@@ -1,0 +1,11 @@
+.next/
+node_modules/
+npm-debug.log
+build
+bin
+
+lang/.messages/
+coverage/
+.coveralls.yml
+yarn-error.log
+.env

@@ -1,0 +1,36 @@
+ /*
+ *
+ * {{ properCase name }}
+ *
+ */
+
+import React from 'react'
+import PropTypes from 'prop-types'
+
+{{#if wantI18n}}
+import { FormattedMessage as I18n } from 'react-intl'
+import lang from './lang'
+{{/if}}
+
+import { makeDebugger } from '../../utils'
+/* eslint-disable no-unused-vars */
+const debug = makeDebugger('c:{{ properCase name }}:index')
+/* eslint-enable no-unused-vars */
+
+const {{ properCase name }} = (props) => {
+  return (
+    <div>
+    {{#if wantI18n}}
+      <I18n {...lang.header} />
+    {{/if}}
+    </div>
+  )
+}
+
+{{ properCase name }}.propTypes = {
+  // https://www.npmjs.com/package/prop-types
+}
+
+{{ properCase name }}.defaultProps = {}
+
+export default {{ properCase name }}
