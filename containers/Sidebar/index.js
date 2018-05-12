@@ -5,101 +5,108 @@
  */
 
 import React from 'react'
-import Link from 'next/link'
+// import Link from 'next/link'
+import shortid from 'shortid'
 import R from 'ramda'
 import { inject, observer } from 'mobx-react'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
-import Trend from 'react-trend'
 
-import { makeDebugger, storeSelector } from '../../utils'
+import { makeDebugger, storeSelector, cutFrom } from '../../utils'
+
 import PinButton from './PinButton'
+import { Sidebar } from './styles'
+
 import {
-  Sidebar,
   MenuItem,
   MenuRow,
   MenuItemWrapper,
   MenuItemEach,
   MenuItemIcon,
-  MiniChartWrapper,
-  /* MiniChartBar, */
-  /* MiniChartText, */
-} from './styles'
+  ChildrenWrapper,
+  ChildrenItem,
+  ChildrenTitle,
+  ChildrenNum,
+} from './styles/menu'
 import * as logic from './logic'
 
 const debug = makeDebugger('C:Sidebar:index')
 
-const getItemStyle = (isDragging, draggableStyle) => ({
-  // styles we need to apply on draggables
-  ...draggableStyle,
-})
+const MenuItemBar = ({ item, curPath, activeCommunityId, curCommunityId }) => {
+  //   <Link href={item.target.href} as={item.target.as}>
+  return (
+    <MenuItemEach>
+      <div>
+        <MenuRow
+          active={curPath === R.toLower(item.raw)}
+          activeCommunityId={activeCommunityId}
+          curCommunityId={curCommunityId}
+          onClick={logic.extendMenuBar.bind(this, item)}
+        >
+          <MenuItemIcon
+            active={curPath === R.toLower(item.raw)}
+            path={item.logo}
+          />
+          {/* eslint-disable jsx-a11y/anchor-is-valid */}
+          <div style={{ marginRight: 10 }} />
+          <a style={{ textDecoration: 'none' }}>{cutFrom(item.title, 10)}</a>
+        </MenuRow>
+      </div>
+    </MenuItemEach>
+  )
+}
 
-const MenuList = ({ items, pin, curPath }) => {
+const MenuChildren = ({ activeCommunityId, curCommunityId }) => {
+  return (
+    <ChildrenWrapper
+      activeCommunityId={activeCommunityId}
+      curCommunityId={curCommunityId}
+    >
+      <ChildrenItem>
+        <ChildrenTitle>post</ChildrenTitle>
+        <ChildrenNum>20</ChildrenNum>
+      </ChildrenItem>
+      <ChildrenItem>
+        <ChildrenTitle>job</ChildrenTitle>
+        <ChildrenNum>18</ChildrenNum>
+      </ChildrenItem>
+      <ChildrenItem active>
+        <ChildrenTitle>editor</ChildrenTitle>
+        <ChildrenNum>3</ChildrenNum>
+      </ChildrenItem>
+      <ChildrenItem>
+        <ChildrenTitle>threads</ChildrenTitle>
+        <ChildrenNum>13</ChildrenNum>
+      </ChildrenItem>
+      <ChildrenItem>
+        <ChildrenTitle>subscribes</ChildrenTitle>
+        <ChildrenNum>2</ChildrenNum>
+      </ChildrenItem>
+    </ChildrenWrapper>
+  )
+}
+
+const MenuList = ({ items, curPath, activeCommunityId }) => {
   /* const sparkData = [0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0] */
   // const sparkData = [0, 0, 0, 1, 0, 0, 1]
 
   const listItems = (
-    <DragDropContext onDragEnd={debug}>
-      <Droppable droppableId="droppable">
-        {provided => (
-          <div ref={provided.innerRef}>
-            {items.map((item, index) => (
-              <Draggable key={item.raw} draggableId={item.raw} index={index}>
-                {(provided, snapshot) => (
-                  <MenuItemWrapper>
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      style={getItemStyle(
-                        snapshot.isDragging,
-                        provided.draggableProps.style
-                      )}
-                    >
-                      <MenuItemEach>
-                        <Link href={item.target.href} as={item.target.as}>
-                          <MenuRow
-                            pin={pin}
-                            active={curPath === R.toLower(item.raw)}
-                          >
-                            <MenuItemIcon
-                              active={curPath === R.toLower(item.raw)}
-                              path={item.logo}
-                            />
-                            {/* eslint-disable jsx-a11y/anchor-is-valid */}
-                            <div style={{ marginRight: 10 }} />
-                            <a style={{ textDecoration: 'none' }}>
-                              {item.title}
-                            </a>
-
-                            <MiniChartWrapper pin={pin}>
-                              {/* <MiniChartBar /> */}
-                              <Trend
-                                smooth
-                                autoDraw
-                                autoDrawDuration={300}
-                                autoDrawEasing="ease-in"
-                                data={item.contributesDigest}
-                                gradient={['#D6ECB2', '#4F966E']}
-                                radius={15}
-                                strokeWidth={7}
-                                strokeLinecap="round"
-                              />
-                              {/* <MiniChartText>247</MiniChartText> */}
-                            </MiniChartWrapper>
-                          </MenuRow>
-                        </Link>
-                      </MenuItemEach>
-                    </div>
-                    {provided.placeholder}
-                  </MenuItemWrapper>
-                )}
-              </Draggable>
-            ))}
-            {provided.placeholder}
+    <div>
+      {items.map(item => (
+        <MenuItemWrapper key={shortid.generate()}>
+          <div>
+            <MenuItemBar
+              curPath={curPath}
+              item={item}
+              activeCommunityId={activeCommunityId}
+              curCommunityId={item.id}
+            />
+            <MenuChildren
+              activeCommunityId={activeCommunityId}
+              curCommunityId={item.id}
+            />
           </div>
-        )}
-      </Droppable>
-    </DragDropContext>
+        </MenuItemWrapper>
+      ))}
+    </div>
   )
   return <MenuItem>{listItems}</MenuItem>
 }
@@ -137,7 +144,13 @@ class SidebarContainer extends React.Component {
 
   render() {
     const { sidebar } = this.props
-    const { curPath, pin, subscribedCommunities } = sidebar
+    const {
+      curPath,
+      pin,
+      subscribedCommunities,
+      activeCommunityId,
+      // activePart,
+    } = sidebar
     //    onMouseLeave={logic.leaveSidebar}
     // onMouseLeave is not unreliable in chrome: https://github.com/facebook/react/issues/4492
 
@@ -146,7 +159,12 @@ class SidebarContainer extends React.Component {
         <PinButton pin={pin} onClick={logic.pin} />
         <br />
         <br />
-        <MenuList items={subscribedCommunities} pin={pin} curPath={curPath} />
+        <MenuList
+          items={subscribedCommunities}
+          pin={pin}
+          curPath={curPath}
+          activeCommunityId={activeCommunityId}
+        />
       </Sidebar>
     )
   }

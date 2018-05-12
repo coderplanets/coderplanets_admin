@@ -3,7 +3,45 @@ import { lighten } from 'polished'
 
 import { theme } from '../../utils'
 
+const tableStyle = `
+  .ant-table-pagination.ant-pagination {
+    margin: 20px 0;
+    text-align: center;
+  }
+
+  .ant-table-thead > tr > th {
+    transition: background 0.1s ease;
+    color: #c6c6cb;
+    padding: 6px 16px;
+    border-bottom: 0;
+  }
+
+  .ant-table-thead > tr > th:nth-child(even) {
+    background-color: #65647a;
+  }
+  .ant-table-thead > tr > th:nth-child(odd) {
+    background-color: #717085;
+  }
+
+  .ant-table-thead > tr.ant-table-row-hover > td,
+  .ant-table-tbody > tr.ant-table-row-hover > td,
+  .ant-table-thead > tr:hover > td,
+  .ant-table-tbody > tr:hover > td {
+    background-color: #fffee6;
+  }
+  .ant-table-tbody > tr > td {
+    transition: none;
+  }
+`
+
 const AntOverWrite = styled.div`
+  .ant-table-thead > tr.ant-table-row-hover > td,
+  .ant-table-tbody > tr.ant-table-row-hover > td,
+  .ant-table-thead > tr:hover > td,
+  .ant-table-tbody > tr:hover > td {
+    background-color: #fffee6;
+  }
+
   .react-calendar-heatmap rect:hover {
     stroke: #51abb2;
   }
@@ -126,8 +164,8 @@ const AntOverWrite = styled.div`
     height: 24px;
     border-radius: 12px;
   }
+  ${tableStyle};
 
-  // modal
   .ant-modal-mask {
     background-color: rgba(0, 0, 0, 0.15) !important;
   }

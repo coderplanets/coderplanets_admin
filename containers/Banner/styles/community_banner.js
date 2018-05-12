@@ -4,7 +4,9 @@ import ReactSVG from 'react-svg'
 import { theme } from '../../../utils'
 import { BaseBanner, BaseTabber, BaseBannerContent } from './index'
 
-export const BannerContainer = BaseBanner.extend``
+export const BannerContainer = BaseBanner.extend`
+  min-height: 100px;
+`
 export const TabberWrapper = BaseTabber.extend``
 export const BannerContentWrapper = BaseBannerContent.extend``
 

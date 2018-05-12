@@ -3,9 +3,7 @@ import React from 'react'
 import { prettyNum } from '../../utils'
 import { DEFAULT_ICON } from '../../config/assets'
 
-import Tabber from '../../components/Tabber'
-import * as logic from './logic'
-
+// import * as logic from './logic'
 import {
   NumbersWrapper,
   NumberSection,
@@ -17,7 +15,6 @@ import {
 import {
   BannerContainer,
   BannerContentWrapper,
-  TabberWrapper,
   CommunityWrapper,
   CommunityLogo,
   CommunityInfo,
@@ -25,9 +22,11 @@ import {
   Desc,
 } from './styles/community_banner'
 
+/*
 const onChange = e => {
   logic.tabberChange(e)
 }
+*/
 
 const NumbersInfo = ({
   content: { subscribersCount, editorsCount, postsCount },
@@ -71,9 +70,6 @@ const CommunityBanner = ({ content }) => (
     <BannerContentWrapper>
       <CommunityBrief content={content} />
       <NumbersInfo content={content} />
-      <TabberWrapper>
-        <Tabber source={content.threads} onChange={onChange} />
-      </TabberWrapper>
     </BannerContentWrapper>
   </BannerContainer>
 )

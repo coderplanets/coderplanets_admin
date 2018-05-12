@@ -15,7 +15,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: -18%;
 `
 export const BaseInfo = styled.div`
   display: flex;

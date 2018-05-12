@@ -39,7 +39,9 @@ const debug = makeDebugger('S:SidebarStore')
 const SidebarStore = t
   .model('SidebarStore', {
     // open: t.optional(t.boolean, false),
-    pin: t.optional(t.boolean, false),
+    pin: t.optional(t.boolean, true),
+    activeCommunityId: t.maybe(t.string),
+    activePart: t.maybe(t.string),
     // theme: t.string, // view staff
     // curSelectItem: t.string, // view staff
     // searchBox: t.string, // complex data

@@ -21,6 +21,19 @@ export function pin() {
   sidebar.markState({ pin: !sidebar.pin })
 }
 
+export function extendMenuBar(community) {
+  console.log('extendMenuBar: ', community)
+  if (sidebar.activeCommunityId === community.id) {
+    return sidebar.markState({
+      activeCommunityId: null,
+    })
+  }
+
+  sidebar.markState({
+    activeCommunityId: community.id,
+  })
+}
+
 export function loadSubscribedCommunities() {
   // const { accountInfo, isLogin } = sidebar
   const user = store.get('user')

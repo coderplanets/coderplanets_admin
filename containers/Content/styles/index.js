@@ -9,22 +9,13 @@ export const Hidder = styled.div`
 `
 
 export const Wrapper = styled.div`
-  margin: 30px;
-  margin-bottom: 0px;
-  width: 95.5%;
-  height: 70%;
+  margin-left: 12px;
+  width: 100%;
+  height: 100%;
   min-height: 70vh;
   background: ${theme('content.bg')};
   color: ${theme('font')};
   border-radius: 6px;
-  padding: 1em 6em;
-  padding-top: 1.5em;
-  @media (max-width: 1400px) {
-    padding: 1em 2em;
-  }
-  @media (max-width: 1200px) {
-    padding: 1em 1em;
-  }
 `
 
 export const CategoryWrapper = styled.div`
