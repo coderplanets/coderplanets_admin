@@ -1,75 +1,61 @@
 import React from 'react'
 
-import { prettyNum } from '../../utils'
-import { DEFAULT_ICON } from '../../config/assets'
+import { ICON_ASSETS } from '../../config'
 
 // import * as logic from './logic'
-import {
-  NumbersWrapper,
-  NumberSection,
-  NumberDivider,
-  NumberTitle,
-  NumberItem,
-} from './styles'
+import { Tag } from '../../components'
 
 import {
   BannerContainer,
   BannerContentWrapper,
-  CommunityWrapper,
-  CommunityLogo,
-  CommunityInfo,
-  Title,
-  Desc,
+  Result,
+  ResultTop,
+  ResultBottom,
+  ResultNumber,
+  ResultText,
+  Operation,
+  OperationItem,
+  OperationDivider,
+  OperationTitle,
+  FilterTags,
+  OperationIcon,
+  OperationIconChart,
 } from './styles/community_banner'
 
 /*
-const onChange = e => {
-  logic.tabberChange(e)
-}
-*/
+   const onChange = e => {
+   logic.tabberChange(e)
+   }
+ */
 
-const NumbersInfo = ({
-  content: { subscribersCount, editorsCount, postsCount },
-}) => (
-  <NumbersWrapper>
-    <NumberSection>
-      <NumberTitle>关注</NumberTitle>
-      <NumberItem>{prettyNum(subscribersCount)}</NumberItem>
-    </NumberSection>
-    <NumberDivider />
-    <NumberSection>
-      <NumberTitle>内容</NumberTitle>
-      <NumberItem>{prettyNum(postsCount)}</NumberItem>
-    </NumberSection>
-    <NumberDivider />
-    <NumberSection>
-      <NumberTitle>编辑</NumberTitle>
-      <NumberItem>{prettyNum(editorsCount)}</NumberItem>
-    </NumberSection>
-  </NumbersWrapper>
-)
-
-const CommunityBrief = ({ content }) => {
-  return (
-    <CommunityWrapper>
-      {content.logo ? (
-        <CommunityLogo path={content.logo || DEFAULT_ICON} />
-      ) : (
-        <div />
-      )}
-      <CommunityInfo>
-        <Title>{content.title}</Title>
-        <Desc>{content.desc}</Desc>
-      </CommunityInfo>
-    </CommunityWrapper>
-  )
-}
-
-const CommunityBanner = ({ content }) => (
+// const CommunityBanner = ({ content }) => (
+const CommunityBanner = () => (
   <BannerContainer>
     <BannerContentWrapper>
-      <CommunityBrief content={content} />
-      <NumbersInfo content={content} />
+      <Result>
+        <ResultTop>帖子总数为 4837 条</ResultTop>
+        <ResultBottom>
+          <ResultText>共找到</ResultText>
+          <ResultNumber>87</ResultNumber>
+          <ResultText>项结果符合过滤条件</ResultText>
+        </ResultBottom>
+      </Result>
+      <Operation>
+        <OperationItem>
+          <OperationIcon path={`${ICON_ASSETS}/cmd/filter2.svg`} />
+          <OperationTitle>过滤</OperationTitle>
+          <FilterTags>
+            <Tag closable>最多xx</Tag>
+            <Tag closable>最少..</Tag>
+          </FilterTags>
+        </OperationItem>
+        <OperationDivider />
+        <OperationItem>
+          {/* <OperationIcon path={`${ICON_ASSETS}/cmd/chart.svg`} /> */}
+          <OperationIconChart path={`${ICON_ASSETS}/cmd/list.svg`} />
+          视图
+        </OperationItem>
+      </Operation>
     </BannerContentWrapper>
   </BannerContainer>
 )

@@ -13,7 +13,7 @@ export const HeaderWrapper = styled.div`
 
   border-bottom: ${theme('header.spliter')};
   align-items: center;
-  padding: 0 4vw;
+  padding: 0 5px;
   margin-left: ${props => props.leftOffset};
   transition: all 0.2s;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(234, 234, 234, 0.28);
@@ -26,19 +26,26 @@ export const RouterWrapper = styled.div`
   height: 100%;
   margin-top: 1px;
 `
-
 export const MiniMapWrapper = styled.div`
   display: flex;
-  align-items: flex-end;
-  margin-left: 4vw;
+  align-items: center;
+  margin-left: 2vw;
+`
+export const CommunityLogo = styled(ReactSVG)`
+  width: 22px;
+  height: 22px;
+  display: block;
 `
 
-export const CommunityLogo = styled(ReactSVG)`
-  width: 26px;
-  height: 26px;
-  margin-right: 25px;
-  display: block;
-  margin-bottom: 2px;
+export const MiniMapDivider = styled.div`
+  margin-left: 10px;
+  margin-right: 10px;
+  border-left: 1px solid #6f7083;
+  height: 15px;
+`
+
+export const MiniMapTitle = styled.div`
+  color: #6f7083;
 `
 
 /*

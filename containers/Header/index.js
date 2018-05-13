@@ -9,7 +9,7 @@ import { inject, observer } from 'mobx-react'
 import keydown from 'react-keydown'
 
 import { ICON_ASSETS } from '../../config/assets'
-import { Affix, Navigator } from '../../components'
+import { Affix } from '../../components'
 
 import { makeDebugger, storeSelector } from '../../utils'
 
@@ -18,7 +18,8 @@ import {
   RouterWrapper,
   MiniMapWrapper,
   CommunityLogo,
-  MiniTab,
+  MiniMapTitle,
+  MiniMapDivider,
   Admin,
   Search,
   Notification,
@@ -47,16 +48,13 @@ const MiniMap = ({ curRoute }) => {
   return (
     <MiniMapWrapper>
       <CommunityLogo path={`${ICON_ASSETS}/pl/${iconKey}.svg`} />
-      <MiniTab active>帖子</MiniTab>
-      <MiniTab>教程</MiniTab>
-      <MiniTab>动态</MiniTab>
-      <MiniTab>视频</MiniTab>
-      <MiniTab>地图</MiniTab>
-      <MiniTab>cheatsheet</MiniTab>
+      <MiniMapDivider />
+      <MiniMapTitle>综合设置</MiniMapTitle>
     </MiniMapWrapper>
   )
 }
 
+// {fixed ? <MiniMap curRoute={curRoute} /> : <Navigator />}
 const Header = ({ curRoute, leftOffset, fixed, isLogin, accountInfo }) => (
   <HeaderWrapper
     id="whereCallShowDoraemon"
@@ -64,7 +62,7 @@ const Header = ({ curRoute, leftOffset, fixed, isLogin, accountInfo }) => (
     fixed={fixed}
   >
     <RouterWrapper>
-      {fixed ? <MiniMap curRoute={curRoute} /> : <Navigator />}
+      <MiniMap curRoute={curRoute} />
     </RouterWrapper>
     <Admin>
       <div style={{ display: 'flex' }}>

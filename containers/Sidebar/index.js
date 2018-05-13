@@ -197,7 +197,6 @@ class SidebarContainer extends React.Component {
     const { sidebar } = this.props
     const {
       curPath,
-      pin,
       subscribedCommunities,
       activeCommunityId,
       activePart,
@@ -206,19 +205,17 @@ class SidebarContainer extends React.Component {
     // onMouseLeave is not unreliable in chrome: https://github.com/facebook/react/issues/4492
 
     return (
-      <Sidebar pin={pin}>
+      <Sidebar>
         <Banner>
           <BannerLogo path={`${ICON_ASSETS}/cmd/rainbow_logo.svg`} />
           <BannerTitle>CPS 管理后台 @2018</BannerTitle>
         </Banner>
         <MenuList
           items={subscribedCommunities}
-          pin={pin}
           curPath={curPath}
           activeCommunityId={activeCommunityId}
           activePart={activePart}
         />
-        <h3>hello</h3>
         <Footer>
           <SearchLogo path={`${ICON_ASSETS}/cmd/search2.svg`} />
           <BannerTitle>综合搜索等</BannerTitle>

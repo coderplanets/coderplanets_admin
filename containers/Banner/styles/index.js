@@ -19,8 +19,9 @@ export const BaseBanner = styled.div`
 
 export const BaseBannerContent = styled.div`
   display: flex;
-  margin-left: 8%;
-  margin-right: 8%;
+  margin-left: 30px;
+  margin-right: 25px;
+  padding-bottom: 10px;
 `
 
 export const BaseTabber = styled.div`

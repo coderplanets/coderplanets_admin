@@ -354,11 +354,11 @@ const AntOverWrite = styled.div`
   .ant-tag,
   .ant-tag a,
   .ant-tag a:hover {
-    color: #d2a05f;
+    color: #dac49c;
   }
   .ant-tag {
-    border: 1px solid #fff2b3;
-    background: #fff2b3;
+    border: 1px solid #707084;
+    background: #707084;
   }
 `
 

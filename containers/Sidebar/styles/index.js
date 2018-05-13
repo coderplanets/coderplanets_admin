@@ -10,7 +10,7 @@ export const Sidebar = styled.div`
   position: fixed;
   height: 100vh;
   top: 0;
-  width: ${props => (props.pin ? '250px' : '56px')};
+  width: 250px;
   background: ${theme('sidebar.bg')};
   z-index: 1000;
   overflow: hidden;
