@@ -9,7 +9,6 @@ import {
   BannerContainer,
   BannerContentWrapper,
   Result,
-  ResultTop,
   ResultBottom,
   ResultNumber,
   ResultText,
@@ -29,14 +28,14 @@ import {
  */
 
 // const CommunityBanner = ({ content }) => (
-const CommunityBanner = () => (
+const CommunitiesBanner = () => (
   <BannerContainer>
     <BannerContentWrapper>
       <Result>
-        <ResultTop>帖子总数为 4837 条</ResultTop>
+        {/* <ResultTop>帖子总数为 4837 条</ResultTop> */}
         <ResultBottom>
-          <ResultText>共找到</ResultText>
-          <ResultNumber>87</ResultNumber>
+          <ResultText>社区共</ResultText>
+          <ResultNumber>14个</ResultNumber>
           <ResultText>项结果符合过滤条件</ResultText>
         </ResultBottom>
       </Result>
@@ -51,6 +50,11 @@ const CommunityBanner = () => (
         </OperationItem>
         <OperationDivider />
         <OperationItem>
+          <OperationIconChart path={`${ICON_ASSETS}/cmd/plus.svg`} />
+          添加
+        </OperationItem>
+        <OperationDivider />
+        <OperationItem>
           {/* <OperationIcon path={`${ICON_ASSETS}/cmd/chart.svg`} /> */}
           <OperationIconChart path={`${ICON_ASSETS}/cmd/list.svg`} />
           视图
@@ -60,4 +64,4 @@ const CommunityBanner = () => (
   </BannerContainer>
 )
 
-export default CommunityBanner
+export default CommunitiesBanner

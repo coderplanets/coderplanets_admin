@@ -36,24 +36,31 @@ const menuItemConveter = R.compose(
 const debug = makeDebugger('S:SidebarStore')
 /* eslint-enable no-unused-vars */
 
+const validParts = [
+  TYPE.C_UTILS,
+  TYPE.C_POSTS,
+  TYPE.C_JOBS,
+  TYPE.C_ACTIVITIES,
+  TYPE.C_CHEATSHEETS,
+  TYPE.C_EDITORS,
+  TYPE.C_THREADS,
+  TYPE.C_TAGS,
+  TYPE.C_SUBSCRIBERS,
+  TYPE.C_R_TOP,
+  TYPE.C_R_CATEGORIES,
+  TYPE.C_R_EDITORS,
+  TYPE.C_R_POSTS,
+  TYPE.U_R_REGISTER,
+  TYPE.U_R_PAYS,
+  TYPE.U_R_PASSPORTS,
+  TYPE.U_R_ROLES,
+]
 const SidebarStore = t
   .model('SidebarStore', {
     // open: t.optional(t.boolean, false),
     pin: t.optional(t.boolean, true),
     activeCommunityId: t.maybe(t.string),
-    activePart: t.maybe(
-      t.enumeration('activePart', [
-        TYPE.C_UTILS,
-        TYPE.C_POSTS,
-        TYPE.C_JOBS,
-        TYPE.C_ACTIVITIES,
-        TYPE.C_CHEATSHEETS,
-        TYPE.C_EDITORS,
-        TYPE.C_THREADS,
-        TYPE.C_TAGS,
-        TYPE.C_SUBSCRIBERS,
-      ])
-    ),
+    activePart: t.maybe(t.enumeration('activePart', validParts)),
     // theme: t.string, // view staff
     // curSelectItem: t.string, // view staff
     // searchBox: t.string, // complex data

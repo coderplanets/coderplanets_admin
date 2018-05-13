@@ -9,7 +9,7 @@ import { inject, observer } from 'mobx-react'
 
 import { makeDebugger, storeSelector } from '../../utils'
 
-import CommunityBanner from './CommunityBanner'
+import IndexBanner from './IndexBanner'
 
 import * as logic from './logic'
 
@@ -28,7 +28,7 @@ class BannerContainer extends React.Component {
     // const { mainQuery } = curRoute
     // debug('detail ---> ', detail)
 
-    return <CommunityBanner content={detail.content} />
+    return <IndexBanner content={detail.content} />
   }
 }
 

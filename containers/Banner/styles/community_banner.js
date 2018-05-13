@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import ReactSVG from 'react-svg'
-// import { theme } from '../../../utils'
+import { Animate } from '../../../utils'
 import { BaseBanner, BaseTabber, BaseBannerContent } from './index'
 
 export const BannerContainer = BaseBanner.extend`
@@ -45,6 +45,8 @@ export const OperationItem = styled.div`
   color: #9797a9;
   &:hover {
     cursor: pointer;
+    font-size: bold;
+    animation: ${Animate.pulse} 0.3s linear;
   }
 `
 export const OperationDivider = styled.div`

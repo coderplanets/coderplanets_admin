@@ -50,6 +50,9 @@ export const MenuRow = styled.div`
   transition: background-color 0.2s linear;
   &:hover {
     background-color: #047fbd;
+    a {
+      color: ${theme('sidebar.menu_link')};
+    }
   }
 `
 // TODO: hover
@@ -91,6 +94,10 @@ export const MenuItemIcon = styled(ReactSVG)`
   width: 22px;
   height: 22px;
 `
+export const MenuCommunitiesIcon = MenuItemIcon.extend`
+  fill: ${theme('sidebar.menu_link')};
+`
+
 export const ChildrenWrapper = styled.div`
   padding-left: 23px;
   padding-top: ${props =>
@@ -126,6 +133,11 @@ export const ChildrenItem = styled.div`
     cursor: pointer;
     color: #7ebad1;
   }
+`
+
+export const ChildrenItemInner = styled.div`
+  display: flex;
+  width: 100%;
 `
 
 export const ChildrenTitle = styled.div`

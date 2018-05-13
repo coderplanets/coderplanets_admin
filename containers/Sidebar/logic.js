@@ -21,16 +21,16 @@ export function pin() {
   sidebar.markState({ pin: !sidebar.pin })
 }
 
-export function extendMenuBar(community) {
-  console.log('extendMenuBar: ', community)
-  if (sidebar.activeCommunityId === community.id) {
+export function extendMenuBar(communityId) {
+  console.log('extendMenuBar id: ', communityId)
+  if (sidebar.activeCommunityId === communityId) {
     return sidebar.markState({
       activeCommunityId: null,
     })
   }
 
   sidebar.markState({
-    activeCommunityId: community.id,
+    activeCommunityId: communityId,
     activePart: null,
   })
 }
