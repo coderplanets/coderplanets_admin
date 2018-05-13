@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import ReactSVG from 'react-svg'
 
 // import { darken } from 'polished'
-import { theme } from '../../../utils'
+import { theme, Animate } from '../../../utils'
 import { Sidebar } from './index'
 
 export const MenuItem = styled.ul`
@@ -14,7 +14,6 @@ export const MenuItem = styled.ul`
   overflow-y: scroll;
   transition: left 0.2s;
 `
-
 /*
    &:hover {
    background: ${props => darken(0.05, props.theme.sidebar.bg)};
@@ -48,7 +47,10 @@ export const MenuRow = styled.div`
     max-width: 50%;
     opacity: 0.6;
   }
-  transition: background-color 0.5s linear;
+  transition: background-color 0.2s linear;
+  &:hover {
+    background-color: #047fbd;
+  }
 `
 // TODO: hover
 export const MiniChartWrapper = styled.div`
@@ -103,7 +105,7 @@ export const ChildrenWrapper = styled.div`
     props.activeCommunityId === props.curCommunityId ? '10px' : '0px'};
   overflow: hidden;
   max-height: ${props =>
-    props.activeCommunityId === props.curCommunityId ? '300px' : '0px'};
+    props.activeCommunityId === props.curCommunityId ? '400px' : '0px'};
   transition: max-height 0.5s ease-in-out;
 `
 /* display: ${props => */
@@ -117,12 +119,13 @@ export const ChildrenItem = styled.div`
   border-left-color: ${props => (props.active ? '#A5CFE0' : '#309abb')};
   padding-top: 5px;
   padding-bottom: 5px;
+  display: flex;
+  transition: color 0.1s linear;
+  font-size: ${props => (props.active ? '1rem' : '0.9rem')};
   &:hover {
     cursor: pointer;
     color: #7ebad1;
   }
-  display: flex;
-  transition: color 0.1s linear;
 `
 
 export const ChildrenTitle = styled.div`
@@ -131,4 +134,19 @@ export const ChildrenTitle = styled.div`
 
 export const ChildrenNum = styled.div`
   margin-right: 25px;
+
+  ${ChildrenItem}:hover & {
+    animation: ${Animate.pulse} 0.3s linear;
+  }
+`
+
+export const SettingIcon = styled(ReactSVG)`
+  fill: #309abb;
+  width: 17px;
+  height: 17px;
+
+  ${ChildrenItem}:hover & {
+    fill: #a5cfe0;
+    animation: ${Animate.pulse} 0.3s linear;
+  }
 `

@@ -31,6 +31,15 @@ export function extendMenuBar(community) {
 
   sidebar.markState({
     activeCommunityId: community.id,
+    activePart: null,
+  })
+}
+
+export function onChildMenuChange(activePart) {
+  debug('onChildMenuChange: ', activePart)
+
+  sidebar.markState({
+    activePart,
   })
 }
 

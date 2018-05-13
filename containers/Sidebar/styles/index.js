@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import ReactSVG from 'react-svg'
 
 /* import { darken } from 'polished' */
 import { theme } from '../../../utils'
@@ -23,19 +24,32 @@ export const Sidebar = styled.div`
   }
 `
 
-export const StyledPin = styled.div`
-  color: ${props => (props.pin ? props.theme.sidebar.pin_active : 'grey')};
-  visibility: ${props => (props.pin ? 'visible' : 'hidden')};
-  opacity: ${props => (props.pin ? 1 : 0)};
-  position: absolute;
-  font-size: 25px;
-  right: 10px;
-  top: 5px;
-  transition: visibility 0s, opacity 0.3s linear;
-  cursor: pointer;
+export const Banner = styled.div`
+  height: 50px;
+  background: #033850;
+  display: flex;
+  align-items: center;
+  color: #6c8892;
+  padding-left: 18px;
+`
 
-  ${Sidebar}:hover & {
-    visibility: visible;
-    opacity: 1;
-  }
+export const Footer = Banner.extend`
+  position: fixed;
+  bottom: 0px;
+  width: 250px;
+`
+
+export const BannerLogo = styled(ReactSVG)`
+  width: 22px;
+  height: 22px;
+  border-radius: 100%;
+`
+export const SearchLogo = styled(ReactSVG)`
+  width: 22px;
+  height: 22px;
+  fill: #0098b8;
+`
+export const BannerTitle = styled.div`
+  margin-left: 8px;
+  margin-top: -4px;
 `

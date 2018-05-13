@@ -5,7 +5,7 @@
 
 import { types as t, getParent } from 'mobx-state-tree'
 import R from 'ramda'
-import { makeDebugger, markStates } from '../../utils'
+import { makeDebugger, markStates, TYPE } from '../../utils'
 /* import MenuItem from './MenuItemStore' */
 
 const menuItemConveter = R.compose(
@@ -41,7 +41,19 @@ const SidebarStore = t
     // open: t.optional(t.boolean, false),
     pin: t.optional(t.boolean, true),
     activeCommunityId: t.maybe(t.string),
-    activePart: t.maybe(t.string),
+    activePart: t.maybe(
+      t.enumeration('activePart', [
+        TYPE.C_UTILS,
+        TYPE.C_POSTS,
+        TYPE.C_JOBS,
+        TYPE.C_ACTIVITIES,
+        TYPE.C_CHEATSHEETS,
+        TYPE.C_EDITORS,
+        TYPE.C_THREADS,
+        TYPE.C_TAGS,
+        TYPE.C_SUBSCRIBERS,
+      ])
+    ),
     // theme: t.string, // view staff
     // curSelectItem: t.string, // view staff
     // searchBox: t.string, // complex data
