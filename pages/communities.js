@@ -16,51 +16,27 @@ import Header from '../containers/Header'
 import CommunitiesBanner from '../containers/CommunitiesBanner'
 import CommunitiesContent from '../containers/CommunitiesContent'
 
+import sidebarSchema from '../containers/Sidebar/schema'
+
 import { Global } from '../utils'
 import Footer from '../components/Footer'
 // try to fix safari bug
 // see https://github.com/yahoo/react-intl/issues/422
 global.Intl = require('intl')
 
-const query = `
-query communities($filter: PagedFilter!) {
-    communities(filter: $filter) {
-      entries {
-        id
-        title
-        desc
-        raw
-        logo
-        subscribersCount
-        insertedAt
-        updatedAt
-      }
-      pageNumber
-      pageSize
-      totalCount
-      totalPages
-    }
-  }
-
-`
-const variables = {
-  filter: { page: 1, size: 30 },
-}
-
 export default class Index extends React.Component {
-  static async getInitialProps({ req }) {
+  static async getInitialProps({ req, pathname, asPath }) {
     /* const isServer = !!req */
-    /* eslint-disable no-underscore-dangle */
-    /* eslint-disable no-undef */
-    const data = await request(GRAPHQL_ENDPOINT, query, variables) // .then(data => console.log(data))
-    // console.log('SSR getInitialProps ------> ', data.communities)
 
-    // const { locale, messages } = req || window.__NEXT_DATA__.props
-    // const langSetup = {}
-    // langSetup[locale] = messages
-    // const store = initRootStore(langSetup)
-    /* eslint-enable no-undef */
+    console.log('getInitialProps pathname ---> ', pathname)
+    console.log('getInitialProps asPath ---> ', asPath)
+    const data = await request(GRAPHQL_ENDPOINT, sidebarSchema.communitiesRaw, {
+      filter: { page: 1, size: 30 },
+    }) // .then(data => console.log(data))
+    // console.log('SSR getInitialProps ------> ', data.communities)
+    /* eslint-disable */
     const { locale, messages } = req || Global.__NEXT_DATA__.props
+    /* eslint-enable */
     const langSetup = {}
     langSetup[locale] = messages
 

@@ -59,7 +59,7 @@ const DataSolver = [
   {
     match: gqRes('communities'),
     action: ({ communities }) => {
-      debug('communities ---* --> ', communities)
+      debug('communities --- bbb * --> ', communities)
       sidebar.loadCommunities(communities)
     },
   },
