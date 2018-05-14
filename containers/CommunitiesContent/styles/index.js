@@ -5,5 +5,9 @@ export const CommunityIcon = styled(ReactSVG)`
   width: 30px;
   height: 30px;
 `
-
 export const Wrapper = styled.div``
+
+export const OperationWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`

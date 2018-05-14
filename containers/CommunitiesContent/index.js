@@ -10,11 +10,11 @@ import TimeAgo from 'timeago-react'
 
 // import Link from 'next/link'
 
-import { Pagi, Table, TableLoading } from '../../components'
+import { Pagi, Table, TableLoading, Button, Space } from '../../components'
 
 import { makeDebugger, storePlug, cutFrom } from '../../utils'
 
-import { Wrapper, CommunityIcon } from './styles'
+import { Wrapper, CommunityIcon, OperationWrapper } from './styles'
 
 import * as logic from './logic'
 
@@ -53,7 +53,7 @@ const columns = [
   },
   {
     title: '描述',
-    width: 200,
+    width: 300,
     dataIndex: 'desc',
     align: 'center',
     render: text => {
@@ -71,13 +71,13 @@ const columns = [
   },
   {
     title: '订阅人数',
-    width: 100,
+    width: 150,
     align: 'center',
     dataIndex: 'subscribersCount',
   },
   {
     title: '编辑人数',
-    width: 100,
+    width: 150,
     dataIndex: 'editorsCount',
     align: 'center',
   },
@@ -105,6 +105,35 @@ const columns = [
       return <TimeAgo datetime={text} locale="zh_CN" />
     },
   },
+  {
+    title: '操作',
+    width: 200,
+    dataIndex: '',
+    align: 'center',
+    render: (text, record) => {
+      return (
+        <OperationWrapper>
+          <Button
+            size="small"
+            type="primary"
+            ghost
+            onClick={logic.onEdit.bind(this, record)}
+          >
+            编辑
+          </Button>
+          <Space right="10px" />
+          <Button
+            size="small"
+            type="red"
+            ghost
+            onClick={logic.onDelete.bind(this, record)}
+          >
+            删除
+          </Button>
+        </OperationWrapper>
+      )
+    },
+  },
 ]
 
 class CommunitiesContentContainer extends React.Component {
@@ -122,7 +151,7 @@ class CommunitiesContentContainer extends React.Component {
             <Table
               columns={columns}
               dataSource={pagedCommunitiesData.entries}
-              scroll={{ x: 1200 }}
+              scroll={{ x: 1500 }}
               loading={TableLoading(communitiesLoading)}
               pagination={false}
             />

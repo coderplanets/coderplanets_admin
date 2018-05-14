@@ -42,6 +42,14 @@ export function pageChange(page) {
   sr71$.query(S.communities, args)
 }
 
+export function onEdit(record) {
+  debug('onEdit', record)
+}
+
+export function onDelete(record) {
+  debug('onDelete', record)
+}
+
 /* when error occured cancle all the loading state */
 const cancleLoading = () => {
   communitiesContent.markState({
