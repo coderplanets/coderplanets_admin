@@ -6,7 +6,7 @@ import { storePlug } from '../../utils'
 import { ICON_ASSETS } from '../../config'
 
 import * as logic from './logic'
-import { Tag } from '../../components'
+import { Tag, Popover } from '../../components'
 
 // TODO: extract banner styles to common components
 import {
@@ -47,14 +47,19 @@ class CommunitiesBannerContainer extends React.Component {
           <Operation>
             <OperationItem>
               <OperationIcon path={`${ICON_ASSETS}/cmd/filter2.svg`} />
-              <OperationTitle>过滤</OperationTitle>
+              <Popover
+                content={<div>兼容各个页面的 Filter 菜单</div>}
+                trigger="hover"
+              >
+                <OperationTitle>过滤</OperationTitle>
+              </Popover>
               <FilterTags>
                 <Tag closable>最多xx</Tag>
                 <Tag closable>最少..</Tag>
               </FilterTags>
             </OperationItem>
             <OperationDivider />
-            <OperationItem>
+            <OperationItem onClick={logic.onAdd}>
               <OperationIconChart path={`${ICON_ASSETS}/cmd/plus.svg`} />
               添加
             </OperationItem>

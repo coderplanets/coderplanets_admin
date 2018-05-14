@@ -16,6 +16,7 @@ const sr71$ = new SR71({
     EVENT.PREVIEW,
     EVENT.NAV_CREATE_POST,
     EVENT.PREVIEW_CLOSE,
+    EVENT.NAV_CREATE_COMMUNITY,
   ],
 })
 
@@ -73,6 +74,15 @@ const DataResolver = [
     match: gqRes(EVENT.NAV_CREATE_POST),
     action: res => {
       const event = res[EVENT.NAV_CREATE_POST]
+      holdPage()
+      preview.open(event.type)
+    },
+  },
+  {
+    match: gqRes(EVENT.NAV_CREATE_COMMUNITY),
+    action: res => {
+      const event = res[EVENT.NAV_CREATE_COMMUNITY]
+      console.log('preview event: ', event)
       holdPage()
       preview.open(event.type)
     },

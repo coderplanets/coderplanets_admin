@@ -1,6 +1,15 @@
 // import R from 'ramda'
 // import Router from 'next/router'
-import { gqRes, gqErr, makeDebugger, $solver, ERR } from '../../utils'
+import {
+  gqRes,
+  gqErr,
+  makeDebugger,
+  $solver,
+  ERR,
+  EVENT,
+  TYPE,
+  dispatchEvent,
+} from '../../utils'
 
 import SR71 from '../../utils/network/sr71'
 
@@ -15,6 +24,13 @@ let communitiesBanner = null
 
 export function loadCommunities() {
   sr71$.query(S.communities, { filter: { page: 1, size: 20 } })
+}
+
+export function onAdd() {
+  debug('onAdd')
+  dispatchEvent(EVENT.NAV_CREATE_COMMUNITY, {
+    type: TYPE.PREVIEW_CREATE_COMMUNITY,
+  })
 }
 
 const DataSolver = [
