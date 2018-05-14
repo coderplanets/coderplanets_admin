@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react'
 import R from 'ramda'
 import { isObject } from '../utils'
 
-export const storeSelector = R.curry((wantedStore, props) => ({
+export const storePlug = R.curry((wantedStore, props) => ({
   [wantedStore]: R.path(['store', wantedStore], props),
 }))
 
@@ -64,13 +64,16 @@ export const meteorState = (store, state, secs, statusMsg = '') => {
   }, secs * 1000)
 }
 
-export const stripMobx = obj =>
-  R.map(v => {
+export const stripMobx = obj => {
+  if (!obj) return obj
+
+  return R.map(v => {
     if (isObject(v) && R.has('$mobx')) {
       return v.toJSON()
     }
     return v
   }, obj)
+}
 
 /*
  *  make life easier by using the redux like connent syntax

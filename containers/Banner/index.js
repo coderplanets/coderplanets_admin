@@ -7,7 +7,7 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 
-import { makeDebugger, storeSelector } from '../../utils'
+import { makeDebugger, storePlug } from '../../utils'
 
 import IndexBanner from './IndexBanner'
 
@@ -32,4 +32,4 @@ class BannerContainer extends React.Component {
   }
 }
 
-export default inject(storeSelector('banner'))(observer(BannerContainer))
+export default inject(storePlug('banner'))(observer(BannerContainer))

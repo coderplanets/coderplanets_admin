@@ -7,7 +7,7 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 
-import { makeDebugger, storeSelector } from '../../utils'
+import { makeDebugger, storePlug } from '../../utils'
 
 // import CommunitiesContent from '../CommunitiesContent'
 // import CheatSheetContent from '../CheatSheetContent'
@@ -113,4 +113,4 @@ class ContentContainer extends React.Component {
   }
 }
 
-export default inject(storeSelector('content'))(observer(ContentContainer))
+export default inject(storePlug('content'))(observer(ContentContainer))

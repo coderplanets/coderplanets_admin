@@ -13,6 +13,10 @@ export { default as BannerStore } from './BannerStore'
 export { default as ContentStore } from './ContentStore'
 
 export { default as CurCommunity } from './CurCommunity'
+
+// banner store
+export { default as CommunitiesBannerStore } from './CommunitiesBannerStore'
+
 // contents store
 export { default as CommunitiesContentStore } from './CommunitiesContentStore'
 export { default as CheatSheetContentStore } from './CheatSheetContentStore'

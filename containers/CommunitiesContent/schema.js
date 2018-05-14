@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 const communities = gql`
-  query communities($filter: PagedFilter!, $userHasLogin: Boolean!) {
+  query communities($filter: PagedFilter!) {
     communities(filter: $filter) {
       entries {
         id
@@ -11,7 +11,8 @@ const communities = gql`
         logo
         contributesDigest
         subscribersCount
-        viewerHasSubscribed @include(if: $userHasLogin)
+        insertedAt
+        updatedAt
       }
       pageNumber
       pageSize
@@ -21,34 +22,8 @@ const communities = gql`
   }
 `
 
-const subscribeCommunity = gql`
-  mutation($communityId: ID!) {
-    subscribeCommunity(communityId: $communityId) {
-      id
-      title
-      raw
-      logo
-      contributesDigest
-      threads {
-        title
-        raw
-      }
-    }
-  }
-`
-
-const unsubscribeCommunity = gql`
-  mutation($communityId: ID!) {
-    unsubscribeCommunity(communityId: $communityId) {
-      id
-    }
-  }
-`
-
 const schema = {
   communities,
-  subscribeCommunity,
-  unsubscribeCommunity,
 }
 
 export default schema

@@ -7,7 +7,7 @@ import React from 'react'
 import shortid from 'shortid'
 import { inject, observer } from 'mobx-react'
 
-import { makeDebugger, storeSelector } from '../../utils'
+import { makeDebugger, storePlug } from '../../utils'
 import { ICON_ASSETS } from '../../config'
 
 import CommunityMenuItem from './CommunityMenuItem'
@@ -91,4 +91,4 @@ class SidebarContainer extends React.Component {
   }
 }
 
-export default inject(storeSelector('sidebar'))(observer(SidebarContainer))
+export default inject(storePlug('sidebar'))(observer(SidebarContainer))

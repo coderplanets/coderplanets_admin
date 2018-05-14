@@ -6,16 +6,26 @@
 import { types as t, getParent } from 'mobx-state-tree'
 // import R from 'ramda'
 
-import { markStates, makeDebugger } from '../../utils'
+import { Community } from '../SharedModel'
+import { markStates, makeDebugger, stripMobx } from '../../utils'
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('S:CommunitiesContentStore')
 /* eslint-enable no-unused-vars */
 
+const PagedCommunities = t.model('PagedCommunities', {
+  entries: t.optional(t.array(Community), []),
+  pageNumber: t.optional(t.number, 1),
+  pageSize: t.optional(t.number, 20), // TODO: USE CONSTANTS
+  totalCount: t.optional(t.number, 0),
+  totalPages: t.optional(t.number, 0),
+})
+
 const CommunitiesContentStore = t
   .model('CommunitiesContentStore', {
+    // all the communities
+    pagedCommunities: t.maybe(PagedCommunities),
+    communitiesLoading: t.optional(t.boolean, false),
     category: t.optional(t.string, ''),
-    subscribing: t.optional(t.boolean, false),
-    subscribingId: t.maybe(t.string),
   })
   .views(self => ({
     get root() {
@@ -26,25 +36,11 @@ const CommunitiesContentStore = t
       return self.root.account.isLogin
     },
 
-    get communities() {
-      const { entries } = self.root.communities.all
-
-      return {
-        ...self.root.communities.all,
-        entries: entries.toJSON(),
-      }
+    get pagedCommunitiesData() {
+      return stripMobx(self.pagedCommunities)
     },
   }))
   .actions(self => ({
-    loadCommunities(data) {
-      self.root.communities.load(data)
-    },
-    addSubscribedCommunity(community) {
-      self.root.account.addSubscribedCommunity(community)
-    },
-    removeSubscribedCommunity(community) {
-      self.root.account.removeSubscribedCommunity(community)
-    },
     markState(sobj) {
       markStates(sobj, self)
     },

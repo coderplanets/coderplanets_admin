@@ -6,24 +6,15 @@
 
 import React from 'react'
 import { inject, observer } from 'mobx-react'
-import Trend from 'react-trend'
+import TimeAgo from 'timeago-react'
+
 // import Link from 'next/link'
 
-import { Pagi, Button, Icon, Tooltip } from '../../components'
+import { Pagi, Table, TableLoading } from '../../components'
 
-import { makeDebugger, storeSelector, prettyNum } from '../../utils'
+import { makeDebugger, storePlug, cutFrom } from '../../utils'
 
-import {
-  Wrapper,
-  GridWrapper,
-  Card,
-  CommunityIcon,
-  CardTitle,
-  CardDesc,
-  ActivitySpark,
-  Divider,
-  CardFooter,
-} from './styles'
+import { Wrapper, CommunityIcon } from './styles'
 
 import * as logic from './logic'
 
@@ -31,87 +22,90 @@ import * as logic from './logic'
 const debug = makeDebugger('C:CommunitiesContent')
 /* eslint-enable no-unused-vars */
 
-const SubscribeBtn = ({
-  community,
-  restProps: { subscribing, subscribingId },
-}) => {
-  if (subscribing && community.id === subscribingId) {
-    return (
-      <div>
-        <Button size="small" type="primary">
-          <Icon type="loading" /> 关注
-        </Button>
-      </div>
-    )
-  }
-  return (
-    <div>
-      {community.viewerHasSubscribed ? (
-        <Tooltip title="取消关注" mouseEnterDelay={1} placement="bottom">
-          <Button
-            size="small"
-            type="primary"
-            ghost
-            onClick={logic.unSubscribe.bind(this, community.id)}
-          >
-            <Icon type="check" />已关注
-          </Button>
-        </Tooltip>
-      ) : (
-        <Button
-          size="small"
-          type="primary"
-          onClick={logic.subscribe.bind(this, community.id)}
-        >
-          <Icon type="plus" />关注
-        </Button>
-      )}
-    </div>
-  )
-}
-
-const CommunityCard = ({ community, restProps }) => (
-  <Card>
-    <CommunityIcon path={community.logo} />
-    <CardTitle>{community.title}</CardTitle>
-    <CardDesc>{community.desc}</CardDesc>
-    <ActivitySpark>
-      <Trend
-        smooth
-        autoDraw
-        autoDrawDuration={200}
-        autoDrawEasing="ease-in"
-        data={community.contributesDigest}
-        gradient={['#D6ECB2', '#4F966E']}
-        radius={15}
-        strokeWidth={3}
-        strokeLinecap="round"
-      />
-    </ActivitySpark>
-    <Divider />
-    <CardFooter>
-      <div>
-        {/* TODO: number color should be different when number grow large */}
-        {prettyNum(community.subscribersCount)}{' '}
-        {community.subscribersCount < 1000 ? '人关注' : '关注'}
-      </div>
-
-      <SubscribeBtn community={community} restProps={restProps} />
-    </CardFooter>
-  </Card>
-)
-
-const CommunitiesGrid = ({ entries, restProps }) => (
-  <GridWrapper>
-    {entries.map(community => (
-      <CommunityCard
-        key={community.raw}
-        community={community}
-        restProps={restProps}
-      />
-    ))}
-  </GridWrapper>
-)
+/* eslint-disable react/display-name */
+const columns = [
+  {
+    title: 'id',
+    dataIndex: 'id',
+    align: 'center',
+    width: 80,
+    fixed: 'left',
+  },
+  {
+    title: 'logo',
+    dataIndex: 'logo',
+    align: 'center',
+    fixed: 'left',
+    width: 80,
+    render: text => {
+      // TODO: jadge image type before render, currently only svg supported
+      return <CommunityIcon path={text} />
+    },
+  },
+  {
+    title: '名称',
+    width: 200,
+    dataIndex: 'title',
+    align: 'center',
+    render: text => {
+      return <div>{cutFrom(text, 15)}</div>
+    },
+  },
+  {
+    title: '描述',
+    width: 200,
+    dataIndex: 'desc',
+    align: 'center',
+    render: text => {
+      return <div>{cutFrom(text, 10)}</div>
+    },
+  },
+  {
+    title: 'raw',
+    width: 150,
+    dataIndex: 'raw',
+    align: 'center',
+    render: text => {
+      return <div>{cutFrom(text, 10)}</div>
+    },
+  },
+  {
+    title: '订阅人数',
+    width: 100,
+    align: 'center',
+    dataIndex: 'subscribersCount',
+  },
+  {
+    title: '编辑人数',
+    width: 100,
+    dataIndex: 'editorsCount',
+    align: 'center',
+  },
+  {
+    title: '帖子数',
+    width: 100,
+    dataIndex: 'postsCount',
+    align: 'center',
+  },
+  {
+    title: '创建时间',
+    width: 150,
+    dataIndex: 'insertedAt',
+    align: 'center',
+    render: text => {
+      return <TimeAgo datetime={text} locale="zh_CN" />
+    },
+  },
+  {
+    title: '上次更新',
+    width: 150,
+    dataIndex: 'updatedAt',
+    align: 'center',
+    render: text => {
+      return <TimeAgo datetime={text} locale="zh_CN" />
+    },
+  },
+]
 
 class CommunitiesContentContainer extends React.Component {
   componentWillMount() {
@@ -119,27 +113,38 @@ class CommunitiesContentContainer extends React.Component {
   }
 
   render() {
-    const { communities } = this.props.communitiesContent
+    const { communitiesContent } = this.props
+    const { pagedCommunitiesData, communitiesLoading } = communitiesContent
+    /* console.log('pagedCommunities index: ', pagedCommunities) */
+    console.log('pagedCommunitiesData : ', pagedCommunitiesData)
 
     return (
       <Wrapper>
-        <CommunitiesGrid
-          entries={communities.entries}
-          restProps={{ ...this.props.communitiesContent }}
-        />
-
-        <Pagi
-          left="-10px"
-          pageNumber={communities.pageNumber}
-          pageSize={communities.pageSize}
-          totalCount={communities.totalCount}
-          onChange={logic.pageChange}
-        />
+        {pagedCommunitiesData ? (
+          <div>
+            <Table
+              columns={columns}
+              dataSource={pagedCommunitiesData.entries}
+              scroll={{ x: 1200 }}
+              loading={TableLoading(communitiesLoading)}
+              pagination={false}
+            />
+            <Pagi
+              left="-10px"
+              pageNumber={pagedCommunitiesData.pageNumber}
+              pageSize={pagedCommunitiesData.pageSize}
+              totalCount={pagedCommunitiesData.totalCount}
+              onChange={logic.pageChange}
+            />
+          </div>
+        ) : (
+          <div />
+        )}
       </Wrapper>
     )
   }
 }
 
-export default inject(storeSelector('communitiesContent'))(
+export default inject(storePlug('communitiesContent'))(
   observer(CommunitiesContentContainer)
 )

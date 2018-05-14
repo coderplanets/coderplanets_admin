@@ -22,6 +22,8 @@ import {
   BannerStore,
   ContentStore,
   CurCommunity,
+  // banner
+  CommunitiesBannerStore,
   // papers
   PostsPaperStore,
   CommunitiesContentStore,
@@ -75,6 +77,7 @@ const rootStore = t
     bodylayout: t.optional(BodylayoutStore, {}),
     apiLayout: t.optional(ApiLayoutStore, {}),
     header: t.optional(HeaderStore, {}),
+    communitiesBanner: t.optional(CommunitiesBannerStore, {}),
     banner: t.optional(BannerStore, {}),
     content: t.optional(ContentStore, {}),
     // layouts end

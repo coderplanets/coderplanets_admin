@@ -1,6 +1,15 @@
 // import R from 'ramda'
 
-import { gqRes, gqErr, $solver, ERR, makeDebugger, EVENT } from '../../utils'
+import {
+  gqRes,
+  gqErr,
+  $solver,
+  ERR,
+  makeDebugger,
+  EVENT,
+  TYPE,
+  scrollIntoEle,
+} from '../../utils'
 import S from './schema'
 import SR71 from '../../utils/network/sr71'
 
@@ -17,7 +26,6 @@ let communitiesContent = null
 export function loadCommunities() {
   const args = {
     filter: { page: 1, size: 20 },
-    userHasLogin: communitiesContent.isLogin,
   }
   sr71$.query(S.communities, args)
 }
@@ -25,36 +33,19 @@ export function loadCommunities() {
 export function pageChange(page) {
   const args = {
     filter: { page, size: 20 },
-    userHasLogin: communitiesContent.isLogin,
   }
 
+  communitiesContent.markState({
+    communitiesLoading: true,
+  })
+  scrollIntoEle(TYPE.APP_HEADER_ID)
   sr71$.query(S.communities, args)
-}
-
-export function subscribe(id) {
-  debug('subscribe', id)
-
-  sr71$.mutate(S.subscribeCommunity, { communityId: id })
-  communitiesContent.markState({
-    subscribing: true,
-    subscribingId: id,
-  })
-}
-
-export function unSubscribe(id) {
-  debug('unSubscribe', id)
-
-  sr71$.mutate(S.unsubscribeCommunity, { communityId: id })
-  communitiesContent.markState({
-    subscribing: true,
-    subscribingId: id,
-  })
 }
 
 /* when error occured cancle all the loading state */
 const cancleLoading = () => {
   communitiesContent.markState({
-    subscribing: false,
+    communitiesLoading: false,
   })
 }
 
@@ -62,26 +53,12 @@ const DataSolver = [
   {
     match: gqRes('communities'),
     action: ({ communities }) => {
-      communitiesContent.loadCommunities(communities)
-    },
-  },
-  {
-    match: gqRes('subscribeCommunity'),
-    action: ({ subscribeCommunity }) => {
-      communitiesContent.addSubscribedCommunity(subscribeCommunity)
+      debug('get communities haha: ', communities)
+      cancleLoading()
       communitiesContent.markState({
-        subscribing: false,
+        pagedCommunities: communities,
       })
-    },
-  },
-  {
-    match: gqRes('unsubscribeCommunity'),
-    action: ({ unsubscribeCommunity }) => {
-      debug('unsubscribeCommunity: ', unsubscribeCommunity)
-      communitiesContent.removeSubscribedCommunity(unsubscribeCommunity)
-      communitiesContent.markState({
-        subscribing: false,
-      })
+      // communitiesContent.loadCommunities(communities)
     },
   },
   {
