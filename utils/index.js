@@ -2,7 +2,7 @@
  * constants used cross the site
  */
 
-export { EVENT, ERR, TYPE } from './constants'
+export { EVENT, ERR, TYPE, ROUTE } from './constants'
 
 export { makeDebugger } from './debug'
 /*

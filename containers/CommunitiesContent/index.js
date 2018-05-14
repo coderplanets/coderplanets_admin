@@ -115,9 +115,6 @@ class CommunitiesContentContainer extends React.Component {
   render() {
     const { communitiesContent } = this.props
     const { pagedCommunitiesData, communitiesLoading } = communitiesContent
-    /* console.log('pagedCommunities index: ', pagedCommunities) */
-    console.log('pagedCommunitiesData : ', pagedCommunitiesData)
-
     return (
       <Wrapper>
         {pagedCommunitiesData ? (

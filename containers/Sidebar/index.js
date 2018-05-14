@@ -26,7 +26,9 @@ import {
 import { MenuItem } from './styles/menu'
 import * as logic from './logic'
 
+/* eslint-disable no-unused-vars */
 const debug = makeDebugger('C:Sidebar:index')
+/* eslint-enable no-unused-vars */
 
 const MenuList = ({ items, activeCommunityId, activePart }) => {
   const listItems = (
@@ -55,7 +57,6 @@ const MenuList = ({ items, activeCommunityId, activePart }) => {
 
 class SidebarContainer extends React.Component {
   componentDidMount() {
-    debug('init')
     logic.init(this.props.sidebar)
   }
 
@@ -74,7 +75,9 @@ class SidebarContainer extends React.Component {
       <Sidebar>
         <Banner>
           <BannerLogo path={`${ICON_ASSETS}/cmd/rainbow_logo.svg`} />
-          <BannerTitle>CPS 管理后台 @2018</BannerTitle>
+          <BannerTitle onClick={logic.loadCommunities}>
+            CPS 管理后台 @2018
+          </BannerTitle>
         </Banner>
         <MenuList
           items={subscribedCommunities}

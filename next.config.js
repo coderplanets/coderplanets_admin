@@ -12,7 +12,14 @@ module.exports = {
       '/': { page: '/' },
       // '/ruby': { page: '/', query: { name: 'ruby' } },
       '/cheatsheet': { page: '/', query: { main: 'cheatsheet', sub: '' } },
-      '/communities': { page: '/', query: { main: 'communities', sub: '' } },
+      '/communities': {
+        page: '/communities',
+        query: { main: 'communities', sub: '' },
+      },
+      '/communities/category': {
+        page: '/communities',
+        query: { main: 'communities', sub: 'category' },
+      },
       '/js/posts': { page: '/', query: { main: 'js', sub: 'posts' } },
       /* '/intro/i': { page: '/intro', query: { name: 'index' } }, */
       /* '/intro/feature': { page: '/intro', query: { name: 'feature' } }, */

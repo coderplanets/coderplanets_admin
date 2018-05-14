@@ -49,8 +49,8 @@ const getMessages = locale => {
 }
 
 // const homeQuery = route('/home/:name')
-const introQuery = route('/intro')
-const apiQuery = route('/api')
+const communitiesQuery = route('/communities')
+const communitiesSubQuery = route('/communities/:sub')
 // const communityQuery = route('/:main')
 const communityQuery = route('/:community')
 const communitySubQuery = route('/:main/:sub')
@@ -60,8 +60,8 @@ app.prepare().then(() => {
   createServer((req, res) => {
     const { pathname } = parse(req.url)
     // const homeMatch = homeQuery(pathname)
-    const introMatch = introQuery(pathname)
-    const apiMatch = apiQuery(pathname)
+    const communitiesMatch = communitiesQuery(pathname)
+    const communitiesSubMatch = communitiesSubQuery(pathname)
     const localeMatch = localeQuery(pathname)
     const communityMatch = communityQuery(pathname)
     const communitySubMatch = communitySubQuery(pathname)
@@ -77,12 +77,11 @@ app.prepare().then(() => {
     req.locale = locale
     req.messages = getMessages(locale)
 
-    if (introMatch) {
-      return app.render(req, res, '/intro', introMatch)
+    if (communitiesMatch) {
+      return app.render(req, res, '/communities', communitiesMatch)
     }
-
-    if (apiMatch) {
-      return app.render(req, res, '/api', apiMatch)
+    if (communitiesSubMatch) {
+      return app.render(req, res, '/communities', communitiesSubMatch)
     }
 
     if (communityMatch) {

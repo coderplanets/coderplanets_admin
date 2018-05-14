@@ -9,16 +9,13 @@ import RootStore from './RootStore'
 
 let rootStore = null
 
-const createRootStore = langSetup => {
-  return RootStore.create(
-    { version: 'fake from the server', appLangs: langSetup },
-    {}
-  )
+const createRootStore = ({ langSetup, communities }) => {
+  return RootStore.create({ appLangs: langSetup, communities }, {})
 }
 
-function initRootStore(langSetup) {
+function initRootStore({ langSetup, communities }) {
   if (rootStore === null) {
-    rootStore = createRootStore(langSetup)
+    rootStore = createRootStore({ langSetup, communities })
   }
 
   /*

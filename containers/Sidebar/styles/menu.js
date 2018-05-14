@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import ReactSVG from 'react-svg'
 
 // import { darken } from 'polished'
-import { theme, Animate } from '../../../utils'
+import { theme } from '../../../utils'
 import { Sidebar } from './index'
 
 export const MenuItem = styled.ul`
@@ -26,7 +26,7 @@ export const MenuItemEach = styled.div`
   opacity: 1;
   transition: color 0.2s;
   font-size: 15px;
-  line-height: 58px;
+  line-height: 60px;
   height: 50px;
   width: 100%;
   box-sizing: border-box;
@@ -35,7 +35,8 @@ export const MenuItemEach = styled.div`
 export const MenuRow = styled.div`
   display: flex;
   justify-content: left;
-  font-size: 1em;
+  align-items: center;
+  font-size: 1rem;
   background-color: ${props =>
     props.activeCommunityId === props.curCommunityId ? '#009DED' : '#005682'};
   padding-left: 15px;
@@ -55,6 +56,21 @@ export const MenuRow = styled.div`
     }
   }
 `
+
+export const MenuTitle = styled.div`
+  color: ${theme('sidebar.menu_link')};
+  display: block;
+  flex-grow: 1;
+  max-width: 50%;
+  opacity: 0.6;
+  margin-top: -10px;
+
+  &:hover {
+    color: ${theme('sidebar.menu_link')};
+    cursor: pointer;
+  }
+`
+
 // TODO: hover
 export const MiniChartWrapper = styled.div`
   width: 12vh;
@@ -90,7 +106,6 @@ export const MiniChartText = styled.div`
 
 export const MenuItemIcon = styled(ReactSVG)`
   opacity: ${props => (props.active ? 1 : 0.5)};
-  margin-top: 1em;
   width: 22px;
   height: 22px;
 `
@@ -146,19 +161,10 @@ export const ChildrenTitle = styled.div`
 
 export const ChildrenNum = styled.div`
   margin-right: 25px;
-
-  ${ChildrenItem}:hover & {
-    animation: ${Animate.pulse} 0.3s linear;
-  }
 `
 
 export const SettingIcon = styled(ReactSVG)`
   fill: #309abb;
   width: 17px;
   height: 17px;
-
-  ${ChildrenItem}:hover & {
-    fill: #a5cfe0;
-    animation: ${Animate.pulse} 0.3s linear;
-  }
 `

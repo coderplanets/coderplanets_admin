@@ -25,18 +25,21 @@ export default class Index extends React.Component {
     /* eslint-disable no-underscore-dangle */
     /* eslint-disable no-undef */
     // console.log('SSR getInitialProps ------> ', req.headers)
+
     const { locale, messages } = req || window.__NEXT_DATA__.props
     const langSetup = {}
     langSetup[locale] = messages
-    const store = initRootStore(langSetup)
+    // const store = initRootStore(langSetup)
     /* eslint-enable no-undef */
 
-    return { version: store.version, messages, locale, langSetup }
+    return { messages, locale, langSetup }
   }
 
   constructor(props) {
     super(props)
-    this.store = initRootStore(props.langSetup)
+    this.store = initRootStore({
+      langSetup: props.langSetup,
+    })
   }
 
   render() {

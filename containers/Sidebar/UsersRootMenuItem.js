@@ -1,11 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
 
-import { TYPE } from '../../utils'
+import { ROUTE } from '../../utils'
 import { ICON_ASSETS } from '../../config'
 
 import {
   MenuRow,
+  MenuTitle,
   MenuItemWrapper,
   MenuItemEach,
   MenuCommunitiesIcon,
@@ -25,8 +26,8 @@ const MenuChildren = ({ activeCommunityId, curCommunityId, activePart }) => {
       curCommunityId={curCommunityId}
     >
       <ChildrenItem
-        active={TYPE.U_R_REGISTER === activePart}
-        onClick={logic.onChildMenuChange.bind(this, TYPE.U_R_REGISTER)}
+        active={ROUTE.REGISTERS === activePart}
+        onClick={logic.onChildMenuChange.bind(this, ROUTE.REGISTERS)}
       >
         <Link href="/communities">
           <ChildrenItemInner>
@@ -36,8 +37,8 @@ const MenuChildren = ({ activeCommunityId, curCommunityId, activePart }) => {
         </Link>
       </ChildrenItem>
       <ChildrenItem
-        active={TYPE.U_R_PAYS === activePart}
-        onClick={logic.onChildMenuChange.bind(this, TYPE.U_R_PAYS)}
+        active={ROUTE.PAYS === activePart}
+        onClick={logic.onChildMenuChange.bind(this, ROUTE.PAYS)}
       >
         <Link href="/communities">
           <ChildrenItemInner>
@@ -47,8 +48,8 @@ const MenuChildren = ({ activeCommunityId, curCommunityId, activePart }) => {
         </Link>
       </ChildrenItem>
       <ChildrenItem
-        active={TYPE.U_R_PASSPORTS === activePart}
-        onClick={logic.onChildMenuChange.bind(this, TYPE.U_R_PASSPORTS)}
+        active={ROUTE.PASSPORTS === activePart}
+        onClick={logic.onChildMenuChange.bind(this, ROUTE.PASSPORTS)}
       >
         <Link href="/communities">
           <ChildrenItemInner>
@@ -58,8 +59,8 @@ const MenuChildren = ({ activeCommunityId, curCommunityId, activePart }) => {
         </Link>
       </ChildrenItem>
       <ChildrenItem
-        active={TYPE.U_R_ROLES === activePart}
-        onClick={logic.onChildMenuChange.bind(this, TYPE.U_R_ROLES)}
+        active={ROUTE.ROLES === activePart}
+        onClick={logic.onChildMenuChange.bind(this, ROUTE.ROLES)}
       >
         <Link href="/communities">
           <ChildrenItemInner>
@@ -80,12 +81,12 @@ const UsersItemBar = ({ activeCommunityId, curCommunityId }) => {
         <MenuRow
           activeCommunityId={activeCommunityId}
           curCommunityId={curCommunityId}
-          onClick={logic.extendMenuBar.bind(this, TYPE.C_USERS_ID)}
+          onClick={logic.extendMenuBar.bind(this, ROUTE.USERS_ID)}
         >
           <MenuCommunitiesIcon path={`${ICON_ASSETS}/cmd/users.svg`} />
           <div style={{ marginRight: 10 }} />
           {/* eslint-disable jsx-a11y/anchor-is-valid */}
-          <a style={{ textDecoration: 'none' }}>所有用户</a>
+          <MenuTitle>所有用户</MenuTitle>
         </MenuRow>
       </div>
     </MenuItemEach>
@@ -97,11 +98,11 @@ const UsersRootMenuItem = ({ activeCommunityId, activePart }) => (
     <div>
       <UsersItemBar
         activeCommunityId={activeCommunityId}
-        curCommunityId={TYPE.C_USERS_ID}
+        curCommunityId={ROUTE.USERS_ID}
       />
       <MenuChildren
         activeCommunityId={activeCommunityId}
-        curCommunityId={TYPE.C_USERS_ID}
+        curCommunityId={ROUTE.USERS_ID}
         activePart={activePart}
       />
     </div>

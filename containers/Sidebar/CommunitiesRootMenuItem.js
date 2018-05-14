@@ -1,11 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
 
-import { TYPE } from '../../utils'
+import { ROUTE } from '../../utils'
 import { ICON_ASSETS } from '../../config'
 
 import {
   MenuRow,
+  MenuTitle,
   MenuItemWrapper,
   MenuItemEach,
   MenuCommunitiesIcon,
@@ -25,8 +26,8 @@ const MenuChildren = ({ activeCommunityId, curCommunityId, activePart }) => {
       curCommunityId={curCommunityId}
     >
       <ChildrenItem
-        active={TYPE.C_R_TOP === activePart}
-        onClick={logic.onChildMenuChange.bind(this, TYPE.C_R_TOP)}
+        active={ROUTE.COMMUNITIES === activePart}
+        onClick={logic.onChildMenuChange.bind(this, ROUTE.COMMUNITIES)}
       >
         <Link href="/communities">
           <ChildrenItemInner>
@@ -36,10 +37,10 @@ const MenuChildren = ({ activeCommunityId, curCommunityId, activePart }) => {
         </Link>
       </ChildrenItem>
       <ChildrenItem
-        active={TYPE.C_R_CATEGORIES === activePart}
-        onClick={logic.onChildMenuChange.bind(this, TYPE.C_R_CATEGORIES)}
+        active={ROUTE.CATEGORIES === activePart}
+        onClick={logic.onChildMenuChange.bind(this, ROUTE.CATEGORIES)}
       >
-        <Link href="/communities">
+        <Link href="/communities/category">
           <ChildrenItemInner>
             <ChildrenTitle>分类</ChildrenTitle>
             <ChildrenNum>22</ChildrenNum>
@@ -47,8 +48,8 @@ const MenuChildren = ({ activeCommunityId, curCommunityId, activePart }) => {
         </Link>
       </ChildrenItem>
       <ChildrenItem
-        active={TYPE.C_R_EDITORS === activePart}
-        onClick={logic.onChildMenuChange.bind(this, TYPE.C_R_EDITORS)}
+        active={ROUTE.EDITORS === activePart}
+        onClick={logic.onChildMenuChange.bind(this, ROUTE.EDITORS)}
       >
         <Link href="/communities">
           <ChildrenItemInner>
@@ -58,8 +59,8 @@ const MenuChildren = ({ activeCommunityId, curCommunityId, activePart }) => {
         </Link>
       </ChildrenItem>
       <ChildrenItem
-        active={TYPE.C_R_POSTS === activePart}
-        onClick={logic.onChildMenuChange.bind(this, TYPE.C_R_POSTS)}
+        active={ROUTE.POSTS === activePart}
+        onClick={logic.onChildMenuChange.bind(this, ROUTE.POSTS)}
       >
         <Link href="/communities">
           <ChildrenItemInner>
@@ -80,12 +81,12 @@ const CommunitiesItemBar = ({ activeCommunityId, curCommunityId }) => {
         <MenuRow
           activeCommunityId={activeCommunityId}
           curCommunityId={curCommunityId}
-          onClick={logic.extendMenuBar.bind(this, TYPE.C_COMMUNITIES_ID)}
+          onClick={logic.extendMenuBar.bind(this, ROUTE.COMMUNITIES_ID)}
         >
           <MenuCommunitiesIcon path={`${ICON_ASSETS}/cmd/all.svg`} />
           <div style={{ marginRight: 10 }} />
           {/* eslint-disable jsx-a11y/anchor-is-valid */}
-          <a style={{ textDecoration: 'none' }}>所有社区</a>
+          <MenuTitle>所有社区</MenuTitle>
         </MenuRow>
       </div>
     </MenuItemEach>
@@ -97,11 +98,11 @@ const CommunitiesRootMenuItem = ({ activeCommunityId, activePart }) => (
     <div>
       <CommunitiesItemBar
         activeCommunityId={activeCommunityId}
-        curCommunityId={TYPE.C_COMMUNITIES_ID}
+        curCommunityId={ROUTE.COMMUNITIES_ID}
       />
       <MenuChildren
         activeCommunityId={activeCommunityId}
-        curCommunityId={TYPE.C_COMMUNITIES_ID}
+        curCommunityId={ROUTE.COMMUNITIES_ID}
         activePart={activePart}
       />
     </div>

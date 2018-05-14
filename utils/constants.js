@@ -10,6 +10,7 @@ export const EVENT = {
   LOGIN_PANEL: 'LOGIN_PANEL',
   LOGIN: 'LOGIN',
   LOGOUT: 'LOGOUT',
+  ROUTE_CHANGE: 'ROUTE_CHANGE',
   PREVIEW: 'PREVIEW',
   PREVIEW_CLOSE: 'PREVIEW_CLOSE',
   PREVIEW_CLOSED: 'PREVIEW_CLOSED',
@@ -52,26 +53,37 @@ export const TYPE = {
   DESC_INSERTED: 'DESC_INSERTED',
   MOST_LIKES: 'MOST_LIKES',
   MOST_DISLIKES: 'MOST_DISLIKES',
-  // Admin
-  C_UTILS: 'C_UTILS',
-  C_POSTS: 'C_POSTS',
-  C_JOBS: 'C_JOBS',
-  C_ACTIVITIES: 'C_ACTIVITIES',
-  C_CHEATSHEETS: 'C_CHEATSHEETS',
-  C_EDITORS: 'C_EDITORS',
-  C_THREADS: 'C_THREADS',
-  C_TAGS: 'C_TAGS',
-  C_SUBSCRIBERS: 'C_SUBSCRIBERS',
-  C_COMMUNITIES_ID: 'C_COMMUNITIES_ID',
-  C_USERS_ID: 'C_USERS_ID',
-  // Admin Communites Root
-  C_R_TOP: 'C_R_TOP',
-  C_R_CATEGORIES: 'C_R_CATEGORIES',
-  C_R_EDITORS: 'C_R_EDITORS',
-  C_R_POSTS: 'C_R_POSTS',
-  // Admin Users Root
-  U_R_REGISTER: 'U_R_REGISTER',
-  U_R_PAYS: 'U_R_PAYS',
-  U_R_PASSPORTS: 'U_R_PASSPORTS',
-  U_R_ROLES: 'U_R_ROLES',
+}
+
+export const ROUTE = {
+  // the fake id for all communities, this item do not has a id, so make a fake one
+  // id is used for UI when item is active
+  COMMUNITIES_ID: 'COMMUNITIES_ID',
+  // communities CURD
+  COMMUNITIES: 'COMMUNITIES',
+  // communities categories CURD
+  CATEGORIES: 'CATEGORIES',
+
+  COMMUNITY: 'COMMUNITY',
+
+  USERS_ID: 'USERS_ID',
+  // valid part
+  POSTS: 'POSTS',
+  JOBS: 'JOBS',
+  ACTIVITIES: 'ACTIVITIES',
+  CHEATSHEETS: 'CHEATSHEETS',
+  EDITORS: 'EDITORS',
+  THREADS: 'THREADS',
+  TAGS: 'TAGS',
+  SUBSCRIBERS: 'SUBSCRIBERS',
+
+  // users
+  // register users
+  REGISTERS: 'REGISTERS',
+  // mother and fathers
+  PAYS: 'PAYS',
+  // users passport CURD
+  PASSPORTS: 'PASSPORTS',
+  // roles CURD (based on passports)
+  ROLES: 'ROLES',
 }

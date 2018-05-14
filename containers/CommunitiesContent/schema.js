@@ -9,7 +9,6 @@ const communities = gql`
         desc
         raw
         logo
-        contributesDigest
         subscribersCount
         insertedAt
         updatedAt
