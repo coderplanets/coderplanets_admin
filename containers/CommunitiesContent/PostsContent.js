@@ -2,9 +2,16 @@ import React from 'react'
 import TimeAgo from 'timeago-react'
 
 import { cutFrom } from '../../utils'
-import { Pagi, Table, TableLoading, Button, Space } from '../../components'
+import {
+  Pagi,
+  Table,
+  TableLoading,
+  Button,
+  Space,
+  UserCell,
+} from '../../components'
 
-import { CommunityIcon, OperationWrapper } from './styles'
+import { OperationWrapper } from './styles'
 import * as logic from './logic'
 
 /* eslint-disable react/display-name */
@@ -17,18 +24,16 @@ const columns = [
     fixed: 'left',
   },
   {
-    title: 'logo',
-    dataIndex: 'logo',
+    title: '作者',
+    width: 200,
+    dataIndex: 'author',
     align: 'center',
-    fixed: 'left',
-    width: 80,
-    render: text => {
-      // TODO: jadge image type before render, currently only svg supported
-      return <CommunityIcon path={text} />
+    render: author => {
+      return <UserCell user={author} />
     },
   },
   {
-    title: '名称',
+    title: '标题',
     width: 200,
     dataIndex: 'title',
     align: 'center',
@@ -37,39 +42,42 @@ const columns = [
     },
   },
   {
-    title: '描述',
+    title: '摘要',
     width: 300,
-    dataIndex: 'desc',
+    dataIndex: 'digest',
     align: 'center',
     render: text => {
       return <div>{cutFrom(text, 10)}</div>
     },
   },
   {
-    title: 'raw',
-    width: 150,
-    dataIndex: 'raw',
-    align: 'center',
-    render: text => {
-      return <div>{cutFrom(text, 10)}</div>
-    },
-  },
-  {
-    title: '订阅人数',
-    width: 150,
-    align: 'center',
-    dataIndex: 'subscribersCount',
-  },
-  {
-    title: '编辑人数',
-    width: 150,
-    dataIndex: 'editorsCount',
-    align: 'center',
-  },
-  {
-    title: '帖子数',
+    title: '浏览',
     width: 100,
-    dataIndex: 'postsCount',
+    dataIndex: 'views',
+    align: 'center',
+  },
+  {
+    title: '收藏',
+    width: 100,
+    dataIndex: 'favoritedCount',
+    align: 'center',
+  },
+  {
+    title: '点赞',
+    width: 100,
+    dataIndex: 'starredCount',
+    align: 'center',
+  },
+  {
+    title: '评论数',
+    width: 100,
+    dataIndex: 'commentsCount',
+    align: 'center',
+  },
+  {
+    title: '评论参与',
+    width: 150,
+    dataIndex: 'commentsParticipatorsCount',
     align: 'center',
   },
   {
@@ -121,17 +129,25 @@ const columns = [
   },
 ]
 
-class IndexContent extends React.Component {
+class PostsContent extends React.Component {
   componentWillMount() {
-    logic.loadCommunities()
+    logic.loadPosts()
   }
+  /*
+  <Table
+  columns={columns}
+  dataSource={data.entries}
+  scroll={{ x: 1500 }}
+  loading={TableLoading(communitiesLoading)}
+  pagination={false}
+  />
+  */
 
   render() {
     const {
       data,
       restProps: { communitiesLoading },
     } = this.props
-
     return (
       <div>
         {data ? (
@@ -148,7 +164,7 @@ class IndexContent extends React.Component {
               pageNumber={data.pageNumber}
               pageSize={data.pageSize}
               totalCount={data.totalCount}
-              onChange={logic.loadCommunities}
+              onChange={logic.loadPosts}
             />
           </div>
         ) : (
@@ -159,4 +175,4 @@ class IndexContent extends React.Component {
   }
 }
 
-export default IndexContent
+export default PostsContent

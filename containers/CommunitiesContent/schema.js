@@ -21,8 +21,40 @@ const communities = gql`
   }
 `
 
+const pagedPosts = gql`
+  query pagedPosts($filter: PagedArticleFilter) {
+    pagedPosts(filter: $filter) {
+      entries {
+        id
+        title
+        digest
+        author {
+          id
+          nickname
+          avatar
+        }
+        communities {
+          id
+          title
+        }
+        commentsCount
+        commentsParticipatorsCount
+        views
+        favoritedCount
+        starredCount
+        insertedAt
+        updatedAt
+      }
+      totalCount
+      pageSize
+      pageNumber
+    }
+  }
+`
+
 const schema = {
   communities,
+  pagedPosts,
 }
 
 export default schema

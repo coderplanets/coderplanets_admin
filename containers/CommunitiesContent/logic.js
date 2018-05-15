@@ -10,6 +10,7 @@ import {
   TYPE,
   scrollIntoEle,
 } from '../../utils'
+import { PAGE_SIZE } from '../../config'
 import S from './schema'
 import SR71 from '../../utils/network/sr71'
 
@@ -23,23 +24,28 @@ const debug = makeDebugger('L:CommunitiesContent')
 
 let communitiesContent = null
 
-export function loadCommunities() {
+export function loadCommunities(page = 1) {
+  const size = PAGE_SIZE.COMMON
   const args = {
-    filter: { page: 1, size: 20 },
+    filter: { page, size },
   }
-  sr71$.query(S.communities, args)
-}
-
-export function pageChange(page) {
-  const args = {
-    filter: { page, size: 20 },
-  }
-
   communitiesContent.markState({
     communitiesLoading: true,
   })
   scrollIntoEle(TYPE.APP_HEADER_ID)
   sr71$.query(S.communities, args)
+}
+
+export function loadPosts(page = 1) {
+  const size = PAGE_SIZE.COMMON
+  const args = {
+    filter: { page, size },
+  }
+  scrollIntoEle(TYPE.APP_HEADER_ID)
+  communitiesContent.markState({
+    postsLoading: true,
+  })
+  sr71$.query(S.pagedPosts, args)
 }
 
 export function onEdit(record) {
@@ -54,6 +60,7 @@ export function onDelete(record) {
 const cancleLoading = () => {
   communitiesContent.markState({
     communitiesLoading: false,
+    postsLoading: false,
   })
 }
 
@@ -65,7 +72,15 @@ const DataSolver = [
       communitiesContent.markState({
         pagedCommunities: communities,
       })
-      // communitiesContent.loadCommunities(communities)
+    },
+  },
+  {
+    match: gqRes('pagedPosts'),
+    action: ({ pagedPosts }) => {
+      /* cancleLoading() */
+      communitiesContent.markState({
+        pagedPosts,
+      })
     },
   },
   {
@@ -107,5 +122,5 @@ export function init(selectedStore) {
   debug(communitiesContent)
   sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 
-  loadCommunities()
+  // loadCommunities()
 }

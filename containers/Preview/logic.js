@@ -82,7 +82,6 @@ const DataResolver = [
     match: gqRes(EVENT.NAV_CREATE_COMMUNITY),
     action: res => {
       const event = res[EVENT.NAV_CREATE_COMMUNITY]
-      console.log('preview event: ', event)
       holdPage()
       preview.open(event.type)
     },

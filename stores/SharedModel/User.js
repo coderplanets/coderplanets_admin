@@ -29,6 +29,7 @@ export const User = t.model('User', {
   nickname: t.optional(t.string, ''),
   bio: t.optional(t.string, ''),
   avatar: t.optional(t.string, ''),
+  /* avatar: t.maybe(t.string), */
   email: t.maybe(t.string),
   location: t.maybe(t.string),
   company: t.maybe(t.string),

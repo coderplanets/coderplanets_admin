@@ -26,6 +26,10 @@ export function loadCommunities() {
   sr71$.query(S.communities, { filter: { page: 1, size: 20 } })
 }
 
+export function loadPosts() {
+  sr71$.query(S.pagedPosts, { filter: {} })
+}
+
 export function onAdd() {
   debug('onAdd')
   dispatchEvent(EVENT.NAV_CREATE_COMMUNITY, {
@@ -39,6 +43,13 @@ const DataSolver = [
     action: ({ communities: { totalCount } }) =>
       communitiesBanner.markState({
         totalCount,
+      }),
+  },
+  {
+    match: gqRes('pagedPosts'),
+    action: ({ pagedPosts: { totalCount } }) =>
+      communitiesBanner.markState({
+        postsTotalCount: totalCount,
       }),
   },
 ]
@@ -67,5 +78,4 @@ const ErrSolver = [
 export function init(selectedStore) {
   communitiesBanner = selectedStore
   sr71$.data().subscribe($solver(DataSolver, ErrSolver))
-  loadCommunities()
 }

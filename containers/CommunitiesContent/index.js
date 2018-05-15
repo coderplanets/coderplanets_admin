@@ -11,6 +11,7 @@ import { inject, observer } from 'mobx-react'
 import { makeDebugger, storePlug, ROUTE } from '../../utils'
 
 import IndexContent from './IndexContent'
+import PostsContent from './PostsContent'
 import { Wrapper } from './styles'
 
 import * as logic from './logic'
@@ -19,7 +20,8 @@ import * as logic from './logic'
 const debug = makeDebugger('C:CommunitiesContent')
 /* eslint-enable no-unused-vars */
 
-const renderChildContent = (route, pagedCommunitiesData, restProps) => {
+const renderChildContent = (route, store, restProps) => {
+  const { pagedCommunitiesData, PagedPostsData } = store
   switch (route.subQuery) {
     case ROUTE.CATEGORIES: {
       return <h2>CATEGORIES Content</h2>
@@ -28,7 +30,7 @@ const renderChildContent = (route, pagedCommunitiesData, restProps) => {
       return <h2>Editors Content</h2>
     }
     case ROUTE.POSTS: {
-      return <h2>POSTS Content</h2>
+      return <PostsContent data={PagedPostsData} restProps={restProps} />
     }
     default: {
       return <IndexContent data={pagedCommunitiesData} restProps={restProps} />
@@ -43,12 +45,12 @@ class CommunitiesContentContainer extends React.Component {
 
   render() {
     const { communitiesContent } = this.props
-    const { pagedCommunitiesData, route } = communitiesContent
+    const { route } = communitiesContent
     const restProps = { ...this.props.communitiesContent }
 
     return (
       <Wrapper>
-        {renderChildContent(route, pagedCommunitiesData, restProps)}
+        {renderChildContent(route, communitiesContent, restProps)}
       </Wrapper>
     )
   }

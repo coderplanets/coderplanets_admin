@@ -17,7 +17,14 @@ import { BannerContainer } from './styles/community_banner'
 const debug = makeDebugger('C:CommunitiesBanner')
 /* eslint-enable no-unused-vars */
 
-const renderChildBanner = (route, restProps) => {
+const renderChildBanner = (route, store) => {
+  const {
+    totalCount,
+    curTotalCount,
+    curPostsTotalCount,
+    postsTotalCount,
+  } = store
+
   switch (route.subQuery) {
     case ROUTE.CATEGORIES: {
       return <CategoriesBanner />
@@ -26,10 +33,15 @@ const renderChildBanner = (route, restProps) => {
       return <EditorsBanner />
     }
     case ROUTE.POSTS: {
-      return <PostsBanner />
+      return (
+        <PostsBanner
+          totalCount={postsTotalCount}
+          curCount={curPostsTotalCount}
+        />
+      )
     }
     default: {
-      return <IndexBanner restProps={restProps} />
+      return <IndexBanner totalCount={totalCount} curCount={curTotalCount} />
     }
   }
 }
@@ -42,11 +54,13 @@ class CommunitiesBannerContainer extends React.Component {
     const { communitiesBanner } = this.props
     const { route } = communitiesBanner
     /* const { detail } = banner */
-    debug('route ccc: ', route)
-    const restProps = { ...this.props.communitiesBanner }
+    // debug('route ccc: ', route)
+    // const restProps = { ...this.props.communitiesBanner }
 
     return (
-      <BannerContainer>{renderChildBanner(route, restProps)}</BannerContainer>
+      <BannerContainer>
+        {renderChildBanner(route, communitiesBanner)}
+      </BannerContainer>
     )
   }
 }
