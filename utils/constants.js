@@ -62,34 +62,35 @@ export const TYPE = {
 }
 
 export const ROUTE = {
+  // NOTE: use lower case for god sake
   // the fake id for all communities, this item do not has a id, so make a fake one
   // id is used for UI when item is active
-  COMMUNITIES_ID: 'COMMUNITIES_ID',
+  COMMUNITIES_ID: 'communities',
   // communities CURD
-  COMMUNITIES: 'COMMUNITIES',
+  COMMUNITIES: 'communities',
   // communities categories CURD
-  CATEGORIES: 'CATEGORIES',
+  CATEGORIES: 'categories',
 
-  COMMUNITY: 'COMMUNITY',
+  COMMUNITY: 'community',
 
-  USERS_ID: 'USERS_ID',
+  USERS_ID: 'users_id',
   // valid part
-  POSTS: 'POSTS',
-  JOBS: 'JOBS',
-  ACTIVITIES: 'ACTIVITIES',
-  CHEATSHEETS: 'CHEATSHEETS',
-  EDITORS: 'EDITORS',
-  THREADS: 'THREADS',
-  TAGS: 'TAGS',
-  SUBSCRIBERS: 'SUBSCRIBERS',
+  POSTS: 'posts',
+  JOBS: 'jobs',
+  ACTIVITIES: 'activities',
+  CHEATSHEETS: 'cheatsheets',
+  EDITORS: 'editors',
+  THREADS: 'threads',
+  TAGS: 'tags',
+  SUBSCRIBERS: 'subscribers',
 
   // users
   // register users
-  REGISTERS: 'REGISTERS',
+  REGISTERS: 'registers',
   // mother and fathers
-  PAYS: 'PAYS',
+  PAYS: 'pays',
   // users passport CURD
-  PASSPORTS: 'PASSPORTS',
+  PASSPORTS: 'passports',
   // roles CURD (based on passports)
-  ROLES: 'ROLES',
+  ROLES: 'roles',
 }

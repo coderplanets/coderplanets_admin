@@ -40,7 +40,7 @@ const MenuChildren = ({ activeCommunityId, curCommunityId, activePart }) => {
         active={ROUTE.CATEGORIES === activePart}
         onClick={logic.onChildMenuChange.bind(this, ROUTE.CATEGORIES)}
       >
-        <Link href="/communities/category">
+        <Link href="/communities" as="/communities/categories">
           <ChildrenItemInner>
             <ChildrenTitle>分类</ChildrenTitle>
             <ChildrenNum>22</ChildrenNum>
@@ -51,7 +51,7 @@ const MenuChildren = ({ activeCommunityId, curCommunityId, activePart }) => {
         active={ROUTE.EDITORS === activePart}
         onClick={logic.onChildMenuChange.bind(this, ROUTE.EDITORS)}
       >
-        <Link href="/communities">
+        <Link href="/communities" as="/communities/editors">
           <ChildrenItemInner>
             <ChildrenTitle>编辑</ChildrenTitle>
             <ChildrenNum>22</ChildrenNum>
@@ -62,7 +62,7 @@ const MenuChildren = ({ activeCommunityId, curCommunityId, activePart }) => {
         active={ROUTE.POSTS === activePart}
         onClick={logic.onChildMenuChange.bind(this, ROUTE.POSTS)}
       >
-        <Link href="/communities">
+        <Link href="/communities" as="/communities/posts">
           <ChildrenItemInner>
             <ChildrenTitle>帖子</ChildrenTitle>
             <ChildrenNum>445</ChildrenNum>

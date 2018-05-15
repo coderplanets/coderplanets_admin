@@ -65,8 +65,8 @@ const DataSolver = [
   },
   {
     match: gqRes(EVENT.ROUTE_CHANGE),
-    action: () => {
-      sidebar.syncStateFromhRoute()
+    action: data => {
+      sidebar.syncStateFromhRoute(data[EVENT.ROUTE_CHANGE])
     },
   },
 ]

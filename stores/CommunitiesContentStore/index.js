@@ -36,6 +36,13 @@ const CommunitiesContentStore = t
       return self.root.account.isLogin
     },
 
+    get route() {
+      const { mainQuery, subQuery } = self.root.route
+      return {
+        mainQuery,
+        subQuery,
+      }
+    },
     get pagedCommunitiesData() {
       return stripMobx(self.pagedCommunities)
     },

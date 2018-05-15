@@ -1,29 +1,38 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 
-import { storePlug } from '../../utils'
-
-import { ICON_ASSETS } from '../../config'
+import { storePlug, makeDebugger, ROUTE } from '../../utils'
 
 import * as logic from './logic'
-import { Tag, Popover } from '../../components'
+
+import IndexBanner from './IndexBanner'
+import CategoriesBanner from './CategoryBanner'
+import EditorsBanner from './EditorsBanner'
+import PostsBanner from './PostsBanner'
 
 // TODO: extract banner styles to common components
-import {
-  BannerContainer,
-  BannerContentWrapper,
-  Result,
-  ResultBottom,
-  ResultNumber,
-  ResultText,
-  Operation,
-  OperationItem,
-  OperationDivider,
-  OperationTitle,
-  FilterTags,
-  OperationIcon,
-  OperationIconChart,
-} from './styles/community_banner'
+import { BannerContainer } from './styles/community_banner'
+
+/* eslint-disable no-unused-vars */
+const debug = makeDebugger('C:CommunitiesBanner')
+/* eslint-enable no-unused-vars */
+
+const renderChildBanner = (route, restProps) => {
+  switch (route.subQuery) {
+    case ROUTE.CATEGORIES: {
+      return <CategoriesBanner />
+    }
+    case ROUTE.EDITORS: {
+      return <EditorsBanner />
+    }
+    case ROUTE.POSTS: {
+      return <PostsBanner />
+    }
+    default: {
+      return <IndexBanner restProps={restProps} />
+    }
+  }
+}
 
 class CommunitiesBannerContainer extends React.Component {
   componentWillMount() {
@@ -31,47 +40,13 @@ class CommunitiesBannerContainer extends React.Component {
   }
   render() {
     const { communitiesBanner } = this.props
-    const { totalCount } = communitiesBanner
+    const { route } = communitiesBanner
     /* const { detail } = banner */
+    debug('route ccc: ', route)
+    const restProps = { ...this.props.communitiesBanner }
+
     return (
-      <BannerContainer>
-        <BannerContentWrapper>
-          <Result>
-            {/* <ResultTop>帖子总数为 4837 条</ResultTop> */}
-            <ResultBottom>
-              <ResultText>社区共</ResultText>
-              <ResultNumber>{totalCount}个</ResultNumber>
-              <ResultText>项结果符合过滤条件</ResultText>
-            </ResultBottom>
-          </Result>
-          <Operation>
-            <OperationItem>
-              <OperationIcon path={`${ICON_ASSETS}/cmd/filter2.svg`} />
-              <Popover
-                content={<div>兼容各个页面的 Filter 菜单</div>}
-                trigger="hover"
-              >
-                <OperationTitle>过滤</OperationTitle>
-              </Popover>
-              <FilterTags>
-                <Tag closable>最多xx</Tag>
-                <Tag closable>最少..</Tag>
-              </FilterTags>
-            </OperationItem>
-            <OperationDivider />
-            <OperationItem onClick={logic.onAdd}>
-              <OperationIconChart path={`${ICON_ASSETS}/cmd/plus.svg`} />
-              添加
-            </OperationItem>
-            <OperationDivider />
-            <OperationItem>
-              <OperationIcon path={`${ICON_ASSETS}/cmd/chart.svg`} />
-              {/* <OperationIconChart path={`${ICON_ASSETS}/cmd/list.svg`} /> */}
-              统计
-            </OperationItem>
-          </Operation>
-        </BannerContentWrapper>
-      </BannerContainer>
+      <BannerContainer>{renderChildBanner(route, restProps)}</BannerContainer>
     )
   }
 }

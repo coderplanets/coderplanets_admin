@@ -4,7 +4,7 @@
  */
 
 import { types as t, getParent } from 'mobx-state-tree'
-// import R from 'ramda'
+import R from 'ramda'
 import { makeDebugger, markStates, ROUTE, stripMobx } from '../../utils'
 
 /* eslint-disable no-unused-vars */
@@ -77,10 +77,10 @@ const SidebarStore = t
       // const communities = self.root.communities.all
     },
 
-    syncStateFromhRoute() {
+    syncStateFromhRoute({ mainQuery, subQuery }) {
       // TODO
-      self.activeCommunityId = ROUTE.COMMUNITIES_ID
-      self.activePart = ROUTE.COMMUNITIES
+      self.activeCommunityId = mainQuery
+      self.activePart = R.isEmpty(subQuery) ? ROUTE.COMMUNITIES : subQuery
     },
 
     loadCommunities(data) {

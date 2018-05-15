@@ -23,6 +23,13 @@ const CommunitiesBannerStore = t
     get root() {
       return getParent(self)
     },
+    get route() {
+      const { mainQuery, subQuery } = self.root.route
+      return {
+        mainQuery,
+        subQuery,
+      }
+    },
   }))
   .actions(self => ({
     markState(sobj) {

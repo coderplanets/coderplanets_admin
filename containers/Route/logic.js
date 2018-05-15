@@ -9,7 +9,7 @@ const debug = makeDebugger('L:Route')
 let route = null
 
 // const getMainQuery = q => (R.isEmpty(q) ? '' : q.main)
-const getSubQuery = q => (R.isEmpty(q) || !R.has('sub', q) ? '' : q.sub)
+// const getSubQuery = q => (R.isEmpty(q) || !R.has('sub', q) ? 'index' : q.sub)
 
 const getQueryMain = q => {
   if (R.isEmpty(q)) return ''
@@ -20,9 +20,16 @@ const getQueryMain = q => {
   return q.main
 }
 
+const getQuerySub = q => {
+  // TODO isEmpty ..
+  return R.last(R.split('/', q.asPath))
+}
+
 export function syncRoute(current) {
-  const { query } = current
+  // const { query } = current
+
   /*
+     debug('syncRoute current: ', current)
      debug('syncRoute query: ', current.query)
      debug('syncRoute pathname: ', current.pathname)
      debug('syncRoute asPath: ', current.asPath)
@@ -32,7 +39,12 @@ export function syncRoute(current) {
 
   /* const mainQuery = query ? getMainQuery(query) : '' */
   const mainQuery = getQueryMain(current)
-  const subQuery = query ? getSubQuery(query) : ''
+  const subQuery = getQuerySub(current)
+
+  /*
+     debug('mainQuery: ', mainQuery)
+     debug('subQuery: ', subQuery)
+   */
 
   route.markState({
     mainQuery,
@@ -41,7 +53,10 @@ export function syncRoute(current) {
 
   // avoid sr71 default debouce
   setTimeout(() => {
-    dispatchEvent(EVENT.ROUTE_CHANGE, {})
+    dispatchEvent(EVENT.ROUTE_CHANGE, {
+      mainQuery,
+      subQuery,
+    })
   }, 500)
 }
 

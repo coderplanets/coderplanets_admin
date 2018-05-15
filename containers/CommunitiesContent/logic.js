@@ -61,7 +61,6 @@ const DataSolver = [
   {
     match: gqRes('communities'),
     action: ({ communities }) => {
-      debug('get communities haha: ', communities)
       cancleLoading()
       communitiesContent.markState({
         pagedCommunities: communities,
