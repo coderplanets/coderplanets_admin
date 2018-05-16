@@ -23,11 +23,15 @@ const debug = makeDebugger('L:communitiesBanner')
 let communitiesBanner = null
 
 export function loadCommunities() {
-  sr71$.query(S.communities, { filter: { page: 1, size: 20 } })
+  sr71$.query(S.communities, { filter: {} })
 }
 
 export function loadPosts() {
   sr71$.query(S.pagedPosts, { filter: {} })
+}
+
+export function loadTags() {
+  sr71$.query(S.tags, { filter: {} })
 }
 
 export function onAdd() {
@@ -43,6 +47,13 @@ const DataSolver = [
     action: ({ communities: { totalCount } }) =>
       communitiesBanner.markState({
         totalCount,
+      }),
+  },
+  {
+    match: gqRes('tags'),
+    action: ({ tags: { totalCount } }) =>
+      communitiesBanner.markState({
+        tagsTotalCount: totalCount,
       }),
   },
   {

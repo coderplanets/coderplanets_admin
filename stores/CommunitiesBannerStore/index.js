@@ -16,6 +16,7 @@ const CommunitiesBannerStore = t
     // totalCount of all the communities
     totalCount: t.optional(t.number, 0),
     postsTotalCount: t.optional(t.number, 0),
+    tagsTotalCount: t.optional(t.number, 0),
     // categories count
     // editors count
     // ...
@@ -28,7 +29,12 @@ const CommunitiesBannerStore = t
       const data = self.root.communitiesContent.pagedCommunities
       return data ? data.totalCount : 0
     },
-
+    /*
+    get curTagsTotalCount() {
+      const data = self.root.communitiesContent.pagedtags
+      return data ? data.totalCount : 0
+    },
+    */
     get curPostsTotalCount() {
       const data = self.root.communitiesContent.pagedPosts
       return data ? data.totalCount : 0

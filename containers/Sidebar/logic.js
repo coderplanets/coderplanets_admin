@@ -4,6 +4,7 @@
 // const debug = makeDebugger('L:sidebar')
 import { gqRes, gqErr, $solver, ERR, makeDebugger, EVENT } from '../../utils'
 import S from './schema'
+import { PAGE_SIZE } from '../../config'
 
 import SR71 from '../../utils/network/sr71'
 
@@ -42,16 +43,15 @@ export function onChildMenuChange(activePart) {
   })
 }
 
-export function loadCommunities() {
+export function loadCommunities(page = 1) {
   // const { accountInfo, isLogin } = sidebar
   //  const user = store.get('user')
 
-  // TODO: load manaigedCommunities
+  const size = PAGE_SIZE.COMMON
   const args = {
-    filter: { page: 1, size: 30 },
+    filter: { page, size },
   }
 
-  console.log('fuck query ---- ?')
   sr71$.query(S.communities, args)
 }
 
@@ -59,7 +59,6 @@ const DataSolver = [
   {
     match: gqRes('communities'),
     action: ({ communities }) => {
-      debug('communities --- bbb * --> ', communities)
       sidebar.loadCommunities(communities)
     },
   },
@@ -95,5 +94,5 @@ const ErrSolver = [
 export function init(selectedStore) {
   sidebar = selectedStore
   sr71$.data().subscribe($solver(DataSolver, ErrSolver))
-  //  loadCommunities()
+  loadCommunities()
 }

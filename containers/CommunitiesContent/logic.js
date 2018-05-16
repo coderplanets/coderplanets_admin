@@ -48,6 +48,21 @@ export function loadPosts(page = 1) {
   sr71$.query(S.pagedPosts, args)
 }
 
+const commonFilter = page => {
+  const size = PAGE_SIZE.COMMON
+  return {
+    filter: { page, size },
+  }
+}
+
+export function loadTags(page = 1) {
+  scrollIntoEle(TYPE.APP_HEADER_ID)
+  communitiesContent.markState({
+    tagsLoading: true,
+  })
+  sr71$.query(S.tags, commonFilter(page))
+}
+
 export function onEdit(record) {
   debug('onEdit', record)
 }
@@ -61,6 +76,7 @@ const cancleLoading = () => {
   communitiesContent.markState({
     communitiesLoading: false,
     postsLoading: false,
+    tagsLoading: false,
   })
 }
 
@@ -75,9 +91,19 @@ const DataSolver = [
     },
   },
   {
+    match: gqRes('tags'),
+    action: ({ tags }) => {
+      cancleLoading()
+      console.log('tags ---> ', tags)
+      communitiesContent.markState({
+        pagedTags: tags,
+      })
+    },
+  },
+  {
     match: gqRes('pagedPosts'),
     action: ({ pagedPosts }) => {
-      /* cancleLoading() */
+      cancleLoading()
       communitiesContent.markState({
         pagedPosts,
       })

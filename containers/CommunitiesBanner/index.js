@@ -9,6 +9,7 @@ import IndexBanner from './IndexBanner'
 import CategoriesBanner from './CategoryBanner'
 import EditorsBanner from './EditorsBanner'
 import PostsBanner from './PostsBanner'
+import TagsBanner from './TagsBanner'
 
 // TODO: extract banner styles to common components
 import { BannerContainer } from './styles/community_banner'
@@ -21,11 +22,15 @@ const renderChildBanner = (route, store) => {
   const {
     totalCount,
     curTotalCount,
-    curPostsTotalCount,
+    tagsTotalCount,
     postsTotalCount,
+    curPostsTotalCount,
   } = store
 
   switch (route.subQuery) {
+    case ROUTE.TAGS: {
+      return <TagsBanner totalCount={tagsTotalCount} />
+    }
     case ROUTE.CATEGORIES: {
       return <CategoriesBanner />
     }

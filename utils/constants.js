@@ -70,6 +70,7 @@ export const ROUTE = {
   COMMUNITIES: 'communities',
   // communities categories CURD
   CATEGORIES: 'categories',
+  TAGS: 'tags',
 
   COMMUNITY: 'community',
 
@@ -81,7 +82,6 @@ export const ROUTE = {
   CHEATSHEETS: 'cheatsheets',
   EDITORS: 'editors',
   THREADS: 'threads',
-  TAGS: 'tags',
   SUBSCRIBERS: 'subscribers',
 
   // users

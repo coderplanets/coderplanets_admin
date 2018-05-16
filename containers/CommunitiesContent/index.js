@@ -12,6 +12,7 @@ import { makeDebugger, storePlug, ROUTE } from '../../utils'
 
 import IndexContent from './IndexContent'
 import PostsContent from './PostsContent'
+import TagsContent from './TagsContent'
 import { Wrapper } from './styles'
 
 import * as logic from './logic'
@@ -21,8 +22,11 @@ const debug = makeDebugger('C:CommunitiesContent')
 /* eslint-enable no-unused-vars */
 
 const renderChildContent = (route, store, restProps) => {
-  const { pagedCommunitiesData, PagedPostsData } = store
+  const { pagedCommunitiesData, pagedPostsData, pagedTagsData } = store
   switch (route.subQuery) {
+    case ROUTE.TAGS: {
+      return <TagsContent data={pagedTagsData} restProps={restProps} />
+    }
     case ROUTE.CATEGORIES: {
       return <h2>CATEGORIES Content</h2>
     }
@@ -30,7 +34,7 @@ const renderChildContent = (route, store, restProps) => {
       return <h2>Editors Content</h2>
     }
     case ROUTE.POSTS: {
-      return <PostsContent data={PagedPostsData} restProps={restProps} />
+      return <PostsContent data={pagedPostsData} restProps={restProps} />
     }
     default: {
       return <IndexContent data={pagedCommunitiesData} restProps={restProps} />

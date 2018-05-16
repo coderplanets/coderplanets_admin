@@ -48,6 +48,17 @@ const MenuChildren = ({ activeCommunityId, curCommunityId, activePart }) => {
         </Link>
       </ChildrenItem>
       <ChildrenItem
+        active={ROUTE.TAGS === activePart}
+        onClick={logic.onChildMenuChange.bind(this, ROUTE.TAGS)}
+      >
+        <Link href="/communities" as="/communities/tags">
+          <ChildrenItemInner>
+            <ChildrenTitle>标签</ChildrenTitle>
+            <ChildrenNum>22</ChildrenNum>
+          </ChildrenItemInner>
+        </Link>
+      </ChildrenItem>
+      <ChildrenItem
         active={ROUTE.EDITORS === activePart}
         onClick={logic.onChildMenuChange.bind(this, ROUTE.EDITORS)}
       >

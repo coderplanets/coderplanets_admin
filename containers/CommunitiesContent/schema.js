@@ -20,7 +20,24 @@ const communities = gql`
     }
   }
 `
-
+const tags = gql`
+  query tags($filter: PagedFilter!) {
+    tags(filter: $filter) {
+      entries {
+        id
+        title
+        color
+        part
+        insertedAt
+        updatedAt
+      }
+      pageNumber
+      pageSize
+      totalCount
+      totalPages
+    }
+  }
+`
 const pagedPosts = gql`
   query pagedPosts($filter: PagedArticleFilter) {
     pagedPosts(filter: $filter) {
@@ -54,6 +71,7 @@ const pagedPosts = gql`
 
 const schema = {
   communities,
+  tags,
   pagedPosts,
 }
 
