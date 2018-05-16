@@ -63,11 +63,10 @@ app.prepare().then(() => {
   createServer((req, res) => {
     const { pathname } = parse(req.url)
     // const homeMatch = homeQuery(pathname)
-    const communitiesMatch = communitiesQuery(pathname)
-    const communitiesSubMatch = communitiesSubQuery(pathname)
-
-    const usersMatch = usersQuery(pathname)
-    const usersSubMatch = usersSubQuery(pathname)
+    /* const communitiesMatch = communitiesQuery(pathname) */
+    /* const communitiesSubMatch = communitiesSubQuery(pathname) */
+    /* const usersMatch = usersQuery(pathname) */
+    /* const usersSubMatch = usersSubQuery(pathname) */
 
     const localeMatch = localeQuery(pathname)
     const communityMatch = communityQuery(pathname)
@@ -79,38 +78,24 @@ app.prepare().then(() => {
     if (localeMatch) {
       res.setHeader('Content-Type', 'application/json;charset=utf-8')
       return res.end(JSON.stringify(getMessages(localeMatch.lang)))
-    }
-
-    req.locale = locale
-    req.messages = getMessages(locale)
-
-    if (communitiesMatch) {
-      return app.render(req, res, '/communities', communitiesMatch)
-    }
-    if (communitiesSubMatch) {
-      return app.render(req, res, '/communities', communitiesSubMatch)
-    }
-
-    if (usersMatch) {
-      return app.render(req, res, '/users', usersMatch)
-    }
-
-    if (usersSubMatch) {
-      return app.render(req, res, '/users', usersSubMatch)
-    }
-
-    if (communityMatch) {
+    } else if (communitiesQuery(pathname) || communitiesSubQuery(pathname)) {
+      return app.render(req, res, '/communities')
+    } else if (usersQuery(pathname) || usersSubQuery(pathname)) {
+      return app.render(req, res, '/users')
+    } else if (communityMatch) {
       return app.render(req, res, '/', communityMatch)
-    }
-    if (communitySubMatch) {
+    } else if (communitySubMatch) {
       return app.render(req, res, '/', communitySubMatch)
     }
     /*
-      if (homeMatch) {
-        return app.render(req, res, '/', homeMatch)
-      }
+       if (homeMatch) {
+       return app.render(req, res, '/', homeMatch)
+       }
      */
     // now index page go this way
+    req.locale = locale
+    req.messages = getMessages(locale)
+
     return handle(req, res)
   }).listen(3001, err => {
     if (err) throw err
