@@ -1,14 +1,13 @@
 import styled from 'styled-components'
 import ReactSVG from 'react-svg'
 // import { Animate } from '../../../utils'
-import { BaseBanner, BaseTabber, BaseBannerContent } from './index'
+import { BaseBanner, BaseBannerContent } from './index'
 
 export const BannerContainer = BaseBanner.extend`
   min-height: 100px;
   justify-content: flex-end;
   color: #707084;
 `
-export const TabberWrapper = BaseTabber.extend``
 export const BannerContentWrapper = BaseBannerContent.extend``
 
 export const Result = styled.div`

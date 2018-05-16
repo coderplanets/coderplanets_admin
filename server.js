@@ -48,9 +48,12 @@ const getMessages = locale => {
   return messageCache.get(locale)
 }
 
-// const homeQuery = route('/home/:name')
+// communities view for root
 const communitiesQuery = route('/communities')
 const communitiesSubQuery = route('/communities/:sub')
+// users view for root
+const usersQuery = route('/users')
+const usersSubQuery = route('/users/:sub')
 // const communityQuery = route('/:main')
 const communityQuery = route('/:community')
 const communitySubQuery = route('/:main/:sub')
@@ -62,6 +65,10 @@ app.prepare().then(() => {
     // const homeMatch = homeQuery(pathname)
     const communitiesMatch = communitiesQuery(pathname)
     const communitiesSubMatch = communitiesSubQuery(pathname)
+
+    const usersMatch = usersQuery(pathname)
+    const usersSubMatch = usersSubQuery(pathname)
+
     const localeMatch = localeQuery(pathname)
     const communityMatch = communityQuery(pathname)
     const communitySubMatch = communitySubQuery(pathname)
@@ -82,6 +89,14 @@ app.prepare().then(() => {
     }
     if (communitiesSubMatch) {
       return app.render(req, res, '/communities', communitiesSubMatch)
+    }
+
+    if (usersMatch) {
+      return app.render(req, res, '/users', usersMatch)
+    }
+
+    if (usersSubMatch) {
+      return app.render(req, res, '/users', usersSubMatch)
     }
 
     if (communityMatch) {

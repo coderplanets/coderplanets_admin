@@ -24,10 +24,12 @@ import {
   CurCommunity,
   // banner
   CommunitiesBannerStore,
-  // papers
-  PostsPaperStore,
+  UsersBannerStore,
+  // PostsPaperStore,
+  // content
   CommunitiesContentStore,
-  CheatSheetContentStore,
+  UsersContentStore,
+  // CheatSheetContentStore,
   // viewers
   ArticleViwerStore,
   AccountViewerStore,
@@ -35,7 +37,7 @@ import {
   TutsViewerStore,
   MapViewerStore,
   JobsViewerStore,
-  CheatSheetPaperStore,
+  // CheatSheetPaperStore,
   // toolbox
   DoraemonStore,
   PreviewStore,
@@ -78,18 +80,20 @@ const rootStore = t
     apiLayout: t.optional(ApiLayoutStore, {}),
     header: t.optional(HeaderStore, {}),
     communitiesBanner: t.optional(CommunitiesBannerStore, {}),
+    usersBanner: t.optional(UsersBannerStore, {}),
     banner: t.optional(BannerStore, {}),
     content: t.optional(ContentStore, {}),
     // layouts end
 
     // content
     communitiesContent: t.optional(CommunitiesContentStore, {}),
-    cheatSheatContent: t.optional(CheatSheetContentStore, {}),
+    usersContent: t.optional(UsersContentStore, {}),
+    // cheatSheatContent: t.optional(CheatSheetContentStore, {}),
     // content end
 
     // papers
-    postsPaper: t.optional(PostsPaperStore, {}),
-    cheatSheetPaper: t.optional(CheatSheetPaperStore, {}),
+    // postsPaper: t.optional(PostsPaperStore, {}),
+    // cheatSheetPaper: t.optional(CheatSheetPaperStore, {}),
 
     // viewers (for preview usage)
     articleViwer: t.optional(ArticleViwerStore, {}),

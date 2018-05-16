@@ -17,7 +17,7 @@ import {
   FilterTags,
   OperationIcon,
   OperationIconChart,
-} from './styles/community_banner'
+} from './styles/common_banner'
 
 const CategoriesBanner = () => {
   return (

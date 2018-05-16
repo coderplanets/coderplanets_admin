@@ -12,7 +12,7 @@ import PostsBanner from './PostsBanner'
 import TagsBanner from './TagsBanner'
 
 // TODO: extract banner styles to common components
-import { BannerContainer } from './styles/community_banner'
+import { BannerContainer } from './styles'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('C:CommunitiesBanner')

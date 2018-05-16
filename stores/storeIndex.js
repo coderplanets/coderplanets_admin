@@ -16,10 +16,12 @@ export { default as CurCommunity } from './CurCommunity'
 
 // banner store
 export { default as CommunitiesBannerStore } from './CommunitiesBannerStore'
+export { default as UsersBannerStore } from './UsersBannerStore'
 
 // contents store
 export { default as CommunitiesContentStore } from './CommunitiesContentStore'
-export { default as CheatSheetContentStore } from './CheatSheetContentStore'
+export { default as UsersContentStore } from './UsersContentStore'
+// export { default as CheatSheetContentStore } from './CheatSheetContentStore'
 
 // papers store
 export { default as PostsPaperStore } from './PostsPaperStore'

@@ -18,7 +18,7 @@ import {
   FilterTags,
   OperationIcon,
   OperationIconChart,
-} from './styles/community_banner'
+} from './styles/common_banner'
 
 class IndexBanner extends React.Component {
   componentWillMount() {

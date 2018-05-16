@@ -74,7 +74,8 @@ export const ROUTE = {
 
   COMMUNITY: 'community',
 
-  USERS_ID: 'users_id',
+  USERS_ID: 'users',
+  USERS: 'users',
   // valid part
   POSTS: 'posts',
   JOBS: 'jobs',
