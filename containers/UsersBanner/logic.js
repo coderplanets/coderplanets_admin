@@ -12,7 +12,7 @@ const debug = makeDebugger('L:UsersBanner')
 
 let usersBanner = null
 
-export function someMethod() {}
+export function onAdd() {}
 
 // ###############################
 // Data & Error handlers
