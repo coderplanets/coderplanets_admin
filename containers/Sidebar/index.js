@@ -30,23 +30,17 @@ import * as logic from './logic'
 const debug = makeDebugger('C:Sidebar:index')
 /* eslint-enable no-unused-vars */
 
-const MenuList = ({ items, activeCommunityId, activePart }) => {
+const MenuList = ({ items, activeRaw, activePart }) => {
   const listItems = (
     <div>
-      <CommunitiesRootMenuItem
-        activeCommunityId={activeCommunityId}
-        activePart={activePart}
-      />
-      <UsersRootMenuItem
-        activeCommunityId={activeCommunityId}
-        activePart={activePart}
-      />
+      <CommunitiesRootMenuItem activeRaw={activeRaw} activePart={activePart} />
+      <UsersRootMenuItem activeRaw={activeRaw} activePart={activePart} />
 
       {items.map(item => (
         <CommunityMenuItem
           key={shortid.generate()}
           item={item}
-          activeCommunityId={activeCommunityId}
+          activeRaw={activeRaw}
           activePart={activePart}
         />
       ))}
@@ -62,12 +56,7 @@ class SidebarContainer extends React.Component {
 
   render() {
     const { sidebar } = this.props
-    const {
-      curPath,
-      subscribedCommunities,
-      activeCommunityId,
-      activePart,
-    } = sidebar
+    const { curPath, subscribedCommunities, activeRaw, activePart } = sidebar
     //    onMouseLeave={logic.leaveSidebar}
     // onMouseLeave is not unreliable in chrome: https://github.com/facebook/react/issues/4492
 
@@ -82,7 +71,7 @@ class SidebarContainer extends React.Component {
         <MenuList
           items={subscribedCommunities}
           curPath={curPath}
-          activeCommunityId={activeCommunityId}
+          activeRaw={activeRaw}
           activePart={activePart}
         />
         <Footer>

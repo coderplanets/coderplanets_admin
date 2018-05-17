@@ -37,8 +37,7 @@ export const MenuRow = styled.div`
   justify-content: left;
   align-items: center;
   font-size: 1rem;
-  background-color: ${props =>
-    props.activeCommunityId === props.curCommunityId ? '#009DED' : '#005682'};
+  background-color: ${props => (props.active ? '#009DED' : '#005682')};
   padding-left: 15px;
 
   a {
@@ -115,23 +114,18 @@ export const MenuCommunitiesIcon = MenuItemIcon.extend`
 
 export const ChildrenWrapper = styled.div`
   padding-left: 23px;
-  padding-top: ${props =>
-    props.activeCommunityId === props.curCommunityId ? '10px' : '0px'};
-  padding-bottom: ${props =>
-    props.activeCommunityId === props.curCommunityId ? '10px' : '0px'};
+  padding-top: ${props => (props.active ? '10px' : '0px')};
+  padding-bottom: ${props => (props.active ? '10px' : '0px')};
   border-left: 1px solid #007baa;
   background: #006a9f;
-  margin-top: ${props =>
-    props.activeCommunityId === props.curCommunityId ? '10px' : '0px'};
-  margin-bottom: ${props =>
-    props.activeCommunityId === props.curCommunityId ? '10px' : '0px'};
+  margin-top: ${props => (props.active ? '10px' : '0px')};
+  margin-bottom: ${props => (props.active ? '10px' : '0px')};
   overflow: hidden;
-  max-height: ${props =>
-    props.activeCommunityId === props.curCommunityId ? '400px' : '0px'};
+  max-height: ${props => (props.active ? '400px' : '0px')};
   transition: max-height 0.5s ease-in-out;
 `
 /* display: ${props => */
-/* props.activeCommunityId === props.curCommunityId ? 'block' : 'none'}; */
+/* props.activeRaw === props.curCommunityId ? 'block' : 'none'}; */
 
 export const ChildrenItem = styled.div`
   color: ${props => (props.active ? '#A5CFE0' : '#309abb')};

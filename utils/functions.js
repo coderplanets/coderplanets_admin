@@ -36,6 +36,7 @@ export const mapKeys = R.curry((fn, obj) => {
 
 export const notEmpty = R.compose(R.not, R.isEmpty)
 export const isEmptyValue = R.compose(R.isEmpty, R.trim)
+export const isEmptyNil = v => R.isEmpty(v) || R.isNil(v)
 /* eslint-disable */
 const log = (...args) => data => {
   console.log.apply(null, args.concat([data]))

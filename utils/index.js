@@ -13,6 +13,7 @@ export {
   mapKeys,
   isObject,
   notEmpty,
+  isEmptyNil,
   getRandomInt,
   isEmptyValue,
   Global,

@@ -23,14 +23,14 @@ export function pin() {
 }
 
 export function extendMenuBar(communityId) {
-  if (sidebar.activeCommunityId === communityId) {
+  if (sidebar.activeRaw === communityId) {
     return sidebar.markState({
-      activeCommunityId: null,
+      activeRaw: null,
     })
   }
 
   sidebar.markState({
-    activeCommunityId: communityId,
+    activeRaw: communityId,
     activePart: null,
   })
 }

@@ -1,6 +1,6 @@
 import R from 'ramda'
 
-import { makeDebugger, dispatchEvent, EVENT } from '../../utils'
+import { makeDebugger, dispatchEvent, EVENT, isEmptyNil } from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('L:Route')
@@ -8,16 +8,14 @@ const debug = makeDebugger('L:Route')
 
 let route = null
 
-// const getMainQuery = q => (R.isEmpty(q) ? '' : q.main)
-// const getSubQuery = q => (R.isEmpty(q) || !R.has('sub', q) ? 'index' : q.sub)
+const getQueryMain = routeObj => {
+  if (R.isEmpty(routeObj)) return ''
 
-const getQueryMain = q => {
-  if (R.isEmpty(q)) return ''
-  if (!q.main && q.pathname !== '/') {
-    return q.pathname.slice(1)
+  if (isEmptyNil(routeObj.query) && routeObj.pathname !== '/') {
+    return routeObj.pathname.slice(1)
   }
 
-  return q.main
+  return routeObj.query.main
 }
 
 const getQuerySub = q => {
@@ -25,33 +23,24 @@ const getQuerySub = q => {
   return R.last(R.split('/', q.asPath))
 }
 
-export function syncRoute(current) {
-  // const { query } = current
-
+export function syncRoute(routeObj) {
   /*
-     debug('syncRoute current: ', current)
-     debug('syncRoute query: ', current.query)
-     debug('syncRoute pathname: ', current.pathname)
-     debug('syncRoute asPath: ', current.asPath)
-     debug('syncRoute route: ', current.route)
-     debug('getQueryMain: ', getQueryMain(current))
+     debug('syncRoute routeObj: ', routeObj)
+     debug('syncRoute query: ', routeObj.query)
+     debug('syncRoute pathname: ', routeObj.pathname)
+     debug('syncRoute asPath: ', routeObj.asPath)
+     debug('syncRoute route: ', routeObj.route)
+     debug('### getQueryMain: ', getQueryMain(routeObj))
    */
-
-  /* const mainQuery = query ? getMainQuery(query) : '' */
-  const mainQuery = getQueryMain(current)
-  const subQuery = getQuerySub(current)
-
-  /*
-     debug('mainQuery: ', mainQuery)
-     debug('subQuery: ', subQuery)
-   */
+  const mainQuery = getQueryMain(routeObj)
+  const subQuery = getQuerySub(routeObj)
 
   route.markState({
     mainQuery,
     subQuery,
   })
 
-  // avoid sr71 default debouce
+  // avoid sr71/apollo default debouce
   setTimeout(() => {
     dispatchEvent(EVENT.ROUTE_CHANGE, {
       mainQuery,

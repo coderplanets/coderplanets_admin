@@ -20,15 +20,14 @@ import {
   SettingIcon,
 } from './styles/menu'
 
-const MenuItemBar = ({ item, activeCommunityId, curCommunityId }) => {
+const MenuItemBar = ({ item, activeRaw, curRaw }) => {
   //   <Link href={item.target.href} as={item.target.as}>
   return (
     <MenuItemEach>
       <div>
         <MenuRow
-          activeCommunityId={activeCommunityId}
-          curCommunityId={curCommunityId}
-          onClick={logic.extendMenuBar.bind(this, item.id)}
+          active={activeRaw === curRaw}
+          onClick={logic.extendMenuBar.bind(this, item.raw)}
         >
           <MenuItemIcon path={item.logo} />
           {/* eslint-disable jsx-a11y/anchor-is-valid */}
@@ -40,17 +39,14 @@ const MenuItemBar = ({ item, activeCommunityId, curCommunityId }) => {
   )
 }
 
-const MenuChildren = ({ activeCommunityId, curCommunityId, activePart }) => {
+const MenuChildren = ({ activeRaw, activePart, curRaw }) => {
   return (
-    <ChildrenWrapper
-      activeCommunityId={activeCommunityId}
-      curCommunityId={curCommunityId}
-    >
+    <ChildrenWrapper active={activeRaw === curRaw}>
       <ChildrenItem
         active={ROUTE.COMMUNITY === activePart}
         onClick={logic.onChildMenuChange.bind(this, ROUTE.COMMUNITY)}
       >
-        <Link href="/">
+        <Link href={`/${curRaw}`}>
           <ChildrenItemInner>
             <ChildrenTitle>综合设置</ChildrenTitle>
             <ChildrenNum>
@@ -64,8 +60,12 @@ const MenuChildren = ({ activeCommunityId, curCommunityId, activePart }) => {
         onClick={logic.onChildMenuChange.bind(this, ROUTE.POSTS)}
         active={ROUTE.POSTS === activePart}
       >
-        <ChildrenTitle>帖子</ChildrenTitle>
-        <ChildrenNum>20</ChildrenNum>
+        <Link href={`/${curRaw}`} as={`/${curRaw}/posts`}>
+          <ChildrenItemInner>
+            <ChildrenTitle>帖子</ChildrenTitle>
+            <ChildrenNum>22</ChildrenNum>
+          </ChildrenItemInner>
+        </Link>
       </ChildrenItem>
       <ChildrenItem
         onClick={logic.onChildMenuChange.bind(this, ROUTE.JOBS)}
@@ -119,21 +119,20 @@ const MenuChildren = ({ activeCommunityId, curCommunityId, activePart }) => {
     </ChildrenWrapper>
   )
 }
-const CommunityMenuItem = ({ item, activeCommunityId, activePart }) => (
-  <MenuItemWrapper>
-    <div>
-      <MenuItemBar
-        item={item}
-        activeCommunityId={activeCommunityId}
-        curCommunityId={item.id}
-      />
-      <MenuChildren
-        activeCommunityId={activeCommunityId}
-        curCommunityId={item.id}
-        activePart={activePart}
-      />
-    </div>
-  </MenuItemWrapper>
-)
+const CommunityMenuItem = ({ item, activeRaw, activePart }) => {
+  //  console.log('CommunityMenuItem item: ', item)
+  return (
+    <MenuItemWrapper>
+      <div>
+        <MenuItemBar item={item} activeRaw={activeRaw} curRaw={item.raw} />
+        <MenuChildren
+          activeRaw={activeRaw}
+          activePart={activePart}
+          curRaw={item.raw}
+        />
+      </div>
+    </MenuItemWrapper>
+  )
+}
 
 export default CommunityMenuItem

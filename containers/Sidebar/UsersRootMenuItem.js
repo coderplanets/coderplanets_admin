@@ -19,11 +19,8 @@ import {
 
 import * as logic from './logic'
 
-const MenuChildren = ({ activeCommunityId, curCommunityId, activePart }) => (
-  <ChildrenWrapper
-    activeCommunityId={activeCommunityId}
-    curCommunityId={curCommunityId}
-  >
+const MenuChildren = ({ activeRaw, curRaw, activePart }) => (
+  <ChildrenWrapper active={activeRaw === curRaw}>
     <ChildrenItem
       active={ROUTE.USERS === activePart}
       onClick={logic.onChildMenuChange.bind(this, ROUTE.USERS)}
@@ -71,14 +68,13 @@ const MenuChildren = ({ activeCommunityId, curCommunityId, activePart }) => (
   </ChildrenWrapper>
 )
 
-const UsersItemBar = ({ activeCommunityId, curCommunityId }) => (
+const UsersItemBar = ({ activeRaw, curRaw }) => (
   //   <Link href={item.target.href} as={item.target.as}>
   <MenuItemEach>
     <div>
       <MenuRow
-        activeCommunityId={activeCommunityId}
-        curCommunityId={curCommunityId}
-        onClick={logic.extendMenuBar.bind(this, ROUTE.USERS_ID)}
+        active={activeRaw === curRaw}
+        onClick={logic.extendMenuBar.bind(this, ROUTE.USERS_RAW)}
       >
         <MenuCommunitiesIcon path={`${ICON_ASSETS}/cmd/users.svg`} />
         <div style={{ marginRight: 10 }} />
@@ -89,16 +85,13 @@ const UsersItemBar = ({ activeCommunityId, curCommunityId }) => (
   </MenuItemEach>
 )
 
-const UsersRootMenuItem = ({ activeCommunityId, activePart }) => (
+const UsersRootMenuItem = ({ activeRaw, activePart }) => (
   <MenuItemWrapper>
     <div>
-      <UsersItemBar
-        activeCommunityId={activeCommunityId}
-        curCommunityId={ROUTE.USERS_ID}
-      />
+      <UsersItemBar activeRaw={activeRaw} curRaw={ROUTE.USERS_RAW} />
       <MenuChildren
-        activeCommunityId={activeCommunityId}
-        curCommunityId={ROUTE.USERS_ID}
+        activeRaw={activeRaw}
+        curRaw={ROUTE.USERS_RAW}
         activePart={activePart}
       />
     </div>

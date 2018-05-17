@@ -67,17 +67,17 @@ app.prepare().then(() => {
     /* const communitiesSubMatch = communitiesSubQuery(pathname) */
     /* const usersMatch = usersQuery(pathname) */
     /* const usersSubMatch = usersSubQuery(pathname) */
+    /* const localeMatch = localeQuery(pathname) */
 
-    const localeMatch = localeQuery(pathname)
     const communityMatch = communityQuery(pathname)
     const communitySubMatch = communitySubQuery(pathname)
 
     const accept = accepts(req)
     const locale = accept.language(supportLanguages) // 'zh'
 
-    if (localeMatch) {
+    if (localeQuery(pathname)) {
       res.setHeader('Content-Type', 'application/json;charset=utf-8')
-      return res.end(JSON.stringify(getMessages(localeMatch.lang)))
+      return res.end(JSON.stringify(getMessages(localeQuery(pathname).lang)))
     } else if (communitiesQuery(pathname) || communitiesSubQuery(pathname)) {
       return app.render(req, res, '/communities')
     } else if (usersQuery(pathname) || usersSubQuery(pathname)) {

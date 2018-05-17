@@ -34,7 +34,7 @@ const SidebarStore = t
   .model('SidebarStore', {
     // open: t.optional(t.boolean, false),
     pin: t.optional(t.boolean, true),
-    activeCommunityId: t.maybe(t.string),
+    activeRaw: t.maybe(t.string),
     activePart: t.maybe(t.enumeration('activePart', validParts)),
     // theme: t.string, // view staff
     // curSelectItem: t.string, // view staff
@@ -80,7 +80,7 @@ const SidebarStore = t
 
     syncStateFromhRoute({ mainQuery, subQuery }) {
       // TODO
-      self.activeCommunityId = mainQuery
+      self.activeRaw = mainQuery
       self.activePart = R.isEmpty(subQuery) ? ROUTE.COMMUNITIES : subQuery
     },
 
