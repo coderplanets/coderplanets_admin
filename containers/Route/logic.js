@@ -8,30 +8,43 @@ const debug = makeDebugger('L:Route')
 
 let route = null
 
+const getAsPathList = R.compose(
+  R.reject(R.isEmpty),
+  R.split('/'),
+  R.prop('asPath')
+)
+
 const getQueryMain = routeObj => {
   if (R.isEmpty(routeObj)) return ''
 
   if (isEmptyNil(routeObj.query) && routeObj.pathname !== '/') {
     return routeObj.pathname.slice(1)
+  } else if (isEmptyNil(routeObj.query) && routeObj.pathname === '/') {
+    const asPathList = getAsPathList(routeObj)
+    return R.head(asPathList)
   }
 
   return routeObj.query.main
 }
 
-const getQuerySub = q => {
-  // TODO isEmpty ..
-  return R.last(R.split('/', q.asPath))
+const getQuerySub = routeObj => {
+  const asPathList = getAsPathList(routeObj)
+  return R.last(asPathList)
 }
 
 export function syncRoute(routeObj) {
+  /* console.log('syncRoute routeObj: ', routeObj) */
   /*
-     debug('syncRoute routeObj: ', routeObj)
-     debug('syncRoute query: ', routeObj.query)
-     debug('syncRoute pathname: ', routeObj.pathname)
-     debug('syncRoute asPath: ', routeObj.asPath)
-     debug('syncRoute route: ', routeObj.route)
-     debug('### getQueryMain: ', getQueryMain(routeObj))
+     console.log('syncRoute query: ', routeObj.query)
+     console.log('syncRoute pathname: ', routeObj.pathname)
+     console.log('syncRoute asPath: ', routeObj.asPath)
+     console.log('syncRoute route: ', routeObj.route)
    */
+
+  console.log(' ----------  ')
+  console.log('### getQueryMain: ', getQueryMain(routeObj))
+  console.log('### getQuerySub: ', getQuerySub(routeObj))
+
   const mainQuery = getQueryMain(routeObj)
   const subQuery = getQuerySub(routeObj)
 

@@ -9,25 +9,53 @@ import { inject, observer } from 'mobx-react'
 
 // import Link from 'next/link'
 
-import { makeDebugger, storePlug } from '../../utils'
+import { makeDebugger, storePlug, ROUTE } from '../../utils'
 import * as logic from './logic'
 
+import PostsBanner from './PostsBanner'
+import ThreadsBanner from './ThreadsBanner'
 import { BannerContainer } from './styles'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('C:CommunityBanner')
 /* eslint-enable no-unused-vars */
 
+const renderChildBanner = (route, store) => {
+  /* const { */
+  /* totalCount, */
+  /* curTotalCount, */
+  /* tagsTotalCount, */
+  /* postsTotalCount, */
+  /* curPostsTotalCount, */
+  /* } = store */
+
+  debug(store)
+  switch (route.subQuery) {
+    case ROUTE.POSTS: {
+      return <PostsBanner totalCount={200} curCount={100} />
+    }
+    case ROUTE.THREADS: {
+      return <ThreadsBanner totalCount={200} curCount={100} />
+    }
+    default: {
+      return <h2>Index</h2>
+    }
+  }
+}
+
 class CommunityBannerContainer extends React.Component {
   componentWillMount() {
     logic.init(this.props.communityBanner)
+    debug('componentWillMount  !')
   }
 
   render() {
+    const { communityBanner } = this.props
+    const { route } = communityBanner
+
     return (
       <BannerContainer>
-        <h2>Banner</h2>
-        CommunityBanner container!
+        {renderChildBanner(route, communityBanner)}
       </BannerContainer>
     )
   }

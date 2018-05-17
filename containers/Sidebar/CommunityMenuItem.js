@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'next/link'
+// import Link from 'next/link'
 
 import { ICON_ASSETS } from '../../config'
 
@@ -44,77 +44,83 @@ const MenuChildren = ({ activeRaw, activePart, curRaw }) => {
     <ChildrenWrapper active={activeRaw === curRaw}>
       <ChildrenItem
         active={ROUTE.COMMUNITY === activePart}
-        onClick={logic.onChildMenuChange.bind(this, ROUTE.COMMUNITY)}
+        onClick={logic.onCommunityChildMenuChange.bind(this, '')}
       >
-        <Link href={`/${curRaw}`}>
-          <ChildrenItemInner>
-            <ChildrenTitle>综合设置</ChildrenTitle>
-            <ChildrenNum>
-              <SettingIcon path={`${ICON_ASSETS}/cmd/extra_setting.svg`} />
-            </ChildrenNum>
-          </ChildrenItemInner>
-        </Link>
+        <ChildrenItemInner>
+          <ChildrenTitle>综合设置</ChildrenTitle>
+          <ChildrenNum>
+            <SettingIcon path={`${ICON_ASSETS}/cmd/extra_setting.svg`} />
+          </ChildrenNum>
+        </ChildrenItemInner>
       </ChildrenItem>
 
       <ChildrenItem
-        onClick={logic.onChildMenuChange.bind(this, ROUTE.POSTS)}
+        onClick={logic.onCommunityChildMenuChange.bind(this, ROUTE.POSTS)}
         active={ROUTE.POSTS === activePart}
       >
-        <Link href={`/${curRaw}`} as={`/${curRaw}/posts`}>
-          <ChildrenItemInner>
-            <ChildrenTitle>帖子</ChildrenTitle>
-            <ChildrenNum>22</ChildrenNum>
-          </ChildrenItemInner>
-        </Link>
+        <ChildrenItemInner>
+          <ChildrenTitle>帖子</ChildrenTitle>
+          <ChildrenNum>22</ChildrenNum>
+        </ChildrenItemInner>
       </ChildrenItem>
       <ChildrenItem
-        onClick={logic.onChildMenuChange.bind(this, ROUTE.JOBS)}
+        onClick={logic.onCommunityChildMenuChange.bind(this, ROUTE.JOBS)}
         active={ROUTE.JOBS === activePart}
       >
-        <ChildrenTitle>招聘</ChildrenTitle>
-        <ChildrenNum>18</ChildrenNum>
+        <ChildrenItemInner>
+          <ChildrenTitle>招聘</ChildrenTitle>
+          <ChildrenNum>18</ChildrenNum>
+        </ChildrenItemInner>
       </ChildrenItem>
       <ChildrenItem
-        onClick={logic.onChildMenuChange.bind(this, ROUTE.ACTIVITIES)}
+        onClick={logic.onCommunityChildMenuChange.bind(this, ROUTE.ACTIVITIES)}
         active={ROUTE.ACTIVITIES === activePart}
       >
         <ChildrenTitle>活动</ChildrenTitle>
         <ChildrenNum>18</ChildrenNum>
       </ChildrenItem>
       <ChildrenItem
-        onClick={logic.onChildMenuChange.bind(this, ROUTE.CHEATSHEETS)}
+        onClick={logic.onCommunityChildMenuChange.bind(this, ROUTE.CHEATSHEETS)}
         active={ROUTE.CHEATSHEETS === activePart}
       >
         <ChildrenTitle>Cheatsheets</ChildrenTitle>
         <ChildrenNum>18</ChildrenNum>
       </ChildrenItem>
       <ChildrenItem
-        onClick={logic.onChildMenuChange.bind(this, ROUTE.EDITORS)}
+        onClick={logic.onCommunityChildMenuChange.bind(this, ROUTE.EDITORS)}
         active={ROUTE.EDITORS === activePart}
       >
-        <ChildrenTitle>编辑</ChildrenTitle>
-        <ChildrenNum>3</ChildrenNum>
+        <ChildrenItemInner>
+          <ChildrenTitle>编辑</ChildrenTitle>
+          <ChildrenNum>3</ChildrenNum>
+        </ChildrenItemInner>
       </ChildrenItem>
       <ChildrenItem
-        onClick={logic.onChildMenuChange.bind(this, ROUTE.THREADS)}
+        onClick={logic.onCommunityChildMenuChange.bind(this, ROUTE.THREADS)}
         active={ROUTE.THREADS === activePart}
       >
-        <ChildrenTitle>threads</ChildrenTitle>
-        <ChildrenNum>13</ChildrenNum>
+        <ChildrenItemInner>
+          <ChildrenTitle>threads</ChildrenTitle>
+          <ChildrenNum>13</ChildrenNum>
+        </ChildrenItemInner>
       </ChildrenItem>
       <ChildrenItem
-        onClick={logic.onChildMenuChange.bind(this, ROUTE.TAGS)}
+        onClick={logic.onCommunityChildMenuChange.bind(this, ROUTE.TAGS)}
         active={ROUTE.TAGS === activePart}
       >
-        <ChildrenTitle>标签(part)</ChildrenTitle>
-        <ChildrenNum>13</ChildrenNum>
+        <ChildrenItemInner>
+          <ChildrenTitle>标签(part)</ChildrenTitle>
+          <ChildrenNum>13</ChildrenNum>
+        </ChildrenItemInner>
       </ChildrenItem>
       <ChildrenItem
-        onClick={logic.onChildMenuChange.bind(this, ROUTE.SUBSCRIBERS)}
+        onClick={logic.onCommunityChildMenuChange.bind(this, ROUTE.SUBSCRIBERS)}
         active={ROUTE.SUBSCRIBERS === activePart}
       >
-        <ChildrenTitle>订阅用户</ChildrenTitle>
-        <ChildrenNum>2</ChildrenNum>
+        <ChildrenItemInner>
+          <ChildrenTitle>订阅用户</ChildrenTitle>
+          <ChildrenNum>130</ChildrenNum>
+        </ChildrenItemInner>
       </ChildrenItem>
     </ChildrenWrapper>
   )

@@ -12,7 +12,7 @@ const debug = makeDebugger('L:CommunityBanner')
 
 let communityBanner = null
 
-export function someMethod() {}
+export function onAdd() {}
 
 // ###############################
 // Data & Error handlers

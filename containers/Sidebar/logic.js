@@ -1,5 +1,6 @@
-// import R from 'ramda'
-// import store from 'store'
+import R from 'ramda'
+import Router from 'next/router'
+/* import store from 'store' */
 
 // const debug = makeDebugger('L:sidebar')
 import { gqRes, gqErr, $solver, ERR, makeDebugger, EVENT } from '../../utils'
@@ -37,6 +38,26 @@ export function extendMenuBar(communityId) {
 
 export function onChildMenuChange(activePart) {
   debug('onChildMenuChange: ', activePart)
+  if (activePart === 'cheatsheets') {
+    console.log('see me')
+    Router.push('/', '/racket/cheatsheets')
+  }
+
+  sidebar.markState({
+    activePart,
+  })
+}
+
+export function onCommunityChildMenuChange(activePart) {
+  debug('onChildMenuChange activePart: ', activePart)
+  debug('onChildMenuChange activeRaw: ', sidebar.activeRaw)
+
+  let asPath = `/${sidebar.activeRaw}/${activePart}`
+  if (R.isEmpty(activePart)) {
+    asPath = `/${sidebar.activeRaw}`
+  }
+  console.log('&&&&& see me2 asPath: ', asPath)
+  Router.push('/', asPath)
 
   sidebar.markState({
     activePart,

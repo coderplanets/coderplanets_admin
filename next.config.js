@@ -7,19 +7,35 @@ const { ANALYZE } = process.env
 // https://github.com/zeit/next.js/blob/canary/examples/with-static-export/next.config.js
 
 module.exports = {
+  useFileSystemPublicRoutes: true,
   exportPathMap: () => {
     return {
       '/': { page: '/' },
       // '/ruby': { page: '/', query: { name: 'ruby' } },
-      '/cheatsheet': { page: '/', query: { main: 'cheatsheet', sub: '' } },
+      /*
+      '/communities/tags': {
+        page: '/communities',
+      },
+      */
+      '/communities/posts': {
+        page: '/communities',
+        //  asPath: '/communities/posts',
+      },
       '/communities': {
         page: '/communities',
-        query: { main: 'communities', sub: '' },
+        // query: { main: 'communities', sub: '' },
       },
-      '/communities/category': {
-        page: '/communities',
-        query: { main: 'communities', sub: 'category' },
-      },
+
+      //      '/racket': {
+      //      page: '/',
+      //    query: { main: 'racket', sub: '' },
+      //  asPath: '/communities/posts',
+      // },
+      /* '/racket/tags': { */
+      /* page: '/', */
+      //  asPath: '/communities/posts',
+      /* }, */
+
       '/js/posts': { page: '/', query: { main: 'js', sub: 'posts' } },
       /* '/intro/i': { page: '/intro', query: { name: 'index' } }, */
       /* '/intro/feature': { page: '/intro', query: { name: 'feature' } }, */

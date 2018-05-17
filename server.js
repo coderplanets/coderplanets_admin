@@ -55,13 +55,14 @@ const communitiesSubQuery = route('/communities/:sub')
 const usersQuery = route('/users')
 const usersSubQuery = route('/users/:sub')
 // const communityQuery = route('/:main')
-const communityQuery = route('/:community')
+const communityQuery = route('/:main')
 const communitySubQuery = route('/:main/:sub')
 const localeQuery = route('/locale/:lang')
 
 app.prepare().then(() => {
   createServer((req, res) => {
     const { pathname } = parse(req.url)
+    /* console.log('---------> server parse(req.url): ', parse(req.url)) */
     // const homeMatch = homeQuery(pathname)
     /* const communitiesMatch = communitiesQuery(pathname) */
     /* const communitiesSubMatch = communitiesSubQuery(pathname) */
@@ -87,6 +88,14 @@ app.prepare().then(() => {
     } else if (communitySubMatch) {
       return app.render(req, res, '/', communitySubMatch)
     }
+    /*
+  } else if (communityMatch) {
+    return app.render(req, res, '/', communityMatch)
+  } else if (communitySubMatch) {
+    return app.render(req, res, '/', communitySubMatch)
+  }
+    */
+
     /*
        if (homeMatch) {
        return app.render(req, res, '/', homeMatch)
