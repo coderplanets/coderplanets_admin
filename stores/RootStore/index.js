@@ -24,10 +24,12 @@ import {
   CurCommunity,
   // banner
   CommunitiesBannerStore,
+  CommunityBannerStore,
   UsersBannerStore,
   // PostsPaperStore,
   // content
   CommunitiesContentStore,
+  CommunityContentStore,
   UsersContentStore,
   // CheatSheetContentStore,
   // viewers
@@ -80,6 +82,7 @@ const rootStore = t
     apiLayout: t.optional(ApiLayoutStore, {}),
     header: t.optional(HeaderStore, {}),
     communitiesBanner: t.optional(CommunitiesBannerStore, {}),
+    communityBanner: t.optional(CommunityBannerStore, {}),
     usersBanner: t.optional(UsersBannerStore, {}),
     banner: t.optional(BannerStore, {}),
     content: t.optional(ContentStore, {}),
@@ -87,6 +90,7 @@ const rootStore = t
 
     // content
     communitiesContent: t.optional(CommunitiesContentStore, {}),
+    communityContent: t.optional(CommunityContentStore, {}),
     usersContent: t.optional(UsersContentStore, {}),
     // cheatSheatContent: t.optional(CheatSheetContentStore, {}),
     // content end

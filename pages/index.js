@@ -11,8 +11,9 @@ import Doraemon from '../containers/Doraemon'
 import Route from '../containers/Route'
 import BodyLayout from '../containers/BodyLayout'
 import Header from '../containers/Header'
-import Banner from '../containers/Banner'
-import Content from '../containers/Content'
+// ..
+import CommunityBanner from '../containers/CommunityBanner'
+import CommunityContent from '../containers/CommunityContent'
 
 import Footer from '../components/Footer'
 // try to fix safari bug
@@ -54,8 +55,8 @@ export default class Index extends React.Component {
               <Doraemon />
               <BodyLayout>
                 <Header />
-                <Banner />
-                <Content />
+                <CommunityBanner />
+                <CommunityContent />
                 <Footer />
               </BodyLayout>
             </MultiLanguage>

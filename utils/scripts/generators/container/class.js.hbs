@@ -35,4 +35,6 @@ class {{ properCase name }}Container extends React.Component {
   }
 }
 
-export default inject(storePlug('{{ camelCase name }}'))(observer({{ properCase name }}Container))
+export default inject(storePlug('{{ camelCase name }}'))(
+  observer({{ properCase name }}Container)
+)
