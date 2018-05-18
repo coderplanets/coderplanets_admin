@@ -74,25 +74,20 @@ const rootStore = t
     bodylayout: t.optional(BodylayoutStore, {}),
     apiLayout: t.optional(ApiLayoutStore, {}),
     header: t.optional(HeaderStore, {}),
+    // layouts end
+
+    // banner
     communitiesBanner: t.optional(CommunitiesBannerStore, {}),
     communityBanner: t.optional(CommunityBannerStore, {}),
     usersBanner: t.optional(UsersBannerStore, {}),
-    // layouts end
 
     // content
     communitiesContent: t.optional(CommunitiesContentStore, {}),
     communityContent: t.optional(CommunityContentStore, {}),
     usersContent: t.optional(UsersContentStore, {}),
-    // cheatSheatContent: t.optional(CheatSheetContentStore, {}),
-    // content end
-
-    // papers
-    // cheatSheetPaper: t.optional(CheatSheetPaperStore, {}),
-
     // viewers (for preview usage)
     articleViwer: t.optional(ArticleViwerStore, {}),
     accountViewer: t.optional(AccountViewerStore, {}),
-    // TODO rename to xxPaper
   })
   .views(self => ({
     get locale() {
