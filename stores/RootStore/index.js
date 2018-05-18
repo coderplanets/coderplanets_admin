@@ -19,14 +19,11 @@ import {
   PostsStore,
   ApiLayoutStore,
   HeaderStore,
-  BannerStore,
-  ContentStore,
   CurCommunity,
   // banner
   CommunitiesBannerStore,
   CommunityBannerStore,
   UsersBannerStore,
-  // PostsPaperStore,
   // content
   CommunitiesContentStore,
   CommunityContentStore,
@@ -36,10 +33,6 @@ import {
   ArticleViwerStore,
   AccountViewerStore,
   CommentsStore,
-  TutsViewerStore,
-  MapViewerStore,
-  JobsViewerStore,
-  // CheatSheetPaperStore,
   // toolbox
   DoraemonStore,
   PreviewStore,
@@ -84,8 +77,6 @@ const rootStore = t
     communitiesBanner: t.optional(CommunitiesBannerStore, {}),
     communityBanner: t.optional(CommunityBannerStore, {}),
     usersBanner: t.optional(UsersBannerStore, {}),
-    banner: t.optional(BannerStore, {}),
-    content: t.optional(ContentStore, {}),
     // layouts end
 
     // content
@@ -96,17 +87,12 @@ const rootStore = t
     // content end
 
     // papers
-    // postsPaper: t.optional(PostsPaperStore, {}),
     // cheatSheetPaper: t.optional(CheatSheetPaperStore, {}),
 
     // viewers (for preview usage)
     articleViwer: t.optional(ArticleViwerStore, {}),
     accountViewer: t.optional(AccountViewerStore, {}),
-
     // TODO rename to xxPaper
-    tutsViewer: t.optional(TutsViewerStore, {}),
-    mapViewer: t.optional(MapViewerStore, {}),
-    jobsViewer: t.optional(JobsViewerStore, {}),
   })
   .views(self => ({
     get locale() {
