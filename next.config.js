@@ -7,7 +7,8 @@ const { ANALYZE } = process.env
 // https://github.com/zeit/next.js/blob/canary/examples/with-static-export/next.config.js
 
 module.exports = {
-  useFileSystemPublicRoutes: true,
+  // useFileSystemPublicRoutes: false,
+  // smartSlashes: false,
   exportPathMap: () => {
     return {
       '/': { page: '/' },
@@ -26,11 +27,13 @@ module.exports = {
         // query: { main: 'communities', sub: '' },
       },
 
-      //      '/racket': {
-      //      page: '/',
-      //    query: { main: 'racket', sub: '' },
-      //  asPath: '/communities/posts',
-      // },
+      '/racket': {
+        page: '/',
+      },
+      '/racket/posts': {
+        page: '/',
+      },
+
       /* '/racket/tags': { */
       /* page: '/', */
       //  asPath: '/communities/posts',

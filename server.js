@@ -1,5 +1,4 @@
 const dev = process.env.NODE_ENV !== 'production'
-// const goal = process.env.GOAL
 
 const { createServer } = require('http')
 const { parse } = require('url')
@@ -13,6 +12,7 @@ const glob = require('glob')
 const app = next({ dev })
 const handle = app.getRequestHandler()
 const route = pathMatch()
+const SERVE_PORT = 3001
 
 // const moduleAlias = require('module-alias')
 // For the development version, we'll use React.
@@ -24,7 +24,6 @@ const route = pathMatch()
    }
  */
 
-// const langMatch = route('/lang/:name')
 mobxReact.useStaticRendering(true)
 
 const supportLanguages = glob
@@ -48,30 +47,23 @@ const getMessages = locale => {
   return messageCache.get(locale)
 }
 
-// communities view for root
-const communitiesQuery = route('/communities')
-const communitiesSubQuery = route('/communities/:sub')
-// users view for root
-const usersQuery = route('/users')
-const usersSubQuery = route('/users/:sub')
-// const communityQuery = route('/:main')
-const communityQuery = route('/:main')
-const communitySubQuery = route('/:main/:sub')
+// routes
+const communitiesQuery = route('/communities/:sub?')
+const usersQuery = route('/users/:sub?')
 const localeQuery = route('/locale/:lang')
+const communityQuery = route('/:main/:sub?')
 
 app.prepare().then(() => {
   createServer((req, res) => {
-    const { pathname } = parse(req.url)
-    /* console.log('---------> server parse(req.url): ', parse(req.url)) */
-    // const homeMatch = homeQuery(pathname)
-    /* const communitiesMatch = communitiesQuery(pathname) */
-    /* const communitiesSubMatch = communitiesSubQuery(pathname) */
-    /* const usersMatch = usersQuery(pathname) */
-    /* const usersSubMatch = usersSubQuery(pathname) */
-    /* const localeMatch = localeQuery(pathname) */
+    /*
+    req.url = req.url.replace(/\/$/, '')
+    if (req.url === '') {
+      req.url = '/'
+    }
+    handle(req, res)
+    */
 
-    const communityMatch = communityQuery(pathname)
-    const communitySubMatch = communitySubQuery(pathname)
+    const { pathname } = parse(req.url)
 
     const accept = accepts(req)
     const locale = accept.language(supportLanguages) // 'zh'
@@ -79,34 +71,20 @@ app.prepare().then(() => {
     if (localeQuery(pathname)) {
       res.setHeader('Content-Type', 'application/json;charset=utf-8')
       return res.end(JSON.stringify(getMessages(localeQuery(pathname).lang)))
-    } else if (communitiesQuery(pathname) || communitiesSubQuery(pathname)) {
+    } else if (communitiesQuery(pathname)) {
       return app.render(req, res, '/communities')
-    } else if (usersQuery(pathname) || usersSubQuery(pathname)) {
+    } else if (usersQuery(pathname)) {
       return app.render(req, res, '/users')
-    } else if (communityMatch) {
-      return app.render(req, res, '/', communityMatch)
-    } else if (communitySubMatch) {
-      return app.render(req, res, '/', communitySubMatch)
+    } else if (communityQuery(pathname)) {
+      return app.render(req, res, '/')
     }
-    /*
-  } else if (communityMatch) {
-    return app.render(req, res, '/', communityMatch)
-  } else if (communitySubMatch) {
-    return app.render(req, res, '/', communitySubMatch)
-  }
-    */
 
-    /*
-       if (homeMatch) {
-       return app.render(req, res, '/', homeMatch)
-       }
-     */
     // now index page go this way
     req.locale = locale
     req.messages = getMessages(locale)
 
     return handle(req, res)
-  }).listen(3001, err => {
+  }).listen(SERVE_PORT, err => {
     if (err) throw err
     console.log('> Ready on http://localhost:3001')
   })
