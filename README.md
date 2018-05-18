@@ -1,18 +1,18 @@
 
 <div align="center">
   <div>
-    <img src="https://raw.githubusercontent.com/mydearxym/mastani/dev/static/waji.png" alt="building ..." />
+    <img src="https://raw.githubusercontent.com/mydearxym/coderplanets_admin/dev/static/waji.png" alt="building ..." />
   </div>
   <div> work in progress ...</div>
   <br/><br/>
   
-  <a href="https://travis-ci.org/mydearxym/mastani_web" target="_blank">
-    <img src="https://api.travis-ci.org/mydearxym/mastani_web.svg?branch=dev" alt="Build Status" />
+  <a href="https://travis-ci.org/mydearxym/coderplanets_admin" target="_blank">
+    <img src="https://api.travis-ci.org/mydearxym/coderplanets_admin.svg?branch=dev" alt="Build Status" />
   </a>
 
-  <a href='https://coveralls.io/github/mydearxym/mastani_web?branch=master' target="_blank">
+  <a href='https://coveralls.io/github/mydearxym/coderplanets_admin_web?branch=master' target="_blank">
     <img
-    src='https://coveralls.io/repos/github/mydearxym/mastani_web/badge.svg?branch=master'
+    src='https://coveralls.io/repos/github/mydearxym/coderplanets_admin_web/badge.svg?branch=master'
     alt='Coverage Status' />
   </a>
 
@@ -27,42 +27,30 @@
   </a>
 
   <a href="https://greenkeeper.io" target="_blank">
-    <img src="https://badges.greenkeeper.io/mydearxym/mastani.svg" alt="greenkeeper enabled" />
+    <img src="https://badges.greenkeeper.io/mydearxym/coderplanets_admin.svg" alt="greenkeeper enabled" />
   </a>
 
-  <a href="https://david-dm.org/mydearxym/mastani?type=dev" target="_blank">
-    <img src="https://david-dm.org/mydearxym/mastani/dev-status.svg" alt="devDependency Status" />
+  <a href="https://david-dm.org/mydearxym/coderplanets_admin?type=dev" target="_blank">
+    <img src="https://david-dm.org/mydearxym/coderplanets_admin/dev-status.svg" alt="devDependency Status" />
   </a>
 
-  <a href="https://david-dm.org/mydearxym/mastani" target="_blank">
-    <img src="https://david-dm.org/mydearxym/mastani.svg" alt="Dependency Status" />
+  <a href="https://david-dm.org/mydearxym/coderplanets_admin" target="_blank">
+    <img src="https://david-dm.org/mydearxym/coderplanets_admin.svg" alt="Dependency Status" />
   </a>
 
   <a href="https://github.com/styled-components/styled-components" target="_blank">
     <img src="https://img.shields.io/badge/style-%F0%9F%92%85%20styled--components-orange.svg?colorB=daa357&colorA=db748e" alt="Dependency Status" />
   </a>
     
-  <a href="https://insight.io/github.com/mydearxym/mastani/tree/dev" target="_blank">
-    <img src="https://insight.io/repoBadge/github.com/mydearxym/mastani" alt="source insight" />
+  <a href="https://insight.io/github.com/mydearxym/coderplanets_admin/tree/dev" target="_blank">
+    <img src="https://insight.io/repoBadge/github.com/mydearxym/coderplanets_admin" alt="source insight" />
   </a>
 </div>
 
 ## As advertising: the author is looking for a good job :)
 
-## live demo
-  [see here](https://mastani.now.sh/)
-
 
 ## Feature
 
-- [x] Server-Side-Render out of the box, power by next.js
-- [x] State management and front-end ORM layer powered by mobx && mobx-state-tree
-- [x] No local state, Logic process layer build with Ramada.js && Rx.js
-- [x] styled-componentas the css solution
-- [x] Multi Themes switch on the fly
-- [x] Pre-baked i18n support, scale easliy
-- [x] Scaffolding tools for quick development
-- [x] and lots more ...
+- [x] TODO
 
-## online code viewer
-  [check it out](https://insight.io/github.com/mydearxym/mastani/tree/dev/)
