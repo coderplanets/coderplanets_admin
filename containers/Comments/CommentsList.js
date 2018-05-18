@@ -4,7 +4,6 @@ import TimeAgo from 'timeago-react'
 import shortid from 'shortid'
 
 import { ICON_ASSETS } from '../../config'
-/* import { fakeUsers, getRandomInt, Global, prettyNum } from '../../utils' */
 import { Global, prettyNum } from '../../utils'
 
 import {

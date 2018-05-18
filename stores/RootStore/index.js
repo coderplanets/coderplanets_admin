@@ -59,7 +59,6 @@ const rootStore = t
     theme: t.optional(ThemeStore, ThemeDefaults),
     appLocale: t.optional(t.enumeration('locale', ['zh', 'en']), 'zh'),
     appLangs: t.map(t.frozen),
-    // domain end
 
     // toolbox
     sidebar: t.optional(SidebarStore, { menuItems: [] }),
@@ -67,14 +66,11 @@ const rootStore = t
     doraemon: t.optional(DoraemonStore, {}),
     typeWriter: t.optional(TypeWriterStore, {}),
     accountEditor: t.optional(AccountEditorStore, {}),
-    // toolbox end
 
-    // layouts > xxx > papers
     // layouts
     bodylayout: t.optional(BodylayoutStore, {}),
     apiLayout: t.optional(ApiLayoutStore, {}),
     header: t.optional(HeaderStore, {}),
-    // layouts end
 
     // banner
     communitiesBanner: t.optional(CommunitiesBannerStore, {}),

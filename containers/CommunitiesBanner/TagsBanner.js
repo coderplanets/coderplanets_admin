@@ -2,15 +2,10 @@ import React from 'react'
 
 import { ICON_ASSETS } from '../../config'
 import * as logic from './logic'
-import { Tag, Popover } from '../../components'
+import { Tag, Popover, BannerCountBrief } from '../../components'
 
 import {
   BannerContentWrapper,
-  Result,
-  ResultTop,
-  ResultBottom,
-  ResultNumber,
-  ResultText,
   Operation,
   OperationItem,
   OperationDivider,
@@ -26,17 +21,14 @@ class TagsBanner extends React.Component {
   }
 
   render() {
-    const { totalCount } = this.props
+    const { curCount, totalCount } = this.props
     return (
       <BannerContentWrapper>
-        <Result>
-          <ResultTop>帖子总数为 {totalCount} 条</ResultTop>
-          <ResultBottom>
-            <ResultText>符合当前条件的帖子</ResultText>
-            <ResultNumber>curCount 个</ResultNumber>
-            <ResultText>占比 22%</ResultText>
-          </ResultBottom>
-        </Result>
+        <BannerCountBrief
+          curCount={curCount}
+          totalCount={totalCount}
+          part="标签"
+        />
         <Operation>
           <OperationItem>
             <OperationIcon path={`${ICON_ASSETS}/cmd/filter2.svg`} />

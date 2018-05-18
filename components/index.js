@@ -7,6 +7,7 @@ export { default as Popover } from './Popover'
 export { Space, SpaceGrow } from './BaseStyled'
 
 // Utils component
+export { default as BannerCountBrief } from './BannerCountBrief'
 export { default as MarkDownPreviewer } from './MarkDownPreviewer'
 export { default as ContentFilter } from './ContentFilter'
 export { default as FileUploader } from './FileUploader'

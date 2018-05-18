@@ -12,7 +12,10 @@ const debug = makeDebugger('S:CommunityBannerStore')
 /* eslint-enable no-unused-vars */
 
 const CommunityBannerStore = t
-  .model('CommunityBannerStore', {})
+  .model('CommunityBannerStore', {
+    postsTotalCount: t.optional(t.number, 0),
+    postsCurCount: t.maybe(t.number),
+  })
   .views(self => ({
     get root() {
       return getParent(self)

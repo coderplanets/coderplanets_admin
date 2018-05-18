@@ -6,7 +6,6 @@ import { storePlug, makeDebugger, ROUTE } from '../../utils'
 import * as logic from './logic'
 
 import IndexBanner from './IndexBanner'
-import CategoriesBanner from './CategoryBanner'
 import EditorsBanner from './EditorsBanner'
 import PostsBanner from './PostsBanner'
 import TagsBanner from './TagsBanner'
@@ -29,13 +28,10 @@ const renderChildBanner = (route, store) => {
 
   switch (route.subQuery) {
     case ROUTE.TAGS: {
-      return <TagsBanner totalCount={tagsTotalCount} />
-    }
-    case ROUTE.CATEGORIES: {
-      return <CategoriesBanner />
+      return <TagsBanner totalCount={tagsTotalCount} curCount={1} />
     }
     case ROUTE.EDITORS: {
-      return <EditorsBanner />
+      return <EditorsBanner totalCount={100} curCount={10} />
     }
     case ROUTE.POSTS: {
       return (

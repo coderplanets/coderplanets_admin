@@ -2,15 +2,10 @@ import React from 'react'
 
 import { ICON_ASSETS } from '../../config'
 import * as logic from './logic'
-import { Tag, Popover } from '../../components'
+import { Tag, Popover, BannerCountBrief } from '../../components'
 
 import {
   BannerContentWrapper,
-  Result,
-  ResultTop,
-  ResultBottom,
-  ResultNumber,
-  ResultText,
   Operation,
   OperationItem,
   OperationDivider,
@@ -28,14 +23,12 @@ class IndexBanner extends React.Component {
     const { curCount, totalCount } = this.props
     return (
       <BannerContentWrapper>
-        <Result>
-          <ResultTop>社区总数总数为 {totalCount} 个</ResultTop>
-          <ResultBottom>
-            <ResultText>社区共</ResultText>
-            <ResultNumber>{curCount}个</ResultNumber>
-            <ResultText>项结果符合过滤条件</ResultText>
-          </ResultBottom>
-        </Result>
+        <BannerCountBrief
+          curCount={curCount}
+          totalCount={totalCount}
+          part="社区"
+          unit="个"
+        />
         <Operation>
           <OperationItem>
             <OperationIcon path={`${ICON_ASSETS}/cmd/filter2.svg`} />

@@ -1,7 +1,9 @@
 // import R from 'ramda'
 
-import { makeDebugger, $solver } from '../../utils'
+import { makeDebugger, gqRes, $solver } from '../../utils'
 import SR71 from '../../utils/network/sr71'
+
+import S from './schema'
 
 const sr71$ = new SR71()
 let sub$ = null
@@ -12,13 +14,32 @@ const debug = makeDebugger('L:CommunityBanner')
 
 let communityBanner = null
 
+export function loadPosts() {
+  sr71$.query(S.pagedPosts, { filter: {} })
+}
+
 export function onAdd() {}
 
 // ###############################
 // Data & Error handlers
 // ###############################
 
-const DataSolver = []
+const DataSolver = [
+  {
+    match: gqRes('pagedPosts'),
+    action: ({ pagedPosts: { totalCount } }) => {
+      if (!communityBanner.postsCurCount) {
+        return communityBanner.markState({
+          postsTotalCount: totalCount,
+          postsCurCount: totalCount,
+        })
+      }
+      return communityBanner.markState({
+        postsTotalCount: totalCount,
+      })
+    },
+  },
+]
 const ErrSolver = []
 
 export function init(selectedStore) {

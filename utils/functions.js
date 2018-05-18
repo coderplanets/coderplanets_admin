@@ -91,11 +91,14 @@ export function countWords(str) {
   return matches ? matches.length : 0
 }
 
-// TODO remove
-export const getRandomInt = (min, max) => {
-  min = Math.ceil(min)
-  max = Math.floor(max)
-  return Math.floor(Math.random() * (max - min)) + min
+export function toPercentNum(top, bottom) {
+  const topNum = parseInt(top, 10)
+  const bottomNum = parseInt(bottom, 10)
+
+  if (topNum >= bottomNum) return '100%'
+  const flostNum = topNum / bottomNum
+  const fixedNum = flostNum.toFixed(2) * 100
+  return `${fixedNum}%`
 }
 
 export const dispatchEvent = (msg, data = {}) => {

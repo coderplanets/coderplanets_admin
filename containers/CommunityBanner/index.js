@@ -21,18 +21,24 @@ const debug = makeDebugger('C:CommunityBanner')
 /* eslint-enable no-unused-vars */
 
 const renderChildBanner = (route, store) => {
-  /* const { */
-  /* totalCount, */
-  /* curTotalCount, */
-  /* tagsTotalCount, */
-  /* postsTotalCount, */
-  /* curPostsTotalCount, */
-  /* } = store */
+  const {
+    /* totalCount, */
+    /* curTotalCount, */
+    /* tagsTotalCount, */
+    postsTotalCount,
+    postsCurCount,
+    /* curPostsTotalCount, */
+  } = store
 
   debug(store)
   switch (route.subQuery) {
     case ROUTE.POSTS: {
-      return <PostsBanner totalCount={200} curCount={100} />
+      return (
+        <PostsBanner
+          totalCount={postsTotalCount}
+          curCount={postsCurCount - 1}
+        />
+      )
     }
     case ROUTE.THREADS: {
       return <ThreadsBanner totalCount={200} curCount={100} />
