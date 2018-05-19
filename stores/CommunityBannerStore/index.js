@@ -21,10 +21,6 @@ const CommunityBannerStore = t
     get root() {
       return getParent(self)
     },
-    get filteredCount() {
-      if (!self.filteredPostsCount) return self.postsTotalCount
-      return self.filteredPostsCount
-    },
     get route() {
       const { mainQuery, subQuery } = self.root.route
       return {

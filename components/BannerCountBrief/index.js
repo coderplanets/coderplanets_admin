@@ -22,7 +22,7 @@ const debug = makeDebugger('c:BannerCountBrief:index')
 /* eslint-enable no-unused-vars */
 
 const CountBrief = ({ filteredCount, totalCount, part, unit }) => {
-  if (totalCount === filteredCount) {
+  if (filteredCount === null || totalCount === filteredCount) {
     return (
       <Result>
         <ResultBottom>

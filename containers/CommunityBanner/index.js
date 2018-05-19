@@ -29,7 +29,7 @@ const renderChildBanner = (route, store) => {
     /* curTotalCount, */
     tagsTotalCount,
     postsTotalCount,
-    postsCurCount,
+    filteredPostsCount,
     /* curPostsTotalCount, */
   } = store
 
@@ -39,7 +39,7 @@ const renderChildBanner = (route, store) => {
       return (
         <PostsBanner
           totalCount={postsTotalCount}
-          filteredCount={postsCurCount - 1}
+          filteredCount={filteredPostsCount}
         />
       )
     }
