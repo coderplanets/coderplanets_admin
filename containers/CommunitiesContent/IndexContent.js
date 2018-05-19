@@ -24,7 +24,7 @@ const columns = [
     width: 80,
     render: text => {
       // TODO: jadge image type before render, currently only svg supported
-      return <CommunityIcon path={text} />
+      return <CommunityIcon src={text} />
     },
   },
   {
@@ -127,10 +127,7 @@ class IndexContent extends React.Component {
   }
 
   render() {
-    const {
-      data,
-      restProps: { communitiesLoading },
-    } = this.props
+    const { data, restProps: { communitiesLoading } } = this.props
 
     return (
       <div>

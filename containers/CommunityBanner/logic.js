@@ -32,12 +32,6 @@ const DataSolver = [
   {
     match: gqRes('pagedPosts'),
     action: ({ pagedPosts: { totalCount } }) => {
-      if (!communityBanner.postsCurCount) {
-        return communityBanner.markState({
-          postsTotalCount: totalCount,
-          postsCurCount: totalCount,
-        })
-      }
       return communityBanner.markState({
         postsTotalCount: totalCount,
       })

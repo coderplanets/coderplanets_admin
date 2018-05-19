@@ -14,12 +14,16 @@ const debug = makeDebugger('S:CommunityBannerStore')
 const CommunityBannerStore = t
   .model('CommunityBannerStore', {
     postsTotalCount: t.optional(t.number, 0),
-    postsCurCount: t.maybe(t.number),
+    filteredPostsCount: t.maybe(t.number),
     tagsTotalCount: t.optional(t.number, 0),
   })
   .views(self => ({
     get root() {
       return getParent(self)
+    },
+    get filteredCount() {
+      if (!self.filteredPostsCount) return self.postsTotalCount
+      return self.filteredPostsCount
     },
     get route() {
       const { mainQuery, subQuery } = self.root.route

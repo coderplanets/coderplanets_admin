@@ -20,11 +20,11 @@ class TagsBanner extends React.Component {
     logic.loadTags()
   }
   render() {
-    const { curCount, totalCount } = this.props
+    const { totalCount, filteredCount } = this.props
     return (
       <BannerContentWrapper>
         <BannerCountBrief
-          curCount={curCount}
+          filteredCount={filteredCount}
           totalCount={totalCount}
           part="标签"
           unit="个"

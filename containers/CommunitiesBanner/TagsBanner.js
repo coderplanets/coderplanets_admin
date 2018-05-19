@@ -21,11 +21,11 @@ class TagsBanner extends React.Component {
   }
 
   render() {
-    const { curCount, totalCount } = this.props
+    const { filteredCount, totalCount } = this.props
     return (
       <BannerContentWrapper>
         <BannerCountBrief
-          curCount={curCount}
+          filteredCount={filteredCount}
           totalCount={totalCount}
           part="标签"
         />

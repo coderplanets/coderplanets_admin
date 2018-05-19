@@ -28,21 +28,23 @@ const renderChildBanner = (route, store) => {
 
   switch (route.subQuery) {
     case ROUTE.TAGS: {
-      return <TagsBanner totalCount={tagsTotalCount} curCount={1} />
+      return <TagsBanner totalCount={tagsTotalCount} filteredCount={1} />
     }
     case ROUTE.EDITORS: {
-      return <EditorsBanner totalCount={100} curCount={10} />
+      return <EditorsBanner totalCount={100} filteredCount={10} />
     }
     case ROUTE.POSTS: {
       return (
         <PostsBanner
           totalCount={postsTotalCount}
-          curCount={curPostsTotalCount}
+          filteredCount={curPostsTotalCount}
         />
       )
     }
     default: {
-      return <IndexBanner totalCount={totalCount} curCount={curTotalCount} />
+      return (
+        <IndexBanner totalCount={totalCount} filteredCount={curTotalCount} />
+      )
     }
   }
 }

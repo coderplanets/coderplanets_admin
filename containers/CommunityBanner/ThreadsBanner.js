@@ -20,10 +20,13 @@ class ThreadsBanner extends React.Component {
     // logic.loadPosts()
   }
   render() {
-    const { curCount, totalCount } = this.props
+    const { filteredCount, totalCount } = this.props
     return (
       <BannerContentWrapper>
-        <BannerCountBrief curCount={curCount} totalCount={totalCount} />
+        <BannerCountBrief
+          filteredCount={filteredCount}
+          totalCount={totalCount}
+        />
         <Operation>
           <OperationItem>
             <OperationIcon src={`${ICON_ASSETS}/cmd/filter2.svg`} />

@@ -38,17 +38,20 @@ const renderChildBanner = (route, store) => {
       return (
         <PostsBanner
           totalCount={postsTotalCount}
-          curCount={postsCurCount - 1}
+          filteredCount={postsCurCount - 1}
         />
       )
     }
     case ROUTE.TAGS: {
       return (
-        <TagsBanner totalCount={tagsTotalCount} curCount={tagsTotalCount} />
+        <TagsBanner
+          totalCount={tagsTotalCount}
+          filteredCount={tagsTotalCount}
+        />
       )
     }
     case ROUTE.THREADS: {
-      return <ThreadsBanner totalCount={200} curCount={100} />
+      return <ThreadsBanner totalCount={200} filteredCount={100} />
     }
     default: {
       return <h2>Index</h2>

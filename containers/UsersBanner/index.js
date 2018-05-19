@@ -24,19 +24,25 @@ const debug = makeDebugger('C:UsersBanner')
 /* eslint-enable no-unused-vars */
 
 const renderChildBanner = (route, store) => {
-  debug(store)
+  const { usersTotalCount, filteredCount } = store
+
   switch (route.subQuery) {
     case ROUTE.PAYS: {
-      return <PaysBanner />
+      return <PaysBanner totalCount={200} filteredCount={100} />
     }
     case ROUTE.PASSPORTS: {
-      return <PassportsBanner />
+      return <PassportsBanner totalCount={200} filteredCount={100} />
     }
     case ROUTE.ROLES: {
-      return <RolesBanner />
+      return <RolesBanner totalCount={200} filteredCount={100} />
     }
     default: {
-      return <IndexBanner />
+      return (
+        <IndexBanner
+          totalCount={usersTotalCount}
+          filteredCount={filteredCount}
+        />
+      )
     }
   }
 }

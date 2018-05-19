@@ -20,11 +20,11 @@ class IndexBanner extends React.Component {
     logic.loadCommunities()
   }
   render() {
-    const { curCount, totalCount } = this.props
+    const { filteredCount, totalCount } = this.props
     return (
       <BannerContentWrapper>
         <BannerCountBrief
-          curCount={curCount}
+          filteredCount={filteredCount}
           totalCount={totalCount}
           part="社区"
           unit="个"
