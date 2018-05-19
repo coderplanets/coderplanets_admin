@@ -39,7 +39,6 @@ export function logout() {
 }
 
 export function editProfile() {
-  console.log('do the editProfile logic')
   dispatchEvent(EVENT.NAV_EDIT, {
     type: TYPE.PREVIEW_ACCOUNT_EDIT,
     data: { user: 'fuck' },

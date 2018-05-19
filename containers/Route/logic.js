@@ -39,11 +39,11 @@ export function syncRoute(routeObj) {
      console.log('syncRoute pathname: ', routeObj.pathname)
      console.log('syncRoute asPath: ', routeObj.asPath)
      console.log('syncRoute route: ', routeObj.route)
-   */
 
-  console.log(' ----------  ')
-  console.log('### getQueryMain: ', getQueryMain(routeObj))
-  console.log('### getQuerySub: ', getQuerySub(routeObj))
+     console.log(' ----------  ')
+     console.log('### getQueryMain: ', getQueryMain(routeObj))
+     console.log('### getQuerySub: ', getQuerySub(routeObj))
+   */
 
   const mainQuery = getQueryMain(routeObj)
   const subQuery = getQuerySub(routeObj)

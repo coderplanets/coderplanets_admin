@@ -39,7 +39,6 @@ export function extendMenuBar(communityId) {
 export function onChildMenuChange(activePart) {
   debug('onChildMenuChange: ', activePart)
   if (activePart === 'cheatsheets') {
-    console.log('see me')
     Router.push('/', '/racket/cheatsheets')
   }
 
@@ -49,14 +48,10 @@ export function onChildMenuChange(activePart) {
 }
 
 export function onCommunityChildMenuChange(activePart) {
-  debug('onChildMenuChange activePart: ', activePart)
-  debug('onChildMenuChange activeRaw: ', sidebar.activeRaw)
-
   let asPath = `/${sidebar.activeRaw}/${activePart}`
   if (R.isEmpty(activePart)) {
     asPath = `/${sidebar.activeRaw}`
   }
-  console.log('&&&&& see me2 asPath: ', asPath)
   Router.push('/', asPath)
 
   sidebar.markState({

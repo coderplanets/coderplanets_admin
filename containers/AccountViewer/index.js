@@ -76,7 +76,7 @@ class AccountViewerContainer extends React.Component {
           <Divider top="10px" bottom="20px" />
           <ContributeMap data={contributes} />
           <Divider top="18px" />
-          <Tabs onChange={console.log} type="card">
+          <Tabs onChange={debug} type="card">
             <TabPane tab="最近" key="1">
               Content of Tab Pane 1
             </TabPane>

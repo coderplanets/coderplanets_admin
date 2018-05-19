@@ -94,7 +94,6 @@ const DataSolver = [
     match: gqRes('tags'),
     action: ({ tags }) => {
       cancleLoading()
-      console.log('tags ---> ', tags)
       communitiesContent.markState({
         pagedTags: tags,
       })

@@ -4,7 +4,7 @@ import TimeAgo from 'timeago-react'
 import shortid from 'shortid'
 
 import { ICON_ASSETS } from '../../config'
-import { Global, prettyNum } from '../../utils'
+import { Global, prettyNum, makeDebugger } from '../../utils'
 
 import {
   AvatarsRow,
@@ -52,10 +52,14 @@ import {
   ReplyToFloor,
 } from './styles/comments_list'
 
+/* eslint-disable no-unused-vars */
+const debug = makeDebugger('C:CommentsList')
+/* eslint-enable no-unused-vars */
+
 const getSelection = () => {
   const selectText = Global.getSelection().toString()
   if (!R.isEmpty(selectText)) {
-    console.log('getSelection', selectText)
+    debug('getSelection', selectText)
     // TODO: then use window.getSelection().getRangeAt(0).getBoundingClientRect() to draw a button
   }
 }

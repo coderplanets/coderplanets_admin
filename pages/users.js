@@ -26,11 +26,11 @@ import Footer from '../components/Footer'
 global.Intl = require('intl')
 
 export default class Index extends React.Component {
-  static async getInitialProps({ req, pathname, asPath }) {
+  // static async getInitialProps({ req, pathname, asPath }) {
+  static async getInitialProps({ req }) {
     /* const isServer = !!req */
-
-    console.log('getInitialProps pathname ---> ', pathname)
-    console.log('getInitialProps asPath ---> ', asPath)
+    // console.log('getInitialProps pathname ---> ', pathname)
+    // console.log('getInitialProps asPath ---> ', asPath)
     const data = await request(GRAPHQL_ENDPOINT, sidebarSchema.communitiesRaw, {
       filter: { page: 1, size: 30 },
     }) // .then(data => console.log(data))

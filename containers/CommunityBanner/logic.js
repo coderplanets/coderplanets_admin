@@ -46,7 +46,6 @@ const DataSolver = [
   {
     match: gqRes('tags'),
     action: ({ tags: { totalCount } }) => {
-      console.log('tags totalCount: ', totalCount)
       communityBanner.markState({
         tagsTotalCount: totalCount,
       })
