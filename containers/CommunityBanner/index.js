@@ -15,6 +15,7 @@ import * as logic from './logic'
 import PostsBanner from './PostsBanner'
 import TagsBanner from './TagsBanner'
 import ThreadsBanner from './ThreadsBanner'
+import SubscribersBanner from './SubscribersBanner'
 
 import { BannerContainer } from './styles'
 
@@ -41,6 +42,9 @@ const renderChildBanner = (route, store) => {
           filteredCount={postsCurCount - 1}
         />
       )
+    }
+    case ROUTE.SUBSCRIBERS: {
+      return <SubscribersBanner totalCount={100} filteredCount={10} />
     }
     case ROUTE.TAGS: {
       return (

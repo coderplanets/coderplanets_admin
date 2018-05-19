@@ -15,6 +15,9 @@ const tableStyle = `
     padding: 6px 16px;
     border-bottom: 0;
   }
+  .ant-table-tbody>tr>td {
+    background-color: white;
+  }
 
   .ant-table-thead > tr > th:nth-child(even) {
     background-color: #65647a;

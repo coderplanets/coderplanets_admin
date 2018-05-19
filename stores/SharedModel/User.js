@@ -42,8 +42,11 @@ export const User = t.model('User', {
   fromGithub: t.optional(t.boolean, false),
   /* fromWeixin: t.optional(t.boolean, false), */
   subscribedCommunities: t.optional(SubscribedCommunities, {}),
+  subscribedCommunitiesCount: t.optional(t.number, 0),
   contributes: t.optional(Contributes, {}),
   githubProfile: t.maybe(GithubProfile),
+  insertedAt: t.optional(t.string, ''),
+  updatedAt: t.optional(t.string, ''),
 })
 
 export const EmptyUser = {

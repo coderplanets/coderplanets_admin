@@ -22,6 +22,7 @@ export { default as ThemeSelector } from './ThemeSelector'
 
 export { default as UserCell } from './UserCell'
 export { default as ColorCell } from './ColorCell'
+export { default as SexCell } from './SexCell'
 
 // loading component
 export {

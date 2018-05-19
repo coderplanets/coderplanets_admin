@@ -4,8 +4,9 @@ import { Img } from '../../../components'
 export const UserCellWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  margin-left: 10px;
+  justify-content: ${props =>
+    props.align === 'center' ? 'center' : 'flex-start'};
+  margin-left: ${props => props.left};
 `
 export const Avatar = styled(Img)`
   width: 25px;
