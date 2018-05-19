@@ -15,6 +15,7 @@ const CommunityBannerStore = t
   .model('CommunityBannerStore', {
     postsTotalCount: t.optional(t.number, 0),
     postsCurCount: t.maybe(t.number),
+    tagsTotalCount: t.optional(t.number, 0),
   })
   .views(self => ({
     get root() {

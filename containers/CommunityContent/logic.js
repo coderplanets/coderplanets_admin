@@ -40,6 +40,14 @@ export function loadPosts(page = 1) {
   sr71$.query(S.pagedPosts, commonFilter(page))
 }
 
+export function loadTags(page = 1) {
+  scrollIntoEle(TYPE.APP_HEADER_ID)
+  communityContent.markState({
+    tagsLoading: true,
+  })
+  sr71$.query(S.tags, commonFilter(page))
+}
+
 export function onEdit() {}
 export function onDelete() {}
 
@@ -61,6 +69,15 @@ const DataSolver = [
       cancleLoading()
       communityContent.markState({
         pagedPosts,
+      })
+    },
+  },
+  {
+    match: gqRes('tags'),
+    action: ({ tags }) => {
+      cancleLoading()
+      communityContent.markState({
+        pagedTags: tags,
       })
     },
   },

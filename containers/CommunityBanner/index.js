@@ -13,7 +13,9 @@ import { makeDebugger, storePlug, ROUTE } from '../../utils'
 import * as logic from './logic'
 
 import PostsBanner from './PostsBanner'
+import TagsBanner from './TagsBanner'
 import ThreadsBanner from './ThreadsBanner'
+
 import { BannerContainer } from './styles'
 
 /* eslint-disable no-unused-vars */
@@ -24,7 +26,7 @@ const renderChildBanner = (route, store) => {
   const {
     /* totalCount, */
     /* curTotalCount, */
-    /* tagsTotalCount, */
+    tagsTotalCount,
     postsTotalCount,
     postsCurCount,
     /* curPostsTotalCount, */
@@ -38,6 +40,11 @@ const renderChildBanner = (route, store) => {
           totalCount={postsTotalCount}
           curCount={postsCurCount - 1}
         />
+      )
+    }
+    case ROUTE.TAGS: {
+      return (
+        <TagsBanner totalCount={tagsTotalCount} curCount={tagsTotalCount} />
       )
     }
     case ROUTE.THREADS: {

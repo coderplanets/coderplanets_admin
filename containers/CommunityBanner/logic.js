@@ -18,6 +18,10 @@ export function loadPosts() {
   sr71$.query(S.pagedPosts, { filter: {} })
 }
 
+export function loadTags() {
+  sr71$.query(S.tags, { filter: {} })
+}
+
 export function onAdd() {}
 
 // ###############################
@@ -36,6 +40,15 @@ const DataSolver = [
       }
       return communityBanner.markState({
         postsTotalCount: totalCount,
+      })
+    },
+  },
+  {
+    match: gqRes('tags'),
+    action: ({ tags: { totalCount } }) => {
+      console.log('tags totalCount: ', totalCount)
+      communityBanner.markState({
+        tagsTotalCount: totalCount,
       })
     },
   },

@@ -107,9 +107,8 @@ class TagsContent extends React.Component {
   render() {
     const {
       data,
-      restProps: { tagsLoading },
+      restProps: { postsLoading },
     } = this.props
-
     return (
       <div>
         {data ? (
@@ -118,7 +117,7 @@ class TagsContent extends React.Component {
               columns={columns}
               dataSource={data.entries}
               scroll={{ x: 1500 }}
-              loading={TableLoading(tagsLoading)}
+              loading={TableLoading(postsLoading)}
               pagination={false}
             />
             <Pagi

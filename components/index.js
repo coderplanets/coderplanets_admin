@@ -21,6 +21,7 @@ export { default as Navigator } from './Navigator'
 export { default as ThemeSelector } from './ThemeSelector'
 
 export { default as UserCell } from './UserCell'
+export { default as ColorCell } from './ColorCell'
 
 // loading component
 export {
