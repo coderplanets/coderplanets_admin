@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import ReactSVG from 'react-svg'
-// import { Animate } from '../../../utils'
+
+import { Img } from '../../../components'
 import { BaseBanner, BaseBannerContent } from './index'
 
 export const BannerContainer = BaseBanner.extend`
@@ -64,7 +64,7 @@ export const FilterTags = styled.div`
   margin-left: 8px;
 `
 
-export const OperationIcon = styled(ReactSVG)`
+export const OperationIcon = styled(Img)`
   fill: #646479;
   width: 16px;
   height: 16px;

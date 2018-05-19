@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Img } from '../../../components'
 
 export const UserCellWrapper = styled.div`
   display: flex;
@@ -6,7 +7,7 @@ export const UserCellWrapper = styled.div`
   justify-content: flex-start;
   margin-left: 10px;
 `
-export const Avatar = styled.img`
+export const Avatar = styled(Img)`
   width: 25px;
   height: 25px;
   border-radius: 100%;

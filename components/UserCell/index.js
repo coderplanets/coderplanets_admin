@@ -17,7 +17,7 @@ const debug = makeDebugger('c:UserCell:index')
 const UserCell = ({ user }) => {
   return (
     <UserCellWrapper>
-      <Avatar src={user.avatar} />
+      <Avatar src={user.avatar} alt={user.nickname} />
       <NickName>{user.nickname}</NickName>
     </UserCellWrapper>
   )

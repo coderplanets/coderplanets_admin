@@ -8815,9 +8815,9 @@ react-style-proptype@^3.0.0:
   dependencies:
     prop-types "^15.5.4"
 
-react-svg@2.2.18:
-  version "2.2.18"
-  resolved "https://registry.npmjs.org/react-svg/-/react-svg-2.2.18.tgz#78985d5db84813d8e57f5e762951246774bf8644"
+react-svg@3.0.6:
+  version "3.0.6"
+  resolved "https://registry.npmjs.org/react-svg/-/react-svg-3.0.6.tgz#2b26f6f0de88575803962c37d9bf5e52af658ca5"
   dependencies:
     svg-injector "^1.1.3"
 

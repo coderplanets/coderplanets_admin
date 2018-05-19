@@ -29,7 +29,7 @@ const MenuItemBar = ({ item, activeRaw, curRaw }) => {
           active={activeRaw === curRaw}
           onClick={logic.extendMenuBar.bind(this, item.raw)}
         >
-          <MenuItemIcon path={item.logo} />
+          <MenuItemIcon src={item.logo} />
           {/* eslint-disable jsx-a11y/anchor-is-valid */}
           <div style={{ marginRight: 10 }} />
           <MenuTitle>{cutFrom(item.title, 10)}</MenuTitle>
@@ -49,7 +49,7 @@ const MenuChildren = ({ activeRaw, activePart, curRaw }) => {
         <ChildrenItemInner>
           <ChildrenTitle>综合设置</ChildrenTitle>
           <ChildrenNum>
-            <SettingIcon path={`${ICON_ASSETS}/cmd/extra_setting.svg`} />
+            <SettingIcon src={`${ICON_ASSETS}/cmd/extra_setting.svg`} />
           </ChildrenNum>
         </ChildrenItemInner>
       </ChildrenItem>

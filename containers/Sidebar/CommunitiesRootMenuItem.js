@@ -87,7 +87,7 @@ const CommunitiesItemBar = ({ active }) => (
         active={active}
         onClick={logic.extendMenuBar.bind(this, ROUTE.COMMUNITIES_RAW)}
       >
-        <MenuCommunitiesIcon path={`${ICON_ASSETS}/cmd/all.svg`} />
+        <MenuCommunitiesIcon src={`${ICON_ASSETS}/cmd/all.svg`} />
         <div style={{ marginRight: 10 }} />
         {/* eslint-disable jsx-a11y/anchor-is-valid */}
         <MenuTitle>所有社区</MenuTitle>

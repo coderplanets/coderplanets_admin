@@ -63,7 +63,7 @@ class SidebarContainer extends React.Component {
     return (
       <Sidebar>
         <Banner>
-          <BannerLogo path={`${ICON_ASSETS}/cmd/rainbow_logo.svg`} />
+          <BannerLogo src={`${ICON_ASSETS}/cmd/rainbow_logo.svg`} />
           <BannerTitle onClick={logic.loadCommunities}>
             CPS 管理后台 @2018
           </BannerTitle>
@@ -75,7 +75,7 @@ class SidebarContainer extends React.Component {
           activePart={activePart}
         />
         <Footer>
-          <SearchLogo path={`${ICON_ASSETS}/cmd/search2.svg`} />
+          <SearchLogo src={`${ICON_ASSETS}/cmd/search2.svg`} />
           <BannerTitle>综合搜索等</BannerTitle>
         </Footer>
       </Sidebar>

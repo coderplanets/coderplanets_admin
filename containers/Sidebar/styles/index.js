@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import ReactSVG from 'react-svg'
 
 /* import { darken } from 'polished' */
+import { Img } from '../../../components'
 import { theme } from '../../../utils'
 
 // 纯css，div隐藏滚动条，保留鼠标滚动效果。
@@ -39,12 +39,12 @@ export const Footer = Banner.extend`
   width: 250px;
 `
 
-export const BannerLogo = styled(ReactSVG)`
+export const BannerLogo = styled(Img)`
   width: 22px;
   height: 22px;
   border-radius: 100%;
 `
-export const SearchLogo = styled(ReactSVG)`
+export const SearchLogo = styled(Img)`
   width: 22px;
   height: 22px;
   fill: #0098b8;

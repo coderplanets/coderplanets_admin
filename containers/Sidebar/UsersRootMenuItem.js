@@ -76,7 +76,7 @@ const UsersItemBar = ({ activeRaw, curRaw }) => (
         active={activeRaw === curRaw}
         onClick={logic.extendMenuBar.bind(this, ROUTE.USERS_RAW)}
       >
-        <MenuCommunitiesIcon path={`${ICON_ASSETS}/cmd/users.svg`} />
+        <MenuCommunitiesIcon src={`${ICON_ASSETS}/cmd/users.svg`} />
         <div style={{ marginRight: 10 }} />
         {/* eslint-disable jsx-a11y/anchor-is-valid */}
         <MenuTitle>所有用户</MenuTitle>
