@@ -61,13 +61,14 @@ const BannerCountBrief = ({ filteredCount, totalCount, part, unit }) => (
 )
 
 BannerCountBrief.propTypes = {
-  filteredCount: PropTypes.number.isRequired,
+  filteredCount: PropTypes.number,
   totalCount: PropTypes.number.isRequired,
   unit: PropTypes.string,
   part: PropTypes.string,
 }
 
 BannerCountBrief.defaultProps = {
+  filteredCount: null,
   part: '帖子',
   unit: '篇',
 }

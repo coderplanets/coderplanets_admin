@@ -51,7 +51,11 @@ export const Rlog = (arg = 'Rlog: ') => R.tap(log(arg))
 const validValues = R.compose(R.not, isEmptyNil)
 
 export const castArgs = (fields, optFields) => {
-  return R.pickBy(validValues, R.pick(optFields, fields))
+  const emptyLists = R.repeat('', optFields.length)
+  const emptyFields = R.zipObj(optFields, emptyLists)
+  const validFields = R.pickBy(validValues, R.pick(optFields, fields))
+
+  return R.merge(emptyFields, validFields)
 }
 
 export const cutFrom = (val, cutnumber = 20) => {

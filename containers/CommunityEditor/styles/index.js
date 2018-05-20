@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-// import { Img } from '../../../components'
+import { Img } from '../../../components'
 import { Animate } from '../../../utils'
 
 export const Wrapper = styled.div`
@@ -21,10 +21,37 @@ export const Wrapper = styled.div`
   animation: ${Animate.fadeInRight} 0.2s linear;
 `
 
+export const Logo = styled(Img)`
+  width: 80px;
+  height: 80px;
+  margin-bottom: 30px;
+  &:hover {
+    cursor: pointer;
+    border: 1px dashed grey;
+  }
+`
+
+export const ImageWrapper = styled.div`
+  width: 80px;
+  height: 80px;
+  border: 1px dashed lightgrey;
+  font-size: 1.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  border-radius: 3px;
+  &:hover {
+    cursor: pointer;
+    border: 1px dashed grey;
+  }
+`
+
 export const Divider = styled.div`
   border-top: 1px solid #e3eeed;
   margin-top: 15px;
   width: 75%;
   margin-bottom: 20px;
 `
+
 export const ActionBtns = styled.div``

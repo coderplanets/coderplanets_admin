@@ -29,18 +29,19 @@ export const profileChange = R.curry((part, e) => {
   })
 })
 
+export const uploadPic = pic => {
+  communityEditor.updateCommunity({
+    logo: pic,
+  })
+}
+
 const wanted = ['title', 'desc', 'raw', 'category', 'logo']
 export const updateConfirm = () => {
-  debug('updateConfirm: ', communityEditor.communityData)
   const args = {
     ...communityEditor.communityData,
   }
-  args.logo =
-    'https://coderplanets.oss-cn-beijing.aliyuncs.com/icons/pl/elixir.svg'
 
-  console.log('args: ', args)
-  console.log('castArgs args: ', castArgs(args, wanted))
-  sr71$.mutate(S.createCommunity, args)
+  sr71$.mutate(S.createCommunity, castArgs(args, wanted))
 }
 
 // TODO: move to utils: closePreviewer
@@ -72,6 +73,12 @@ const ErrSolver = [
       const errMsg = details[0].detail
       meteorState(communityEditor, 'error', 5, errMsg)
       // cancleLoading()
+    },
+  },
+  {
+    match: gqErr(ERR.NETWORK),
+    action: ({ details }) => {
+      debug('ERR.NETWORK -->', details)
     },
   },
 ]

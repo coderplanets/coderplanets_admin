@@ -19,27 +19,25 @@ const debug = makeDebugger('c:FormInputer:index')
 
 const { TextArea } = Input
 
-const FormInputer = ({ label, textarea, value, onChange }) => {
-  return (
-    <FormItemWrapper>
-      <FormLable>{label}</FormLable>
+const FormInputer = ({ label, textarea, value, onChange }) => (
+  <FormItemWrapper>
+    <FormLable>{label}</FormLable>
 
-      <FormInput>
-        {textarea ? (
-          <TextArea
-            value={value}
-            placeholder={value}
-            autosize={{ minRows: 3, maxRows: 6 }}
-            onChange={onChange}
-          />
-        ) : (
-          <Input size="default" value={value} onChange={onChange} />
-        )}
-        {/* NOTE info put here */}
-      </FormInput>
-    </FormItemWrapper>
-  )
-}
+    <FormInput>
+      {textarea ? (
+        <TextArea
+          value={value}
+          placeholder={value}
+          autosize={{ minRows: 3, maxRows: 6 }}
+          onChange={onChange}
+        />
+      ) : (
+        <Input size="default" value={value} onChange={onChange} />
+      )}
+      {/* NOTE info put here */}
+    </FormInput>
+  </FormItemWrapper>
+)
 
 FormInputer.propTypes = {
   // https://www.npmjs.com/package/prop-types

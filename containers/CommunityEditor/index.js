@@ -12,8 +12,15 @@ import { inject, observer } from 'mobx-react'
 import { makeDebugger, storePlug } from '../../utils'
 
 // TODO: EditableImage
-import { Button, Icon, FormInputer, Space } from '../../components'
-import { Wrapper, Divider, ActionBtns } from './styles'
+import {
+  Button,
+  Icon,
+  FormInputer,
+  Space,
+  FileUploader,
+  StatusBox,
+} from '../../components'
+import { Wrapper, Logo, Divider, ActionBtns, ImageWrapper } from './styles'
 
 import * as logic from './logic'
 
@@ -29,11 +36,34 @@ class CommunityEditorContainer extends React.Component {
   render() {
     const updating = false
     const { communityEditor } = this.props
-    const { communityData } = communityEditor
+    const { communityData, success, error, warn, statusMsg } = communityEditor
+
     return (
       <Wrapper>
         <h3>创建社区</h3>
         <br />
+        <div>
+          {communityData.logo ? (
+            <FileUploader
+              onUploadDone={logic.uploadPic}
+              dir="communities"
+              nestDir={false}
+            >
+              <Logo src={communityData.logo} />
+            </FileUploader>
+          ) : (
+            <FileUploader
+              onUploadDone={logic.uploadPic}
+              dir="communities"
+              nestDir={false}
+            >
+              <ImageWrapper>
+                <Icon type="plus" />
+              </ImageWrapper>
+            </FileUploader>
+          )}
+        </div>
+
         <FormInputer
           label="名称:"
           value={communityData.title}
@@ -54,6 +84,14 @@ class CommunityEditorContainer extends React.Component {
           textarea
           value={communityData.desc}
           onChange={logic.profileChange('desc')}
+        />
+
+        <br />
+        <StatusBox
+          success={success}
+          error={error}
+          warn={warn}
+          msg={statusMsg}
         />
         <Divider />
         <ActionBtns>
