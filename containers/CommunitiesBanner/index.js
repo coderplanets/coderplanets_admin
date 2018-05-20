@@ -20,15 +20,21 @@ const debug = makeDebugger('C:CommunitiesBanner')
 const renderChildBanner = (route, store) => {
   const {
     totalCount,
-    curTotalCount,
+    filteredTotalCount,
     tagsTotalCount,
+    filterdTagsCount,
     postsTotalCount,
-    curPostsTotalCount,
+    filteredPostsCount,
   } = store
 
   switch (route.subQuery) {
     case ROUTE.TAGS: {
-      return <TagsBanner totalCount={tagsTotalCount} filteredCount={1} />
+      return (
+        <TagsBanner
+          totalCount={tagsTotalCount}
+          filteredCount={filterdTagsCount}
+        />
+      )
     }
     case ROUTE.EDITORS: {
       return <EditorsBanner totalCount={100} filteredCount={10} />
@@ -37,13 +43,16 @@ const renderChildBanner = (route, store) => {
       return (
         <PostsBanner
           totalCount={postsTotalCount}
-          filteredCount={curPostsTotalCount}
+          filteredCount={filteredPostsCount}
         />
       )
     }
     default: {
       return (
-        <IndexBanner totalCount={totalCount} filteredCount={curTotalCount} />
+        <IndexBanner
+          totalCount={totalCount}
+          filteredCount={filteredTotalCount}
+        />
       )
     }
   }

@@ -1,6 +1,11 @@
 /*
    index of all the containers
  */
+
+// viewers
 export { default as ArticleViwer } from './ArticleViwer'
-export { default as AccountEditor } from './AccountEditor'
 export { default as AccountViewer } from './AccountViewer'
+
+// editors
+export { default as AccountEditor } from './AccountEditor'
+export { default as CommunityEditor } from './CommunityEditor'

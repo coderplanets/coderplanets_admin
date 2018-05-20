@@ -23,6 +23,8 @@ export {
   Rlog,
   countWords,
   debounce,
+  castArgs,
+  closePreviewer,
   extractMentions,
   extractAttachments,
 } from './functions'

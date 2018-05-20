@@ -23,6 +23,7 @@ export { default as ThemeSelector } from './ThemeSelector'
 export { default as UserCell } from './UserCell'
 export { default as ColorCell } from './ColorCell'
 export { default as SexCell } from './SexCell'
+export { default as FormInputer } from './FormInputer'
 
 // loading component
 export {
@@ -34,4 +35,14 @@ export {
 } from './LoadingEffects'
 
 // UI library (currently use antd)
-export { Affix, Button, Tabs, Tooltip, Icon, Input, Table, Tag } from 'antd'
+export {
+  Affix,
+  Button,
+  Tabs,
+  Tooltip,
+  Icon,
+  Input,
+  Table,
+  Tag,
+  Popconfirm,
+} from 'antd'

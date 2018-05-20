@@ -15,8 +15,11 @@ const CommunitiesBannerStore = t
   .model('CommunitiesBannerStore', {
     // totalCount of all the communities
     totalCount: t.optional(t.number, 0),
+    filteredTotalCount: t.maybe(t.number),
     postsTotalCount: t.optional(t.number, 0),
+    filteredPostsCount: t.maybe(t.number),
     tagsTotalCount: t.optional(t.number, 0),
+    filterdTagsCount: t.maybe(t.number),
     // categories count
     // editors count
     // ...
@@ -24,20 +27,6 @@ const CommunitiesBannerStore = t
   .views(self => ({
     get root() {
       return getParent(self)
-    },
-    get curTotalCount() {
-      const data = self.root.communitiesContent.pagedCommunities
-      return data ? data.totalCount : 0
-    },
-    /*
-    get curTagsTotalCount() {
-      const data = self.root.communitiesContent.pagedtags
-      return data ? data.totalCount : 0
-    },
-    */
-    get curPostsTotalCount() {
-      const data = self.root.communitiesContent.pagedPosts
-      return data ? data.totalCount : 0
     },
     get route() {
       const { mainQuery, subQuery } = self.root.route

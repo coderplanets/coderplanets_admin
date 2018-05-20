@@ -1,5 +1,6 @@
 import R from 'ramda'
 import PubSub from 'pubsub-js'
+import { EVENT } from '../utils'
 
 /* eslint-disable */
 // TODO: document ?
@@ -36,7 +37,7 @@ export const mapKeys = R.curry((fn, obj) => {
 
 export const notEmpty = R.compose(R.not, R.isEmpty)
 export const isEmptyValue = R.compose(R.isEmpty, R.trim)
-export const isEmptyNil = v => R.isEmpty(v) || R.isNil(v)
+export const isEmptyNil = R.either(R.isNil, R.isEmpty)
 /* eslint-disable */
 const log = (...args) => data => {
   console.log.apply(null, args.concat([data]))
@@ -46,6 +47,12 @@ const log = (...args) => data => {
 
 // reference: https://blog.carbonfive.com/2017/12/20/easy-pipeline-debugging-with-curried-console-log/
 export const Rlog = (arg = 'Rlog: ') => R.tap(log(arg))
+
+const validValues = R.compose(R.not, isEmptyNil)
+
+export const castArgs = (fields, optFields) => {
+  return R.pickBy(validValues, R.pick(optFields, fields))
+}
 
 export const cutFrom = (val, cutnumber = 20) => {
   if (isEmptyValue(val)) {
@@ -105,6 +112,10 @@ export const dispatchEvent = (msg, data = {}) => {
   // TODO: check the msg is valid
   // PubSub.publishSync(msg, data)
   PubSub.publish(msg, data)
+}
+
+export const closePreviewer = (type = '') => {
+  dispatchEvent(EVENT.PREVIEW_CLOSE, { type })
 }
 
 /* eslint-disable */

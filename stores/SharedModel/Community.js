@@ -11,6 +11,7 @@ const Community = t.model('Community', {
   desc: t.optional(t.string, ''),
   raw: t.maybe(t.string),
   logo: t.maybe(t.string),
+  category: t.optional(t.string, ''),
   contributesDigest: t.optional(t.array(t.number), []),
   subscribersCount: t.optional(t.number, 0),
   editorsCount: t.optional(t.number, 0),

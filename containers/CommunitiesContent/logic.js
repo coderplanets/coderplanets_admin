@@ -9,13 +9,14 @@ import {
   EVENT,
   TYPE,
   scrollIntoEle,
+  closePreviewer,
 } from '../../utils'
 import { PAGE_SIZE } from '../../config'
 import S from './schema'
 import SR71 from '../../utils/network/sr71'
 
 const sr71$ = new SR71({
-  resv_event: [EVENT.LOGOUT, EVENT.LOGIN],
+  resv_event: [EVENT.LOGOUT, EVENT.LOGIN, EVENT.PREVIEW_CLOSE],
 })
 
 /* eslint-disable no-unused-vars */
@@ -68,7 +69,7 @@ export function onEdit(record) {
 }
 
 export function onDelete(record) {
-  debug('onDelete', record)
+  sr71$.mutate(S.deleteCommunity, { id: record.id })
 }
 
 /* when error occured cancle all the loading state */
@@ -109,12 +110,27 @@ const DataSolver = [
     },
   },
   {
+    match: gqRes('deleteCommunity'),
+    action: () => {
+      closePreviewer(TYPE.COMMUNITIES_REFRESH)
+    },
+  },
+
+  {
     match: gqRes(EVENT.LOGOUT),
     action: () => loadCommunities(),
   },
   {
     match: gqRes(EVENT.LOGIN),
     action: () => loadCommunities(),
+  },
+  {
+    match: gqRes(EVENT.PREVIEW_CLOSE),
+    action: res => {
+      if (res[EVENT.PREVIEW_CLOSE].type === TYPE.COMMUNITIES_REFRESH) {
+        loadCommunities()
+      }
+    },
   },
 ]
 

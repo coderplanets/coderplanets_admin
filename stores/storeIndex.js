@@ -21,7 +21,9 @@ export { default as CommunityBannerStore } from './CommunityBannerStore'
 export { default as CommunitiesContentStore } from './CommunitiesContentStore'
 export { default as CommunityContentStore } from './CommunityContentStore'
 export { default as UsersContentStore } from './UsersContentStore'
-// export { default as CheatSheetContentStore } from './CheatSheetContentStore'
+
+// editors
+export { default as CommunityEditorStore } from './CommunityEditorStore'
 
 // toolbox
 export { default as TypeWriterStore } from './TypeWriterStore'

@@ -15,7 +15,9 @@ import SR71 from '../../utils/network/sr71'
 
 import S from './schema'
 
-const sr71$ = new SR71()
+const sr71$ = new SR71({
+  resv_event: [EVENT.PREVIEW_CLOSE],
+})
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('L:communitiesBanner')
 /* eslint-enable no-unused-vars */
@@ -35,7 +37,6 @@ export function loadTags() {
 }
 
 export function onAdd() {
-  debug('onAdd')
   dispatchEvent(EVENT.NAV_CREATE_COMMUNITY, {
     type: TYPE.PREVIEW_CREATE_COMMUNITY,
   })
@@ -62,6 +63,14 @@ const DataSolver = [
       communitiesBanner.markState({
         postsTotalCount: totalCount,
       }),
+  },
+  {
+    match: gqRes(EVENT.PREVIEW_CLOSE),
+    action: res => {
+      if (res[EVENT.PREVIEW_CLOSE].type === TYPE.COMMUNITIES_REFRESH) {
+        loadCommunities()
+      }
+    },
   },
 ]
 

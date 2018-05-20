@@ -68,11 +68,19 @@ const pagedPosts = gql`
     }
   }
 `
+const deleteCommunity = gql`
+  mutation($id: ID!) {
+    deleteCommunity(id: $id) {
+      id
+    }
+  }
+`
 
 const schema = {
   communities,
   tags,
   pagedPosts,
+  deleteCommunity,
 }
 
 export default schema

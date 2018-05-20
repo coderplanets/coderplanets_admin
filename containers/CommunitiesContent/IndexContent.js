@@ -2,7 +2,14 @@ import React from 'react'
 import TimeAgo from 'timeago-react'
 
 import { cutFrom } from '../../utils'
-import { Pagi, Table, TableLoading, Button, Space } from '../../components'
+import {
+  Pagi,
+  Table,
+  TableLoading,
+  Button,
+  Space,
+  Popconfirm,
+} from '../../components'
 
 import { CommunityIcon, OperationWrapper } from './styles'
 import * as logic from './logic'
@@ -107,14 +114,16 @@ const columns = [
             编辑
           </Button>
           <Space right="10px" />
-          <Button
-            size="small"
-            type="red"
-            ghost
-            onClick={logic.onDelete.bind(this, record)}
+          <Popconfirm
+            title="确定删除 ?？"
+            okText="Y"
+            cancelText="N"
+            onConfirm={logic.onDelete.bind(this, record)}
           >
-            删除
-          </Button>
+            <Button size="small" type="red" ghost>
+              删除
+            </Button>
+          </Popconfirm>
         </OperationWrapper>
       )
     },

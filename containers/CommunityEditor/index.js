@@ -1,0 +1,81 @@
+/*
+ *
+ * CommunityEditor
+ *
+ */
+
+import React from 'react'
+import { inject, observer } from 'mobx-react'
+
+// import Link from 'next/link'
+
+import { makeDebugger, storePlug } from '../../utils'
+
+// TODO: EditableImage
+import { Button, Icon, FormInputer, Space } from '../../components'
+import { Wrapper, Divider, ActionBtns } from './styles'
+
+import * as logic from './logic'
+
+/* eslint-disable no-unused-vars */
+const debug = makeDebugger('C:CommunityEditor')
+/* eslint-enable no-unused-vars */
+
+class CommunityEditorContainer extends React.Component {
+  componentWillMount() {
+    logic.init(this.props.communityEditor)
+  }
+
+  render() {
+    const updating = false
+    const { communityEditor } = this.props
+    const { communityData } = communityEditor
+    return (
+      <Wrapper>
+        <h3>创建社区</h3>
+        <br />
+        <FormInputer
+          label="名称:"
+          value={communityData.title}
+          onChange={logic.profileChange('title')}
+        />
+        <FormInputer
+          label="raw:"
+          value={communityData.raw}
+          onChange={logic.profileChange('raw')}
+        />
+        <FormInputer
+          label="类别:"
+          value={communityData.category}
+          onChange={logic.profileChange('category')}
+        />
+        <FormInputer
+          label="描述:"
+          textarea
+          value={communityData.desc}
+          onChange={logic.profileChange('desc')}
+        />
+        <Divider />
+        <ActionBtns>
+          <Button type="primary" ghost onClick={logic.cancleEdit}>
+            取消
+          </Button>
+          <Space right="20px" />
+          {updating ? (
+            <Button type="primary" disabled>
+              <Icon type="loading" /> 保存中
+            </Button>
+          ) : (
+            <Button type="primary" onClick={logic.updateConfirm}>
+              保存
+            </Button>
+          )}
+        </ActionBtns>
+      </Wrapper>
+    )
+  }
+}
+
+export default inject(storePlug('communityEditor'))(
+  observer(CommunityEditorContainer)
+)

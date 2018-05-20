@@ -33,7 +33,6 @@ const renderChildBanner = (route, store) => {
     /* curPostsTotalCount, */
   } = store
 
-  debug(store)
   switch (route.subQuery) {
     case ROUTE.POSTS: {
       return (
