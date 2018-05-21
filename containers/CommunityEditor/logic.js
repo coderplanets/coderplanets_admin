@@ -35,17 +35,40 @@ export const uploadPic = pic => {
   })
 }
 
-const wanted = ['title', 'desc', 'raw', 'category', 'logo']
+const requiredArgs = ['title', 'desc', 'raw', 'category', 'logo']
+// TODO: rename to mutateConfirm
 export const updateConfirm = () => {
   const args = {
     ...communityEditor.communityData,
   }
 
-  sr71$.mutate(S.createCommunity, castArgs(args, wanted))
+  communityEditor.markState({
+    mutating: true,
+  })
+
+  if (communityEditor.isEdit) {
+    return sr71$.mutate(
+      S.updateCommunity,
+      castArgs(args, ['id', ...requiredArgs])
+    )
+  }
+
+  return sr71$.mutate(S.createCommunity, castArgs(args, requiredArgs))
+}
+
+const initEditData = editData => {
+  communityEditor.markState({
+    community: editData,
+    isEdit: true,
+  })
 }
 
 // TODO: move to utils: closePreviewer
 export function cancleEdit() {
+  communityEditor.markState({
+    community: {},
+    isEdit: false,
+  })
   closePreviewer()
 }
 
@@ -53,15 +76,23 @@ export function cancleEdit() {
 // Data & Error handlers
 // ###############################
 
+const cancleLoading = () => {
+  communityEditor.markState({
+    mutating: false,
+  })
+}
+
 const DataSolver = [
   {
     match: gqRes('createCommunity'),
     action: () => {
       closePreviewer(TYPE.COMMUNITIES_REFRESH)
-      // meteorState(communityEditor, 'success', 3)
-      // updateDone()
-      // cancleLoading()
-      // communitiesContent.loadCommunities(data)
+    },
+  },
+  {
+    match: gqRes('updateCommunity'),
+    action: () => {
+      closePreviewer(TYPE.COMMUNITIES_REFRESH)
     },
   },
 ]
@@ -72,20 +103,30 @@ const ErrSolver = [
     action: ({ details }) => {
       const errMsg = details[0].detail
       meteorState(communityEditor, 'error', 5, errMsg)
-      // cancleLoading()
+      cancleLoading()
     },
   },
   {
     match: gqErr(ERR.NETWORK),
     action: ({ details }) => {
       debug('ERR.NETWORK -->', details)
+      cancleLoading()
     },
   },
 ]
 
-export function init(selectedStore) {
+export function init(selectedStore, editData) {
   communityEditor = selectedStore
   debug(communityEditor)
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+
+  if (editData) {
+    initEditData(editData)
+  }
+}
+
+export function uninit() {
+  cancleEdit()
+  cancleLoading()
 }

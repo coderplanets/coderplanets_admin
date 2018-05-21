@@ -30,13 +30,24 @@ const debug = makeDebugger('C:CommunityEditor')
 
 class CommunityEditorContainer extends React.Component {
   componentWillMount() {
-    logic.init(this.props.communityEditor)
+    debug('this.props: ', this.props)
+    const { communityEditor, editData } = this.props
+    logic.init(communityEditor, editData)
+  }
+  componentWillUnmount() {
+    logic.uninit()
   }
 
   render() {
-    const updating = false
     const { communityEditor } = this.props
-    const { communityData, success, error, warn, statusMsg } = communityEditor
+    const {
+      communityData,
+      mutating,
+      success,
+      error,
+      warn,
+      statusMsg,
+    } = communityEditor
 
     return (
       <Wrapper>
@@ -100,7 +111,7 @@ class CommunityEditorContainer extends React.Component {
             取消
           </Button>
           <Space right="20px" />
-          {updating ? (
+          {mutating ? (
             <Button type="primary" disabled>
               <Icon type="loading" /> 保存中
             </Button>

@@ -16,7 +16,12 @@ const debug = makeDebugger('S:CommunityEditorStore')
 const CommunityEditorStore = t
   .model('CommunityEditorStore', {
     community: t.optional(Community, {}),
-    updating: t.optional(t.boolean, false),
+    // TODO: rename to mutating,
+    mutating: t.optional(t.boolean, false),
+    //
+    isEdit: t.optional(t.boolean, false),
+
+    // statusBox
     success: t.optional(t.boolean, false),
     error: t.optional(t.boolean, false),
     warn: t.optional(t.boolean, false),

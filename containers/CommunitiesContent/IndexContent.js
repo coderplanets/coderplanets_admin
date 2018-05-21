@@ -62,6 +62,12 @@ const columns = [
     },
   },
   {
+    title: '类别',
+    width: 150,
+    align: 'center',
+    dataIndex: 'category',
+  },
+  {
     title: '订阅人数',
     width: 150,
     align: 'center',

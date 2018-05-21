@@ -10,6 +10,7 @@ const communities = gql`
         raw
         logo
         subscribersCount
+        category
         insertedAt
         updatedAt
       }

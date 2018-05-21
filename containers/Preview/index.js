@@ -54,7 +54,7 @@ const CloseBtn = ({ type }) => (
 // <AccountViewer2 themeKeys={themeKeys} curTheme={curTheme} />
 
 // TODO: post edit viewer
-const Viewer = ({ type, root }) => {
+const Viewer = ({ type, root, editingCommunity }) => {
   switch (type) {
     case TYPE.PREVIEW_ACCOUNT_VIEW: {
       return <AccountViewer />
@@ -71,6 +71,9 @@ const Viewer = ({ type, root }) => {
     case TYPE.PREVIEW_CREATE_COMMUNITY: {
       return <CommunityEditor />
     }
+    case TYPE.PREVIEW_UPDATE_COMMUNITY: {
+      return <CommunityEditor editData={editingCommunity} />
+    }
 
     default: {
       return <StateTree json={root.toJSON()} />
@@ -84,30 +87,28 @@ class PreviewContainer extends React.Component {
   }
 
   render() {
-    const { visible, type, themeKeys, curTheme, root } = this.props.preview
+    const {
+      visible,
+      type,
+      themeKeys,
+      curTheme,
+      root,
+      editingCommunity,
+    } = this.props.preview
 
-    /*
-
-    <PreviewBody>
-      <h2>Preview body</h2>
-    </PreviewBody>
-     */
-
-    /* debug('this.props.preview: ', this.props.preview.root.toJSON()) */
     return (
       <div>
         <PreviewOverlay visible={visible} onClick={logic.closePreview} />
         <PreviewWrapper visible={visible} type={type}>
           <CloseBtn type={type} />
           <PreviewContent>
-            <div>
-              <Viewer
-                type={type}
-                root={root}
-                themeKeys={themeKeys}
-                curTheme={curTheme}
-              />
-            </div>
+            <Viewer
+              type={type}
+              root={root}
+              themeKeys={themeKeys}
+              curTheme={curTheme}
+              editingCommunity={editingCommunity}
+            />
           </PreviewContent>
         </PreviewWrapper>
       </div>

@@ -10,7 +10,9 @@ import {
   TYPE,
   scrollIntoEle,
   closePreviewer,
+  dispatchEvent,
 } from '../../utils'
+
 import { PAGE_SIZE } from '../../config'
 import S from './schema'
 import SR71 from '../../utils/network/sr71'
@@ -66,6 +68,11 @@ export function loadTags(page = 1) {
 
 export function onEdit(record) {
   debug('onEdit', record)
+
+  dispatchEvent(EVENT.NAV_UPDATE_COMMUNITY, {
+    type: TYPE.PREVIEW_UPDATE_COMMUNITY,
+    data: record,
+  })
 }
 
 export function onDelete(record) {

@@ -17,6 +17,7 @@ const sr71$ = new SR71({
     EVENT.NAV_CREATE_POST,
     EVENT.PREVIEW_CLOSE,
     EVENT.NAV_CREATE_COMMUNITY,
+    EVENT.NAV_UPDATE_COMMUNITY,
   ],
 })
 
@@ -83,6 +84,18 @@ const DataResolver = [
     action: res => {
       const event = res[EVENT.NAV_CREATE_COMMUNITY]
       debug('NAV_CREATE_COMMUNITY EVENT: ', event)
+      holdPage()
+      preview.open(event.type)
+    },
+  },
+  {
+    match: gqRes(EVENT.NAV_UPDATE_COMMUNITY),
+    action: res => {
+      const event = res[EVENT.NAV_UPDATE_COMMUNITY]
+      debug('NAV_UPDATE_COMMUNITY EVENT: ', event)
+      preview.markState({
+        editCommunity: event.data,
+      })
       holdPage()
       preview.open(event.type)
     },

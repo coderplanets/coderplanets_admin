@@ -17,7 +17,6 @@ const debug = makeDebugger('C:FileUploader')
 
 const getFullDir = (dir, nestDir) => {
   /* yearYmonthM */
-  console.log('the fuck : nestDir : ', nestDir)
   if (!nestDir) return dir
 
   const date = new Date()
