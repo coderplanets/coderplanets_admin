@@ -72,6 +72,7 @@ class CommunityEditorContainer extends React.Component {
         <FormInputer
           label="raw:"
           value={communityData.raw}
+          note="用作 router 的唯一值，只能用英文。建议用社区的 translate 作为 raw 值， 比如 'javascript 中文社区'， 对应的 raw 值为 'javascript'"
           onChange={logic.profileChange('raw')}
         />
         <FormInputer

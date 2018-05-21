@@ -7,11 +7,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Input } from 'antd'
+import R from 'ramda'
 // import { Input } from '../../components'
 
 import { makeDebugger } from '../../utils'
 
-import { FormItemWrapper, FormLable, FormInput } from './styles'
+import { FormItemWrapper, FormLable, FormInput, Note } from './styles'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:FormInputer:index')
@@ -19,7 +20,7 @@ const debug = makeDebugger('c:FormInputer:index')
 
 const { TextArea } = Input
 
-const FormInputer = ({ label, textarea, value, onChange }) => (
+const FormInputer = ({ label, textarea, value, onChange, note }) => (
   <FormItemWrapper>
     <FormLable>{label}</FormLable>
 
@@ -35,6 +36,7 @@ const FormInputer = ({ label, textarea, value, onChange }) => (
         <Input size="default" value={value} onChange={onChange} />
       )}
       {/* NOTE info put here */}
+      {R.isEmpty(note) ? <div /> : <Note>{note}</Note>}
     </FormInput>
   </FormItemWrapper>
 )
@@ -45,6 +47,7 @@ FormInputer.propTypes = {
   label: PropTypes.string,
   value: PropTypes.string,
   textarea: PropTypes.bool,
+  note: PropTypes.string,
 }
 
 FormInputer.defaultProps = {
@@ -52,6 +55,7 @@ FormInputer.defaultProps = {
   value: '',
   label: '',
   textarea: false,
+  note: '',
 }
 
 export default FormInputer
