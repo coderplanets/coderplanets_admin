@@ -5,6 +5,7 @@
  */
 
 import React from 'react'
+import R from 'ramda'
 import { inject, observer } from 'mobx-react'
 import keydown from 'react-keydown'
 
@@ -18,6 +19,7 @@ import {
   RouterWrapper,
   MiniMapWrapper,
   CommunityLogo,
+  SettingLogo,
   MiniMapTitle,
   MiniMapDivider,
   Admin,
@@ -28,6 +30,7 @@ import {
   StateIcon,
   StateButton,
   DividerIcon,
+  SubRoute,
   Operations,
   User,
   AffixHeader,
@@ -40,18 +43,72 @@ import * as logic from './logic'
 const debug = makeDebugger('C:Header')
 /* eslint-enable no-unused-vars */
 
+const I18Dict = {
+  posts: '帖子',
+  categories: '类别',
+  tags: '标签',
+  editors: '编辑',
+  subscribers: '订阅用户',
+  pays: '衣食父母',
+  users: '注册用户',
+  passports: '权限',
+  roles: '角色',
+}
+
+const translate = key => {
+  if (R.has(key, I18Dict)) return I18Dict[key]
+  return key
+}
+
+const SubRouteContent = ({ subQuery }) => {
+  if (subQuery) {
+    return (
+      <SubRoute>
+        <MiniMapDivider />
+        <MiniMapTitle>{translate(subQuery)}</MiniMapTitle>
+      </SubRoute>
+    )
+  }
+  return <div />
+}
+
 const MiniMap = ({ curRoute }) => {
   const defaultIcon = 'js'
-  const { mainQuery } = curRoute
+  const { mainQuery, subQuery } = curRoute
   const iconKey = mainQuery.length > 1 ? mainQuery : defaultIcon
 
-  return (
-    <MiniMapWrapper>
-      <CommunityLogo src={`${ICON_ASSETS}/pl/${iconKey}.svg`} />
-      <MiniMapDivider />
-      <MiniMapTitle>综合设置</MiniMapTitle>
-    </MiniMapWrapper>
-  )
+  switch (mainQuery) {
+    case 'communities': {
+      return (
+        <MiniMapWrapper>
+          <SettingLogo src={`${ICON_ASSETS}/cmd/all.svg`} />
+          <MiniMapDivider />
+          <MiniMapTitle>社区设置</MiniMapTitle>
+          <SubRouteContent subQuery={subQuery} />
+        </MiniMapWrapper>
+      )
+    }
+    case 'users': {
+      return (
+        <MiniMapWrapper>
+          <SettingLogo src={`${ICON_ASSETS}/cmd/users.svg`} />
+          <MiniMapDivider />
+          <MiniMapTitle>用户设置</MiniMapTitle>
+          <SubRouteContent subQuery={subQuery} />
+        </MiniMapWrapper>
+      )
+    }
+    default: {
+      return (
+        <MiniMapWrapper>
+          <CommunityLogo src={`${ICON_ASSETS}/pl/${iconKey}.svg`} />
+          <MiniMapDivider />
+          <MiniMapTitle>{mainQuery}</MiniMapTitle>
+          <SubRouteContent subQuery={subQuery} />
+        </MiniMapWrapper>
+      )
+    }
+  }
 }
 
 // {fixed ? <MiniMap curRoute={curRoute} /> : <Navigator />}

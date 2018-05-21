@@ -35,12 +35,21 @@ export const CommunityLogo = styled(Img)`
   height: 22px;
   display: block;
 `
+export const SettingLogo = CommunityLogo.extend`
+  fill: #6f7083;
+`
 
 export const MiniMapDivider = styled.div`
   margin-left: 10px;
   margin-right: 10px;
-  border-left: 1px solid #6f7083;
-  height: 15px;
+  border-left: 1px dashed #6f7083;
+  height: 12px;
+  transform: rotate(10deg);
+`
+
+export const SubRoute = styled.div`
+  display: flex;
+  align-items: center;
 `
 
 export const MiniMapTitle = styled.div`
