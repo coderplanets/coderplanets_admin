@@ -9,6 +9,7 @@ import {
   Button,
   Space,
   ColorCell,
+  CommunityCell,
 } from '../../components'
 
 import { OperationWrapper } from './styles'
@@ -42,8 +43,17 @@ const columns = [
     },
   },
   {
+    title: '社区',
+    width: 200,
+    dataIndex: 'community',
+    align: 'center',
+    render: community => {
+      return <CommunityCell data={community} />
+    },
+  },
+  {
     title: 'part',
-    width: 300,
+    width: 200,
     dataIndex: 'part',
     align: 'center',
     render: text => {

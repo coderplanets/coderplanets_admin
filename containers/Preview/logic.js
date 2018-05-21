@@ -18,6 +18,8 @@ const sr71$ = new SR71({
     EVENT.PREVIEW_CLOSE,
     EVENT.NAV_CREATE_COMMUNITY,
     EVENT.NAV_UPDATE_COMMUNITY,
+    EVENT.NAV_CREATE_TAG,
+    // EVENT.NAV_UPDATE_TAG,
   ],
 })
 
@@ -83,7 +85,6 @@ const DataResolver = [
     match: gqRes(EVENT.NAV_CREATE_COMMUNITY),
     action: res => {
       const event = res[EVENT.NAV_CREATE_COMMUNITY]
-      debug('NAV_CREATE_COMMUNITY EVENT: ', event)
       holdPage()
       preview.open(event.type)
     },
@@ -92,10 +93,20 @@ const DataResolver = [
     match: gqRes(EVENT.NAV_UPDATE_COMMUNITY),
     action: res => {
       const event = res[EVENT.NAV_UPDATE_COMMUNITY]
-      debug('NAV_UPDATE_COMMUNITY EVENT: ', event)
+      debug('get ', EVENT.NAV_UPDATE_COMMUNITY)
+
       preview.markState({
         editCommunity: event.data,
       })
+      holdPage()
+      preview.open(event.type)
+    },
+  },
+  {
+    match: gqRes(EVENT.NAV_CREATE_TAG),
+    action: res => {
+      debug('get ', EVENT.NAV_CREATE_TAG)
+      const event = res[EVENT.NAV_CREATE_TAG]
       holdPage()
       preview.open(event.type)
     },

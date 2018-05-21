@@ -29,6 +29,11 @@ const tags = gql`
         title
         color
         part
+        community {
+          id
+          logo
+          title
+        }
         insertedAt
         updatedAt
       }

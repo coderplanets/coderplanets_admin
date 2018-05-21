@@ -35,7 +35,6 @@ const FormInputer = ({ label, textarea, value, onChange, note }) => (
       ) : (
         <Input size="default" value={value} onChange={onChange} />
       )}
-      {/* NOTE info put here */}
       {R.isEmpty(note) ? <div /> : <Note>{note}</Note>}
     </FormInput>
   </FormItemWrapper>

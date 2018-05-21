@@ -36,10 +36,22 @@ export function loadTags() {
   sr71$.query(S.tags, { filter: {} })
 }
 
-export function onAdd() {
-  dispatchEvent(EVENT.NAV_CREATE_COMMUNITY, {
-    type: TYPE.PREVIEW_CREATE_COMMUNITY,
-  })
+export function onAdd(part) {
+  switch (part) {
+    case 'tags': {
+      debug('onAdd part: ', part)
+      return dispatchEvent(EVENT.NAV_CREATE_TAG, {
+        type: TYPE.PREVIEW_CREATE_TAG,
+      })
+    }
+    default: {
+      debug('onAdd part: ', part)
+
+      return dispatchEvent(EVENT.NAV_CREATE_COMMUNITY, {
+        type: TYPE.PREVIEW_CREATE_COMMUNITY,
+      })
+    }
+  }
 }
 
 const DataSolver = [
@@ -67,8 +79,11 @@ const DataSolver = [
   {
     match: gqRes(EVENT.PREVIEW_CLOSE),
     action: res => {
-      if (res[EVENT.PREVIEW_CLOSE].type === TYPE.COMMUNITIES_REFRESH) {
+      const closeType = res[EVENT.PREVIEW_CLOSE].type
+      if (closeType === TYPE.COMMUNITIES_REFRESH) {
         loadCommunities()
+      } else if (closeType === TYPE.TAGS_REFRESH) {
+        loadTags()
       }
     },
   },

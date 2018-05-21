@@ -20,10 +20,14 @@ export { default as Pagi } from './Pagi'
 export { default as Navigator } from './Navigator'
 export { default as ThemeSelector } from './ThemeSelector'
 
+// Table cell
+export { default as CommunityCell } from './CommunityCell'
 export { default as UserCell } from './UserCell'
 export { default as ColorCell } from './ColorCell'
 export { default as SexCell } from './SexCell'
 export { default as FormInputer } from './FormInputer'
+export { default as FormSelector } from './FormSelector'
+export { default as TagColorSelector } from './TagColorSelector'
 
 // loading component
 export {
@@ -44,5 +48,6 @@ export {
   Input,
   Table,
   Tag,
+  Select,
   Popconfirm,
 } from 'antd'

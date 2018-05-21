@@ -30,7 +30,6 @@ const debug = makeDebugger('C:CommunityEditor')
 
 class CommunityEditorContainer extends React.Component {
   componentWillMount() {
-    debug('this.props: ', this.props)
     const { communityEditor, editData } = this.props
     logic.init(communityEditor, editData)
   }
@@ -51,8 +50,9 @@ class CommunityEditorContainer extends React.Component {
 
     return (
       <Wrapper>
-        <h3>创建社区</h3>
-        <br />
+        coderplanets
+        <h2>创建社区</h2>
+        <Divider />
         <div>
           {communityData.logo ? (
             <FileUploader
@@ -74,7 +74,6 @@ class CommunityEditorContainer extends React.Component {
             </FileUploader>
           )}
         </div>
-
         <FormInputer
           label="名称:"
           value={communityData.title}
@@ -97,7 +96,6 @@ class CommunityEditorContainer extends React.Component {
           value={communityData.desc}
           onChange={logic.profileChange('desc')}
         />
-
         <br />
         <StatusBox
           success={success}
@@ -116,7 +114,7 @@ class CommunityEditorContainer extends React.Component {
               <Icon type="loading" /> 保存中
             </Button>
           ) : (
-            <Button type="primary" onClick={logic.updateConfirm}>
+            <Button type="primary" onClick={logic.mutateConfirm}>
               保存
             </Button>
           )}

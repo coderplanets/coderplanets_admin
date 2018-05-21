@@ -1,23 +1,21 @@
 /*
- * CommunityEditorStore store
+ * TagEditorStore store
  *
  */
 
 import { types as t, getParent } from 'mobx-state-tree'
 import R from 'ramda'
 
+import { Tag } from '../SharedModel'
 import { markStates, makeDebugger, stripMobx } from '../../utils'
-import { Community } from '../SharedModel'
-
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('S:CommunityEditorStore')
+const debug = makeDebugger('S:TagEditorStore')
 /* eslint-enable no-unused-vars */
 
-const CommunityEditorStore = t
-  .model('CommunityEditorStore', {
-    community: t.optional(Community, {}),
-    // Creating or Updating
-    mutating: t.optional(t.boolean, false),
+const TagEditorStore = t
+  .model('TagEditorStore', {
+    tag: t.optional(Tag, {}),
+    // Creating or Updating mutating: t.optional(t.boolean, false),
     // is Edit or Create
     isEdit: t.optional(t.boolean, false),
 
@@ -31,18 +29,18 @@ const CommunityEditorStore = t
     get root() {
       return getParent(self)
     },
-    get communityData() {
-      return stripMobx(self.community)
+    get tagData() {
+      return stripMobx(self.tag)
     },
   }))
   .actions(self => ({
-    updateCommunity(sobj) {
-      const community = R.merge(self.community, { ...sobj })
-      self.markState({ community })
+    updateTag(sobj) {
+      const tag = R.merge(self.tag, { ...sobj })
+      self.markState({ tag })
     },
     markState(sobj) {
       markStates(sobj, self)
     },
   }))
 
-export default CommunityEditorStore
+export default TagEditorStore

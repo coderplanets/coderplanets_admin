@@ -35,9 +35,8 @@ export const uploadPic = pic => {
   })
 }
 
-const requiredArgs = ['title', 'desc', 'raw', 'category', 'logo']
-// TODO: rename to mutateConfirm
-export const updateConfirm = () => {
+export const mutateConfirm = () => {
+  const requiredArgs = ['title', 'desc', 'raw', 'category', 'logo']
   const args = {
     ...communityEditor.communityData,
   }

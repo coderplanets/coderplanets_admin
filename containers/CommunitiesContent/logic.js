@@ -134,8 +134,11 @@ const DataSolver = [
   {
     match: gqRes(EVENT.PREVIEW_CLOSE),
     action: res => {
-      if (res[EVENT.PREVIEW_CLOSE].type === TYPE.COMMUNITIES_REFRESH) {
+      const closeType = res[EVENT.PREVIEW_CLOSE].type
+      if (closeType === TYPE.COMMUNITIES_REFRESH) {
         loadCommunities()
+      } else if (closeType === TYPE.TAGS_REFRESH) {
+        loadTags()
       }
     },
   },

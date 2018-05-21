@@ -9,3 +9,4 @@ export { default as AccountViewer } from './AccountViewer'
 // editors
 export { default as AccountEditor } from './AccountEditor'
 export { default as CommunityEditor } from './CommunityEditor'
+export { default as TagEditor } from './TagEditor'

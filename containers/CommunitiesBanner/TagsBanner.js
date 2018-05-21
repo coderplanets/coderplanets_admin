@@ -44,7 +44,7 @@ class TagsBanner extends React.Component {
             </FilterTags>
           </OperationItem>
           <OperationDivider />
-          <OperationItem onClick={logic.onAdd}>
+          <OperationItem onClick={logic.onAdd.bind(this, 'tags')}>
             <OperationIconChart src={`${ICON_ASSETS}/cmd/plus.svg`} />
             添加
           </OperationItem>

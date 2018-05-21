@@ -22,6 +22,9 @@ const PreviewStore = t
         TYPE.PREVIEW_CREATE_POST,
         TYPE.PREVIEW_CREATE_COMMUNITY,
         TYPE.PREVIEW_UPDATE_COMMUNITY,
+
+        TYPE.PREVIEW_CREATE_TAG,
+        TYPE.PREVIEW_UPDATE_TAG,
       ])
     ),
 
