@@ -61,12 +61,14 @@ const columns = [
       return <div>{cutFrom(text, 10)}</div>
     },
   },
+  /*
   {
     title: '类别',
     width: 150,
     align: 'center',
     dataIndex: 'category',
   },
+  */
   {
     title: '订阅人数',
     width: 150,
@@ -142,10 +144,7 @@ class IndexContent extends React.Component {
   }
 
   render() {
-    const {
-      data,
-      restProps: { communitiesLoading },
-    } = this.props
+    const { data, restProps: { communitiesLoading } } = this.props
 
     return (
       <div>
