@@ -1,8 +1,8 @@
 // import R from 'ramda'
 // import Router from 'next/router'
 import {
-  gqRes,
-  gqErr,
+  asyncRes,
+  asyncErr,
   makeDebugger,
   $solver,
   ERR,
@@ -56,28 +56,28 @@ export function onAdd(part) {
 
 const DataSolver = [
   {
-    match: gqRes('communities'),
+    match: asyncRes('communities'),
     action: ({ communities: { totalCount } }) =>
       communitiesBanner.markState({
         totalCount,
       }),
   },
   {
-    match: gqRes('tags'),
+    match: asyncRes('tags'),
     action: ({ tags: { totalCount } }) =>
       communitiesBanner.markState({
         tagsTotalCount: totalCount,
       }),
   },
   {
-    match: gqRes('pagedPosts'),
+    match: asyncRes('pagedPosts'),
     action: ({ pagedPosts: { totalCount } }) =>
       communitiesBanner.markState({
         postsTotalCount: totalCount,
       }),
   },
   {
-    match: gqRes(EVENT.PREVIEW_CLOSE),
+    match: asyncRes(EVENT.PREVIEW_CLOSE),
     action: res => {
       const closeType = res[EVENT.PREVIEW_CLOSE].type
       if (closeType === TYPE.COMMUNITIES_REFRESH) {
@@ -91,19 +91,19 @@ const DataSolver = [
 
 const ErrSolver = [
   {
-    match: gqErr(ERR.CRAPHQL),
+    match: asyncErr(ERR.CRAPHQL),
     action: ({ details }) => {
       debug('ERR.CRAPHQL -->', details)
     },
   },
   {
-    match: gqErr(ERR.TIMEOUT),
+    match: asyncErr(ERR.TIMEOUT),
     action: ({ details }) => {
       debug('ERR.TIMEOUT -->', details)
     },
   },
   {
-    match: gqErr(ERR.NETWORK),
+    match: asyncErr(ERR.NETWORK),
     action: ({ details }) => {
       debug('ERR.NETWORK -->', details)
     },

@@ -2,7 +2,7 @@ import R from 'ramda'
 
 import {
   TYPE,
-  gqRes,
+  asyncRes,
   makeDebugger,
   $solver,
   castArgs,
@@ -60,7 +60,7 @@ export const mutateConfirm = () => {
 
 const DataSolver = [
   {
-    match: gqRes('createTag'),
+    match: asyncRes('createTag'),
     action: () => {
       debug('createTag done!')
       closePreviewer(TYPE.TAGS_REFRESH)

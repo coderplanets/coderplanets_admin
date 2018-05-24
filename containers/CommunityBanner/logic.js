@@ -1,6 +1,6 @@
 // import R from 'ramda'
 
-import { makeDebugger, gqRes, $solver } from '../../utils'
+import { makeDebugger, asyncRes, $solver } from '../../utils'
 import SR71 from '../../utils/network/sr71'
 
 import S from './schema'
@@ -33,7 +33,7 @@ export function onAdd() {}
 
 const DataSolver = [
   {
-    match: gqRes('pagedPosts'),
+    match: asyncRes('pagedPosts'),
     action: ({ pagedPosts: { totalCount } }) => {
       return communityBanner.markState({
         postsTotalCount: totalCount,
@@ -41,7 +41,7 @@ const DataSolver = [
     },
   },
   {
-    match: gqRes('tags'),
+    match: asyncRes('tags'),
     action: ({ tags: { totalCount } }) => {
       communityBanner.markState({
         tagsTotalCount: totalCount,

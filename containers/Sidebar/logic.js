@@ -3,7 +3,14 @@ import Router from 'next/router'
 /* import store from 'store' */
 
 // const debug = makeDebugger('L:sidebar')
-import { gqRes, gqErr, $solver, ERR, makeDebugger, EVENT } from '../../utils'
+import {
+  asyncRes,
+  asyncErr,
+  $solver,
+  ERR,
+  makeDebugger,
+  EVENT,
+} from '../../utils'
 import S from './schema'
 import { PAGE_SIZE } from '../../config'
 
@@ -73,13 +80,13 @@ export function loadCommunities(page = 1) {
 
 const DataSolver = [
   {
-    match: gqRes('communities'),
+    match: asyncRes('communities'),
     action: ({ communities }) => {
       sidebar.loadCommunities(communities)
     },
   },
   {
-    match: gqRes(EVENT.ROUTE_CHANGE),
+    match: asyncRes(EVENT.ROUTE_CHANGE),
     action: data => {
       sidebar.syncStateFromhRoute(data[EVENT.ROUTE_CHANGE])
     },
@@ -88,19 +95,19 @@ const DataSolver = [
 
 const ErrSolver = [
   {
-    match: gqErr(ERR.CRAPHQL),
+    match: asyncErr(ERR.CRAPHQL),
     action: ({ details }) => {
       debug('ERR.CRAPHQL -->', details)
     },
   },
   {
-    match: gqErr(ERR.TIMEOUT),
+    match: asyncErr(ERR.TIMEOUT),
     action: ({ details }) => {
       debug('ERR.TIMEOUT -->', details)
     },
   },
   {
-    match: gqErr(ERR.NETWORK),
+    match: asyncErr(ERR.NETWORK),
     action: ({ details }) => {
       debug('ERR.NETWORK -->', details)
     },

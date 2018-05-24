@@ -1,7 +1,7 @@
 import {
   makeDebugger,
-  gqRes,
-  // gqErr,
+  asyncRes,
+  // asyncErr,
   $solver,
   // ERR,
   // EVENT,
@@ -52,7 +52,7 @@ const cancleLoading = () => {
 
 const DataSolver = [
   {
-    match: gqRes('pagedUsers'),
+    match: asyncRes('pagedUsers'),
     action: ({ pagedUsers }) => {
       cancleLoading()
       usersContent.markState({

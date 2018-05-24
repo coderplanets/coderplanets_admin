@@ -1,8 +1,8 @@
 // import R from 'ramda'
 
 import {
-  gqRes,
-  // gqErr,
+  asyncRes,
+  // asyncErr,
   $solver,
   // ERR,
   makeDebugger,
@@ -64,7 +64,7 @@ const cancleLoading = () => {
 
 const DataSolver = [
   {
-    match: gqRes('pagedPosts'),
+    match: asyncRes('pagedPosts'),
     action: ({ pagedPosts }) => {
       cancleLoading()
       communityContent.markState({
@@ -73,7 +73,7 @@ const DataSolver = [
     },
   },
   {
-    match: gqRes('tags'),
+    match: asyncRes('tags'),
     action: ({ tags }) => {
       cancleLoading()
       communityContent.markState({

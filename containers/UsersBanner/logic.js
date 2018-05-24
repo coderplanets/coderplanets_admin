@@ -1,6 +1,6 @@
 // import R from 'ramda'
 
-import { makeDebugger, $solver, gqRes } from '../../utils'
+import { makeDebugger, $solver, asyncRes } from '../../utils'
 
 import S from './schema'
 import SR71 from '../../utils/network/sr71'
@@ -26,7 +26,7 @@ export function onAdd() {}
 
 const DataSolver = [
   {
-    match: gqRes('pagedUsers'),
+    match: asyncRes('pagedUsers'),
     action: ({ pagedUsers: { totalCount } }) => {
       usersBanner.markState({
         usersTotalCount: totalCount,

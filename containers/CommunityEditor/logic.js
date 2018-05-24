@@ -3,8 +3,8 @@ import R from 'ramda'
 import {
   makeDebugger,
   $solver,
-  gqRes,
-  gqErr,
+  asyncRes,
+  asyncErr,
   ERR,
   TYPE,
   meteorState,
@@ -83,13 +83,13 @@ const cancleLoading = () => {
 
 const DataSolver = [
   {
-    match: gqRes('createCommunity'),
+    match: asyncRes('createCommunity'),
     action: () => {
       closePreviewer(TYPE.COMMUNITIES_REFRESH)
     },
   },
   {
-    match: gqRes('updateCommunity'),
+    match: asyncRes('updateCommunity'),
     action: () => {
       closePreviewer(TYPE.COMMUNITIES_REFRESH)
     },
@@ -98,7 +98,7 @@ const DataSolver = [
 
 const ErrSolver = [
   {
-    match: gqErr(ERR.CRAPHQL),
+    match: asyncErr(ERR.CRAPHQL),
     action: ({ details }) => {
       const errMsg = details[0].detail
       meteorState(communityEditor, 'error', 5, errMsg)
@@ -106,7 +106,7 @@ const ErrSolver = [
     },
   },
   {
-    match: gqErr(ERR.NETWORK),
+    match: asyncErr(ERR.NETWORK),
     action: ({ details }) => {
       debug('ERR.NETWORK -->', details)
       cancleLoading()
