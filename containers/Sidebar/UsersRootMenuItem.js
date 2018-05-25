@@ -21,10 +21,7 @@ import * as logic from './logic'
 
 const MenuChildren = ({ activeRaw, curRaw, activePart }) => (
   <ChildrenWrapper active={activeRaw === curRaw}>
-    <ChildrenItem
-      active={ROUTE.USERS === activePart}
-      onClick={logic.onChildMenuChange.bind(this, ROUTE.USERS)}
-    >
+    <ChildrenItem active={ROUTE.USERS === activePart}>
       <Link href="/users">
         <ChildrenItemInner>
           <ChildrenTitle>注册用户</ChildrenTitle>
@@ -32,10 +29,7 @@ const MenuChildren = ({ activeRaw, curRaw, activePart }) => (
         </ChildrenItemInner>
       </Link>
     </ChildrenItem>
-    <ChildrenItem
-      active={ROUTE.PAYS === activePart}
-      onClick={logic.onChildMenuChange.bind(this, ROUTE.PAYS)}
-    >
+    <ChildrenItem active={ROUTE.PAYS === activePart}>
       <Link href="/users" as="/users/pays">
         <ChildrenItemInner>
           <ChildrenTitle>衣食父母</ChildrenTitle>
@@ -43,10 +37,7 @@ const MenuChildren = ({ activeRaw, curRaw, activePart }) => (
         </ChildrenItemInner>
       </Link>
     </ChildrenItem>
-    <ChildrenItem
-      active={ROUTE.PASSPORTS === activePart}
-      onClick={logic.onChildMenuChange.bind(this, ROUTE.PASSPORTS)}
-    >
+    <ChildrenItem active={ROUTE.PASSPORTS === activePart}>
       <Link href="/users" as="/users/passports">
         <ChildrenItemInner>
           <ChildrenTitle>权限</ChildrenTitle>
@@ -54,10 +45,7 @@ const MenuChildren = ({ activeRaw, curRaw, activePart }) => (
         </ChildrenItemInner>
       </Link>
     </ChildrenItem>
-    <ChildrenItem
-      active={ROUTE.ROLES === activePart}
-      onClick={logic.onChildMenuChange.bind(this, ROUTE.ROLES)}
-    >
+    <ChildrenItem active={ROUTE.ROLES === activePart}>
       <Link href="/users" as="/users/roles">
         <ChildrenItemInner>
           <ChildrenTitle>角色</ChildrenTitle>

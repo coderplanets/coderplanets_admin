@@ -25,7 +25,7 @@ const debug = makeDebugger('L:communitiesBanner')
 let communitiesBanner = null
 
 export function loadCommunities() {
-  sr71$.query(S.communities, { filter: {} })
+  sr71$.query(S.pagedCommunities, { filter: {} })
 }
 
 export function loadPosts() {
@@ -33,15 +33,22 @@ export function loadPosts() {
 }
 
 export function loadTags() {
-  sr71$.query(S.tags, { filter: {} })
+  sr71$.query(S.pagedTags, { filter: {} })
 }
+
+export const loadCategories = () =>
+  sr71$.query(S.pagedCategories, { filter: {} })
 
 export function onAdd(part) {
   switch (part) {
     case 'tags': {
-      debug('onAdd part: ', part)
       return dispatchEvent(EVENT.NAV_CREATE_TAG, {
         type: TYPE.PREVIEW_CREATE_TAG,
+      })
+    }
+    case 'categories': {
+      return dispatchEvent(EVENT.NAV_CREATE_CATEGORY, {
+        type: TYPE.PREVIEW_CREATE_CATEGORY,
       })
     }
     default: {
@@ -56,18 +63,26 @@ export function onAdd(part) {
 
 const DataSolver = [
   {
-    match: asyncRes('communities'),
-    action: ({ communities: { totalCount } }) =>
+    match: asyncRes('pagedCommunities'),
+    action: ({ pagedCommunities: { totalCount } }) =>
       communitiesBanner.markState({
         totalCount,
       }),
   },
   {
-    match: asyncRes('tags'),
-    action: ({ tags: { totalCount } }) =>
+    match: asyncRes('pagedTags'),
+    action: ({ pagedTags: { totalCount } }) =>
       communitiesBanner.markState({
         tagsTotalCount: totalCount,
       }),
+  },
+  {
+    match: asyncRes('pagedCategories'),
+    action: ({ pagedCategories: { totalCount } }) => {
+      communitiesBanner.markState({
+        categoriesTotalCount: totalCount,
+      })
+    },
   },
   {
     match: asyncRes('pagedPosts'),
@@ -84,6 +99,8 @@ const DataSolver = [
         loadCommunities()
       } else if (closeType === TYPE.TAGS_REFRESH) {
         loadTags()
+      } else if (closeType === TYPE.GATEGORIES_REFRESH) {
+        loadCategories()
       }
     },
   },

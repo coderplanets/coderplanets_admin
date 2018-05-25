@@ -20,9 +20,9 @@ const communities = gql`
     }
   }
 `
-const tags = gql`
-  query tags($filter: PagedFilter!) {
-    tags(filter: $filter) {
+const pagedTags = gql`
+  query($filter: PagedFilter!) {
+    pagedTags(filter: $filter) {
       entries {
         id
         title
@@ -72,7 +72,7 @@ const pagedPosts = gql`
 
 const schema = {
   communities,
-  tags,
+  pagedTags,
   pagedPosts,
 }
 

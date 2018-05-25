@@ -1,21 +1,28 @@
 import gql from 'graphql-tag'
 
-const communities = gql`
-  query communities($filter: PagedFilter!) {
-    communities(filter: $filter) {
+const pagedCommunities = gql`
+  query($filter: PagedFilter!) {
+    pagedCommunities(filter: $filter) {
       totalCount
     }
   }
 `
-const tags = gql`
-  query tags($filter: PagedFilter!) {
-    tags(filter: $filter) {
+const pagedTags = gql`
+  query($filter: PagedFilter!) {
+    pagedTags(filter: $filter) {
+      totalCount
+    }
+  }
+`
+const pagedCategories = gql`
+  query($filter: PagedFilter!) {
+    pagedCategories(filter: $filter) {
       totalCount
     }
   }
 `
 const pagedPosts = gql`
-  query pagedPosts($filter: PagedFilter!) {
+  query($filter: PagedFilter!) {
     pagedPosts(filter: $filter) {
       totalCount
     }
@@ -23,9 +30,10 @@ const pagedPosts = gql`
 `
 
 const schema = {
-  communities,
+  pagedCommunities,
   pagedPosts,
-  tags,
+  pagedCategories,
+  pagedTags,
 }
 
 export default schema

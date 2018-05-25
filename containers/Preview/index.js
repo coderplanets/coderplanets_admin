@@ -22,6 +22,7 @@ import {
   AccountEditor,
   CommunityEditor,
   TagEditor,
+  CategoryEditor,
 } from '../../containers'
 
 import {
@@ -77,6 +78,9 @@ const Viewer = ({ type, root, editingCommunity }) => {
     }
     case TYPE.PREVIEW_CREATE_TAG: {
       return <TagEditor />
+    }
+    case TYPE.PREVIEW_CREATE_CATEGORY: {
+      return <CategoryEditor />
     }
     default: {
       return <StateTree json={root.toJSON()} />

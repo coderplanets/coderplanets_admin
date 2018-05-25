@@ -15,11 +15,11 @@ import {
   OperationIconChart,
 } from './styles/common_banner'
 
-class IndexBanner extends React.Component {
+class CategoryBanner extends React.Component {
   componentWillMount() {
-    console.log('准备 load loadCommunities !')
-    logic.loadCommunities()
+    logic.loadCategories()
   }
+
   render() {
     const { filteredCount, totalCount } = this.props
     return (
@@ -27,7 +27,7 @@ class IndexBanner extends React.Component {
         <BannerCountBrief
           filteredCount={filteredCount}
           totalCount={totalCount}
-          part="社区"
+          part="社区分类"
           unit="个"
         />
         <Operation>
@@ -45,7 +45,7 @@ class IndexBanner extends React.Component {
             </FilterTags>
           </OperationItem>
           <OperationDivider />
-          <OperationItem onClick={logic.onAdd.bind(this, 'communities')}>
+          <OperationItem onClick={logic.onAdd.bind(this, 'categories')}>
             <OperationIconChart src={`${ICON_ASSETS}/cmd/plus.svg`} />
             添加
           </OperationItem>
@@ -61,4 +61,4 @@ class IndexBanner extends React.Component {
   }
 }
 
-export default IndexBanner
+export default CategoryBanner

@@ -20,6 +20,8 @@ const sr71$ = new SR71({
     EVENT.NAV_UPDATE_COMMUNITY,
     EVENT.NAV_CREATE_TAG,
     // EVENT.NAV_UPDATE_TAG,
+    EVENT.NAV_CREATE_CATEGORY,
+    // EVENT.NAV_UPDATE_CATEGORY,
   ],
 })
 
@@ -107,6 +109,15 @@ const DataResolver = [
     action: res => {
       debug('get ', EVENT.NAV_CREATE_TAG)
       const event = res[EVENT.NAV_CREATE_TAG]
+      holdPage()
+      preview.open(event.type)
+    },
+  },
+  {
+    match: asyncRes(EVENT.NAV_CREATE_CATEGORY),
+    action: res => {
+      debug('get ', EVENT.NAV_CREATE_CATEGORY)
+      const event = res[EVENT.NAV_CREATE_CATEGORY]
       holdPage()
       preview.open(event.type)
     },

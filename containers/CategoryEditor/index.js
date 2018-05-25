@@ -1,6 +1,6 @@
 /*
  *
- * TagEditor
+ * CategoryEditor
  *
  */
 
@@ -10,54 +10,42 @@ import { inject, observer } from 'mobx-react'
 // import Link from 'next/link'
 
 import { makeDebugger, storePlug } from '../../utils'
-import { CMS_PARTS } from '../../config'
 
 import {
   Button,
   Icon,
   Space,
   FormInputer,
-  FormSelector,
-  TagColorSelector,
+  /* FormSelector, */
+  /* TagColorSelector, */
 } from '../../components'
+
 import { Wrapper, ActionBtns, Divider } from './styles'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:TagEditor')
+const debug = makeDebugger('C:CategoryEditor')
 /* eslint-enable no-unused-vars */
 
-class TagEditorContainer extends React.Component {
+class CategoryEditorContainer extends React.Component {
   componentWillMount() {
-    logic.init(this.props.tagEditor)
+    logic.init(this.props.categoryEditor)
   }
 
   render() {
-    const { tagEditor } = this.props
-    const { mutating, tagData } = tagEditor
-    console.log('options --> ', CMS_PARTS)
+    const { categoryEditor } = this.props
+    const { mutating, categoryData } = categoryEditor
 
     return (
       <Wrapper>
         coderplanets
-        <h2>创建标签</h2>
+        <h2>创建社区分类</h2>
         <Divider />
         <FormInputer
           label="名称:"
-          value={tagData.title}
+          value={categoryData.title}
           onChange={logic.profileChange('title')}
-        />
-        <TagColorSelector
-          label="颜色:"
-          value={tagData.color}
-          onChange={logic.colorChange}
-        />
-        <FormInputer label="社区:" onChange={debug} />
-        <FormSelector
-          label="part:"
-          options={CMS_PARTS}
-          value={tagData.part}
-          onChange={logic.partChange}
+          note="一个分类可包含多个社区，同时，一个社区可属于多个分类"
         />
         <Divider />
         <ActionBtns>
@@ -80,4 +68,6 @@ class TagEditorContainer extends React.Component {
   }
 }
 
-export default inject(storePlug('tagEditor'))(observer(TagEditorContainer))
+export default inject(storePlug('categoryEditor'))(
+  observer(CategoryEditorContainer)
+)

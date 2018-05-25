@@ -25,6 +25,9 @@ const PreviewStore = t
 
         TYPE.PREVIEW_CREATE_TAG,
         TYPE.PREVIEW_UPDATE_TAG,
+
+        TYPE.PREVIEW_CREATE_CATEGORY,
+        /* TYPE.PREVIEW_UPDATE_CATEGORY, */
       ])
     ),
 

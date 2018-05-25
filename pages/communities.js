@@ -45,7 +45,7 @@ export default class Index extends React.Component {
       // messages,
       // locale,
       langSetup,
-      communities: data.communities,
+      communities: data.pagedCommunities,
     }
   }
 

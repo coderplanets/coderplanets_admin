@@ -30,28 +30,17 @@ export function pin() {
   sidebar.markState({ pin: !sidebar.pin })
 }
 
-export function extendMenuBar(communityId) {
-  if (sidebar.activeRaw === communityId) {
-    return sidebar.markState({
-      activeRaw: null,
-    })
+export function extendMenuBar(communityRaw) {
+  console.log('extendMenuBar: communityRaw bbb: ', communityRaw)
+  let asPath = ''
+  if (communityRaw === 'communities') {
+    asPath = `/${communityRaw}/`
+    return Router.push('/communities', asPath)
   }
 
-  sidebar.markState({
-    activeRaw: communityId,
-    activePart: null,
-  })
-}
-
-export function onChildMenuChange(activePart) {
-  debug('onChildMenuChange: ', activePart)
-  if (activePart === 'cheatsheets') {
-    Router.push('/', '/racket/cheatsheets')
-  }
-
-  sidebar.markState({
-    activePart,
-  })
+  asPath = `/${communityRaw}/posts`
+  Router.push('/', asPath)
+  /* Router.push(asPath) */
 }
 
 export function onCommunityChildMenuChange(activePart) {
@@ -60,10 +49,6 @@ export function onCommunityChildMenuChange(activePart) {
     asPath = `/${sidebar.activeRaw}`
   }
   Router.push('/', asPath)
-
-  sidebar.markState({
-    activePart,
-  })
 }
 
 export function loadCommunities(page = 1) {
@@ -75,20 +60,14 @@ export function loadCommunities(page = 1) {
     filter: { page, size },
   }
 
-  sr71$.query(S.communities, args)
+  sr71$.query(S.pagedCommunities, args)
 }
 
 const DataSolver = [
   {
-    match: asyncRes('communities'),
-    action: ({ communities }) => {
-      sidebar.loadCommunities(communities)
-    },
-  },
-  {
-    match: asyncRes(EVENT.ROUTE_CHANGE),
-    action: data => {
-      sidebar.syncStateFromhRoute(data[EVENT.ROUTE_CHANGE])
+    match: asyncRes('pagedCommunities'),
+    action: ({ pagedCommunities }) => {
+      sidebar.loadCommunities(pagedCommunities)
     },
   },
 ]

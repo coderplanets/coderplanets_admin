@@ -129,14 +129,12 @@ const CommunityMenuItem = ({ item, activeRaw, activePart }) => {
   //  console.log('CommunityMenuItem item: ', item)
   return (
     <MenuItemWrapper>
-      <div>
-        <MenuItemBar item={item} activeRaw={activeRaw} curRaw={item.raw} />
-        <MenuChildren
-          activeRaw={activeRaw}
-          activePart={activePart}
-          curRaw={item.raw}
-        />
-      </div>
+      <MenuItemBar item={item} activeRaw={activeRaw} curRaw={item.raw} />
+      <MenuChildren
+        activeRaw={activeRaw}
+        activePart={activePart}
+        curRaw={item.raw}
+      />
     </MenuItemWrapper>
   )
 }

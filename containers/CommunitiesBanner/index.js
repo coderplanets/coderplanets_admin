@@ -8,9 +8,9 @@ import * as logic from './logic'
 import IndexBanner from './IndexBanner'
 import EditorsBanner from './EditorsBanner'
 import PostsBanner from './PostsBanner'
+import CategoryBanner from './CategoryBanner'
 import TagsBanner from './TagsBanner'
 
-// TODO: extract banner styles to common components
 import { BannerContainer } from './styles'
 
 /* eslint-disable no-unused-vars */
@@ -19,15 +19,30 @@ const debug = makeDebugger('C:CommunitiesBanner')
 
 const renderChildBanner = (route, store) => {
   const {
+    // communities
     totalCount,
     filteredTotalCount,
+    // tags
     tagsTotalCount,
     filterdTagsCount,
+    // posts
     postsTotalCount,
     filteredPostsCount,
+    // categories
+    categoriesTotalCount,
+    filterdCategoriesCount,
   } = store
 
   switch (route.subQuery) {
+    case ROUTE.CATEGORIES: {
+      return (
+        <CategoryBanner
+          totalCount={categoriesTotalCount}
+          filteredCount={filterdCategoriesCount}
+        />
+      )
+    }
+
     case ROUTE.TAGS: {
       return (
         <TagsBanner
@@ -66,8 +81,8 @@ class CommunitiesBannerContainer extends React.Component {
     const { communitiesBanner } = this.props
     const { route } = communitiesBanner
     /* const { detail } = banner */
-    // debug('route ccc: ', route)
-    // const restProps = { ...this.props.communitiesBanner }
+    debug('--> 在 Banner 中的 route: ', route.subQuery)
+    /* const restProps = { ...this.props.communitiesBanner } */
 
     return (
       <BannerContainer>

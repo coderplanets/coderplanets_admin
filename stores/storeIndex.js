@@ -25,6 +25,7 @@ export { default as UsersContentStore } from './UsersContentStore'
 // editors
 export { default as CommunityEditorStore } from './CommunityEditorStore'
 export { default as TagEditorStore } from './TagEditorStore'
+export { default as CategoryEditorStore } from './CategoryEditorStore'
 
 // toolbox
 export { default as TypeWriterStore } from './TypeWriterStore'

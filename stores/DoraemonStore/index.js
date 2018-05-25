@@ -79,6 +79,7 @@ const DoraemonStore = t
     },
     get allSuggestions() {
       const { entries } = self.root.account.subscribedCommunities
+      if (!entries) return []
 
       const subscribedCommunitiesMaps = {}
 
@@ -89,7 +90,6 @@ const DoraemonStore = t
       }, R.map(convertThreadsToMaps, entries))
 
       return R.merge(subscribedCommunitiesMaps, cmds)
-      /* return R.mergeAll([self.root.communities.all, mapKeys(R.toLower, cmds)]) */
     },
     get communities() {
       return self.root.communities.all

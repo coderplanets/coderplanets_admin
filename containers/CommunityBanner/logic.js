@@ -19,7 +19,7 @@ export function loadPosts() {
 }
 
 export function loadTags() {
-  sr71$.query(S.tags, { filter: {} })
+  sr71$.query(S.pagedTags, { filter: {} })
 }
 
 // TODO: should be loadSubscribers

@@ -45,7 +45,7 @@ export function loadTags(page = 1) {
   communityContent.markState({
     tagsLoading: true,
   })
-  sr71$.query(S.tags, commonFilter(page))
+  sr71$.query(S.pagedTags, commonFilter(page))
 }
 
 export function onEdit() {}
@@ -73,11 +73,11 @@ const DataSolver = [
     },
   },
   {
-    match: asyncRes('tags'),
-    action: ({ tags }) => {
+    match: asyncRes('pagedTags'),
+    action: ({ pagedTags }) => {
       cancleLoading()
       communityContent.markState({
-        pagedTags: tags,
+        pagedTags,
       })
     },
   },

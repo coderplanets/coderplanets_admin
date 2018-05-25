@@ -36,7 +36,7 @@ export function loadCommunities(page = 1) {
     communitiesLoading: true,
   })
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  sr71$.query(S.communities, args)
+  sr71$.query(S.pagedCommunities, args)
 }
 
 export function loadPosts(page = 1) {
@@ -58,12 +58,21 @@ const commonFilter = page => {
   }
 }
 
+export function loadCategories(page = 1) {
+  scrollIntoEle(TYPE.APP_HEADER_ID)
+  communitiesContent.markState({
+    categoriessLoading: true,
+  })
+  sr71$.query(S.pagedCategories, commonFilter(page))
+}
+
 export function loadTags(page = 1) {
   scrollIntoEle(TYPE.APP_HEADER_ID)
   communitiesContent.markState({
     tagsLoading: true,
   })
-  sr71$.query(S.tags, commonFilter(page))
+  // TODO: use paged version
+  sr71$.query(S.pagedTags, commonFilter(page))
 }
 
 export function onEdit(record) {
@@ -85,25 +94,26 @@ const cancleLoading = () => {
     communitiesLoading: false,
     postsLoading: false,
     tagsLoading: false,
+    categoriessLoading: false,
   })
 }
 
 const DataSolver = [
   {
-    match: asyncRes('communities'),
-    action: ({ communities }) => {
+    match: asyncRes('pagedCommunities'),
+    action: ({ pagedCommunities }) => {
       cancleLoading()
       communitiesContent.markState({
-        pagedCommunities: communities,
+        pagedCommunities,
       })
     },
   },
   {
-    match: asyncRes('tags'),
-    action: ({ tags }) => {
+    match: asyncRes('pagedTags'),
+    action: ({ pagedTags }) => {
       cancleLoading()
       communitiesContent.markState({
-        pagedTags: tags,
+        pagedTags,
       })
     },
   },
@@ -113,6 +123,15 @@ const DataSolver = [
       cancleLoading()
       communitiesContent.markState({
         pagedPosts,
+      })
+    },
+  },
+  {
+    match: asyncRes('pagedCategories'),
+    action: ({ pagedCategories }) => {
+      cancleLoading()
+      communitiesContent.markState({
+        pagedCategories,
       })
     },
   },
@@ -139,6 +158,8 @@ const DataSolver = [
         loadCommunities()
       } else if (closeType === TYPE.TAGS_REFRESH) {
         loadTags()
+      } else if (closeType === TYPE.GATEGORIES_REFRESH) {
+        loadCategories()
       }
     },
   },

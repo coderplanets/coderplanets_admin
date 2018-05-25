@@ -1,6 +1,6 @@
 import R from 'ramda'
 
-import { makeDebugger, dispatchEvent, EVENT, isEmptyNil } from '../../utils'
+import { makeDebugger, isEmptyNil } from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('L:Route')
@@ -52,14 +52,6 @@ export function syncRoute(routeObj) {
     mainQuery,
     subQuery,
   })
-
-  // avoid sr71/apollo default debouce
-  setTimeout(() => {
-    dispatchEvent(EVENT.ROUTE_CHANGE, {
-      mainQuery,
-      subQuery,
-    })
-  }, 500)
 }
 
 export function init(selectedStore) {

@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
-const communities = gql`
-  query communities($filter: PagedFilter!) {
-    communities(filter: $filter) {
+const pagedCommunities = gql`
+  query($filter: PagedFilter!) {
+    pagedCommunities(filter: $filter) {
       entries {
         id
         title
@@ -10,7 +10,10 @@ const communities = gql`
         raw
         logo
         subscribersCount
-        category
+        categories {
+          id
+          title
+        }
         insertedAt
         updatedAt
       }
@@ -21,9 +24,36 @@ const communities = gql`
     }
   }
 `
-const tags = gql`
-  query tags($filter: PagedFilter!) {
-    tags(filter: $filter) {
+const pagedCategories = gql`
+  query($filter: PagedFilter!) {
+    pagedCategories(filter: $filter) {
+      entries {
+        id
+        title
+        communities {
+          id
+          logo
+          title
+        }
+        author {
+          id
+          nickname
+          avatar
+        }
+        insertedAt
+        updatedAt
+      }
+      pageNumber
+      pageSize
+      totalCount
+      totalPages
+    }
+  }
+`
+
+const pagedTags = gql`
+  query($filter: PagedFilter!) {
+    pagedTags(filter: $filter) {
       entries {
         id
         title
@@ -83,8 +113,9 @@ const deleteCommunity = gql`
 `
 
 const schema = {
-  communities,
-  tags,
+  pagedCommunities,
+  pagedTags,
+  pagedCategories,
   pagedPosts,
   deleteCommunity,
 }

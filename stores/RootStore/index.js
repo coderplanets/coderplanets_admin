@@ -31,6 +31,7 @@ import {
   // editors
   CommunityEditorStore,
   TagEditorStore,
+  CategoryEditorStore,
 
   // viewers
   ArticleViwerStore,
@@ -88,6 +89,7 @@ const rootStore = t
     accountEditor: t.optional(AccountEditorStore, {}),
     communityEditor: t.optional(CommunityEditorStore, {}),
     tagEditor: t.optional(TagEditorStore, {}),
+    categoryEditor: t.optional(CategoryEditorStore, {}),
 
     // viewers (for preview usage)
     articleViwer: t.optional(ArticleViwerStore, {}),

@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
 const communitiesRaw = `
-  query communities($filter: PagedFilter!) {
-    communities(filter: $filter) {
+  query($filter: PagedFilter!) {
+    pagedCommunities(filter: $filter) {
       entries {
         id
         title

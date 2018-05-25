@@ -1,62 +1,47 @@
 import R from 'ramda'
 
 import {
-  TYPE,
   asyncRes,
+  TYPE,
   makeDebugger,
+  closePreviewer,
   $solver,
   castArgs,
-  closePreviewer,
 } from '../../utils'
-import SR71 from '../../utils/network/sr71'
-
 import S from './schema'
+import SR71 from '../../utils/network/sr71'
 
 const sr71$ = new SR71()
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:TagEditor')
+const debug = makeDebugger('L:CategoryEditor')
 /* eslint-enable no-unused-vars */
 
-let tagEditor = null
+let categoryEditor = null
 
 export const profileChange = R.curry((part, e) =>
-  tagEditor.updateTag({
+  categoryEditor.updateCategory({
     [part]: e.target.value,
   })
 )
 
-export const colorChange = color =>
-  tagEditor.updateTag({
-    color,
-  })
-
-export const partChange = part =>
-  tagEditor.updateTag({
-    part,
-  })
-
 export const mutateConfirm = () => {
-  const requiredArgs = ['title', 'color', 'part']
-  const args = { ...tagEditor.tagData }
+  const requiredArgs = ['title']
+  const args = { ...categoryEditor.categoryData }
 
-  tagEditor.markState({
+  categoryEditor.markState({
     mutating: true,
   })
   const fargs = castArgs(args, requiredArgs)
 
-  fargs.color = R.toUpper(fargs.color)
-  fargs.part = R.toUpper(fargs.part)
-
-  fargs.communityId = 123
   debug('fargs --> ', fargs)
-  sr71$.mutate(S.createTag, fargs)
+  sr71$.mutate(S.createCategory, fargs)
 }
 
 export function cancleMutate() {
-  tagEditor.markState({
-    tag: {},
+  categoryEditor.markState({
+    category: {},
     isEdit: false,
   })
   closePreviewer()
@@ -65,13 +50,12 @@ export function cancleMutate() {
 // ###############################
 // Data & Error handlers
 // ###############################
-
 const DataSolver = [
   {
-    match: asyncRes('createTag'),
+    match: asyncRes('createCategory'),
     action: () => {
-      debug('createTag done!')
-      closePreviewer(TYPE.TAGS_REFRESH)
+      debug('createCategory done!')
+      closePreviewer(TYPE.GATEGORIES_REFRESH)
     },
   },
 ]
@@ -79,8 +63,8 @@ const DataSolver = [
 const ErrSolver = []
 
 export function init(selectedStore) {
-  tagEditor = selectedStore
-  debug(tagEditor)
+  categoryEditor = selectedStore
+  debug(categoryEditor)
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 }
