@@ -96,5 +96,5 @@ const ErrSolver = [
 export function init(selectedStore) {
   sidebar = selectedStore
   sr71$.data().subscribe($solver(DataSolver, ErrSolver))
-  loadCommunities()
+  // loadCommunities()
 }

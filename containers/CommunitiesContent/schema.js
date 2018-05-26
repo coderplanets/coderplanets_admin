@@ -75,7 +75,7 @@ const pagedTags = gql`
   }
 `
 const pagedPosts = gql`
-  query pagedPosts($filter: PagedArticleFilter) {
+  query($filter: PagedArticleFilter) {
     pagedPosts(filter: $filter) {
       entries {
         id

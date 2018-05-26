@@ -17,7 +17,6 @@ import {
 
 class IndexBanner extends React.Component {
   componentWillMount() {
-    console.log('准备 load loadCommunities !')
     logic.loadCommunities()
   }
   render() {

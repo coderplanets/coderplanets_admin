@@ -81,7 +81,6 @@ class CommunitiesBannerContainer extends React.Component {
     const { communitiesBanner } = this.props
     const { route } = communitiesBanner
     /* const { detail } = banner */
-    debug('--> 在 Banner 中的 route: ', route.subQuery)
     /* const restProps = { ...this.props.communitiesBanner } */
 
     return (
