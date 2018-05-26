@@ -9,6 +9,7 @@ import {
   Button,
   Space,
   Popconfirm,
+  CategoriesCell,
 } from '../../components'
 
 import { CommunityIcon, OperationWrapper } from './styles'
@@ -61,14 +62,21 @@ const columns = [
       return <div>{cutFrom(text, 10)}</div>
     },
   },
-  /*
-     {
-     title: '类别',
-     width: 150,
-     align: 'center',
-     dataIndex: 'category',
-     },
-   */
+  {
+    title: '类别',
+    width: 350,
+    align: 'center',
+    dataIndex: 'categories',
+    render: (categoriesArray, record) => {
+      return (
+        <CategoriesCell
+          categories={categoriesArray}
+          communityId={record.id}
+          onDelete={logic.unsetCategory}
+        />
+      )
+    },
+  },
   {
     title: '订阅人数',
     width: 150,

@@ -111,6 +111,13 @@ const deleteCommunity = gql`
     }
   }
 `
+const unsetCategory = gql`
+  mutation($categoryId: ID!, $communityId: ID!) {
+    unsetCategory(categoryId: $categoryId, communityId: $communityId) {
+      id
+    }
+  }
+`
 
 const schema = {
   pagedCommunities,
@@ -118,6 +125,7 @@ const schema = {
   pagedCategories,
   pagedPosts,
   deleteCommunity,
+  unsetCategory,
 }
 
 export default schema

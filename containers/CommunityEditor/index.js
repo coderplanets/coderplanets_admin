@@ -46,12 +46,16 @@ class CommunityEditorContainer extends React.Component {
       error,
       warn,
       statusMsg,
+      isEdit,
     } = communityEditor
 
     return (
       <Wrapper>
         coderplanets
-        <h2>创建社区</h2>
+        <h2>
+          {isEdit ? '编辑' : '创建'}
+          社区
+        </h2>
         <Divider />
         <div>
           {communityData.logo ? (

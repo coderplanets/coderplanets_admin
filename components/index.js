@@ -28,6 +28,7 @@ export { default as SexCell } from './SexCell'
 export { default as FormInputer } from './FormInputer'
 export { default as FormSelector } from './FormSelector'
 export { default as TagColorSelector } from './TagColorSelector'
+export { default as CategoriesCell } from './CategoriesCell'
 
 // loading component
 export {

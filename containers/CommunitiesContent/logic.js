@@ -88,6 +88,13 @@ export function onDelete(record) {
   sr71$.mutate(S.deleteCommunity, { id: record.id })
 }
 
+export function unsetCategory(communityId, category) {
+  sr71$.mutate(S.unsetCategory, {
+    communityId,
+    categoryId: category.id,
+  })
+}
+
 /* when error occured cancle all the loading state */
 const cancleLoading = () => {
   communitiesContent.markState({
@@ -141,7 +148,12 @@ const DataSolver = [
       closePreviewer(TYPE.COMMUNITIES_REFRESH)
     },
   },
-
+  {
+    match: asyncRes('unsetCategory'),
+    action: () => {
+      loadCommunities()
+    },
+  },
   {
     match: asyncRes(EVENT.LOGOUT),
     action: () => loadCommunities(),

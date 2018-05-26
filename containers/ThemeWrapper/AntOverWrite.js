@@ -363,6 +363,9 @@ const AntOverWrite = styled.div`
     border: 1px solid #707084;
     background: #707084;
   }
+  .ant-tag .anticon-cross {
+    color: gold;
+  }
 `
 
 export default AntOverWrite
