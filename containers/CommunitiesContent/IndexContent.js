@@ -145,7 +145,10 @@ class IndexContent extends React.Component {
   }
 
   render() {
-    const { data, restProps: { communitiesLoading } } = this.props
+    const {
+      data,
+      restProps: { communitiesLoading },
+    } = this.props
 
     return (
       <div>
