@@ -36,7 +36,13 @@ export const mutateConfirm = () => {
   const fargs = castArgs(args, requiredArgs)
 
   debug('fargs --> ', fargs)
-  sr71$.mutate(S.createCategory, fargs)
+  if (categoryEditor.isEdit) {
+    return sr71$.mutate(
+      S.updateCategory,
+      castArgs(args, ['id', ...requiredArgs])
+    )
+  }
+  return sr71$.mutate(S.createCategory, fargs)
 }
 
 export function cancleMutate() {
@@ -47,6 +53,20 @@ export function cancleMutate() {
   closePreviewer()
 }
 
+const initEditData = editData => {
+  categoryEditor.markState({
+    category: editData,
+    isEdit: true,
+  })
+}
+
+export function cancleEdit() {
+  categoryEditor.markState({
+    category: {},
+    isEdit: false,
+  })
+  /* closePreviewer() */
+}
 // ###############################
 // Data & Error handlers
 // ###############################
@@ -54,7 +74,12 @@ const DataSolver = [
   {
     match: asyncRes('createCategory'),
     action: () => {
-      debug('createCategory done!')
+      closePreviewer(TYPE.GATEGORIES_REFRESH)
+    },
+  },
+  {
+    match: asyncRes('updateCategory'),
+    action: () => {
       closePreviewer(TYPE.GATEGORIES_REFRESH)
     },
   },
@@ -62,9 +87,18 @@ const DataSolver = [
 
 const ErrSolver = []
 
-export function init(selectedStore) {
+export function init(selectedStore, editData) {
   categoryEditor = selectedStore
   debug(categoryEditor)
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+
+  if (editData) {
+    initEditData(editData)
+  }
+}
+
+export function uninit() {
+  cancleEdit()
+  /* cancleLoading() */
 }

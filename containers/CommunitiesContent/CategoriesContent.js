@@ -1,6 +1,8 @@
 import React from 'react'
 import TimeAgo from 'timeago-react'
 
+import ReactTooltip from 'react-tooltip'
+
 import { cutFrom } from '../../utils'
 import {
   Pagi,
@@ -9,7 +11,7 @@ import {
   Button,
   Space,
   UserCell,
-  // CommunityCell,
+  CommunityCell,
 } from '../../components'
 
 import { OperationWrapper } from './styles'
@@ -30,6 +32,15 @@ const columns = [
     align: 'center',
     render: text => {
       return <div>{cutFrom(text, 15)}</div>
+    },
+  },
+  {
+    title: '社区',
+    width: 260,
+    dataIndex: 'communities',
+    align: 'center',
+    render: communities => {
+      return <CommunityCell array={communities} />
     },
   },
   {
@@ -93,6 +104,14 @@ const columns = [
 class CategoriesContent extends React.Component {
   componentWillMount() {
     logic.loadCategories()
+  }
+  componentDidMount() {
+    /* force rebuild the tooltip, otherwise it won't work in some async cases */
+    /* if you want to custom see: */
+    /* https://github.com/wwayne/react-tooltip/blob/2364dc61332aa947b106dd4bbdd1f2b0e4b1e51d/src/index.scss */
+    setTimeout(() => {
+      ReactTooltip.rebuild()
+    }, 2000)
   }
 
   render() {

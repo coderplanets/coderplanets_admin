@@ -73,6 +73,7 @@ const columns = [
           categories={categoriesArray}
           communityId={record.id}
           onDelete={logic.unsetCategory}
+          onAdd={logic.addCategory}
         />
       )
     },

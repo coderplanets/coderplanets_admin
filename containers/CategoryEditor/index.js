@@ -29,17 +29,26 @@ const debug = makeDebugger('C:CategoryEditor')
 
 class CategoryEditorContainer extends React.Component {
   componentWillMount() {
-    logic.init(this.props.categoryEditor)
+    const { categoryEditor, editData } = this.props
+
+    logic.init(categoryEditor, editData)
+  }
+
+  componentWillUnmount() {
+    logic.uninit()
   }
 
   render() {
     const { categoryEditor } = this.props
-    const { mutating, categoryData } = categoryEditor
+    const { mutating, categoryData, isEdit } = categoryEditor
 
     return (
       <Wrapper>
         coderplanets
-        <h2>创建社区分类</h2>
+        <h2>
+          {isEdit ? '编辑' : '创建'}
+          社区分类
+        </h2>
         <Divider />
         <FormInputer
           label="名称:"

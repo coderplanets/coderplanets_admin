@@ -22,10 +22,11 @@ export { default as CommunitiesContentStore } from './CommunitiesContentStore'
 export { default as CommunityContentStore } from './CommunityContentStore'
 export { default as UsersContentStore } from './UsersContentStore'
 
-// editors
+// editors & setter
 export { default as CommunityEditorStore } from './CommunityEditorStore'
 export { default as TagEditorStore } from './TagEditorStore'
 export { default as CategoryEditorStore } from './CategoryEditorStore'
+export { default as CategorySetterStore } from './CategorySetterStore'
 
 // toolbox
 export { default as TypeWriterStore } from './TypeWriterStore'

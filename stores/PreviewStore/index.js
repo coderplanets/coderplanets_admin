@@ -5,7 +5,7 @@
 
 import { types as t, getParent } from 'mobx-state-tree'
 
-import { Community } from '../SharedModel'
+import { Community, Category } from '../SharedModel'
 import { markStates, TYPE, unholdPage, stripMobx } from '../../utils'
 
 // const debug = makeDebugger('S:PreviewStore')
@@ -27,14 +27,14 @@ const PreviewStore = t
         TYPE.PREVIEW_UPDATE_TAG,
 
         TYPE.PREVIEW_CREATE_CATEGORY,
-        /* TYPE.PREVIEW_UPDATE_CATEGORY, */
+        TYPE.PREVIEW_SET_CATEGORY,
+        TYPE.PREVIEW_UPDATE_CATEGORY,
       ])
     ),
 
     editCommunity: t.maybe(Community),
-
-    // header:
-    // body:
+    editCategory: t.maybe(Category),
+    /* editCategory: t.maybe(SelectCommunity), */
   })
   .views(self => ({
     get root() {
@@ -43,6 +43,9 @@ const PreviewStore = t
 
     get editingCommunity() {
       return stripMobx(self.editCommunity)
+    },
+    get editingCategory() {
+      return stripMobx(self.editCategory)
     },
 
     get themeKeys() {

@@ -78,8 +78,8 @@ export function loadTags(page = 1) {
 export function onEdit(record) {
   debug('onEdit', record)
 
-  dispatchEvent(EVENT.NAV_UPDATE_COMMUNITY, {
-    type: TYPE.PREVIEW_UPDATE_COMMUNITY,
+  dispatchEvent(EVENT.NAV_UPDATE_CATEGORY, {
+    type: TYPE.PREVIEW_UPDATE_CATEGORY,
     data: record,
   })
 }
@@ -92,6 +92,19 @@ export function unsetCategory(communityId, category) {
   sr71$.mutate(S.unsetCategory, {
     communityId,
     categoryId: category.id,
+  })
+}
+
+export function addCategory(communityId, categories) {
+  /* debug('addCategory: ', communityId) */
+  /* debug('belongCommunities: ', belongCommunities) */
+
+  dispatchEvent(EVENT.NAV_SET_CATEGORY, {
+    type: TYPE.PREVIEW_SET_CATEGORY,
+    data: {
+      communityId,
+      categories,
+    },
   })
 }
 

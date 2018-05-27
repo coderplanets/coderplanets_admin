@@ -23,6 +23,7 @@ import {
   CommunityEditor,
   TagEditor,
   CategoryEditor,
+  CategorySetter,
 } from '../../containers'
 
 import {
@@ -56,7 +57,7 @@ const CloseBtn = ({ type }) => (
 // <AccountViewer2 themeKeys={themeKeys} curTheme={curTheme} />
 
 // TODO: post edit viewer
-const Viewer = ({ type, root, editingCommunity }) => {
+const Viewer = ({ type, root, editingCommunity, editingCategory }) => {
   switch (type) {
     case TYPE.PREVIEW_ACCOUNT_VIEW: {
       return <AccountViewer />
@@ -82,6 +83,12 @@ const Viewer = ({ type, root, editingCommunity }) => {
     case TYPE.PREVIEW_CREATE_CATEGORY: {
       return <CategoryEditor />
     }
+    case TYPE.PREVIEW_UPDATE_CATEGORY: {
+      return <CategoryEditor editData={editingCategory} />
+    }
+    case TYPE.PREVIEW_SET_CATEGORY: {
+      return <CategorySetter editData={editingCommunity} />
+    }
     default: {
       return <StateTree json={root.toJSON()} />
     }
@@ -101,6 +108,7 @@ class PreviewContainer extends React.Component {
       curTheme,
       root,
       editingCommunity,
+      editingCategory,
     } = this.props.preview
 
     return (
@@ -115,6 +123,7 @@ class PreviewContainer extends React.Component {
               themeKeys={themeKeys}
               curTheme={curTheme}
               editingCommunity={editingCommunity}
+              editingCategory={editingCategory}
             />
           </PreviewContent>
         </PreviewWrapper>

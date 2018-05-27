@@ -7,9 +7,17 @@ const createCategory = gql`
     }
   }
 `
+const updateCategory = gql`
+  mutation($id: ID!, $title: String!) {
+    updateCategory(id: $id, title: $title) {
+      id
+    }
+  }
+`
 
 const schema = {
   createCategory,
+  updateCategory,
 }
 
 export default schema
