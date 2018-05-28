@@ -24,12 +24,12 @@ import {
 // import { inject, observer } from 'mobx-react'
 // import Link from 'next/link'
 
-const CategoriesList = ({ categories, communityId, onDelete }) => (
+const CategoriesList = ({ source, onDelete }) => (
   <CategoryWrapper>
-    {categories.map(c => (
+    {source.categories.map(c => (
       <CategoryTag
         key={shortid.generate()}
-        onClick={onDelete.bind(this, communityId, c)}
+        onClick={onDelete.bind(this, source.id, c)}
       >
         {c.title}
         <DeleteCross>x</DeleteCross>
@@ -44,23 +44,19 @@ class CategoriesCell extends React.Component {
   componentWillUnmount() {}
 
   render() {
-    const { communityId, categories, onDelete, onAdd } = this.props
+    const { source, onDelete, onAdd } = this.props
 
     return (
       <div>
-        {R.isEmpty(categories) ? (
+        {R.isEmpty(source.categories) ? (
           <AddWrapper>
             <AddIcon src={`${ICON_ASSETS}/cmd/plus.svg`} />
-            <AddText onClick={onAdd.bind(this, communityId, [])}>添加</AddText>
+            <AddText onClick={onAdd.bind(this, source)}>添加</AddText>
           </AddWrapper>
         ) : (
           <Wrapper>
-            <CategoriesList
-              categories={categories}
-              onDelete={onDelete}
-              communityId={communityId}
-            />
-            <div onClick={onAdd.bind(this, communityId, categories)}>
+            <CategoriesList source={source} onDelete={onDelete} />
+            <div onClick={onAdd.bind(this, source)}>
               <AddIcon src={`${ICON_ASSETS}/cmd/plus.svg`} />
             </div>
           </Wrapper>
@@ -74,13 +70,7 @@ export default CategoriesCell
 
 CategoriesCell.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  categories: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      title: PropTypes.string,
-    })
-  ),
-  communityId: PropTypes.number.isRequired,
+  source: PropTypes.object.isRequired,
   onDelete: PropTypes.func.isRequired,
   onAdd: PropTypes.func.isRequired,
 }

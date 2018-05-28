@@ -70,6 +70,7 @@ const columns = [
     render: (categoriesArray, record) => {
       return (
         <CategoriesCell
+          source={record}
           categories={categoriesArray}
           communityId={record.id}
           onDelete={logic.unsetCategory}
@@ -154,10 +155,7 @@ class IndexContent extends React.Component {
   }
 
   render() {
-    const {
-      data,
-      restProps: { communitiesLoading },
-    } = this.props
+    const { data, restProps: { communitiesLoading } } = this.props
 
     return (
       <div>

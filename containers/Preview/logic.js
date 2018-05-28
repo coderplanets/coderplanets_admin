@@ -59,8 +59,9 @@ const DataResolver = [
     match: asyncRes(EVENT.PREVIEW),
     action: res => {
       const event = res[EVENT.PREVIEW]
-      holdPage()
+
       preview.open(event.type)
+      holdPage()
     },
   },
   {
@@ -71,99 +72,86 @@ const DataResolver = [
     match: asyncRes(EVENT.NAV_EDIT),
     action: res => {
       const event = res[EVENT.NAV_EDIT]
-      holdPage()
 
-      debug('EVENT.NAV_EDIT: ', res)
       preview.open(event.type)
       loadDataForPreview(res[EVENT.NAV_EDIT])
+      holdPage()
     },
   },
   {
     match: asyncRes(EVENT.NAV_CREATE_POST),
     action: res => {
       const event = res[EVENT.NAV_CREATE_POST]
-      holdPage()
+
       preview.open(event.type)
+      holdPage()
     },
   },
   {
     match: asyncRes(EVENT.NAV_CREATE_COMMUNITY),
     action: res => {
       const event = res[EVENT.NAV_CREATE_COMMUNITY]
-      holdPage()
+
       preview.open(event.type)
+      holdPage()
     },
   },
   {
     match: asyncRes(EVENT.NAV_UPDATE_COMMUNITY),
     action: res => {
       const event = res[EVENT.NAV_UPDATE_COMMUNITY]
-      debug('get ', EVENT.NAV_UPDATE_COMMUNITY)
 
-      preview.markState({
-        editCommunity: event.data,
-      })
-      holdPage()
+      preview.markState({ editCommunity: event.data })
       preview.open(event.type)
+      holdPage()
     },
   },
   {
     match: asyncRes(EVENT.NAV_CREATE_TAG),
     action: res => {
-      debug('get ', EVENT.NAV_CREATE_TAG)
       const event = res[EVENT.NAV_CREATE_TAG]
-      holdPage()
+
       preview.open(event.type)
+      holdPage()
     },
   },
   {
     match: asyncRes(EVENT.NAV_CREATE_CATEGORY),
     action: res => {
-      debug('get ', EVENT.NAV_CREATE_CATEGORY)
       const event = res[EVENT.NAV_CREATE_CATEGORY]
-      holdPage()
+
       preview.open(event.type)
+      holdPage()
     },
   },
   {
     match: asyncRes(EVENT.NAV_UPDATE_CATEGORY),
     action: res => {
       const event = res[EVENT.NAV_UPDATE_CATEGORY]
-      holdPage()
-      preview.markState({
-        editCategory: event.data,
-      })
+
+      preview.markState({ editCategory: event.data })
       preview.open(event.type)
+      holdPage()
     },
   },
   {
     match: asyncRes(EVENT.NAV_SET_CATEGORY),
     action: res => {
       const event = res[EVENT.NAV_SET_CATEGORY]
-      preview.markState({
-        editCommunity: {
-          id: event.data.communityId,
-          categories: event.data.categories,
-        },
-      })
-      holdPage()
+
+      preview.markState({ editCommunity: event.data })
       preview.open(event.type)
+      holdPage()
     },
   },
   {
     match: asyncRes(EVENT.NAV_SET_TAG),
     action: res => {
       const event = res[EVENT.NAV_SET_TAG]
-      console.log('res -> ', {
-        partId: event.data.partId,
-        /* source: event.data.source, */
-        tags: event.data.tags,
-      })
-      preview.markState({
-        editTag: event.data,
-      })
-      holdPage()
+
+      preview.markState({ editTag: event.data })
       preview.open(event.type)
+      holdPage()
     },
   },
 ]

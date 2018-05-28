@@ -95,13 +95,10 @@ export function unsetCategory(communityId, category) {
   })
 }
 
-export function setCategory(communityId, categories) {
+export function setCategory(source) {
   dispatchEvent(EVENT.NAV_SET_CATEGORY, {
     type: TYPE.PREVIEW_SET_CATEGORY,
-    data: {
-      communityId,
-      categories,
-    },
+    data: source,
   })
 }
 
