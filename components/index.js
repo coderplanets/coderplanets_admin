@@ -29,6 +29,7 @@ export { default as FormInputer } from './FormInputer'
 export { default as FormSelector } from './FormSelector'
 export { default as TagColorSelector } from './TagColorSelector'
 export { default as CategoriesCell } from './CategoriesCell'
+export { default as TagsCell } from './TagsCell'
 
 // loading component
 export {

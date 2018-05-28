@@ -89,6 +89,16 @@ const pagedPosts = gql`
         communities {
           id
           title
+          logo
+        }
+        tags {
+          id
+          title
+          color
+          part
+          community {
+            id
+          }
         }
         commentsCount
         commentsParticipatorsCount
@@ -118,6 +128,20 @@ const unsetCategory = gql`
     }
   }
 `
+const setTag = gql`
+  mutation($part: String!, $id: ID!, $tagId: ID!, $communityId: ID!) {
+    setTag(part: $part, id: $id, tagId: $tagId, communityId: $communityId) {
+      id
+    }
+  }
+`
+const unsetTag = gql`
+  mutation($part: String!, $id: ID!, $tagId: ID!, $communityId: ID!) {
+    unsetTag(part: $part, id: $id, tagId: $tagId, communityId: $communityId) {
+      id
+    }
+  }
+`
 
 const schema = {
   pagedCommunities,
@@ -126,6 +150,8 @@ const schema = {
   pagedPosts,
   deleteCommunity,
   unsetCategory,
+  setTag,
+  unsetTag,
 }
 
 export default schema

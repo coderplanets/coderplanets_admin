@@ -12,7 +12,7 @@ import shortid from 'shortid'
 
 import ReactTooltip from 'react-tooltip'
 import { makeDebugger } from '../../utils'
-import { Wrapper, Logo, Title } from './styles'
+import { Wrapper, Logo, Title, UnknowText } from './styles'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:CommunityCell:index')
@@ -45,15 +45,15 @@ const renderContent = (data, array) => {
       </Wrapper>
     )
   }
-  return <div />
+  return <UnknowText>未知</UnknowText>
 }
 
 // TODO: array version && tooltip
 const CommunityCell = ({ data, array }) => (
-  <div>
+  <React.Fragment>
     {renderContent(data, array)}
     <ReactTooltip effect="solid" place="bottom" id="community_cell" />
-  </div>
+  </React.Fragment>
 )
 
 CommunityCell.propTypes = {

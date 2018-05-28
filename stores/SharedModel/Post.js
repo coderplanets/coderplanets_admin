@@ -2,6 +2,7 @@ import { types as t } from 'mobx-state-tree'
 import { User } from './User'
 import Community from './Community'
 import Comment from './Comment'
+import Tag from './Tag'
 
 const Post = t.model('Post', {
   id: t.maybe(t.string),
@@ -12,6 +13,7 @@ const Post = t.model('Post', {
   author: t.maybe(User),
 
   communities: t.optional(t.array(Community), []),
+  tags: t.optional(t.array(Tag), []),
   comments: t.optional(t.array(Comment), []),
 
   commentsCount: t.optional(t.number, 0),

@@ -73,7 +73,7 @@ const columns = [
           categories={categoriesArray}
           communityId={record.id}
           onDelete={logic.unsetCategory}
-          onAdd={logic.addCategory}
+          onAdd={logic.setCategory}
         />
       )
     },
@@ -154,10 +154,7 @@ class IndexContent extends React.Component {
   }
 
   render() {
-    const {
-      data,
-      restProps: { communitiesLoading },
-    } = this.props
+    const { data, restProps: { communitiesLoading } } = this.props
 
     return (
       <div>

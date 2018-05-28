@@ -16,3 +16,8 @@ export const Logo = styled(Img)`
 export const Title = styled.div`
   margin-left: 5px;
 `
+
+export const UnknowText = styled.div`
+  color: tomato;
+  font-size: 0.8rem;
+`

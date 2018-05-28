@@ -1,6 +1,6 @@
 /*
  *
- * CategoriesCell
+ * TagsCell
  *
  */
 
@@ -11,6 +11,8 @@ import shortid from 'shortid'
 
 import { ICON_ASSETS } from '../../config'
 
+// import { inject, observer } from 'mobx-react'
+// import Link from 'next/link'
 import {
   Wrapper,
   CategoryWrapper,
@@ -21,15 +23,12 @@ import {
   AddText,
 } from './styles'
 
-// import { inject, observer } from 'mobx-react'
-// import Link from 'next/link'
-
-const CategoriesList = ({ categories, communityId, onDelete }) => (
+const TagsList = ({ tags, partId, onDelete }) => (
   <CategoryWrapper>
-    {categories.map(c => (
+    {tags.map(c => (
       <CategoryTag
         key={shortid.generate()}
-        onClick={onDelete.bind(this, communityId, c)}
+        onClick={onDelete.bind(this, partId, c)}
       >
         {c.title}
         <DeleteCross>x</DeleteCross>
@@ -38,53 +37,51 @@ const CategoriesList = ({ categories, communityId, onDelete }) => (
   </CategoryWrapper>
 )
 
-class CategoriesCell extends React.Component {
+class TagsCell extends React.Component {
   componentDidMount() {}
 
   componentWillUnmount() {}
 
   render() {
-    const { communityId, categories, onDelete, onAdd } = this.props
+    const { tags, partId, onDelete, onAdd } = this.props
 
     return (
-      <div>
-        {R.isEmpty(categories) ? (
+      <React.Fragment>
+        {R.isEmpty(tags) ? (
           <AddWrapper>
             <AddIcon src={`${ICON_ASSETS}/cmd/plus.svg`} />
-            <AddText onClick={onAdd.bind(this, communityId, [])}>添加</AddText>
+            <AddText onClick={onAdd.bind(this, [])}>添加</AddText>
           </AddWrapper>
         ) : (
           <Wrapper>
-            <CategoriesList
-              categories={categories}
-              onDelete={onDelete}
-              communityId={communityId}
-            />
-            <div onClick={onAdd.bind(this, communityId, categories)}>
+            <TagsList tags={tags} partId={partId} onDelete={onDelete} />
+            <div onClick={onAdd.bind(this, tags)}>
               <AddIcon src={`${ICON_ASSETS}/cmd/plus.svg`} />
             </div>
           </Wrapper>
         )}
-      </div>
+      </React.Fragment>
     )
   }
 }
 
-export default CategoriesCell
+export default TagsCell
 
-CategoriesCell.propTypes = {
+TagsCell.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  categories: PropTypes.arrayOf(
+  /* communityId: PropTypes.number.isRequired, */
+  tags: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
       title: PropTypes.string,
+      color: PropTypes.string,
     })
   ),
-  communityId: PropTypes.number.isRequired,
+  partId: PropTypes.string.isRequired,
   onDelete: PropTypes.func.isRequired,
   onAdd: PropTypes.func.isRequired,
 }
 
-CategoriesCell.defaultProps = {
-  categories: [],
+TagsCell.defaultProps = {
+  tags: [],
 }

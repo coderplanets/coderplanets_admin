@@ -1,4 +1,4 @@
-// import R from 'ramda'
+import R from 'ramda'
 
 import {
   asyncRes,
@@ -95,10 +95,7 @@ export function unsetCategory(communityId, category) {
   })
 }
 
-export function addCategory(communityId, categories) {
-  /* debug('addCategory: ', communityId) */
-  /* debug('belongCommunities: ', belongCommunities) */
-
+export function setCategory(communityId, categories) {
   dispatchEvent(EVENT.NAV_SET_CATEGORY, {
     type: TYPE.PREVIEW_SET_CATEGORY,
     data: {
@@ -106,6 +103,16 @@ export function addCategory(communityId, categories) {
       categories,
     },
   })
+}
+
+export function unsetTag(partId, tag) {
+  const args = {
+    part: R.toUpper(tag.part),
+    id: partId,
+    tagId: tag.id,
+    communityId: tag.community.id,
+  }
+  sr71$.mutate(S.unsetTag, args)
 }
 
 /* when error occured cancle all the loading state */
@@ -140,6 +147,7 @@ const DataSolver = [
   {
     match: asyncRes('pagedPosts'),
     action: ({ pagedPosts }) => {
+      console.log('pagedPosts --> ', pagedPosts)
       cancleLoading()
       communitiesContent.markState({
         pagedPosts,
@@ -157,15 +165,15 @@ const DataSolver = [
   },
   {
     match: asyncRes('deleteCommunity'),
-    action: () => {
-      closePreviewer(TYPE.COMMUNITIES_REFRESH)
-    },
+    action: () => closePreviewer(TYPE.COMMUNITIES_REFRESH),
   },
   {
     match: asyncRes('unsetCategory'),
-    action: () => {
-      loadCommunities()
-    },
+    action: () => loadCommunities(),
+  },
+  {
+    match: asyncRes('unsetTag'),
+    action: () => loadPosts(),
   },
   {
     match: asyncRes(EVENT.LOGOUT),

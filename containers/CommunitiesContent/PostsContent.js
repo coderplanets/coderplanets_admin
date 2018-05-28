@@ -9,6 +9,8 @@ import {
   Button,
   Space,
   UserCell,
+  CommunityCell,
+  TagsCell,
 } from '../../components'
 
 import { OperationWrapper } from './styles'
@@ -33,8 +35,33 @@ const columns = [
     },
   },
   {
-    title: '标题',
+    title: '社区',
+    width: 150,
+    dataIndex: 'communities',
+    align: 'center',
+    render: communities => {
+      return <CommunityCell array={communities} />
+    },
+  },
+  {
+    title: '标签',
     width: 200,
+    dataIndex: 'tags',
+    align: 'center',
+    render: (tags, record) => {
+      return (
+        <TagsCell
+          tags={tags}
+          partId={record.id}
+          onAdd={console.log}
+          onDelete={logic.unsetTag}
+        />
+      )
+    },
+  },
+  {
+    title: '标题',
+    width: 300,
     dataIndex: 'title',
     align: 'center',
     render: text => {
@@ -43,7 +70,7 @@ const columns = [
   },
   {
     title: '摘要',
-    width: 300,
+    width: 400,
     dataIndex: 'digest',
     align: 'center',
     render: text => {
@@ -144,10 +171,7 @@ class PostsContent extends React.Component {
   */
 
   render() {
-    const {
-      data,
-      restProps: { communitiesLoading },
-    } = this.props
+    const { data, restProps: { communitiesLoading } } = this.props
     return (
       <div>
         {data ? (
@@ -155,7 +179,7 @@ class PostsContent extends React.Component {
             <Table
               columns={columns}
               dataSource={data.entries}
-              scroll={{ x: 1500 }}
+              scroll={{ x: 2000 }}
               loading={TableLoading(communitiesLoading)}
               pagination={false}
             />
