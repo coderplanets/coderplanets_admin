@@ -26,6 +26,25 @@ const columns = [
     fixed: 'left',
   },
   {
+    title: '标题',
+    width: 300,
+    dataIndex: 'title',
+    align: 'center',
+    fixed: 'left',
+    render: text => {
+      return <div>{cutFrom(text, 15)}</div>
+    },
+  },
+  {
+    title: '摘要',
+    width: 400,
+    dataIndex: 'digest',
+    align: 'center',
+    render: text => {
+      return <div>{cutFrom(text, 10)}</div>
+    },
+  },
+  {
     title: '作者',
     width: 200,
     dataIndex: 'author',
@@ -53,28 +72,10 @@ const columns = [
         <TagsCell
           tags={tags}
           partId={record.id}
-          onAdd={console.log}
           onDelete={logic.unsetTag}
+          onAdd={logic.setTag}
         />
       )
-    },
-  },
-  {
-    title: '标题',
-    width: 300,
-    dataIndex: 'title',
-    align: 'center',
-    render: text => {
-      return <div>{cutFrom(text, 15)}</div>
-    },
-  },
-  {
-    title: '摘要',
-    width: 400,
-    dataIndex: 'digest',
-    align: 'center',
-    render: text => {
-      return <div>{cutFrom(text, 10)}</div>
     },
   },
   {
@@ -171,10 +172,7 @@ class PostsContent extends React.Component {
   */
 
   render() {
-    const {
-      data,
-      restProps: { communitiesLoading },
-    } = this.props
+    const { data, restProps: { communitiesLoading } } = this.props
     return (
       <div>
         {data ? (

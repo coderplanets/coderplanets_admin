@@ -27,6 +27,7 @@ export { default as CommunityEditorStore } from './CommunityEditorStore'
 export { default as TagEditorStore } from './TagEditorStore'
 export { default as CategoryEditorStore } from './CategoryEditorStore'
 export { default as CategorySetterStore } from './CategorySetterStore'
+export { default as TagSetterStore } from './TagSetterStore'
 
 // toolbox
 export { default as TypeWriterStore } from './TypeWriterStore'

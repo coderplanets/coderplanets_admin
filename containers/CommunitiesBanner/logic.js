@@ -95,12 +95,20 @@ const DataSolver = [
     match: asyncRes(EVENT.PREVIEW_CLOSE),
     action: res => {
       const closeType = res[EVENT.PREVIEW_CLOSE].type
-      if (closeType === TYPE.COMMUNITIES_REFRESH) {
-        loadCommunities()
-      } else if (closeType === TYPE.TAGS_REFRESH) {
-        loadTags()
-      } else if (closeType === TYPE.GATEGORIES_REFRESH) {
-        loadCategories()
+      switch (closeType) {
+        case TYPE.COMMUNITIES_REFRESH: {
+          return loadCommunities()
+        }
+        case TYPE.TAGS_REFRESH: {
+          return loadTags()
+        }
+        case TYPE.GATEGORIES_REFRESH: {
+          return loadCategories()
+        }
+        default: {
+          debug('unknow event')
+          return loadPosts()
+        }
       }
     },
   },

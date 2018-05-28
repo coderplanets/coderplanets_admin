@@ -23,6 +23,8 @@ const sr71$ = new SR71({
     EVENT.NAV_CREATE_CATEGORY,
     EVENT.NAV_SET_CATEGORY,
     EVENT.NAV_UPDATE_CATEGORY,
+    // tag
+    EVENT.NAV_SET_TAG,
   ],
 })
 
@@ -142,6 +144,24 @@ const DataResolver = [
         editCommunity: {
           id: event.data.communityId,
           categories: event.data.categories,
+        },
+      })
+      holdPage()
+      preview.open(event.type)
+    },
+  },
+  {
+    match: asyncRes(EVENT.NAV_SET_TAG),
+    action: res => {
+      const event = res[EVENT.NAV_SET_TAG]
+      console.log('res -> ', {
+        partId: event.data.partId,
+        tags: event.data.tags,
+      })
+      preview.markState({
+        editTag: {
+          partId: event.data.partId,
+          tags: event.data.tags,
         },
       })
       holdPage()

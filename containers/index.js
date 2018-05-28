@@ -11,4 +11,7 @@ export { default as AccountEditor } from './AccountEditor'
 export { default as CommunityEditor } from './CommunityEditor'
 export { default as TagEditor } from './TagEditor'
 export { default as CategoryEditor } from './CategoryEditor'
+
+// setters
 export { default as CategorySetter } from './CategorySetter'
+export { default as TagSetter } from './TagSetter'

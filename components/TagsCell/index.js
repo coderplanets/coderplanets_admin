@@ -50,12 +50,12 @@ class TagsCell extends React.Component {
         {R.isEmpty(tags) ? (
           <AddWrapper>
             <AddIcon src={`${ICON_ASSETS}/cmd/plus.svg`} />
-            <AddText onClick={onAdd.bind(this, [])}>添加</AddText>
+            <AddText onClick={onAdd.bind(this, partId, [])}>添加</AddText>
           </AddWrapper>
         ) : (
           <Wrapper>
             <TagsList tags={tags} partId={partId} onDelete={onDelete} />
-            <div onClick={onAdd.bind(this, tags)}>
+            <div onClick={onAdd.bind(this, partId, tags)}>
               <AddIcon src={`${ICON_ASSETS}/cmd/plus.svg`} />
             </div>
           </Wrapper>

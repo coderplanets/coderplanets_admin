@@ -105,6 +105,16 @@ export function setCategory(communityId, categories) {
   })
 }
 
+export function setTag(partId, tags) {
+  dispatchEvent(EVENT.NAV_SET_TAG, {
+    type: TYPE.PREVIEW_SET_TAG,
+    data: {
+      partId,
+      tags,
+    },
+  })
+}
+
 export function unsetTag(partId, tag) {
   const args = {
     part: R.toUpper(tag.part),
@@ -147,7 +157,6 @@ const DataSolver = [
   {
     match: asyncRes('pagedPosts'),
     action: ({ pagedPosts }) => {
-      console.log('pagedPosts --> ', pagedPosts)
       cancleLoading()
       communitiesContent.markState({
         pagedPosts,
@@ -187,12 +196,23 @@ const DataSolver = [
     match: asyncRes(EVENT.PREVIEW_CLOSE),
     action: res => {
       const closeType = res[EVENT.PREVIEW_CLOSE].type
-      if (closeType === TYPE.COMMUNITIES_REFRESH) {
-        loadCommunities()
-      } else if (closeType === TYPE.TAGS_REFRESH) {
-        loadTags()
-      } else if (closeType === TYPE.GATEGORIES_REFRESH) {
-        loadCategories()
+      switch (closeType) {
+        case TYPE.COMMUNITIES_REFRESH: {
+          return loadCommunities()
+        }
+        case TYPE.TAGS_REFRESH: {
+          return loadTags()
+        }
+        case TYPE.GATEGORIES_REFRESH: {
+          return loadCategories()
+        }
+        case TYPE.POSTS_TAG_REFRESH: {
+          return loadPosts()
+        }
+        default: {
+          debug('unknow event')
+          return loadPosts()
+        }
       }
     },
   },

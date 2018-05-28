@@ -56,9 +56,7 @@ const DataSolver = [
   },
   {
     match: asyncRes('setCategory'),
-    action: () => {
-      closePreviewer(TYPE.COMMUNITIES_REFRESH)
-    },
+    action: () => closePreviewer(TYPE.COMMUNITIES_REFRESH),
   },
 ]
 
