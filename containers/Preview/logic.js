@@ -156,13 +156,11 @@ const DataResolver = [
       const event = res[EVENT.NAV_SET_TAG]
       console.log('res -> ', {
         partId: event.data.partId,
+        /* source: event.data.source, */
         tags: event.data.tags,
       })
       preview.markState({
-        editTag: {
-          partId: event.data.partId,
-          tags: event.data.tags,
-        },
+        editTag: event.data,
       })
       holdPage()
       preview.open(event.type)

@@ -9,7 +9,7 @@ export const UnsetText = styled.div`
 `
 export const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
 `
 export const CategoryWrapper = styled.div`

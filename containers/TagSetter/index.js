@@ -20,6 +20,7 @@ import {
   CategoryWrapper,
   CategoryTag,
   CommunityLogo,
+  SetterTitle,
   PartText,
 } from './styles'
 
@@ -62,17 +63,17 @@ class TagSetterContainer extends React.Component {
     const { pagedTagsData } = tagSetter
 
     const selectedTids = R.pluck('id', editData.tags)
-    const { partId } = editData
+    const { id, title } = editData
 
     return (
       <Wrapper>
-        coderplanets
+        <SetterTitle>{title}</SetterTitle>
         <h2>设置标签</h2>
         <Divider />
         {pagedTagsData ? (
           <TagsList
             tags={pagedTagsData.entries}
-            partId={partId}
+            partId={id}
             selectedTids={selectedTids}
           />
         ) : (

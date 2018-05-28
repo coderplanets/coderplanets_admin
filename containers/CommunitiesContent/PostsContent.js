@@ -67,16 +67,13 @@ const columns = [
     width: 200,
     dataIndex: 'tags',
     align: 'center',
-    render: (tags, record) => {
-      return (
-        <TagsCell
-          tags={tags}
-          partId={record.id}
-          onDelete={logic.unsetTag}
-          onAdd={logic.setTag}
-        />
-      )
-    },
+    render: (tags, record) => (
+      <TagsCell
+        source={record}
+        onDelete={logic.unsetTag}
+        onAdd={logic.setTag}
+      />
+    ),
   },
   {
     title: '浏览',

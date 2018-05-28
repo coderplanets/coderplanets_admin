@@ -105,13 +105,10 @@ export function setCategory(communityId, categories) {
   })
 }
 
-export function setTag(partId, tags) {
+export function setTag(source) {
   dispatchEvent(EVENT.NAV_SET_TAG, {
     type: TYPE.PREVIEW_SET_TAG,
-    data: {
-      partId,
-      tags,
-    },
+    data: source,
   })
 }
 
@@ -210,8 +207,8 @@ const DataSolver = [
           return loadPosts()
         }
         default: {
-          debug('unknow event')
-          return loadPosts()
+          debug('unknow event: ', closeType)
+          /* return loadPosts() */
         }
       }
     },

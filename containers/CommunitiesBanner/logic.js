@@ -106,8 +106,8 @@ const DataSolver = [
           return loadCategories()
         }
         default: {
-          debug('unknow event')
-          return loadPosts()
+          debug('unknow event: ', closeType)
+          /* return loadPosts() */
         }
       }
     },

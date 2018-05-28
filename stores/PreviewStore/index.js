@@ -5,14 +5,10 @@
 
 import { types as t, getParent } from 'mobx-state-tree'
 
-import { Community, Category, Tag } from '../SharedModel'
+import { Community, Category, Post } from '../SharedModel'
 import { markStates, TYPE, unholdPage, stripMobx } from '../../utils'
 
 // const debug = makeDebugger('S:PreviewStore')
-const EditTag = t.model('EditTag', {
-  partId: t.string,
-  tags: t.array(Tag),
-})
 
 const PreviewStore = t
   .model('PreviewStore', {
@@ -41,7 +37,7 @@ const PreviewStore = t
 
     editCommunity: t.maybe(Community),
     editCategory: t.maybe(Category),
-    editTag: t.maybe(EditTag),
+    editTag: t.maybe(Post),
     /* editCategory: t.maybe(SelectCommunity), */
   })
   .views(self => ({

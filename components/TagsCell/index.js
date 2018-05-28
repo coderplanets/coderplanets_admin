@@ -23,12 +23,12 @@ import {
   AddText,
 } from './styles'
 
-const TagsList = ({ tags, partId, onDelete }) => (
+const TagsList = ({ source, onDelete }) => (
   <CategoryWrapper>
-    {tags.map(c => (
+    {source.tags.map(c => (
       <CategoryTag
         key={shortid.generate()}
-        onClick={onDelete.bind(this, partId, c)}
+        onClick={onDelete.bind(this, source.id, c)}
       >
         {c.title}
         <DeleteCross>x</DeleteCross>
@@ -43,19 +43,19 @@ class TagsCell extends React.Component {
   componentWillUnmount() {}
 
   render() {
-    const { tags, partId, onDelete, onAdd } = this.props
+    const { source, onDelete, onAdd } = this.props
 
     return (
       <React.Fragment>
-        {R.isEmpty(tags) ? (
+        {R.isEmpty(source.tags) ? (
           <AddWrapper>
             <AddIcon src={`${ICON_ASSETS}/cmd/plus.svg`} />
-            <AddText onClick={onAdd.bind(this, partId, [])}>添加</AddText>
+            <AddText onClick={onAdd.bind(this, source)}>添加</AddText>
           </AddWrapper>
         ) : (
           <Wrapper>
-            <TagsList tags={tags} partId={partId} onDelete={onDelete} />
-            <div onClick={onAdd.bind(this, partId, tags)}>
+            <TagsList source={source} onDelete={onDelete} />
+            <div onClick={onAdd.bind(this, source)}>
               <AddIcon src={`${ICON_ASSETS}/cmd/plus.svg`} />
             </div>
           </Wrapper>
@@ -70,18 +70,9 @@ export default TagsCell
 TagsCell.propTypes = {
   // https://www.npmjs.com/package/prop-types
   /* communityId: PropTypes.number.isRequired, */
-  tags: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      title: PropTypes.string,
-      color: PropTypes.string,
-    })
-  ),
-  partId: PropTypes.string.isRequired,
+  source: PropTypes.object.isRequired,
   onDelete: PropTypes.func.isRequired,
   onAdd: PropTypes.func.isRequired,
 }
 
-TagsCell.defaultProps = {
-  tags: [],
-}
+TagsCell.defaultProps = {}

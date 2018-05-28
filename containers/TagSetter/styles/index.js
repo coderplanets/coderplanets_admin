@@ -21,6 +21,13 @@ export const Wrapper = styled.div`
   animation: ${Animate.fadeInRight} 0.2s linear;
 `
 
+export const SetterTitle = styled.div`
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`
+
 export const Divider = styled.div`
   border-top: 1px solid #e3eeed;
   margin-top: 15px;
