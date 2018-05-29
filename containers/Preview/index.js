@@ -55,13 +55,9 @@ const CloseBtn = ({ type }) => (
   </PreviewCloser>
 )
 
-// const Viewer = ({ type, root, themeKeys, curTheme }) => {
-// <AccountViewer2 themeKeys={themeKeys} curTheme={curTheme} />
-
-// TODO: post edit viewer
 const Viewer = ({
   type,
-  root,
+  rootState,
   editCommunityData,
   editCategoryData,
   editArticleData,
@@ -104,7 +100,7 @@ const Viewer = ({
       return <TagSetter editData={editArticleData} />
     }
     default: {
-      return <StateTree json={root.toJSON()} />
+      return <StateTree json={rootState} />
     }
   }
 }
@@ -120,7 +116,7 @@ class PreviewContainer extends React.Component {
       type,
       themeKeys,
       curTheme,
-      root,
+      rootState,
       editCommunityData,
       editArticleData,
       editCategoryData,
@@ -134,7 +130,7 @@ class PreviewContainer extends React.Component {
           <PreviewContent>
             <Viewer
               type={type}
-              root={root}
+              rootState={rootState}
               themeKeys={themeKeys}
               curTheme={curTheme}
               editCommunityData={editCommunityData}

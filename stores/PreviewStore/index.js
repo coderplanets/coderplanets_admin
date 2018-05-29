@@ -51,7 +51,9 @@ const PreviewStore = t
     get root() {
       return getParent(self)
     },
-
+    get rootState() {
+      return stripMobx(self.root)
+    },
     get editCommunityData() {
       return stripMobx(self.editCommunity)
     },
