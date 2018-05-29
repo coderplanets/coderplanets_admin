@@ -3,7 +3,7 @@ import { TAG_COLORS, CMS_PARTS } from '../../config'
 
 import { Community } from '../SharedModel'
 
-const Tag = t.model('Tag', {
+export const Tag = t.model('Tag', {
   id: t.maybe(t.string),
   title: t.maybe(t.string),
   color: t.optional(t.enumeration('color', TAG_COLORS), TAG_COLORS[0]),
@@ -15,4 +15,10 @@ const Tag = t.model('Tag', {
   updatedAt: t.optional(t.string, ''),
 })
 
-export default Tag
+export const PagedTags = t.model('PagedTags', {
+  entries: t.optional(t.array(Tag), []),
+  pageNumber: t.optional(t.number, 1),
+  pageSize: t.optional(t.number, 20), // TODO: USE CONSTANTS
+  totalCount: t.optional(t.number, 0),
+  totalPages: t.optional(t.number, 0),
+})

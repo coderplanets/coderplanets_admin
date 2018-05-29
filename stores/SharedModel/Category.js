@@ -10,7 +10,7 @@ const SimpleCommunity = t.model('SimpleCommunity', {
   logo: t.maybe(t.string),
 })
 
-export const SimpleUser = t.model('SimpleUser', {
+const SimpleUser = t.model('SimpleUser', {
   id: t.maybe(t.string),
   nickname: t.maybe(t.string),
   bio: t.maybe(t.string),
@@ -26,4 +26,10 @@ export const Category = t.model('Category', {
   updatedAt: t.optional(t.string, ''),
 })
 
-export default Category
+export const PagedCategories = t.model('PagedCategories', {
+  entries: t.optional(t.array(Category), []),
+  pageNumber: t.optional(t.number, 1),
+  pageSize: t.optional(t.number, 20), // TODO: USE CONSTANTS
+  totalCount: t.optional(t.number, 0),
+  totalPages: t.optional(t.number, 0),
+})

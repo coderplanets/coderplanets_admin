@@ -9,16 +9,6 @@ import { types as t, getParent } from 'mobx-state-tree'
 import { markStates, makeDebugger } from '../../utils'
 import { Community } from '../SharedModel'
 
-// TODO; pl framework cmd -> plLanguages frameworks cmds
-/* import { pl, framework, database } from '../DoraemonStore/suggestions' */
-// import { pl } from '../DoraemonStore/suggestions'
-
-// import PlModel from './PlModel'
-
-// import FrameworkModel from './FrameworkModel'
-// / import DatabaseModel from './DatabaseModel'
-// import CheatSheetModal from './CheatSheetModal'
-
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('S:communities')
 /* eslint-enable no-unused-vars */
