@@ -31,11 +31,13 @@ export function pin() {
 }
 
 export function extendMenuBar(communityRaw) {
-  console.log('extendMenuBar: communityRaw bbb: ', communityRaw)
   let asPath = ''
   if (communityRaw === 'communities') {
     asPath = `/${communityRaw}/`
     return Router.push('/communities', asPath)
+  } else if (communityRaw === 'users') {
+    asPath = `/${communityRaw}/`
+    return Router.push('/users', asPath)
   }
 
   asPath = `/${communityRaw}/posts`
