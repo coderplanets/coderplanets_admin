@@ -32,8 +32,10 @@ import {
   CommunityEditorStore,
   TagEditorStore,
   CategoryEditorStore,
+  // setter
   CategorySetterStore,
   TagSetterStore,
+  CommunitySetterStore,
 
   // viewers
   ArticleViwerStore,
@@ -95,6 +97,7 @@ const rootStore = t
     // setter
     categorySetter: t.optional(CategorySetterStore, {}),
     tagSetter: t.optional(TagSetterStore, {}),
+    communitySetter: t.optional(CommunitySetterStore, {}),
 
     // viewers (for preview usage)
     articleViwer: t.optional(ArticleViwerStore, {}),

@@ -58,8 +58,17 @@ const columns = [
     width: 150,
     dataIndex: 'communities',
     align: 'center',
-    render: communities => {
-      return <CommunityCell array={communities} />
+    render: (communities, record) => {
+      return (
+        <CommunityCell
+          array={communities}
+          source={record}
+          part="POST"
+          onDelete={logic.unsetCommunity}
+          onAdd={logic.setCommunity}
+          withSetter
+        />
+      )
     },
   },
   {
@@ -69,6 +78,7 @@ const columns = [
     align: 'center',
     render: (tags, record) => (
       <TagsCell
+        part="POST"
         source={record}
         onDelete={logic.unsetTag}
         onAdd={logic.setTag}
@@ -158,15 +168,6 @@ class PostsContent extends React.Component {
   componentWillMount() {
     logic.loadPosts()
   }
-  /*
-  <Table
-  columns={columns}
-  dataSource={data.entries}
-  scroll={{ x: 1500 }}
-  loading={TableLoading(communitiesLoading)}
-  pagination={false}
-  />
-  */
 
   render() {
     const {

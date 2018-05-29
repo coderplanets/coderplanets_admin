@@ -1,6 +1,5 @@
 import React from 'react'
 import TimeAgo from 'timeago-react'
-
 import ReactTooltip from 'react-tooltip'
 
 import { cutFrom } from '../../utils'

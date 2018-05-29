@@ -28,20 +28,20 @@ import {
 const debug = makeDebugger('C:TagSetter')
 /* eslint-enable no-unused-vars */
 
-const TagsList = ({ tags, partId, selectedTids }) => {
+const TagsList = ({ tags, partId, selectedids }) => {
   return (
     <CategoryWrapper>
       {tags.map(c => (
         <CategoryTag
           key={shortid.generate()}
-          active={R.contains(c.id, selectedTids)}
+          active={R.contains(c.id, selectedids)}
           onClick={logic.onAdd.bind(
             this,
             c.part,
             partId,
             c.id,
             c.community.id,
-            selectedTids
+            selectedids
           )}
         >
           <CommunityLogo src={c.community.logo} />
@@ -62,8 +62,10 @@ class TagSetterContainer extends React.Component {
     const { tagSetter, editData } = this.props
     const { pagedTagsData } = tagSetter
 
-    const selectedTids = R.pluck('id', editData.tags)
-    const { id, title } = editData
+    const source = editData.data
+    /* const { part } = editData */
+    const selectedids = R.pluck('id', source.tags)
+    const { id, title } = source
 
     return (
       <Wrapper>
@@ -74,7 +76,7 @@ class TagSetterContainer extends React.Component {
           <TagsList
             tags={pagedTagsData.entries}
             partId={id}
-            selectedTids={selectedTids}
+            selectedids={selectedids}
           />
         ) : (
           <div />

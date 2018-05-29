@@ -25,6 +25,7 @@ import {
   CategoryEditor,
   CategorySetter,
   TagSetter,
+  CommunitySetter,
 } from '../../containers'
 
 import {
@@ -61,9 +62,9 @@ const CloseBtn = ({ type }) => (
 const Viewer = ({
   type,
   root,
-  editingCommunity,
-  editingCategory,
-  editingTag,
+  editCommunityData,
+  editCategoryData,
+  editArticleData,
 }) => {
   switch (type) {
     case TYPE.PREVIEW_ACCOUNT_VIEW: {
@@ -82,7 +83,10 @@ const Viewer = ({
       return <CommunityEditor />
     }
     case TYPE.PREVIEW_UPDATE_COMMUNITY: {
-      return <CommunityEditor editData={editingCommunity} />
+      return <CommunityEditor editData={editCommunityData} />
+    }
+    case TYPE.PREVIEW_SET_COMMUNITY: {
+      return <CommunitySetter editData={editArticleData} />
     }
     case TYPE.PREVIEW_CREATE_TAG: {
       return <TagEditor />
@@ -91,13 +95,13 @@ const Viewer = ({
       return <CategoryEditor />
     }
     case TYPE.PREVIEW_UPDATE_CATEGORY: {
-      return <CategoryEditor editData={editingCategory} />
+      return <CategoryEditor editData={editCategoryData} />
     }
     case TYPE.PREVIEW_SET_CATEGORY: {
-      return <CategorySetter editData={editingCommunity} />
+      return <CategorySetter editData={editCommunityData} />
     }
     case TYPE.PREVIEW_SET_TAG: {
-      return <TagSetter editData={editingTag} />
+      return <TagSetter editData={editArticleData} />
     }
     default: {
       return <StateTree json={root.toJSON()} />
@@ -117,9 +121,9 @@ class PreviewContainer extends React.Component {
       themeKeys,
       curTheme,
       root,
-      editingCommunity,
-      editingCategory,
-      editingTag,
+      editCommunityData,
+      editArticleData,
+      editCategoryData,
     } = this.props.preview
 
     return (
@@ -133,9 +137,9 @@ class PreviewContainer extends React.Component {
               root={root}
               themeKeys={themeKeys}
               curTheme={curTheme}
-              editingCommunity={editingCommunity}
-              editingCategory={editingCategory}
-              editingTag={editingTag}
+              editCommunityData={editCommunityData}
+              editCategoryData={editCategoryData}
+              editArticleData={editArticleData}
             />
           </PreviewContent>
         </PreviewWrapper>

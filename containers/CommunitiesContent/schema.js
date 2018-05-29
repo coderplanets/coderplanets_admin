@@ -121,6 +121,13 @@ const deleteCommunity = gql`
     }
   }
 `
+const unsetCommunity = gql`
+  mutation($part: CmsPart, $id: ID!, $communityId: ID!) {
+    unsetCommunity(part: $part, id: $id, communityId: $communityId) {
+      id
+    }
+  }
+`
 const unsetCategory = gql`
   mutation($categoryId: ID!, $communityId: ID!) {
     unsetCategory(categoryId: $categoryId, communityId: $communityId) {
@@ -150,6 +157,7 @@ const schema = {
   pagedPosts,
   deleteCommunity,
   unsetCategory,
+  unsetCommunity,
   setTag,
   unsetTag,
 }

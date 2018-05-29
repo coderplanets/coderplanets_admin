@@ -15,3 +15,4 @@ export { default as CategoryEditor } from './CategoryEditor'
 // setters
 export { default as CategorySetter } from './CategorySetter'
 export { default as TagSetter } from './TagSetter'
+export { default as CommunitySetter } from './CommunitySetter'

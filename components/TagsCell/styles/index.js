@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 import { Animate } from '../../../utils'
-
 import { Img } from '../../../components'
 
 export const UnsetText = styled.div`
@@ -12,11 +11,11 @@ export const Wrapper = styled.div`
   justify-content: left;
   align-items: center;
 `
-export const CategoryWrapper = styled.div`
+export const ListWrapper = styled.div`
   display: flex;
 `
 
-export const CategoryTag = styled.div`
+export const TagWrapper = styled.div`
   display: flex;
   align-items: center;
   background: #e4f7fe;

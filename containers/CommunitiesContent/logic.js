@@ -88,6 +88,30 @@ export function onDelete(record) {
   sr71$.mutate(S.deleteCommunity, { id: record.id })
 }
 
+export function setCommunity(part, source) {
+  console.log('setCommunity --> ', {
+    source,
+    part,
+  })
+  dispatchEvent(EVENT.NAV_SET_COMMUNITY, {
+    type: TYPE.PREVIEW_SET_COMMUNITY,
+    data: {
+      source,
+      part,
+    },
+  })
+}
+
+export function unsetCommunity(part, source, communityId) {
+  const args = {
+    part,
+    communityId,
+    id: source.id,
+  }
+
+  sr71$.mutate(S.unsetCommunity, args)
+}
+
 export function unsetCategory(communityId, category) {
   sr71$.mutate(S.unsetCategory, {
     communityId,
@@ -102,10 +126,13 @@ export function setCategory(source) {
   })
 }
 
-export function setTag(source) {
+export function setTag(part, source) {
   dispatchEvent(EVENT.NAV_SET_TAG, {
     type: TYPE.PREVIEW_SET_TAG,
-    data: source,
+    data: {
+      part,
+      source,
+    },
   })
 }
 
@@ -171,6 +198,10 @@ const DataSolver = [
     action: () => closePreviewer(TYPE.COMMUNITIES_REFRESH),
   },
   {
+    match: asyncRes('unsetCommunity'),
+    action: () => loadPosts(),
+  },
+  {
     match: asyncRes('unsetCategory'),
     action: () => loadCommunities(),
   },
@@ -200,7 +231,7 @@ const DataSolver = [
         case TYPE.GATEGORIES_REFRESH: {
           return loadCategories()
         }
-        case TYPE.POSTS_TAG_REFRESH: {
+        case TYPE.POSTS_CONTENT_REFRESH: {
           return loadPosts()
         }
         default: {

@@ -1,25 +1,25 @@
-import R from 'ramda'
+// import R from 'ramda'
 
 import {
-  asyncRes,
   makeDebugger,
   $solver,
+  asyncRes,
   closePreviewer,
   TYPE,
 } from '../../utils'
-import { PAGE_SIZE } from '../../config'
-
 import SR71 from '../../utils/network/sr71'
+
+import { PAGE_SIZE } from '../../config'
 import S from './schema'
 
 const sr71$ = new SR71()
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:TagSetter')
+const debug = makeDebugger('L:CommunitySetter')
 /* eslint-enable no-unused-vars */
 
-let tagSetter = null
+let communitySetter = null
 
 const commonFilter = page => {
   const size = PAGE_SIZE.COMMON
@@ -28,16 +28,14 @@ const commonFilter = page => {
   }
 }
 
-export function onAdd(part, id, tagId, communityId, selectedIds) {
-  if (!R.contains(tagId, selectedIds)) {
-    const args = { id, tagId, communityId }
-    args.part = R.toUpper(part)
-    sr71$.mutate(S.setTag, args)
-  }
+export function getAllCommunities(page = 1) {
+  sr71$.query(S.pagedCommunities, commonFilter(page))
 }
 
-export function getAllTags(page = 1) {
-  sr71$.query(S.pagedTags, commonFilter(page))
+export function setCommunity(part, id, communityId) {
+  const args = { part, id, communityId }
+
+  sr71$.mutate(S.setCommunity, args)
 }
 
 // ###############################
@@ -46,25 +44,25 @@ export function getAllTags(page = 1) {
 
 const DataSolver = [
   {
-    match: asyncRes('pagedTags'),
-    action: ({ pagedTags }) => {
-      tagSetter.markState({
-        pagedTags,
+    match: asyncRes('pagedCommunities'),
+    action: ({ pagedCommunities }) => {
+      communitySetter.markState({
+        pagedCommunities,
       })
     },
   },
   {
-    match: asyncRes('setTag'),
+    match: asyncRes('setCommunity'),
     action: () => closePreviewer(TYPE.POSTS_CONTENT_REFRESH),
   },
 ]
 const ErrSolver = []
 
 export function init(selectedStore) {
-  tagSetter = selectedStore
-  debug(tagSetter)
+  communitySetter = selectedStore
+  debug(communitySetter)
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 
-  getAllTags()
+  getAllCommunities()
 }

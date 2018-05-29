@@ -5,10 +5,16 @@
 
 import { types as t, getParent } from 'mobx-state-tree'
 
+// import { CMS_PARTS } from '../../config'
+
 import { Community, Category, Post } from '../SharedModel'
 import { markStates, TYPE, unholdPage, stripMobx } from '../../utils'
 
 // const debug = makeDebugger('S:PreviewStore')
+const Article = t.model('Article', {
+  part: t.string, // t.optional(t.enumeration('part', CMS_PARTS), CMS_PARTS[0]),
+  data: Post,
+})
 
 const PreviewStore = t
   .model('PreviewStore', {
@@ -23,6 +29,8 @@ const PreviewStore = t
         TYPE.PREVIEW_CREATE_COMMUNITY,
         TYPE.PREVIEW_UPDATE_COMMUNITY,
 
+        // community
+        TYPE.PREVIEW_SET_COMMUNITY,
         // tag
         TYPE.PREVIEW_SET_TAG,
         TYPE.PREVIEW_CREATE_TAG,
@@ -34,10 +42,9 @@ const PreviewStore = t
         TYPE.PREVIEW_UPDATE_CATEGORY,
       ])
     ),
-
     editCommunity: t.maybe(Community),
     editCategory: t.maybe(Category),
-    editTag: t.maybe(Post),
+    editArticle: t.maybe(Article),
     /* editCategory: t.maybe(SelectCommunity), */
   })
   .views(self => ({
@@ -45,14 +52,14 @@ const PreviewStore = t
       return getParent(self)
     },
 
-    get editingCommunity() {
+    get editCommunityData() {
       return stripMobx(self.editCommunity)
     },
-    get editingCategory() {
+    get editCategoryData() {
       return stripMobx(self.editCategory)
     },
-    get editingTag() {
-      return stripMobx(self.editTag)
+    get editArticleData() {
+      return stripMobx(self.editArticle)
     },
     get themeKeys() {
       return self.root.theme.themeKeys

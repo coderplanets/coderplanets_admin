@@ -18,6 +18,7 @@ const sr71$ = new SR71({
     EVENT.PREVIEW_CLOSE,
     EVENT.NAV_CREATE_COMMUNITY,
     EVENT.NAV_UPDATE_COMMUNITY,
+    EVENT.NAV_SET_COMMUNITY,
     EVENT.NAV_CREATE_TAG,
     // EVENT.NAV_UPDATE_TAG,
     EVENT.NAV_CREATE_CATEGORY,
@@ -107,6 +108,20 @@ const DataResolver = [
     },
   },
   {
+    match: asyncRes(EVENT.NAV_SET_COMMUNITY),
+    action: res => {
+      const event = res[EVENT.NAV_SET_COMMUNITY]
+      preview.markState({
+        editArticle: {
+          part: event.data.part,
+          data: event.data.source,
+        },
+      })
+      preview.open(event.type)
+      holdPage()
+    },
+  },
+  {
     match: asyncRes(EVENT.NAV_CREATE_TAG),
     action: res => {
       const event = res[EVENT.NAV_CREATE_TAG]
@@ -148,8 +163,14 @@ const DataResolver = [
     match: asyncRes(EVENT.NAV_SET_TAG),
     action: res => {
       const event = res[EVENT.NAV_SET_TAG]
+      console.log('NAV_SET_TAG event.data: ', event.data)
 
-      preview.markState({ editTag: event.data })
+      preview.markState({
+        editArticle: {
+          part: event.data.part,
+          data: event.data.source,
+        },
+      })
       preview.open(event.type)
       holdPage()
     },

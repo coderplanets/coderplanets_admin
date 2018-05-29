@@ -15,8 +15,8 @@ import { ICON_ASSETS } from '../../config'
 // import Link from 'next/link'
 import {
   Wrapper,
-  CategoryWrapper,
-  CategoryTag,
+  ListWrapper,
+  TagWrapper,
   AddWrapper,
   DeleteCross,
   AddIcon,
@@ -24,17 +24,17 @@ import {
 } from './styles'
 
 const TagsList = ({ source, onDelete }) => (
-  <CategoryWrapper>
+  <ListWrapper>
     {source.tags.map(c => (
-      <CategoryTag
+      <TagWrapper
         key={shortid.generate()}
         onClick={onDelete.bind(this, source.id, c)}
       >
         {c.title}
         <DeleteCross>x</DeleteCross>
-      </CategoryTag>
+      </TagWrapper>
     ))}
-  </CategoryWrapper>
+  </ListWrapper>
 )
 
 class TagsCell extends React.Component {
@@ -43,19 +43,19 @@ class TagsCell extends React.Component {
   componentWillUnmount() {}
 
   render() {
-    const { source, onDelete, onAdd } = this.props
+    const { part, source, onDelete, onAdd } = this.props
 
     return (
       <React.Fragment>
         {R.isEmpty(source.tags) ? (
           <AddWrapper>
             <AddIcon src={`${ICON_ASSETS}/cmd/plus.svg`} />
-            <AddText onClick={onAdd.bind(this, source)}>添加</AddText>
+            <AddText onClick={onAdd.bind(this, part, source)}>添加</AddText>
           </AddWrapper>
         ) : (
           <Wrapper>
             <TagsList source={source} onDelete={onDelete} />
-            <div onClick={onAdd.bind(this, source)}>
+            <div onClick={onAdd.bind(this, part, source)}>
               <AddIcon src={`${ICON_ASSETS}/cmd/plus.svg`} />
             </div>
           </Wrapper>
@@ -71,8 +71,11 @@ TagsCell.propTypes = {
   // https://www.npmjs.com/package/prop-types
   /* communityId: PropTypes.number.isRequired, */
   source: PropTypes.object.isRequired,
+  part: PropTypes.string,
   onDelete: PropTypes.func.isRequired,
   onAdd: PropTypes.func.isRequired,
 }
 
-TagsCell.defaultProps = {}
+TagsCell.defaultProps = {
+  part: 'POST',
+}
