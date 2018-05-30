@@ -4,8 +4,9 @@ import {
   // asyncErr,
   $solver,
   // ERR,
-  // EVENT,
+  EVENT,
   TYPE,
+  dispatchEvent,
   scrollIntoEle,
 } from '../../utils'
 import { PAGE_SIZE } from '../../config'
@@ -39,6 +40,16 @@ export function loadUsers(page = 1) {
 
 export function onEdit() {}
 export function onDelete() {}
+
+export function onCmsPermissionEdit(source) {
+  dispatchEvent(EVENT.NAV_UPDATE_PERMISSION, {
+    type: TYPE.PREVIEW_UPDATE_PERMISSION,
+    data: {
+      type: 'cms',
+      source,
+    },
+  })
+}
 
 // ###############################
 // Data & Error handlers

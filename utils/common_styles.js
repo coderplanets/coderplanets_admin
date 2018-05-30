@@ -2,7 +2,7 @@
    common styles use in styled-component
  */
 export const smokey = `
-  opacity: 0.6;
+  opacity: 0.5;
 
   &:hover {
     opacity: 1;

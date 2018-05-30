@@ -3,7 +3,7 @@ import { types as t } from 'mobx-state-tree'
 import { PAGE_SIZE } from '../../config'
 
 import { User } from './User'
-import Community from './Community'
+import { Community } from './Community'
 import Comment from './Comment'
 import { Tag } from './Tag'
 

@@ -32,6 +32,7 @@ import {
   CommunityEditorStore,
   TagEditorStore,
   CategoryEditorStore,
+  PermissionEditorStore,
   // setter
   CategorySetterStore,
   TagSetterStore,
@@ -94,6 +95,7 @@ const rootStore = t
     communityEditor: t.optional(CommunityEditorStore, {}),
     tagEditor: t.optional(TagEditorStore, {}),
     categoryEditor: t.optional(CategoryEditorStore, {}),
+    permissionEditor: t.optional(PermissionEditorStore, {}),
     // setter
     categorySetter: t.optional(CategorySetterStore, {}),
     tagSetter: t.optional(TagSetterStore, {}),

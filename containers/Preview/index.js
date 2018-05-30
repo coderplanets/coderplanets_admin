@@ -26,6 +26,7 @@ import {
   CategorySetter,
   TagSetter,
   CommunitySetter,
+  PermissionEditor,
 } from '../../containers'
 
 import {
@@ -61,6 +62,7 @@ const Viewer = ({
   editCommunityData,
   editCategoryData,
   editArticleData,
+  editPermissionData,
 }) => {
   switch (type) {
     case TYPE.PREVIEW_ACCOUNT_VIEW: {
@@ -99,6 +101,9 @@ const Viewer = ({
     case TYPE.PREVIEW_SET_TAG: {
       return <TagSetter editData={editArticleData} />
     }
+    case TYPE.PREVIEW_UPDATE_PERMISSION: {
+      return <PermissionEditor editData={editPermissionData} />
+    }
     default: {
       return <StateTree json={rootState} />
     }
@@ -119,6 +124,7 @@ class PreviewContainer extends React.Component {
       rootState,
       editCommunityData,
       editArticleData,
+      editPermissionData,
       editCategoryData,
     } = this.props.preview
 
@@ -136,6 +142,7 @@ class PreviewContainer extends React.Component {
               editCommunityData={editCommunityData}
               editCategoryData={editCategoryData}
               editArticleData={editArticleData}
+              editPermissionData={editPermissionData}
             />
           </PreviewContent>
         </PreviewWrapper>

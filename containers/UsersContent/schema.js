@@ -19,6 +19,7 @@ const pagedUsers = gql`
         location
         fromGithub
         insertedAt
+        cmsPassportString
       }
       pageNumber
       pageSize

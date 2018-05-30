@@ -1,7 +1,7 @@
 import { types as t } from 'mobx-state-tree'
 import { TAG_COLORS, CMS_PARTS, PAGE_SIZE } from '../../config'
 
-import { Community } from '../SharedModel'
+import { Community } from './Community'
 
 export const Tag = t.model('Tag', {
   id: t.maybe(t.string),

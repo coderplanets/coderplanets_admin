@@ -12,6 +12,8 @@ export {
   dispatchEvent,
   mapKeys,
   isObject,
+  maybe,
+  objToArray,
   notEmpty,
   isEmptyNil,
   isEmptyValue,

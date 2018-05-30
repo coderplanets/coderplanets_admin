@@ -8,8 +8,10 @@ import {
   TableLoading,
   Button,
   Space,
+  MaybeCell,
   UserCell,
   SexCell,
+  PermissionCell,
 } from '../../components'
 
 import { OperationWrapper } from './styles'
@@ -51,43 +53,6 @@ const columns = [
     },
   },
   {
-    title: 'education',
-    dataIndex: 'education',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'company',
-    dataIndex: 'company',
-    align: 'center',
-    width: 150,
-  },
-
-  {
-    title: 'email',
-    dataIndex: 'email',
-    align: 'center',
-    width: 100,
-  },
-  {
-    title: 'qq',
-    dataIndex: 'qq',
-    align: 'center',
-    width: 100,
-  },
-  {
-    title: 'weixin',
-    dataIndex: 'weixin',
-    align: 'center',
-    width: 150,
-  },
-  {
-    title: 'weibo',
-    dataIndex: 'weibo',
-    align: 'center',
-    width: 100,
-  },
-  {
     title: 'sex',
     dataIndex: 'sex',
     align: 'center',
@@ -97,10 +62,63 @@ const columns = [
     },
   },
   {
+    title: 'education',
+    dataIndex: 'education',
+    align: 'center',
+    width: 150,
+    render: text => <MaybeCell text={text} />,
+  },
+  {
+    title: 'cms权限',
+    dataIndex: 'cmsPassportString',
+    align: 'center',
+    width: 200,
+    render: (text, record) => (
+      <PermissionCell source={record} onClick={logic.onCmsPermissionEdit} />
+    ),
+  },
+  {
+    title: 'company',
+    dataIndex: 'company',
+    align: 'center',
+    width: 150,
+    render: text => <MaybeCell text={text} />,
+  },
+
+  {
+    title: 'email',
+    dataIndex: 'email',
+    align: 'center',
+    width: 100,
+    render: text => <MaybeCell text={text} />,
+  },
+  {
+    title: 'qq',
+    dataIndex: 'qq',
+    align: 'center',
+    width: 100,
+    render: text => <MaybeCell text={text} />,
+  },
+  {
+    title: 'weixin',
+    dataIndex: 'weixin',
+    align: 'center',
+    width: 150,
+    render: text => <MaybeCell text={text} />,
+  },
+  {
+    title: 'weibo',
+    dataIndex: 'weibo',
+    align: 'center',
+    width: 100,
+    render: text => <MaybeCell text={text} />,
+  },
+  {
     title: '位置',
     dataIndex: 'location',
     align: 'center',
     width: 220,
+    render: text => <MaybeCell text={text} />,
   },
   {
     title: '注册时间',
@@ -160,7 +178,7 @@ class IndexContent extends React.Component {
             <Table
               columns={columns}
               dataSource={data.entries}
-              scroll={{ x: 2000 }}
+              scroll={{ x: 2200 }}
               loading={TableLoading(usersLoading)}
               pagination={false}
             />

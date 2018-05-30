@@ -1,5 +1,5 @@
 import { types as t } from 'mobx-state-tree'
-import Community from './Community'
+import { Community } from './Community'
 
 const SubscribedCommunities = t.model('SubscribedCommunities', {
   entries: t.optional(t.array(Community), []),
@@ -49,6 +49,7 @@ export const User = t.model('User', {
   subscribedCommunitiesCount: t.optional(t.number, 0),
   contributes: t.optional(Contributes, {}),
   githubProfile: t.maybe(GithubProfile),
+  cmsPassportString: t.maybe(t.string),
   insertedAt: t.optional(t.string, ''),
   updatedAt: t.optional(t.string, ''),
 })

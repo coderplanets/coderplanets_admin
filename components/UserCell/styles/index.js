@@ -9,8 +9,8 @@ export const UserCellWrapper = styled.div`
   margin-left: ${props => props.left};
 `
 export const Avatar = styled(Img)`
-  width: 25px;
-  height: 25px;
+  width: ${props => (props.small ? '18px' : '25px')};
+  height: ${props => (props.small ? '18px' : '25px')};
   border-radius: 100%;
 `
 export const NickName = styled.div`

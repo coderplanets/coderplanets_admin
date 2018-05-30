@@ -45,6 +45,14 @@ const log = (...args) => data => {
 }
 /* eslint-enable */
 
+export const maybe = (value, defVal = '') =>
+  !isEmptyNil(value) ? value : defVal
+
+export const objToArray = input =>
+  Object.keys(input).map(key => {
+    return { [key]: input[key] }
+  })
+
 // reference: https://blog.carbonfive.com/2017/12/20/easy-pipeline-debugging-with-curried-console-log/
 export const Rlog = (arg = 'Rlog: ') => R.tap(log(arg))
 

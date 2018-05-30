@@ -26,6 +26,8 @@ const sr71$ = new SR71({
     EVENT.NAV_UPDATE_CATEGORY,
     // tag
     EVENT.NAV_SET_TAG,
+    // permission
+    EVENT.NAV_UPDATE_PERMISSION,
   ],
 })
 
@@ -49,7 +51,6 @@ export function closePreview() {
 function loadDataForPreview(info) {
   debug('loadDataForPreview --> : ', info)
   if (info.type === TYPE.POST_PREVIEW_VIEW) {
-    // debug('load fucking post: ', info.data)
     dispatchEvent(EVENT.PREVIEW_POST, { type: TYPE.POST, data: info.data })
     // loadPost(info.data)
   }
@@ -163,11 +164,24 @@ const DataResolver = [
     match: asyncRes(EVENT.NAV_SET_TAG),
     action: res => {
       const event = res[EVENT.NAV_SET_TAG]
-      console.log('NAV_SET_TAG event.data: ', event.data)
-
       preview.markState({
         editArticle: {
           part: event.data.part,
+          data: event.data.source,
+        },
+      })
+      preview.open(event.type)
+      holdPage()
+    },
+  },
+  {
+    match: asyncRes(EVENT.NAV_UPDATE_PERMISSION),
+    action: res => {
+      const event = res[EVENT.NAV_UPDATE_PERMISSION]
+      console.log('hello --> ')
+      preview.markState({
+        editPermission: {
+          type: event.data.type,
           data: event.data.source,
         },
       })

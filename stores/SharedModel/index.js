@@ -1,4 +1,4 @@
-export { default as Community } from './Community'
+export { Community, PagedCommunities } from './Community'
 export { default as Article } from './Article'
 export { default as Comment } from './Comment'
 export { Post, PagedPosts } from './Post'
