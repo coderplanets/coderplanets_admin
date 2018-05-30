@@ -10,6 +10,7 @@ import {
   ERR,
   makeDebugger,
   EVENT,
+  ROUTE,
 } from '../../utils'
 import S from './schema'
 import { PAGE_SIZE } from '../../config'
@@ -31,18 +32,18 @@ export function pin() {
 }
 
 export function extendMenuBar(communityRaw) {
-  let asPath = ''
-  if (communityRaw === 'communities') {
-    asPath = `/${communityRaw}/`
-    return Router.push('/communities', asPath)
-  } else if (communityRaw === 'users') {
-    asPath = `/${communityRaw}/`
-    return Router.push('/users', asPath)
+  switch (communityRaw) {
+    case ROUTE.COMMUNITIES: {
+      return Router.push(`/${ROUTE.COMMUNITIES}`, `/${communityRaw}/`)
+    }
+    case ROUTE.USERS: {
+      return Router.push(`/${ROUTE.USERS}`, `/${communityRaw}/`)
+    }
+    default: {
+      const asPath = `/${communityRaw}/${ROUTE.POSTS}`
+      return Router.push('/', asPath)
+    }
   }
-
-  asPath = `/${communityRaw}/posts`
-  Router.push('/', asPath)
-  /* Router.push(asPath) */
 }
 
 export function onCommunityChildMenuChange(activePart) {
