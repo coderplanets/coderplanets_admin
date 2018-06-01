@@ -9,16 +9,20 @@ import R from 'ramda'
 import PropTypes from 'prop-types'
 import shortid from 'shortid'
 
+import { ICON_ASSETS } from '../../config'
+
 import { makeDebugger, isEmptyNil, isObject } from '../../utils'
 import {
   Wrapper,
   Number,
   RootNumber,
-  NoneText,
   Label,
   UnitText,
   NumberInfo,
   PermissionWrapper,
+  AddWrapper,
+  AddIcon,
+  AddText,
 } from './styles'
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:PermissionCell:index')
@@ -69,17 +73,22 @@ const RootPermissions = ({ data }) => {
   )
 }
 
-const PermissionCell = ({ source, onClick }) => {
+const PermissionCell = ({ source, onMutate }) => {
   const cmsps = source.cmsPassportString
   if (isEmptyNil(cmsps)) {
-    return <NoneText>暂无</NoneText>
+    return (
+      <AddWrapper>
+        <AddIcon src={`${ICON_ASSETS}/cmd/plus.svg`} />
+        <AddText onClick={onMutate.bind(this, source)}>添加</AddText>
+      </AddWrapper>
+    )
   }
   const pjson = JSON.parse(cmsps)
   const cdata = R.pickBy(valueIsObj, pjson)
   const rdata = R.pickBy(valueIsNotObj, pjson)
 
   return (
-    <Wrapper onClick={onClick.bind(this, source)}>
+    <Wrapper onClick={onMutate.bind(this, source)}>
       <CommunityPermissions data={cdata} />
       <RootPermissions data={rdata} />
     </Wrapper>
@@ -88,7 +97,7 @@ const PermissionCell = ({ source, onClick }) => {
 
 PermissionCell.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  onClick: PropTypes.func.isRequired,
+  onMutate: PropTypes.func.isRequired,
   source: PropTypes.object.isRequired,
 }
 

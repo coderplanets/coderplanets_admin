@@ -75,8 +75,6 @@ export function getAllRules() {
 }
 
 export function confirm(userId) {
-  debug('confirm ..userId: ', userId)
-  debug('selectRules --> ', permissionEditor.selectRules)
   const rules = permissionEditor.selectRules
   sr71$.mutate(S.stampCmsPassport, { userId, rules })
 }
@@ -97,7 +95,6 @@ const DataSolver = [
   {
     match: asyncRes('allPassportRulesString'),
     action: ({ allPassportRulesString }) => {
-      /* console.log('allPassportRulesString --> ', allPassportRulesString) */
       permissionEditor.markState({
         allRules: allPassportRulesString,
       })

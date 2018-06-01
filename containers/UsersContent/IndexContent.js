@@ -74,7 +74,7 @@ const columns = [
     align: 'center',
     width: 200,
     render: (text, record) => (
-      <PermissionCell source={record} onClick={logic.onCmsPermissionEdit} />
+      <PermissionCell source={record} onMutate={logic.onCmsPermissionMutate} />
     ),
   },
   {
@@ -166,10 +166,7 @@ class IndexContent extends React.Component {
   }
 
   render() {
-    const {
-      data,
-      restProps: { usersLoading },
-    } = this.props
+    const { data, restProps: { usersLoading } } = this.props
 
     return (
       <div>

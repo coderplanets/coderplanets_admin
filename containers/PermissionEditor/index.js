@@ -57,6 +57,7 @@ const getManagedCommunitiesRaws = userRules => {
 
 const CommunityMatrix = ({ data, userRules, activeRaw }) => {
   if (!data) return <div />
+  userRules = isEmptyNil(userRules) ? '{}' : userRules
 
   const managerdRaws = getManagedCommunitiesRaws(userRules)
 
@@ -117,9 +118,7 @@ const PermissionList = ({
   curView,
   activeRaw,
 }) => {
-  if (isEmptyNil(data)) {
-    return <div />
-  }
+  data = isEmptyNil(data) ? '{}' : data
 
   const curUserRules = getCurUserRules(data, curView, activeRaw)
   const selectGeneralRules = R.filter(valueIsNotObj, selectRules)
@@ -181,6 +180,7 @@ class PermissionEditorContainer extends React.Component {
         <UserCell user={user} small />
         <h2>权限编辑</h2>
         <Divider />
+
         <CommunityMatrix
           data={pagedCommunitiesData}
           userRules={cmsPassportString}
@@ -188,6 +188,7 @@ class PermissionEditorContainer extends React.Component {
           activeRaw={curCommunityRaw}
         />
         <Divider />
+
         <PermissionList
           data={cmsPassportString}
           selectRules={selectRulesData}
