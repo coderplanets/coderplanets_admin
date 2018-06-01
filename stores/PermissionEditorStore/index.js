@@ -31,6 +31,7 @@ const PermissionEditorStore = t
       'general'
     ),
     curCommunityRaw: t.optional(t.string, 'general'),
+    selectRules: t.optional(t.string, '{}'),
   })
   .views(self => ({
     get root() {
@@ -41,6 +42,9 @@ const PermissionEditorStore = t
     },
     get allRulesData() {
       return stripMobx(self.allRules)
+    },
+    get selectRulesData() {
+      return JSON.parse(self.selectRules)
     },
   }))
   .actions(self => ({

@@ -25,9 +25,18 @@ const allPassportRulesString = gql`
   }
 `
 
+const stampCmsPassport = gql`
+  mutation($userId: ID!, $rules: String!) {
+    stampCmsPassport(userId: $userId, rules: $rules) {
+      id
+    }
+  }
+`
+
 const schema = {
   pagedCommunities,
   allPassportRulesString,
+  stampCmsPassport,
 }
 
 export default schema

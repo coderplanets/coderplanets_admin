@@ -11,6 +11,8 @@ export { makeDebugger } from './debug'
 export {
   dispatchEvent,
   mapKeys,
+  mapKey,
+  mapValue,
   isObject,
   maybe,
   objToArray,

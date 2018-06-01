@@ -53,6 +53,9 @@ export const objToArray = input =>
     return { [key]: input[key] }
   })
 
+export const mapKey = R.compose(R.head, R.keys)
+export const mapValue = R.compose(R.head, R.values)
+
 // reference: https://blog.carbonfive.com/2017/12/20/easy-pipeline-debugging-with-curried-console-log/
 export const Rlog = (arg = 'Rlog: ') => R.tap(log(arg))
 

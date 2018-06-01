@@ -14,7 +14,9 @@ import { PAGE_SIZE } from '../../config'
 import S from './schema'
 import SR71 from '../../utils/network/sr71'
 
-const sr71$ = new SR71()
+const sr71$ = new SR71({
+  resv_event: [EVENT.PREVIEW_CLOSE],
+})
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
@@ -69,6 +71,22 @@ const DataSolver = [
       usersContent.markState({
         pagedUsers,
       })
+    },
+  },
+  {
+    match: asyncRes(EVENT.PREVIEW_CLOSE),
+    action: res => {
+      const closeType = res[EVENT.PREVIEW_CLOSE].type
+      switch (closeType) {
+        case TYPE.USERS_REFRESH: {
+          const { pageNumber } = usersContent.pagedUsersData
+          return loadUsers(pageNumber)
+        }
+        default: {
+          debug('unknow event: ', closeType)
+          /* return loadPosts() */
+        }
+      }
     },
   },
 ]

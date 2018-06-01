@@ -18,6 +18,8 @@ import {
   isEmptyNil,
   isObject,
   maybe,
+  mapKey,
+  mapValue,
   objToArray,
 } from '../../utils'
 
@@ -43,10 +45,6 @@ const debug = makeDebugger('C:PermissionEditor')
 
 const valueIsObj = v => isObject(v)
 const valueIsNotObj = R.complement(valueIsObj)
-
-// TODO: move to utils
-const mapKey = R.compose(R.head, R.keys)
-const mapValue = R.compose(R.head, R.values)
 
 const tooltipOffset = JSON.stringify({ top: 5, right: -5 })
 
@@ -112,25 +110,40 @@ const getCurUserRules = (data, curView, activeRaw) => {
   return maybe(userRulesByCommunities[activeRaw], {})
 }
 
-const PermissionList = ({ data, allRules, curView, activeRaw }) => {
+const PermissionList = ({
+  data,
+  allRules,
+  selectRules,
+  curView,
+  activeRaw,
+}) => {
   if (isEmptyNil(data)) {
     return <div />
   }
 
   const curUserRules = getCurUserRules(data, curView, activeRaw)
+  const selectGeneralRules = R.filter(valueIsNotObj, selectRules)
+  const selectCommunityRules = R.filter(valueIsObj, selectRules)
 
   const curAllRules =
     curView === 'general'
       ? getJson(allRules.general)
       : getJson(allRules.community)
 
-  const dataArray = objToArray(R.merge(curAllRules, curUserRules))
+  const curSelectRules =
+    curView === 'general' ? selectGeneralRules : selectCommunityRules[activeRaw]
+
+  const curActiveRules = R.merge(curUserRules, curSelectRules)
+  const ruleArray = objToArray(R.merge(curAllRules, curActiveRules))
 
   return (
     <PermissionWrapper>
       <React.Fragment>
-        {dataArray.map(p => (
-          <PerItem key={shortid.generate()}>
+        {ruleArray.map(p => (
+          <PerItem
+            key={shortid.generate()}
+            onClick={logic.onRuleClick.bind(this, p)}
+          >
             <PerTitle>{mapKey(p)}</PerTitle> <CheckMark active={mapValue(p)} />
           </PerItem>
         ))}
@@ -156,6 +169,7 @@ class PermissionEditorContainer extends React.Component {
       allRulesData,
       curView,
       curCommunityRaw,
+      selectRulesData,
     } = permissionEditor
 
     const user = editData.data
@@ -176,6 +190,7 @@ class PermissionEditorContainer extends React.Component {
         <Divider />
         <PermissionList
           data={cmsPassportString}
+          selectRules={selectRulesData}
           allRules={allRulesData.cms}
           curView={curView}
           activeRaw={curCommunityRaw}
@@ -198,7 +213,7 @@ class PermissionEditorContainer extends React.Component {
               <Icon type="loading" /> 保存中
             </Button>
           ) : (
-            <Button type="primary" onClick={debug}>
+            <Button type="primary" onClick={logic.confirm.bind(this, user.id)}>
               保存
             </Button>
           )}

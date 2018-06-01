@@ -25,7 +25,7 @@ const LoadingText = styled.div`
 const TableLoading = () => (
   <LoadingWrapper>
     <LoadingIcon src={`${ICON_ASSETS}/cmd/rainbow_logo.svg`} />
-    <LoadingText>... 漫威的编辑真心可以 ...</LoadingText>
+    <LoadingText>... 漫威的编剧真心可以 ...</LoadingText>
   </LoadingWrapper>
 )
 
