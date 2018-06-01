@@ -223,16 +223,20 @@ const DataSolver = [
       const closeType = res[EVENT.PREVIEW_CLOSE].type
       switch (closeType) {
         case TYPE.COMMUNITIES_REFRESH: {
-          return loadCommunities()
+          const { pageNumber } = communitiesContent.pagedCommunitiesData
+          return loadCommunities(pageNumber)
         }
         case TYPE.TAGS_REFRESH: {
-          return loadTags()
+          const { pageNumber } = communitiesContent.pagedTagsData
+          return loadTags(pageNumber)
         }
         case TYPE.GATEGORIES_REFRESH: {
-          return loadCategories()
+          const { pageNumber } = communitiesContent.pagedCategoriesData
+          return loadCategories(pageNumber)
         }
         case TYPE.POSTS_CONTENT_REFRESH: {
-          return loadPosts()
+          const { pageNumber } = communitiesContent.pagedPostsData
+          return loadPosts(pageNumber)
         }
         default: {
           debug('unknow event: ', closeType)
