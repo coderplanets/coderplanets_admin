@@ -7,6 +7,7 @@ import {
   mapKey,
   mapValue,
   TYPE,
+  EVENT,
   closePreviewer,
 } from '../../utils'
 import SR71 from '../../utils/network/sr71'
@@ -14,7 +15,9 @@ import { PAGE_SIZE } from '../../config'
 
 import S from './schema'
 
-const sr71$ = new SR71()
+const sr71$ = new SR71({
+  resv_event: [EVENT.PREVIEW_CLOSED],
+})
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
@@ -79,6 +82,19 @@ export function confirm(userId) {
   sr71$.mutate(S.stampCmsPassport, { userId, rules })
 }
 
+const cleanUp = () => {
+  permissionEditor.markState({
+    selectRules: '{}',
+    curView: 'general',
+    curCommunityRaw: 'general',
+  })
+}
+
+export function onCancle() {
+  cleanUp()
+  closePreviewer()
+}
+
 // ###############################
 // Data & Error handlers
 // ###############################
@@ -107,6 +123,12 @@ const DataSolver = [
       permissionEditor.markState({
         selectRules: '{}',
       })
+    },
+  },
+  {
+    match: asyncRes(EVENT.PREVIEW_CLOSED),
+    action: () => {
+      cleanUp()
     },
   },
 ]

@@ -37,13 +37,13 @@ let preview = null
 let sub$ = null
 
 export function closePreview() {
-  debug('closePreview')
   preview.close()
 
   // force call Typewriter's componentWillUnmount to store the draft
   // wait until preview move out of the screean
   setTimeout(() => {
     preview.markState({ type: null })
+    debug('closePreview ...')
     dispatchEvent(EVENT.PREVIEW_CLOSED)
   }, 200)
 }

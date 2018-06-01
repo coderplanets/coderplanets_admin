@@ -205,7 +205,7 @@ class PermissionEditorContainer extends React.Component {
         <br />
         <Divider />
         <ActionBtns>
-          <Button type="primary" ghost onClick={debug}>
+          <Button type="primary" ghost onClick={logic.onCancle}>
             取消
           </Button>
           <Space right="20px" />
