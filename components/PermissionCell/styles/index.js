@@ -1,8 +1,5 @@
 import styled from 'styled-components'
 
-import { Animate } from '../../../utils'
-import { Img } from '../../../components'
-
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -34,12 +31,6 @@ export const Number = styled.span`
 export const RootNumber = Number.extend`
   color: orange;
 `
-export const NoneText = styled.div`
-  text-align: center;
-  font-size: 0.8rem;
-  color: lightgrey;
-  font-style: italic;
-`
 
 export const Label = styled.div`
   flex-grow: 1;
@@ -56,36 +47,4 @@ export const PermissionWrapper = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-`
-
-// TODO: use a component
-export const AddWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-export const AddIcon = styled(Img)`
-  width: 15px;
-  height: 15px;
-  display: block;
-  fill: lightgrey;
-  &:hover {
-    cursor: pointer;
-    fill: #646479;
-  }
-  ${AddWrapper}:hover & {
-    cursor: pointer;
-    fill: #646479;
-    animation: ${Animate.pulse} 0.3s linear;
-  }
-`
-
-export const AddText = styled.div`
-  margin-left: 5px;
-  color: lightgrey;
-  ${AddWrapper}:hover & {
-    cursor: pointer;
-    color: #646479;
-  }
-  transition: color 0.2s linear;
 `

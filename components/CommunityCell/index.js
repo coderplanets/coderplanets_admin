@@ -12,6 +12,7 @@ import shortid from 'shortid'
 
 import { ICON_ASSETS } from '../../config'
 import { makeDebugger } from '../../utils'
+import { AdderCell } from '../../components'
 
 import {
   Wrapper,
@@ -20,8 +21,6 @@ import {
   SetterWrapper,
   DeleteCross,
   UnknowText,
-  AddText,
-  AddWrapper,
   AddIcon,
 } from './styles'
 
@@ -97,10 +96,7 @@ const renderContent = props => {
   return (
     <React.Fragment>
       {withSetter ? (
-        <AddWrapper onClick={onAdd.bind(this, part, source)}>
-          <AddIcon src={`${ICON_ASSETS}/cmd/plus.svg`} />
-          <AddText>添加</AddText>
-        </AddWrapper>
+        <AdderCell onAdd={onAdd.bind(this, part, source)} />
       ) : (
         <UnknowText>漂浮中</UnknowText>
       )}

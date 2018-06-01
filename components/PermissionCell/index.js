@@ -9,9 +9,10 @@ import R from 'ramda'
 import PropTypes from 'prop-types'
 import shortid from 'shortid'
 
-import { ICON_ASSETS } from '../../config'
+import { makeDebugger, isEmptyNil, isObject, objToArray } from '../../utils'
 
-import { makeDebugger, isEmptyNil, isObject } from '../../utils'
+import { AdderCell } from '../../components'
+
 import {
   Wrapper,
   Number,
@@ -20,9 +21,6 @@ import {
   UnitText,
   NumberInfo,
   PermissionWrapper,
-  AddWrapper,
-  AddIcon,
-  AddText,
 } from './styles'
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:PermissionCell:index')
@@ -30,11 +28,6 @@ const debug = makeDebugger('c:PermissionCell:index')
 
 const valueIsObj = v => isObject(v)
 const valueIsNotObj = R.complement(valueIsObj)
-
-const objToArray = input =>
-  Object.keys(input).map(key => {
-    return { [key]: input[key] }
-  })
 
 const key = R.compose(R.head, R.keys)
 const value = R.compose(R.head, R.values)
@@ -64,7 +57,7 @@ const RootPermissions = ({ data }) => {
 
   return (
     <PermissionWrapper>
-      <Label>system: </Label>
+      <Label>general: </Label>
       <NumberInfo>
         <RootNumber>{plength.length}</RootNumber>
         <UnitText>项</UnitText>
@@ -76,12 +69,7 @@ const RootPermissions = ({ data }) => {
 const PermissionCell = ({ source, onMutate }) => {
   const cmsps = source.cmsPassportString
   if (isEmptyNil(cmsps)) {
-    return (
-      <AddWrapper>
-        <AddIcon src={`${ICON_ASSETS}/cmd/plus.svg`} />
-        <AddText onClick={onMutate.bind(this, source)}>添加</AddText>
-      </AddWrapper>
-    )
+    return <AdderCell onAdd={onMutate.bind(this, source)} />
   }
   const pjson = JSON.parse(cmsps)
   const cdata = R.pickBy(valueIsObj, pjson)

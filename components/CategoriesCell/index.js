@@ -11,14 +11,13 @@ import shortid from 'shortid'
 
 import { ICON_ASSETS } from '../../config'
 
+import { AdderCell } from '../../components'
 import {
   Wrapper,
   CategoryWrapper,
   CategoryTag,
-  AddWrapper,
   DeleteCross,
   AddIcon,
-  AddText,
 } from './styles'
 
 // import { inject, observer } from 'mobx-react'
@@ -49,10 +48,7 @@ class CategoriesCell extends React.Component {
     return (
       <div>
         {R.isEmpty(source.categories) ? (
-          <AddWrapper>
-            <AddIcon src={`${ICON_ASSETS}/cmd/plus.svg`} />
-            <AddText onClick={onAdd.bind(this, source)}>添加</AddText>
-          </AddWrapper>
+          <AdderCell onAdd={onAdd.bind(this, source)} />
         ) : (
           <Wrapper>
             <CategoriesList source={source} onDelete={onDelete} />

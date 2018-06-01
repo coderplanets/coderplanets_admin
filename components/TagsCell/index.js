@@ -13,14 +13,14 @@ import { ICON_ASSETS } from '../../config'
 
 // import { inject, observer } from 'mobx-react'
 // import Link from 'next/link'
+import { AdderCell } from '../../components'
+
 import {
   Wrapper,
   ListWrapper,
   TagWrapper,
-  AddWrapper,
   DeleteCross,
   AddIcon,
-  AddText,
 } from './styles'
 
 const TagsList = ({ source, onDelete }) => (
@@ -48,10 +48,7 @@ class TagsCell extends React.Component {
     return (
       <React.Fragment>
         {R.isEmpty(source.tags) ? (
-          <AddWrapper>
-            <AddIcon src={`${ICON_ASSETS}/cmd/plus.svg`} />
-            <AddText onClick={onAdd.bind(this, part, source)}>添加</AddText>
-          </AddWrapper>
+          <AdderCell onAdd={onAdd.bind(this, part, source)} />
         ) : (
           <Wrapper>
             <TagsList source={source} onDelete={onDelete} />

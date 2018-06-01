@@ -21,6 +21,7 @@ export { default as Navigator } from './Navigator'
 export { default as ThemeSelector } from './ThemeSelector'
 
 // Table cell
+export { default as AdderCell } from './AdderCell'
 export { default as MaybeCell } from './MaybeCell'
 export { default as CommunityCell } from './CommunityCell'
 export { default as UserCell } from './UserCell'
