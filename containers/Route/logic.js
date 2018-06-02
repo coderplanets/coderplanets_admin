@@ -45,16 +45,14 @@ const getSubPath = routeObj => {
 }
 
 export function syncRoute(routeObj) {
-  const mainQuery = getMainPath(routeObj)
-  const subQuery = getSubPath(routeObj)
+  const mainPath = getMainPath(routeObj)
+  const subPath = getSubPath(routeObj)
 
   const { query } = routeObj
 
-  // TODO: mainQuery -> mainPath
-  //       subQuery  -> subPath
   route.markState({
-    mainQuery,
-    subQuery,
+    mainPath,
+    subPath,
     query,
   })
 }

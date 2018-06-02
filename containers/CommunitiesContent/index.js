@@ -31,7 +31,7 @@ const renderChildContent = (route, store, restProps) => {
     pagedTagsData,
   } = store
 
-  switch (route.subQuery) {
+  switch (route.subPath) {
     case ROUTE.TAGS: {
       return <TagsContent data={pagedTagsData} restProps={restProps} />
     }

@@ -25,10 +25,10 @@ const UsersBannerStore = t
       return self.filteredUsersCount
     },
     get route() {
-      const { mainQuery, subQuery } = self.root.route
+      const { mainPath, subPath } = self.root.route
       return {
-        mainQuery,
-        subQuery,
+        mainPath,
+        subPath,
       }
     },
   }))

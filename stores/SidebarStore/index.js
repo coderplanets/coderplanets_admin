@@ -67,12 +67,12 @@ const SidebarStore = t
       return self.root.curPath
     },
     get activeRaw() {
-      return self.root.route.mainQuery
+      return self.root.route.mainPath
     },
     get activePart() {
-      const { subQuery } = self.root.route
+      const { subPath } = self.root.route
 
-      return R.isEmpty(subQuery) ? ROUTE.COMMUNITIES : subQuery
+      return R.isEmpty(subPath) ? ROUTE.COMMUNITIES : subPath
     },
 
     get subscribedCommunities() {

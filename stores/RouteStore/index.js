@@ -21,17 +21,17 @@ const Query = t.model('Query', {
 
 const RouteStore = t
   .model('RouteStore', {
-    mainQuery: t.optional(t.string, ''),
-    subQuery: t.optional(t.string, ''),
+    mainPath: t.optional(t.string, ''),
+    subPath: t.optional(t.string, ''),
     query: t.optional(Query, {}),
   })
   .views(self => ({
     get curPath() {
-      return self.mainQuery
+      return self.mainPath
     },
     get curRoute() {
-      const { mainQuery, subQuery } = self
-      return { mainQuery, subQuery }
+      const { mainPath, subPath } = self
+      return { mainPath, subPath }
     },
   }))
   .actions(self => ({
@@ -47,8 +47,8 @@ const RouteStore = t
       /* debug('final query =>  ', query) */
       if (typeof window !== 'undefined') {
         return Router.push({
-          pathname: `/${self.mainQuery}`,
-          asPath: `/${self.subQuery}`,
+          pathname: `/${self.mainPath}`,
+          asPath: `/${self.subPath}`,
           query,
           shallow: true,
         })

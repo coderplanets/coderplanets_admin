@@ -31,10 +31,10 @@ const CommunitiesBannerStore = t
       return getParent(self)
     },
     get route() {
-      const { mainQuery, subQuery } = stripMobx(self.root.route)
+      const { mainPath, subPath } = stripMobx(self.root.route)
       return {
-        mainQuery,
-        subQuery,
+        mainPath,
+        subPath,
       }
     },
   }))

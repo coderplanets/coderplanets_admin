@@ -40,10 +40,10 @@ const CommunitiesContentStore = t
     },
 
     get route() {
-      const { mainQuery, subQuery } = self.root.route
+      const { mainPath, subPath } = self.root.route
       return {
-        mainQuery,
-        subQuery,
+        mainPath,
+        subPath,
       }
     },
     get pagedCommunitiesData() {

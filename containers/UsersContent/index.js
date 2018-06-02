@@ -22,7 +22,7 @@ const debug = makeDebugger('C:UsersContent')
 const renderChildBanner = (route, store, restProps) => {
   const { pagedUsersData } = store
 
-  switch (route.subQuery) {
+  switch (route.subPath) {
     case ROUTE.USERS: {
       return <IndexContent data={pagedUsersData} restProps={restProps} />
     }

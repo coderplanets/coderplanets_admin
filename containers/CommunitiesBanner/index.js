@@ -33,7 +33,7 @@ const renderChildBanner = (route, store) => {
     filterdCategoriesCount,
   } = store
 
-  switch (route.subQuery) {
+  switch (route.subPath) {
     case ROUTE.CATEGORIES: {
       return (
         <CategoryBanner

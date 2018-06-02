@@ -24,10 +24,10 @@ const CommunityContentStore = t
       return getParent(self)
     },
     get route() {
-      const { mainQuery, subQuery } = self.root.route
+      const { mainPath, subPath } = self.root.route
       return {
-        mainQuery,
-        subQuery,
+        mainPath,
+        subPath,
       }
     },
     get pagedPostsData() {

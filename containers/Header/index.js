@@ -60,12 +60,12 @@ const translate = key => {
   return key
 }
 
-const SubRouteContent = ({ subQuery }) => {
-  if (subQuery) {
+const SubRouteContent = ({ subPath }) => {
+  if (subPath) {
     return (
       <SubRoute>
         <MiniMapDivider />
-        <MiniMapTitle>{translate(subQuery)}</MiniMapTitle>
+        <MiniMapTitle>{translate(subPath)}</MiniMapTitle>
       </SubRoute>
     )
   }
@@ -74,17 +74,17 @@ const SubRouteContent = ({ subQuery }) => {
 
 const MiniMap = ({ curRoute }) => {
   const defaultIcon = 'js'
-  const { mainQuery, subQuery } = curRoute
-  const iconKey = mainQuery.length > 1 ? mainQuery : defaultIcon
+  const { mainPath, subPath } = curRoute
+  const iconKey = mainPath.length > 1 ? mainPath : defaultIcon
 
-  switch (mainQuery) {
+  switch (mainPath) {
     case 'communities': {
       return (
         <MiniMapWrapper>
           <SettingLogo src={`${ICON_ASSETS}/cmd/all.svg`} />
           <MiniMapDivider />
           <MiniMapTitle>社区设置</MiniMapTitle>
-          <SubRouteContent subQuery={subQuery} />
+          <SubRouteContent subPath={subPath} />
         </MiniMapWrapper>
       )
     }
@@ -94,7 +94,7 @@ const MiniMap = ({ curRoute }) => {
           <SettingLogo src={`${ICON_ASSETS}/cmd/users.svg`} />
           <MiniMapDivider />
           <MiniMapTitle>用户设置</MiniMapTitle>
-          <SubRouteContent subQuery={subQuery} />
+          <SubRouteContent subPath={subPath} />
         </MiniMapWrapper>
       )
     }
@@ -103,8 +103,8 @@ const MiniMap = ({ curRoute }) => {
         <MiniMapWrapper>
           <CommunityLogo src={`${ICON_ASSETS}/pl/${iconKey}.svg`} />
           <MiniMapDivider />
-          <MiniMapTitle>{mainQuery}</MiniMapTitle>
-          <SubRouteContent subQuery={subQuery} />
+          <MiniMapTitle>{mainPath}</MiniMapTitle>
+          <SubRouteContent subPath={subPath} />
         </MiniMapWrapper>
       )
     }

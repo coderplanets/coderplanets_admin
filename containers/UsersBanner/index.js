@@ -26,7 +26,7 @@ const debug = makeDebugger('C:UsersBanner')
 const renderChildBanner = (route, store) => {
   const { usersTotalCount, filteredCount } = store
 
-  switch (route.subQuery) {
+  switch (route.subPath) {
     case ROUTE.PAYS: {
       return <PaysBanner totalCount={200} filteredCount={100} />
     }

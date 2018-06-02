@@ -33,7 +33,7 @@ const renderChildBanner = (route, store) => {
     /* curPostsTotalCount, */
   } = store
 
-  switch (route.subQuery) {
+  switch (route.subPath) {
     case ROUTE.POSTS: {
       return (
         <PostsBanner
