@@ -1,6 +1,6 @@
 import R from 'ramda'
 
-import { makeDebugger, isEmptyNil } from '../../utils'
+import { makeDebugger /*  isEmptyNil, getParameterByName */ } from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('L:Route')
@@ -8,49 +8,102 @@ const debug = makeDebugger('L:Route')
 
 let route = null
 
-const getAsPathList = R.compose(
+/*
+   const getAsPathList = R.compose(
+   R.reject(R.isEmpty),
+   R.split('/'),
+   R.prop('asPath')
+   )
+
+   const getQueryMain = routeObj => {
+   if (R.isEmpty(routeObj)) return ''
+
+   if (isEmptyNil(routeObj.query) && routeObj.pathname !== '/') {
+   return routeObj.pathname.slice(1)
+   } else if (isEmptyNil(routeObj.query) && routeObj.pathname === '/') {
+   const asPathList = getAsPathList(routeObj)
+   return R.head(asPathList)
+   }
+
+   return routeObj.query.main
+   }
+
+   const getQuerySub = routeObj => {
+   const asPathList = getAsPathList(routeObj)
+   return R.last(asPathList)
+   }
+ */
+
+const asPathForMain = R.compose(
+  R.head,
+  R.split('?'),
+  R.head,
   R.reject(R.isEmpty),
   R.split('/'),
   R.prop('asPath')
 )
 
-const getQueryMain = routeObj => {
-  if (R.isEmpty(routeObj)) return ''
+const INDEX = ''
+const getMainPath = routeObj => {
+  if (R.isEmpty(routeObj)) return INDEX
+  const { asPath } = routeObj
+  if (asPath === '/') return INDEX
 
-  if (isEmptyNil(routeObj.query) && routeObj.pathname !== '/') {
-    return routeObj.pathname.slice(1)
-  } else if (isEmptyNil(routeObj.query) && routeObj.pathname === '/') {
-    const asPathList = getAsPathList(routeObj)
-    return R.head(asPathList)
-  }
+  /* const test = splitAsPathTest('/communities/posts/?page=1&size=20') */
+  /* console.log('test --> ', test) */
 
-  return routeObj.query.main
+  /* const asPathList = splitAsPath(routeObj) */
+  /* console.log('asPathList -- > ', asPathList) */
+  return asPathForMain(routeObj)
 }
 
-const getQuerySub = routeObj => {
-  const asPathList = getAsPathList(routeObj)
-  return R.last(asPathList)
+const asPathForSub = R.compose(
+  R.reject(R.isEmpty),
+  R.split('/'),
+  R.head,
+  R.reject(R.contains('=')),
+  R.reject(R.isEmpty),
+  R.split('?'),
+  R.prop('asPath')
+)
+
+const getSubPath = routeObj => {
+  if (R.isEmpty(routeObj)) return INDEX
+
+  const { asPath } = routeObj
+  if (asPath === '/') return INDEX
+
+  const asPathList = asPathForSub(routeObj)
+  /* console.log('asPath jjj -> ', asPathList) */
+  /* const asPathList = asPathForSub('/communities') */
+
+  /* const asPathList = asPathForSub('/communities/posts?page=2&size=20') */
+  /* const asPathListtest = asPathForSub('/communities/posts/?page=2&size=20') */
+  /* const asPathListtest = fuckmetest('/communities') */
+  /* const asPathListtest = fuckmetest('/communities/') */
+  /* console.log('asPathListtest jjj -> ', asPathListtest) */
+
+  return asPathList.length > 1 ? asPathList[1] : asPathList[0]
 }
 
 export function syncRoute(routeObj) {
-  /* console.log('syncRoute routeObj: ', routeObj) */
-  /*
-     console.log('syncRoute query: ', routeObj.query)
-     console.log('syncRoute pathname: ', routeObj.pathname)
-     console.log('syncRoute asPath: ', routeObj.asPath)
-     console.log('syncRoute route: ', routeObj.route)
+  /* const mainQuery = getQueryMain(routeObj) */
+  const mainQuery = getMainPath(routeObj)
+  /* console.log('mainQuery ## ', mainQuery) */
 
-     console.log(' ----------  ')
-     console.log('### getQueryMain: ', getQueryMain(routeObj))
-     console.log('### getQuerySub: ', getQuerySub(routeObj))
-   */
+  const subQuery = getSubPath(routeObj)
+  /* const subQuery = getSubPath(routeObj) */
+  /* const subPath = getSubPath(routeObj) */
+  /* console.log('subPath final -->  ', subPath) */
 
-  const mainQuery = getQueryMain(routeObj)
-  const subQuery = getQuerySub(routeObj)
+  const { query } = routeObj
 
+  // TODO: mainQuery -> mainPath
+  //       subQuery  -> subPath
   route.markState({
     mainQuery,
     subQuery,
+    query,
   })
 }
 

@@ -121,31 +121,29 @@ const columns = [
     dataIndex: '',
     align: 'center',
     key: 'operation',
-    render: (text, record) => {
-      return (
-        <OperationWrapper>
-          <Button
-            size="small"
-            type="primary"
-            ghost
-            onClick={logic.onEdit.bind(this, record)}
-          >
-            编辑
+    render: (text, record) => (
+      <OperationWrapper>
+        <Button
+          size="small"
+          type="primary"
+          ghost
+          onClick={logic.onEdit.bind(this, record)}
+        >
+          编辑
+        </Button>
+        <Space right="10px" />
+        <Popconfirm
+          title="确定删除 ?？"
+          okText="Y"
+          cancelText="N"
+          onConfirm={logic.onDelete.bind(this, record)}
+        >
+          <Button size="small" type="red" ghost>
+            删除
           </Button>
-          <Space right="10px" />
-          <Popconfirm
-            title="确定删除 ?？"
-            okText="Y"
-            cancelText="N"
-            onConfirm={logic.onDelete.bind(this, record)}
-          >
-            <Button size="small" type="red" ghost>
-              删除
-            </Button>
-          </Popconfirm>
-        </OperationWrapper>
-      )
-    },
+        </Popconfirm>
+      </OperationWrapper>
+    ),
   },
 ]
 

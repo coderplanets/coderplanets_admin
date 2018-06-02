@@ -1,4 +1,5 @@
 import R from 'ramda'
+/* import Router from 'next/router' */
 
 import {
   asyncRes,
@@ -36,7 +37,10 @@ export function loadCommunities(page = 1) {
     communitiesLoading: true,
   })
   scrollIntoEle(TYPE.APP_HEADER_ID)
+
   sr71$.query(S.pagedCommunities, args)
+
+  communitiesContent.markQuery({ page, size })
 }
 
 export function loadPosts(page = 1) {
@@ -275,6 +279,4 @@ export function init(selectedStore) {
   communitiesContent = selectedStore
   debug(communitiesContent)
   sr71$.data().subscribe($solver(DataSolver, ErrSolver))
-
-  // loadCommunities()
 }

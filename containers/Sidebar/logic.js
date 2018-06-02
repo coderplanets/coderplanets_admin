@@ -34,7 +34,14 @@ export function pin() {
 export function extendMenuBar(communityRaw) {
   switch (communityRaw) {
     case ROUTE.COMMUNITIES: {
-      return Router.push(`/${ROUTE.COMMUNITIES}`, `/${communityRaw}/`)
+      /* return Router.push(`/${ROUTE.COMMUNITIES}`, `/${communityRaw}/`) */
+      return Router.push(
+        {
+          pathname: `/${ROUTE.COMMUNITIES}`,
+          asPath: `/${communityRaw}/`,
+        }
+        /* `/${ROUTE.COMMUNITIES}`, `/${communityRaw}/` */
+      )
     }
     case ROUTE.USERS: {
       return Router.push(`/${ROUTE.USERS}`, `/${communityRaw}/`)

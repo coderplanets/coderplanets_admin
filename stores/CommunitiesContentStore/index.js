@@ -60,6 +60,9 @@ const CommunitiesContentStore = t
     },
   }))
   .actions(self => ({
+    markQuery(query) {
+      self.root.route.markQuery(query)
+    },
     markState(sobj) {
       markStates(sobj, self)
     },
