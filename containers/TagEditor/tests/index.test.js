@@ -4,7 +4,7 @@
 // import TagEditor from '../index'
 
 describe('TODO <TagEditor />', () => {
-  it('Expect to have unit tests specified', () => {
+  it('-Expect to have unit tests specified', () => {
     expect(true).toEqual(true)
   })
 })
