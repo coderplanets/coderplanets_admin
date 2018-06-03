@@ -1,8 +1,8 @@
 // import R from 'ramda'
 // import Router from 'next/router'
 import {
-  gqRes,
-  gqErr,
+  asyncRes,
+  asyncErr,
   makeDebugger,
   $solver,
   ERR,
@@ -15,7 +15,9 @@ import SR71 from '../../utils/network/sr71'
 
 import S from './schema'
 
-const sr71$ = new SR71()
+const sr71$ = new SR71({
+  resv_event: [EVENT.PREVIEW_CLOSE],
+})
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('L:communitiesBanner')
 /* eslint-enable no-unused-vars */
@@ -23,7 +25,7 @@ const debug = makeDebugger('L:communitiesBanner')
 let communitiesBanner = null
 
 export function loadCommunities() {
-  sr71$.query(S.communities, { filter: {} })
+  sr71$.query(S.pagedCommunities, { filter: {} })
 }
 
 export function loadPosts() {
@@ -31,55 +33,102 @@ export function loadPosts() {
 }
 
 export function loadTags() {
-  sr71$.query(S.tags, { filter: {} })
+  sr71$.query(S.pagedTags, { filter: {} })
 }
 
-export function onAdd() {
-  debug('onAdd')
-  dispatchEvent(EVENT.NAV_CREATE_COMMUNITY, {
-    type: TYPE.PREVIEW_CREATE_COMMUNITY,
-  })
+export const loadCategories = () =>
+  sr71$.query(S.pagedCategories, { filter: {} })
+
+export function onAdd(part) {
+  switch (part) {
+    case 'tags': {
+      return dispatchEvent(EVENT.NAV_CREATE_TAG, {
+        type: TYPE.PREVIEW_CREATE_TAG,
+      })
+    }
+    case 'categories': {
+      return dispatchEvent(EVENT.NAV_CREATE_CATEGORY, {
+        type: TYPE.PREVIEW_CREATE_CATEGORY,
+      })
+    }
+    default: {
+      debug('onAdd part: ', part)
+
+      return dispatchEvent(EVENT.NAV_CREATE_COMMUNITY, {
+        type: TYPE.PREVIEW_CREATE_COMMUNITY,
+      })
+    }
+  }
 }
 
 const DataSolver = [
   {
-    match: gqRes('communities'),
-    action: ({ communities: { totalCount } }) =>
+    match: asyncRes('pagedCommunities'),
+    action: ({ pagedCommunities: { totalCount } }) =>
       communitiesBanner.markState({
         totalCount,
       }),
   },
   {
-    match: gqRes('tags'),
-    action: ({ tags: { totalCount } }) =>
+    match: asyncRes('pagedTags'),
+    action: ({ pagedTags: { totalCount } }) =>
       communitiesBanner.markState({
         tagsTotalCount: totalCount,
       }),
   },
   {
-    match: gqRes('pagedPosts'),
+    match: asyncRes('pagedCategories'),
+    action: ({ pagedCategories: { totalCount } }) => {
+      communitiesBanner.markState({
+        categoriesTotalCount: totalCount,
+      })
+    },
+  },
+  {
+    match: asyncRes('pagedPosts'),
     action: ({ pagedPosts: { totalCount } }) =>
       communitiesBanner.markState({
         postsTotalCount: totalCount,
       }),
   },
+  {
+    match: asyncRes(EVENT.PREVIEW_CLOSE),
+    action: res => {
+      const closeType = res[EVENT.PREVIEW_CLOSE].type
+      switch (closeType) {
+        case TYPE.COMMUNITIES_REFRESH: {
+          return loadCommunities()
+        }
+        case TYPE.TAGS_REFRESH: {
+          return loadTags()
+        }
+        case TYPE.GATEGORIES_REFRESH: {
+          return loadCategories()
+        }
+        default: {
+          debug('unknow event: ', closeType)
+          /* return loadPosts() */
+        }
+      }
+    },
+  },
 ]
 
 const ErrSolver = [
   {
-    match: gqErr(ERR.CRAPHQL),
+    match: asyncErr(ERR.CRAPHQL),
     action: ({ details }) => {
       debug('ERR.CRAPHQL -->', details)
     },
   },
   {
-    match: gqErr(ERR.TIMEOUT),
+    match: asyncErr(ERR.TIMEOUT),
     action: ({ details }) => {
       debug('ERR.TIMEOUT -->', details)
     },
   },
   {
-    match: gqErr(ERR.NETWORK),
+    match: asyncErr(ERR.NETWORK),
     action: ({ details }) => {
       debug('ERR.NETWORK -->', details)
     },

@@ -1,6 +1,19 @@
 /*
    index of all the containers
  */
+
+// viewers
 export { default as ArticleViwer } from './ArticleViwer'
-export { default as AccountEditor } from './AccountEditor'
 export { default as AccountViewer } from './AccountViewer'
+
+// editors
+export { default as AccountEditor } from './AccountEditor'
+export { default as CommunityEditor } from './CommunityEditor'
+export { default as TagEditor } from './TagEditor'
+export { default as CategoryEditor } from './CategoryEditor'
+export { default as PermissionEditor } from './PermissionEditor'
+
+// setters
+export { default as CategorySetter } from './CategorySetter'
+export { default as TagSetter } from './TagSetter'
+export { default as CommunitySetter } from './CommunitySetter'

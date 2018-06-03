@@ -8,9 +8,9 @@ import * as logic from './logic'
 import IndexBanner from './IndexBanner'
 import EditorsBanner from './EditorsBanner'
 import PostsBanner from './PostsBanner'
+import CategoryBanner from './CategoryBanner'
 import TagsBanner from './TagsBanner'
 
-// TODO: extract banner styles to common components
 import { BannerContainer } from './styles'
 
 /* eslint-disable no-unused-vars */
@@ -19,30 +19,56 @@ const debug = makeDebugger('C:CommunitiesBanner')
 
 const renderChildBanner = (route, store) => {
   const {
+    // communities
     totalCount,
-    curTotalCount,
+    filteredTotalCount,
+    // tags
     tagsTotalCount,
+    filterdTagsCount,
+    // posts
     postsTotalCount,
-    curPostsTotalCount,
+    filteredPostsCount,
+    // categories
+    categoriesTotalCount,
+    filterdCategoriesCount,
   } = store
 
-  switch (route.subQuery) {
+  switch (route.subPath) {
+    case ROUTE.CATEGORIES: {
+      return (
+        <CategoryBanner
+          totalCount={categoriesTotalCount}
+          filteredCount={filterdCategoriesCount}
+        />
+      )
+    }
+
     case ROUTE.TAGS: {
-      return <TagsBanner totalCount={tagsTotalCount} curCount={1} />
+      return (
+        <TagsBanner
+          totalCount={tagsTotalCount}
+          filteredCount={filterdTagsCount}
+        />
+      )
     }
     case ROUTE.EDITORS: {
-      return <EditorsBanner totalCount={100} curCount={10} />
+      return <EditorsBanner totalCount={100} filteredCount={10} />
     }
     case ROUTE.POSTS: {
       return (
         <PostsBanner
           totalCount={postsTotalCount}
-          curCount={curPostsTotalCount}
+          filteredCount={filteredPostsCount}
         />
       )
     }
     default: {
-      return <IndexBanner totalCount={totalCount} curCount={curTotalCount} />
+      return (
+        <IndexBanner
+          totalCount={totalCount}
+          filteredCount={filteredTotalCount}
+        />
+      )
     }
   }
 }
@@ -55,8 +81,7 @@ class CommunitiesBannerContainer extends React.Component {
     const { communitiesBanner } = this.props
     const { route } = communitiesBanner
     /* const { detail } = banner */
-    // debug('route ccc: ', route)
-    // const restProps = { ...this.props.communitiesBanner }
+    /* const restProps = { ...this.props.communitiesBanner } */
 
     return (
       <BannerContainer>

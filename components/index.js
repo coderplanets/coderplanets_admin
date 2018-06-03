@@ -20,7 +20,19 @@ export { default as Pagi } from './Pagi'
 export { default as Navigator } from './Navigator'
 export { default as ThemeSelector } from './ThemeSelector'
 
+// Table cell
+export { default as AdderCell } from './AdderCell'
+export { default as MaybeCell } from './MaybeCell'
+export { default as CommunityCell } from './CommunityCell'
 export { default as UserCell } from './UserCell'
+export { default as ColorCell } from './ColorCell'
+export { default as SexCell } from './SexCell'
+export { default as FormInputer } from './FormInputer'
+export { default as FormSelector } from './FormSelector'
+export { default as TagColorSelector } from './TagColorSelector'
+export { default as CategoriesCell } from './CategoriesCell'
+export { default as TagsCell } from './TagsCell'
+export { default as PermissionCell } from './PermissionCell'
 
 // loading component
 export {
@@ -32,4 +44,15 @@ export {
 } from './LoadingEffects'
 
 // UI library (currently use antd)
-export { Affix, Button, Tabs, Tooltip, Icon, Input, Table, Tag } from 'antd'
+export {
+  Affix,
+  Button,
+  Tabs,
+  Tooltip,
+  Icon,
+  Input,
+  Table,
+  Tag,
+  Select,
+  Popconfirm,
+} from 'antd'

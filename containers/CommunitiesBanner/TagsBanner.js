@@ -21,17 +21,17 @@ class TagsBanner extends React.Component {
   }
 
   render() {
-    const { curCount, totalCount } = this.props
+    const { filteredCount, totalCount } = this.props
     return (
       <BannerContentWrapper>
         <BannerCountBrief
-          curCount={curCount}
+          filteredCount={filteredCount}
           totalCount={totalCount}
           part="标签"
         />
         <Operation>
           <OperationItem>
-            <OperationIcon path={`${ICON_ASSETS}/cmd/filter2.svg`} />
+            <OperationIcon src={`${ICON_ASSETS}/cmd/filter2.svg`} />
             <Popover
               content={<div>兼容各个页面的 Filter 菜单</div>}
               trigger="hover"
@@ -44,14 +44,14 @@ class TagsBanner extends React.Component {
             </FilterTags>
           </OperationItem>
           <OperationDivider />
-          <OperationItem onClick={logic.onAdd}>
-            <OperationIconChart path={`${ICON_ASSETS}/cmd/plus.svg`} />
+          <OperationItem onClick={logic.onAdd.bind(this, 'tags')}>
+            <OperationIconChart src={`${ICON_ASSETS}/cmd/plus.svg`} />
             添加
           </OperationItem>
           <OperationDivider />
           <OperationItem>
-            <OperationIcon path={`${ICON_ASSETS}/cmd/chart.svg`} />
-            {/* <OperationIconChart path={`${ICON_ASSETS}/cmd/list.svg`} /> */}
+            <OperationIcon src={`${ICON_ASSETS}/cmd/chart.svg`} />
+            {/* <OperationIconChart src={`${ICON_ASSETS}/cmd/list.svg`} /> */}
             统计
           </OperationItem>
         </Operation>

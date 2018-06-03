@@ -14,7 +14,7 @@ export default class MyDocument extends Document {
         <Head>
           <title>mastani</title>
           <link
-            href="https://cdn.bootcss.com/antd/3.1.4/antd.css"
+            href="https://cdn.bootcss.com/antd/3.5.2/antd.min.css"
             rel="stylesheet"
           />
           <script
@@ -31,7 +31,7 @@ export default class MyDocument extends Document {
             gtag('js', new Date());
 
             gtag('config', '${process.env.GA_TRACING_ID}');
-              `,
+                `,
             }}
           />
           {styleTags}

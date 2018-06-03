@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import ReactSVG from 'react-svg'
-// import { Animate } from '../../../utils'
+
+import { Img } from '../../../components'
 import { BaseBanner, BaseBannerContent } from './index'
 
 export const BannerContainer = BaseBanner.extend`
@@ -9,30 +9,6 @@ export const BannerContainer = BaseBanner.extend`
   color: #707084;
 `
 export const BannerContentWrapper = BaseBannerContent.extend``
-
-export const Result = styled.div`
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-`
-
-export const ResultTop = styled.div`
-  margin-bottom: 4px;
-`
-export const ResultBottom = styled.div`
-  display: flex;
-`
-
-export const ResultNumber = styled.div`
-  color: #e0e0e3;
-  font-size: 1.1rem;
-  margin-left: 10px;
-  margin-right: 10px;
-`
-
-export const ResultText = styled.div`
-  margin-top: 4px;
-`
 
 export const Operation = styled.div`
   align-self: flex-end;
@@ -64,7 +40,7 @@ export const FilterTags = styled.div`
   margin-left: 8px;
 `
 
-export const OperationIcon = styled(ReactSVG)`
+export const OperationIcon = styled(Img)`
   fill: #646479;
   width: 16px;
   height: 16px;

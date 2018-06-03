@@ -27,7 +27,10 @@ class {{ properCase name }}Container extends React.Component {
 
   render() {
     return (
-      <div>{{ properCase name }} container!</div>
+      <div>
+        <h2>coderplanets</h2>
+        {{ properCase name }} container!
+      </div>
       {{#if wantMessages}}
       <FormattedMessage {...messages.header} />
       {{/if}}

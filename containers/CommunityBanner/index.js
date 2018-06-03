@@ -13,7 +13,10 @@ import { makeDebugger, storePlug, ROUTE } from '../../utils'
 import * as logic from './logic'
 
 import PostsBanner from './PostsBanner'
+import TagsBanner from './TagsBanner'
 import ThreadsBanner from './ThreadsBanner'
+import SubscribersBanner from './SubscribersBanner'
+
 import { BannerContainer } from './styles'
 
 /* eslint-disable no-unused-vars */
@@ -24,27 +27,37 @@ const renderChildBanner = (route, store) => {
   const {
     /* totalCount, */
     /* curTotalCount, */
-    /* tagsTotalCount, */
+    tagsTotalCount,
     postsTotalCount,
-    postsCurCount,
+    filteredPostsCount,
     /* curPostsTotalCount, */
   } = store
 
-  debug(store)
-  switch (route.subQuery) {
+  switch (route.subPath) {
     case ROUTE.POSTS: {
       return (
         <PostsBanner
           totalCount={postsTotalCount}
-          curCount={postsCurCount - 1}
+          filteredCount={filteredPostsCount}
+        />
+      )
+    }
+    case ROUTE.SUBSCRIBERS: {
+      return <SubscribersBanner totalCount={100} filteredCount={10} />
+    }
+    case ROUTE.TAGS: {
+      return (
+        <TagsBanner
+          totalCount={tagsTotalCount}
+          filteredCount={tagsTotalCount}
         />
       )
     }
     case ROUTE.THREADS: {
-      return <ThreadsBanner totalCount={200} curCount={100} />
+      return <ThreadsBanner totalCount={200} filteredCount={100} />
     }
     default: {
-      return <h2>Index</h2>
+      return <h2>Index of Community</h2>
     }
   }
 }

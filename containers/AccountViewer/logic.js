@@ -1,7 +1,7 @@
 // import R from 'ramda'
 import {
-  gqRes,
-  gqErr,
+  asyncRes,
+  asyncErr,
   makeDebugger,
   $solver,
   ERR,
@@ -39,7 +39,6 @@ export function logout() {
 }
 
 export function editProfile() {
-  console.log('do the editProfile logic')
   dispatchEvent(EVENT.NAV_EDIT, {
     type: TYPE.PREVIEW_ACCOUNT_EDIT,
     data: { user: 'fuck' },
@@ -48,33 +47,33 @@ export function editProfile() {
 
 const DataSolver = [
   {
-    match: gqRes('account'),
+    match: asyncRes('account'),
     action: res => {
       const data = res.account
       accountViewer.updateAccount(data)
     },
   },
   {
-    match: gqRes(EVENT.LOGIN),
+    match: asyncRes(EVENT.LOGIN),
     action: () => loadAccount(),
   },
 ]
 
 const ErrSolver = [
   {
-    match: gqErr(ERR.CRAPHQL),
+    match: asyncErr(ERR.CRAPHQL),
     action: ({ details }) => {
       debug('ERR.CRAPHQL -->', details)
     },
   },
   {
-    match: gqErr(ERR.TIMEOUT),
+    match: asyncErr(ERR.TIMEOUT),
     action: ({ details }) => {
       debug('ERR.TIMEOUT -->', details)
     },
   },
   {
-    match: gqErr(ERR.NETWORK),
+    match: asyncErr(ERR.NETWORK),
     action: ({ details }) => {
       debug('ERR.NETWORK -->', details)
     },

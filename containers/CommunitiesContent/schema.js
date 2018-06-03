@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
-const communities = gql`
-  query communities($filter: PagedFilter!) {
-    communities(filter: $filter) {
+const pagedCommunities = gql`
+  query($filter: PagedFilter!) {
+    pagedCommunities(filter: $filter) {
       entries {
         id
         title
@@ -10,6 +10,10 @@ const communities = gql`
         raw
         logo
         subscribersCount
+        categories {
+          id
+          title
+        }
         insertedAt
         updatedAt
       }
@@ -20,14 +24,46 @@ const communities = gql`
     }
   }
 `
-const tags = gql`
-  query tags($filter: PagedFilter!) {
-    tags(filter: $filter) {
+const pagedCategories = gql`
+  query($filter: PagedFilter!) {
+    pagedCategories(filter: $filter) {
+      entries {
+        id
+        title
+        communities {
+          id
+          logo
+          title
+        }
+        author {
+          id
+          nickname
+          avatar
+        }
+        insertedAt
+        updatedAt
+      }
+      pageNumber
+      pageSize
+      totalCount
+      totalPages
+    }
+  }
+`
+
+const pagedTags = gql`
+  query($filter: PagedFilter!) {
+    pagedTags(filter: $filter) {
       entries {
         id
         title
         color
         part
+        community {
+          id
+          logo
+          title
+        }
         insertedAt
         updatedAt
       }
@@ -39,7 +75,7 @@ const tags = gql`
   }
 `
 const pagedPosts = gql`
-  query pagedPosts($filter: PagedArticleFilter) {
+  query($filter: PagedArticleFilter) {
     pagedPosts(filter: $filter) {
       entries {
         id
@@ -53,6 +89,16 @@ const pagedPosts = gql`
         communities {
           id
           title
+          logo
+        }
+        tags {
+          id
+          title
+          color
+          part
+          community {
+            id
+          }
         }
         commentsCount
         commentsParticipatorsCount
@@ -68,11 +114,52 @@ const pagedPosts = gql`
     }
   }
 `
+const deleteCommunity = gql`
+  mutation($id: ID!) {
+    deleteCommunity(id: $id) {
+      id
+    }
+  }
+`
+const unsetCommunity = gql`
+  mutation($part: CmsPart, $id: ID!, $communityId: ID!) {
+    unsetCommunity(part: $part, id: $id, communityId: $communityId) {
+      id
+    }
+  }
+`
+const unsetCategory = gql`
+  mutation($categoryId: ID!, $communityId: ID!) {
+    unsetCategory(categoryId: $categoryId, communityId: $communityId) {
+      id
+    }
+  }
+`
+const setTag = gql`
+  mutation($part: String!, $id: ID!, $tagId: ID!, $communityId: ID!) {
+    setTag(part: $part, id: $id, tagId: $tagId, communityId: $communityId) {
+      id
+    }
+  }
+`
+const unsetTag = gql`
+  mutation($part: String!, $id: ID!, $tagId: ID!, $communityId: ID!) {
+    unsetTag(part: $part, id: $id, tagId: $tagId, communityId: $communityId) {
+      id
+    }
+  }
+`
 
 const schema = {
-  communities,
-  tags,
+  pagedCommunities,
+  pagedTags,
+  pagedCategories,
   pagedPosts,
+  deleteCommunity,
+  unsetCategory,
+  unsetCommunity,
+  setTag,
+  unsetTag,
 }
 
 export default schema

@@ -1,65 +1,62 @@
 import R from 'ramda'
 
-import { makeDebugger, dispatchEvent, EVENT, isEmptyNil } from '../../utils'
+import { makeDebugger /*  isEmptyNil, getParameterByName */ } from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('L:Route')
 /* eslint-enable no-unused-vars */
 
 let route = null
+const INDEX = ''
 
-const getAsPathList = R.compose(
+// example: /getme/xxx?aa=bb&cc=dd
+const parseMainPath = R.compose(
+  R.head,
+  R.split('?'),
+  R.head,
   R.reject(R.isEmpty),
   R.split('/'),
   R.prop('asPath')
 )
 
-const getQueryMain = routeObj => {
-  if (R.isEmpty(routeObj)) return ''
+// example: /xxx/getme?aa=bb&cc=dd
+const parseSubPathList = R.compose(
+  R.reject(R.isEmpty),
+  R.split('/'),
+  R.head,
+  R.reject(R.contains('=')),
+  R.reject(R.isEmpty),
+  R.split('?'),
+  R.prop('asPath')
+)
 
-  if (isEmptyNil(routeObj.query) && routeObj.pathname !== '/') {
-    return routeObj.pathname.slice(1)
-  } else if (isEmptyNil(routeObj.query) && routeObj.pathname === '/') {
-    const asPathList = getAsPathList(routeObj)
-    return R.head(asPathList)
-  }
+const getMainPath = routeObj => {
+  if (R.isEmpty(routeObj)) return INDEX
+  if (routeObj.asPath === '/') return INDEX
 
-  return routeObj.query.main
+  return parseMainPath(routeObj)
 }
 
-const getQuerySub = routeObj => {
-  const asPathList = getAsPathList(routeObj)
-  return R.last(asPathList)
+const getSubPath = routeObj => {
+  if (R.isEmpty(routeObj)) return INDEX
+  if (routeObj.asPath === '/') return INDEX
+
+  const asPathList = parseSubPathList(routeObj)
+
+  return asPathList.length > 1 ? asPathList[1] : asPathList[0]
 }
 
 export function syncRoute(routeObj) {
-  /* console.log('syncRoute routeObj: ', routeObj) */
-  /*
-     console.log('syncRoute query: ', routeObj.query)
-     console.log('syncRoute pathname: ', routeObj.pathname)
-     console.log('syncRoute asPath: ', routeObj.asPath)
-     console.log('syncRoute route: ', routeObj.route)
-   */
+  const mainPath = getMainPath(routeObj)
+  const subPath = getSubPath(routeObj)
 
-  console.log(' ----------  ')
-  console.log('### getQueryMain: ', getQueryMain(routeObj))
-  console.log('### getQuerySub: ', getQuerySub(routeObj))
-
-  const mainQuery = getQueryMain(routeObj)
-  const subQuery = getQuerySub(routeObj)
+  const { query } = routeObj
 
   route.markState({
-    mainQuery,
-    subQuery,
+    mainPath,
+    subPath,
+    query,
   })
-
-  // avoid sr71/apollo default debouce
-  setTimeout(() => {
-    dispatchEvent(EVENT.ROUTE_CHANGE, {
-      mainQuery,
-      subQuery,
-    })
-  }, 500)
 }
 
 export function init(selectedStore) {

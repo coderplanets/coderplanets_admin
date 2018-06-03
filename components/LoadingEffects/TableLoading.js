@@ -1,6 +1,7 @@
 import React from 'react'
-import ReactSVG from 'react-svg'
 import styled from 'styled-components'
+
+import { Img } from '../../components'
 
 import { ICON_ASSETS } from '../../config'
 import { Animate } from '../../utils'
@@ -8,7 +9,7 @@ import { Animate } from '../../utils'
 const LoadingWrapper = styled.div`
   margin-top: 20vh;
 `
-const LoadingIcon = styled(ReactSVG)`
+const LoadingIcon = styled(Img)`
   width: 50px;
   height: 50px;
   opacity: 0.8;
@@ -23,8 +24,8 @@ const LoadingText = styled.div`
 
 const TableLoading = () => (
   <LoadingWrapper>
-    <LoadingIcon path={`${ICON_ASSETS}/cmd/rainbow_logo.svg`} />
-    <LoadingText>... 漫威的编辑真心可以 ...</LoadingText>
+    <LoadingIcon src={`${ICON_ASSETS}/cmd/rainbow_logo.svg`} />
+    <LoadingText>... 漫威的编剧真心可以 ...</LoadingText>
   </LoadingWrapper>
 )
 

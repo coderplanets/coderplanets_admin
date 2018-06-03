@@ -2,7 +2,15 @@ import React from 'react'
 import TimeAgo from 'timeago-react'
 
 import { cutFrom } from '../../utils'
-import { Pagi, Table, TableLoading, Button, Space } from '../../components'
+import {
+  Pagi,
+  Table,
+  TableLoading,
+  Button,
+  Space,
+  Popconfirm,
+  CategoriesCell,
+} from '../../components'
 
 import { CommunityIcon, OperationWrapper } from './styles'
 import * as logic from './logic'
@@ -24,7 +32,7 @@ const columns = [
     width: 80,
     render: text => {
       // TODO: jadge image type before render, currently only svg supported
-      return <CommunityIcon path={text} />
+      return <CommunityIcon src={text} />
     },
   },
   {
@@ -52,6 +60,23 @@ const columns = [
     align: 'center',
     render: text => {
       return <div>{cutFrom(text, 10)}</div>
+    },
+  },
+  {
+    title: '类别',
+    width: 350,
+    align: 'center',
+    dataIndex: 'categories',
+    render: (categoriesArray, record) => {
+      return (
+        <CategoriesCell
+          source={record}
+          categories={categoriesArray}
+          communityId={record.id}
+          onDelete={logic.unsetCategory}
+          onAdd={logic.setCategory}
+        />
+      )
     },
   },
   {
@@ -95,29 +120,30 @@ const columns = [
     width: 200,
     dataIndex: '',
     align: 'center',
-    render: (text, record) => {
-      return (
-        <OperationWrapper>
-          <Button
-            size="small"
-            type="primary"
-            ghost
-            onClick={logic.onEdit.bind(this, record)}
-          >
-            编辑
-          </Button>
-          <Space right="10px" />
-          <Button
-            size="small"
-            type="red"
-            ghost
-            onClick={logic.onDelete.bind(this, record)}
-          >
+    key: 'operation',
+    render: (text, record) => (
+      <OperationWrapper>
+        <Button
+          size="small"
+          type="primary"
+          ghost
+          onClick={logic.onEdit.bind(this, record)}
+        >
+          编辑
+        </Button>
+        <Space right="10px" />
+        <Popconfirm
+          title="确定删除 ?？"
+          okText="Y"
+          cancelText="N"
+          onConfirm={logic.onDelete.bind(this, record)}
+        >
+          <Button size="small" type="red" ghost>
             删除
           </Button>
-        </OperationWrapper>
-      )
-    },
+        </Popconfirm>
+      </OperationWrapper>
+    ),
   },
 ]
 

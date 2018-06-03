@@ -5,9 +5,21 @@
 
 import { types as t, getParent } from 'mobx-state-tree'
 
-import { markStates, TYPE, unholdPage } from '../../utils'
+// import { CMS_PARTS } from '../../config'
+
+import { Community, Category, Post, User } from '../SharedModel'
+import { markStates, TYPE, unholdPage, stripMobx } from '../../utils'
 
 // const debug = makeDebugger('S:PreviewStore')
+const Article = t.model('Article', {
+  part: t.string, // t.optional(t.enumeration('part', CMS_PARTS), CMS_PARTS[0]),
+  data: Post,
+})
+
+const EditPermission = t.model('EditPermission', {
+  type: t.string, // TODO: enumeration
+  data: User,
+})
 
 const PreviewStore = t
   .model('PreviewStore', {
@@ -20,16 +32,47 @@ const PreviewStore = t
         TYPE.PREVIEW_ROOT_STORE,
         TYPE.PREVIEW_CREATE_POST,
         TYPE.PREVIEW_CREATE_COMMUNITY,
+        TYPE.PREVIEW_UPDATE_COMMUNITY,
+        // community
+        TYPE.PREVIEW_SET_COMMUNITY,
+        // tag
+        TYPE.PREVIEW_SET_TAG,
+        TYPE.PREVIEW_CREATE_TAG,
+        TYPE.PREVIEW_UPDATE_TAG,
+        // category
+        TYPE.PREVIEW_CREATE_CATEGORY,
+        TYPE.PREVIEW_SET_CATEGORY,
+        TYPE.PREVIEW_UPDATE_CATEGORY,
+        // permission
+        TYPE.PREVIEW_CREATE_PERMISSION,
+        TYPE.PREVIEW_UPDATE_PERMISSION,
       ])
     ),
-    // header:
-    // body:
+    editCommunity: t.maybe(Community),
+    editCategory: t.maybe(Category),
+    editArticle: t.maybe(Article),
+    editPermission: t.maybe(EditPermission),
+    /* editCategory: t.maybe(SelectCommunity), */
   })
   .views(self => ({
     get root() {
       return getParent(self)
     },
-
+    get rootState() {
+      return stripMobx(self.root)
+    },
+    get editCommunityData() {
+      return stripMobx(self.editCommunity)
+    },
+    get editCategoryData() {
+      return stripMobx(self.editCategory)
+    },
+    get editArticleData() {
+      return stripMobx(self.editArticle)
+    },
+    get editPermissionData() {
+      return stripMobx(self.editPermission)
+    },
     get themeKeys() {
       return self.root.theme.themeKeys
     },

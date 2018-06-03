@@ -9,6 +9,8 @@ import {
   Button,
   Space,
   UserCell,
+  CommunityCell,
+  TagsCell,
 } from '../../components'
 
 import { OperationWrapper } from './styles'
@@ -24,6 +26,25 @@ const columns = [
     fixed: 'left',
   },
   {
+    title: '标题',
+    width: 300,
+    dataIndex: 'title',
+    align: 'center',
+    fixed: 'left',
+    render: text => {
+      return <div>{cutFrom(text, 15)}</div>
+    },
+  },
+  {
+    title: '摘要',
+    width: 400,
+    dataIndex: 'digest',
+    align: 'center',
+    render: text => {
+      return <div>{cutFrom(text, 10)}</div>
+    },
+  },
+  {
     title: '作者',
     width: 200,
     dataIndex: 'author',
@@ -33,22 +54,36 @@ const columns = [
     },
   },
   {
-    title: '标题',
-    width: 200,
-    dataIndex: 'title',
+    title: '社区',
+    width: 150,
+    dataIndex: 'communities',
     align: 'center',
-    render: text => {
-      return <div>{cutFrom(text, 15)}</div>
+    render: (communities, record) => {
+      return (
+        <CommunityCell
+          array={communities}
+          source={record}
+          part="POST"
+          onDelete={logic.unsetCommunity}
+          onAdd={logic.setCommunity}
+          withSetter
+        />
+      )
     },
   },
   {
-    title: '摘要',
-    width: 300,
-    dataIndex: 'digest',
+    title: '标签',
+    width: 200,
+    dataIndex: 'tags',
     align: 'center',
-    render: text => {
-      return <div>{cutFrom(text, 10)}</div>
-    },
+    render: (tags, record) => (
+      <TagsCell
+        part="POST"
+        source={record}
+        onDelete={logic.unsetTag}
+        onAdd={logic.setTag}
+      />
+    ),
   },
   {
     title: '浏览',
@@ -133,15 +168,6 @@ class PostsContent extends React.Component {
   componentWillMount() {
     logic.loadPosts()
   }
-  /*
-  <Table
-  columns={columns}
-  dataSource={data.entries}
-  scroll={{ x: 1500 }}
-  loading={TableLoading(communitiesLoading)}
-  pagination={false}
-  />
-  */
 
   render() {
     const {
@@ -155,7 +181,7 @@ class PostsContent extends React.Component {
             <Table
               columns={columns}
               dataSource={data.entries}
-              scroll={{ x: 1500 }}
+              scroll={{ x: 2000 }}
               loading={TableLoading(communitiesLoading)}
               pagination={false}
             />

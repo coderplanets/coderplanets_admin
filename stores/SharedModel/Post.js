@@ -1,9 +1,13 @@
 import { types as t } from 'mobx-state-tree'
-import { User } from './User'
-import Community from './Community'
-import Comment from './Comment'
 
-const Post = t.model('Post', {
+import { PAGE_SIZE } from '../../config'
+
+import { User } from './User'
+import { Community } from './Community'
+import Comment from './Comment'
+import { Tag } from './Tag'
+
+export const Post = t.model('Post', {
   id: t.maybe(t.string),
   title: t.maybe(t.string),
   body: t.maybe(t.string),
@@ -12,6 +16,7 @@ const Post = t.model('Post', {
   author: t.maybe(User),
 
   communities: t.optional(t.array(Community), []),
+  tags: t.optional(t.array(Tag), []),
   comments: t.optional(t.array(Comment), []),
 
   commentsCount: t.optional(t.number, 0),
@@ -24,4 +29,10 @@ const Post = t.model('Post', {
   updatedAt: t.optional(t.string, ''),
 })
 
-export default Post
+export const PagedPosts = t.model('PagedPosts', {
+  entries: t.optional(t.array(Post), []),
+  pageNumber: t.optional(t.number, 1),
+  pageSize: t.optional(t.number, PAGE_SIZE.COMMON),
+  totalCount: t.optional(t.number, 0),
+  totalPages: t.optional(t.number, 0),
+})

@@ -12,16 +12,23 @@ const debug = makeDebugger('S:UsersBannerStore')
 /* eslint-enable no-unused-vars */
 
 const UsersBannerStore = t
-  .model('UsersBannerStore', {})
+  .model('UsersBannerStore', {
+    usersTotalCount: t.optional(t.number, 0),
+    filteredUsersCount: t.maybe(t.number),
+  })
   .views(self => ({
     get root() {
       return getParent(self)
     },
+    get filteredCount() {
+      if (!self.filteredUsersCount) return self.usersTotalCount
+      return self.filteredUsersCount
+    },
     get route() {
-      const { mainQuery, subQuery } = self.root.route
+      const { mainPath, subPath } = self.root.route
       return {
-        mainQuery,
-        subQuery,
+        mainPath,
+        subPath,
       }
     },
   }))

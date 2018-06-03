@@ -3,7 +3,15 @@ import Router from 'next/router'
 /* import store from 'store' */
 
 // const debug = makeDebugger('L:sidebar')
-import { gqRes, gqErr, $solver, ERR, makeDebugger, EVENT } from '../../utils'
+import {
+  asyncRes,
+  asyncErr,
+  $solver,
+  ERR,
+  makeDebugger,
+  EVENT,
+  ROUTE,
+} from '../../utils'
 import S from './schema'
 import { PAGE_SIZE } from '../../config'
 
@@ -23,45 +31,34 @@ export function pin() {
   sidebar.markState({ pin: !sidebar.pin })
 }
 
-export function extendMenuBar(communityId) {
-  if (sidebar.activeRaw === communityId) {
-    return sidebar.markState({
-      activeRaw: null,
-    })
+export function extendMenuBar(communityRaw) {
+  switch (communityRaw) {
+    case ROUTE.COMMUNITIES: {
+      /* return Router.push(`/${ROUTE.COMMUNITIES}`, `/${communityRaw}/`) */
+      return Router.push(
+        {
+          pathname: `/${ROUTE.COMMUNITIES}`,
+          asPath: `/${communityRaw}/`,
+        }
+        /* `/${ROUTE.COMMUNITIES}`, `/${communityRaw}/` */
+      )
+    }
+    case ROUTE.USERS: {
+      return Router.push(`/${ROUTE.USERS}`, `/${communityRaw}/`)
+    }
+    default: {
+      const asPath = `/${communityRaw}/${ROUTE.POSTS}`
+      return Router.push('/', asPath)
+    }
   }
-
-  sidebar.markState({
-    activeRaw: communityId,
-    activePart: null,
-  })
-}
-
-export function onChildMenuChange(activePart) {
-  debug('onChildMenuChange: ', activePart)
-  if (activePart === 'cheatsheets') {
-    console.log('see me')
-    Router.push('/', '/racket/cheatsheets')
-  }
-
-  sidebar.markState({
-    activePart,
-  })
 }
 
 export function onCommunityChildMenuChange(activePart) {
-  debug('onChildMenuChange activePart: ', activePart)
-  debug('onChildMenuChange activeRaw: ', sidebar.activeRaw)
-
   let asPath = `/${sidebar.activeRaw}/${activePart}`
   if (R.isEmpty(activePart)) {
     asPath = `/${sidebar.activeRaw}`
   }
-  console.log('&&&&& see me2 asPath: ', asPath)
   Router.push('/', asPath)
-
-  sidebar.markState({
-    activePart,
-  })
 }
 
 export function loadCommunities(page = 1) {
@@ -73,39 +70,33 @@ export function loadCommunities(page = 1) {
     filter: { page, size },
   }
 
-  sr71$.query(S.communities, args)
+  sr71$.query(S.pagedCommunities, args)
 }
 
 const DataSolver = [
   {
-    match: gqRes('communities'),
-    action: ({ communities }) => {
-      sidebar.loadCommunities(communities)
-    },
-  },
-  {
-    match: gqRes(EVENT.ROUTE_CHANGE),
-    action: data => {
-      sidebar.syncStateFromhRoute(data[EVENT.ROUTE_CHANGE])
+    match: asyncRes('pagedCommunities'),
+    action: ({ pagedCommunities }) => {
+      sidebar.loadCommunities(pagedCommunities)
     },
   },
 ]
 
 const ErrSolver = [
   {
-    match: gqErr(ERR.CRAPHQL),
+    match: asyncErr(ERR.CRAPHQL),
     action: ({ details }) => {
       debug('ERR.CRAPHQL -->', details)
     },
   },
   {
-    match: gqErr(ERR.TIMEOUT),
+    match: asyncErr(ERR.TIMEOUT),
     action: ({ details }) => {
       debug('ERR.TIMEOUT -->', details)
     },
   },
   {
-    match: gqErr(ERR.NETWORK),
+    match: asyncErr(ERR.NETWORK),
     action: ({ details }) => {
       debug('ERR.NETWORK -->', details)
     },
@@ -115,5 +106,5 @@ const ErrSolver = [
 export function init(selectedStore) {
   sidebar = selectedStore
   sr71$.data().subscribe($solver(DataSolver, ErrSolver))
-  loadCommunities()
+  // loadCommunities()
 }

@@ -8,11 +8,18 @@ const pagedPosts = gql`
     }
   }
 `
+const pagedTags = gql`
+  query tags($filter: PagedFilter!) {
+    tags(filter: $filter) {
+      totalCount
+    }
+  }
+`
 
 const schema = {
   // communities,
   pagedPosts,
-  // tags,
+  pagedTags,
 }
 
 export default schema

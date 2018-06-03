@@ -28,7 +28,16 @@ import {
   CommunitiesContentStore,
   CommunityContentStore,
   UsersContentStore,
-  // CheatSheetContentStore,
+  // editors
+  CommunityEditorStore,
+  TagEditorStore,
+  CategoryEditorStore,
+  PermissionEditorStore,
+  // setter
+  CategorySetterStore,
+  TagSetterStore,
+  CommunitySetterStore,
+
   // viewers
   ArticleViwerStore,
   AccountViewerStore,
@@ -64,8 +73,6 @@ const rootStore = t
     sidebar: t.optional(SidebarStore, { menuItems: [] }),
     preview: t.optional(PreviewStore, { visible: false }),
     doraemon: t.optional(DoraemonStore, {}),
-    typeWriter: t.optional(TypeWriterStore, {}),
-    accountEditor: t.optional(AccountEditorStore, {}),
 
     // layouts
     bodylayout: t.optional(BodylayoutStore, {}),
@@ -81,6 +88,19 @@ const rootStore = t
     communitiesContent: t.optional(CommunitiesContentStore, {}),
     communityContent: t.optional(CommunityContentStore, {}),
     usersContent: t.optional(UsersContentStore, {}),
+
+    // eiditors
+    typeWriter: t.optional(TypeWriterStore, {}),
+    accountEditor: t.optional(AccountEditorStore, {}),
+    communityEditor: t.optional(CommunityEditorStore, {}),
+    tagEditor: t.optional(TagEditorStore, {}),
+    categoryEditor: t.optional(CategoryEditorStore, {}),
+    permissionEditor: t.optional(PermissionEditorStore, {}),
+    // setter
+    categorySetter: t.optional(CategorySetterStore, {}),
+    tagSetter: t.optional(TagSetterStore, {}),
+    communitySetter: t.optional(CommunitySetterStore, {}),
+
     // viewers (for preview usage)
     articleViwer: t.optional(ArticleViwerStore, {}),
     accountViewer: t.optional(AccountViewerStore, {}),

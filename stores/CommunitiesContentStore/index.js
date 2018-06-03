@@ -6,35 +6,16 @@
 import { types as t, getParent } from 'mobx-state-tree'
 // import R from 'ramda'
 
-import { Community, Post, Tag } from '../SharedModel'
+import {
+  PagedPosts,
+  PagedTags,
+  PagedCategories,
+  PagedCommunities,
+} from '../SharedModel'
 import { markStates, makeDebugger, stripMobx } from '../../utils'
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('S:CommunitiesContentStore')
 /* eslint-enable no-unused-vars */
-
-const PagedCommunities = t.model('PagedCommunities', {
-  entries: t.optional(t.array(Community), []),
-  pageNumber: t.optional(t.number, 1),
-  pageSize: t.optional(t.number, 20), // TODO: USE CONSTANTS
-  totalCount: t.optional(t.number, 0),
-  totalPages: t.optional(t.number, 0),
-})
-
-const PagedTags = t.model('PagedTags', {
-  entries: t.optional(t.array(Tag), []),
-  pageNumber: t.optional(t.number, 1),
-  pageSize: t.optional(t.number, 20), // TODO: USE CONSTANTS
-  totalCount: t.optional(t.number, 0),
-  totalPages: t.optional(t.number, 0),
-})
-
-const PagedPosts = t.model('PagedPosts', {
-  entries: t.optional(t.array(Post), []),
-  pageNumber: t.optional(t.number, 1),
-  pageSize: t.optional(t.number, 20), // TODO: USE CONSTANTS
-  totalCount: t.optional(t.number, 0),
-  totalPages: t.optional(t.number, 0),
-})
 
 const CommunitiesContentStore = t
   .model('CommunitiesContentStore', {
@@ -42,11 +23,12 @@ const CommunitiesContentStore = t
     pagedCommunities: t.maybe(PagedCommunities),
     pagedTags: t.maybe(PagedTags),
     pagedPosts: t.maybe(PagedPosts),
+    pagedCategories: t.maybe(PagedCategories),
 
     communitiesLoading: t.optional(t.boolean, false),
     tagsLoading: t.optional(t.boolean, false),
+    categoriesLoading: t.optional(t.boolean, false),
     postsLoading: t.optional(t.boolean, false),
-    category: t.optional(t.string, ''),
   })
   .views(self => ({
     get root() {
@@ -58,14 +40,17 @@ const CommunitiesContentStore = t
     },
 
     get route() {
-      const { mainQuery, subQuery } = self.root.route
+      const { mainPath, subPath } = self.root.route
       return {
-        mainQuery,
-        subQuery,
+        mainPath,
+        subPath,
       }
     },
     get pagedCommunitiesData() {
       return stripMobx(self.pagedCommunities)
+    },
+    get pagedCategoriesData() {
+      return stripMobx(self.pagedCategories)
     },
     get pagedTagsData() {
       return stripMobx(self.pagedTags)
@@ -75,6 +60,9 @@ const CommunitiesContentStore = t
     },
   }))
   .actions(self => ({
+    markQuery(query) {
+      self.root.route.markQuery(query)
+    },
     markState(sobj) {
       markStates(sobj, self)
     },

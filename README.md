@@ -7,12 +7,12 @@
   <br/><br/>
   
   <a href="https://travis-ci.org/mydearxym/coderplanets_admin" target="_blank">
-    <img src="https://api.travis-ci.org/mydearxym/coderplanets_admin.svg?branch=dev" alt="Build Status" />
+    <img src="https://travis-ci.org/mydearxym/coderplanets_admin.svg?branch=dev" alt="Build Status" />
   </a>
 
-  <a href='https://coveralls.io/github/mydearxym/coderplanets_admin_web?branch=master' target="_blank">
+  <a href='https://coveralls.io/github/mydearxym/coderplanets_admin?branch=master' target="_blank">
     <img
-    src='https://coveralls.io/repos/github/mydearxym/coderplanets_admin_web/badge.svg?branch=master'
+    src='https://coveralls.io/repos/github/mydearxym/coderplanets_admin/badge.svg?branch=master'
     alt='Coverage Status' />
   </a>
 

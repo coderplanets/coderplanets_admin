@@ -2,9 +2,17 @@ import React from 'react'
 import TimeAgo from 'timeago-react'
 
 import { cutFrom } from '../../utils'
-import { Pagi, Table, TableLoading, Button, Space } from '../../components'
+import {
+  Pagi,
+  Table,
+  TableLoading,
+  Button,
+  Space,
+  ColorCell,
+  CommunityCell,
+} from '../../components'
 
-import { OperationWrapper, ColorCell, ColorDot, ColorTitle } from './styles'
+import { OperationWrapper } from './styles'
 import * as logic from './logic'
 
 /* eslint-disable react/display-name */
@@ -31,17 +39,21 @@ const columns = [
     dataIndex: 'color',
     align: 'center',
     render: text => {
-      return (
-        <ColorCell>
-          <ColorDot color={text} />
-          <ColorTitle>{text}</ColorTitle>
-        </ColorCell>
-      )
+      return <ColorCell color={text} />
+    },
+  },
+  {
+    title: '社区',
+    width: 200,
+    dataIndex: 'community',
+    align: 'center',
+    render: community => {
+      return <CommunityCell data={community} />
     },
   },
   {
     title: 'part',
-    width: 300,
+    width: 200,
     dataIndex: 'part',
     align: 'center',
     render: text => {

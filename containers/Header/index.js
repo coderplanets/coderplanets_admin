@@ -5,6 +5,7 @@
  */
 
 import React from 'react'
+import R from 'ramda'
 import { inject, observer } from 'mobx-react'
 import keydown from 'react-keydown'
 
@@ -18,6 +19,7 @@ import {
   RouterWrapper,
   MiniMapWrapper,
   CommunityLogo,
+  SettingLogo,
   MiniMapTitle,
   MiniMapDivider,
   Admin,
@@ -28,6 +30,7 @@ import {
   StateIcon,
   StateButton,
   DividerIcon,
+  SubRoute,
   Operations,
   User,
   AffixHeader,
@@ -40,18 +43,72 @@ import * as logic from './logic'
 const debug = makeDebugger('C:Header')
 /* eslint-enable no-unused-vars */
 
+const I18Dict = {
+  posts: '帖子',
+  categories: '类别',
+  tags: '标签',
+  editors: '编辑',
+  subscribers: '订阅用户',
+  pays: '衣食父母',
+  users: '注册用户',
+  passports: '权限',
+  roles: '角色',
+}
+
+const translate = key => {
+  if (R.has(key, I18Dict)) return I18Dict[key]
+  return key
+}
+
+const SubRouteContent = ({ subPath }) => {
+  if (subPath) {
+    return (
+      <SubRoute>
+        <MiniMapDivider />
+        <MiniMapTitle>{translate(subPath)}</MiniMapTitle>
+      </SubRoute>
+    )
+  }
+  return <div />
+}
+
 const MiniMap = ({ curRoute }) => {
   const defaultIcon = 'js'
-  const { mainQuery } = curRoute
-  const iconKey = mainQuery.length > 1 ? mainQuery : defaultIcon
+  const { mainPath, subPath } = curRoute
+  const iconKey = mainPath.length > 1 ? mainPath : defaultIcon
 
-  return (
-    <MiniMapWrapper>
-      <CommunityLogo path={`${ICON_ASSETS}/pl/${iconKey}.svg`} />
-      <MiniMapDivider />
-      <MiniMapTitle>综合设置</MiniMapTitle>
-    </MiniMapWrapper>
-  )
+  switch (mainPath) {
+    case 'communities': {
+      return (
+        <MiniMapWrapper>
+          <SettingLogo src={`${ICON_ASSETS}/cmd/all.svg`} />
+          <MiniMapDivider />
+          <MiniMapTitle>社区设置</MiniMapTitle>
+          <SubRouteContent subPath={subPath} />
+        </MiniMapWrapper>
+      )
+    }
+    case 'users': {
+      return (
+        <MiniMapWrapper>
+          <SettingLogo src={`${ICON_ASSETS}/cmd/users.svg`} />
+          <MiniMapDivider />
+          <MiniMapTitle>用户设置</MiniMapTitle>
+          <SubRouteContent subPath={subPath} />
+        </MiniMapWrapper>
+      )
+    }
+    default: {
+      return (
+        <MiniMapWrapper>
+          <CommunityLogo src={`${ICON_ASSETS}/pl/${iconKey}.svg`} />
+          <MiniMapDivider />
+          <MiniMapTitle>{mainPath}</MiniMapTitle>
+          <SubRouteContent subPath={subPath} />
+        </MiniMapWrapper>
+      )
+    }
+  }
 }
 
 // {fixed ? <MiniMap curRoute={curRoute} /> : <Navigator />}
@@ -72,20 +129,20 @@ const Header = ({ curRoute, leftOffset, fixed, isLogin, accountInfo }) => (
           ghost
           onClick={logic.previewState.bind(this, 'mst-state')}
         >
-          <StateIcon path={`${ICON_ASSETS}/cmd/header_state.svg`} />
+          <StateIcon src={`${ICON_ASSETS}/cmd/header_state.svg`} />
           <div>STATE</div>
         </StateButton>
 
-        <DividerIcon path={`${ICON_ASSETS}/cmd/more.svg`} />
+        <DividerIcon src={`${ICON_ASSETS}/cmd/more.svg`} />
       </div>
     </Admin>
 
     <Operations>
       <Search onClick={logic.openDoraemon}>
-        <HeaderIcon path={`${ICON_ASSETS}/cmd/search2.svg`} />
+        <HeaderIcon src={`${ICON_ASSETS}/cmd/search2.svg`} />
       </Search>
       <Notification onClick={logic.openPreview.bind(this, 'post')}>
-        <HeaderIcon path={`${ICON_ASSETS}/cmd/notification_none.svg`} />
+        <HeaderIcon src={`${ICON_ASSETS}/cmd/notification_none.svg`} />
       </Notification>
 
       {isLogin ? (
@@ -94,7 +151,7 @@ const Header = ({ curRoute, leftOffset, fixed, isLogin, accountInfo }) => (
         </User>
       ) : (
         <User onClick={logic.login}>
-          <HeaderIcon path={`${ICON_ASSETS}/cmd/header_user.svg`} />
+          <HeaderIcon src={`${ICON_ASSETS}/cmd/header_user.svg`} />
         </User>
       )}
     </Operations>

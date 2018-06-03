@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import ReactSVG from 'react-svg'
+
+import { Img } from '../../../components'
 
 // import { darken } from 'polished'
 import { theme } from '../../../utils'
@@ -103,7 +104,7 @@ export const MiniChartText = styled.div`
   }
 `
 
-export const MenuItemIcon = styled(ReactSVG)`
+export const MenuItemIcon = styled(Img)`
   opacity: ${props => (props.active ? 1 : 0.5)};
   width: 22px;
   height: 22px;
@@ -157,7 +158,7 @@ export const ChildrenNum = styled.div`
   margin-right: 25px;
 `
 
-export const SettingIcon = styled(ReactSVG)`
+export const SettingIcon = styled(Img)`
   fill: #309abb;
   width: 17px;
   height: 17px;

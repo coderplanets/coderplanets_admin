@@ -1,6 +1,6 @@
 // import R from 'ramda'
 
-import { makeDebugger, gqRes, $solver } from '../../utils'
+import { makeDebugger, asyncRes, $solver } from '../../utils'
 import SR71 from '../../utils/network/sr71'
 
 import S from './schema'
@@ -18,6 +18,13 @@ export function loadPosts() {
   sr71$.query(S.pagedPosts, { filter: {} })
 }
 
+export function loadTags() {
+  sr71$.query(S.pagedTags, { filter: {} })
+}
+
+// TODO: should be loadSubscribers
+export function loadUsers() {}
+
 export function onAdd() {}
 
 // ###############################
@@ -26,16 +33,18 @@ export function onAdd() {}
 
 const DataSolver = [
   {
-    match: gqRes('pagedPosts'),
+    match: asyncRes('pagedPosts'),
     action: ({ pagedPosts: { totalCount } }) => {
-      if (!communityBanner.postsCurCount) {
-        return communityBanner.markState({
-          postsTotalCount: totalCount,
-          postsCurCount: totalCount,
-        })
-      }
       return communityBanner.markState({
         postsTotalCount: totalCount,
+      })
+    },
+  },
+  {
+    match: asyncRes('tags'),
+    action: ({ tags: { totalCount } }) => {
+      communityBanner.markState({
+        tagsTotalCount: totalCount,
       })
     },
   },

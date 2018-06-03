@@ -1,6 +1,6 @@
 {
-  "name": "mastani_web",
-  "version": "0.3.0",
+  "name": "coderplanets_admin",
+  "version": "0.4.0",
   "license": "MIT",
   "scripts": {
     "dev": "cross-env GOAL=dev run-p server lint:watch",

@@ -6,44 +6,35 @@
 import { types as t, getParent } from 'mobx-state-tree'
 // import R from 'ramda'
 
-import { markStates, makeDebugger } from '../../utils'
+import { markStates, makeDebugger, stripMobx } from '../../utils'
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('S:CommunitiesBannerStore')
 /* eslint-enable no-unused-vars */
 
 const CommunitiesBannerStore = t
   .model('CommunitiesBannerStore', {
-    // totalCount of all the communities
+    // communities: totalCount of all
     totalCount: t.optional(t.number, 0),
+    filteredTotalCount: t.maybe(t.number),
+    // posts
     postsTotalCount: t.optional(t.number, 0),
+    filteredPostsCount: t.maybe(t.number),
+    // categories
+    categoriesTotalCount: t.optional(t.number, 0),
+    filterdCategoriesCount: t.maybe(t.number),
+    // tags
     tagsTotalCount: t.optional(t.number, 0),
-    // categories count
-    // editors count
-    // ...
+    filterdTagsCount: t.maybe(t.number),
   })
   .views(self => ({
     get root() {
       return getParent(self)
     },
-    get curTotalCount() {
-      const data = self.root.communitiesContent.pagedCommunities
-      return data ? data.totalCount : 0
-    },
-    /*
-    get curTagsTotalCount() {
-      const data = self.root.communitiesContent.pagedtags
-      return data ? data.totalCount : 0
-    },
-    */
-    get curPostsTotalCount() {
-      const data = self.root.communitiesContent.pagedPosts
-      return data ? data.totalCount : 0
-    },
     get route() {
-      const { mainQuery, subQuery } = self.root.route
+      const { mainPath, subPath } = stripMobx(self.root.route)
       return {
-        mainQuery,
-        subQuery,
+        mainPath,
+        subPath,
       }
     },
   }))

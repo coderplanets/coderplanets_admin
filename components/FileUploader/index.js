@@ -15,25 +15,29 @@ import { makeDebugger } from '../../utils'
 const debug = makeDebugger('C:FileUploader')
 /* eslint-enable no-unused-vars */
 
-const getDir = () => {
+const getFullDir = (dir, nestDir) => {
   /* yearYmonthM */
+  if (!nestDir) return dir
+
   const date = new Date()
   let day = date.getDate()
-  if (day < 10) {
-    day = `0${day}`
-  }
+  day = day < 10 ? `0${day}` : day
 
-  return `posts/${date.getFullYear()}_${date.getMonth() + 1}/${day}`
+  let month = date.getMonth() + 1
+  month = month < 10 ? `0${month}` : month
+
+  return `${dir}/${date.getFullYear()}_${month}/${day}`
 }
 
-const getFileName = filename => {
-  const community = 'javascript'
-  const part = 'post'
-  const partId = '113'
-  const nickname = 'mydearxym'
-  const userId = '112'
+// TODO: base on community
+// communityx-nickname-filename
+// tagx-part-nickname-filename
 
-  return `${community}--${part}--${partId}--${nickname}-${userId}--${filename}`
+const getFileName = filename => {
+  const date = new Date()
+  const timestamp = date.getTime()
+
+  return `${timestamp}_${filename}`
 }
 
 class FileUploader extends React.Component {
@@ -61,6 +65,8 @@ class FileUploader extends React.Component {
   /* eslint-disable */
   handleCHange(e) {
     // TODO: Dir nameing
+    const { dir, nestDir } = this.props
+    const ossDir = getFullDir(dir, nestDir)
     const files = e.target.files
     /* console.log('handleCHange files: ', files) */
     const theFile = files[0]
@@ -74,7 +80,7 @@ class FileUploader extends React.Component {
     this.props.onUploadStart()
     const filename = theFile.name
     this.state.ossClient
-      .multipartUpload(`${getDir()}/${getFileName(filename)}`, theFile)
+      .multipartUpload(`${ossDir}/${getFileName(filename)}`, theFile)
       .then(result => {
         /* console.log('result: ', result) */
         const url = `${ASSETS_ENDPOINT}/${result.name}`
@@ -112,9 +118,14 @@ FileUploader.propTypes = {
   onUploadStart: PropTypes.func,
   onUploadError: PropTypes.func,
   onUploadDone: PropTypes.func,
+
+  dir: PropTypes.oneOf(['posts', 'communities', 'jobs', 'activities']),
+  nestDir: PropTypes.bool,
 }
 
 FileUploader.defaultProps = {
+  dir: 'posts',
+  nestDir: true,
   onUploadStart: debug,
   onUploadError: debug,
   onUploadDone: debug,

@@ -11,31 +11,31 @@ import { makeDebugger, markStates, ROUTE, stripMobx } from '../../utils'
 const debug = makeDebugger('S:SidebarStore')
 /* eslint-enable no-unused-vars */
 
-const validParts = [
-  ROUTE.COMMUNITIES,
-  ROUTE.COMMUNITY,
-  ROUTE.POSTS,
-  ROUTE.JOBS,
-  ROUTE.ACTIVITIES,
-  ROUTE.CHEATSHEETS,
-  ROUTE.CATEGORIES,
-  ROUTE.EDITORS,
-  ROUTE.THREADS,
-  ROUTE.TAGS,
-  ROUTE.SUBSCRIBERS,
+/*
+   const validParts = [
+   ROUTE.COMMUNITIES,
+   ROUTE.COMMUNITY,
+   ROUTE.POSTS,
+   ROUTE.JOBS,
+   ROUTE.ACTIVITIES,
+   ROUTE.CHEATSHEETS,
+   ROUTE.CATEGORIES,
+   ROUTE.EDITORS,
+   ROUTE.THREADS,
+   ROUTE.TAGS,
+   ROUTE.SUBSCRIBERS,
 
-  ROUTE.USERS,
-  // ROUTE.REGISTERS,
-  ROUTE.PAYS,
-  ROUTE.PASSPORTS,
-  ROUTE.ROLES,
-]
+   ROUTE.USERS,
+   ROUTE.PAYS,
+   ROUTE.PASSPORTS,
+   ROUTE.ROLES,
+   ]
+ */
+
 const SidebarStore = t
   .model('SidebarStore', {
     // open: t.optional(t.boolean, false),
     pin: t.optional(t.boolean, true),
-    activeRaw: t.maybe(t.string),
-    activePart: t.maybe(t.enumeration('activePart', validParts)),
     // theme: t.string, // view staff
     // curSelectItem: t.string, // view staff
     // searchBox: t.string, // complex data
@@ -66,6 +66,15 @@ const SidebarStore = t
     get curPath() {
       return self.root.curPath
     },
+    get activeRaw() {
+      return self.root.route.mainPath
+    },
+    get activePart() {
+      const { subPath } = self.root.route
+
+      return R.isEmpty(subPath) ? ROUTE.COMMUNITIES : subPath
+    },
+
     get subscribedCommunities() {
       /* const { entries } = self.root.account.subscribedCommunities */
       // TODO use managers communities
@@ -76,12 +85,6 @@ const SidebarStore = t
   .actions(self => ({
     load() {
       // const communities = self.root.communities.all
-    },
-
-    syncStateFromhRoute({ mainQuery, subQuery }) {
-      // TODO
-      self.activeRaw = mainQuery
-      self.activePart = R.isEmpty(subQuery) ? ROUTE.COMMUNITIES : subQuery
     },
 
     loadCommunities(data) {

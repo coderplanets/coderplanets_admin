@@ -9,16 +9,6 @@ import { types as t, getParent } from 'mobx-state-tree'
 import { markStates, makeDebugger } from '../../utils'
 import { Community } from '../SharedModel'
 
-// TODO; pl framework cmd -> plLanguages frameworks cmds
-/* import { pl, framework, database } from '../DoraemonStore/suggestions' */
-// import { pl } from '../DoraemonStore/suggestions'
-
-// import PlModel from './PlModel'
-
-// import FrameworkModel from './FrameworkModel'
-// / import DatabaseModel from './DatabaseModel'
-// import CheatSheetModal from './CheatSheetModal'
-
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('S:communities')
 /* eslint-enable no-unused-vars */
@@ -77,14 +67,14 @@ const CommunitiesStore = t
       }
 
       /*
-      let { mainQuery } = curRoute
-      mainQuery = R.isEmpty(mainQuery) ? defaultCommunity.title : mainQuery
+      let { mainPath } = curRoute
+      mainPath = R.isEmpty(mainPath) ? defaultCommunity.title : mainPath
       try {
         return {
-          header: R.pick(['title', 'desc', 'raw'], self.all[mainQuery]),
-          body: R.omit(['desc', 'title', 'raw', 'parent'], self.all[mainQuery]),
-          threads: R.path(['threads'], self.all[mainQuery]),
-          title: R.path(['title'], self.all[mainQuery]),
+          header: R.pick(['title', 'desc', 'raw'], self.all[mainPath]),
+          body: R.omit(['desc', 'title', 'raw', 'parent'], self.all[mainPath]),
+          threads: R.path(['threads'], self.all[mainPath]),
+          title: R.path(['title'], self.all[mainPath]),
         }
       } catch (e) {
         return {
@@ -101,10 +91,10 @@ const CommunitiesStore = t
       /*
 
          const { curRoute } = self.root
-         const { mainQuery } = curRoute
+         const { mainPath } = curRoute
          const defaultCommunity = 'js'
 
-         return R.isEmpty(mainQuery) ? defaultCommunity : mainQuery
+         return R.isEmpty(mainPath) ? defaultCommunity : mainPath
        */
     },
   }))

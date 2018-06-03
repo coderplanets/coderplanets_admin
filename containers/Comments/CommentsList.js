@@ -4,7 +4,7 @@ import TimeAgo from 'timeago-react'
 import shortid from 'shortid'
 
 import { ICON_ASSETS } from '../../config'
-import { Global, prettyNum } from '../../utils'
+import { Global, prettyNum, makeDebugger } from '../../utils'
 
 import {
   AvatarsRow,
@@ -52,10 +52,14 @@ import {
   ReplyToFloor,
 } from './styles/comments_list'
 
+/* eslint-disable no-unused-vars */
+const debug = makeDebugger('C:CommentsList')
+/* eslint-enable no-unused-vars */
+
 const getSelection = () => {
   const selectText = Global.getSelection().toString()
   if (!R.isEmpty(selectText)) {
-    console.log('getSelection', selectText)
+    debug('getSelection', selectText)
     // TODO: then use window.getSelection().getRangeAt(0).getBoundingClientRect() to draw a button
   }
 }
@@ -82,11 +86,11 @@ const ActionBottom = ({ data, accountInfo }) => {
     return (
       <div style={{ display: 'flex' }}>
         <ReplyAction>
-          <ReplyIcon path={`${ICON_ASSETS}/cmd/edit.svg`} />
+          <ReplyIcon src={`${ICON_ASSETS}/cmd/edit.svg`} />
           编辑
         </ReplyAction>
         <ReplyAction onClick={logic.onDelete.bind(this, data)}>
-          <ReplyIcon path={`${ICON_ASSETS}/cmd/delete.svg`} />
+          <ReplyIcon src={`${ICON_ASSETS}/cmd/delete.svg`} />
           删除
         </ReplyAction>
       </div>
@@ -95,7 +99,7 @@ const ActionBottom = ({ data, accountInfo }) => {
   return (
     <div style={{ display: 'flex' }}>
       <ReplyAction onClick={logic.openReplyEditor.bind(this, data)}>
-        <ReplyIcon path={`${ICON_ASSETS}/cmd/nest_comment.svg`} />
+        <ReplyIcon src={`${ICON_ASSETS}/cmd/nest_comment.svg`} />
         回复
       </ReplyAction>
     </div>
@@ -159,7 +163,7 @@ const Comment = ({ data, tobeDeleteId, accountInfo }) => (
             <VisiableAction>
               <div onClick={logic.toggleLikeComment.bind(this, data)}>
                 <UpIcon
-                  path={`${ICON_ASSETS}/cmd/up.svg`}
+                  src={`${ICON_ASSETS}/cmd/up.svg`}
                   viewerDid={data.viewerHasLiked}
                 />
               </div>
@@ -168,7 +172,7 @@ const Comment = ({ data, tobeDeleteId, accountInfo }) => (
             <VisiableAction>
               <div onClick={logic.toggleDislikeComment.bind(this, data)}>
                 <UpIcon
-                  path={`${ICON_ASSETS}/cmd/up.svg`}
+                  src={`${ICON_ASSETS}/cmd/up.svg`}
                   reverse
                   viewerDid={data.viewerHasDisliked}
                 />

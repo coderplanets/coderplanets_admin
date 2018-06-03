@@ -20,9 +20,6 @@ export const formatGraphErrors = error => {
   // graphQLErrors may not catch in graph query (wrang sytax etc ...)
   // checkout this issue https://github.com/apollographql/apollo-client/issues/2810
   if (notEmpty(graphQLErrors) && undefined !== graphQLErrors) {
-    // console.log('-- graphQLErrors --> ', graphQLErrors)
-    // console.log('-- error --> ', error)
-
     const details = []
     graphQLErrors.map(({ message, path, key }) => {
       return details.push({
@@ -57,10 +54,10 @@ export const getThenHandler = res => {
 
 export const getCatchHandler = err => {
   /*
-  if (!navigator.onLine) {
-    return { error: 'NET_OFFLINE', details: 'NET_OFFLINE' }
-  }
-  */
+     if (!navigator.onLine) {
+     return { error: 'NET_OFFLINE', details: 'NET_OFFLINE' }
+     }
+   */
 
   switch (true) {
     case err.error === ERR.NOT_FOUND:

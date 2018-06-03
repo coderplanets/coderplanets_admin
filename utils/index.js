@@ -11,7 +11,11 @@ export { makeDebugger } from './debug'
 export {
   dispatchEvent,
   mapKeys,
+  mapKey,
+  mapValue,
   isObject,
+  maybe,
+  objToArray,
   notEmpty,
   isEmptyNil,
   isEmptyValue,
@@ -23,11 +27,13 @@ export {
   Rlog,
   countWords,
   debounce,
+  castArgs,
+  closePreviewer,
   extractMentions,
   extractAttachments,
 } from './functions'
 
-export { gqErr, gqRes } from './graphql_helper'
+export { asyncErr, asyncRes } from './graphql_helper'
 
 export {
   storePlug,

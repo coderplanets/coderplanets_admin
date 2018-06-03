@@ -16,7 +16,18 @@ import * as logic from './logic'
 // TODO: move it to component
 import { StateTree } from '../../components/'
 import TypeWriterLoading from '../../components/LoadingEffects/TypeWriterLoading'
-import { ArticleViwer, AccountViewer, AccountEditor } from '../../containers'
+import {
+  ArticleViwer,
+  AccountViewer,
+  AccountEditor,
+  CommunityEditor,
+  TagEditor,
+  CategoryEditor,
+  CategorySetter,
+  TagSetter,
+  CommunitySetter,
+  PermissionEditor,
+} from '../../containers'
 
 import {
   PreviewOverlay,
@@ -45,11 +56,14 @@ const CloseBtn = ({ type }) => (
   </PreviewCloser>
 )
 
-// const Viewer = ({ type, root, themeKeys, curTheme }) => {
-// <AccountViewer2 themeKeys={themeKeys} curTheme={curTheme} />
-
-// TODO: post edit viewer
-const Viewer = ({ type, root }) => {
+const Viewer = ({
+  type,
+  rootState,
+  editCommunityData,
+  editCategoryData,
+  editArticleData,
+  editPermissionData,
+}) => {
   switch (type) {
     case TYPE.PREVIEW_ACCOUNT_VIEW: {
       return <AccountViewer />
@@ -64,11 +78,34 @@ const Viewer = ({ type, root }) => {
       return <DynamicTypeWriter onClose={logic.closePreview} />
     }
     case TYPE.PREVIEW_CREATE_COMMUNITY: {
-      return <h3>PREVIEW_CREATE_COMMUNITY</h3>
+      return <CommunityEditor />
     }
-
+    case TYPE.PREVIEW_UPDATE_COMMUNITY: {
+      return <CommunityEditor editData={editCommunityData} />
+    }
+    case TYPE.PREVIEW_SET_COMMUNITY: {
+      return <CommunitySetter editData={editArticleData} />
+    }
+    case TYPE.PREVIEW_CREATE_TAG: {
+      return <TagEditor />
+    }
+    case TYPE.PREVIEW_CREATE_CATEGORY: {
+      return <CategoryEditor />
+    }
+    case TYPE.PREVIEW_UPDATE_CATEGORY: {
+      return <CategoryEditor editData={editCategoryData} />
+    }
+    case TYPE.PREVIEW_SET_CATEGORY: {
+      return <CategorySetter editData={editCommunityData} />
+    }
+    case TYPE.PREVIEW_SET_TAG: {
+      return <TagSetter editData={editArticleData} />
+    }
+    case TYPE.PREVIEW_UPDATE_PERMISSION: {
+      return <PermissionEditor editData={editPermissionData} />
+    }
     default: {
-      return <StateTree json={root.toJSON()} />
+      return <StateTree json={rootState} />
     }
   }
 }
@@ -79,30 +116,34 @@ class PreviewContainer extends React.Component {
   }
 
   render() {
-    const { visible, type, themeKeys, curTheme, root } = this.props.preview
+    const {
+      visible,
+      type,
+      themeKeys,
+      curTheme,
+      rootState,
+      editCommunityData,
+      editArticleData,
+      editPermissionData,
+      editCategoryData,
+    } = this.props.preview
 
-    /*
-
-    <PreviewBody>
-      <h2>Preview body</h2>
-    </PreviewBody>
-     */
-
-    /* debug('this.props.preview: ', this.props.preview.root.toJSON()) */
     return (
       <div>
         <PreviewOverlay visible={visible} onClick={logic.closePreview} />
         <PreviewWrapper visible={visible} type={type}>
           <CloseBtn type={type} />
           <PreviewContent>
-            <div>
-              <Viewer
-                type={type}
-                root={root}
-                themeKeys={themeKeys}
-                curTheme={curTheme}
-              />
-            </div>
+            <Viewer
+              type={type}
+              rootState={rootState}
+              themeKeys={themeKeys}
+              curTheme={curTheme}
+              editCommunityData={editCommunityData}
+              editCategoryData={editCategoryData}
+              editArticleData={editArticleData}
+              editPermissionData={editPermissionData}
+            />
           </PreviewContent>
         </PreviewWrapper>
       </div>

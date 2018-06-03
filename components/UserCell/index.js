@@ -14,10 +14,10 @@ import { makeDebugger } from '../../utils'
 const debug = makeDebugger('c:UserCell:index')
 /* eslint-enable no-unused-vars */
 
-const UserCell = ({ user }) => {
+const UserCell = ({ user, align, left, small }) => {
   return (
-    <UserCellWrapper>
-      <Avatar src={user.avatar} />
+    <UserCellWrapper align={align} left={left}>
+      <Avatar src={user.avatar} alt={user.nickname} small={small} />
       <NickName>{user.nickname}</NickName>
     </UserCellWrapper>
   )
@@ -30,8 +30,15 @@ UserCell.propTypes = {
     avatar: PropTypes.string,
     nickname: PropTypes.string,
   }).isRequired,
+  align: PropTypes.string,
+  left: PropTypes.string,
+  small: PropTypes.bool,
 }
 
-UserCell.defaultProps = {}
+UserCell.defaultProps = {
+  align: 'left',
+  left: '10px',
+  small: false,
+}
 
 export default UserCell

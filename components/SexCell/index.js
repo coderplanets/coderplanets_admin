@@ -1,0 +1,34 @@
+/*
+ *
+ * SexCell
+ *
+ */
+
+import React from 'react'
+import PropTypes from 'prop-types'
+
+import { ICON_ASSETS } from '../../config'
+
+import { makeDebugger } from '../../utils'
+import { DudeIcon, GirlIcon } from './styles'
+/* eslint-disable no-unused-vars */
+const debug = makeDebugger('c:SexCell:index')
+/* eslint-enable no-unused-vars */
+
+const SexCell = ({ sex }) => {
+  if (sex === 'dude') {
+    return <DudeIcon src={`${ICON_ASSETS}/cmd/dude.svg`} />
+  }
+  return <GirlIcon src={`${ICON_ASSETS}/cmd/girl.svg`} />
+}
+
+SexCell.propTypes = {
+  // https://www.npmjs.com/package/prop-types
+  sex: PropTypes.oneOf(['dude', 'girl']),
+}
+
+SexCell.defaultProps = {
+  sex: 'dude',
+}
+
+export default SexCell

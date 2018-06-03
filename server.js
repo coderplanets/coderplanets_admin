@@ -55,15 +55,9 @@ const communityQuery = route('/:main/:sub?')
 
 app.prepare().then(() => {
   createServer((req, res) => {
-    /*
-    req.url = req.url.replace(/\/$/, '')
-    if (req.url === '') {
-      req.url = '/'
-    }
-    handle(req, res)
-    */
-
-    const { pathname } = parse(req.url)
+    const urlParts = parse(req.url, true)
+    /* const { pathname } = parse(req.url) */
+    const { pathname, query } = urlParts
 
     const accept = accepts(req)
     const locale = accept.language(supportLanguages) // 'zh'
@@ -72,11 +66,14 @@ app.prepare().then(() => {
       res.setHeader('Content-Type', 'application/json;charset=utf-8')
       return res.end(JSON.stringify(getMessages(localeQuery(pathname).lang)))
     } else if (communitiesQuery(pathname)) {
-      return app.render(req, res, '/communities')
+      /* console.log('===========================================') */
+      /* console.log('req.params: ', parse(req.url, true)) */
+      /* console.log('===========================================') */
+      return app.render(req, res, '/communities', query)
     } else if (usersQuery(pathname)) {
-      return app.render(req, res, '/users')
+      return app.render(req, res, '/users', query)
     } else if (communityQuery(pathname)) {
-      return app.render(req, res, '/')
+      return app.render(req, res, '/', query)
     }
 
     // now index page go this way

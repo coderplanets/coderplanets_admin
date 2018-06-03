@@ -21,10 +21,7 @@ import * as logic from './logic'
 
 const MenuChildren = ({ activeRaw, curRaw, activePart }) => (
   <ChildrenWrapper active={activeRaw === curRaw}>
-    <ChildrenItem
-      active={ROUTE.COMMUNITIES === activePart}
-      onClick={logic.onChildMenuChange.bind(this, ROUTE.COMMUNITIES)}
-    >
+    <ChildrenItem active={ROUTE.COMMUNITIES === activePart}>
       <Link href="/communities">
         <ChildrenItemInner>
           <ChildrenTitle>社区</ChildrenTitle>
@@ -32,10 +29,7 @@ const MenuChildren = ({ activeRaw, curRaw, activePart }) => (
         </ChildrenItemInner>
       </Link>
     </ChildrenItem>
-    <ChildrenItem
-      active={ROUTE.CATEGORIES === activePart}
-      onClick={logic.onChildMenuChange.bind(this, ROUTE.CATEGORIES)}
-    >
+    <ChildrenItem active={ROUTE.CATEGORIES === activePart}>
       <Link href="/communities" as="/communities/categories">
         <ChildrenItemInner>
           <ChildrenTitle>分类</ChildrenTitle>
@@ -43,10 +37,7 @@ const MenuChildren = ({ activeRaw, curRaw, activePart }) => (
         </ChildrenItemInner>
       </Link>
     </ChildrenItem>
-    <ChildrenItem
-      active={ROUTE.TAGS === activePart}
-      onClick={logic.onChildMenuChange.bind(this, ROUTE.TAGS)}
-    >
+    <ChildrenItem active={ROUTE.TAGS === activePart}>
       <Link href="/communities" as="/communities/tags">
         <ChildrenItemInner>
           <ChildrenTitle>标签</ChildrenTitle>
@@ -54,10 +45,7 @@ const MenuChildren = ({ activeRaw, curRaw, activePart }) => (
         </ChildrenItemInner>
       </Link>
     </ChildrenItem>
-    <ChildrenItem
-      active={ROUTE.EDITORS === activePart}
-      onClick={logic.onChildMenuChange.bind(this, ROUTE.EDITORS)}
-    >
+    <ChildrenItem active={ROUTE.EDITORS === activePart}>
       <Link href="/communities" as="/communities/editors">
         <ChildrenItemInner>
           <ChildrenTitle>编辑</ChildrenTitle>
@@ -65,10 +53,7 @@ const MenuChildren = ({ activeRaw, curRaw, activePart }) => (
         </ChildrenItemInner>
       </Link>
     </ChildrenItem>
-    <ChildrenItem
-      active={ROUTE.POSTS === activePart}
-      onClick={logic.onChildMenuChange.bind(this, ROUTE.POSTS)}
-    >
+    <ChildrenItem active={ROUTE.POSTS === activePart}>
       <Link href="/communities" as="/communities/posts">
         <ChildrenItemInner>
           <ChildrenTitle>帖子</ChildrenTitle>
@@ -87,7 +72,7 @@ const CommunitiesItemBar = ({ active }) => (
         active={active}
         onClick={logic.extendMenuBar.bind(this, ROUTE.COMMUNITIES_RAW)}
       >
-        <MenuCommunitiesIcon path={`${ICON_ASSETS}/cmd/all.svg`} />
+        <MenuCommunitiesIcon src={`${ICON_ASSETS}/cmd/all.svg`} />
         <div style={{ marginRight: 10 }} />
         {/* eslint-disable jsx-a11y/anchor-is-valid */}
         <MenuTitle>所有社区</MenuTitle>
