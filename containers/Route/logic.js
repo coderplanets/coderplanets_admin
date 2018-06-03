@@ -9,6 +9,7 @@ const debug = makeDebugger('L:Route')
 let route = null
 const INDEX = ''
 
+// example: /getme/xxx?aa=bb&cc=dd
 const parseMainPath = R.compose(
   R.head,
   R.split('?'),
@@ -18,6 +19,7 @@ const parseMainPath = R.compose(
   R.prop('asPath')
 )
 
+// example: /xxx/getme?aa=bb&cc=dd
 const parseSubPathList = R.compose(
   R.reject(R.isEmpty),
   R.split('/'),
