@@ -23,6 +23,8 @@ export {
   Global,
   cutFrom,
   getParameterByName,
+  queryStringToJSON,
+  mergeRouteQuery,
   prettyNum,
   Rlog,
   countWords,

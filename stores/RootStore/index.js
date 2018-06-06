@@ -4,7 +4,7 @@
  */
 
 import { types as t } from 'mobx-state-tree'
-import { makeDebugger } from '../../utils'
+import { makeDebugger, markStates } from '../../utils'
 
 import RouteStore from '../RouteStore'
 
@@ -139,7 +139,6 @@ const rootStore = t
       self.sidebar.load()
       // self.posts.load()
     },
-
     setHeaderFix(fix) {
       self.header.setFix(fix)
     },
@@ -164,6 +163,9 @@ const rootStore = t
     },
     isLocaleExist(locale) {
       return !!self.langs.get(locale)
+    },
+    markState(sobj) {
+      markStates(sobj, self)
     },
   }))
 

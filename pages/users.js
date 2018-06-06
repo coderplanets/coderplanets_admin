@@ -34,7 +34,6 @@ export default class Index extends React.Component {
     const data = await request(GRAPHQL_ENDPOINT, sidebarSchema.communitiesRaw, {
       filter: { page: 1, size: 30 },
     }) // .then(data => console.log(data))
-    // console.log('SSR getInitialProps ------> ', data.communities)
     /* eslint-disable */
     const { locale, messages } = req || Global.__NEXT_DATA__.props
     /* eslint-enable */

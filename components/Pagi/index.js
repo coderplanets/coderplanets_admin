@@ -52,11 +52,12 @@ const Pagi = ({
       </PagiWrapper>
     )
   }
+
   return (
     <PagiWrapper left={left} top={top} bottom={bottom}>
       {hasExtraPage(totalCount, pageSize) ? (
         <Pagination
-          current={pageNumber}
+          current={parseInt(pageNumber, 10)}
           pageSize={pageSize}
           total={totalCount}
           itemRender={PagiCustomRender}

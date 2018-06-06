@@ -12,34 +12,50 @@ module.exports = {
   exportPathMap: () => {
     return {
       '/': { page: '/' },
-      // '/ruby': { page: '/', query: { name: 'ruby' } },
       /*
-      '/communities/tags': {
-        page: '/communities',
-      },
-      */
-      '/communities/posts': {
-        page: '/communities',
-        //  asPath: '/communities/posts',
-      },
+         '/communities/tags': {
+         page: '/communities',
+         },
+       */
+      /*
+         '/communities/posts': {
+         page: '/communities',
+         },
+       */
       '/communities': {
         page: '/communities',
-        // query: { main: 'communities', sub: '' },
+        /* query: { page: 1, size: 20 }, */
       },
 
-      '/racket': {
-        page: '/',
-      },
-      '/racket/posts': {
-        page: '/',
-      },
+      /*
+         '/communities/': {
+         page: '/communities',
+         query: { page: 2, size: 20 },
+         },
+       */
+
+      /*
+         '/communities/page/1/size/20': {
+         page: '/communities',
+         asPath: '/communities/?page=2&size=20',
+         },
+       */
+
+      /*
+         '/racket': {
+         page: '/',
+         },
+         '/racket/posts': {
+         page: '/',
+         },
+       */
 
       /* '/racket/tags': { */
       /* page: '/', */
       //  asPath: '/communities/posts',
       /* }, */
 
-      '/js/posts': { page: '/', query: { main: 'js', sub: 'posts' } },
+      /* '/js/posts': { page: '/', query: { main: 'js', sub: 'posts' } }, */
       /* '/intro/i': { page: '/intro', query: { name: 'index' } }, */
       /* '/intro/feature': { page: '/intro', query: { name: 'feature' } }, */
       /* '/intro/theme': { page: '/intro', query: { name: 'theme' } }, */

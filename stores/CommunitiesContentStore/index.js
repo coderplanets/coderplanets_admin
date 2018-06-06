@@ -60,6 +60,9 @@ const CommunitiesContentStore = t
     },
   }))
   .actions(self => ({
+    /* ssrLoad(data, mainPath = 'communities') { */
+    /* self.pagedCommunities = data */
+    /* }, */
     markQuery(query) {
       self.root.route.markQuery(query)
     },

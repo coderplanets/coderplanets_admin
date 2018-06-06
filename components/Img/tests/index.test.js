@@ -20,7 +20,7 @@ describe('<Img />', () => {
     expect(renderedComponent.prop('alt')).toEqual(alt)
   })
 
-  it('should not have a default className', () => {
+  it('should have a default className', () => {
     const renderedComponent = renderComponent()
     expect(renderedComponent.prop('className')).toBe('img-class')
   })

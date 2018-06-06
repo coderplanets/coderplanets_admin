@@ -1,6 +1,9 @@
 import R from 'ramda'
 
-import { makeDebugger /*  isEmptyNil, getParameterByName */ } from '../../utils'
+import {
+  makeDebugger,
+  queryStringToJSON /*  isEmptyNil, getParameterByName */,
+} from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('L:Route')
@@ -50,7 +53,12 @@ export function syncRoute(routeObj) {
   const mainPath = getMainPath(routeObj)
   const subPath = getSubPath(routeObj)
 
-  const { query } = routeObj
+  const { query, asPath } = routeObj
+
+  /* console.log('syncRoute --> routeObj: ', routeObj) */
+  console.log('syncRoute --> asPath: ', asPath)
+  console.log('syncRoute --> query: ', query)
+  console.log('syncRoute parse --> ', queryStringToJSON(asPath))
 
   route.markState({
     mainPath,

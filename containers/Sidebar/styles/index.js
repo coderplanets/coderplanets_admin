@@ -8,7 +8,8 @@ import { theme } from '../../../utils'
 // http://blog.csdn.net/liusaint1992/article/details/51277751
 export const Sidebar = styled.div`
   position: fixed;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   top: 0;
   width: 250px;
   background: ${theme('sidebar.bg')};

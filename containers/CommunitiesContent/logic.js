@@ -33,10 +33,11 @@ export function loadCommunities(page = 1) {
   const args = {
     filter: { page, size },
   }
+  scrollIntoEle(TYPE.APP_HEADER_ID)
+
   communitiesContent.markState({
     communitiesLoading: true,
   })
-  scrollIntoEle(TYPE.APP_HEADER_ID)
 
   sr71$.query(S.pagedCommunities, args)
 
@@ -165,6 +166,11 @@ const DataSolver = [
     match: asyncRes('pagedCommunities'),
     action: ({ pagedCommunities }) => {
       cancleLoading()
+      debug(
+        '## loadCommunities in the client .... pagedCommunities: ',
+        pagedCommunities.pageNumber
+      )
+
       communitiesContent.markState({
         pagedCommunities,
       })

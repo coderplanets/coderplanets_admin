@@ -7,6 +7,7 @@ import { types as t } from 'mobx-state-tree'
 import R from 'ramda'
 import Router from 'next/router'
 
+import { PAGE_SIZE } from '../../config'
 import { markStates, makeDebugger } from '../../utils'
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('S:RouteStore')
@@ -14,10 +15,24 @@ const debug = makeDebugger('S:RouteStore')
 
 const Query = t.model('Query', {
   page: t.optional(t.string, '1'),
-  size: t.optional(t.string, '20'), // TODO: use config
+  size: t.optional(t.string, String(PAGE_SIZE.COMMON)),
   // sort .... [when, ...]
   // view ... [chart, list ...]
 })
+
+const serializeQuery = obj => {
+  /* eslint-disable */
+  return (
+    '?' +
+    Object.keys(obj)
+      .reduce((a, k) => {
+        a.push(k + '=' + encodeURIComponent(obj[k]))
+        return a
+      }, [])
+      .join('&')
+  )
+  /* eslint-enable */
+}
 
 const RouteStore = t
   .model('RouteStore', {
@@ -43,15 +58,27 @@ const RouteStore = t
       if (page && page === '1') {
         query = R.omit(['page', 'size'], query)
       }
-
-      /* debug('final query =>  ', query) */
+      let queryString = ''
+      if (!R.isEmpty(query)) {
+        queryString = serializeQuery(query)
+      }
       if (typeof window !== 'undefined') {
-        return Router.push({
-          pathname: `/${self.mainPath}`,
-          asPath: `/${self.subPath}`,
-          query,
-          shallow: true,
-        })
+        /*
+           return Router.push({
+           pathname: `/${self.mainPath}`,
+           asPath: `/${self.subPath}`,
+           query,
+           shallow: true,
+           })
+         */
+        /* return Router.push(`/${self.mainPath}`, `/${self.subPath}`, { */
+        return Router.push(
+          `/${self.mainPath}${queryString}`,
+          `/${self.subPath}${queryString}`,
+          {
+            shallow: true,
+          }
+        )
       }
     },
 

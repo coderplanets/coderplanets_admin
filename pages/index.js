@@ -1,7 +1,7 @@
 import React from 'react'
 import { Provider } from 'mobx-react'
-import { request } from 'graphql-request'
-import { GRAPHQL_ENDPOINT } from '../config'
+/* import { request } from 'graphql-request' */
+/* import { GRAPHQL_ENDPOINT } from '../config' */
 
 import GAWraper from '../components/GAWraper'
 import initRootStore from '../stores'
@@ -17,7 +17,7 @@ import Header from '../containers/Header'
 import CommunityBanner from '../containers/CommunityBanner'
 import CommunityContent from '../containers/CommunityContent'
 
-import sidebarSchema from '../containers/Sidebar/schema'
+/* import sidebarSchema from '../containers/Sidebar/schema' */
 import { Global } from '../utils'
 
 import Footer from '../components/Footer'
@@ -30,12 +30,16 @@ export default class Index extends React.Component {
   static async getInitialProps({ req }) {
     /* const isServer = !!req */
 
+    /* console.log('-------> isServer(index) -----> ', isServer) */
+    /* console.log('-------> pathname(index) -----> ', pathname) */
+    /* return {} */
+    /* const isServer = !!req */
     // console.log('getInitialProps pathname ---> ', pathname)
     // console.log('getInitialProps asPath ---> ', asPath)
-    const data = await request(GRAPHQL_ENDPOINT, sidebarSchema.communitiesRaw, {
-      filter: { page: 1, size: 30 },
-    }) // .then(data => console.log(data))
-    // console.log('SSR getInitialProps ------> ', data.communities)
+    /* const data = await request(GRAPHQL_ENDPOINT, sidebarSchema.communitiesRaw, { */
+    /* filter: { page: 1, size: 30 }, */
+    /* }) // .then(data => console.log(data)) */
+    /* console.log('SSR getInitialProps index ------> ', data.communities) */
     /* eslint-disable */
     const { locale, messages } = req || Global.__NEXT_DATA__.props
     /* eslint-enable */
@@ -47,7 +51,7 @@ export default class Index extends React.Component {
       // messages,
       // locale,
       langSetup,
-      communities: data.pagedCommunities,
+      communities: {},
     }
   }
 
@@ -55,7 +59,7 @@ export default class Index extends React.Component {
     super(props)
     this.store = initRootStore({
       langSetup: props.langSetup,
-      communities: props.communities,
+      communities: {},
     })
   }
 

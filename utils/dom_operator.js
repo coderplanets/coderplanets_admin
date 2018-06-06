@@ -22,7 +22,7 @@ export const scrollIntoEle = eleID => {
 
   const e = safeDocument.getElementById(eleID)
   if (!!e && e.scrollIntoView) {
-    e.scrollIntoView({ behavior: 'smooth' })
+    e.scrollIntoView({ behavior: 'auto' })
   }
 }
 

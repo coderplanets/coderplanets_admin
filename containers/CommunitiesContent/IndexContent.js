@@ -1,6 +1,8 @@
 import React from 'react'
 import TimeAgo from 'timeago-react'
 
+/* import { Pagination } from 'antd' */
+
 import { cutFrom } from '../../utils'
 import {
   Pagi,
@@ -149,7 +151,7 @@ const columns = [
 
 class IndexContent extends React.Component {
   componentWillMount() {
-    logic.loadCommunities()
+    // logic.loadCommunities()
   }
 
   render() {

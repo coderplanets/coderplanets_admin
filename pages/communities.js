@@ -18,22 +18,30 @@ import CommunitiesContent from '../containers/CommunitiesContent'
 
 import sidebarSchema from '../containers/Sidebar/schema'
 
-import { Global } from '../utils'
+import { Global, /* queryStringToJSON, */ mergeRouteQuery } from '../utils'
 import Footer from '../components/Footer'
+
 // try to fix safari bug
 // see https://github.com/yahoo/react-intl/issues/422
 global.Intl = require('intl')
 
 export default class Index extends React.Component {
   // static async getInitialProps({ req, pathname, asPath }) {
-  static async getInitialProps({ req }) {
+  static async getInitialProps({ req, query }) {
     /* const isServer = !!req */
-    // console.log('getInitialProps pathname ---> ', pathname)
-    // console.log('getInitialProps asPath ---> ', asPath)
+    /* if (!isServer) return {} */
+    /* const test = '/communities/?page=2&size=20' */
+    /* console.log('mergeRouteQuery --> test ---> ', queryStringToJSON(test)) */
+
+    /* console.log('mergeRouteQuery --> bb ---> ', queryStringToJSON(asPath)) */
+    console.log('mergeRouteQuery --> cc ---> ', mergeRouteQuery(query))
+
     const data = await request(GRAPHQL_ENDPOINT, sidebarSchema.communitiesRaw, {
-      filter: { page: 1, size: 30 },
-    }) // .then(data => console.log(data))
-    // console.log('SSR getInitialProps ------> ', data.communities)
+      /* filter: queryStringToJSON(asPath), */
+      filter: mergeRouteQuery(query),
+      /* filter: { page: 2, size: 20 }, */
+    })
+
     /* eslint-disable */
     const { locale, messages } = req || Global.__NEXT_DATA__.props
     /* eslint-enable */
@@ -46,16 +54,14 @@ export default class Index extends React.Component {
       // locale,
       langSetup,
       communities: data.pagedCommunities,
+      communitiesContent: { pagedCommunities: data.pagedCommunities },
+      /* communitiesContent: { pagedCommunities: {} }, */
     }
   }
 
   constructor(props) {
     super(props)
-    /* this.store = initRootStore(props.langSetup) */
-    this.store = initRootStore({
-      langSetup: props.langSetup,
-      communities: props.communities,
-    })
+    this.store = initRootStore({ ...props })
   }
 
   render() {
