@@ -72,6 +72,7 @@ const RouteStore = t
            })
          */
         /* return Router.push(`/${self.mainPath}`, `/${self.subPath}`, { */
+        console.log('queryString --> ', queryString)
         return Router.push(
           `/${self.mainPath}${queryString}`,
           `/${self.subPath}${queryString}`,

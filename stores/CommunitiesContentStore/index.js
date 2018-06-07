@@ -40,10 +40,16 @@ const CommunitiesContentStore = t
     },
 
     get route() {
-      const { mainPath, subPath } = self.root.route
+      const { mainPath, subPath, query } = self.root.route
+      const queryObj = stripMobx(query)
+
+      if (queryObj.page) queryObj.page = parseInt(queryObj.page, 10)
+      if (queryObj.size) queryObj.size = parseInt(queryObj.size, 10)
+
       return {
         mainPath,
         subPath,
+        query: queryObj,
       }
     },
     get pagedCommunitiesData() {

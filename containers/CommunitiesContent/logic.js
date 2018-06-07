@@ -35,13 +35,15 @@ export function loadCommunities(page = 1) {
   }
   scrollIntoEle(TYPE.APP_HEADER_ID)
 
-  communitiesContent.markState({
-    communitiesLoading: true,
-  })
-
-  sr71$.query(S.pagedCommunities, args)
+  communitiesContent.markState({ communitiesLoading: true })
 
   communitiesContent.markQuery({ page, size })
+  const { route } = communitiesContent
+  /* console.log('route before fucking query: ', route.query) */
+
+  args.filter = R.merge(args.filter, route.query)
+  console.log('args 请求: ', args)
+  sr71$.query(S.pagedCommunities, args)
 }
 
 export function loadPosts(page = 1) {

@@ -24,6 +24,7 @@ const SERVE_PORT = 3001
    }
  */
 
+// TODO: server static: https://github.com/zeit/next.js/blob/master/examples/root-static-files/server.js
 mobxReact.useStaticRendering(true)
 
 const supportLanguages = glob
@@ -66,6 +67,9 @@ app.prepare().then(() => {
       res.setHeader('Content-Type', 'application/json;charset=utf-8')
       return res.end(JSON.stringify(getMessages(localeQuery(pathname).lang)))
     } else if (communitiesQuery(pathname)) {
+      console.log('urlParts --> ', urlParts)
+      console.log('req.params: ', req.params)
+
       return app.render(req, res, '/communities', query)
     } else if (usersQuery(pathname)) {
       return app.render(req, res, '/users', query)

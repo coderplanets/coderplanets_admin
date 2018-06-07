@@ -5,6 +5,7 @@ const Dotenv = require('dotenv-webpack')
 const { ANALYZE } = process.env
 // export example
 // https://github.com/zeit/next.js/blob/canary/examples/with-static-export/next.config.js
+// https://github.com/infiniteluke/next-static/blob/master/next.config.js
 
 module.exports = {
   // useFileSystemPublicRoutes: false,
@@ -22,33 +23,49 @@ module.exports = {
          page: '/communities',
          },
        */
+
       '/communities': {
         page: '/communities',
         /* query: { page: 1, size: 20 }, */
       },
 
+      '/communities?page=2&size=20': {
+        page: '/communities',
+        query: { page: 2, size: 20 },
+      },
+
       /*
-         '/communities/': {
+         '/communities/_page/2/_size/20': {
          page: '/communities',
          query: { page: 2, size: 20 },
          },
        */
 
-      /*
-         '/communities/page/1/size/20': {
-         page: '/communities',
-         asPath: '/communities/?page=2&size=20',
-         },
-       */
+      // '/javascript/posts/_q/page/2'
+      // '/javascript/jobs/_q/page/2'
+      // '/javascript/posts/_q/tag/all/page/2'
+      // '/javascript/posts/_q/tag/general/page/2'
+
+      '/communities/_q/page/2': {
+        page: '/communities',
+        query: { page: 2 },
+      },
 
       /*
-         '/racket': {
-         page: '/',
-         },
-         '/racket/posts': {
-         page: '/',
-         },
-       */
+         '/communities/page/1/size/20': {
+           page: '/communities',
+           asPath: '/communities/?page=2&size=20',
+           },
+         */
+
+      /*
+           '/racket': {
+           page: '/',
+           },
+           '/racket/posts': {
+           page: '/',
+           },
+         */
 
       /* '/racket/tags': { */
       /* page: '/', */

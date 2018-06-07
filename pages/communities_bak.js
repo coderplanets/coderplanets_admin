@@ -18,7 +18,7 @@ import CommunitiesContent from '../containers/CommunitiesContent'
 
 import sidebarSchema from '../containers/Sidebar/schema'
 
-import { Global, /* queryStringToJSON, */ mergeRouteQuery } from '../utils'
+import { Global, queryStringToJSON, mergeRouteQuery } from '../utils'
 import Footer from '../components/Footer'
 
 // try to fix safari bug
@@ -27,18 +27,24 @@ global.Intl = require('intl')
 
 export default class Index extends React.Component {
   // static async getInitialProps({ req, pathname, asPath }) {
-  static async getInitialProps({ req, query }) {
-    /* const isServer = !!req */
-    /* if (!isServer) return {} */
-    /* const test = '/communities/?page=2&size=20' */
-    /* console.log('mergeRouteQuery --> test ---> ', queryStringToJSON(test)) */
+  static async getInitialProps({ req, build, query, asPath }) {
+    const isServer = !!req
+    if (build) {
+      return {}
+    }
+    if (!isServer) {
+      console.log('在客户端 --> ', isServer)
+      /* return {} */
+    } else {
+      console.log('在服务器上 --> ', isServer)
+    }
 
-    /* console.log('mergeRouteQuery --> bb ---> ', queryStringToJSON(asPath)) */
-    console.log('mergeRouteQuery --> cc ---> ', mergeRouteQuery(query))
+    console.log('mergeRouteQuery --> cc i---> ', mergeRouteQuery(query))
 
+    console.log('quer GRAPHQL_ENDPOINT --> ', GRAPHQL_ENDPOINT)
     const data = await request(GRAPHQL_ENDPOINT, sidebarSchema.communitiesRaw, {
-      /* filter: queryStringToJSON(asPath), */
-      filter: mergeRouteQuery(query),
+      filter: queryStringToJSON(asPath),
+      /* filter: mergeRouteQuery(query), */
       /* filter: { page: 2, size: 20 }, */
     })
 
