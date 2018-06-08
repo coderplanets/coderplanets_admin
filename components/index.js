@@ -20,6 +20,8 @@ export { default as Pagi } from './Pagi'
 export { default as Navigator } from './Navigator'
 export { default as ThemeSelector } from './ThemeSelector'
 
+export { default as CommunityMatrix } from './CommunityMatrix'
+
 // Table cell
 export { default as AdderCell } from './AdderCell'
 export { default as MaybeCell } from './MaybeCell'
@@ -27,12 +29,15 @@ export { default as CommunityCell } from './CommunityCell'
 export { default as UserCell } from './UserCell'
 export { default as ColorCell } from './ColorCell'
 export { default as SexCell } from './SexCell'
-export { default as FormInputer } from './FormInputer'
-export { default as FormSelector } from './FormSelector'
-export { default as TagColorSelector } from './TagColorSelector'
 export { default as CategoriesCell } from './CategoriesCell'
 export { default as TagsCell } from './TagsCell'
 export { default as PermissionCell } from './PermissionCell'
+
+// form
+export { default as FormItem } from './FormItem'
+export { default as FormInputer } from './FormInputer'
+export { default as FormSelector } from './FormSelector'
+export { default as TagColorSelector } from './TagColorSelector'
 
 // loading component
 export {

@@ -18,8 +18,27 @@ const createTag = gql`
     }
   }
 `
+
+const pagedCommunities = gql`
+  query($filter: PagedFilter!) {
+    pagedCommunities(filter: $filter) {
+      entries {
+        id
+        title
+        raw
+        logo
+      }
+      pageNumber
+      pageSize
+      totalCount
+      totalPages
+    }
+  }
+`
+
 const schema = {
   createTag,
+  pagedCommunities,
 }
 
 export default schema

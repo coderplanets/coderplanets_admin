@@ -23,13 +23,16 @@ import {
   objToArray,
 } from '../../utils'
 
-import { UserCell, Button, Space, Icon } from '../../components'
+import {
+  UserCell,
+  Button,
+  Space,
+  Icon,
+  CommunityMatrix,
+} from '../../components'
 
 import {
   Wrapper,
-  MatrixWrapper,
-  CommunityLogo,
-  GeneralPLogo,
   Divider,
   PermissionWrapper,
   PerItem,
@@ -46,8 +49,6 @@ const debug = makeDebugger('C:PermissionEditor')
 const valueIsObj = v => isObject(v)
 const valueIsNotObj = R.complement(valueIsObj)
 
-const tooltipOffset = JSON.stringify({ top: 5, right: -5 })
-
 const getManagedCommunitiesRaws = userRules => {
   const userRulesByCommunities = R.filter(valueIsObj, JSON.parse(userRules))
   const ckeys = R.keys(userRulesByCommunities)
@@ -55,40 +56,20 @@ const getManagedCommunitiesRaws = userRules => {
   return ckeys
 }
 
-const CommunityMatrix = ({ data, userRules, activeRaw }) => {
+const CommunitiesMatrix = ({ data, userRules, activeRaw }) => {
   if (!data) return <div />
   userRules = isEmptyNil(userRules) ? '{}' : userRules
 
   const managerdRaws = getManagedCommunitiesRaws(userRules)
 
   return (
-    <MatrixWrapper>
-      {data.entries.map(c => (
-        <div
-          key={shortid.generate()}
-          onClick={logic.communitySelect.bind(this, c.raw)}
-          data-place="right"
-          data-tip={c.title}
-          data-for="permission_editor"
-          data-offset={tooltipOffset}
-        >
-          <CommunityLogo
-            src={c.logo}
-            len={R.contains(c.raw, managerdRaws)}
-            active={c.raw === activeRaw}
-          />
-        </div>
-      ))}
-      <div
-        data-place="right"
-        data-tip="基础权限"
-        data-for="permission_editor"
-        data-offset={tooltipOffset}
-        onClick={logic.communitySelect.bind(this, 'general')}
-      >
-        <GeneralPLogo src={`${ICON_ASSETS}/cmd/all.svg`} />
-      </div>
-    </MatrixWrapper>
+    <CommunityMatrix
+      data={data}
+      onSelect={logic.communitySelect}
+      onAddOnSelect={logic.communityAddOnSelect}
+      activeRaw={activeRaw}
+      lens={managerdRaws}
+    />
   )
 }
 
@@ -181,7 +162,7 @@ class PermissionEditorContainer extends React.Component {
         <h2>权限编辑</h2>
         <Divider />
 
-        <CommunityMatrix
+        <CommunitiesMatrix
           data={pagedCommunitiesData}
           userRules={cmsPassportString}
           allRules={allRulesData.cms.community}

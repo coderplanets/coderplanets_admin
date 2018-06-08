@@ -8,11 +8,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Input } from 'antd'
 import R from 'ramda'
-// import { Input } from '../../components'
+
+import { FormItem } from '../../components'
 
 import { makeDebugger } from '../../utils'
 
-import { FormItemWrapper, FormLable, FormInput, Note } from './styles'
+import { FormInput, Note } from './styles'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:FormInputer:index')
@@ -21,9 +22,7 @@ const debug = makeDebugger('c:FormInputer:index')
 const { TextArea } = Input
 
 const FormInputer = ({ label, textarea, value, onChange, note }) => (
-  <FormItemWrapper>
-    <FormLable>{label}</FormLable>
-
+  <FormItem label={label}>
     <FormInput>
       {textarea ? (
         <TextArea
@@ -37,7 +36,7 @@ const FormInputer = ({ label, textarea, value, onChange, note }) => (
       )}
       {R.isEmpty(note) ? <div /> : <Note>{note}</Note>}
     </FormInput>
-  </FormItemWrapper>
+  </FormItem>
 )
 
 FormInputer.propTypes = {

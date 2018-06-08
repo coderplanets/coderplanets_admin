@@ -16,9 +16,11 @@ import {
   Button,
   Icon,
   Space,
+  FormItem,
   FormInputer,
   FormSelector,
   TagColorSelector,
+  CommunityMatrix,
 } from '../../components'
 import { Wrapper, ActionBtns, Divider } from './styles'
 import * as logic from './logic'
@@ -34,8 +36,7 @@ class TagEditorContainer extends React.Component {
 
   render() {
     const { tagEditor } = this.props
-    const { mutating, tagData } = tagEditor
-    console.log('options --> ', CMS_PARTS)
+    const { mutating, tagData, pagedCommunitiesData } = tagEditor
 
     return (
       <Wrapper>
@@ -52,7 +53,14 @@ class TagEditorContainer extends React.Component {
           value={tagData.color}
           onChange={logic.colorChange}
         />
-        <FormInputer label="社区:" onChange={debug} />
+        <FormItem label="社区:">
+          <CommunityMatrix
+            data={pagedCommunitiesData}
+            onSelect={logic.communityChange}
+            activeRaw={tagData.community ? tagData.community.raw : ''}
+            hasAddon={false}
+          />
+        </FormItem>
         <FormSelector
           label="part:"
           options={CMS_PARTS}

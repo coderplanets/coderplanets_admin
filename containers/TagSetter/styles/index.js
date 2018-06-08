@@ -39,6 +39,7 @@ export const CategoryWrapper = styled.div`
   display: flex;
   margin-bottom: 30px;
   align-items: center;
+  flex-wrap: wrap;
 `
 
 export const CategoryTag = styled.div`
@@ -47,9 +48,10 @@ export const CategoryTag = styled.div`
   background: ${props => (props.active ? '#e4f7fe' : '#ececec')};
   border: 1px dashed #97dbfc;
   color: ${props => (props.active ? '#0692fa' : 'grey')};
-  padding: 5px 20px;
+  padding: 5px 10px;
   border-radius: 3px;
   margin-right: 15px;
+  margin-bottom: 12px;
   &:hover {
     border: 1px solid #97dbfc;
     cursor: ${props => (props.active ? '' : 'pointer')};

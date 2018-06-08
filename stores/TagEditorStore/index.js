@@ -6,7 +6,7 @@
 import { types as t, getParent } from 'mobx-state-tree'
 import R from 'ramda'
 
-import { Tag } from '../SharedModel'
+import { Tag, PagedCommunities } from '../SharedModel'
 import { markStates, makeDebugger, stripMobx } from '../../utils'
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('S:TagEditorStore')
@@ -15,6 +15,7 @@ const debug = makeDebugger('S:TagEditorStore')
 const TagEditorStore = t
   .model('TagEditorStore', {
     tag: t.optional(Tag, {}),
+    pagedCommunities: t.maybe(PagedCommunities),
     // Creating or Updating mutating: t.optional(t.boolean, false),
     // is Edit or Create
     isEdit: t.optional(t.boolean, false),
@@ -31,6 +32,9 @@ const TagEditorStore = t
     },
     get tagData() {
       return stripMobx(self.tag)
+    },
+    get pagedCommunitiesData() {
+      return stripMobx(self.pagedCommunities)
     },
   }))
   .actions(self => ({

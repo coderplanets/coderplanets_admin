@@ -11,8 +11,10 @@ import shortid from 'shortid'
 
 import { Select } from 'antd'
 
+import { FormItem } from '../../components'
+
 import { makeDebugger } from '../../utils'
-import { FormItemWrapper, FormLable, Note } from './styles'
+import { Note } from './styles'
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:FormSelector:index')
 /* eslint-enable no-unused-vars */
@@ -21,22 +23,22 @@ const { Option } = Select
 
 const FormSelector = ({ label, options, value, onChange, note }) => {
   return (
-    <FormItemWrapper>
-      <FormLable>{label}</FormLable>
-
-      <Select
-        defaultValue={value}
-        style={{ minWidth: 250 }}
-        onChange={onChange}
-      >
-        {options.map(v => (
-          <Option key={shortid.generate()} value={v}>
-            {v}
-          </Option>
-        ))}
-      </Select>
-      {R.isEmpty(note) ? <div /> : <Note>{note}</Note>}
-    </FormItemWrapper>
+    <FormItem label={label}>
+      <React.Fragment>
+        <Select
+          defaultValue={value}
+          style={{ minWidth: 250 }}
+          onChange={onChange}
+        >
+          {options.map(v => (
+            <Option key={shortid.generate()} value={v}>
+              {v}
+            </Option>
+          ))}
+        </Select>
+        {R.isEmpty(note) ? <div /> : <Note>{note}</Note>}
+      </React.Fragment>
+    </FormItem>
   )
 }
 

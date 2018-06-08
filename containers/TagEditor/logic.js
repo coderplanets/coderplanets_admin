@@ -10,6 +10,8 @@ import {
 } from '../../utils'
 import SR71 from '../../utils/network/sr71'
 
+import { PAGE_SIZE } from '../../config'
+
 import S from './schema'
 
 const sr71$ = new SR71()
@@ -20,6 +22,17 @@ const debug = makeDebugger('L:TagEditor')
 /* eslint-enable no-unused-vars */
 
 let tagEditor = null
+
+const commonFilter = page => {
+  const size = PAGE_SIZE.COMMON + 10
+  return {
+    filter: { page, size },
+  }
+}
+
+export function getAllCommunities(page = 1) {
+  sr71$.query(S.pagedCommunities, commonFilter(page))
+}
 
 export const profileChange = R.curry((part, e) =>
   tagEditor.updateTag({
@@ -37,8 +50,15 @@ export const partChange = part =>
     part,
   })
 
+export const communityChange = community => {
+  console.log('communityChange community: ', community)
+  tagEditor.updateTag({
+    community,
+  })
+}
+
 export const mutateConfirm = () => {
-  const requiredArgs = ['title', 'color', 'part']
+  const requiredArgs = ['title', 'color', 'part', 'community']
   const args = { ...tagEditor.tagData }
 
   tagEditor.markState({
@@ -49,7 +69,7 @@ export const mutateConfirm = () => {
   fargs.color = R.toUpper(fargs.color)
   fargs.part = R.toUpper(fargs.part)
 
-  fargs.communityId = 123
+  fargs.communityId = fargs.community.id
   debug('fargs --> ', fargs)
   sr71$.mutate(S.createTag, fargs)
 }
@@ -74,6 +94,14 @@ const DataSolver = [
       closePreviewer(TYPE.TAGS_REFRESH)
     },
   },
+  {
+    match: asyncRes('pagedCommunities'),
+    action: ({ pagedCommunities }) => {
+      tagEditor.markState({
+        pagedCommunities,
+      })
+    },
+  },
 ]
 
 const ErrSolver = []
@@ -83,4 +111,6 @@ export function init(selectedStore) {
   debug(tagEditor)
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+
+  getAllCommunities()
 }

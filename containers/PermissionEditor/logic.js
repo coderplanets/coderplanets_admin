@@ -33,15 +33,17 @@ const commonFilter = page => {
   }
 }
 
-export function communitySelect(curCommunityRaw) {
-  let curView = 'community'
-  if (curCommunityRaw === 'general') {
-    curView = 'general'
-  }
-
+export function communitySelect(community) {
   permissionEditor.markState({
-    curView,
-    curCommunityRaw,
+    curView: 'community',
+    curCommunityRaw: community.raw,
+  })
+}
+
+export function communityAddOnSelect() {
+  permissionEditor.markState({
+    curView: 'general',
+    curCommunityRaw: 'general',
   })
 }
 
