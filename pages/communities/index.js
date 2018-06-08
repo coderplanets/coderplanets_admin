@@ -16,35 +16,48 @@ import Header from '../../containers/Header'
 import CommunitiesBanner from '../../containers/CommunitiesBanner'
 import CommunitiesContent from '../../containers/CommunitiesContent'
 
-import sidebarSchema from '../../containers/Sidebar/schema'
+import schema from '../../containers/CommunitiesContent/schema'
 
-import { Global, queryStringToJSON /* mergeRouteQuery */ } from '../../utils'
+import {
+  Global,
+  queryStringToJSON,
+  /* mergeRouteQuery */
+  parsePathList,
+} from '../../utils'
 import Footer from '../../components/Footer'
 
 // try to fix safari bug
 // see https://github.com/yahoo/react-intl/issues/422
 global.Intl = require('intl')
 
+/*
+   this function is only needed in dev-mode, it's a bug
+   in production, the query for sub-path will go direactly to sub-route file
+
+   这个函数的存在是 dev 模式下的 bug, 生产环境下是不需要（不起作用的）的，生产环境下会
+   直接被路由到子文件
+ */
+const getSubPath = props => {
+  const asPathList = parsePathList(props)
+
+  return asPathList.length > 1 ? asPathList[1] : null
+}
+
+/* filter: mergeRouteQuery(query), */
 export default class Index extends React.Component {
-  // static async getInitialProps({ req, pathname, asPath }) {
-  static async getInitialProps({ req, asPath }) {
-    /*
+  static async getInitialProps(props) {
+    const { req, asPath } = props
     const isServer = !!req
-    if (!isServer) {
-      console.log('在客户端 --> ', isServer)
-    } else {
-      console.log('在服务器上 --> ', isServer)
+    if (!isServer) return {}
+
+    let querySchema = schema.pagedCommunitiesRaw
+    if (getSubPath(props) === 'tags') {
+      querySchema = schema.pagedTagsRaw
     }
-    */
 
-    /* console.log('mergeRouteQuery --> cc i---> ', mergeRouteQuery(query)) */
-
-    const data = await request(GRAPHQL_ENDPOINT, sidebarSchema.communitiesRaw, {
+    const data = await request(GRAPHQL_ENDPOINT, querySchema, {
       filter: queryStringToJSON(asPath),
-      /* filter: mergeRouteQuery(query), */
-      /* filter: { page: 2, size: 20 }, */
     })
-
     /* eslint-disable */
     const { locale, messages } = req || Global.__NEXT_DATA__.props
     /* eslint-enable */
@@ -57,8 +70,7 @@ export default class Index extends React.Component {
       // locale,
       langSetup,
       communities: data.pagedCommunities,
-      communitiesContent: { pagedCommunities: data.pagedCommunities },
-      /* communitiesContent: { pagedCommunities: {} }, */
+      communitiesContent: { ...data },
     }
   }
 

@@ -63,23 +63,16 @@ const RouteStore = t
         queryString = serializeQuery(query)
       }
       if (typeof window !== 'undefined') {
-        /*
-           return Router.push({
-           pathname: `/${self.mainPath}`,
-           asPath: `/${self.subPath}`,
-           query,
-           shallow: true,
-           })
-         */
-        /* return Router.push(`/${self.mainPath}`, `/${self.subPath}`, { */
-        console.log('queryString --> ', queryString)
-        return Router.push(
-          `/${self.mainPath}${queryString}`,
-          `/${self.subPath}${queryString}`,
-          {
-            shallow: true,
-          }
-        )
+        let url = ''
+        if (self.mainPath === self.subPath) {
+          url = `/${self.mainPath}${queryString}`
+        } else {
+          url = `/${self.mainPath}/${self.subPath}${queryString}`
+        }
+
+        return Router.push(url, url, {
+          shallow: true,
+        })
       }
     },
 

@@ -17,7 +17,7 @@ import Header from '../containers/Header'
 import UsersBanner from '../containers/UsersBanner'
 import UsersContent from '../containers/UsersContent'
 
-import sidebarSchema from '../containers/Sidebar/schema'
+import schema from '../containers/CommunitiesContent/schema'
 
 import { Global } from '../utils'
 import Footer from '../components/Footer'
@@ -31,7 +31,7 @@ export default class Index extends React.Component {
     /* const isServer = !!req */
     // console.log('getInitialProps pathname ---> ', pathname)
     // console.log('getInitialProps asPath ---> ', asPath)
-    const data = await request(GRAPHQL_ENDPOINT, sidebarSchema.communitiesRaw, {
+    const data = await request(GRAPHQL_ENDPOINT, schema.pagedCommunitiesRaw, {
       filter: { page: 1, size: 30 },
     }) // .then(data => console.log(data))
     /* eslint-disable */

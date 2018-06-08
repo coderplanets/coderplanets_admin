@@ -22,9 +22,6 @@ export {
   toPercentNum,
   Global,
   cutFrom,
-  getParameterByName,
-  queryStringToJSON,
-  mergeRouteQuery,
   prettyNum,
   Rlog,
   countWords,
@@ -36,6 +33,13 @@ export {
 } from './functions'
 
 export { asyncErr, asyncRes } from './graphql_helper'
+export {
+  parseMainPath,
+  parsePathList,
+  getParameterByName,
+  queryStringToJSON,
+  mergeRouteQuery,
+} from './route_helper'
 
 export {
   storePlug,

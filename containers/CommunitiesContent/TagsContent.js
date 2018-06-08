@@ -110,8 +110,8 @@ const columns = [
 ]
 
 class TagsContent extends React.Component {
-  componentWillMount() {
-    logic.loadTags()
+  componentDidMount() {
+    logic.loadTagsIfNeed()
   }
 
   render() {
@@ -136,7 +136,7 @@ class TagsContent extends React.Component {
               pageNumber={data.pageNumber}
               pageSize={data.pageSize}
               totalCount={data.totalCount}
-              onChange={logic.loadPosts}
+              onChange={logic.loadTags}
             />
           </div>
         ) : (

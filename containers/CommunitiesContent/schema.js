@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-const pagedCommunities = gql`
+const pagedCommunitiesRaw = `
   query($filter: PagedFilter!) {
     pagedCommunities(filter: $filter) {
       entries {
@@ -23,6 +23,10 @@ const pagedCommunities = gql`
       totalPages
     }
   }
+`
+
+const pagedCommunities = gql`
+  ${pagedCommunitiesRaw}
 `
 const pagedCategories = gql`
   query($filter: PagedFilter!) {
@@ -51,7 +55,7 @@ const pagedCategories = gql`
   }
 `
 
-const pagedTags = gql`
+const pagedTagsRaw = `
   query($filter: PagedFilter!) {
     pagedTags(filter: $filter) {
       entries {
@@ -73,6 +77,9 @@ const pagedTags = gql`
       totalPages
     }
   }
+`
+const pagedTags = gql`
+  ${pagedTagsRaw}
 `
 const pagedPosts = gql`
   query($filter: PagedArticleFilter) {
@@ -152,7 +159,9 @@ const unsetTag = gql`
 
 const schema = {
   pagedCommunities,
+  pagedCommunitiesRaw,
   pagedTags,
+  pagedTagsRaw,
   pagedCategories,
   pagedPosts,
   deleteCommunity,

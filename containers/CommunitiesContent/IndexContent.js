@@ -151,7 +151,7 @@ const columns = [
 
 class IndexContent extends React.Component {
   componentWillMount() {
-    /* logic.loadCommunities() */
+    logic.loadCommunitiesIfNeed()
   }
 
   render() {

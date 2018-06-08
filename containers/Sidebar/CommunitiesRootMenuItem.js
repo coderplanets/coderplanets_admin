@@ -22,7 +22,7 @@ import * as logic from './logic'
 const MenuChildren = ({ activeRaw, curRaw, activePart }) => (
   <ChildrenWrapper active={activeRaw === curRaw}>
     <ChildrenItem active={ROUTE.COMMUNITIES === activePart}>
-      <Link href="/communities">
+      <Link href="/communities" as="/communities">
         <ChildrenItemInner>
           <ChildrenTitle>社区</ChildrenTitle>
           <ChildrenNum>23</ChildrenNum>
@@ -38,7 +38,7 @@ const MenuChildren = ({ activeRaw, curRaw, activePart }) => (
       </Link>
     </ChildrenItem>
     <ChildrenItem active={ROUTE.TAGS === activePart}>
-      <Link href="/communities" as="/communities/tags">
+      <Link href="/communities/tags" as="/communities/tags">
         <ChildrenItemInner>
           <ChildrenTitle>标签</ChildrenTitle>
           <ChildrenNum>22</ChildrenNum>

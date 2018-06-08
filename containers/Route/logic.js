@@ -2,6 +2,8 @@ import R from 'ramda'
 
 import {
   makeDebugger,
+  parseMainPath,
+  parsePathList,
   // queryStringToJSON /*  isEmptyNil, getParameterByName */,
 } from '../../utils'
 
@@ -11,27 +13,6 @@ const debug = makeDebugger('L:Route')
 
 let route = null
 const INDEX = ''
-
-// example: /getme/xxx?aa=bb&cc=dd
-const parseMainPath = R.compose(
-  R.head,
-  R.split('?'),
-  R.head,
-  R.reject(R.isEmpty),
-  R.split('/'),
-  R.prop('asPath')
-)
-
-// example: /xxx/getme?aa=bb&cc=dd
-const parseSubPathList = R.compose(
-  R.reject(R.isEmpty),
-  R.split('/'),
-  R.head,
-  R.reject(R.contains('=')),
-  R.reject(R.isEmpty),
-  R.split('?'),
-  R.prop('asPath')
-)
 
 const getMainPath = routeObj => {
   if (R.isEmpty(routeObj)) return INDEX
@@ -44,7 +25,7 @@ const getSubPath = routeObj => {
   if (R.isEmpty(routeObj)) return INDEX
   if (routeObj.asPath === '/') return INDEX
 
-  const asPathList = parseSubPathList(routeObj)
+  const asPathList = parsePathList(routeObj)
 
   return asPathList.length > 1 ? asPathList[1] : asPathList[0]
 }

@@ -16,7 +16,7 @@
     "build": "run-s dist clean",
 
     "build:only": "npm run i18n && next build",
-    "next-start": "cross-env GOAL=production next build && cross-env GOAL=production next start -p 3001",
+    "next-start": "cross-env GOAL=production next build && cross-env GOAL=production next start -p 3002",
 
     "build:dev": "cross-env GOAL=dev run-s dist:dev clean",
     "dist": "npm run i18n && next build && next export -o \"build\"",

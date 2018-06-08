@@ -16,9 +16,9 @@ import Header from '../../containers/Header'
 import CommunitiesBanner from '../../containers/CommunitiesBanner'
 import CommunitiesContent from '../../containers/CommunitiesContent'
 
-import sidebarSchema from '../../containers/Sidebar/schema'
+import schema from '../../containers/CommunitiesContent/schema'
 
-import { Global, queryStringToJSON, mergeRouteQuery } from '../../utils'
+import { Global, queryStringToJSON /* mergeRouteQuery */ } from '../../utils'
 import Footer from '../../components/Footer'
 
 // try to fix safari bug
@@ -26,23 +26,11 @@ import Footer from '../../components/Footer'
 global.Intl = require('intl')
 
 export default class Index extends React.Component {
-  // static async getInitialProps({ req, pathname, asPath }) {
-  static async getInitialProps({ req, build, query, asPath }) {
+  static async getInitialProps({ req, asPath }) {
     const isServer = !!req
-    if (build) {
-      return {}
-    }
-    if (!isServer) {
-      console.log('在客户端 --> ', isServer)
-      /* return {} */
-    } else {
-      console.log('在服务器上 --> ', isServer)
-    }
+    if (!isServer) return {}
 
-    console.log('mergeRouteQuery --> cc i---> ', mergeRouteQuery(query))
-
-    console.log('quer GRAPHQL_ENDPOINT --> ', GRAPHQL_ENDPOINT)
-    const data = await request(GRAPHQL_ENDPOINT, sidebarSchema.communitiesRaw, {
+    const data = await request(GRAPHQL_ENDPOINT, schema.pagedTagsRaw, {
       filter: queryStringToJSON(asPath),
       /* filter: mergeRouteQuery(query), */
       /* filter: { page: 2, size: 20 }, */
@@ -55,13 +43,9 @@ export default class Index extends React.Component {
     langSetup[locale] = messages
 
     return {
-      // version: store.version,
-      // messages,
-      // locale,
       langSetup,
-      communities: data.pagedCommunities,
-      communitiesContent: { pagedCommunities: data.pagedCommunities },
-      /* communitiesContent: { pagedCommunities: {} }, */
+      /* communities: data.pagedCommunities, */
+      communitiesContent: { pagedTags: data.pagedTags },
     }
   }
 

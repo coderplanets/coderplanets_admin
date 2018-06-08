@@ -12,15 +12,19 @@ let rootStore = null
 // TODO: refactor
 const createRootStore = ({ langSetup, ...restData }) => {
   /* console.log('createRootStore: ', { ...restData }) */
+  /* console.log('0 initRootStore: ', { ...restData }) */
   return RootStore.create({ appLangs: langSetup, ...restData }, {})
 }
 
 function initRootStore({ langSetup, ...restData }) {
   if (rootStore === null) {
     /* console.log('initRootStore 0 (rootStore is Empty)') */
+    /* console.log('1 initRootStore: ', { ...restData }) */
+
     rootStore = createRootStore({ langSetup, ...restData })
   }
 
+  /* console.log('2 initRootStore: ', { ...restData }) */
   rootStore.markState({
     ...restData,
   })

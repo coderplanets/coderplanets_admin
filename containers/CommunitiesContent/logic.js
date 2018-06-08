@@ -42,7 +42,6 @@ export function loadCommunities(page = 1) {
   /* console.log('route before fucking query: ', route.query) */
 
   args.filter = R.merge(args.filter, route.query)
-  console.log('args 请求: ', args)
   sr71$.query(S.pagedCommunities, args)
 }
 
@@ -74,12 +73,30 @@ export function loadCategories(page = 1) {
 }
 
 export function loadTags(page = 1) {
+  const size = PAGE_SIZE.COMMON
+  scrollIntoEle(TYPE.APP_HEADER_ID)
+
+  communitiesContent.markQuery({ page, size })
+
   scrollIntoEle(TYPE.APP_HEADER_ID)
   communitiesContent.markState({
     tagsLoading: true,
   })
-  // TODO: use paged version
   sr71$.query(S.pagedTags, commonFilter(page))
+}
+
+export function loadCommunitiesIfNeed() {
+  if (!communitiesContent.pagedCommunities) {
+    debug('loadCommunitiesIfNeed')
+    loadCommunities()
+  }
+}
+
+export function loadTagsIfNeed() {
+  if (!communitiesContent.pagedTags) {
+    debug('loadTagsIfNeed')
+    loadTags()
+  }
 }
 
 export function onEdit(record) {

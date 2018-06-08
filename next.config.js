@@ -28,6 +28,11 @@ module.exports = {
         page: '/communities',
         /* query: { page: 1, size: 20 }, */
       },
+      /*
+      '/communities/tags': {
+        page: '/communities/tags',
+      },
+      */
 
       '/communities?page=2&size=20': {
         page: '/communities',
