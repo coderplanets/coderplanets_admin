@@ -5,3 +5,5 @@ coverage
 ./bin
 ./npm-debug.log
 .next
+schema.graphql
+LICENSE
