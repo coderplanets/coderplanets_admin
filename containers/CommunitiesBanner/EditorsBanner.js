@@ -27,7 +27,7 @@ class EditorsBanner extends React.Component {
         <BannerCountBrief
           filteredCount={filteredCount}
           totalCount={totalCount}
-          part="编辑"
+          thread="编辑"
           unit="人"
         />
         <Operation>

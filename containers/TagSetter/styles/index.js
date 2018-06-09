@@ -62,7 +62,7 @@ export const CommunityLogo = styled(Img)`
   height: 18px;
   display: block;
 `
-export const PartText = styled.div`
+export const ThreadText = styled.div`
   margin-left: 3px;
   margin-right: 5px;
   opacity: 0.6;

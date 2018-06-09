@@ -21,14 +21,14 @@ import {
   CategoryTag,
   CommunityLogo,
   SetterTitle,
-  PartText,
+  ThreadText,
 } from './styles'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('C:TagSetter')
 /* eslint-enable no-unused-vars */
 
-const TagsList = ({ tags, partId, selectedids }) => {
+const TagsList = ({ tags, threadId, selectedids }) => {
   return (
     <CategoryWrapper>
       {tags.map(c => (
@@ -37,15 +37,15 @@ const TagsList = ({ tags, partId, selectedids }) => {
           active={R.contains(c.id, selectedids)}
           onClick={logic.onAdd.bind(
             this,
-            c.part,
-            partId,
+            c.thread,
+            threadId,
             c.id,
             c.community.id,
             selectedids
           )}
         >
           <CommunityLogo src={c.community.logo} />
-          <PartText>({c.part})</PartText>
+          <ThreadText>({c.thread})</ThreadText>
           {c.title}
         </CategoryTag>
       ))}
@@ -63,7 +63,7 @@ class TagSetterContainer extends React.Component {
     const { pagedTagsData } = tagSetter
 
     const source = editData.data
-    /* const { part } = editData */
+    /* const { thread } = editData */
     const selectedids = R.pluck('id', source.tags)
     const { id, title } = source
 
@@ -75,7 +75,7 @@ class TagSetterContainer extends React.Component {
         {pagedTagsData ? (
           <TagsList
             tags={pagedTagsData.entries}
-            partId={id}
+            threadId={id}
             selectedids={selectedids}
           />
         ) : (

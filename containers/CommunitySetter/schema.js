@@ -17,8 +17,8 @@ const pagedCommunities = gql`
 `
 
 const setCommunity = gql`
-  mutation($part: CmsPart, $id: ID!, $communityId: ID!) {
-    setCommunity(part: $part, id: $id, communityId: $communityId) {
+  mutation($thread: CmsThread, $id: ID!, $communityId: ID!) {
+    setCommunity(thread: $thread, id: $id, communityId: $communityId) {
       id
     }
   }

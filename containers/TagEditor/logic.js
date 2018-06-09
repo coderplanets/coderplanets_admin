@@ -34,9 +34,9 @@ export function getAllCommunities(page = 1) {
   sr71$.query(S.pagedCommunities, commonFilter(page))
 }
 
-export const profileChange = R.curry((part, e) =>
+export const profileChange = R.curry((thread, e) =>
   tagEditor.updateTag({
-    [part]: e.target.value,
+    [thread]: e.target.value,
   })
 )
 
@@ -45,9 +45,9 @@ export const colorChange = color =>
     color,
   })
 
-export const partChange = part =>
+export const threadChange = thread =>
   tagEditor.updateTag({
-    part,
+    thread,
   })
 
 export const communityChange = community => {
@@ -58,7 +58,7 @@ export const communityChange = community => {
 }
 
 export const mutateConfirm = () => {
-  const requiredArgs = ['title', 'color', 'part', 'community']
+  const requiredArgs = ['title', 'color', 'thread', 'community']
   const args = { ...tagEditor.tagData }
 
   tagEditor.markState({
@@ -67,7 +67,7 @@ export const mutateConfirm = () => {
   const fargs = castArgs(args, requiredArgs)
 
   fargs.color = R.toUpper(fargs.color)
-  fargs.part = R.toUpper(fargs.part)
+  fargs.thread = R.toUpper(fargs.thread)
 
   fargs.communityId = fargs.community.id
   debug('fargs --> ', fargs)

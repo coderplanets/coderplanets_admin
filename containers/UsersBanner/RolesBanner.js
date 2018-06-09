@@ -29,7 +29,7 @@ class RolesBanner extends React.Component {
         <BannerCountBrief
           filteredCount={filteredCount}
           totalCount={totalCount}
-          part="角色"
+          thread="角色"
           unit="人"
         />
         <Operation>

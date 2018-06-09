@@ -29,7 +29,7 @@ class PaysBanner extends React.Component {
         <BannerCountBrief
           filteredCount={filteredCount}
           totalCount={totalCount}
-          part="付费用户"
+          thread="付费用户"
           unit="人"
         />
         <Operation>

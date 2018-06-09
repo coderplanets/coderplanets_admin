@@ -51,7 +51,7 @@ const CommentsStore = t
     editContent: t.optional(t.string, ''),
     // content input of current reply comment editor
     replyContent: t.optional(t.string, ''),
-    // comments pagination data of current COMMUNITY / PART
+    // comments pagination data of current COMMUNITY / Thread
     entries: t.optional(t.array(Comment), []),
     totalCount: t.optional(t.number, 0),
     pageNumber: t.optional(t.number, 0),

@@ -28,9 +28,9 @@ export function goBack() {
   })
 }
 
-export const profileChange = R.curry((part, e) => {
+export const profileChange = R.curry((thread, e) => {
   accountEditor.updateUser({
-    [part]: e.target.value,
+    [thread]: e.target.value,
   })
 })
 

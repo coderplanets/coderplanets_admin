@@ -27,7 +27,7 @@ class CategoryBanner extends React.Component {
         <BannerCountBrief
           filteredCount={filteredCount}
           totalCount={totalCount}
-          part="社区分类"
+          thread="社区分类"
           unit="个"
         />
         <Operation>

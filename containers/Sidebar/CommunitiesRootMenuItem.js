@@ -19,9 +19,9 @@ import {
 
 import * as logic from './logic'
 
-const MenuChildren = ({ activeRaw, curRaw, activePart }) => (
+const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
   <ChildrenWrapper active={activeRaw === curRaw}>
-    <ChildrenItem active={ROUTE.COMMUNITIES === activePart}>
+    <ChildrenItem active={ROUTE.COMMUNITIES === activeThread}>
       <Link href="/communities" as="/communities">
         <ChildrenItemInner>
           <ChildrenTitle>社区</ChildrenTitle>
@@ -29,7 +29,7 @@ const MenuChildren = ({ activeRaw, curRaw, activePart }) => (
         </ChildrenItemInner>
       </Link>
     </ChildrenItem>
-    <ChildrenItem active={ROUTE.CATEGORIES === activePart}>
+    <ChildrenItem active={ROUTE.CATEGORIES === activeThread}>
       <Link href="/communities" as="/communities/categories">
         <ChildrenItemInner>
           <ChildrenTitle>分类</ChildrenTitle>
@@ -37,7 +37,7 @@ const MenuChildren = ({ activeRaw, curRaw, activePart }) => (
         </ChildrenItemInner>
       </Link>
     </ChildrenItem>
-    <ChildrenItem active={ROUTE.TAGS === activePart}>
+    <ChildrenItem active={ROUTE.TAGS === activeThread}>
       <Link href="/communities/tags" as="/communities/tags">
         <ChildrenItemInner>
           <ChildrenTitle>标签</ChildrenTitle>
@@ -45,7 +45,7 @@ const MenuChildren = ({ activeRaw, curRaw, activePart }) => (
         </ChildrenItemInner>
       </Link>
     </ChildrenItem>
-    <ChildrenItem active={ROUTE.EDITORS === activePart}>
+    <ChildrenItem active={ROUTE.EDITORS === activeThread}>
       <Link href="/communities" as="/communities/editors">
         <ChildrenItemInner>
           <ChildrenTitle>编辑</ChildrenTitle>
@@ -53,7 +53,7 @@ const MenuChildren = ({ activeRaw, curRaw, activePart }) => (
         </ChildrenItemInner>
       </Link>
     </ChildrenItem>
-    <ChildrenItem active={ROUTE.POSTS === activePart}>
+    <ChildrenItem active={ROUTE.POSTS === activeThread}>
       <Link href="/communities" as="/communities/posts">
         <ChildrenItemInner>
           <ChildrenTitle>帖子</ChildrenTitle>
@@ -81,14 +81,14 @@ const CommunitiesItemBar = ({ active }) => (
   </MenuItemEach>
 )
 
-const CommunitiesRootMenuItem = ({ activeRaw, activePart }) => (
+const CommunitiesRootMenuItem = ({ activeRaw, activeThread }) => (
   <MenuItemWrapper>
     <div>
       <CommunitiesItemBar active={activeRaw === ROUTE.COMMUNITIES_RAW} />
       <MenuChildren
         activeRaw={activeRaw}
         curRaw={ROUTE.COMMUNITIES_RAW}
-        activePart={activePart}
+        activeThread={activeThread}
       />
     </div>
   </MenuItemWrapper>

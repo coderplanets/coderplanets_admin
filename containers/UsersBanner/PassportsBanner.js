@@ -29,7 +29,7 @@ class PassportsBanner extends React.Component {
         <BannerCountBrief
           filteredCount={filteredCount}
           totalCount={totalCount}
-          part="权限"
+          thread="权限"
           unit="项"
         />
         <Operation>

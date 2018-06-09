@@ -62,7 +62,7 @@ const pagedTagsRaw = `
         id
         title
         color
-        part
+        thread
         community {
           id
           logo
@@ -102,7 +102,7 @@ const pagedPosts = gql`
           id
           title
           color
-          part
+          thread
           community {
             id
           }
@@ -129,8 +129,8 @@ const deleteCommunity = gql`
   }
 `
 const unsetCommunity = gql`
-  mutation($part: CmsPart, $id: ID!, $communityId: ID!) {
-    unsetCommunity(part: $part, id: $id, communityId: $communityId) {
+  mutation($thread: CmsThread, $id: ID!, $communityId: ID!) {
+    unsetCommunity(thread: $thread, id: $id, communityId: $communityId) {
       id
     }
   }
@@ -143,15 +143,20 @@ const unsetCategory = gql`
   }
 `
 const setTag = gql`
-  mutation($part: String!, $id: ID!, $tagId: ID!, $communityId: ID!) {
-    setTag(part: $part, id: $id, tagId: $tagId, communityId: $communityId) {
+  mutation($thread: String!, $id: ID!, $tagId: ID!, $communityId: ID!) {
+    setTag(thread: $thread, id: $id, tagId: $tagId, communityId: $communityId) {
       id
     }
   }
 `
 const unsetTag = gql`
-  mutation($part: String!, $id: ID!, $tagId: ID!, $communityId: ID!) {
-    unsetTag(part: $part, id: $id, tagId: $tagId, communityId: $communityId) {
+  mutation($thread: String!, $id: ID!, $tagId: ID!, $communityId: ID!) {
+    unsetTag(
+      thread: $thread
+      id: $id
+      tagId: $tagId
+      communityId: $communityId
+    ) {
       id
     }
   }

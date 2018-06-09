@@ -19,9 +19,9 @@ import {
 
 import * as logic from './logic'
 
-const MenuChildren = ({ activeRaw, curRaw, activePart }) => (
+const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
   <ChildrenWrapper active={activeRaw === curRaw}>
-    <ChildrenItem active={ROUTE.USERS === activePart}>
+    <ChildrenItem active={ROUTE.USERS === activeThread}>
       <Link href="/users">
         <ChildrenItemInner>
           <ChildrenTitle>注册用户</ChildrenTitle>
@@ -29,7 +29,7 @@ const MenuChildren = ({ activeRaw, curRaw, activePart }) => (
         </ChildrenItemInner>
       </Link>
     </ChildrenItem>
-    <ChildrenItem active={ROUTE.PAYS === activePart}>
+    <ChildrenItem active={ROUTE.PAYS === activeThread}>
       <Link href="/users" as="/users/pays">
         <ChildrenItemInner>
           <ChildrenTitle>衣食父母</ChildrenTitle>
@@ -37,7 +37,7 @@ const MenuChildren = ({ activeRaw, curRaw, activePart }) => (
         </ChildrenItemInner>
       </Link>
     </ChildrenItem>
-    <ChildrenItem active={ROUTE.PASSPORTS === activePart}>
+    <ChildrenItem active={ROUTE.PASSPORTS === activeThread}>
       <Link href="/users" as="/users/passports">
         <ChildrenItemInner>
           <ChildrenTitle>权限</ChildrenTitle>
@@ -45,7 +45,7 @@ const MenuChildren = ({ activeRaw, curRaw, activePart }) => (
         </ChildrenItemInner>
       </Link>
     </ChildrenItem>
-    <ChildrenItem active={ROUTE.ROLES === activePart}>
+    <ChildrenItem active={ROUTE.ROLES === activeThread}>
       <Link href="/users" as="/users/roles">
         <ChildrenItemInner>
           <ChildrenTitle>角色</ChildrenTitle>
@@ -73,14 +73,14 @@ const UsersItemBar = ({ activeRaw, curRaw }) => (
   </MenuItemEach>
 )
 
-const UsersRootMenuItem = ({ activeRaw, activePart }) => (
+const UsersRootMenuItem = ({ activeRaw, activeThread }) => (
   <MenuItemWrapper>
     <div>
       <UsersItemBar activeRaw={activeRaw} curRaw={ROUTE.USERS_RAW} />
       <MenuChildren
         activeRaw={activeRaw}
         curRaw={ROUTE.USERS_RAW}
-        activePart={activePart}
+        activeThread={activeThread}
       />
     </div>
   </MenuItemWrapper>

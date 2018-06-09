@@ -52,9 +52,9 @@ const columns = [
     },
   },
   {
-    title: 'part',
+    title: 'thread',
     width: 200,
-    dataIndex: 'part',
+    dataIndex: 'thread',
     align: 'center',
     render: text => {
       return <div>{text}</div>
@@ -115,10 +115,7 @@ class TagsContent extends React.Component {
   }
 
   render() {
-    const {
-      data,
-      restProps: { tagsLoading },
-    } = this.props
+    const { data, restProps: { tagsLoading } } = this.props
 
     return (
       <div>

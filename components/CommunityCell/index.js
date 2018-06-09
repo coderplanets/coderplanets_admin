@@ -53,12 +53,12 @@ const CommunitiesLogoArray = ({ array }) => (
   </Wrapper>
 )
 
-const CommunitiesSetter = ({ array, source, part, onDelete }) => (
+const CommunitiesSetter = ({ array, source, thread, onDelete }) => (
   <Wrapper>
     {array.map(c => (
       <SetterWrapper key={shortid.generate()}>
         <CommunityLogo src={c.logo} />
-        <DeleteCross onClick={onDelete.bind(this, part, source, c.id)}>
+        <DeleteCross onClick={onDelete.bind(this, thread, source, c.id)}>
           x
         </DeleteCross>
       </SetterWrapper>
@@ -68,7 +68,7 @@ const CommunitiesSetter = ({ array, source, part, onDelete }) => (
 
 // TODO: move args to props
 const renderContent = props => {
-  const { data, array, withSetter, source, part, onAdd, onDelete } = props
+  const { data, array, withSetter, source, thread, onAdd, onDelete } = props
   if (!R.isEmpty(data)) {
     return <SingleCommunity community={data} />
   } else if (withSetter && !R.isEmpty(array)) {
@@ -77,10 +77,10 @@ const renderContent = props => {
         <CommunitiesSetter
           array={array}
           source={source}
-          part={part}
+          thread={thread}
           onDelete={onDelete}
         />
-        <div onClick={onAdd.bind(this, part, source)}>
+        <div onClick={onAdd.bind(this, thread, source)}>
           <AddIcon src={`${ICON_ASSETS}/cmd/plus.svg`} />
         </div>
       </Wrapper>
@@ -96,7 +96,7 @@ const renderContent = props => {
   return (
     <React.Fragment>
       {withSetter ? (
-        <AdderCell onAdd={onAdd.bind(this, part, source)} />
+        <AdderCell onAdd={onAdd.bind(this, thread, source)} />
       ) : (
         <UnknowText>漂浮中</UnknowText>
       )}
@@ -128,7 +128,7 @@ CommunityCell.propTypes = {
     })
   ),
   withSetter: PropTypes.bool,
-  part: PropTypes.string,
+  thread: PropTypes.string,
   source: PropTypes.object,
   onDelete: PropTypes.func,
   onAdd: PropTypes.func,
@@ -138,7 +138,7 @@ CommunityCell.propTypes = {
 CommunityCell.defaultProps = {
   array: [],
   data: {},
-  part: 'POST',
+  thread: 'POST',
   withSetter: false,
   source: {},
   onDelete: debug,

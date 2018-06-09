@@ -30,18 +30,21 @@ import * as logic from './logic'
 const debug = makeDebugger('C:Sidebar:index')
 /* eslint-enable no-unused-vars */
 
-const MenuList = ({ items, activeRaw, activePart }) => {
+const MenuList = ({ items, activeRaw, activeThread }) => {
   const listItems = (
     <div>
-      <CommunitiesRootMenuItem activeRaw={activeRaw} activePart={activePart} />
-      <UsersRootMenuItem activeRaw={activeRaw} activePart={activePart} />
+      <CommunitiesRootMenuItem
+        activeRaw={activeRaw}
+        activeThread={activeThread}
+      />
+      <UsersRootMenuItem activeRaw={activeRaw} activeThread={activeThread} />
 
       {items.map(item => (
         <CommunityMenuItem
           key={shortid.generate()}
           item={item}
           activeRaw={activeRaw}
-          activePart={activePart}
+          activeThread={activeThread}
         />
       ))}
     </div>
@@ -56,7 +59,7 @@ class SidebarContainer extends React.Component {
 
   render() {
     const { sidebar } = this.props
-    const { curPath, subscribedCommunities, activeRaw, activePart } = sidebar
+    const { curPath, subscribedCommunities, activeRaw, activeThread } = sidebar
     //    onMouseLeave={logic.leaveSidebar}
     // onMouseLeave is not unreliable in chrome: https://github.com/facebook/react/issues/4492
 
@@ -72,7 +75,7 @@ class SidebarContainer extends React.Component {
           items={subscribedCommunities}
           curPath={curPath}
           activeRaw={activeRaw}
-          activePart={activePart}
+          activeThread={activeThread}
         />
         <Footer>
           <SearchLogo src={`${ICON_ASSETS}/cmd/search2.svg`} />

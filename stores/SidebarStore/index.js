@@ -69,7 +69,7 @@ const SidebarStore = t
     get activeRaw() {
       return self.root.route.mainPath
     },
-    get activePart() {
+    get activeThread() {
       const { subPath } = self.root.route
 
       return R.isEmpty(subPath) ? ROUTE.COMMUNITIES : subPath

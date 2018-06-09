@@ -32,8 +32,8 @@ export function getAllCommunities(page = 1) {
   sr71$.query(S.pagedCommunities, commonFilter(page))
 }
 
-export function setCommunity(part, id, communityId) {
-  const args = { part, id, communityId }
+export function setCommunity(thread, id, communityId) {
+  const args = { thread, id, communityId }
 
   sr71$.mutate(S.setCommunity, args)
 }

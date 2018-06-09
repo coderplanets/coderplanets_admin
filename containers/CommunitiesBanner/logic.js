@@ -39,8 +39,8 @@ export function loadTags() {
 export const loadCategories = () =>
   sr71$.query(S.pagedCategories, { filter: {} })
 
-export function onAdd(part) {
-  switch (part) {
+export function onAdd(thread) {
+  switch (thread) {
     case 'tags': {
       return dispatchEvent(EVENT.NAV_CREATE_TAG, {
         type: TYPE.PREVIEW_CREATE_TAG,
@@ -52,7 +52,7 @@ export function onAdd(part) {
       })
     }
     default: {
-      debug('onAdd part: ', part)
+      debug('onAdd thread: ', thread)
 
       return dispatchEvent(EVENT.NAV_CREATE_COMMUNITY, {
         type: TYPE.PREVIEW_CREATE_COMMUNITY,

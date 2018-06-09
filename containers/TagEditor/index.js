@@ -10,7 +10,7 @@ import { inject, observer } from 'mobx-react'
 // import Link from 'next/link'
 
 import { makeDebugger, storePlug } from '../../utils'
-import { CMS_PARTS } from '../../config'
+import { CMS_THREADS } from '../../config'
 
 import {
   Button,
@@ -62,10 +62,10 @@ class TagEditorContainer extends React.Component {
           />
         </FormItem>
         <FormSelector
-          label="part:"
-          options={CMS_PARTS}
-          value={tagData.part}
-          onChange={logic.partChange}
+          label="thread:"
+          options={CMS_THREADS}
+          value={tagData.thread}
+          onChange={logic.threadChange}
         />
         <Divider />
         <ActionBtns>

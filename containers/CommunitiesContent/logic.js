@@ -112,23 +112,23 @@ export function onDelete(record) {
   sr71$.mutate(S.deleteCommunity, { id: record.id })
 }
 
-export function setCommunity(part, source) {
+export function setCommunity(thread, source) {
   console.log('setCommunity --> ', {
     source,
-    part,
+    thread,
   })
   dispatchEvent(EVENT.NAV_SET_COMMUNITY, {
     type: TYPE.PREVIEW_SET_COMMUNITY,
     data: {
       source,
-      part,
+      thread,
     },
   })
 }
 
-export function unsetCommunity(part, source, communityId) {
+export function unsetCommunity(thread, source, communityId) {
   const args = {
-    part,
+    thread,
     communityId,
     id: source.id,
   }
@@ -150,20 +150,20 @@ export function setCategory(source) {
   })
 }
 
-export function setTag(part, source) {
+export function setTag(thread, source) {
   dispatchEvent(EVENT.NAV_SET_TAG, {
     type: TYPE.PREVIEW_SET_TAG,
     data: {
-      part,
+      thread,
       source,
     },
   })
 }
 
-export function unsetTag(partId, tag) {
+export function unsetTag(threadId, tag) {
   const args = {
-    part: R.toUpper(tag.part),
-    id: partId,
+    thread: R.toUpper(tag.thread),
+    id: threadId,
     tagId: tag.id,
     communityId: tag.community.id,
   }

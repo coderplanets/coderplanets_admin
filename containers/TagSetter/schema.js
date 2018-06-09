@@ -7,7 +7,7 @@ const pagedTags = gql`
         id
         title
         color
-        part
+        thread
         community {
           id
           title
@@ -25,8 +25,8 @@ const pagedTags = gql`
 // TODO: partial_tags ..
 
 const setTag = gql`
-  mutation($part: String!, $id: ID!, $tagId: ID!, $communityId: ID!) {
-    setTag(part: $part, id: $id, tagId: $tagId, communityId: $communityId) {
+  mutation($thread: String!, $id: ID!, $tagId: ID!, $communityId: ID!) {
+    setTag(thread: $thread, id: $id, tagId: $tagId, communityId: $communityId) {
       id
     }
   }

@@ -20,9 +20,9 @@ const debug = makeDebugger('L:CategoryEditor')
 
 let categoryEditor = null
 
-export const profileChange = R.curry((part, e) =>
+export const profileChange = R.curry((thread, e) =>
   categoryEditor.updateCategory({
-    [part]: e.target.value,
+    [thread]: e.target.value,
   })
 )
 

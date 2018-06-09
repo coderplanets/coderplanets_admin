@@ -21,12 +21,12 @@ import {
 const debug = makeDebugger('c:BannerCountBrief:index')
 /* eslint-enable no-unused-vars */
 
-const CountBrief = ({ filteredCount, totalCount, part, unit }) => {
+const CountBrief = ({ filteredCount, totalCount, thread, unit }) => {
   if (filteredCount === null || totalCount === filteredCount) {
     return (
       <Result>
         <ResultBottom>
-          <ResultText>当前共有{part}</ResultText>
+          <ResultText>当前共有{thread}</ResultText>
           <ResultNumber>{totalCount} </ResultNumber>
           <ResultText>{unit}</ResultText>
         </ResultBottom>
@@ -38,10 +38,10 @@ const CountBrief = ({ filteredCount, totalCount, part, unit }) => {
   return (
     <Result>
       <ResultTop>
-        {part}总数为 {totalCount} {unit}
+        {thread}总数为 {totalCount} {unit}
       </ResultTop>
       <ResultBottom>
-        <ResultText>符合当前条件的{part}</ResultText>
+        <ResultText>符合当前条件的{thread}</ResultText>
         <ResultNumber>{filteredCount} </ResultNumber>
         <ResultText>
           {unit}, 占比 {toPercentNum(filteredCount, totalCount)}
@@ -51,11 +51,11 @@ const CountBrief = ({ filteredCount, totalCount, part, unit }) => {
   )
 }
 
-const BannerCountBrief = ({ filteredCount, totalCount, part, unit }) => (
+const BannerCountBrief = ({ filteredCount, totalCount, thread, unit }) => (
   <CountBrief
     filteredCount={filteredCount}
     totalCount={totalCount}
-    part={part}
+    thread={thread}
     unit={unit}
   />
 )
@@ -64,12 +64,12 @@ BannerCountBrief.propTypes = {
   filteredCount: PropTypes.number,
   totalCount: PropTypes.number.isRequired,
   unit: PropTypes.string,
-  part: PropTypes.string,
+  thread: PropTypes.string,
 }
 
 BannerCountBrief.defaultProps = {
   filteredCount: null,
-  part: '帖子',
+  thread: '帖子',
   unit: '篇',
 }
 

@@ -39,11 +39,11 @@ const MenuItemBar = ({ item, activeRaw, curRaw }) => {
   )
 }
 
-const MenuChildren = ({ activeRaw, activePart, curRaw }) => {
+const MenuChildren = ({ activeRaw, activeThread, curRaw }) => {
   return (
     <ChildrenWrapper active={activeRaw === curRaw}>
       <ChildrenItem
-        active={ROUTE.COMMUNITY === activePart}
+        active={ROUTE.COMMUNITY === activeThread}
         onClick={logic.onCommunityChildMenuChange.bind(this, '')}
       >
         <ChildrenItemInner>
@@ -56,7 +56,7 @@ const MenuChildren = ({ activeRaw, activePart, curRaw }) => {
 
       <ChildrenItem
         onClick={logic.onCommunityChildMenuChange.bind(this, ROUTE.POSTS)}
-        active={ROUTE.POSTS === activePart}
+        active={ROUTE.POSTS === activeThread}
       >
         <ChildrenItemInner>
           <ChildrenTitle>帖子</ChildrenTitle>
@@ -65,7 +65,7 @@ const MenuChildren = ({ activeRaw, activePart, curRaw }) => {
       </ChildrenItem>
       <ChildrenItem
         onClick={logic.onCommunityChildMenuChange.bind(this, ROUTE.JOBS)}
-        active={ROUTE.JOBS === activePart}
+        active={ROUTE.JOBS === activeThread}
       >
         <ChildrenItemInner>
           <ChildrenTitle>招聘</ChildrenTitle>
@@ -74,21 +74,21 @@ const MenuChildren = ({ activeRaw, activePart, curRaw }) => {
       </ChildrenItem>
       <ChildrenItem
         onClick={logic.onCommunityChildMenuChange.bind(this, ROUTE.ACTIVITIES)}
-        active={ROUTE.ACTIVITIES === activePart}
+        active={ROUTE.ACTIVITIES === activeThread}
       >
         <ChildrenTitle>活动</ChildrenTitle>
         <ChildrenNum>18</ChildrenNum>
       </ChildrenItem>
       <ChildrenItem
         onClick={logic.onCommunityChildMenuChange.bind(this, ROUTE.CHEATSHEETS)}
-        active={ROUTE.CHEATSHEETS === activePart}
+        active={ROUTE.CHEATSHEETS === activeThread}
       >
         <ChildrenTitle>Cheatsheets</ChildrenTitle>
         <ChildrenNum>18</ChildrenNum>
       </ChildrenItem>
       <ChildrenItem
         onClick={logic.onCommunityChildMenuChange.bind(this, ROUTE.EDITORS)}
-        active={ROUTE.EDITORS === activePart}
+        active={ROUTE.EDITORS === activeThread}
       >
         <ChildrenItemInner>
           <ChildrenTitle>编辑</ChildrenTitle>
@@ -97,7 +97,7 @@ const MenuChildren = ({ activeRaw, activePart, curRaw }) => {
       </ChildrenItem>
       <ChildrenItem
         onClick={logic.onCommunityChildMenuChange.bind(this, ROUTE.THREADS)}
-        active={ROUTE.THREADS === activePart}
+        active={ROUTE.THREADS === activeThread}
       >
         <ChildrenItemInner>
           <ChildrenTitle>threads</ChildrenTitle>
@@ -106,16 +106,16 @@ const MenuChildren = ({ activeRaw, activePart, curRaw }) => {
       </ChildrenItem>
       <ChildrenItem
         onClick={logic.onCommunityChildMenuChange.bind(this, ROUTE.TAGS)}
-        active={ROUTE.TAGS === activePart}
+        active={ROUTE.TAGS === activeThread}
       >
         <ChildrenItemInner>
-          <ChildrenTitle>标签(part)</ChildrenTitle>
+          <ChildrenTitle>标签(thread)</ChildrenTitle>
           <ChildrenNum>13</ChildrenNum>
         </ChildrenItemInner>
       </ChildrenItem>
       <ChildrenItem
         onClick={logic.onCommunityChildMenuChange.bind(this, ROUTE.SUBSCRIBERS)}
-        active={ROUTE.SUBSCRIBERS === activePart}
+        active={ROUTE.SUBSCRIBERS === activeThread}
       >
         <ChildrenItemInner>
           <ChildrenTitle>订阅用户</ChildrenTitle>
@@ -125,14 +125,14 @@ const MenuChildren = ({ activeRaw, activePart, curRaw }) => {
     </ChildrenWrapper>
   )
 }
-const CommunityMenuItem = ({ item, activeRaw, activePart }) => {
+const CommunityMenuItem = ({ item, activeRaw, activeThread }) => {
   //  console.log('CommunityMenuItem item: ', item)
   return (
     <MenuItemWrapper>
       <MenuItemBar item={item} activeRaw={activeRaw} curRaw={item.raw} />
       <MenuChildren
         activeRaw={activeRaw}
-        activePart={activePart}
+        activeThread={activeThread}
         curRaw={item.raw}
       />
     </MenuItemWrapper>

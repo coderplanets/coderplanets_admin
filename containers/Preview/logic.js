@@ -114,7 +114,7 @@ const DataResolver = [
       const event = res[EVENT.NAV_SET_COMMUNITY]
       preview.markState({
         editArticle: {
-          part: event.data.part,
+          thread: event.data.thread,
           data: event.data.source,
         },
       })
@@ -166,7 +166,7 @@ const DataResolver = [
       const event = res[EVENT.NAV_SET_TAG]
       preview.markState({
         editArticle: {
-          part: event.data.part,
+          thread: event.data.thread,
           data: event.data.source,
         },
       })

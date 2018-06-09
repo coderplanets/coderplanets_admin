@@ -28,10 +28,10 @@ const commonFilter = page => {
   }
 }
 
-export function onAdd(part, id, tagId, communityId, selectedIds) {
+export function onAdd(thread, id, tagId, communityId, selectedIds) {
   if (!R.contains(tagId, selectedIds)) {
     const args = { id, tagId, communityId }
-    args.part = R.toUpper(part)
+    args.thread = R.toUpper(thread)
     sr71$.mutate(S.setTag, args)
   }
 }

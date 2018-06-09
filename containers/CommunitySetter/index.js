@@ -28,14 +28,14 @@ import {
 const debug = makeDebugger('C:CommunitySetter')
 /* eslint-enable no-unused-vars */
 
-const CommunitiesList = ({ part, source, communities, selectedids }) => {
+const CommunitiesList = ({ thread, source, communities, selectedids }) => {
   return (
     <CategoryWrapper>
       {communities.map(c => (
         <CategoryTag
           key={shortid.generate()}
           active={R.contains(c.id, selectedids)}
-          onClick={logic.setCommunity.bind(this, part, source.id, c.id)}
+          onClick={logic.setCommunity.bind(this, thread, source.id, c.id)}
         >
           <CommunityLogo src={c.logo} />
           {c.title}
@@ -53,7 +53,7 @@ class CommunitySetterContainer extends React.Component {
   render() {
     const { communitySetter, editData } = this.props
     const { pagedCommunitiesData } = communitySetter
-    const { part } = editData
+    const { thread } = editData
 
     const source = editData.data
     const selectedids = R.pluck('id', source.communities)
@@ -66,7 +66,7 @@ class CommunitySetterContainer extends React.Component {
         {pagedCommunitiesData ? (
           <React.Fragment>
             <CommunitiesList
-              part={part}
+              thread={thread}
               source={source}
               communities={pagedCommunitiesData.entries}
               selectedids={selectedids}

@@ -29,7 +29,7 @@ class SubscribersBanner extends React.Component {
         <BannerCountBrief
           filteredCount={filteredCount}
           totalCount={totalCount}
-          part="订阅用户"
+          thread="订阅用户"
           unit="人"
         />
         <Operation>

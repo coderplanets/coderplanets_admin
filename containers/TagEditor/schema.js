@@ -2,13 +2,13 @@ import gql from 'graphql-tag'
 
 const createTag = gql`
   mutation(
-    $part: CmsPart!
+    $thread: CmsThread!
     $title: String!
     $color: String!
     $communityId: ID!
   ) {
     createTag(
-      part: $part
+      thread: $thread
       title: $title
       color: $color
       communityId: $communityId

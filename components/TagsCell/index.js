@@ -43,16 +43,16 @@ class TagsCell extends React.Component {
   componentWillUnmount() {}
 
   render() {
-    const { part, source, onDelete, onAdd } = this.props
+    const { thread, source, onDelete, onAdd } = this.props
 
     return (
       <React.Fragment>
         {R.isEmpty(source.tags) ? (
-          <AdderCell onAdd={onAdd.bind(this, part, source)} />
+          <AdderCell onAdd={onAdd.bind(this, thread, source)} />
         ) : (
           <Wrapper>
             <TagsList source={source} onDelete={onDelete} />
-            <div onClick={onAdd.bind(this, part, source)}>
+            <div onClick={onAdd.bind(this, thread, source)}>
               <AddIcon src={`${ICON_ASSETS}/cmd/plus.svg`} />
             </div>
           </Wrapper>
@@ -68,11 +68,11 @@ TagsCell.propTypes = {
   // https://www.npmjs.com/package/prop-types
   /* communityId: PropTypes.number.isRequired, */
   source: PropTypes.object.isRequired,
-  part: PropTypes.string,
+  thread: PropTypes.string,
   onDelete: PropTypes.func.isRequired,
   onAdd: PropTypes.func.isRequired,
 }
 
 TagsCell.defaultProps = {
-  part: 'POST',
+  thread: 'POST',
 }

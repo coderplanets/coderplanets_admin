@@ -26,7 +26,7 @@ class IndexBanner extends React.Component {
         <BannerCountBrief
           filteredCount={filteredCount}
           totalCount={totalCount}
-          part="社区"
+          thread="社区"
           unit="个"
         />
         <Operation>

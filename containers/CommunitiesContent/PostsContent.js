@@ -63,7 +63,7 @@ const columns = [
         <CommunityCell
           array={communities}
           source={record}
-          part="POST"
+          thread="POST"
           onDelete={logic.unsetCommunity}
           onAdd={logic.setCommunity}
           withSetter
@@ -78,7 +78,7 @@ const columns = [
     align: 'center',
     render: (tags, record) => (
       <TagsCell
-        part="POST"
+        thread="POST"
         source={record}
         onDelete={logic.unsetTag}
         onAdd={logic.setTag}
@@ -170,10 +170,7 @@ class PostsContent extends React.Component {
   }
 
   render() {
-    const {
-      data,
-      restProps: { communitiesLoading },
-    } = this.props
+    const { data, restProps: { communitiesLoading } } = this.props
     return (
       <div>
         {data ? (

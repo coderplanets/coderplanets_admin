@@ -27,7 +27,7 @@ const pagedTags = gql`
         id
         title
         color
-        part
+        thread
         insertedAt
         updatedAt
       }

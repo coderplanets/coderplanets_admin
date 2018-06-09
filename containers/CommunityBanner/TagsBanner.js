@@ -26,7 +26,7 @@ class TagsBanner extends React.Component {
         <BannerCountBrief
           filteredCount={filteredCount}
           totalCount={totalCount}
-          part="标签"
+          thread="标签"
           unit="个"
         />
         <Operation>

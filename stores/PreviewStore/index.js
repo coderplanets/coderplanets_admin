@@ -5,14 +5,14 @@
 
 import { types as t, getParent } from 'mobx-state-tree'
 
-// import { CMS_PARTS } from '../../config'
+// import { CMS_THREADS } from '../../config'
 
 import { Community, Category, Post, User } from '../SharedModel'
 import { markStates, TYPE, unholdPage, stripMobx } from '../../utils'
 
 // const debug = makeDebugger('S:PreviewStore')
 const Article = t.model('Article', {
-  part: t.string, // t.optional(t.enumeration('part', CMS_PARTS), CMS_PARTS[0]),
+  thread: t.string, // t.optional(t.enumeration('thread', CMS_THREADS), CMS_THREADS[0]),
   data: Post,
 })
 

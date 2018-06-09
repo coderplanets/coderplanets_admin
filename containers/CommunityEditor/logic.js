@@ -23,9 +23,9 @@ const debug = makeDebugger('L:CommunityEditor')
 
 let communityEditor = null
 
-export const profileChange = R.curry((part, e) => {
+export const profileChange = R.curry((thread, e) => {
   communityEditor.updateCommunity({
-    [part]: e.target.value,
+    [thread]: e.target.value,
   })
 })
 

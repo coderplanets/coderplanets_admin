@@ -53,9 +53,9 @@ export function extendMenuBar(communityRaw) {
   }
 }
 
-export function onCommunityChildMenuChange(activePart) {
-  let asPath = `/${sidebar.activeRaw}/${activePart}`
-  if (R.isEmpty(activePart)) {
+export function onCommunityChildMenuChange(activeThread) {
+  let asPath = `/${sidebar.activeRaw}/${activeThread}`
+  if (R.isEmpty(activeThread)) {
     asPath = `/${sidebar.activeRaw}`
   }
   Router.push('/', asPath)
