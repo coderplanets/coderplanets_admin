@@ -115,7 +115,10 @@ class TagsContent extends React.Component {
   }
 
   render() {
-    const { data, restProps: { tagsLoading } } = this.props
+    const {
+      data,
+      restProps: { tagsLoading },
+    } = this.props
 
     return (
       <div>
