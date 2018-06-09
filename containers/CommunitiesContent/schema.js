@@ -97,6 +97,7 @@ const pagedPosts = gql`
           id
           title
           logo
+          raw
         }
         tags {
           id

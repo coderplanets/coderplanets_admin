@@ -26,30 +26,26 @@ const debug = makeDebugger('c:CommunityMatrix:index')
 
 const tooltipOffset = JSON.stringify({ top: 5, right: -5 })
 
-const Communities = ({ data, onSelect, activeRaw, lens }) => {
-  if (!data || R.isEmpty(data.entries)) return <div />
-
-  return (
-    <React.Fragment>
-      {data.entries.map(c => (
-        <div
-          key={shortid.generate()}
-          onClick={onSelect.bind(this, c)}
-          data-place="right"
-          data-tip={c.title}
-          data-for="permission_editor"
-          data-offset={tooltipOffset}
-        >
-          <CommunityLogo
-            src={c.logo}
-            active={c.raw === activeRaw}
-            len={R.contains(c.raw, lens)}
-          />
-        </div>
-      ))}
-    </React.Fragment>
-  )
-}
+const Communities = ({ list, onSelect, activeRaw, lens }) => (
+  <React.Fragment>
+    {list.map(c => (
+      <div
+        key={shortid.generate()}
+        onClick={onSelect.bind(this, c)}
+        data-place="right"
+        data-tip={c.title}
+        data-for="permission_editor"
+        data-offset={tooltipOffset}
+      >
+        <CommunityLogo
+          src={c.logo}
+          active={c.raw === activeRaw}
+          len={R.contains(c.raw, lens)}
+        />
+      </div>
+    ))}
+  </React.Fragment>
+)
 
 class CommunityMatrix extends React.Component {
   componentDidMount() {
@@ -61,19 +57,21 @@ class CommunityMatrix extends React.Component {
   render() {
     const {
       data,
+      array,
       activeRaw,
       lens,
       onSelect,
       onAddOnSelect,
       hasAddon,
     } = this.props
-    // len={R.contains(c.raw, managerdRaws)}
-    // active={c.raw === activeRaw}
+
+    const safedata = data === null ? { entries: [] } : data
+    const entries = R.concat(safedata.entries, array)
 
     return (
       <MatrixWrapper>
         <Communities
-          data={data}
+          list={entries}
           onSelect={onSelect}
           activeRaw={activeRaw}
           lens={lens}
@@ -103,10 +101,10 @@ CommunityMatrix.propTypes = {
     pageSize: PropTypes.number.isRequired,
     totalCount: PropTypes.number.isRequired,
   }),
-
+  array: PropTypes.array,
   onSelect: PropTypes.func,
   onAddOnSelect: PropTypes.func,
-  activeRaw: PropTypes.string.isRequired,
+  activeRaw: PropTypes.string,
   lens: PropTypes.arrayOf(PropTypes.string),
   hasAddon: PropTypes.bool,
 }
@@ -118,10 +116,12 @@ CommunityMatrix.defaultProps = {
     pageSize: 20,
     totalCount: 0,
   },
+  array: [],
   onSelect: debug,
   onAddOnSelect: debug,
   lens: [],
   hasAddon: true,
+  activeRaw: '',
 }
 
 export default CommunityMatrix

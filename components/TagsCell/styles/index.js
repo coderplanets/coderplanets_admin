@@ -13,6 +13,7 @@ export const Wrapper = styled.div`
 `
 export const ListWrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `
 
 export const TagWrapper = styled.div`
@@ -25,6 +26,7 @@ export const TagWrapper = styled.div`
   padding-right: 6px;
   border-radius: 3px;
   margin-right: 7px;
+  margin-bottom: 6px;
   &:hover {
     border: 1px solid #97dbfc;
   }

@@ -14,6 +14,7 @@ import shortid from 'shortid'
 import { makeDebugger, storePlug } from '../../utils'
 import * as logic from './logic'
 
+import { CommunityMatrix } from '../../components'
 import {
   Wrapper,
   Divider,
@@ -28,41 +29,41 @@ import {
 const debug = makeDebugger('C:TagSetter')
 /* eslint-enable no-unused-vars */
 
-const TagsList = ({ tags, threadId, selectedids }) => {
-  return (
-    <CategoryWrapper>
-      {tags.map(c => (
-        <CategoryTag
-          key={shortid.generate()}
-          active={R.contains(c.id, selectedids)}
-          onClick={logic.onAdd.bind(
-            this,
-            c.thread,
-            threadId,
-            c.id,
-            c.community.id,
-            selectedids
-          )}
-        >
-          <CommunityLogo src={c.community.logo} />
-          <ThreadText>({c.thread})</ThreadText>
-          {c.title}
-        </CategoryTag>
-      ))}
-    </CategoryWrapper>
-  )
-}
+const TagsList = ({ tags, threadId, selectedids }) => (
+  <CategoryWrapper>
+    {tags.map(c => (
+      <CategoryTag
+        key={shortid.generate()}
+        active={R.contains(c.id, selectedids)}
+        onClick={logic.onAdd.bind(
+          this,
+          c.thread,
+          threadId,
+          c.id,
+          c.community.id,
+          selectedids
+        )}
+      >
+        <CommunityLogo src={c.community.logo} />
+        <ThreadText>({c.thread})</ThreadText>
+        {c.title}
+      </CategoryTag>
+    ))}
+  </CategoryWrapper>
+)
 
 class TagSetterContainer extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     logic.init(this.props.tagSetter)
+    logic.getPartialTags(this.props.editData)
   }
 
   render() {
     const { tagSetter, editData } = this.props
-    const { pagedTagsData } = tagSetter
+    const { tagsData, activeCommunityRaw } = tagSetter
 
     const source = editData.data
+    const { communities } = source
     /* const { thread } = editData */
     const selectedids = R.pluck('id', source.tags)
     const { id, title } = source
@@ -72,15 +73,20 @@ class TagSetterContainer extends React.Component {
         <SetterTitle>{title}</SetterTitle>
         <h2>设置标签</h2>
         <Divider />
-        {pagedTagsData ? (
-          <TagsList
-            tags={pagedTagsData.entries}
-            threadId={id}
-            selectedids={selectedids}
-          />
+        {R.isEmpty(communities) ? (
+          <h4>该内容不属于任何社区,因此不能设置标签，请先设置社区</h4>
         ) : (
-          <div />
+          <CommunityMatrix
+            array={communities}
+            activeRaw={activeCommunityRaw}
+            onSelect={logic.selectCommunity}
+            hasAddon={false}
+          />
         )}
+
+        <Divider />
+
+        <TagsList tags={tagsData} threadId={id} selectedids={selectedids} />
       </Wrapper>
     )
   }

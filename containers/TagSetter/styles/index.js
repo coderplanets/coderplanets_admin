@@ -26,6 +26,7 @@ export const SetterTitle = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: center;
 `
 
 export const Divider = styled.div`

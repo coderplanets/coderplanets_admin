@@ -7,7 +7,6 @@ import {
   closePreviewer,
   TYPE,
 } from '../../utils'
-import { PAGE_SIZE } from '../../config'
 
 import SR71 from '../../utils/network/sr71'
 import S from './schema'
@@ -21,12 +20,14 @@ const debug = makeDebugger('L:TagSetter')
 
 let tagSetter = null
 
+/*
 const commonFilter = page => {
   const size = PAGE_SIZE.COMMON
   return {
     filter: { page, size },
   }
 }
+*/
 
 export function onAdd(thread, id, tagId, communityId, selectedIds) {
   if (!R.contains(tagId, selectedIds)) {
@@ -36,8 +37,30 @@ export function onAdd(thread, id, tagId, communityId, selectedIds) {
   }
 }
 
-export function getAllTags(page = 1) {
-  sr71$.query(S.pagedTags, commonFilter(page))
+export function getPartialTags({ thread, data: { communities } }) {
+  if (R.isEmpty(communities)) return false
+
+  selectThread(thread)
+  selectCommunity(communities[0])
+}
+
+export function selectCommunity(community) {
+  tagSetter.markState({
+    activeCommunityRaw: community.raw,
+  })
+
+  const args = {
+    communityId: community.id,
+    thread: tagSetter.activeThread,
+  }
+
+  sr71$.query(S.partialTags, args)
+}
+
+export function selectThread(activeThread) {
+  tagSetter.markState({
+    activeThread,
+  })
 }
 
 // ###############################
@@ -47,11 +70,17 @@ export function getAllTags(page = 1) {
 const DataSolver = [
   {
     match: asyncRes('pagedTags'),
-    action: ({ pagedTags }) => {
+    action: ({ pagedTags }) =>
       tagSetter.markState({
         pagedTags,
-      })
-    },
+      }),
+  },
+  {
+    match: asyncRes('partialTags'),
+    action: ({ partialTags }) =>
+      tagSetter.markState({
+        tags: partialTags,
+      }),
   },
   {
     match: asyncRes('setTag'),
@@ -66,5 +95,5 @@ export function init(selectedStore) {
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 
-  getAllTags()
+  /* getAllTags() */
 }

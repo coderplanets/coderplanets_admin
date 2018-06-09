@@ -73,7 +73,7 @@ const columns = [
   },
   {
     title: '标签',
-    width: 200,
+    width: 250,
     dataIndex: 'tags',
     align: 'center',
     render: (tags, record) => (

@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 
+// TODO: remove
 const pagedTags = gql`
   query($filter: PagedFilter!) {
     pagedTags(filter: $filter) {
@@ -22,7 +23,22 @@ const pagedTags = gql`
   }
 `
 
-// TODO: partial_tags ..
+const partialTags = gql`
+  query($communityId: ID!, $thread: CmsThread!) {
+    partialTags(communityId: $communityId, thread: $thread) {
+      id
+      title
+      color
+      thread
+      community {
+        id
+        title
+        logo
+        raw
+      }
+    }
+  }
+`
 
 const setTag = gql`
   mutation($thread: String!, $id: ID!, $tagId: ID!, $communityId: ID!) {
@@ -34,6 +50,7 @@ const setTag = gql`
 
 const schema = {
   pagedTags,
+  partialTags,
   setTag,
 }
 

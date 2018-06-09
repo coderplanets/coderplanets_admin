@@ -8,29 +8,25 @@ import { types as t, getParent } from 'mobx-state-tree'
 
 import { Tag } from '../SharedModel'
 import { markStates, makeDebugger, stripMobx } from '../../utils'
+/* import { CMS_THREADS } from '../../config' */
+
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('S:TagSetterStore')
 /* eslint-enable no-unused-vars */
 
-const PagedTags = t.model('PagedTags', {
-  entries: t.optional(t.array(Tag), []),
-  pageNumber: t.optional(t.number, 1),
-  pageSize: t.optional(t.number, 20), // TODO: USE CONSTANTS
-  totalCount: t.optional(t.number, 0),
-  totalPages: t.optional(t.number, 0),
-})
-
 const TagSetterStore = t
   .model('TagSetterStore', {
-    pagedTags: t.maybe(PagedTags),
+    tags: t.optional(t.array(Tag), []),
     loading: t.optional(t.boolean, false),
+    activeCommunityRaw: t.optional(t.string, ''),
+    activeThread: t.optional(t.string, 'POST'), // t.optional(t.enumeration('thread', CMS_THREADS), CMS_THREADS[0]),
   })
   .views(self => ({
     get root() {
       return getParent(self)
     },
-    get pagedTagsData() {
-      return stripMobx(self.pagedTags)
+    get tagsData() {
+      return stripMobx(self.tags)
     },
   }))
   .actions(self => ({
