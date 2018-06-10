@@ -163,6 +163,14 @@ const unsetTag = gql`
   }
 `
 
+const deleteTag = gql`
+  mutation($id: ID!, $communityId: ID!) {
+    deleteTag(id: $id, communityId: $communityId) {
+      id
+    }
+  }
+`
+
 const schema = {
   pagedCommunities,
   pagedCommunitiesRaw,
@@ -175,6 +183,7 @@ const schema = {
   unsetCommunity,
   setTag,
   unsetTag,
+  deleteTag,
 }
 
 export default schema

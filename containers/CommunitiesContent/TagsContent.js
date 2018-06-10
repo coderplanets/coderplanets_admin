@@ -52,7 +52,7 @@ const columns = [
     },
   },
   {
-    title: 'thread',
+    title: '版块',
     width: 200,
     dataIndex: 'thread',
     align: 'center',
@@ -99,7 +99,7 @@ const columns = [
             size="small"
             type="red"
             ghost
-            onClick={logic.onDelete.bind(this, record)}
+            onClick={logic.onDeleteTag.bind(this, record)}
           >
             删除
           </Button>

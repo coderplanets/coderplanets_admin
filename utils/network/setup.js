@@ -30,7 +30,7 @@ const retryLink = new RetryLink({
     jitter: true,
   },
   attempts: {
-    max: 3,
+    max: 2,
     /* retryIf: error => !!error, */
   },
 })
@@ -68,9 +68,9 @@ export const context = {
   },
 }
 
-/* const link = ApolloLink.from([errorLink, retryLink, graphLink]) */
-const link = ApolloLink.from([retryLink, errorLink, graphLink])
-/* const link = ApolloLink.from([retryLink, graphLink]) */
+const link = ApolloLink.from([errorLink, retryLink, graphLink])
+/* const link = ApolloLink.from([retryLink, errorLink, graphLink]) */
+/* const link = ApolloLink.from([errorLink, graphLink]) */
 
 // disable cache in apollo-client
 // sse https://www.apollographql.com/docs/react/essentials/queries.html#graphql-config-options-fetchPolicy

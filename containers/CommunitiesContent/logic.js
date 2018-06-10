@@ -1,4 +1,5 @@
 import R from 'ramda'
+import { message } from 'antd'
 /* import Router from 'next/router' */
 
 import {
@@ -17,6 +18,8 @@ import {
 import { PAGE_SIZE } from '../../config'
 import S from './schema'
 import SR71 from '../../utils/network/sr71'
+
+let sub$ = null
 
 const sr71$ = new SR71({
   resv_event: [EVENT.LOGOUT, EVENT.LOGIN, EVENT.PREVIEW_CLOSE],
@@ -108,8 +111,17 @@ export function onEdit(record) {
   })
 }
 
+// TODO rename to onDeleteCommunity
 export function onDelete(record) {
+  console.log('onDelete: ', record)
   sr71$.mutate(S.deleteCommunity, { id: record.id })
+}
+
+export function onDeleteTag(record) {
+  const args = { id: record.id, communityId: record.community.id }
+  console.log('onDeleteTag: ', args)
+
+  sr71$.mutate(S.deleteTag, args)
 }
 
 export function setCommunity(thread, source) {
@@ -239,6 +251,10 @@ const DataSolver = [
     action: () => loadPosts(),
   },
   {
+    match: asyncRes('deleteTag'),
+    action: () => loadTags(),
+  },
+  {
     match: asyncRes(EVENT.LOGOUT),
     action: () => loadCommunities(),
   },
@@ -250,6 +266,7 @@ const DataSolver = [
     match: asyncRes(EVENT.PREVIEW_CLOSE),
     action: res => {
       const closeType = res[EVENT.PREVIEW_CLOSE].type
+      debug('PREVIEW_CLOSE --> ', closeType)
       switch (closeType) {
         case TYPE.COMMUNITIES_REFRESH: {
           const { pageNumber } = communitiesContent.pagedCommunitiesData
@@ -280,7 +297,8 @@ const ErrSolver = [
   {
     match: asyncErr(ERR.CRAPHQL),
     action: ({ details }) => {
-      debug('ERR.CRAPHQL -->', details)
+      debug('ERR.CRAPHQL -->', details[0].detail)
+      message.error(details[0].detail)
       cancleLoading()
     },
   },
@@ -303,5 +321,7 @@ const ErrSolver = [
 export function init(selectedStore) {
   communitiesContent = selectedStore
   debug(communitiesContent)
-  sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+
+  if (sub$) sub$.unsubscribe()
+  sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 }
