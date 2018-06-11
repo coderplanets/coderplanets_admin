@@ -111,7 +111,7 @@ const columns = [
 
 class TagsContent extends React.Component {
   componentDidMount() {
-    logic.loadTagsIfNeed()
+    logic.loadTagsIfOnClient()
   }
 
   render() {

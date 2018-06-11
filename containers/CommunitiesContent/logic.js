@@ -87,16 +87,16 @@ export function loadTags(page = 1) {
   sr71$.query(S.pagedTags, commonFilter(page))
 }
 
-export function loadCommunitiesIfNeed() {
+export function loadCommunitiesIfOnClient() {
   if (!communitiesContent.pagedCommunities) {
-    debug('loadCommunitiesIfNeed')
+    debug('loadCommunitiesIfOnClient')
     loadCommunities()
   }
 }
 
-export function loadTagsIfNeed() {
+export function loadTagsIfOnClient() {
   if (!communitiesContent.pagedTags) {
-    debug('loadTagsIfNeed')
+    debug('loadTagsIfOnClient')
     loadTags()
   }
 }
