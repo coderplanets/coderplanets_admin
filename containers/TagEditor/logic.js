@@ -50,28 +50,34 @@ export const threadChange = thread =>
     thread,
   })
 
-export const communityChange = community => {
-  console.log('communityChange community: ', community)
+export const communityChange = community =>
   tagEditor.updateTag({
     community,
   })
-}
 
 export const mutateConfirm = () => {
-  const requiredArgs = ['title', 'color', 'thread', 'community']
+  const requiredArgs = ['id', 'title', 'color', 'thread', 'community']
   const args = { ...tagEditor.tagData }
 
-  tagEditor.markState({
-    mutating: true,
-  })
+  tagEditor.markState({ mutating: true })
   const fargs = castArgs(args, requiredArgs)
 
   fargs.color = R.toUpper(fargs.color)
-  fargs.thread = R.toUpper(fargs.thread)
-
   fargs.communityId = fargs.community.id
-  debug('fargs --> ', fargs)
-  sr71$.mutate(S.createTag, fargs)
+
+  if (tagEditor.isEdit) {
+    return sr71$.mutate(S.updateTag, fargs)
+  }
+
+  fargs.thread = R.toUpper(fargs.thread)
+  return sr71$.mutate(S.createTag, fargs)
+}
+
+const initEditData = editData => {
+  tagEditor.markState({
+    tag: editData,
+    isEdit: true,
+  })
 }
 
 export function cancleMutate() {
@@ -89,28 +95,35 @@ export function cancleMutate() {
 const DataSolver = [
   {
     match: asyncRes('createTag'),
-    action: () => {
-      debug('createTag done!')
-      closePreviewer(TYPE.TAGS_REFRESH)
-    },
+    action: () => closePreviewer(TYPE.TAGS_REFRESH),
+  },
+  {
+    match: asyncRes('updateTag'),
+    action: () => closePreviewer(TYPE.TAGS_REFRESH),
   },
   {
     match: asyncRes('pagedCommunities'),
-    action: ({ pagedCommunities }) => {
+    action: ({ pagedCommunities }) =>
       tagEditor.markState({
         pagedCommunities,
-      })
-    },
+      }),
   },
 ]
 
 const ErrSolver = []
 
-export function init(selectedStore) {
+export function init(selectedStore, editData) {
   tagEditor = selectedStore
-  debug(tagEditor)
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 
+  if (editData) {
+    initEditData(editData)
+  }
+
   getAllCommunities()
+}
+
+export function uninit() {
+  cancleMutate()
 }

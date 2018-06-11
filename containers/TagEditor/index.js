@@ -31,17 +31,27 @@ const debug = makeDebugger('C:TagEditor')
 
 class TagEditorContainer extends React.Component {
   componentWillMount() {
-    logic.init(this.props.tagEditor)
+    const { tagEditor, editData } = this.props
+    logic.init(tagEditor, editData)
+  }
+
+  componentWillUnmount() {
+    logic.uninit()
   }
 
   render() {
     const { tagEditor } = this.props
-    const { mutating, tagData, pagedCommunitiesData } = tagEditor
+    const { mutating, tagData, pagedCommunitiesData, isEdit } = tagEditor
+
+    const showStyle = isEdit ? { display: 'none' } : { display: 'block' }
 
     return (
       <Wrapper>
         coderplanets
-        <h2>创建标签</h2>
+        <h2>
+          {isEdit ? '编辑' : '创建'}
+          标签
+        </h2>
         <Divider />
         <FormInputer
           label="名称:"
@@ -53,20 +63,24 @@ class TagEditorContainer extends React.Component {
           value={tagData.color}
           onChange={logic.colorChange}
         />
-        <FormItem label="社区:">
-          <CommunityMatrix
-            data={pagedCommunitiesData}
-            onSelect={logic.communityChange}
-            activeRaw={tagData.community ? tagData.community.raw : ''}
-            hasAddon={false}
+        <div style={showStyle}>
+          <FormItem label="社区:">
+            <CommunityMatrix
+              data={pagedCommunitiesData}
+              onSelect={logic.communityChange}
+              activeRaw={tagData.community ? tagData.community.raw : ''}
+              hasAddon={false}
+            />
+          </FormItem>
+        </div>
+        <div style={showStyle}>
+          <FormSelector
+            label="thread:"
+            options={CMS_THREADS}
+            value={tagData.thread}
+            onChange={logic.threadChange}
           />
-        </FormItem>
-        <FormSelector
-          label="thread:"
-          options={CMS_THREADS}
-          value={tagData.thread}
-          onChange={logic.threadChange}
-        />
+        </div>
         <Divider />
         <ActionBtns>
           <Button type="primary" ghost onClick={logic.cancleMutate}>

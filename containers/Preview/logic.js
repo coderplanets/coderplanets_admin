@@ -20,7 +20,7 @@ const sr71$ = new SR71({
     EVENT.NAV_UPDATE_COMMUNITY,
     EVENT.NAV_SET_COMMUNITY,
     EVENT.NAV_CREATE_TAG,
-    // EVENT.NAV_UPDATE_TAG,
+    EVENT.NAV_UPDATE_TAG,
     EVENT.NAV_CREATE_CATEGORY,
     EVENT.NAV_SET_CATEGORY,
     EVENT.NAV_UPDATE_CATEGORY,
@@ -132,6 +132,16 @@ const DataResolver = [
     },
   },
   {
+    match: asyncRes(EVENT.NAV_UPDATE_TAG),
+    action: res => {
+      const event = res[EVENT.NAV_UPDATE_TAG]
+
+      preview.markState({ editTag: event.data })
+      preview.open(event.type)
+      holdPage()
+    },
+  },
+  {
     match: asyncRes(EVENT.NAV_CREATE_CATEGORY),
     action: res => {
       const event = res[EVENT.NAV_CREATE_CATEGORY]
@@ -193,7 +203,6 @@ const DataResolver = [
 
 export function init(selectedStore) {
   preview = selectedStore
-  debug('@@@ init @@0')
   if (sub$) sub$.unsubscribe()
 
   // sub$ = sr71$.data().subscribe(handleData)

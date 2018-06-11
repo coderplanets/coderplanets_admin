@@ -308,7 +308,6 @@ export function inputOnChange(e) {
 
 export function init(selectedStore) {
   doraemon = selectedStore
-  debug('doraemon', doraemon)
 
   pockect$ = new Pockect(doraemon)
   SAK = new SwissArmyKnife(doraemon)

@@ -90,7 +90,7 @@ const columns = [
             size="small"
             type="primary"
             ghost
-            onClick={logic.onEdit.bind(this, record)}
+            onClick={logic.onEditTag.bind(this, record)}
           >
             编辑
           </Button>

@@ -61,6 +61,7 @@ const Viewer = ({
   rootState,
   editCommunityData,
   editCategoryData,
+  editTagData,
   editArticleData,
   editPermissionData,
 }) => {
@@ -88,6 +89,9 @@ const Viewer = ({
     }
     case TYPE.PREVIEW_CREATE_TAG: {
       return <TagEditor />
+    }
+    case TYPE.PREVIEW_UPDATE_TAG: {
+      return <TagEditor editData={editTagData} />
     }
     case TYPE.PREVIEW_CREATE_CATEGORY: {
       return <CategoryEditor />
@@ -126,6 +130,7 @@ class PreviewContainer extends React.Component {
       editArticleData,
       editPermissionData,
       editCategoryData,
+      editTagData,
     } = this.props.preview
 
     return (
@@ -141,6 +146,7 @@ class PreviewContainer extends React.Component {
               curTheme={curTheme}
               editCommunityData={editCommunityData}
               editCategoryData={editCategoryData}
+              editTagData={editTagData}
               editArticleData={editArticleData}
               editPermissionData={editPermissionData}
             />

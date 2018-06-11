@@ -18,6 +18,23 @@ const createTag = gql`
     }
   }
 `
+const updateTag = gql`
+  mutation(
+    $id: ID!
+    $color: RainbowColorEnum!
+    $title: String!
+    $communityId: ID!
+  ) {
+    updateTag(
+      id: $id
+      color: $color
+      title: $title
+      communityId: $communityId
+    ) {
+      id
+    }
+  }
+`
 
 const pagedCommunities = gql`
   query($filter: PagedFilter!) {
@@ -38,6 +55,7 @@ const pagedCommunities = gql`
 
 const schema = {
   createTag,
+  updateTag,
   pagedCommunities,
 }
 

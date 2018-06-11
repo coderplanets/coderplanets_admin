@@ -42,7 +42,6 @@ export function loadCommunities(page = 1) {
 
   communitiesContent.markQuery({ page, size })
   const { route } = communitiesContent
-  /* console.log('route before fucking query: ', route.query) */
 
   args.filter = R.merge(args.filter, route.query)
   sr71$.query(S.pagedCommunities, args)
@@ -103,10 +102,23 @@ export function loadTagsIfNeed() {
 }
 
 export function onEdit(record) {
-  debug('onEdit', record)
+  debug('unMatched edit: ', record)
+}
+
+export function onEditCategory(record) {
+  debug('onEditCategory', record)
 
   dispatchEvent(EVENT.NAV_UPDATE_CATEGORY, {
     type: TYPE.PREVIEW_UPDATE_CATEGORY,
+    data: record,
+  })
+}
+
+export function onEditTag(record) {
+  debug('onEditTag', record)
+
+  dispatchEvent(EVENT.NAV_UPDATE_TAG, {
+    type: TYPE.PREVIEW_UPDATE_TAG,
     data: record,
   })
 }
@@ -320,7 +332,7 @@ const ErrSolver = [
 
 export function init(selectedStore) {
   communitiesContent = selectedStore
-  debug(communitiesContent)
+  debug('.... init .....: ', communitiesContent)
 
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))

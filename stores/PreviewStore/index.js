@@ -7,7 +7,7 @@ import { types as t, getParent } from 'mobx-state-tree'
 
 // import { CMS_THREADS } from '../../config'
 
-import { Community, Category, Post, User } from '../SharedModel'
+import { Community, Category, Tag, Post, User } from '../SharedModel'
 import { markStates, TYPE, unholdPage, stripMobx } from '../../utils'
 
 // const debug = makeDebugger('S:PreviewStore')
@@ -50,6 +50,7 @@ const PreviewStore = t
     ),
     editCommunity: t.maybe(Community),
     editCategory: t.maybe(Category),
+    editTag: t.maybe(Tag),
     editArticle: t.maybe(Article),
     editPermission: t.maybe(EditPermission),
     /* editCategory: t.maybe(SelectCommunity), */
@@ -66,6 +67,9 @@ const PreviewStore = t
     },
     get editCategoryData() {
       return stripMobx(self.editCategory)
+    },
+    get editTagData() {
+      return stripMobx(self.editTag)
     },
     get editArticleData() {
       return stripMobx(self.editArticle)

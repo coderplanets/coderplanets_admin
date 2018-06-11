@@ -81,7 +81,7 @@ const columns = [
             size="small"
             type="primary"
             ghost
-            onClick={logic.onEdit.bind(this, record)}
+            onClick={logic.onEditCategory.bind(this, record)}
           >
             编辑
           </Button>

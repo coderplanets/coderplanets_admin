@@ -35,7 +35,6 @@ export const mutateConfirm = () => {
   })
   const fargs = castArgs(args, requiredArgs)
 
-  debug('fargs --> ', fargs)
   if (categoryEditor.isEdit) {
     return sr71$.mutate(
       S.updateCategory,
@@ -60,13 +59,6 @@ const initEditData = editData => {
   })
 }
 
-export function cancleEdit() {
-  categoryEditor.markState({
-    category: {},
-    isEdit: false,
-  })
-  /* closePreviewer() */
-}
 // ###############################
 // Data & Error handlers
 // ###############################
@@ -99,6 +91,5 @@ export function init(selectedStore, editData) {
 }
 
 export function uninit() {
-  cancleEdit()
-  /* cancleLoading() */
+  cancleMutate()
 }
