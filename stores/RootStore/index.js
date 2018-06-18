@@ -57,7 +57,6 @@ const debug = makeDebugger('S:rootStore')
 const rootStore = t
   .model({
     // domain stores
-    version: t.optional(t.string, '0.0.4'),
     account: t.optional(AccountStore, {}),
     users: t.maybe(UsersStore),
     route: t.optional(RouteStore, {}),

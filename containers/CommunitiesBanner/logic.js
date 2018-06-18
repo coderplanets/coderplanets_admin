@@ -28,12 +28,16 @@ export function loadCommunities() {
   sr71$.query(S.pagedCommunities, { filter: {} })
 }
 
+export function loadTags() {
+  sr71$.query(S.pagedTags, { filter: {} })
+}
+
 export function loadPosts() {
   sr71$.query(S.pagedPosts, { filter: {} })
 }
 
-export function loadTags() {
-  sr71$.query(S.pagedTags, { filter: {} })
+export function loadJobs() {
+  sr71$.query(S.pagedJobs, { filter: {} })
 }
 
 export const loadCategories = () =>
@@ -89,6 +93,13 @@ const DataSolver = [
     action: ({ pagedPosts: { totalCount } }) =>
       communitiesBanner.markState({
         postsTotalCount: totalCount,
+      }),
+  },
+  {
+    match: asyncRes('pagedJobs'),
+    action: ({ pagedJobs: { totalCount } }) =>
+      communitiesBanner.markState({
+        jobsTotalCount: totalCount,
       }),
   },
   {

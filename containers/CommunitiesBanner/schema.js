@@ -29,11 +29,20 @@ const pagedPosts = gql`
   }
 `
 
+const pagedJobs = gql`
+  query($filter: PagedFilter!) {
+    pagedJobs(filter: $filter) {
+      totalCount
+    }
+  }
+`
+
 const schema = {
   pagedCommunities,
-  pagedPosts,
   pagedCategories,
   pagedTags,
+  pagedPosts,
+  pagedJobs,
 }
 
 export default schema

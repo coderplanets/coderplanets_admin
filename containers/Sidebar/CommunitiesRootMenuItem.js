@@ -61,6 +61,14 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
         </ChildrenItemInner>
       </Link>
     </ChildrenItem>
+    <ChildrenItem active={ROUTE.JOBS === activeThread}>
+      <Link href="/communities" as="/communities/jobs">
+        <ChildrenItemInner>
+          <ChildrenTitle>招聘</ChildrenTitle>
+          <ChildrenNum>111</ChildrenNum>
+        </ChildrenItemInner>
+      </Link>
+    </ChildrenItem>
   </ChildrenWrapper>
 )
 

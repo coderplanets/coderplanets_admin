@@ -8,6 +8,7 @@ import { types as t, getParent } from 'mobx-state-tree'
 
 import {
   PagedPosts,
+  PagedJobs,
   PagedTags,
   PagedCategories,
   PagedCommunities,
@@ -22,13 +23,16 @@ const CommunitiesContentStore = t
     // all the communities
     pagedCommunities: t.maybe(PagedCommunities),
     pagedTags: t.maybe(PagedTags),
-    pagedPosts: t.maybe(PagedPosts),
     pagedCategories: t.maybe(PagedCategories),
+
+    pagedPosts: t.maybe(PagedPosts),
+    pagedJobs: t.maybe(PagedJobs),
 
     communitiesLoading: t.optional(t.boolean, false),
     tagsLoading: t.optional(t.boolean, false),
     categoriesLoading: t.optional(t.boolean, false),
     postsLoading: t.optional(t.boolean, false),
+    jobsLoading: t.optional(t.boolean, false),
   })
   .views(self => ({
     get root() {
@@ -63,6 +67,9 @@ const CommunitiesContentStore = t
     },
     get pagedPostsData() {
       return stripMobx(self.pagedPosts)
+    },
+    get pagedJobsData() {
+      return stripMobx(self.pagedJobs)
     },
   }))
   .actions(self => ({

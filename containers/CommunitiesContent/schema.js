@@ -122,6 +122,48 @@ const pagedPosts = gql`
     }
   }
 `
+const pagedJobs = gql`
+  query pagedJobs($filter: PagedArticleFilter) {
+    pagedJobs(filter: $filter) {
+      entries {
+        id
+        title
+        company
+        companyLogo
+        location
+        desc
+        body
+        insertedAt
+        updatedAt
+        views
+        author {
+          id
+          nickname
+          avatar
+        }
+        communities {
+          id
+          title
+          logo
+          raw
+        }
+        tags {
+          id
+          title
+          color
+          thread
+          community {
+            id
+          }
+        }
+      }
+      totalCount
+      pageSize
+      pageNumber
+    }
+  }
+`
+
 const deleteCommunity = gql`
   mutation($id: ID!) {
     deleteCommunity(id: $id) {
@@ -178,6 +220,7 @@ const schema = {
   pagedTagsRaw,
   pagedCategories,
   pagedPosts,
+  pagedJobs,
   deleteCommunity,
   unsetCategory,
   unsetCommunity,

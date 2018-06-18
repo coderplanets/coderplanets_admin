@@ -16,15 +16,18 @@ const CommunitiesBannerStore = t
     // communities: totalCount of all
     totalCount: t.optional(t.number, 0),
     filteredTotalCount: t.maybe(t.number),
-    // posts
-    postsTotalCount: t.optional(t.number, 0),
-    filteredPostsCount: t.maybe(t.number),
     // categories
     categoriesTotalCount: t.optional(t.number, 0),
     filterdCategoriesCount: t.maybe(t.number),
     // tags
     tagsTotalCount: t.optional(t.number, 0),
     filterdTagsCount: t.maybe(t.number),
+    // posts
+    postsTotalCount: t.optional(t.number, 0),
+    filteredPostsCount: t.maybe(t.number),
+    // jobs
+    jobsTotalCount: t.optional(t.number, 0),
+    filteredJobsCount: t.maybe(t.number),
   })
   .views(self => ({
     get root() {

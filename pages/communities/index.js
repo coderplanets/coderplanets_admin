@@ -60,6 +60,8 @@ export default class Index extends React.Component {
     })
     /* eslint-disable */
     const { locale, messages } = req || Global.__NEXT_DATA__.props
+    console.log('locale --> ', locale)
+    console.log('messages --> ', messages)
     /* eslint-enable */
     const langSetup = {}
     langSetup[locale] = messages

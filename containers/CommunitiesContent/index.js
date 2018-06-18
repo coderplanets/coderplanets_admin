@@ -13,6 +13,7 @@ import { makeDebugger, storePlug, ROUTE } from '../../utils'
 
 import IndexContent from './IndexContent'
 import PostsContent from './PostsContent'
+import JobsContent from './JobsContent'
 import CategoriesContent from './CategoriesContent'
 import TagsContent from './TagsContent'
 import { Wrapper } from './styles'
@@ -27,6 +28,7 @@ const renderChildContent = (route, store, restProps) => {
   const {
     pagedCommunitiesData,
     pagedPostsData,
+    pagedJobsData,
     pagedCategoriesData,
     pagedTagsData,
   } = store
@@ -45,6 +47,9 @@ const renderChildContent = (route, store, restProps) => {
     }
     case ROUTE.POSTS: {
       return <PostsContent data={pagedPostsData} restProps={restProps} />
+    }
+    case ROUTE.JOBS: {
+      return <JobsContent data={pagedJobsData} restProps={restProps} />
     }
     default: {
       return <IndexContent data={pagedCommunitiesData} restProps={restProps} />

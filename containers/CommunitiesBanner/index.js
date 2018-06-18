@@ -8,6 +8,7 @@ import * as logic from './logic'
 import IndexBanner from './IndexBanner'
 import EditorsBanner from './EditorsBanner'
 import PostsBanner from './PostsBanner'
+import JobsBanner from './JobsBanner'
 import CategoryBanner from './CategoryBanner'
 import TagsBanner from './TagsBanner'
 
@@ -25,12 +26,15 @@ const renderChildBanner = (route, store) => {
     // tags
     tagsTotalCount,
     filterdTagsCount,
-    // posts
-    postsTotalCount,
-    filteredPostsCount,
     // categories
     categoriesTotalCount,
     filterdCategoriesCount,
+    // posts
+    postsTotalCount,
+    filteredPostsCount,
+    // jobs
+    jobsTotalCount,
+    filteredJobsCount,
   } = store
 
   switch (route.subPath) {
@@ -59,6 +63,14 @@ const renderChildBanner = (route, store) => {
         <PostsBanner
           totalCount={postsTotalCount}
           filteredCount={filteredPostsCount}
+        />
+      )
+    }
+    case ROUTE.JOBS: {
+      return (
+        <JobsBanner
+          totalCount={jobsTotalCount}
+          filteredCount={filteredJobsCount}
         />
       )
     }

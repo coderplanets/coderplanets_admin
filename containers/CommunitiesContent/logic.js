@@ -40,7 +40,8 @@ export function loadCommunities(page = 1) {
 
   communitiesContent.markState({ communitiesLoading: true })
 
-  communitiesContent.markQuery({ page, size })
+  /* communitiesContent.markQuery({ page, size }) */
+  communitiesContent.markQuery({ page })
   const { route } = communitiesContent
 
   args.filter = R.merge(args.filter, route.query)
@@ -53,10 +54,18 @@ export function loadPosts(page = 1) {
     filter: { page, size },
   }
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  communitiesContent.markState({
-    postsLoading: true,
-  })
+  communitiesContent.markState({ postsLoading: true })
   sr71$.query(S.pagedPosts, args)
+}
+
+export function loadJobs(page = 1) {
+  const size = PAGE_SIZE.COMMON
+  const args = {
+    filter: { page, size },
+  }
+  scrollIntoEle(TYPE.APP_HEADER_ID)
+  communitiesContent.markState({ jobsLoading: true })
+  sr71$.query(S.pagedJobs, args)
 }
 
 const commonFilter = page => {
@@ -199,6 +208,7 @@ const cancleLoading = () => {
   communitiesContent.markState({
     communitiesLoading: false,
     postsLoading: false,
+    jobsLoading: false,
     tagsLoading: false,
     categoriessLoading: false,
   })
@@ -234,6 +244,15 @@ const DataSolver = [
       cancleLoading()
       communitiesContent.markState({
         pagedPosts,
+      })
+    },
+  },
+  {
+    match: asyncRes('pagedJobs'),
+    action: ({ pagedJobs }) => {
+      cancleLoading()
+      communitiesContent.markState({
+        pagedJobs,
       })
     },
   },
