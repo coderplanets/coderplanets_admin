@@ -28,13 +28,13 @@ export const Divider = styled.div`
   margin-bottom: 20px;
 `
 
-export const CategoryWrapper = styled.div`
+export const ThreadsWrapper = styled.div`
   display: flex;
   margin-bottom: 30px;
   flex-wrap: wrap;
 `
 
-export const CategoryTag = styled.div`
+export const ThreadTag = styled.div`
   display: flex;
   align-items: center;
   background: ${props => (props.active ? '#e4f7fe' : '#ececec')};

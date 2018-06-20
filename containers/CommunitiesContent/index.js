@@ -16,6 +16,7 @@ import PostsContent from './PostsContent'
 import JobsContent from './JobsContent'
 import CategoriesContent from './CategoriesContent'
 import TagsContent from './TagsContent'
+import ThreadsContent from './ThreadsContent'
 import { Wrapper } from './styles'
 
 import * as logic from './logic'
@@ -27,15 +28,19 @@ const debug = makeDebugger('C:CommunitiesContent')
 const renderChildContent = (route, store, restProps) => {
   const {
     pagedCommunitiesData,
-    pagedPostsData,
-    pagedJobsData,
     pagedCategoriesData,
     pagedTagsData,
+    pagedThreadsData,
+    pagedPostsData,
+    pagedJobsData,
   } = store
 
   switch (route.subPath) {
     case ROUTE.TAGS: {
       return <TagsContent data={pagedTagsData} restProps={restProps} />
+    }
+    case ROUTE.THREADS: {
+      return <ThreadsContent data={pagedThreadsData} restProps={restProps} />
     }
     case ROUTE.CATEGORIES: {
       return (

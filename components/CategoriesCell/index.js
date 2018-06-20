@@ -11,7 +11,7 @@ import shortid from 'shortid'
 
 import { ICON_ASSETS } from '../../config'
 
-import { AdderCell } from '../../components'
+import { AdderCell, Icon } from '../../components'
 import {
   Wrapper,
   CategoryWrapper,
@@ -26,12 +26,11 @@ import {
 const CategoriesList = ({ source, onDelete }) => (
   <CategoryWrapper>
     {source.categories.map(c => (
-      <CategoryTag
-        key={shortid.generate()}
-        onClick={onDelete.bind(this, source.id, c)}
-      >
+      <CategoryTag key={shortid.generate()}>
         {c.title}
-        <DeleteCross>x</DeleteCross>
+        <DeleteCross onClick={onDelete.bind(this, source.id, c)}>
+          <Icon type="cross" />
+        </DeleteCross>
       </CategoryTag>
     ))}
   </CategoryWrapper>

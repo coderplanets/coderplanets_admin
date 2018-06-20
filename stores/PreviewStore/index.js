@@ -43,6 +43,8 @@ const PreviewStore = t
         TYPE.PREVIEW_CREATE_CATEGORY,
         TYPE.PREVIEW_SET_CATEGORY,
         TYPE.PREVIEW_UPDATE_CATEGORY,
+        // thread
+        TYPE.PREVIEW_SET_THREAD,
         // permission
         TYPE.PREVIEW_CREATE_PERMISSION,
         TYPE.PREVIEW_UPDATE_PERMISSION,

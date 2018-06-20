@@ -70,6 +70,7 @@ const RouteStore = t
           url = `/${self.mainPath}/${self.subPath}${queryString}`
         }
 
+        console.log('Router push url: ', url)
         return Router.push(url, url, {
           shallow: true,
         })

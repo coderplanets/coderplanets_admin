@@ -2,7 +2,7 @@
  * constants used cross the site
  */
 
-export { EVENT, ERR, TYPE, ROUTE } from './constants'
+export { EVENT, ERR, TYPE, ROUTE, THREAD } from './constants'
 
 export { makeDebugger } from './debug'
 /*
@@ -75,3 +75,4 @@ export {
 export { default as fakeUsers } from './fake_user'
 
 export { default as GA } from './analytics'
+export { Trans } from './i18n'

@@ -6,6 +6,7 @@ import {
   asyncRes,
   closePreviewer,
   TYPE,
+  THREAD,
 } from '../../utils'
 import SR71 from '../../utils/network/sr71'
 
@@ -32,9 +33,11 @@ export function getAllCommunities(page = 1) {
   sr71$.query(S.pagedCommunities, commonFilter(page))
 }
 
+let CurThread = THREAD.POST
 export function setCommunity(thread, id, communityId) {
   const args = { thread, id, communityId }
 
+  CurThread = thread
   sr71$.mutate(S.setCommunity, args)
 }
 
@@ -53,7 +56,16 @@ const DataSolver = [
   },
   {
     match: asyncRes('setCommunity'),
-    action: () => closePreviewer(TYPE.POSTS_CONTENT_REFRESH),
+    action: () => {
+      switch (CurThread) {
+        case THREAD.JOB: {
+          return closePreviewer(TYPE.JOBS_CONTENT_REFRESH)
+        }
+        default: {
+          closePreviewer(TYPE.POSTS_CONTENT_REFRESH)
+        }
+      }
+    },
   },
 ]
 const ErrSolver = []

@@ -14,6 +14,11 @@ const pagedCommunitiesRaw = `
           id
           title
         }
+        threads{
+          id
+          title
+          raw
+        }
         insertedAt
         updatedAt
       }
@@ -78,9 +83,30 @@ const pagedTagsRaw = `
     }
   }
 `
+const pagedThreadsRaw = `
+  query($filter: PagedFilter!) {
+    pagedThreads(filter: $filter) {
+      entries {
+        id
+        title
+        raw
+      }
+      totalCount
+      totalPages
+      pageSize
+      pageNumber
+    }
+  }
+`
+
 const pagedTags = gql`
   ${pagedTagsRaw}
 `
+
+const pagedThreads = gql`
+  ${pagedThreadsRaw}
+`
+
 const pagedPosts = gql`
   query($filter: PagedArticleFilter) {
     pagedPosts(filter: $filter) {
@@ -178,6 +204,17 @@ const unsetCommunity = gql`
     }
   }
 `
+const unsetThread = gql`
+  mutation($communityId: ID!, $threadId: ID!) {
+    unsetThread(communityId: $communityId, threadId: $threadId) {
+      id
+      threads {
+        title
+      }
+    }
+  }
+`
+
 const unsetCategory = gql`
   mutation($categoryId: ID!, $communityId: ID!) {
     unsetCategory(categoryId: $categoryId, communityId: $communityId) {
@@ -218,9 +255,12 @@ const schema = {
   pagedCommunitiesRaw,
   pagedTags,
   pagedTagsRaw,
+  pagedThreads,
+  pagedThreadsRaw,
   pagedCategories,
   pagedPosts,
   pagedJobs,
+  unsetThread,
   deleteCommunity,
   unsetCategory,
   unsetCommunity,

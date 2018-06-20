@@ -24,6 +24,7 @@ import {
   TagEditor,
   CategoryEditor,
   CategorySetter,
+  ThreadSetter,
   TagSetter,
   CommunitySetter,
   PermissionEditor,
@@ -101,6 +102,9 @@ const Viewer = ({
     }
     case TYPE.PREVIEW_SET_CATEGORY: {
       return <CategorySetter editData={editCommunityData} />
+    }
+    case TYPE.PREVIEW_SET_THREAD: {
+      return <ThreadSetter editData={editCommunityData} />
     }
     case TYPE.PREVIEW_SET_TAG: {
       return <TagSetter editData={editArticleData} />

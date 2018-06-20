@@ -14,6 +14,13 @@ const pagedTags = gql`
     }
   }
 `
+const pagedThreads = gql`
+  query($filter: PagedFilter!) {
+    pagedThreads(filter: $filter) {
+      totalCount
+    }
+  }
+`
 const pagedCategories = gql`
   query($filter: PagedFilter!) {
     pagedCategories(filter: $filter) {
@@ -41,6 +48,7 @@ const schema = {
   pagedCommunities,
   pagedCategories,
   pagedTags,
+  pagedThreads,
   pagedPosts,
   pagedJobs,
 }

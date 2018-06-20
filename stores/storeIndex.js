@@ -31,6 +31,7 @@ export { default as PermissionEditorStore } from './PermissionEditorStore'
 export { default as CategorySetterStore } from './CategorySetterStore'
 export { default as TagSetterStore } from './TagSetterStore'
 export { default as CommunitySetterStore } from './CommunitySetterStore'
+export { default as ThreadSetterStore } from './ThreadSetterStore'
 
 // toolbox
 export { default as TypeWriterStore } from './TypeWriterStore'

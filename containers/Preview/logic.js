@@ -19,13 +19,16 @@ const sr71$ = new SR71({
     EVENT.NAV_CREATE_COMMUNITY,
     EVENT.NAV_UPDATE_COMMUNITY,
     EVENT.NAV_SET_COMMUNITY,
+    // tag
     EVENT.NAV_CREATE_TAG,
     EVENT.NAV_UPDATE_TAG,
+    EVENT.NAV_SET_TAG,
+    // category
     EVENT.NAV_CREATE_CATEGORY,
     EVENT.NAV_SET_CATEGORY,
     EVENT.NAV_UPDATE_CATEGORY,
-    // tag
-    EVENT.NAV_SET_TAG,
+    // threahd
+    EVENT.NAV_SET_THREAD,
     // permission
     EVENT.NAV_UPDATE_PERMISSION,
   ],
@@ -164,6 +167,16 @@ const DataResolver = [
     match: asyncRes(EVENT.NAV_SET_CATEGORY),
     action: res => {
       const event = res[EVENT.NAV_SET_CATEGORY]
+
+      preview.markState({ editCommunity: event.data })
+      preview.open(event.type)
+      holdPage()
+    },
+  },
+  {
+    match: asyncRes(EVENT.NAV_SET_THREAD),
+    action: res => {
+      const event = res[EVENT.NAV_SET_THREAD]
 
       preview.markState({ editCommunity: event.data })
       preview.open(event.type)

@@ -32,6 +32,10 @@ export function loadTags() {
   sr71$.query(S.pagedTags, { filter: {} })
 }
 
+export function loadThreads() {
+  sr71$.query(S.pagedThreads, { filter: {} })
+}
+
 export function loadPosts() {
   sr71$.query(S.pagedPosts, { filter: {} })
 }
@@ -78,6 +82,13 @@ const DataSolver = [
     action: ({ pagedTags: { totalCount } }) =>
       communitiesBanner.markState({
         tagsTotalCount: totalCount,
+      }),
+  },
+  {
+    match: asyncRes('pagedThreads'),
+    action: ({ pagedThreads: { totalCount } }) =>
+      communitiesBanner.markState({
+        threadsTotalCount: totalCount,
       }),
   },
   {

@@ -7,7 +7,6 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 import R from 'ramda'
-
 import shortid from 'shortid'
 
 // import Link from 'next/link'
@@ -21,13 +20,13 @@ import * as logic from './logic'
 const debug = makeDebugger('C:CategorySetter')
 /* eslint-enable no-unused-vars */
 
-const CategoriesList = ({ communityId, categories, selectedCids }) => (
+const CategoriesList = ({ communityId, categories, selectedids }) => (
   <CategoryWrapper>
     {categories.map(c => (
       <CategoryTag
         key={shortid.generate()}
-        active={R.contains(c.id, selectedCids)}
-        onClick={logic.onAdd.bind(this, communityId, c.id, selectedCids)}
+        active={R.contains(c.id, selectedids)}
+        onClick={logic.onAdd.bind(this, communityId, c.id, selectedids)}
       >
         {c.title}
       </CategoryTag>
@@ -45,7 +44,7 @@ class CategorySetterContainer extends React.Component {
     const { categorySetter, editData } = this.props
     const { pagedCategories } = categorySetter
 
-    const selectedCids = R.pluck('id', editData.categories)
+    const selectedids = R.pluck('id', editData.categories)
 
     return (
       <Wrapper>
@@ -56,11 +55,9 @@ class CategorySetterContainer extends React.Component {
           <CategoriesList
             communityId={editData.id}
             categories={pagedCategories.entries}
-            selectedCids={selectedCids}
+            selectedids={selectedids}
           />
-        ) : (
-          <div />
-        )}
+        ) : null}
       </Wrapper>
     )
   }

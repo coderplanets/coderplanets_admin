@@ -3,9 +3,9 @@ import R from 'ramda'
 import {
   makeDebugger,
   $solver,
-  TYPE,
   asyncRes,
   closePreviewer,
+  TYPE,
 } from '../../utils'
 import { PAGE_SIZE } from '../../config'
 
@@ -16,10 +16,10 @@ const sr71$ = new SR71()
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:CategorySetter')
+const debug = makeDebugger('L:ThreadSetter')
 /* eslint-enable no-unused-vars */
 
-let categorySetter = null
+let threadSetter = null
 
 const commonFilter = page => {
   const size = PAGE_SIZE.COMMON
@@ -28,13 +28,13 @@ const commonFilter = page => {
   }
 }
 
-export function getAllCategories(page = 1) {
-  sr71$.query(S.pagedCategories, commonFilter(page))
+export function getAllThreads(page = 1) {
+  sr71$.query(S.pagedThreads, commonFilter(page))
 }
 
-export function onAdd(communityId, categoryId, selectedids) {
-  if (!R.contains(categoryId, selectedids)) {
-    sr71$.mutate(S.setCategory, { communityId, categoryId })
+export function onAdd(communityId, threadId, selectedids) {
+  if (!R.contains(threadId, selectedids)) {
+    sr71$.mutate(S.setThread, { communityId, threadId })
   }
 }
 
@@ -44,24 +44,24 @@ export function onAdd(communityId, categoryId, selectedids) {
 
 const DataSolver = [
   {
-    match: asyncRes('pagedCategories'),
-    action: ({ pagedCategories }) =>
-      categorySetter.markState({
-        pagedCategories,
+    match: asyncRes('pagedThreads'),
+    action: ({ pagedThreads }) =>
+      threadSetter.markState({
+        pagedThreads,
       }),
   },
   {
-    match: asyncRes('setCategory'),
+    match: asyncRes('setThread'),
     action: () => closePreviewer(TYPE.COMMUNITIES_REFRESH),
   },
 ]
-
 const ErrSolver = []
 
 export function init(selectedStore) {
-  categorySetter = selectedStore
+  threadSetter = selectedStore
+  debug(threadSetter)
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 
-  getAllCategories()
+  getAllThreads()
 }

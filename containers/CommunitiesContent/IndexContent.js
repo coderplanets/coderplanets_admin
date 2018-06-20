@@ -12,6 +12,7 @@ import {
   Space,
   Popconfirm,
   CategoriesCell,
+  ThreadsCell,
 } from '../../components'
 
 import { CommunityIcon, OperationWrapper } from './styles'
@@ -56,6 +57,20 @@ const columns = [
     },
   },
   {
+    title: 'threads',
+    width: 350,
+    dataIndex: 'threads',
+    align: 'center',
+    render: (threads, record) => (
+      <ThreadsCell
+        source={record}
+        data={threads}
+        onDelete={logic.unsetThread}
+        onAdd={logic.setThread}
+      />
+    ),
+  },
+  {
     title: 'raw',
     width: 150,
     dataIndex: 'raw',
@@ -69,17 +84,15 @@ const columns = [
     width: 350,
     align: 'center',
     dataIndex: 'categories',
-    render: (categoriesArray, record) => {
-      return (
-        <CategoriesCell
-          source={record}
-          categories={categoriesArray}
-          communityId={record.id}
-          onDelete={logic.unsetCategory}
-          onAdd={logic.setCategory}
-        />
-      )
-    },
+    render: (categoriesArray, record) => (
+      <CategoriesCell
+        source={record}
+        categories={categoriesArray}
+        communityId={record.id}
+        onDelete={logic.unsetCategory}
+        onAdd={logic.setCategory}
+      />
+    ),
   },
   {
     title: '订阅人数',
@@ -161,13 +174,13 @@ class IndexContent extends React.Component {
     } = this.props
 
     return (
-      <div>
+      <React.Fragment>
         {data ? (
-          <div>
+          <React.Fragment>
             <Table
               columns={columns}
               dataSource={data.entries}
-              scroll={{ x: 1500 }}
+              scroll={{ x: 1800 }}
               loading={TableLoading(communitiesLoading)}
               pagination={false}
             />
@@ -178,11 +191,9 @@ class IndexContent extends React.Component {
               totalCount={data.totalCount}
               onChange={logic.loadCommunities}
             />
-          </div>
-        ) : (
-          <div />
-        )}
-      </div>
+          </React.Fragment>
+        ) : null}
+      </React.Fragment>
     )
   }
 }

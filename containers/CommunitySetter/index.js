@@ -28,22 +28,20 @@ import {
 const debug = makeDebugger('C:CommunitySetter')
 /* eslint-enable no-unused-vars */
 
-const CommunitiesList = ({ thread, source, communities, selectedids }) => {
-  return (
-    <CategoryWrapper>
-      {communities.map(c => (
-        <CategoryTag
-          key={shortid.generate()}
-          active={R.contains(c.id, selectedids)}
-          onClick={logic.setCommunity.bind(this, thread, source.id, c.id)}
-        >
-          <CommunityLogo src={c.logo} />
-          {c.title}
-        </CategoryTag>
-      ))}
-    </CategoryWrapper>
-  )
-}
+const CommunitiesList = ({ thread, source, communities, selectedids }) => (
+  <CategoryWrapper>
+    {communities.map(c => (
+      <CategoryTag
+        key={shortid.generate()}
+        active={R.contains(c.id, selectedids)}
+        onClick={logic.setCommunity.bind(this, thread, source.id, c.id)}
+      >
+        <CommunityLogo src={c.logo} />
+        {c.title}
+      </CategoryTag>
+    ))}
+  </CategoryWrapper>
+)
 
 class CommunitySetterContainer extends React.Component {
   componentWillMount() {

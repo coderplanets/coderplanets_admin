@@ -7,10 +7,12 @@ import * as logic from './logic'
 
 import IndexBanner from './IndexBanner'
 import EditorsBanner from './EditorsBanner'
-import PostsBanner from './PostsBanner'
-import JobsBanner from './JobsBanner'
 import CategoryBanner from './CategoryBanner'
 import TagsBanner from './TagsBanner'
+import ThreadsBanner from './ThreadsBanner'
+
+import PostsBanner from './PostsBanner'
+import JobsBanner from './JobsBanner'
 
 import { BannerContainer } from './styles'
 
@@ -26,6 +28,9 @@ const renderChildBanner = (route, store) => {
     // tags
     tagsTotalCount,
     filterdTagsCount,
+    // threads
+    threadsTotalCount,
+    filterdThreadsCount,
     // categories
     categoriesTotalCount,
     filterdCategoriesCount,
@@ -57,6 +62,14 @@ const renderChildBanner = (route, store) => {
     }
     case ROUTE.EDITORS: {
       return <EditorsBanner totalCount={100} filteredCount={10} />
+    }
+    case ROUTE.THREADS: {
+      return (
+        <ThreadsBanner
+          totalCount={threadsTotalCount}
+          filteredCount={filterdThreadsCount}
+        />
+      )
     }
     case ROUTE.POSTS: {
       return (

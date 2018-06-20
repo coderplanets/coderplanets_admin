@@ -1,0 +1,62 @@
+/*
+ *
+ * ThreadsCell
+ *
+ */
+
+import React from 'react'
+import PropTypes from 'prop-types'
+import R from 'ramda'
+import shortid from 'shortid'
+
+import { ICON_ASSETS } from '../../config'
+import { makeDebugger, Trans } from '../../utils'
+import { Wrapper, Thread, DeleteCross, AddIcon } from './styles'
+import { AdderCell, Icon } from '../../components'
+
+/* eslint-disable no-unused-vars */
+const debug = makeDebugger('c:ThreadsCell:index')
+/* eslint-enable no-unused-vars */
+
+const ThreadsCell = ({ data, source, onDelete, onAdd }) => (
+  <Wrapper>
+    {data.map(t => (
+      <Thread key={shortid.generate()}>
+        {Trans(t.raw)}
+        <DeleteCross onClick={onDelete.bind(this, source.id, t)}>
+          <Icon type="cross" />
+        </DeleteCross>
+      </Thread>
+    ))}
+
+    <React.Fragment>
+      {R.isEmpty(data) ? (
+        <AdderCell onAdd={onAdd.bind(this, source)} />
+      ) : (
+        <div onClick={onAdd.bind(this, source)}>
+          <AddIcon src={`${ICON_ASSETS}/cmd/plus.svg`} />
+        </div>
+      )}
+    </React.Fragment>
+  </Wrapper>
+)
+
+ThreadsCell.propTypes = {
+  // https://www.npmjs.com/package/prop-types
+  source: PropTypes.object.isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      raw: PropTypes.string,
+    })
+  ).isRequired,
+  onDelete: PropTypes.func,
+  onAdd: PropTypes.func,
+}
+
+ThreadsCell.defaultProps = {
+  onDelete: debug,
+  onAdd: debug,
+}
+
+export default ThreadsCell

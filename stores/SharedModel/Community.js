@@ -4,6 +4,7 @@ import { PAGE_SIZE } from '../../config'
 // NOTE: the SimpleXXX version is to avoid circle import issue which cause MST error
 
 const Thread = t.model('Thread', {
+  id: t.string,
   title: t.string,
   raw: t.string,
 })

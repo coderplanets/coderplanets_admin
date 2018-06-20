@@ -22,6 +22,9 @@ const CommunitiesBannerStore = t
     // tags
     tagsTotalCount: t.optional(t.number, 0),
     filterdTagsCount: t.maybe(t.number),
+    // threads
+    threadsTotalCount: t.optional(t.number, 0),
+    filterdThreadsCount: t.maybe(t.number),
     // posts
     postsTotalCount: t.optional(t.number, 0),
     filteredPostsCount: t.maybe(t.number),

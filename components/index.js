@@ -32,6 +32,7 @@ export { default as SexCell } from './SexCell'
 export { default as CategoriesCell } from './CategoriesCell'
 export { default as TagsCell } from './TagsCell'
 export { default as PermissionCell } from './PermissionCell'
+export { default as ThreadsCell } from './ThreadsCell'
 
 // form
 export { default as FormItem } from './FormItem'

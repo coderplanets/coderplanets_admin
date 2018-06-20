@@ -10,6 +10,7 @@ import {
   PagedPosts,
   PagedJobs,
   PagedTags,
+  PagedThreads,
   PagedCategories,
   PagedCommunities,
 } from '../SharedModel'
@@ -22,8 +23,9 @@ const CommunitiesContentStore = t
   .model('CommunitiesContentStore', {
     // all the communities
     pagedCommunities: t.maybe(PagedCommunities),
-    pagedTags: t.maybe(PagedTags),
     pagedCategories: t.maybe(PagedCategories),
+    pagedTags: t.maybe(PagedTags),
+    pagedThreads: t.maybe(PagedThreads),
 
     pagedPosts: t.maybe(PagedPosts),
     pagedJobs: t.maybe(PagedJobs),
@@ -64,6 +66,9 @@ const CommunitiesContentStore = t
     },
     get pagedTagsData() {
       return stripMobx(self.pagedTags)
+    },
+    get pagedThreadsData() {
+      return stripMobx(self.pagedThreads)
     },
     get pagedPostsData() {
       return stripMobx(self.pagedPosts)
