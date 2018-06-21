@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
 const createCategory = gql`
-  mutation($title: String!) {
-    createCategory(title: $title) {
+  mutation($title: String!, $raw: String!) {
+    createCategory(title: $title, raw: $raw) {
       id
     }
   }

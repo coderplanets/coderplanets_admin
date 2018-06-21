@@ -49,10 +49,9 @@ export function loadCommunities(page = 1) {
   communitiesContent.markState({ communitiesLoading: true })
 
   communitiesContent.markRoute({ page })
-  communitiesContent.markRoute({ page })
-  const { route } = communitiesContent
+  /* const { route } = communitiesContent */
 
-  args.filter = R.merge(args.filter, route.query)
+  /* args.filter = R.merge(args.filter, route.query) */
   sr71$.query(S.pagedCommunities, args)
 }
 
@@ -152,6 +151,11 @@ export function onDelete(record) {
 export function onDeleteTag(record) {
   const args = { id: record.id, communityId: record.community.id }
   sr71$.mutate(S.deleteTag, args)
+}
+
+export function onDeleteCagegory(record) {
+  const args = { id: record.id }
+  sr71$.mutate(S.deleteCategory, args)
 }
 
 export function setCommunity(thread, source) {
@@ -329,6 +333,10 @@ const DataSolver = [
   {
     match: asyncRes('deleteTag'),
     action: () => loadTags(),
+  },
+  {
+    match: asyncRes('deleteCategory'),
+    action: () => loadCategories(),
   },
   {
     match: asyncRes(EVENT.LOGOUT),

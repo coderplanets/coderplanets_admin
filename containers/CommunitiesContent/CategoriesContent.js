@@ -26,8 +26,17 @@ const columns = [
   },
   {
     title: '标题',
-    width: 200,
+    width: 150,
     dataIndex: 'title',
+    align: 'center',
+    render: text => {
+      return <div>{cutFrom(text, 15)}</div>
+    },
+  },
+  {
+    title: 'raw',
+    width: 150,
+    dataIndex: 'raw',
     align: 'center',
     render: text => {
       return <div>{cutFrom(text, 15)}</div>
@@ -90,7 +99,7 @@ const columns = [
             size="small"
             type="red"
             ghost
-            onClick={logic.onDelete.bind(this, record)}
+            onClick={logic.onDeleteCagegory.bind(this, record)}
           >
             删除
           </Button>

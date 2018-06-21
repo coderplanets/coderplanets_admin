@@ -56,6 +56,12 @@ class CategoryEditorContainer extends React.Component {
           onChange={logic.profileChange('title')}
           note="一个分类可包含多个社区，同时，一个社区可属于多个分类"
         />
+        <FormInputer
+          label="raw:"
+          value={categoryData.raw}
+          onChange={logic.profileChange('raw')}
+          note="必须是英文，用于 route 以及国际化"
+        />
         <Divider />
         <ActionBtns>
           <Button type="primary" ghost onClick={logic.cancleMutate}>

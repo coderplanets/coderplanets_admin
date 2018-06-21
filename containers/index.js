@@ -5,6 +5,7 @@
 export { default as Banner } from './Banner'
 export { default as CommunityBanner } from './CommunityBanner'
 export { default as CommunitiesBanner } from './CommunitiesBanner'
+export { default as UsersBanner } from './UsersBanner'
 
 // content
 export { default as Content } from './Content'

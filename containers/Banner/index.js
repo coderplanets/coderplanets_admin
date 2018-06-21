@@ -9,7 +9,11 @@ import { inject, observer } from 'mobx-react'
 
 // import Link from 'next/link'
 
-import { CommunityBanner, CommunitiesBanner } from '../../containers'
+import {
+  CommunityBanner,
+  CommunitiesBanner,
+  UsersBanner,
+} from '../../containers'
 import { makeDebugger, storePlug, ROUTE } from '../../utils'
 import * as logic from './logic'
 
@@ -21,6 +25,9 @@ const DomainBanner = ({ curRoute }) => {
   switch (curRoute.mainPath) {
     case ROUTE.COMMUNITIES: {
       return <CommunitiesBanner />
+    }
+    case ROUTE.USERS: {
+      return <UsersBanner />
     }
     default: {
       return <CommunityBanner />

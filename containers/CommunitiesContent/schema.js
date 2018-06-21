@@ -39,6 +39,7 @@ const pagedCategories = gql`
       entries {
         id
         title
+        raw
         communities {
           id
           logo
@@ -250,6 +251,14 @@ const deleteTag = gql`
   }
 `
 
+const deleteCategory = gql`
+  mutation($id: ID!) {
+    deleteCategory(id: $id) {
+      id
+    }
+  }
+`
+
 const schema = {
   pagedCommunities,
   pagedCommunitiesRaw,
@@ -267,6 +276,7 @@ const schema = {
   setTag,
   unsetTag,
   deleteTag,
+  deleteCategory,
 }
 
 export default schema

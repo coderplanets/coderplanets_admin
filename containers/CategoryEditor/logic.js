@@ -27,12 +27,10 @@ export const profileChange = R.curry((thread, e) =>
 )
 
 export const mutateConfirm = () => {
-  const requiredArgs = ['title']
+  const requiredArgs = ['title', 'raw']
   const args = { ...categoryEditor.categoryData }
 
-  categoryEditor.markState({
-    mutating: true,
-  })
+  categoryEditor.markState({ mutating: true })
   const fargs = castArgs(args, requiredArgs)
 
   if (categoryEditor.isEdit) {
@@ -41,6 +39,7 @@ export const mutateConfirm = () => {
       castArgs(args, ['id', ...requiredArgs])
     )
   }
+  console.log('fargs --- xxx ', fargs)
   return sr71$.mutate(S.createCategory, fargs)
 }
 

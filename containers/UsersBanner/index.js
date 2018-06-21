@@ -23,10 +23,10 @@ import { BannerContainer } from './styles'
 const debug = makeDebugger('C:UsersBanner')
 /* eslint-enable no-unused-vars */
 
-const renderChildBanner = (route, store) => {
+const renderChildBanner = (curRoute, store) => {
   const { usersTotalCount, filteredCount } = store
 
-  switch (route.subPath) {
+  switch (curRoute.subPath) {
     case ROUTE.PAYS: {
       return <PaysBanner totalCount={200} filteredCount={100} />
     }
@@ -54,10 +54,12 @@ class UsersBannerContainer extends React.Component {
 
   render() {
     const { usersBanner } = this.props
-    const { route } = usersBanner
+    const { curRoute } = usersBanner
 
     return (
-      <BannerContainer>{renderChildBanner(route, usersBanner)}</BannerContainer>
+      <BannerContainer>
+        {renderChildBanner(curRoute, usersBanner)}
+      </BannerContainer>
     )
   }
 }

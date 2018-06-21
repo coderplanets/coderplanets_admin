@@ -24,12 +24,8 @@ const UsersBannerStore = t
       if (!self.filteredUsersCount) return self.usersTotalCount
       return self.filteredUsersCount
     },
-    get route() {
-      const { mainPath, subPath } = self.root.route
-      return {
-        mainPath,
-        subPath,
-      }
+    get curRoute() {
+      return self.root.curRoute
     },
   }))
   .actions(self => ({

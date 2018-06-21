@@ -59,7 +59,7 @@ const RouteStore = t
 
       const url = `/${allQueryString}`
       let asPath = `/${self.mainPath}/${self.subPath}${queryString}`
-      if (self.subPath === 'index') {
+      if (self.subPath === 'index' || self.mainPath === self.subPath) {
         asPath = `/${self.mainPath}${queryString}`
       }
 
