@@ -54,7 +54,7 @@ const renderChildBanner = (route, store) => {
       )
     }
     case ROUTE.THREADS: {
-      return <ThreadsBanner totalCount={200} filteredCount={100} />
+      return <ThreadsBanner totalCount={301} filteredCount={100} />
     }
     default: {
       return <h2>Index of Community</h2>

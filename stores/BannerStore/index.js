@@ -6,38 +6,19 @@
 import { types as t, getParent } from 'mobx-state-tree'
 // import R from 'ramda'
 
-import { markStates, makeDebugger, TYPE } from '../../utils'
+import { markStates, makeDebugger } from '../../utils'
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('S:BannerStore')
 /* eslint-enable no-unused-vars */
 
 const BannerStore = t
-  .model('BannerStore', {
-    hehe: t.optional(t.string, ''),
-  })
+  .model('BannerStore', {})
   .views(self => ({
     get root() {
       return getParent(self)
     },
     get curRoute() {
       return self.root.curRoute
-    },
-    get curCommunity() {
-      return self.root.communities.curCommunity
-    },
-    get detail() {
-      // type depands on route main_query
-      return {
-        // type: TYPE.ACTIVITIES_ROOT_PAGE,
-        // type: TYPE.POST_PAGE,
-        type: TYPE.COMMUNITY_PAGE,
-        /* type: TYPE.CHEATSHEET_ROOT_PAGE, */
-        /* type: TYPE.COMMUNITIES_ROOT_PAGE, */
-        content: self.root.curCommunity.data,
-      }
-    },
-    get curCommunity2() {
-      return self.root.curCommunity.data
     },
   }))
   .actions(self => ({

@@ -21,10 +21,12 @@ import {
   HeaderStore,
   CurCommunity,
   // banner
+  BannerStore,
   CommunitiesBannerStore,
   CommunityBannerStore,
   UsersBannerStore,
   // content
+  ContentStore,
   CommunitiesContentStore,
   CommunityContentStore,
   UsersContentStore,
@@ -79,11 +81,13 @@ const rootStore = t
     header: t.optional(HeaderStore, {}),
 
     // banner
+    banner: t.optional(BannerStore, {}),
     communitiesBanner: t.optional(CommunitiesBannerStore, {}),
     communityBanner: t.optional(CommunityBannerStore, {}),
     usersBanner: t.optional(UsersBannerStore, {}),
 
     // content
+    content: t.optional(ContentStore, {}),
     communitiesContent: t.optional(CommunitiesContentStore, {}),
     communityContent: t.optional(CommunityContentStore, {}),
     usersContent: t.optional(UsersContentStore, {}),
@@ -121,11 +125,6 @@ const rootStore = t
       // TODO self.doraemon.visible
       return self.doraemon.visible
     },
-    // TODO: remove it
-    get curPath() {
-      return self.route.curPath
-    },
-    // TODO: rename to routeInfo
     get curRoute() {
       return self.route.curRoute
     },

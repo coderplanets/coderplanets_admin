@@ -1,7 +1,7 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 
-import { storePlug, makeDebugger, ROUTE } from '../../utils'
+import { storePlug, makeDebugger, ROUTE, stripMobx } from '../../utils'
 
 import * as logic from './logic'
 
@@ -20,7 +20,7 @@ import { BannerContainer } from './styles'
 const debug = makeDebugger('C:CommunitiesBanner')
 /* eslint-enable no-unused-vars */
 
-const renderChildBanner = (route, store) => {
+const ChildBanner = ({ curRoute, store }) => {
   const {
     // communities
     totalCount,
@@ -42,7 +42,7 @@ const renderChildBanner = (route, store) => {
     filteredJobsCount,
   } = store
 
-  switch (route.subPath) {
+  switch (curRoute.subPath) {
     case ROUTE.CATEGORIES: {
       return (
         <CategoryBanner
@@ -61,7 +61,7 @@ const renderChildBanner = (route, store) => {
       )
     }
     case ROUTE.EDITORS: {
-      return <EditorsBanner totalCount={100} filteredCount={10} />
+      return <EditorsBanner totalCount={102} filteredCount={10} />
     }
     case ROUTE.THREADS: {
       return (
@@ -104,13 +104,12 @@ class CommunitiesBannerContainer extends React.Component {
   }
   render() {
     const { communitiesBanner } = this.props
-    const { route } = communitiesBanner
-    /* const { detail } = banner */
-    /* const restProps = { ...this.props.communitiesBanner } */
+    const { curRoute } = communitiesBanner
 
+    // console.log('totalCount --> ', communitiesBanner.totalCount)
     return (
       <BannerContainer>
-        {renderChildBanner(route, communitiesBanner)}
+        <ChildBanner curRoute={curRoute} store={stripMobx(communitiesBanner)} />
       </BannerContainer>
     )
   }

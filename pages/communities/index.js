@@ -22,7 +22,7 @@ import {
   Global,
   queryStringToJSON,
   /* mergeRouteQuery */
-  parsePathList,
+  getSubPath,
 } from '../../utils'
 import Footer from '../../components/Footer'
 
@@ -37,11 +37,13 @@ global.Intl = require('intl')
    这个函数的存在是 dev 模式下的 bug, 生产环境下是不需要（不起作用的）的，生产环境下会
    直接被路由到子文件
  */
+/*
 const getSubPath = props => {
   const asPathList = parsePathList(props)
 
   return asPathList.length > 1 ? asPathList[1] : null
 }
+*/
 
 /* filter: mergeRouteQuery(query), */
 export default class Index extends React.Component {
@@ -49,6 +51,8 @@ export default class Index extends React.Component {
     const { req, asPath } = props
     const isServer = !!req
     if (!isServer) return {}
+
+    console.log('## communities ## page ..')
 
     let querySchema = schema.pagedCommunitiesRaw
     if (getSubPath(props) === 'tags') {

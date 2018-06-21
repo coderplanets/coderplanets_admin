@@ -3,24 +3,25 @@ import { Provider } from 'mobx-react'
 /* import { request } from 'graphql-request' */
 /* import { GRAPHQL_ENDPOINT } from '../config' */
 
-import GAWraper from '../components/GAWraper'
 import initRootStore from '../stores'
-import ThemeWrapper from '../containers/ThemeWrapper'
-import MultiLanguage from '../containers/MultiLanguage'
-import Sidebar from '../containers/Sidebar'
-import Preview from '../containers/Preview'
-import Doraemon from '../containers/Doraemon'
-import Route from '../containers/Route'
-import BodyLayout from '../containers/BodyLayout'
-import Header from '../containers/Header'
-// ..
-import CommunityBanner from '../containers/CommunityBanner'
-import CommunityContent from '../containers/CommunityContent'
+import { GAWraper, Footer } from '../components'
+
+import {
+  Header,
+  Banner,
+  Content,
+  ThemeWrapper,
+  MultiLanguage,
+  Sidebar,
+  Preview,
+  Doraemon,
+  Route,
+  BodyLayout,
+} from '../containers'
 
 /* import sidebarSchema from '../containers/Sidebar/schema' */
 import { Global } from '../utils'
 
-import Footer from '../components/Footer'
 // try to fix safari bug
 // see https://github.com/yahoo/react-intl/issues/422
 global.Intl = require('intl')
@@ -30,6 +31,7 @@ export default class Index extends React.Component {
   static async getInitialProps({ req }) {
     /* const isServer = !!req */
 
+    console.log('## index ## page ..')
     /* console.log('-------> isServer(index) -----> ', isServer) */
     /* console.log('-------> pathname(index) -----> ', pathname) */
     /* return {} */
@@ -75,8 +77,8 @@ export default class Index extends React.Component {
               <Doraemon />
               <BodyLayout>
                 <Header />
-                <CommunityBanner />
-                <CommunityContent />
+                <Banner />
+                <Content />
                 <Footer />
               </BodyLayout>
             </MultiLanguage>

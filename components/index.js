@@ -21,6 +21,8 @@ export { default as Navigator } from './Navigator'
 export { default as ThemeSelector } from './ThemeSelector'
 
 export { default as CommunityMatrix } from './CommunityMatrix'
+export { default as GAWraper } from './GAWraper'
+export { default as Footer } from './Footer'
 
 // Table cell
 export { default as AdderCell } from './AdderCell'

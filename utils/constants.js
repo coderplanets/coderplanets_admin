@@ -115,12 +115,12 @@ export const ROUTE = {
   // NOTE: use lower case for god sake
   // the fake id for all communities, this item do not has a id, so make a fake one
   // id is used for UI when item is active
-  COMMUNITIES_RAW: 'communities',
   // communities CURD
   COMMUNITIES: 'communities',
   // communities categories CURD
   CATEGORIES: 'categories',
   TAGS: 'tags',
+  THREADS: 'threads',
 
   COMMUNITY: 'community',
 
@@ -129,7 +129,6 @@ export const ROUTE = {
   // valid part
   POSTS: 'posts',
   JOBS: 'jobs',
-  THREADS: 'threads',
   ACTIVITIES: 'activities',
   CHEATSHEETS: 'cheatsheets',
   EDITORS: 'editors',

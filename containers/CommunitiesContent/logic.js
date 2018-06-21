@@ -48,8 +48,8 @@ export function loadCommunities(page = 1) {
 
   communitiesContent.markState({ communitiesLoading: true })
 
-  /* communitiesContent.markQuery({ page, size }) */
-  communitiesContent.markQuery({ page })
+  communitiesContent.markRoute({ page })
+  communitiesContent.markRoute({ page })
   const { route } = communitiesContent
 
   args.filter = R.merge(args.filter, route.query)
@@ -59,17 +59,16 @@ export function loadCommunities(page = 1) {
 export function loadCategories(page = 1) {
   scrollIntoEle(TYPE.APP_HEADER_ID)
   /* const size = PAGE_SIZE.COMMON */
-  /* communitiesContent.markQuery({ page, size }) */
+  communitiesContent.markRoute({ page })
 
   communitiesContent.markState({ categoriessLoading: true })
   sr71$.query(S.pagedCategories, commonFilter(page))
 }
 
 export function loadTags(page = 1) {
-  const size = PAGE_SIZE.COMMON
   scrollIntoEle(TYPE.APP_HEADER_ID)
 
-  communitiesContent.markQuery({ page, size })
+  communitiesContent.markRoute({ page })
   communitiesContent.markState({ tagsLoading: true })
 
   sr71$.query(S.pagedTags, commonFilter(page))
@@ -78,7 +77,7 @@ export function loadTags(page = 1) {
 export function loadThreads(page = 1) {
   /* const size = PAGE_SIZE.COMMON */
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  /* communitiesContent.markQuery({ page, size }) */
+  communitiesContent.markRoute({ page })
   /*  */
   communitiesContent.markState({ tagsLoading: true })
   sr71$.query(S.pagedThreads, commonFilter(page))

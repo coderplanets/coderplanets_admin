@@ -21,6 +21,7 @@ export {
   isEmptyValue,
   toPercentNum,
   Global,
+  onClient,
   cutFrom,
   prettyNum,
   Rlog,
@@ -34,11 +35,12 @@ export {
 
 export { asyncErr, asyncRes } from './graphql_helper'
 export {
-  parseMainPath,
-  parsePathList,
+  getMainPath,
+  getSubPath,
   getParameterByName,
   queryStringToJSON,
   mergeRouteQuery,
+  serializeQuery,
 } from './route_helper'
 
 export {

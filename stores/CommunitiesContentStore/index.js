@@ -40,23 +40,11 @@ const CommunitiesContentStore = t
     get root() {
       return getParent(self)
     },
-
     get isLogin() {
       return self.root.account.isLogin
     },
-
-    get route() {
-      const { mainPath, subPath, query } = self.root.route
-      const queryObj = stripMobx(query)
-
-      if (queryObj.page) queryObj.page = parseInt(queryObj.page, 10)
-      if (queryObj.size) queryObj.size = parseInt(queryObj.size, 10)
-
-      return {
-        mainPath,
-        subPath,
-        query: queryObj,
-      }
+    get curRoute() {
+      return self.root.curRoute
     },
     get pagedCommunitiesData() {
       return stripMobx(self.pagedCommunities)
@@ -81,8 +69,8 @@ const CommunitiesContentStore = t
     /* ssrLoad(data, mainPath = 'communities') { */
     /* self.pagedCommunities = data */
     /* }, */
-    markQuery(query) {
-      self.root.route.markQuery(query)
+    markRoute(query) {
+      self.root.route.markRoute(query)
     },
     markState(sobj) {
       markStates(sobj, self)

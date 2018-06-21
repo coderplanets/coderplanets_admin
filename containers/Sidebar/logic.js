@@ -53,6 +53,10 @@ export function extendMenuBar(communityRaw) {
   }
 }
 
+export function onMenuSelect(mainPath, subPath) {
+  sidebar.markRoute({ mainPath, subPath })
+}
+
 export function onCommunityChildMenuChange(activeThread) {
   let asPath = `/${sidebar.activeRaw}/${activeThread}`
   if (R.isEmpty(activeThread)) {

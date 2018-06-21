@@ -25,7 +25,7 @@ import * as logic from './logic'
 const debug = makeDebugger('C:CommunitiesContent')
 /* eslint-enable no-unused-vars */
 
-const renderChildContent = (route, store, restProps) => {
+const renderChildContent = (curRoute, store, restProps) => {
   const {
     pagedCommunitiesData,
     pagedCategoriesData,
@@ -35,7 +35,7 @@ const renderChildContent = (route, store, restProps) => {
     pagedJobsData,
   } = store
 
-  switch (route.subPath) {
+  switch (curRoute.subPath) {
     case ROUTE.TAGS: {
       return <TagsContent data={pagedTagsData} restProps={restProps} />
     }
@@ -69,12 +69,12 @@ class CommunitiesContentContainer extends React.Component {
 
   render() {
     const { communitiesContent } = this.props
-    const { route } = communitiesContent
+    const { curRoute } = communitiesContent
     const restProps = { ...this.props.communitiesContent }
 
     return (
       <Wrapper>
-        {renderChildContent(route, communitiesContent, restProps)}
+        {renderChildContent(curRoute, communitiesContent, restProps)}
       </Wrapper>
     )
   }

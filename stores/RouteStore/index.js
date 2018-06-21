@@ -8,7 +8,7 @@ import R from 'ramda'
 import Router from 'next/router'
 
 import { PAGE_SIZE } from '../../config'
-import { markStates, makeDebugger } from '../../utils'
+import { onClient, markStates, makeDebugger, serializeQuery } from '../../utils'
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('S:RouteStore')
 /* eslint-enable no-unused-vars */
@@ -20,20 +20,6 @@ const Query = t.model('Query', {
   // view ... [chart, list ...]
 })
 
-const serializeQuery = obj => {
-  /* eslint-disable */
-  return (
-    '?' +
-    Object.keys(obj)
-      .reduce((a, k) => {
-        a.push(k + '=' + encodeURIComponent(obj[k]))
-        return a
-      }, [])
-      .join('&')
-  )
-  /* eslint-enable */
-}
-
 const RouteStore = t
   .model('RouteStore', {
     mainPath: t.optional(t.string, ''),
@@ -41,42 +27,48 @@ const RouteStore = t
     query: t.optional(Query, {}),
   })
   .views(self => ({
-    get curPath() {
-      return self.mainPath
-    },
     get curRoute() {
       const { mainPath, subPath } = self
       return { mainPath, subPath }
     },
   }))
   .actions(self => ({
-    markQuery(query = {}) {
-      query = R.mapObjIndexed(v => String(v), query)
-      const { page } = query
+    // /communities/posts ..
+    // /communities/jobs ..
+    // .....
+    // /javascript/posts ..
+    // /racket/jobs ..
 
-      // page = 1 is default
-      if (page && page === '1') {
-        query = R.omit(['page', 'size'], query)
-      }
-      let queryString = ''
-      if (!R.isEmpty(query)) {
-        queryString = serializeQuery(query)
-      }
-      if (typeof window !== 'undefined') {
-        let url = ''
-        if (self.mainPath === self.subPath) {
-          url = `/${self.mainPath}${queryString}`
-        } else {
-          url = `/${self.mainPath}/${self.subPath}${queryString}`
-        }
+    markRoute(query) {
+      if (!onClient || R.isEmpty(query)) return false
+      const { mainPath, subPath, page } = query
 
-        console.log('Router push url: ', url)
-        return Router.push(url, url, {
-          shallow: true,
-        })
+      if (mainPath) {
+        self.mainPath = mainPath
       }
+      if (subPath) {
+        self.subPath = subPath
+      }
+
+      if (page && String(page) === '1') {
+        query = R.omit(['page'], query)
+      }
+
+      const allQueryString = serializeQuery(query)
+      const queryString = serializeQuery(R.omit(['mainPath', 'subPath'], query))
+
+      const url = `/${allQueryString}`
+      let asPath = `/${self.mainPath}/${self.subPath}${queryString}`
+      if (self.subPath === 'index') {
+        asPath = `/${self.mainPath}${queryString}`
+      }
+
+      // NOTE: shallow option only works for same page url
+      // if page is diffrent, it will cause page reload
+      Router.push(url, asPath, {
+        shallow: true,
+      })
     },
-
     markState(sobj) {
       markStates(sobj, self)
     },

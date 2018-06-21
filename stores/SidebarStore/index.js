@@ -63,9 +63,6 @@ const SidebarStore = t
     get langMessages() {
       return self.root.langMessages
     },
-    get curPath() {
-      return self.root.curPath
-    },
     get activeRaw() {
       return self.root.route.mainPath
     },
@@ -86,7 +83,9 @@ const SidebarStore = t
     load() {
       // const communities = self.root.communities.all
     },
-
+    markRoute(query) {
+      self.root.route.markRoute(query)
+    },
     loadCommunities(data) {
       self.root.communities.load(data)
     },

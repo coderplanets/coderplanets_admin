@@ -22,6 +22,23 @@ export const parsePathList = R.compose(
   R.prop('asPath')
 )
 
+const INDEX = ''
+export const getMainPath = routeObj => {
+  if (R.isEmpty(routeObj)) return INDEX
+  if (routeObj.asPath === '/') return INDEX
+
+  return parseMainPath(routeObj)
+}
+
+export const getSubPath = routeObj => {
+  if (R.isEmpty(routeObj)) return INDEX
+  if (routeObj.asPath === '/') return INDEX
+
+  const asPathList = parsePathList(routeObj)
+
+  return asPathList.length > 1 ? asPathList[1] : asPathList[0]
+}
+
 const defaultQuery = { page: 1, size: 20 }
 export const mergeRouteQuery = (query = {}) => {
   const routeQuery = R.clone(query)
@@ -63,3 +80,16 @@ export const getParameterByName = name => {
   return decodeURIComponent(results[2].replace(/\+/g, ' '))
 }
 /* eslint-enable */
+
+export const serializeQuery = obj => {
+  /* eslint-disable */
+  const qstring = Object.keys(obj)
+    .reduce((a, k) => {
+      a.push(k + '=' + encodeURIComponent(obj[k]))
+      return a
+    }, [])
+    .join('&')
+
+  return R.isEmpty(qstring) ? '' : `?${qstring}`
+  /* eslint-enable */
+}

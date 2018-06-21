@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
 
 import { ROUTE } from '../../utils'
 import { ICON_ASSETS } from '../../config'
@@ -21,61 +20,68 @@ import * as logic from './logic'
 
 const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
   <ChildrenWrapper active={activeRaw === curRaw}>
-    <ChildrenItem active={ROUTE.COMMUNITIES === activeThread}>
-      <Link href="/communities" as="/communities">
-        <ChildrenItemInner>
-          <ChildrenTitle>社区</ChildrenTitle>
-          <ChildrenNum>23</ChildrenNum>
-        </ChildrenItemInner>
-      </Link>
+    <ChildrenItem
+      active={ROUTE.COMMUNITIES === activeThread}
+      onClick={logic.onMenuSelect.bind(this, 'communities', 'index')}
+    >
+      <ChildrenItemInner>
+        <ChildrenTitle>社区</ChildrenTitle>
+        <ChildrenNum>23</ChildrenNum>
+      </ChildrenItemInner>
     </ChildrenItem>
-    <ChildrenItem active={ROUTE.CATEGORIES === activeThread}>
-      <Link href="/communities" as="/communities/categories">
-        <ChildrenItemInner>
-          <ChildrenTitle>分类</ChildrenTitle>
-          <ChildrenNum>22</ChildrenNum>
-        </ChildrenItemInner>
-      </Link>
+    <ChildrenItem
+      active={ROUTE.CATEGORIES === activeThread}
+      onClick={logic.onMenuSelect.bind(this, 'communities', 'categories')}
+    >
+      <ChildrenItemInner>
+        <ChildrenTitle>分类</ChildrenTitle>
+        <ChildrenNum>22</ChildrenNum>
+      </ChildrenItemInner>
     </ChildrenItem>
-    <ChildrenItem active={ROUTE.TAGS === activeThread}>
-      <Link href="/communities/tags" as="/communities/tags">
-        <ChildrenItemInner>
-          <ChildrenTitle>标签</ChildrenTitle>
-          <ChildrenNum>22</ChildrenNum>
-        </ChildrenItemInner>
-      </Link>
+    <ChildrenItem
+      active={ROUTE.TAGS === activeThread}
+      onClick={logic.onMenuSelect.bind(this, 'communities', 'tags')}
+    >
+      <ChildrenItemInner>
+        <ChildrenTitle>标签</ChildrenTitle>
+        <ChildrenNum>22</ChildrenNum>
+      </ChildrenItemInner>
     </ChildrenItem>
-    <ChildrenItem active={ROUTE.EDITORS === activeThread}>
-      <Link href="/communities" as="/communities/editors">
-        <ChildrenItemInner>
-          <ChildrenTitle>编辑</ChildrenTitle>
-          <ChildrenNum>22</ChildrenNum>
-        </ChildrenItemInner>
-      </Link>
+    <ChildrenItem
+      active={ROUTE.EDITORS === activeThread}
+      onClick={logic.onMenuSelect.bind(this, 'communities', 'editors')}
+    >
+      <ChildrenItemInner>
+        <ChildrenTitle>编辑</ChildrenTitle>
+        <ChildrenNum>22</ChildrenNum>
+      </ChildrenItemInner>
     </ChildrenItem>
-    <ChildrenItem active={ROUTE.THREADS === activeThread}>
-      <Link href="/communities" as="/communities/threads">
-        <ChildrenItemInner>
-          <ChildrenTitle>Threads</ChildrenTitle>
-          <ChildrenNum>111</ChildrenNum>
-        </ChildrenItemInner>
-      </Link>
+    <ChildrenItem
+      active={ROUTE.THREADS === activeThread}
+      onClick={logic.onMenuSelect.bind(this, 'communities', 'threads')}
+    >
+      <ChildrenItemInner>
+        <ChildrenTitle>Threads</ChildrenTitle>
+        <ChildrenNum>11</ChildrenNum>
+      </ChildrenItemInner>
     </ChildrenItem>
-    <ChildrenItem active={ROUTE.POSTS === activeThread}>
-      <Link href="/communities" as="/communities/posts">
-        <ChildrenItemInner>
-          <ChildrenTitle>帖子</ChildrenTitle>
-          <ChildrenNum>445</ChildrenNum>
-        </ChildrenItemInner>
-      </Link>
+    <ChildrenItem
+      active={ROUTE.POSTS === activeThread}
+      onClick={logic.onMenuSelect.bind(this, 'communities', 'posts')}
+    >
+      <ChildrenItemInner>
+        <ChildrenTitle>帖子</ChildrenTitle>
+        <ChildrenNum>445</ChildrenNum>
+      </ChildrenItemInner>
     </ChildrenItem>
-    <ChildrenItem active={ROUTE.JOBS === activeThread}>
-      <Link href="/communities" as="/communities/jobs">
-        <ChildrenItemInner>
-          <ChildrenTitle>招聘</ChildrenTitle>
-          <ChildrenNum>111</ChildrenNum>
-        </ChildrenItemInner>
-      </Link>
+    <ChildrenItem
+      active={ROUTE.JOBS === activeThread}
+      onClick={logic.onMenuSelect.bind(this, 'communities', 'jobs')}
+    >
+      <ChildrenItemInner>
+        <ChildrenTitle>招聘</ChildrenTitle>
+        <ChildrenNum>111</ChildrenNum>
+      </ChildrenItemInner>
     </ChildrenItem>
   </ChildrenWrapper>
 )
@@ -86,7 +92,7 @@ const CommunitiesItemBar = ({ active }) => (
     <div>
       <MenuRow
         active={active}
-        onClick={logic.extendMenuBar.bind(this, ROUTE.COMMUNITIES_RAW)}
+        onClick={logic.extendMenuBar.bind(this, ROUTE.COMMUNITIES)}
       >
         <MenuCommunitiesIcon src={`${ICON_ASSETS}/cmd/all.svg`} />
         <div style={{ marginRight: 10 }} />
@@ -100,10 +106,10 @@ const CommunitiesItemBar = ({ active }) => (
 const CommunitiesRootMenuItem = ({ activeRaw, activeThread }) => (
   <MenuItemWrapper>
     <div>
-      <CommunitiesItemBar active={activeRaw === ROUTE.COMMUNITIES_RAW} />
+      <CommunitiesItemBar active={activeRaw === ROUTE.COMMUNITIES} />
       <MenuChildren
         activeRaw={activeRaw}
-        curRaw={ROUTE.COMMUNITIES_RAW}
+        curRaw={ROUTE.COMMUNITIES}
         activeThread={activeThread}
       />
     </div>
