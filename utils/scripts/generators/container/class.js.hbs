@@ -13,7 +13,11 @@ import { inject, observer } from 'mobx-react'
   import messages from './messages'
 {{/if}}
 
+// import { } from './styles'
+
 import { makeDebugger, storePlug } from '../../utils'
+
+// import S from './schema'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
@@ -22,22 +26,21 @@ const debug = makeDebugger('C:{{ properCase name }}')
 
 class {{ properCase name }}Container extends React.Component {
   componentWillMount() {
-    logic.init(this.props.{{ camelCase name }})
+    const {{preCurly ""}} {{ camelCase name}} {{afterCurly ""}} = this.props
+    logic.init({{ camelCase name }})
   }
 
   render() {
     return (
       <div>
-        <h2>coderplanets</h2>
-        {{ properCase name }} container!
+        <h2>{{ properCase name }} container!</h2>
+        <div>impress me!</div>
+        {{#if wantMessages}}
+        <FormattedMessage {...messages.header} />
+        {{/if}}
       </div>
-      {{#if wantMessages}}
-      <FormattedMessage {...messages.header} />
-      {{/if}}
     )
   }
 }
 
-export default inject(storePlug('{{ camelCase name }}'))(
-  observer({{ properCase name }}Container)
-)
+export default inject(storePlug('{{ camelCase name }}'))(observer({{ properCase name }}Container))

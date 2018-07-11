@@ -28,15 +28,15 @@ module.exports = {
     },
     {
       type: 'confirm',
-      name: 'wantI18n',
+      name: 'wantSchema',
       default: true,
-      message: 'Do you want i18n messages (i.e. will this container use text)?',
+      message: 'Do you want GraphQL schema?',
     },
     {
       type: 'confirm',
-      name: 'wantLoadable',
-      default: false,
-      message: 'Do you want to load the container asynchronously?',
+      name: 'wantI18n',
+      default: true,
+      message: 'Do you want i18n messages (i.e. will this container use text)?',
     },
   ],
   actions: data => {
@@ -56,8 +56,8 @@ module.exports = {
       },
       {
         type: 'add',
-        path: '../../../containers/{{properCase name}}/tests/index.test.js',
-        templateFile: './container/test.js.hbs',
+        path: '../../../containers/{{properCase name}}/store.js',
+        templateFile: './container/store.js.hbs',
         abortOnFail: true,
       },
       {
@@ -66,7 +66,28 @@ module.exports = {
         templateFile: './container/styles.js.hbs',
         abortOnFail: true,
       },
+      {
+        type: 'add',
+        path: '../../../containers/{{properCase name}}/tests/index.test.js',
+        templateFile: './container/test.js.hbs',
+        abortOnFail: true,
+      },
+      {
+        type: 'add',
+        path: '../../../containers/{{properCase name}}/tests/store.test.js',
+        templateFile: './container/store.test.js.hbs',
+        abortOnFail: true,
+      },
     ]
+
+    if (data.wantSchema) {
+      actions.push({
+        type: 'add',
+        path: '../../../containers/{{properCase name}}/schema.js',
+        templateFile: './container/schema.js.hbs',
+        abortOnFail: true,
+      })
+    }
 
     // If they want a i18n messages file
     if (data.wantI18n) {
@@ -74,16 +95,6 @@ module.exports = {
         type: 'add',
         path: '../../../containers/{{properCase name}}/lang.js',
         templateFile: './container/lang.js.hbs',
-        abortOnFail: true,
-      })
-    }
-
-    // If want Loadable.js to load the component asynchronously
-    if (data.wantLoadable) {
-      actions.push({
-        type: 'add',
-        path: '../../../containers/{{properCase name}}/Loadable.js',
-        templateFile: './container/loadable.js.hbs',
         abortOnFail: true,
       })
     }
