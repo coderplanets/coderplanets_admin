@@ -13,33 +13,59 @@ export { default as HeaderStore } from './HeaderStore'
 export { default as CurCommunity } from './CurCommunity'
 
 // banner store
-export { default as BannerStore } from './BannerStore' //
-export { default as CommunitiesBannerStore } from './CommunitiesBannerStore' //
-export { default as UsersBannerStore } from './UsersBannerStore' //
-export { default as CommunityBannerStore } from './CommunityBannerStore' //
+export { default as BannerStore } from '../containers/Banner/store'
+export { default as UsersBannerStore } from '../containers/UsersBanner/store'
+
+export {
+  default as CommunitiesBannerStore,
+} from '../containers/CommunitiesBanner/store'
+export {
+  default as CommunityBannerStore,
+} from '../containers/CommunityBanner/store'
 
 // contents store
-export { default as ContentStore } from './ContentStore' //
-export { default as CommunitiesContentStore } from './CommunitiesContentStore' //
-export { default as CommunityContentStore } from './CommunityContentStore' //
-export { default as UsersContentStore } from './UsersContentStore' //
+export { default as ContentStore } from '../containers/Content/store'
+export { default as UsersContentStore } from '../containers/UsersContent/store'
+export {
+  default as CommunitiesContentStore,
+} from '../containers/CommunitiesContent/store'
+export {
+  default as CommunityContentStore,
+} from '../containers/CommunityContent/store'
 
 // editors
-export { default as CommunityEditorStore } from './CommunityEditorStore' //
-export { default as TagEditorStore } from './TagEditorStore' //
-export { default as CategoryEditorStore } from './CategoryEditorStore' //
-export { default as PermissionEditorStore } from './PermissionEditorStore' //
+export { default as TagEditorStore } from '../containers/TagEditor/store'
+export {
+  default as CommunityEditorStore,
+} from '../containers/CommunityEditor/store'
+
+export {
+  default as CategoryEditorStore,
+} from '../containers/CategoryEditor/store'
+export {
+  default as PermissionEditorStore,
+} from '../containers/PermissionEditor/store'
+
 // setter
-export { default as CategorySetterStore } from './CategorySetterStore' //
-export { default as TagSetterStore } from './TagSetterStore' //
-export { default as CommunitySetterStore } from './CommunitySetterStore' //
-export { default as ThreadSetterStore } from './ThreadSetterStore' //
+export {
+  default as CategorySetterStore,
+} from '../containers/CategorySetter/store'
+
+export { default as TagSetterStore } from '../containers/TagSetter/store'
+export {
+  default as CommunitySetterStore,
+} from '../containers/CommunitySetter/store'
+export { default as ThreadSetterStore } from '../containers/ThreadSetter/store'
 
 // toolbox
-export { default as TypeWriterStore } from './TypeWriterStore' //
-export { default as CommentsStore } from './CommentsStore' //
-export { default as AccountEditorStore } from './AccountEditorStore' //
+export { default as TypeWriterStore } from '../containers/TypeWriter/store'
+export { default as CommentsStore } from '../containers/Comments/store'
+export {
+  default as AccountEditorStore,
+} from '../containers/AccountEditor/store'
 
 // viewers store
-export { default as ArticleViwerStore } from './ArticleViwerStore' //
-export { default as AccountViewerStore } from './AccountViewerStore' //
+export { default as ArticleViwerStore } from '../containers/ArticleViwer/store'
+export {
+  default as AccountViewerStore,
+} from '../containers/AccountViewer/store'
