@@ -4,7 +4,7 @@ import { request } from 'graphql-request'
 import { GRAPHQL_ENDPOINT } from '../config'
 
 import GAWraper from '../components/GAWraper'
-import initRootStore from '../stores'
+import initRootStore from '../stores/init'
 import ThemeWrapper from '../containers/ThemeWrapper'
 import MultiLanguage from '../containers/MultiLanguage'
 import Sidebar from '../containers/Sidebar'

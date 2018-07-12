@@ -1,40 +1,71 @@
-/*
- * the entry of the App store
- *
- */
+// domain store
+export { default as AccountStore } from './AccountStore'
+export { default as UsersStore } from './UsersStore'
+export { default as PostsStore } from './PostsStore'
 
-// import { onAction } from 'mobx-state-tree'
+export { default as BodylayoutStore } from './BodylayoutStore'
+export { default as ApiLayoutStore } from './ApiLayoutStore'
+export { default as SidebarStore } from './SidebarStore'
+export { default as PreviewStore } from './PreviewStore'
+export { default as DoraemonStore } from './DoraemonStore'
+export { default as HeaderStore } from './HeaderStore'
 
-import RootStore from './RootStore'
+export { default as CurCommunity } from './CurCommunity'
 
-let rootStore = null
+// banner store
+export { default as BannerStore } from '../containers/Banner/store'
+export { default as UsersBannerStore } from '../containers/UsersBanner/store'
 
-const createRootStore = ({ langSetup, ...restData }) => {
-  return RootStore.create({ appLangs: langSetup, ...restData }, {})
-}
+export {
+  default as CommunitiesBannerStore,
+} from '../containers/CommunitiesBanner/store'
+export {
+  default as CommunityBannerStore,
+} from '../containers/CommunityBanner/store'
 
-function initRootStore({ langSetup, ...restData }) {
-  if (rootStore === null) {
-    rootStore = createRootStore({ langSetup, ...restData })
-  }
+// contents store
+export { default as ContentStore } from '../containers/Content/store'
+export { default as UsersContentStore } from '../containers/UsersContent/store'
+export {
+  default as CommunitiesContentStore,
+} from '../containers/CommunitiesContent/store'
+export {
+  default as CommunityContentStore,
+} from '../containers/CommunityContent/store'
 
-  rootStore.markState({
-    ...restData,
-  })
+// editors
+export { default as TagEditorStore } from '../containers/TagEditor/store'
+export {
+  default as CommunityEditorStore,
+} from '../containers/CommunityEditor/store'
 
-  return rootStore
-}
+export {
+  default as CategoryEditorStore,
+} from '../containers/CategoryEditor/store'
+export {
+  default as PermissionEditorStore,
+} from '../containers/PermissionEditor/store'
 
-export default initRootStore
+// setter
+export {
+  default as CategorySetterStore,
+} from '../containers/CategorySetter/store'
 
-// not work, TODO
-/*
-   if (module.hot) {
-   if (module.hot.data && module.hot.data.rootStore) {
-   // applySnapshot(module.hot.data.old, module.hot.data.rootStore)
-   }
-   module.hot.dispose(data => {
-   // getSnapshot ...
-   })
-   }
- */
+export { default as TagSetterStore } from '../containers/TagSetter/store'
+export {
+  default as CommunitySetterStore,
+} from '../containers/CommunitySetter/store'
+export { default as ThreadSetterStore } from '../containers/ThreadSetter/store'
+
+// toolbox
+export { default as TypeWriterStore } from '../containers/TypeWriter/store'
+export { default as CommentsStore } from '../containers/Comments/store'
+export {
+  default as AccountEditorStore,
+} from '../containers/AccountEditor/store'
+
+// viewers store
+export { default as ArticleViwerStore } from '../containers/ArticleViwer/store'
+export {
+  default as AccountViewerStore,
+} from '../containers/AccountViewer/store'

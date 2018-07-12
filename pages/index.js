@@ -3,7 +3,7 @@ import { Provider } from 'mobx-react'
 /* import { request } from 'graphql-request' */
 /* import { GRAPHQL_ENDPOINT } from '../config' */
 
-import initRootStore from '../stores'
+import initRootStore from '../stores/init'
 import { GAWraper, Footer } from '../components'
 
 import {

@@ -50,7 +50,7 @@ import {
   SidebarStore,
   TypeWriterStore,
   AccountEditorStore,
-} from '../storeIndex'
+} from '../index'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('S:rootStore')
