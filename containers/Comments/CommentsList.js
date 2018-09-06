@@ -2,7 +2,7 @@ import R from 'ramda'
 import React from 'react'
 import TimeAgo from 'timeago-react'
 
-import { ICON_ASSETS } from '../../config'
+import { ICON_CMD } from '../../config'
 
 import {
   AvatarsRow,
@@ -86,11 +86,11 @@ const ActionBottom = ({ data, accountInfo }) => {
     return (
       <div style={{ display: 'flex' }}>
         <ReplyAction>
-          <ReplyIcon src={`${ICON_ASSETS}/cmd/edit.svg`} />
+          <ReplyIcon src={`${ICON_CMD}/edit.svg`} />
           编辑
         </ReplyAction>
         <ReplyAction onClick={logic.onDelete.bind(this, data)}>
-          <ReplyIcon src={`${ICON_ASSETS}/cmd/delete.svg`} />
+          <ReplyIcon src={`${ICON_CMD}/delete.svg`} />
           删除
         </ReplyAction>
       </div>
@@ -99,7 +99,7 @@ const ActionBottom = ({ data, accountInfo }) => {
   return (
     <div style={{ display: 'flex' }}>
       <ReplyAction onClick={logic.openReplyEditor.bind(this, data)}>
-        <ReplyIcon src={`${ICON_ASSETS}/cmd/nest_comment.svg`} />
+        <ReplyIcon src={`${ICON_CMD}/nest_comment.svg`} />
         回复
       </ReplyAction>
     </div>
@@ -163,7 +163,7 @@ const Comment = ({ data, tobeDeleteId, accountInfo }) => (
             <VisiableAction>
               <div onClick={logic.toggleLikeComment.bind(this, data)}>
                 <UpIcon
-                  src={`${ICON_ASSETS}/cmd/up.svg`}
+                  src={`${ICON_CMD}/up.svg`}
                   viewerDid={data.viewerHasLiked}
                 />
               </div>
@@ -172,7 +172,7 @@ const Comment = ({ data, tobeDeleteId, accountInfo }) => (
             <VisiableAction>
               <div onClick={logic.toggleDislikeComment.bind(this, data)}>
                 <UpIcon
-                  src={`${ICON_ASSETS}/cmd/up.svg`}
+                  src={`${ICON_CMD}/up.svg`}
                   reverse
                   viewerDid={data.viewerHasDisliked}
                 />

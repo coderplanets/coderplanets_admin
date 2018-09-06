@@ -8,7 +8,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import R from 'ramda'
 
-import { ICON_ASSETS } from '../../config'
+import { ICON_CMD } from '../../config'
 
 // import { inject, observer } from 'mobx-react'
 // import Link from 'next/link'
@@ -51,7 +51,7 @@ class TagsCell extends React.Component {
           <Wrapper>
             <TagsList source={source} onDelete={onDelete} />
             <div onClick={onAdd.bind(this, thread, source)}>
-              <AddIcon src={`${ICON_ASSETS}/cmd/plus.svg`} />
+              <AddIcon src={`${ICON_CMD}/plus.svg`} />
             </div>
           </Wrapper>
         )}

@@ -1,10 +1,7 @@
 import React from 'react'
 // import Link from 'next/link'
 
-import { ICON_ASSETS } from '../../config'
-
-import { cutFrom, ROUTE } from '../../utils'
-import * as logic from './logic'
+import { ICON_CMD } from '../../config'
 
 import {
   MenuRow,
@@ -20,24 +17,24 @@ import {
   SettingIcon,
 } from './styles/menu'
 
-const MenuItemBar = ({ item, activeRaw, curRaw }) => {
-  //   <Link href={item.target.href} as={item.target.as}>
-  return (
-    <MenuItemEach>
-      <div>
-        <MenuRow
-          active={activeRaw === curRaw}
-          onClick={logic.extendMenuBar.bind(this, item.raw)}
-        >
-          <MenuItemIcon src={item.logo} />
-          {/* eslint-disable jsx-a11y/anchor-is-valid */}
-          <div style={{ marginRight: 10 }} />
-          <MenuTitle>{cutFrom(item.title, 10)}</MenuTitle>
-        </MenuRow>
-      </div>
-    </MenuItemEach>
-  )
-}
+import { cutFrom, ROUTE } from '../../utils'
+import * as logic from './logic'
+
+const MenuItemBar = ({ item, activeRaw, curRaw }) => (
+  <MenuItemEach>
+    <div>
+      <MenuRow
+        active={activeRaw === curRaw}
+        onClick={logic.extendMenuBar.bind(this, item.raw)}
+      >
+        <MenuItemIcon src={item.logo} />
+        {/* eslint-disable jsx-a11y/anchor-is-valid */}
+        <div style={{ marginRight: 10 }} />
+        <MenuTitle>{cutFrom(item.title, 10)}</MenuTitle>
+      </MenuRow>
+    </div>
+  </MenuItemEach>
+)
 
 const MenuChildren = ({ activeRaw, activeThread, curRaw }) => {
   return (
@@ -49,7 +46,7 @@ const MenuChildren = ({ activeRaw, activeThread, curRaw }) => {
         <ChildrenItemInner>
           <ChildrenTitle>综合设置</ChildrenTitle>
           <ChildrenNum>
-            <SettingIcon src={`${ICON_ASSETS}/cmd/extra_setting.svg`} />
+            <SettingIcon src={`${ICON_CMD}/extra_setting.svg`} />
           </ChildrenNum>
         </ChildrenItemInner>
       </ChildrenItem>

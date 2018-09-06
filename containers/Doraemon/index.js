@@ -7,15 +7,10 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 
-// import Link from 'next/link'
-// import styled from 'styled-components'
-
-import { ICON_ASSETS } from '../../config'
-import { makeDebugger, storePlug } from '../../utils'
+import { ICON_CMD } from '../../config'
 
 import InputEditor from './InputEditor'
 import NodeIcon from './NodeIcon'
-import * as logic from './logic'
 
 import {
   PageOverlay,
@@ -32,13 +27,16 @@ import {
   HintEnter,
 } from './styles'
 
+import { makeDebugger, storePlug } from '../../utils'
+import * as logic from './logic'
+
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('C:Doraemon')
 /* eslint-enable no-unused-vars */
 
 const HintIcon = ({ index, active, cur, length }) => {
   if (active === cur) {
-    return <HintEnter src={`${ICON_ASSETS}/cmd/enter.svg`} />
+    return <HintEnter src={`${ICON_CMD}/enter.svg`} />
   } else if (length <= 9) {
     return <Hint>^ {index}</Hint>
   }

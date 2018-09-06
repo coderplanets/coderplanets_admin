@@ -6,7 +6,7 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 
-import { ICON_ASSETS } from '../../config'
+import { ICON_CMD } from '../../config'
 
 import CommunityMenuItem from './CommunityMenuItem'
 import CommunitiesRootMenuItem from './CommunitiesRootMenuItem'
@@ -66,7 +66,7 @@ class SidebarContainer extends React.Component {
     return (
       <Sidebar>
         <Banner>
-          <BannerLogo src={`${ICON_ASSETS}/cmd/rainbow_logo.svg`} />
+          <BannerLogo src={`${ICON_CMD}/rainbow_logo.svg`} />
           <BannerTitle onClick={logic.loadCommunities}>
             CPS 管理后台 @2018
           </BannerTitle>
@@ -77,7 +77,7 @@ class SidebarContainer extends React.Component {
           activeThread={activeThread}
         />
         <Footer>
-          <SearchLogo src={`${ICON_ASSETS}/cmd/search2.svg`} />
+          <SearchLogo src={`${ICON_CMD}/search2.svg`} />
           <BannerTitle>综合搜索等</BannerTitle>
         </Footer>
       </Sidebar>

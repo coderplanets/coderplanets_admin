@@ -1,14 +1,11 @@
 import React from 'react'
 import withClickOutside from 'react-click-outside'
 
+import { ICON_CMD, WORD_LIMIT } from '../../config'
+
 import BodyEditor from '../TypeWriter/BodyEditor'
-
-import { ICON_ASSETS, WORD_LIMIT } from '../../config'
-
-import { debounce } from '../../utils'
-import * as logic from './logic'
-
 import { AvatarsRow, SpaceGrow, MarkDownPreviewer } from '../../components'
+import EditorFooter from './EditorFooter'
 
 import {
   InputEditorWrapper,
@@ -26,7 +23,8 @@ import {
   PreviewerWrapper,
 } from './styles/comment_editor'
 
-import EditorFooter from './EditorFooter'
+import { debounce } from '../../utils'
+import * as logic from './logic'
 
 const WordsCounter = ({ countCurrent }) => (
   <CounterWrapper>
@@ -50,7 +48,7 @@ const Header = ({
         <LeaveResponseUsername>{accountInfo.nickname}</LeaveResponseUsername>
         {referUsers.length > 0 ? (
           <div style={{ display: 'flex' }}>
-            <ReferToIcon src={`${ICON_ASSETS}/cmd/refer.svg`} />
+            <ReferToIcon src={`${ICON_CMD}/refer.svg`} />
             <ReplyAvatars>
               <AvatarsRow
                 users={referUsers}
