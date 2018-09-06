@@ -7,9 +7,6 @@
 import React from 'react'
 import R from 'ramda'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
-
-import { makeDebugger, isEmptyNil, isObject, objToArray } from '../../utils'
 
 import { AdderCell } from '../../components'
 
@@ -22,6 +19,15 @@ import {
   NumberInfo,
   PermissionWrapper,
 } from './styles'
+
+import {
+  uid,
+  makeDebugger,
+  isEmptyNil,
+  isObject,
+  objToArray,
+} from '../../utils'
+
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:PermissionCell:index')
 /* eslint-enable no-unused-vars */
@@ -39,7 +45,7 @@ const CommunityPermissions = ({ data }) => {
   return (
     <React.Fragment>
       {dataArray.map(v => (
-        <PermissionWrapper key={shortid.generate()}>
+        <PermissionWrapper key={uid.gen()}>
           <Label>{key(v)}: </Label>
           <NumberInfo>
             <Number>{R.length(R.keys(value(v)))}</Number>

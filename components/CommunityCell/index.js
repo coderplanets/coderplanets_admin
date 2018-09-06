@@ -8,10 +8,8 @@ import React from 'react'
 import R from 'ramda'
 import PropTypes from 'prop-types'
 import ReactTooltip from 'react-tooltip'
-import shortid from 'shortid'
 
 import { ICON_ASSETS } from '../../config'
-import { makeDebugger } from '../../utils'
 import { AdderCell } from '../../components'
 
 import {
@@ -23,6 +21,8 @@ import {
   UnknowText,
   AddIcon,
 } from './styles'
+
+import { uid, makeDebugger } from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:CommunityCell:index')
@@ -40,7 +40,7 @@ const SingleCommunity = ({ community }) => (
 const CommunitiesLogoArray = ({ array }) => (
   <Wrapper>
     {array.map(c => (
-      <Wrapper key={shortid.generate()}>
+      <Wrapper key={uid.gen()}>
         <div
           data-tip={c.title}
           data-for="community_cell"
@@ -56,7 +56,7 @@ const CommunitiesLogoArray = ({ array }) => (
 const CommunitiesSetter = ({ array, source, thread, onDelete }) => (
   <Wrapper>
     {array.map(c => (
-      <SetterWrapper key={shortid.generate()}>
+      <SetterWrapper key={uid.gen()}>
         <CommunityLogo src={c.logo} />
         <DeleteCross onClick={onDelete.bind(this, thread, source, c.id)}>
           x

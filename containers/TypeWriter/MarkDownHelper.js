@@ -4,13 +4,14 @@ import remarkableemoj from 'remarkable-emoji'
 import mentions from 'remarkable-mentions'
 import Prism from 'mastani-codehighlight'
 import R from 'ramda'
-import shortid from 'shortid'
 
 import { MENTION_USER_ADDR } from '../../config'
 import MarkDownStyle from '../../containers/ThemeWrapper/MarkDownStyle'
 
 import fullEmojis from './emojis'
 import { Wrapper, EmojiWraper, EmojiItem } from './styles/markdown_helper'
+
+import { uid } from '../../utils'
 
 const md = new Remarkable()
 md.use(mentions({ url: MENTION_USER_ADDR }))
@@ -35,7 +36,7 @@ const Emojis = () => {
         >
           {source.map(item => (
             <EmojiItem
-              key={shortid.generate()}
+              key={uid.gen()}
               dangerouslySetInnerHTML={{
                 __html: md.render(`${item} \`${item}\``),
               }}

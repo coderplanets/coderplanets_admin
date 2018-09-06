@@ -6,22 +6,10 @@
 
 import React from 'react'
 import { inject, observer } from 'mobx-react'
-import shortid from 'shortid'
 import R from 'ramda'
 import ReactTooltip from 'react-tooltip'
 
 import { ICON_ASSETS } from '../../config'
-
-import {
-  makeDebugger,
-  storePlug,
-  isEmptyNil,
-  isObject,
-  maybe,
-  mapKey,
-  mapValue,
-  objToArray,
-} from '../../utils'
 
 import {
   UserCell,
@@ -40,6 +28,18 @@ import {
   CheckIcon,
   ActionBtns,
 } from './styles'
+
+import {
+  uid,
+  makeDebugger,
+  storePlug,
+  isEmptyNil,
+  isObject,
+  maybe,
+  mapKey,
+  mapValue,
+  objToArray,
+} from '../../utils'
 
 import * as logic from './logic'
 /* eslint-disable no-unused-vars */
@@ -120,10 +120,7 @@ const PermissionList = ({
     <PermissionWrapper>
       <React.Fragment>
         {ruleArray.map(p => (
-          <PerItem
-            key={shortid.generate()}
-            onClick={logic.onRuleClick.bind(this, p)}
-          >
+          <PerItem key={uid.gen()} onClick={logic.onRuleClick.bind(this, p)}>
             <PerTitle>{mapKey(p)}</PerTitle> <CheckMark active={mapValue(p)} />
           </PerItem>
         ))}

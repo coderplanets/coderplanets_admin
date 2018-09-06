@@ -7,12 +7,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import R from 'ramda'
-import shortid from 'shortid'
 
 import { ICON_ASSETS } from '../../config'
-import { makeDebugger, Trans } from '../../utils'
-import { Wrapper, Thread, DeleteCross, AddIcon } from './styles'
+
 import { AdderCell, Icon } from '../../components'
+import { Wrapper, Thread, DeleteCross, AddIcon } from './styles'
+
+import { uid, makeDebugger, Trans } from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:ThreadsCell:index')
@@ -21,7 +22,7 @@ const debug = makeDebugger('c:ThreadsCell:index')
 const ThreadsCell = ({ data, source, onDelete, onAdd }) => (
   <Wrapper>
     {data.map(t => (
-      <Thread key={shortid.generate()}>
+      <Thread key={uid.gen()}>
         {Trans(t.raw)}
         <DeleteCross onClick={onDelete.bind(this, source.id, t)}>
           <Icon type="cross" />

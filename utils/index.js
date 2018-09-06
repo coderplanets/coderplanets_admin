@@ -5,6 +5,7 @@
 export { EVENT, ERR, TYPE, ROUTE, THREAD } from './constants'
 
 export { makeDebugger } from './debug'
+export { default as uid } from './uid'
 /*
  * utils functiosn
  */

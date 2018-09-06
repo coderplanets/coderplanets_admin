@@ -1,5 +1,4 @@
 import React from 'react'
-import shortid from 'shortid'
 
 import { ICON_ASSETS } from '../../config'
 import { A, Button, Icon } from '../../components'
@@ -16,11 +15,13 @@ import {
   EditIcon,
 } from './styles/user_header'
 
+import { uid } from '../../utils'
+
 const tooltipOffset = JSON.stringify({ top: 5, left: 3 })
 const SocalIcons = ({ accountInfo: { githubProfile } }) => (
   <BriefInfo>
     <div
-      key={shortid.generate()}
+      key={uid.gen()}
       data-tip="站内主页"
       data-offset={tooltipOffset}
       data-delay-show="500"
@@ -31,7 +32,7 @@ const SocalIcons = ({ accountInfo: { githubProfile } }) => (
     {githubProfile ? (
       <A href={githubProfile.htmlUrl}>
         <div
-          key={shortid.generate()}
+          key={uid.gen()}
           data-tip={githubProfile.htmlUrl}
           data-offset={tooltipOffset}
           data-delay-show="500"
