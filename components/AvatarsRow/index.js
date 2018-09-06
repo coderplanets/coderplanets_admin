@@ -6,16 +6,16 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
 import R from 'ramda'
 
-import { makeDebugger, prettyNum } from '../../utils'
 import { ATATARS_LIST_LENGTH } from '../../config/general'
 
 import { Tooltip } from '../../components'
 import { Avatars, AvatarsItem, AvatarsImg, AvatarsMore } from './styles'
 
 /* eslint-disable no-unused-vars */
+import { makeDebugger, prettyNum, uid } from '../../utils'
+
 const debug = makeDebugger('c:AvatarsRow:index')
 /* eslint-enable no-unused-vars */
 
@@ -45,10 +45,7 @@ const AvatarsRow = ({
       )}
 
       {R.slice(0, limit, R.reverse(users)).map(user => (
-        <AvatarsItem
-          key={shortid.generate()}
-          onClick={onUserSelect.bind(this, user)}
-        >
+        <AvatarsItem key={uid.gen()} onClick={onUserSelect.bind(this, user)}>
           <Tooltip title={user.nickname}>
             <AvatarsImg src={user.avatar} />
           </Tooltip>

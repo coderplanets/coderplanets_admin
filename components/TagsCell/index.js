@@ -7,7 +7,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import R from 'ramda'
-import shortid from 'shortid'
 
 import { ICON_ASSETS } from '../../config'
 
@@ -23,13 +22,12 @@ import {
   AddIcon,
 } from './styles'
 
+import { uid } from '../../utils'
+
 const TagsList = ({ source, onDelete }) => (
   <ListWrapper>
     {source.tags.map(c => (
-      <TagWrapper
-        key={shortid.generate()}
-        onClick={onDelete.bind(this, source.id, c)}
-      >
+      <TagWrapper key={uid.gen()} onClick={onDelete.bind(this, source.id, c)}>
         {c.title}
         <DeleteCross>x</DeleteCross>
       </TagWrapper>

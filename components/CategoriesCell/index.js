@@ -7,11 +7,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import R from 'ramda'
-import shortid from 'shortid'
 
 import { ICON_ASSETS } from '../../config'
 
 import { AdderCell, Icon } from '../../components'
+
 import {
   Wrapper,
   CategoryWrapper,
@@ -20,13 +20,14 @@ import {
   AddIcon,
 } from './styles'
 
+import { uid } from '../../utils'
 // import { inject, observer } from 'mobx-react'
 // import Link from 'next/link'
 
 const CategoriesList = ({ source, onDelete }) => (
   <CategoryWrapper>
     {source.categories.map(c => (
-      <CategoryTag key={shortid.generate()}>
+      <CategoryTag key={uid.gen()}>
         {c.title}
         <DeleteCross onClick={onDelete.bind(this, source.id, c)}>
           <Icon type="cross" />

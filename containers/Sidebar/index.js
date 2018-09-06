@@ -4,10 +4,8 @@
  *
  */
 import React from 'react'
-import shortid from 'shortid'
 import { inject, observer } from 'mobx-react'
 
-import { makeDebugger, storePlug } from '../../utils'
 import { ICON_ASSETS } from '../../config'
 
 import CommunityMenuItem from './CommunityMenuItem'
@@ -24,6 +22,8 @@ import {
 } from './styles'
 
 import { MenuItem } from './styles/menu'
+
+import { uid, makeDebugger, storePlug } from '../../utils'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
@@ -41,7 +41,7 @@ const MenuList = ({ items, activeRaw, activeThread }) => {
 
       {items.map(item => (
         <CommunityMenuItem
-          key={shortid.generate()}
+          key={uid.gen()}
           item={item}
           activeRaw={activeRaw}
           activeThread={activeThread}

@@ -7,13 +7,8 @@
 import React from 'react'
 import R from 'ramda'
 import { inject, observer } from 'mobx-react'
-import shortid from 'shortid'
 
-// import Link from 'next/link'
-
-import { makeDebugger, storePlug } from '../../utils'
 import { Pagi } from '../../components'
-import * as logic from './logic'
 
 import {
   Wrapper,
@@ -24,6 +19,9 @@ import {
   SetterTitle,
 } from './styles'
 
+import { uid, makeDebugger, storePlug } from '../../utils'
+import * as logic from './logic'
+
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('C:CommunitySetter')
 /* eslint-enable no-unused-vars */
@@ -32,7 +30,7 @@ const CommunitiesList = ({ thread, source, communities, selectedids }) => (
   <CategoryWrapper>
     {communities.map(c => (
       <CategoryTag
-        key={shortid.generate()}
+        key={uid.gen()}
         active={R.contains(c.id, selectedids)}
         onClick={logic.setCommunity.bind(this, thread, source.id, c.id)}
       >

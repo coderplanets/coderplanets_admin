@@ -7,7 +7,6 @@
 import React from 'react'
 import R from 'ramda'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
 import ReactTooltip from 'react-tooltip'
 
 import {
@@ -18,7 +17,7 @@ import {
 } from './styles'
 import { ICON_ASSETS } from '../../config'
 
-import { makeDebugger } from '../../utils'
+import { makeDebugger, uid } from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:CommunityMatrix:index')
@@ -30,7 +29,7 @@ const Communities = ({ list, onSelect, activeRaw, lens }) => (
   <React.Fragment>
     {list.map(c => (
       <div
-        key={shortid.generate()}
+        key={uid.gen()}
         onClick={onSelect.bind(this, c)}
         data-place="right"
         data-tip={c.title}

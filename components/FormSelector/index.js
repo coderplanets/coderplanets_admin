@@ -7,40 +7,37 @@
 import React from 'react'
 import R from 'ramda'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
-
 import { Select } from 'antd'
 
 import { FormItem } from '../../components'
-
-import { makeDebugger } from '../../utils'
 import { Note } from './styles'
+
+import { uid, makeDebugger } from '../../utils'
+
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:FormSelector:index')
 /* eslint-enable no-unused-vars */
 
 const { Option } = Select
 
-const FormSelector = ({ label, options, value, onChange, note }) => {
-  return (
-    <FormItem label={label}>
-      <React.Fragment>
-        <Select
-          defaultValue={value}
-          style={{ minWidth: 250 }}
-          onChange={onChange}
-        >
-          {options.map(v => (
-            <Option key={shortid.generate()} value={v}>
-              {v}
-            </Option>
-          ))}
-        </Select>
-        {R.isEmpty(note) ? <div /> : <Note>{note}</Note>}
-      </React.Fragment>
-    </FormItem>
-  )
-}
+const FormSelector = ({ label, options, value, onChange, note }) => (
+  <FormItem label={label}>
+    <React.Fragment>
+      <Select
+        defaultValue={value}
+        style={{ minWidth: 250 }}
+        onChange={onChange}
+      >
+        {options.map(v => (
+          <Option key={uid.gen()} value={v}>
+            {v}
+          </Option>
+        ))}
+      </Select>
+      {R.isEmpty(note) ? <div /> : <Note>{note}</Note>}
+    </React.Fragment>
+  </FormItem>
+)
 
 FormSelector.propTypes = {
   // https://www.npmjs.com/package/prop-types

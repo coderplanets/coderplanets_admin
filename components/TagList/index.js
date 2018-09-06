@@ -6,13 +6,14 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
+
+import { ICON_ASSETS } from '../../config'
 
 // import TagsLoading from '../../components/LoadingEffects/TagsLoading'
 import { Wrapper, TagItem, TagDot, TagTitle, AllTagIcon } from './styles'
 
-import { ICON_ASSETS } from '../../config'
-import { makeDebugger } from '../../utils'
+import { uid, makeDebugger } from '../../utils'
+
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:TagList:index')
 /* eslint-enable no-unused-vars */
@@ -39,7 +40,7 @@ const TagList = ({ tags, active, onSelect }) => {
 
       {tags.map(tag => (
         <TagItem
-          key={shortid.generate()}
+          key={uid.gen()}
           onClick={onSelect.bind(this, {
             title: tag.title,
             color: tag.color,

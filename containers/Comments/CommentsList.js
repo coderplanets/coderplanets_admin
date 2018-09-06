@@ -1,10 +1,8 @@
 import R from 'ramda'
 import React from 'react'
 import TimeAgo from 'timeago-react'
-import shortid from 'shortid'
 
 import { ICON_ASSETS } from '../../config'
-import { Global, prettyNum, makeDebugger } from '../../utils'
 
 import {
   AvatarsRow,
@@ -15,7 +13,6 @@ import {
   MarkDownPreviewer,
 } from '../../components'
 
-import * as logic from './logic'
 import CommentsFilter from './CommentsFilter'
 
 import {
@@ -51,6 +48,9 @@ import {
   ReplyToBody,
   ReplyToFloor,
 } from './styles/comments_list'
+
+import * as logic from './logic'
+import { uid, Global, prettyNum, makeDebugger } from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('C:CommentsList')
@@ -191,7 +191,7 @@ const Comment = ({ data, tobeDeleteId, accountInfo }) => (
 const Lists = ({ entries, tobeDeleteId, accountInfo }) => (
   <div>
     {entries.map(c => (
-      <div key={shortid.generate()}>
+      <div key={uid.gen()}>
         <Comment
           data={c}
           tobeDeleteId={tobeDeleteId}

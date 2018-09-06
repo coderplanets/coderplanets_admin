@@ -7,34 +7,30 @@
 import React from 'react'
 import R from 'ramda'
 import { inject, observer } from 'mobx-react'
-import shortid from 'shortid'
 
 // import Link from 'next/link'
-
-import { makeDebugger, storePlug } from '../../utils'
-import * as logic from './logic'
-
 import { Wrapper, Divider, ThreadsWrapper, ThreadTag } from './styles'
+
+import { uid, makeDebugger, storePlug } from '../../utils'
+import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('C:ThreadSetter')
 /* eslint-enable no-unused-vars */
 
-const ThreadsList = ({ communityId, threads, selectedids }) => {
-  return (
-    <ThreadsWrapper>
-      {threads.map(c => (
-        <ThreadTag
-          key={shortid.generate()}
-          active={R.contains(c.id, selectedids)}
-          onClick={logic.onAdd.bind(this, communityId, c.id, selectedids)}
-        >
-          {c.title}
-        </ThreadTag>
-      ))}
-    </ThreadsWrapper>
-  )
-}
+const ThreadsList = ({ communityId, threads, selectedids }) => (
+  <ThreadsWrapper>
+    {threads.map(c => (
+      <ThreadTag
+        key={uid.gen()}
+        active={R.contains(c.id, selectedids)}
+        onClick={logic.onAdd.bind(this, communityId, c.id, selectedids)}
+      >
+        {c.title}
+      </ThreadTag>
+    ))}
+  </ThreadsWrapper>
+)
 
 class ThreadSetterContainer extends React.Component {
   componentWillMount() {
