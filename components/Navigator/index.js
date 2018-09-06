@@ -7,24 +7,21 @@
 import React from 'react'
 // import PropTypes from 'prop-types'
 
-import { makeDebugger } from '../../utils'
-import { ICON_ASSETS } from '../../config'
-
+import { ICON_CMD } from '../../config'
 import { Breadcrumbs, Logo, LogoText, BetaLogo } from './style'
+import { makeDebugger } from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:Navigator:index')
 /* eslint-enable no-unused-vars */
 
-const Navigator = () => {
-  return (
-    <Breadcrumbs>
-      <Logo src={`${ICON_ASSETS}/cmd/rainbow_logo.svg`} />
-      <LogoText>coderplanets</LogoText>
-      <BetaLogo src={`${ICON_ASSETS}/cmd/beta.svg`} />
-    </Breadcrumbs>
-  )
-}
+const Navigator = () => (
+  <Breadcrumbs>
+    <Logo src={`${ICON_CMD}/rainbow_logo.svg`} />
+    <LogoText>coderplanets</LogoText>
+    <BetaLogo src={`${ICON_CMD}/beta.svg`} />
+  </Breadcrumbs>
+)
 
 /*
 Navigator.propTypes = {

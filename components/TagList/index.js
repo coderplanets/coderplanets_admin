@@ -7,11 +7,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { ICON_ASSETS } from '../../config'
-
-// import TagsLoading from '../../components/LoadingEffects/TagsLoading'
+import { ICON_CMD } from '../../config'
 import { Wrapper, TagItem, TagDot, TagTitle, AllTagIcon } from './styles'
-
 import { uid, makeDebugger } from '../../utils'
 
 /* eslint-disable no-unused-vars */
@@ -31,7 +28,7 @@ const TagList = ({ tags, active, onSelect }) => {
             color: '',
           })}
         >
-          <AllTagIcon src={`${ICON_ASSETS}/cmd/all_tags.svg`} />
+          <AllTagIcon src={`${ICON_CMD}/all_tags.svg`} />
           <TagTitle>全部标签</TagTitle>
         </TagItem>
       ) : (

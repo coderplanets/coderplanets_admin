@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { Img } from '../../components'
 
-import { ICON_ASSETS } from '../../config'
+import { ICON_CMD } from '../../config'
 import { Animate } from '../../utils'
 
 const LoadingWrapper = styled.div`
@@ -24,7 +24,7 @@ const LoadingText = styled.div`
 
 const TableLoading = () => (
   <LoadingWrapper>
-    <LoadingIcon src={`${ICON_ASSETS}/cmd/rainbow_logo.svg`} />
+    <LoadingIcon src={`${ICON_CMD}/rainbow_logo.svg`} />
     <LoadingText>... 漫威的编剧真心可以 ...</LoadingText>
   </LoadingWrapper>
 )

@@ -5,18 +5,13 @@
  */
 
 import React from 'react'
-// import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
 
-// import ContentInput from './ContentInput'
-import { ICON_ASSETS } from '../../config'
+import { ICON_CMD } from '../../config'
 
 import Editor from './Editor'
 import Preview from './Preview'
 import MarkDownHelper from './MarkDownHelper'
-import { makeDebugger, storePlug } from '../../utils'
-import * as logic from './logic'
-
 import Footer from './Footer'
 
 import {
@@ -29,6 +24,9 @@ import {
   MarkDownHint,
   BackToEditHint,
 } from './styles'
+
+import { makeDebugger, storePlug } from '../../utils'
+import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('C:TypeWriter')
@@ -113,7 +111,7 @@ const TopHeader = ({ curView }) => {
         <Header>
           <UsageText>Github Flavor Markdown</UsageText>
           <BackToEditHint onClick={logic.changeView.bind(this, 'CREATE_VIEW')}>
-            <MarkdownIcon src={`${ICON_ASSETS}/cmd/original.svg`} />
+            <MarkdownIcon src={`${ICON_CMD}/original.svg`} />
             返回编辑
           </BackToEditHint>
         </Header>
@@ -126,7 +124,7 @@ const TopHeader = ({ curView }) => {
           <MarkDownHint
             onClick={logic.changeView.bind(this, 'MARKDOWN_HELP_VIEW')}
           >
-            <MarkdownIcon src={`${ICON_ASSETS}/cmd/markdown.svg`} />
+            <MarkdownIcon src={`${ICON_CMD}/markdown.svg`} />
             markdown 语法 / emojj 速查
           </MarkDownHint>
         </Header>

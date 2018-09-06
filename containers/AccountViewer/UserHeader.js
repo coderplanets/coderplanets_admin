@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ICON_ASSETS } from '../../config'
+import { ICON_CMD } from '../../config'
 import { A, Button, Icon } from '../../components'
 
 import {
@@ -26,7 +26,7 @@ const SocalIcons = ({ accountInfo: { githubProfile } }) => (
       data-offset={tooltipOffset}
       data-delay-show="500"
     >
-      <SocalIcon src={`${ICON_ASSETS}/cmd/home.svg`} />
+      <SocalIcon src={`${ICON_CMD}/home.svg`} />
     </div>
 
     {githubProfile ? (
@@ -37,7 +37,7 @@ const SocalIcons = ({ accountInfo: { githubProfile } }) => (
           data-offset={tooltipOffset}
           data-delay-show="500"
         >
-          <SocalIcon src={`${ICON_ASSETS}/cmd/github.svg`} />
+          <SocalIcon src={`${ICON_CMD}/github.svg`} />
         </div>
       </A>
     ) : (
@@ -57,7 +57,7 @@ const UserHeaderSection = ({ accountInfo, logout, editProfile }) => (
             {accountInfo.nickname}
             {/* eslint-disable */}
             <div onClick={editProfile}>
-              <EditIcon src={`${ICON_ASSETS}/cmd/edit.svg`} />
+              <EditIcon src={`${ICON_CMD}/edit.svg`} />
             </div>
             {/* eslint-enable */}
           </UserName>

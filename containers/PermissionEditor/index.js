@@ -9,7 +9,7 @@ import { inject, observer } from 'mobx-react'
 import R from 'ramda'
 import ReactTooltip from 'react-tooltip'
 
-import { ICON_ASSETS } from '../../config'
+import { ICON_CMD } from '../../config'
 
 import {
   UserCell,
@@ -40,8 +40,8 @@ import {
   mapValue,
   objToArray,
 } from '../../utils'
-
 import * as logic from './logic'
+
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('C:PermissionEditor')
 /* eslint-enable no-unused-vars */
@@ -74,7 +74,7 @@ const CommunitiesMatrix = ({ data, userRules, activeRaw }) => {
 }
 
 const CheckMark = ({ active }) => {
-  return <CheckIcon src={`${ICON_ASSETS}/cmd/check.svg`} active={active} />
+  return <CheckIcon src={`${ICON_CMD}/check.svg`} active={active} />
 }
 
 const getJson = value => {

@@ -7,7 +7,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { ICON_ASSETS } from '../../config'
+import { ICON_CMD } from '../../config'
 
 import { makeDebugger } from '../../utils'
 import { AddWrapper, AddIcon, AddText } from './styles'
@@ -18,7 +18,7 @@ const debug = makeDebugger('c:AdderCell:index')
 
 const AdderCell = ({ onAdd }) => (
   <AddWrapper onClick={onAdd}>
-    <AddIcon src={`${ICON_ASSETS}/cmd/plus.svg`} />
+    <AddIcon src={`${ICON_CMD}/plus.svg`} />
     <AddText>添加</AddText>
   </AddWrapper>
 )

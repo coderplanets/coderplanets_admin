@@ -1,8 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-import { ROUTE } from '../../utils'
-import { ICON_ASSETS } from '../../config'
+import { ICON_CMD } from '../../config'
 
 import {
   MenuRow,
@@ -17,6 +16,7 @@ import {
   ChildrenNum,
 } from './styles/menu'
 
+import { ROUTE } from '../../utils'
 import * as logic from './logic'
 
 const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
@@ -64,7 +64,7 @@ const UsersItemBar = ({ activeRaw, curRaw }) => (
         active={activeRaw === curRaw}
         onClick={logic.extendMenuBar.bind(this, ROUTE.USERS_RAW)}
       >
-        <MenuCommunitiesIcon src={`${ICON_ASSETS}/cmd/users.svg`} />
+        <MenuCommunitiesIcon src={`${ICON_CMD}/users.svg`} />
         <div style={{ marginRight: 10 }} />
         {/* eslint-disable jsx-a11y/anchor-is-valid */}
         <MenuTitle>所有用户</MenuTitle>

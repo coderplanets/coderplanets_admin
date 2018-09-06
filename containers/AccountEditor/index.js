@@ -7,11 +7,9 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 
-import { ICON_ASSETS } from '../../config'
+import { ICON_CMD } from '../../config'
 // import Link from 'next/link'
 
-import { makeDebugger, storePlug } from '../../utils'
-import * as logic from './logic'
 import { Input, Button, Icon, StatusBox } from '../../components'
 
 import {
@@ -31,6 +29,9 @@ import {
   GirlIcon,
 } from './styles'
 
+import { makeDebugger, storePlug } from '../../utils'
+import * as logic from './logic'
+
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('C:AccountEditor')
 /* eslint-enable no-unused-vars */
@@ -48,10 +49,10 @@ const SexItem = ({ label, value }) => (
     <SexLable>{label}</SexLable>
     <SexInput>
       <Dude onClick={logic.sexChange.bind(this, 'dude')}>
-        <DudeIcon src={`${ICON_ASSETS}/cmd/dude.svg`} value={value} />
+        <DudeIcon src={`${ICON_CMD}/dude.svg`} value={value} />
       </Dude>
       <Girl onClick={logic.sexChange.bind(this, 'girl')}>
-        <GirlIcon src={`${ICON_ASSETS}/cmd/girl.svg`} value={value} />
+        <GirlIcon src={`${ICON_CMD}/girl.svg`} value={value} />
       </Girl>
     </SexInput>
   </FormItemWrapper>
@@ -97,7 +98,7 @@ class AccountEditorContainer extends React.Component {
       <Wrapper>
         {/* eslint-disable */}
         <div onClick={logic.goBack}>
-          <BackIcon src={`${ICON_ASSETS}/cmd/goback.svg`} />
+          <BackIcon src={`${ICON_CMD}/goback.svg`} />
         </div>
         {/* eslint-enable */}
         <Avatar src={accountInfo.avatar} />

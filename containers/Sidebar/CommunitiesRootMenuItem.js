@@ -1,7 +1,6 @@
 import React from 'react'
 
-import { ROUTE } from '../../utils'
-import { ICON_ASSETS } from '../../config'
+import { ICON_CMD } from '../../config'
 
 import {
   MenuRow,
@@ -16,6 +15,7 @@ import {
   ChildrenNum,
 } from './styles/menu'
 
+import { ROUTE } from '../../utils'
 import * as logic from './logic'
 
 const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
@@ -94,7 +94,7 @@ const CommunitiesItemBar = ({ active }) => (
         active={active}
         onClick={logic.extendMenuBar.bind(this, ROUTE.COMMUNITIES)}
       >
-        <MenuCommunitiesIcon src={`${ICON_ASSETS}/cmd/all.svg`} />
+        <MenuCommunitiesIcon src={`${ICON_CMD}/all.svg`} />
         <div style={{ marginRight: 10 }} />
         {/* eslint-disable jsx-a11y/anchor-is-valid */}
         <MenuTitle>所有社区</MenuTitle>

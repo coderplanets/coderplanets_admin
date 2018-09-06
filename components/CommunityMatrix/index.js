@@ -9,13 +9,14 @@ import R from 'ramda'
 import PropTypes from 'prop-types'
 import ReactTooltip from 'react-tooltip'
 
+import { ICON_CMD } from '../../config'
+
 import {
   MatrixWrapper,
   CommunityLogo,
   GeneralPLogo,
   AddOnWrapper,
 } from './styles'
-import { ICON_ASSETS } from '../../config'
 
 import { makeDebugger, uid } from '../../utils'
 
@@ -84,7 +85,7 @@ class CommunityMatrix extends React.Component {
           onClick={onAddOnSelect}
           show={hasAddon}
         >
-          <GeneralPLogo src={`${ICON_ASSETS}/cmd/all.svg`} />
+          <GeneralPLogo src={`${ICON_CMD}/all.svg`} />
         </AddOnWrapper>
       </MatrixWrapper>
     )
