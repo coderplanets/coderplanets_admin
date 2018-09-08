@@ -22,33 +22,24 @@ const sr71$ = new SR71()
 const debug = makeDebugger('L:TypeWriter')
 /* eslint-enable no-unused-vars */
 
-let typeWriter = null
+let store = null
 
 export function copyrightChange(articleType) {
-  typeWriter.markState({
-    articleType,
-  })
+  store.markState({ articleType })
 }
 
 export function changeView(curView) {
-  typeWriter.markState({
-    curView,
-  })
+  store.markState({ curView })
 }
 
 function checkValid() {
-  const { body, title, articleType, linkAddr } = typeWriter
+  const { body, title, articleType, linkAddr } = store
   if (isEmptyValue(body) || isEmptyValue(title)) {
-    meteorState(typeWriter, 'error', 5, '文章标题 或 文章内容 不能为空')
+    meteorState(store, 'error', 5, '文章标题 或 文章内容 不能为空')
     return false
   }
   if (articleType !== 'original' && isEmptyValue(linkAddr)) {
-    meteorState(
-      typeWriter,
-      'error',
-      5,
-      '请填写完整地址以方便跳转, http(s)://...'
-    )
+    meteorState(store, 'error', 5, '请填写完整地址以方便跳转, http(s)://...')
     return false
   }
   return true
@@ -83,8 +74,8 @@ const getDigest = body => {
 }
 // TODO move specfical logic outof here
 export function onPublish() {
-  // debug('onPublish: ', typeWriter.body)
-  const { body, title, articleType } = typeWriter
+  // debug('onPublish: ', store.body)
+  const { body, title, articleType } = store
   if (checkValid()) {
     publishing()
 
@@ -96,11 +87,11 @@ export function onPublish() {
       body,
       digest,
       length,
-      community: typeWriter.curCommunity.title,
+      community: store.curCommunity.title,
     }
 
-    if (articleType !== 'original') variables.linkAddr = typeWriter.linkAddr
-    // debug('curCommunity: ', typeWriter.curCommunityName)
+    if (articleType !== 'original') variables.linkAddr = store.linkAddr
+    // debug('curCommunity: ', store.curCommunityName)
     // debug('variables-: ', variables)
     sr71$.mutate(S.createPost, variables)
   }
@@ -109,33 +100,25 @@ export function onPublish() {
 export const canclePublish = () => {
   debug('canclePublish')
   cancleLoading()
-  // typeWriter.reset()
-  typeWriter.closePreview()
+  // store.reset()
+  store.closePreview()
 }
 
 export function bodyOnChange(body) {
   // debug('editorOnChange: ', body)
-  typeWriter.markState({
-    body,
-  })
+  store.markState({ body })
 }
 
 export function titleOnChange(e) {
-  typeWriter.markState({
-    title: e.target.value,
-  })
+  store.markState({ title: e.target.value })
 }
 
 export function linkSourceOnChange(e) {
-  typeWriter.markState({
-    linkAddr: e.target.value,
-  })
+  store.markState({ linkAddr: e.target.value })
 }
 
 function publishing(maybe = true) {
-  typeWriter.markState({
-    publishing: maybe,
-  })
+  store.markState({ publishing: maybe })
 }
 
 const DataSolver = [
@@ -143,8 +126,8 @@ const DataSolver = [
     match: asyncRes('createPost'),
     action: () => {
       cancleLoading()
-      typeWriter.reset()
-      typeWriter.closePreview()
+      store.reset()
+      store.closePreview()
       dispatchEvent(EVENT.REFRESH_POSTS)
       // 1. empty the store
       // 2. close the preview
@@ -157,11 +140,7 @@ const DataSolver = [
   },
 ]
 
-const cancleLoading = () => {
-  typeWriter.markState({
-    publishing: false,
-  })
-}
+const cancleLoading = () => store.markState({ publishing: false })
 
 const ErrSolver = [
   {
@@ -169,7 +148,7 @@ const ErrSolver = [
     action: ({ details }) => {
       const errMsg = details[0].detail
       debug('ERR.CRAPHQL -->', details)
-      meteorState(typeWriter, 'error', 5, errMsg)
+      meteorState(store, 'error', 5, errMsg)
       cancleLoading()
     },
   },
@@ -190,6 +169,6 @@ const ErrSolver = [
 ]
 
 export function init(selectedStore) {
-  typeWriter = selectedStore
+  store = selectedStore
   sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 }

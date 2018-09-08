@@ -22,7 +22,7 @@ const sr71$ = new SR71({
 const debug = makeDebugger('L:communitiesBanner')
 /* eslint-enable no-unused-vars */
 
-let communitiesBanner = null
+let store = null
 
 export function loadCommunities() {
   sr71$.query(S.pagedCommunities, { filter: {} })
@@ -73,45 +73,32 @@ const DataSolver = [
   {
     match: asyncRes('pagedCommunities'),
     action: ({ pagedCommunities: { totalCount } }) =>
-      communitiesBanner.markState({
-        totalCount,
-      }),
+      store.markState({ totalCount }),
   },
   {
     match: asyncRes('pagedTags'),
     action: ({ pagedTags: { totalCount } }) =>
-      communitiesBanner.markState({
-        tagsTotalCount: totalCount,
-      }),
+      store.markState({ tagsTotalCount: totalCount }),
   },
   {
     match: asyncRes('pagedThreads'),
     action: ({ pagedThreads: { totalCount } }) =>
-      communitiesBanner.markState({
-        threadsTotalCount: totalCount,
-      }),
+      store.markState({ threadsTotalCount: totalCount }),
   },
   {
     match: asyncRes('pagedCategories'),
-    action: ({ pagedCategories: { totalCount } }) => {
-      communitiesBanner.markState({
-        categoriesTotalCount: totalCount,
-      })
-    },
+    action: ({ pagedCategories: { totalCount } }) =>
+      store.markState({ categoriesTotalCount: totalCount }),
   },
   {
     match: asyncRes('pagedPosts'),
-    action: ({ pagedPosts: { totalCount } }) =>
-      communitiesBanner.markState({
-        postsTotalCount: totalCount,
-      }),
+    action: ({ pagedPosts: { totalCount: postsTotalCount } }) =>
+      store.markState({ postsTotalCount }),
   },
   {
     match: asyncRes('pagedJobs'),
-    action: ({ pagedJobs: { totalCount } }) =>
-      communitiesBanner.markState({
-        jobsTotalCount: totalCount,
-      }),
+    action: ({ pagedJobs: { totalCount: jobsTotalCount } }) =>
+      store.markState({ jobsTotalCount }),
   },
   {
     match: asyncRes(EVENT.PREVIEW_CLOSE),
@@ -158,6 +145,6 @@ const ErrSolver = [
 ]
 
 export function init(selectedStore) {
-  communitiesBanner = selectedStore
+  store = selectedStore
   sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 }

@@ -12,7 +12,7 @@ let sub$ = null
 const debug = makeDebugger('L:CommunityBanner')
 /* eslint-enable no-unused-vars */
 
-let communityBanner = null
+let store = null
 
 export function loadPosts() {
   sr71$.query(S.pagedPosts, { filter: {} })
@@ -34,26 +34,21 @@ export function onAdd() {}
 const DataSolver = [
   {
     match: asyncRes('pagedPosts'),
-    action: ({ pagedPosts: { totalCount } }) => {
-      return communityBanner.markState({
-        postsTotalCount: totalCount,
-      })
-    },
+    action: ({ pagedPosts: { totalCount: postsTotalCount } }) =>
+      store.markState({ postsTotalCount }),
   },
   {
     match: asyncRes('tags'),
-    action: ({ tags: { totalCount } }) => {
-      communityBanner.markState({
-        tagsTotalCount: totalCount,
-      })
+    action: ({ tags: { totalCount: tagsTotalCount } }) => {
+      store.markState({ tagsTotalCount })
     },
   },
 ]
 const ErrSolver = []
 
 export function init(selectedStore) {
-  communityBanner = selectedStore
-  debug(communityBanner)
+  store = selectedStore
+
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 }
