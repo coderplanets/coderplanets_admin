@@ -19,7 +19,7 @@ let sub$ = null
 const debug = makeDebugger('L:CategorySetter')
 /* eslint-enable no-unused-vars */
 
-let categorySetter = null
+let store = null
 
 const commonFilter = page => {
   const size = PAGE_SIZE.COMMON
@@ -46,7 +46,7 @@ const DataSolver = [
   {
     match: asyncRes('pagedCategories'),
     action: ({ pagedCategories }) =>
-      categorySetter.markState({
+      store.markState({
         pagedCategories,
       }),
   },
@@ -59,7 +59,7 @@ const DataSolver = [
 const ErrSolver = []
 
 export function init(selectedStore) {
-  categorySetter = selectedStore
+  store = selectedStore
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 

@@ -24,7 +24,7 @@ let sub$ = null
 const debug = makeDebugger('L:PermissionEditor')
 /* eslint-enable no-unused-vars */
 
-let permissionEditor = null
+let store = null
 
 const commonFilter = page => {
   const size = PAGE_SIZE.COMMON + 10
@@ -34,14 +34,14 @@ const commonFilter = page => {
 }
 
 export function communitySelect(community) {
-  permissionEditor.markState({
+  store.markState({
     curView: 'community',
     curCommunityRaw: community.raw,
   })
 }
 
 export function communityAddOnSelect() {
-  permissionEditor.markState({
+  store.markState({
     curView: 'general',
     curCommunityRaw: 'general',
   })
@@ -49,8 +49,8 @@ export function communityAddOnSelect() {
 
 export function onRuleClick(rule) {
   /* let selectRules = JSON.parse(permissionEditor.selectRules) */
-  const { curCommunityRaw } = permissionEditor
-  let { selectRulesData } = permissionEditor
+  const { curCommunityRaw } = store
+  let { selectRulesData } = store
 
   if (curCommunityRaw === 'general') {
     selectRulesData = R.merge(selectRulesData, {
@@ -66,7 +66,7 @@ export function onRuleClick(rule) {
     selectRulesData = R.merge(selectRulesData, curCommunitySelectRules)
   }
 
-  permissionEditor.markState({
+  store.markState({
     selectRules: JSON.stringify(selectRulesData),
   })
 }
@@ -80,12 +80,12 @@ export function getAllRules() {
 }
 
 export function confirm(userId) {
-  const rules = permissionEditor.selectRules
+  const rules = store.selectRules
   sr71$.mutate(S.stampCmsPassport, { userId, rules })
 }
 
 const cleanUp = () => {
-  permissionEditor.markState({
+  store.markState({
     selectRules: '{}',
     curView: 'general',
     curCommunityRaw: 'general',
@@ -104,41 +104,30 @@ export function onCancle() {
 const DataSolver = [
   {
     match: asyncRes('pagedCommunities'),
-    action: ({ pagedCommunities }) => {
-      permissionEditor.markState({
-        pagedCommunities,
-      })
-    },
+    action: ({ pagedCommunities }) => store.markState({ pagedCommunities }),
   },
   {
     match: asyncRes('allPassportRulesString'),
-    action: ({ allPassportRulesString }) => {
-      permissionEditor.markState({
-        allRules: allPassportRulesString,
-      })
-    },
+    action: ({ allPassportRulesString: allRules }) =>
+      store.markState({ allRules }),
   },
   {
     match: asyncRes('stampCmsPassport'),
     action: () => {
       closePreviewer(TYPE.USERS_REFRESH)
-      permissionEditor.markState({
-        selectRules: '{}',
-      })
+      store.markState({ selectRules: '{}' })
     },
   },
   {
     match: asyncRes(EVENT.PREVIEW_CLOSED),
-    action: () => {
-      cleanUp()
-    },
+    action: () => cleanUp(),
   },
 ]
 const ErrSolver = []
 
 export function init(selectedStore) {
-  permissionEditor = selectedStore
-  debug(permissionEditor)
+  store = selectedStore
+  debug(store)
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 

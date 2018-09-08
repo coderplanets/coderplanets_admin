@@ -21,7 +21,7 @@ let sub$ = null
 const debug = makeDebugger('L:TagEditor')
 /* eslint-enable no-unused-vars */
 
-let tagEditor = null
+let store = null
 
 const commonFilter = page => {
   const size = PAGE_SIZE.COMMON + 10
@@ -35,37 +35,28 @@ export function getAllCommunities(page = 1) {
 }
 
 export const profileChange = R.curry((thread, e) =>
-  tagEditor.updateTag({
+  store.updateTag({
     [thread]: e.target.value,
   })
 )
 
-export const colorChange = color =>
-  tagEditor.updateTag({
-    color,
-  })
+export const colorChange = color => store.updateTag({ color })
 
-export const threadChange = thread =>
-  tagEditor.updateTag({
-    thread,
-  })
+export const threadChange = thread => store.updateTag({ thread })
 
-export const communityChange = community =>
-  tagEditor.updateTag({
-    community,
-  })
+export const communityChange = community => store.updateTag({ community })
 
 export const mutateConfirm = () => {
   const requiredArgs = ['id', 'title', 'color', 'thread', 'community']
-  const args = { ...tagEditor.tagData }
+  const args = { ...store.tagData }
 
-  tagEditor.markState({ mutating: true })
+  store.markState({ mutating: true })
   const fargs = castArgs(args, requiredArgs)
 
   fargs.color = R.toUpper(fargs.color)
   fargs.communityId = fargs.community.id
 
-  if (tagEditor.isEdit) {
+  if (store.isEdit) {
     return sr71$.mutate(S.updateTag, fargs)
   }
 
@@ -74,14 +65,14 @@ export const mutateConfirm = () => {
 }
 
 const initEditData = editData => {
-  tagEditor.markState({
+  store.markState({
     tag: editData,
     isEdit: true,
   })
 }
 
 export function cancleMutate() {
-  tagEditor.markState({
+  store.markState({
     tag: {},
     isEdit: false,
   })
@@ -103,17 +94,14 @@ const DataSolver = [
   },
   {
     match: asyncRes('pagedCommunities'),
-    action: ({ pagedCommunities }) =>
-      tagEditor.markState({
-        pagedCommunities,
-      }),
+    action: ({ pagedCommunities }) => store.markState({ pagedCommunities }),
   },
 ]
 
 const ErrSolver = []
 
 export function init(selectedStore, editData) {
-  tagEditor = selectedStore
+  store = selectedStore
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 

@@ -30,7 +30,7 @@ const sr71$ = new SR71({
 const debug = makeDebugger('L:CommunitiesContent')
 /* eslint-enable no-unused-vars */
 
-let communitiesContent = null
+let store = null
 
 const commonFilter = page => {
   const size = PAGE_SIZE.COMMON
@@ -46,10 +46,8 @@ export function loadCommunities(page = 1) {
   }
   scrollIntoEle(TYPE.APP_HEADER_ID)
 
-  communitiesContent.markState({ communitiesLoading: true })
-
-  communitiesContent.markRoute({ page })
-  /* const { route } = communitiesContent */
+  store.markState({ communitiesLoading: true })
+  store.markRoute({ page })
 
   /* args.filter = R.merge(args.filter, route.query) */
   sr71$.query(S.pagedCommunities, args)
@@ -58,17 +56,17 @@ export function loadCommunities(page = 1) {
 export function loadCategories(page = 1) {
   scrollIntoEle(TYPE.APP_HEADER_ID)
   /* const size = PAGE_SIZE.COMMON */
-  communitiesContent.markRoute({ page })
+  store.markRoute({ page })
+  store.markState({ categoriessLoading: true })
 
-  communitiesContent.markState({ categoriessLoading: true })
   sr71$.query(S.pagedCategories, commonFilter(page))
 }
 
 export function loadTags(page = 1) {
   scrollIntoEle(TYPE.APP_HEADER_ID)
 
-  communitiesContent.markRoute({ page })
-  communitiesContent.markState({ tagsLoading: true })
+  store.markRoute({ page })
+  store.markState({ tagsLoading: true })
 
   sr71$.query(S.pagedTags, commonFilter(page))
 }
@@ -76,9 +74,9 @@ export function loadTags(page = 1) {
 export function loadThreads(page = 1) {
   /* const size = PAGE_SIZE.COMMON */
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  communitiesContent.markRoute({ page })
-  /*  */
-  communitiesContent.markState({ tagsLoading: true })
+  store.markRoute({ page })
+  store.markState({ tagsLoading: true })
+
   sr71$.query(S.pagedThreads, commonFilter(page))
 }
 
@@ -88,7 +86,8 @@ export function loadPosts(page = 1) {
     filter: { page, size },
   }
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  communitiesContent.markState({ postsLoading: true })
+  store.markState({ postsLoading: true })
+
   sr71$.query(S.pagedPosts, args)
 }
 
@@ -98,26 +97,27 @@ export function loadJobs(page = 1) {
     filter: { page, size },
   }
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  communitiesContent.markState({ jobsLoading: true })
+  store.markState({ jobsLoading: true })
+
   sr71$.query(S.pagedJobs, args)
 }
 
 export function loadCommunitiesIfOnClient() {
-  if (!communitiesContent.pagedCommunities) {
+  if (!store.pagedCommunities) {
     debug('loadCommunitiesIfOnClient')
     loadCommunities()
   }
 }
 
 export function loadTagsIfOnClient() {
-  if (!communitiesContent.pagedTags) {
+  if (!store.pagedTags) {
     debug('loadTagsIfOnClient')
     loadTags()
   }
 }
 
 export function loadThreadsIfOnClient() {
-  if (!communitiesContent.pagedThreads) {
+  if (!store.pagedThreads) {
     debug('loadThreadsIfOnClient')
     loadThreads()
   }
@@ -230,7 +230,7 @@ export function unsetTag(threadId, tag) {
 
 /* when error occured cancle all the loading state */
 const cancleLoading = () => {
-  communitiesContent.markState({
+  store.markState({
     communitiesLoading: false,
     postsLoading: false,
     jobsLoading: false,
@@ -249,54 +249,42 @@ const DataSolver = [
         pagedCommunities.pageNumber
       )
 
-      communitiesContent.markState({
-        pagedCommunities,
-      })
+      store.markState({ pagedCommunities })
     },
   },
   {
     match: asyncRes('pagedTags'),
     action: ({ pagedTags }) => {
       cancleLoading()
-      communitiesContent.markState({
-        pagedTags,
-      })
+      store.markState({ pagedTags })
     },
   },
   {
     match: asyncRes('pagedThreads'),
     action: ({ pagedThreads }) => {
       cancleLoading()
-      communitiesContent.markState({
-        pagedThreads,
-      })
+      store.markState({ pagedThreads })
     },
   },
   {
     match: asyncRes('pagedPosts'),
     action: ({ pagedPosts }) => {
       cancleLoading()
-      communitiesContent.markState({
-        pagedPosts,
-      })
+      store.markState({ pagedPosts })
     },
   },
   {
     match: asyncRes('pagedJobs'),
     action: ({ pagedJobs }) => {
       cancleLoading()
-      communitiesContent.markState({
-        pagedJobs,
-      })
+      store.markState({ pagedJobs })
     },
   },
   {
     match: asyncRes('pagedCategories'),
     action: ({ pagedCategories }) => {
       cancleLoading()
-      communitiesContent.markState({
-        pagedCategories,
-      })
+      store.markState({ pagedCategories })
     },
   },
   {
@@ -308,11 +296,11 @@ const DataSolver = [
     action: () => {
       switch (CurThread) {
         case THREAD.JOB: {
-          const { pageNumber } = communitiesContent.pagedJobsData
+          const { pageNumber } = store.pagedJobsData
           return loadJobs(pageNumber)
         }
         default: {
-          const { pageNumber } = communitiesContent.pagedPostsData
+          const { pageNumber } = store.pagedPostsData
           return loadPosts(pageNumber)
         }
       }
@@ -353,23 +341,23 @@ const DataSolver = [
       debug('PREVIEW_CLOSE --> ', closeType)
       switch (closeType) {
         case TYPE.COMMUNITIES_REFRESH: {
-          const { pageNumber } = communitiesContent.pagedCommunitiesData
+          const { pageNumber } = store.pagedCommunitiesData
           return loadCommunities(pageNumber)
         }
         case TYPE.TAGS_REFRESH: {
-          const { pageNumber } = communitiesContent.pagedTagsData
+          const { pageNumber } = store.pagedTagsData
           return loadTags(pageNumber)
         }
         case TYPE.GATEGORIES_REFRESH: {
-          const { pageNumber } = communitiesContent.pagedCategoriesData
+          const { pageNumber } = store.pagedCategoriesData
           return loadCategories(pageNumber)
         }
         case TYPE.POSTS_CONTENT_REFRESH: {
-          const { pageNumber } = communitiesContent.pagedPostsData
+          const { pageNumber } = store.pagedPostsData
           return loadPosts(pageNumber)
         }
         case TYPE.JOBS_CONTENT_REFRESH: {
-          const { pageNumber } = communitiesContent.pagedJobsData
+          const { pageNumber } = store.pagedJobsData
           return loadJobs(pageNumber)
         }
         default: {
@@ -407,8 +395,8 @@ const ErrSolver = [
 ]
 
 export function init(selectedStore) {
-  if (communitiesContent) return false
-  communitiesContent = selectedStore
+  if (store) return false
+  store = selectedStore
 
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
