@@ -18,22 +18,22 @@ let sub$ = null
 const debug = makeDebugger('L:CategoryEditor')
 /* eslint-enable no-unused-vars */
 
-let categoryEditor = null
+let store = null
 
 export const profileChange = R.curry((thread, e) =>
-  categoryEditor.updateCategory({
+  store.updateCategory({
     [thread]: e.target.value,
   })
 )
 
 export const mutateConfirm = () => {
   const requiredArgs = ['title', 'raw']
-  const args = { ...categoryEditor.categoryData }
+  const args = { ...store.categoryData }
 
-  categoryEditor.markState({ mutating: true })
+  store.markState({ mutating: true })
   const fargs = castArgs(args, requiredArgs)
 
-  if (categoryEditor.isEdit) {
+  if (store.isEdit) {
     return sr71$.mutate(
       S.updateCategory,
       castArgs(args, ['id', ...requiredArgs])
@@ -44,19 +44,15 @@ export const mutateConfirm = () => {
 }
 
 export function cancleMutate() {
-  categoryEditor.markState({
+  store.markState({
     category: {},
     isEdit: false,
   })
   closePreviewer()
 }
 
-const initEditData = editData => {
-  categoryEditor.markState({
-    category: editData,
-    isEdit: true,
-  })
-}
+const initEditData = editData =>
+  store.markState({ category: editData, isEdit: true })
 
 // ###############################
 // Data & Error handlers
@@ -64,23 +60,18 @@ const initEditData = editData => {
 const DataSolver = [
   {
     match: asyncRes('createCategory'),
-    action: () => {
-      closePreviewer(TYPE.GATEGORIES_REFRESH)
-    },
+    action: () => closePreviewer(TYPE.GATEGORIES_REFRESH),
   },
   {
     match: asyncRes('updateCategory'),
-    action: () => {
-      closePreviewer(TYPE.GATEGORIES_REFRESH)
-    },
+    action: () => closePreviewer(TYPE.GATEGORIES_REFRESH),
   },
 ]
 
 const ErrSolver = []
 
 export function init(selectedStore, editData) {
-  categoryEditor = selectedStore
-  debug(categoryEditor)
+  store = selectedStore
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 

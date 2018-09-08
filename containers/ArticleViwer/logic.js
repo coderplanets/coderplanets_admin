@@ -12,7 +12,7 @@ const sr71$ = new SR71({
 const debug = makeDebugger('L:ArticleViwer')
 /* eslint-enable no-unused-vars */
 
-let articleViwer = null
+let store = null
 let sub$ = null
 
 export function onReaction(type, action, isUndo, data) {
@@ -27,9 +27,7 @@ export function onReaction(type, action, isUndo, data) {
 }
 
 function loading(maybe = true) {
-  articleViwer.markState({
-    postLoading: maybe,
-  })
+  store.markState({ postLoading: maybe })
 }
 
 function queryPost(data) {
@@ -56,7 +54,7 @@ const dataResolver = [
       const info = res[EVENT.PREVIEW_POST]
       /* debug('EVENT.PREVIEW_POST: ', res[EVENT.PREVIEW_POST]) */
       if (info.type === TYPE.POST) {
-        articleViwer.load(TYPE.POST, res[EVENT.PREVIEW_POST].data)
+        store.load(TYPE.POST, res[EVENT.PREVIEW_POST].data)
         loading()
         queryPost(info.data)
       }
@@ -86,14 +84,14 @@ const dataResolver = [
     action: () => {
       // TODO: test
       sr71$.stop()
-      articleViwer.load(TYPE.POST, {})
+      store.load(TYPE.POST, {})
       loading(false)
     },
   },
   {
     match: asyncRes(R.toLower(TYPE.POST)), // GraphQL return
     action: res => {
-      articleViwer.load(TYPE.POST, res[R.toLower(TYPE.POST)])
+      store.load(TYPE.POST, res[R.toLower(TYPE.POST)])
       loading(false)
     },
   },
@@ -113,8 +111,8 @@ const handleData = res => {
 }
 
 export function init(selectedStore) {
-  articleViwer = selectedStore
-  debug(articleViwer)
+  store = selectedStore
+  debug(store)
   if (sub$) sub$.unsubscribe()
 
   sub$ = sr71$.data().subscribe(handleData)

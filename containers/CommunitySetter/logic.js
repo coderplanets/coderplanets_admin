@@ -20,7 +20,7 @@ let sub$ = null
 const debug = makeDebugger('L:CommunitySetter')
 /* eslint-enable no-unused-vars */
 
-let communitySetter = null
+let store = null
 
 const commonFilter = page => {
   const size = PAGE_SIZE.COMMON
@@ -48,11 +48,7 @@ export function setCommunity(thread, id, communityId) {
 const DataSolver = [
   {
     match: asyncRes('pagedCommunities'),
-    action: ({ pagedCommunities }) => {
-      communitySetter.markState({
-        pagedCommunities,
-      })
-    },
+    action: ({ pagedCommunities }) => store.markState({ pagedCommunities }),
   },
   {
     match: asyncRes('setCommunity'),
@@ -71,8 +67,8 @@ const DataSolver = [
 const ErrSolver = []
 
 export function init(selectedStore) {
-  communitySetter = selectedStore
-  debug(communitySetter)
+  store = selectedStore
+
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 

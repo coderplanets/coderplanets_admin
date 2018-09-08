@@ -21,31 +21,27 @@ let sub$ = null
 const debug = makeDebugger('L:CommunityEditor')
 /* eslint-enable no-unused-vars */
 
-let communityEditor = null
+let store = null
 
 export const profileChange = R.curry((thread, e) => {
-  communityEditor.updateCommunity({
+  store.updateCommunity({
     [thread]: e.target.value,
   })
 })
 
 export const uploadPic = pic => {
-  communityEditor.updateCommunity({
-    logo: pic,
-  })
+  store.updateCommunity({ logo: pic })
 }
 
 export const mutateConfirm = () => {
   const requiredArgs = ['title', 'desc', 'raw', 'category', 'logo']
   const args = {
-    ...communityEditor.communityData,
+    ...store.communityData,
   }
 
-  communityEditor.markState({
-    mutating: true,
-  })
+  store.markState({ mutating: true })
 
-  if (communityEditor.isEdit) {
+  if (store.isEdit) {
     return sr71$.mutate(
       S.updateCommunity,
       castArgs(args, ['id', ...requiredArgs])
@@ -56,7 +52,7 @@ export const mutateConfirm = () => {
 }
 
 const initEditData = editData => {
-  communityEditor.markState({
+  store.markState({
     community: editData,
     isEdit: true,
   })
@@ -64,7 +60,7 @@ const initEditData = editData => {
 
 // TODO: move to utils: closePreviewer
 export function cancleEdit() {
-  communityEditor.markState({
+  store.markState({
     community: {},
     isEdit: false,
   })
@@ -76,9 +72,7 @@ export function cancleEdit() {
 // ###############################
 
 const cancleLoading = () => {
-  communityEditor.markState({
-    mutating: false,
-  })
+  store.markState({ mutating: false })
 }
 
 const DataSolver = [
@@ -101,7 +95,7 @@ const ErrSolver = [
     match: asyncErr(ERR.CRAPHQL),
     action: ({ details }) => {
       const errMsg = details[0].detail
-      meteorState(communityEditor, 'error', 5, errMsg)
+      meteorState(store, 'error', 5, errMsg)
       cancleLoading()
     },
   },
@@ -115,8 +109,8 @@ const ErrSolver = [
 ]
 
 export function init(selectedStore, editData) {
-  communityEditor = selectedStore
-  debug(communityEditor)
+  store = selectedStore
+
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 

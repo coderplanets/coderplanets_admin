@@ -12,7 +12,7 @@ let sub$ = null
 const debug = makeDebugger('L:UsersBanner')
 /* eslint-enable no-unused-vars */
 
-let usersBanner = null
+let store = null
 
 export function loadUsers() {
   sr71$.query(S.pagedUsers, { filter: {} })
@@ -27,18 +27,16 @@ export function onAdd() {}
 const DataSolver = [
   {
     match: asyncRes('pagedUsers'),
-    action: ({ pagedUsers: { totalCount } }) => {
-      usersBanner.markState({
-        usersTotalCount: totalCount,
-      })
+    action: ({ pagedUsers: { totalCount: usersTotalCount } }) => {
+      store.markState({ usersTotalCount })
     },
   },
 ]
 const ErrSolver = []
 
 export function init(selectedStore) {
-  usersBanner = selectedStore
-  debug(usersBanner)
+  store = selectedStore
+
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 }

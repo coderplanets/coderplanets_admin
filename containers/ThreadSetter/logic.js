@@ -19,7 +19,7 @@ let sub$ = null
 const debug = makeDebugger('L:ThreadSetter')
 /* eslint-enable no-unused-vars */
 
-let threadSetter = null
+let store = null
 
 const commonFilter = page => {
   const size = PAGE_SIZE.COMMON
@@ -45,10 +45,7 @@ export function onAdd(communityId, threadId, selectedids) {
 const DataSolver = [
   {
     match: asyncRes('pagedThreads'),
-    action: ({ pagedThreads }) =>
-      threadSetter.markState({
-        pagedThreads,
-      }),
+    action: ({ pagedThreads }) => store.markState({ pagedThreads }),
   },
   {
     match: asyncRes('setThread'),
@@ -58,8 +55,8 @@ const DataSolver = [
 const ErrSolver = []
 
 export function init(selectedStore) {
-  threadSetter = selectedStore
-  debug(threadSetter)
+  store = selectedStore
+  debug(store)
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 

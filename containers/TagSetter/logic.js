@@ -18,7 +18,7 @@ let sub$ = null
 const debug = makeDebugger('L:TagSetter')
 /* eslint-enable no-unused-vars */
 
-let tagSetter = null
+let store = null
 
 /*
 const commonFilter = page => {
@@ -45,22 +45,18 @@ export function getPartialTags({ thread, data: { communities } }) {
 }
 
 export function selectCommunity(community) {
-  tagSetter.markState({
-    activeCommunityRaw: community.raw,
-  })
+  store.markState({ activeCommunityRaw: community.raw })
 
   const args = {
     communityId: community.id,
-    thread: tagSetter.activeThread,
+    thread: store.activeThread,
   }
 
   sr71$.query(S.partialTags, args)
 }
 
 export function selectThread(activeThread) {
-  tagSetter.markState({
-    activeThread,
-  })
+  store.markState({ activeThread })
 }
 
 // ###############################
@@ -70,17 +66,11 @@ export function selectThread(activeThread) {
 const DataSolver = [
   {
     match: asyncRes('pagedTags'),
-    action: ({ pagedTags }) =>
-      tagSetter.markState({
-        pagedTags,
-      }),
+    action: ({ pagedTags }) => store.markState({ pagedTags }),
   },
   {
     match: asyncRes('partialTags'),
-    action: ({ partialTags }) =>
-      tagSetter.markState({
-        tags: partialTags,
-      }),
+    action: ({ partialTags: tags }) => store.markState({ tags }),
   },
   {
     match: asyncRes('setTag'),
@@ -90,8 +80,7 @@ const DataSolver = [
 const ErrSolver = []
 
 export function init(selectedStore) {
-  tagSetter = selectedStore
-  debug(tagSetter)
+  store = selectedStore
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 

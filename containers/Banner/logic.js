@@ -10,7 +10,7 @@ let sub$ = null
 const debug = makeDebugger('L:Banner')
 /* eslint-enable no-unused-vars */
 
-let banner = null
+let store = null
 
 export function someMethod() {}
 
@@ -22,8 +22,8 @@ const DataSolver = []
 const ErrSolver = []
 
 export function init(selectedStore) {
-  banner = selectedStore
-  debug(banner)
+  store = selectedStore
+  debug(store)
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 }
