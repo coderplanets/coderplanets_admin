@@ -20,11 +20,12 @@ const debug = makeDebugger('C:Route')
 
 class RouteContainer extends React.Component {
   componentWillMount() {
-    init(this.props.route)
-    syncRoute(this.props.router)
+    const { route, router } = this.props
+    init(route)
+    syncRoute(router)
     Router.onRouteChangeComplete = () => {
       // Router.onRouteChangeStart = url => {
-      syncRoute(this.props.router)
+      syncRoute(router)
     }
   }
 

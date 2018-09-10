@@ -22,10 +22,13 @@ const debug = makeDebugger('C:Comments')
 
 class CommentsContainer extends React.Component {
   componentWillMount() {
-    logic.init(this.props.comments)
+    const { comments } = this.props
+    logic.init(comments)
   }
 
   render() {
+    const { comments } = this.props
+
     const {
       /* entries, */
       entriesData,
@@ -35,7 +38,7 @@ class CommentsContainer extends React.Component {
       showReplyBox,
       showReplyEditor,
       showReplyPreview,
-    } = this.props.comments
+    } = comments
 
     /* console.log('the fucking accountInfo --> ', accountInfo) */
     // TODO: use styledModal
@@ -48,7 +51,7 @@ class CommentsContainer extends React.Component {
             <CommentReplyer
               accountInfo={accountInfo}
               referUsers={referUsersData}
-              restProps={{ ...this.props.comments }}
+              restProps={{ ...comments }}
               show={showReplyEditor}
               showReplyPreview={showReplyPreview}
             />
@@ -60,12 +63,12 @@ class CommentsContainer extends React.Component {
         <CommentEditor
           accountInfo={accountInfo}
           referUsers={referUsersData}
-          restProps={{ ...this.props.comments }}
+          restProps={{ ...comments }}
         />
         <CommentsList
           accountInfo={accountInfo}
           entries={entriesData}
-          restProps={{ ...this.props.comments }}
+          restProps={{ ...comments }}
         />
       </Wrapper>
     )

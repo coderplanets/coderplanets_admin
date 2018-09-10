@@ -64,8 +64,8 @@ const renderChildBanner = (route, store) => {
 
 class CommunityBannerContainer extends React.Component {
   componentWillMount() {
-    logic.init(this.props.communityBanner)
-    debug('componentWillMount  !')
+    const { communityBanner } = this.props
+    logic.init(communityBanner)
   }
 
   render() {

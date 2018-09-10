@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { Img } from '../../../components'
+
+import Img from '../../Img'
 
 export const UserCellWrapper = styled.div`
   display: flex;

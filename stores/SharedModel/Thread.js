@@ -2,9 +2,9 @@ import { types as t } from 'mobx-state-tree'
 import { PAGE_SIZE } from '../../config'
 
 export const Thread = t.model('Thread', {
-  id: t.maybe(t.string),
-  title: t.maybe(t.string),
-  raw: t.maybe(t.string),
+  id: t.maybeNull(t.string),
+  title: t.maybeNull(t.string),
+  raw: t.maybeNull(t.string),
 })
 
 export const PagedThreads = t.model('PagedThreads', {

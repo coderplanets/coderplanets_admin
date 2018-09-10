@@ -1,7 +1,7 @@
 /*
-* TypeWriterStore store test
-*
-*/
+ * TypeWriterStore store test
+ *
+ */
 
 // import R from 'ramda'
 

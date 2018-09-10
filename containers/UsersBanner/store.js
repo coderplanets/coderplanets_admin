@@ -14,7 +14,7 @@ const debug = makeDebugger('S:UsersBannerStore')
 const UsersBannerStore = t
   .model('UsersBannerStore', {
     usersTotalCount: t.optional(t.number, 0),
-    filteredUsersCount: t.maybe(t.number),
+    filteredUsersCount: t.maybeNull(t.number),
   })
   .views(self => ({
     get root() {

@@ -13,22 +13,20 @@ import dynamic from 'next/dynamic'
 import { makeDebugger, storePlug, TYPE } from '../../utils'
 import * as logic from './logic'
 
-// TODO: move it to component
-import { StateTree } from '../../components/'
+import ArticleViwer from '../ArticleViwer'
+import AccountViewer from '../AccountViewer'
+import AccountEditor from '../AccountEditor'
+import CommunityEditor from '../CommunityEditor'
+import TagEditor from '../TagEditor'
+import CategoryEditor from '../CategoryEditor'
+import CategorySetter from '../CategorySetter'
+import ThreadSetter from '../ThreadSetter'
+import TagSetter from '../TagSetter'
+import CommunitySetter from '../CommunitySetter'
+import PermissionEditor from '../PermissionEditor'
+
+import StateTree from '../../components/StateTree'
 import TypeWriterLoading from '../../components/LoadingEffects/TypeWriterLoading'
-import {
-  ArticleViwer,
-  AccountViewer,
-  AccountEditor,
-  CommunityEditor,
-  TagEditor,
-  CategoryEditor,
-  CategorySetter,
-  ThreadSetter,
-  TagSetter,
-  CommunitySetter,
-  PermissionEditor,
-} from '../../containers'
 
 import {
   PreviewOverlay,
@@ -120,10 +118,13 @@ const Viewer = ({
 
 class PreviewContainer extends React.Component {
   componentWillMount() {
-    logic.init(this.props.preview)
+    const { preview } = this.props
+    logic.init(preview)
   }
 
   render() {
+    const { preview } = this.props
+
     const {
       visible,
       type,
@@ -135,7 +136,7 @@ class PreviewContainer extends React.Component {
       editPermissionData,
       editCategoryData,
       editTagData,
-    } = this.props.preview
+    } = preview
 
     return (
       <div>

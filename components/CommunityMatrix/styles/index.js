@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { Img } from '../../../components'
 
+import Img from '../../Img'
 import { smokey } from '../../../utils'
 
 export const MatrixWrapper = styled.div`

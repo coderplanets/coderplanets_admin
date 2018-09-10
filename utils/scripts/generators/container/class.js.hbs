@@ -6,8 +6,6 @@
 
 import React from 'react'
 import { inject, observer } from 'mobx-react'
-
-// import Link from 'next/link'
 {{#if wantMessages}}
   import { FormattedMessage } from 'react-intl'
   import messages from './messages'
@@ -17,13 +15,12 @@ import { inject, observer } from 'mobx-react'
 
 import { makeDebugger, storePlug } from '../../utils'
 
-// import S from './schema'
 import * as logic from './logic'
-
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('C:{{ properCase name }}')
 /* eslint-enable no-unused-vars */
 
+// NOTE: add me to ../containers/index
 class {{ properCase name }}Container extends React.Component {
   componentWillMount() {
     const {{preCurly ""}} {{ camelCase name}} {{afterCurly ""}} = this.props

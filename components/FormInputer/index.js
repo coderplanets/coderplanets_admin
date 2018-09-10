@@ -9,12 +9,10 @@ import PropTypes from 'prop-types'
 import { Input } from 'antd'
 import R from 'ramda'
 
-import { FormItem } from '../../components'
-
-import { makeDebugger } from '../../utils'
-
+import FormItem from '../FormItem'
 import { FormInput, Note } from './styles'
 
+import { makeDebugger } from '../../utils'
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:FormInputer:index')
 /* eslint-enable no-unused-vars */

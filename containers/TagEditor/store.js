@@ -15,7 +15,7 @@ const debug = makeDebugger('S:TagEditorStore')
 const TagEditorStore = t
   .model('TagEditorStore', {
     tag: t.optional(Tag, {}),
-    pagedCommunities: t.maybe(PagedCommunities),
+    pagedCommunities: t.maybeNull(PagedCommunities),
     // Creating or Updating mutating: t.optional(t.boolean, false),
     // is Edit or Create
     isEdit: t.optional(t.boolean, false),

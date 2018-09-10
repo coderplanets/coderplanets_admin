@@ -20,11 +20,13 @@ const debug = makeDebugger('C:ApiLayout')
 
 class ApiLayoutContainer extends React.Component {
   componentWillMount() {
-    logic.init(this.props.apiLayout)
+    const { apiLayout } = this.props
+    logic.init(apiLayout)
   }
 
   render() {
-    return <Wrapper>{this.props.children}</Wrapper>
+    const { children } = this.props
+    return <Wrapper>{children}</Wrapper>
   }
 }
 

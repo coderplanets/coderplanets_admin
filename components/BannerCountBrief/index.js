@@ -26,22 +26,30 @@ const CountBrief = ({ filteredCount, totalCount, thread, unit }) => {
     return (
       <Result>
         <ResultBottom>
-          <ResultText>当前共有{thread}</ResultText>
+          <ResultText>
+            当前共有
+            {thread}
+          </ResultText>
           <ResultNumber>{totalCount} </ResultNumber>
           <ResultText>{unit}</ResultText>
         </ResultBottom>
       </Result>
     )
-  } else if (filteredCount < 0 && totalCount === 0) {
+  }
+  if (filteredCount < 0 && totalCount === 0) {
     return <Result>正在加载, 请稍后...</Result>
   }
   return (
     <Result>
       <ResultTop>
-        {thread}总数为 {totalCount} {unit}
+        {thread}
+        总数为 {totalCount} {unit}
       </ResultTop>
       <ResultBottom>
-        <ResultText>符合当前条件的{thread}</ResultText>
+        <ResultText>
+          符合当前条件的
+          {thread}
+        </ResultText>
         <ResultNumber>{filteredCount} </ResultNumber>
         <ResultText>
           {unit}, 占比 {toPercentNum(filteredCount, totalCount)}

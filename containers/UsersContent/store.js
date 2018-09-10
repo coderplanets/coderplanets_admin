@@ -22,7 +22,7 @@ const PagedUsers = t.model('PagedUsers', {
 
 const UsersContentStore = t
   .model('UsersContentStore', {
-    pagedUsers: t.maybe(PagedUsers),
+    pagedUsers: t.maybeNull(PagedUsers),
 
     // loading state
     usersLoading: t.optional(t.boolean, false),

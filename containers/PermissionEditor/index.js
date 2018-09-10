@@ -131,8 +131,10 @@ const PermissionList = ({
 
 class PermissionEditorContainer extends React.Component {
   componentWillMount() {
-    logic.init(this.props.permissionEditor)
+    const { permissionEditor } = this.props
+    logic.init(permissionEditor)
   }
+
   componentDidMount() {
     setTimeout(() => {
       ReactTooltip.rebuild()

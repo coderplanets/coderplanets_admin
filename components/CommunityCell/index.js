@@ -10,7 +10,8 @@ import PropTypes from 'prop-types'
 import ReactTooltip from 'react-tooltip'
 
 import { ICON_CMD } from '../../config'
-import { AdderCell } from '../../components'
+
+import AdderCell from '../AdderCell'
 
 import {
   Wrapper,
@@ -71,7 +72,8 @@ const renderContent = props => {
   const { data, array, withSetter, source, thread, onAdd, onDelete } = props
   if (!R.isEmpty(data)) {
     return <SingleCommunity community={data} />
-  } else if (withSetter && !R.isEmpty(array)) {
+  }
+  if (withSetter && !R.isEmpty(array)) {
     return (
       <Wrapper>
         <CommunitiesSetter
@@ -85,7 +87,8 @@ const renderContent = props => {
         </div>
       </Wrapper>
     )
-  } else if (!R.isEmpty(array)) {
+  }
+  if (!R.isEmpty(array)) {
     return (
       <Wrapper>
         <CommunitiesLogoArray array={array} />
