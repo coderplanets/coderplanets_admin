@@ -9,7 +9,7 @@ const { basename } = require('path')
 const accepts = require('accepts')
 const glob = require('glob')
 
-const app = next({ dev })
+const app = next({ dev, quiet: false })
 const handle = app.getRequestHandler()
 const route = pathMatch()
 const SERVE_PORT = 3001
@@ -57,7 +57,6 @@ const communityQuery = route('/:main/:sub?')
 app.prepare().then(() => {
   createServer((req, res) => {
     const urlParts = parse(req.url, true)
-    /* const { pathname } = parse(req.url) */
     const { pathname, query } = urlParts
 
     const accept = accepts(req)
@@ -66,14 +65,15 @@ app.prepare().then(() => {
     if (localeQuery(pathname)) {
       res.setHeader('Content-Type', 'application/json;charset=utf-8')
       return res.end(JSON.stringify(getMessages(localeQuery(pathname).lang)))
-    } else if (communitiesQuery(pathname)) {
-      console.log('on server communities')
-      return app.render(req, res, '/communities', query)
-    } else if (usersQuery(pathname)) {
-      return app.render(req, res, '/users', query)
-    } else if (communityQuery(pathname)) {
-      return app.render(req, res, '/', query)
     }
+
+    // community page
+    if (communityQuery(pathname)) return app.render(req, res, '/', query)
+    // users page
+    if (usersQuery(pathname)) return app.render(req, res, '/users', query)
+    // communities page
+    if (communitiesQuery(pathname))
+      return app.render(req, res, '/communities', query)
 
     // now index page go this way
     req.locale = locale
@@ -82,6 +82,6 @@ app.prepare().then(() => {
     return handle(req, res)
   }).listen(SERVE_PORT, err => {
     if (err) throw err
-    console.log('> Ready on http://localhost:3001')
+    console.log(`> Ready on http://localhost: ${SERVE_PORT}`)
   })
 })
