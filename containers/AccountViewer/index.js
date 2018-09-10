@@ -40,9 +40,11 @@ const ThemeSection = ({ themeKeys, curTheme }) => {
 
 class AccountViewerContainer extends React.Component {
   componentWillMount() {
-    logic.init(this.props.accountViewer)
+    const { accountViewer } = this.props
+    logic.init(accountViewer)
     logic.loadAccount()
   }
+
   componentDidMount() {
     /* force rebuild the tooltip, otherwise it won't work in some async cases */
     /* if you want to custom see: */
@@ -53,12 +55,13 @@ class AccountViewerContainer extends React.Component {
   }
 
   render() {
+    const { accountViewer } = this.props
     const {
       themeKeys,
       curTheme,
       accountInfo,
       subscribedCommunities,
-    } = this.props.accountViewer
+    } = accountViewer
 
     const { contributes } = accountInfo
 

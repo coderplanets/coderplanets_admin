@@ -33,7 +33,8 @@ const CategoriesList = ({ communityId, categories, selectedids }) => (
 
 class CategorySetterContainer extends React.Component {
   componentWillMount() {
-    logic.init(this.props.categorySetter)
+    const { categorySetter } = this.props
+    logic.init(categorySetter)
   }
 
   render() {

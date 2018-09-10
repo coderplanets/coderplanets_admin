@@ -6,12 +6,11 @@ import Prism from 'mastani-codehighlight'
 import R from 'ramda'
 
 import { MENTION_USER_ADDR } from '../../config'
-import MarkDownStyle from '../../containers/ThemeWrapper/MarkDownStyle'
+import MarkDownStyle from '../ThemeWrapper/MarkDownStyle'
+import { uid } from '../../utils'
 
 import fullEmojis from './emojis'
 import { Wrapper, EmojiWraper, EmojiItem } from './styles/markdown_helper'
-
-import { uid } from '../../utils'
 
 const md = new Remarkable()
 md.use(mentions({ url: MENTION_USER_ADDR }))

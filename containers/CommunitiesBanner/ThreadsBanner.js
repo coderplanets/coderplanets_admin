@@ -20,6 +20,7 @@ class ThreadsBanner extends React.Component {
   componentWillMount() {
     logic.loadThreads()
   }
+
   render() {
     const { filteredCount, totalCount } = this.props
     return (

@@ -8,7 +8,9 @@ import React from 'react'
 import { inject, observer } from 'mobx-react'
 
 // import Link from 'next/link'
-import { CommunityContent, CommunitiesContent } from '../../containers'
+import CommunityContent from '../CommunityContent'
+import CommunitiesContent from '../CommunitiesContent'
+// import { CommunityContent, CommunitiesContent } from '.'
 
 import { makeDebugger, storePlug, ROUTE } from '../../utils'
 import * as logic from './logic'
@@ -34,11 +36,13 @@ const DomainContent = ({ curRoute }) => {
  */
 class ContentContainer extends React.Component {
   componentWillMount() {
-    logic.init(this.props.content)
+    const { content } = this.props
+    logic.init(content)
   }
 
   render() {
-    const { curRoute } = this.props.content
+    const { content } = this.props
+    const { curRoute } = content
 
     return <DomainContent curRoute={curRoute} />
   }

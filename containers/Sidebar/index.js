@@ -54,7 +54,8 @@ const MenuList = ({ items, activeRaw, activeThread }) => {
 
 class SidebarContainer extends React.Component {
   componentDidMount() {
-    logic.init(this.props.sidebar)
+    const { sidebar } = this.props
+    logic.init(sidebar)
   }
 
   render() {

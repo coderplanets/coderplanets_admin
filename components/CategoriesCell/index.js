@@ -7,10 +7,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import R from 'ramda'
+import { Icon } from 'antd'
 
 import { ICON_CMD } from '../../config'
 
-import { AdderCell, Icon } from '../../components'
+import AdderCell from '../AdderCell'
 
 import {
   Wrapper,

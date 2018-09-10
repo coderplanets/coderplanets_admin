@@ -14,8 +14,8 @@ const debug = makeDebugger('S:CommunityContentStore')
 
 const CommunityContentStore = t
   .model('CommunityContentStore', {
-    pagedPosts: t.maybe(PagedPosts),
-    pagedTags: t.maybe(PagedTags),
+    pagedPosts: t.maybeNull(PagedPosts),
+    pagedTags: t.maybeNull(PagedTags),
     postsLoading: t.optional(t.boolean, false),
     tagsLoading: t.optional(t.boolean, false),
   })

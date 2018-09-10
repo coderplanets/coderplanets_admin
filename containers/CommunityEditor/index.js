@@ -33,6 +33,7 @@ class CommunityEditorContainer extends React.Component {
     const { communityEditor, editData } = this.props
     logic.init(communityEditor, editData)
   }
+
   componentWillUnmount() {
     logic.uninit()
   }

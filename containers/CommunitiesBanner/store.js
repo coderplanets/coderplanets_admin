@@ -15,22 +15,22 @@ const CommunitiesBannerStore = t
   .model('CommunitiesBannerStore', {
     // communities: totalCount of all
     totalCount: t.optional(t.number, 0),
-    filteredTotalCount: t.maybe(t.number),
+    filteredTotalCount: t.maybeNull(t.number),
     // categories
     categoriesTotalCount: t.optional(t.number, 0),
-    filterdCategoriesCount: t.maybe(t.number),
+    filterdCategoriesCount: t.maybeNull(t.number),
     // tags
     tagsTotalCount: t.optional(t.number, 0),
-    filterdTagsCount: t.maybe(t.number),
+    filterdTagsCount: t.maybeNull(t.number),
     // threads
     threadsTotalCount: t.optional(t.number, 0),
-    filterdThreadsCount: t.maybe(t.number),
+    filterdThreadsCount: t.maybeNull(t.number),
     // posts
     postsTotalCount: t.optional(t.number, 0),
-    filteredPostsCount: t.maybe(t.number),
+    filteredPostsCount: t.maybeNull(t.number),
     // jobs
     jobsTotalCount: t.optional(t.number, 0),
-    filteredJobsCount: t.maybe(t.number),
+    filteredJobsCount: t.maybeNull(t.number),
   })
   .views(self => ({
     get root() {

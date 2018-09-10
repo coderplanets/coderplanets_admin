@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
-import { Img } from '../../../components'
-
+import Img from '../../../components'
 // import { darken } from 'polished'
 import { theme } from '../../../utils'
 import { Sidebar } from './index'

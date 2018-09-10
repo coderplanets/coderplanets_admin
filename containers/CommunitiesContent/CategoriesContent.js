@@ -113,6 +113,7 @@ class CategoriesContent extends React.Component {
   componentWillMount() {
     logic.loadCategories()
   }
+
   componentDidMount() {
     /* force rebuild the tooltip, otherwise it won't work in some async cases */
     /* if you want to custom see: */

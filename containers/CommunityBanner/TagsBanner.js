@@ -20,6 +20,7 @@ class TagsBanner extends React.Component {
   componentWillMount() {
     logic.loadTags()
   }
+
   render() {
     const { totalCount, filteredCount } = this.props
     return (

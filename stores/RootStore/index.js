@@ -60,7 +60,7 @@ const rootStore = t
   .model({
     // domain stores
     account: t.optional(AccountStore, {}),
-    users: t.maybe(UsersStore),
+    users: t.maybeNull(UsersStore),
     route: t.optional(RouteStore, {}),
     curCommunity: t.optional(CurCommunity, {}),
     communities: t.optional(CommunitiesStore, {}),
