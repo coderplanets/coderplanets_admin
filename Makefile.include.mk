@@ -15,7 +15,7 @@ CI_BUILD_LINK = "https://travis-ci.org/$(BELONG)/$(REPO)"
 CI_COVERAGE_LINK = "https://coveralls.io/github/$(BELONG)/$(REPO)"
 CI_CODECOV_LINK = "https://codecov.io/gh/$(BELONG)/$(REPO)"
 CI_CODEFACTOR_LINK= "https://www.codefactor.io/repository/github/$(BELONG)/$(REPO)"
-CI_CODACY_LINK="https://app.codacy.com/project/mydearxym/$(REPO)/dashboard?branchId=8274848"
+CI_CODACY_LINK="https://app.codacy.com/project/mydearxym/coderplanets_web/dashboard?branchId=8274848"
 CI_DOC_LINK = "https://inch-ci.org/github/$(BELONG)/$(REPO)"
 CI_DEPSBOT_LINK = "https://david-dm.org/$(BELONG)/$(REPO)"
 
