@@ -20,6 +20,7 @@ class JobsBanner extends React.Component {
   componentWillMount() {
     logic.loadJobs()
   }
+
   render() {
     const { filteredCount, totalCount } = this.props
     return (

@@ -32,26 +32,17 @@ export default class Index extends React.Component {
     /* const isServer = !!req */
 
     console.log('## index ## page ..')
-    /* console.log('-------> isServer(index) -----> ', isServer) */
-    /* console.log('-------> pathname(index) -----> ', pathname) */
-    /* return {} */
-    /* const isServer = !!req */
-    // console.log('getInitialProps pathname ---> ', pathname)
-    // console.log('getInitialProps asPath ---> ', asPath)
-    /* const data = await request(GRAPHQL_ENDPOINT, sidebarSchema.communitiesRaw, { */
-    /* filter: { page: 1, size: 30 }, */
-    /* }) // .then(data => console.log(data)) */
-    /* console.log('SSR getInitialProps index ------> ', data.communities) */
-    /* eslint-disable */
+    /* eslint-disable no-underscore-dangle */
     const { locale, messages } = req || Global.__NEXT_DATA__.props
     /* eslint-enable */
     const langSetup = {}
     langSetup[locale] = messages
+    const store = initRootStore(langSetup)
 
     return {
-      // version: store.version,
-      // messages,
-      // locale,
+      version: store.version,
+      messages,
+      locale,
       langSetup,
       communities: {},
     }
@@ -59,10 +50,7 @@ export default class Index extends React.Component {
 
   constructor(props) {
     super(props)
-    this.store = initRootStore({
-      langSetup: props.langSetup,
-      communities: {},
-    })
+    this.store = initRootStore(props.langSetup)
   }
 
   render() {

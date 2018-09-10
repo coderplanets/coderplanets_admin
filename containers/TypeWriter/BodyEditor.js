@@ -68,6 +68,7 @@ class MastaniEditor extends React.Component {
 
     this.initPubSub()
   }
+
   componentWillUnmount() {
     const { pub } = this.state
     PubSub.unsubscribe(pub)
@@ -78,9 +79,7 @@ class MastaniEditor extends React.Component {
     const pub = PubSub.subscribe(EVENT.DRAFT_INSERT_SNIPPET, (event, data) => {
       this.insertSnippet(data.data)
     })
-    this.setState({
-      pub,
-    })
+    this.setState({ pub })
   }
 
   insertSnippet = data => {
@@ -126,27 +125,31 @@ class MastaniEditor extends React.Component {
   }
 
   onChange = editorState => {
+    const { onChange } = this.props
     // const oldString = toRawString(this.state.editorState.getCurrentContent())
     const newString = toRawString(editorState.getCurrentContent())
     // console.log('onChange raw: ', newString)
 
-    // if (oldString === newString) return false
-    // console.log('onChange: ', newString)
-    this.props.onChange(newString)
-    this.setState({
-      editorState,
-    })
+    onChange(newString)
+    this.setState({ editorState })
   }
 
   onSearchChange = ({ value }) => {
+    /*
     this.setState({
       suggestions: defaultSuggestionsFilter(value, this.state.mentions),
     })
+    */
+
+    this.setState(prevState => ({
+      suggestions: defaultSuggestionsFilter(value, prevState.mentions),
+    }))
   }
 
   onAddMention = user => {
     // console.log('onAddMention: ', user)
-    this.props.onMention(user)
+    const { onMention } = this.props
+    onMention(user)
     // get the mention object selected
   }
 
@@ -165,24 +168,20 @@ class MastaniEditor extends React.Component {
   loadUserSuggestions = () => {
     const { mentions } = this.props
     /* debug('loadUserSuggestions --->', mentions) */
-    this.setState({
-      suggestions: mentions,
-      mentions,
-    })
+    this.setState({ suggestions: mentions, mentions })
   }
 
   clearContent = () => {
     const editorState = EditorState.createWithContent(
       ContentState.createFromText('')
     )
-    this.setState({
-      editorState,
-    })
+    this.setState({ editorState })
   }
 
   loadDraft = () => {
+    const { body } = this.props
     const editorState = EditorState.createWithContent(
-      ContentState.createFromText(this.props.body)
+      ContentState.createFromText(body)
     )
     // somehow the onCHange behave strange
     // see issue: https://github.com/facebook/draft-js/issues/1198
@@ -191,19 +190,18 @@ class MastaniEditor extends React.Component {
     //   this.focus()
     //    }, 150)
 
-    this.setState({
-      editorState,
-    })
+    this.setState({ editorState })
   }
 
   render() {
     const { MentionSuggestions } = this.mentionPlugin
     const plugins = [this.mentionPlugin]
+    const { editorState, suggestions } = this.state
 
     return (
       <Wrapper onClick={this.focus}>
         <Editor
-          editorState={this.state.editorState}
+          editorState={editorState}
           onChange={this.onChange}
           onBlur={this.onBlur}
           plugins={plugins}
@@ -213,7 +211,7 @@ class MastaniEditor extends React.Component {
         />
         <MentionSuggestions
           onSearchChange={this.onSearchChange}
-          suggestions={this.state.suggestions}
+          suggestions={suggestions}
           onAddMention={this.onAddMention}
         />
       </Wrapper>

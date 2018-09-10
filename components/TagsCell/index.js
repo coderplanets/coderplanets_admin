@@ -12,7 +12,7 @@ import { ICON_CMD } from '../../config'
 
 // import { inject, observer } from 'mobx-react'
 // import Link from 'next/link'
-import { AdderCell } from '../../components'
+import AdderCell from '../AdderCell'
 
 import {
   Wrapper,

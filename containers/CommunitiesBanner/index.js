@@ -100,8 +100,10 @@ const ChildBanner = ({ curRoute, store }) => {
 
 class CommunitiesBannerContainer extends React.Component {
   componentWillMount() {
-    logic.init(this.props.communitiesBanner)
+    const { communitiesBanner } = this.props
+    logic.init(communitiesBanner)
   }
+
   render() {
     const { communitiesBanner } = this.props
     const { curRoute } = communitiesBanner

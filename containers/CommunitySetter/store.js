@@ -14,7 +14,7 @@ const debug = makeDebugger('S:CommunitySetterStore')
 
 const CommunitySetterStore = t
   .model('CommunitySetterStore', {
-    pagedCommunities: t.maybe(PagedCommunities),
+    pagedCommunities: t.maybeNull(PagedCommunities),
   })
   .views(self => ({
     get root() {

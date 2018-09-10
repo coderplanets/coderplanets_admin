@@ -30,13 +30,11 @@ const debug = makeDebugger('c:NotFound:index')
 const DefaultDesc = () => (
   <div>
     <div>
-      如果你发现是网站的问题，恳请你<IssueLink
-        href={ISSUE_ADDR}
-        rel="noopener noreferrer"
-        target="_blank"
-      >
+      如果你发现是网站的问题，恳请你
+      <IssueLink href={ISSUE_ADDR} rel="noopener noreferrer" target="_blank">
         提交issue
-      </IssueLink>，以便于开发者在第一时间修复。
+      </IssueLink>
+      ，以便于开发者在第一时间修复。
     </div>
   </div>
 )

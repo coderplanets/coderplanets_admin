@@ -82,7 +82,8 @@ const Langs = ({ base }) => {
 
 class CheatSheetContentContainer extends React.Component {
   componentWillMount() {
-    logic.init(this.props.cheatSheetContent)
+    const { cheatSheetContent } = this.props
+    logic.init(cheatSheetContent)
   }
 
   render() {

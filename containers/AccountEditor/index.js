@@ -79,10 +79,13 @@ const FormItem = ({ label, textarea, value, onChange }) => (
 
 class AccountEditorContainer extends React.Component {
   componentWillMount() {
-    logic.init(this.props.accountEditor)
+    const { accountEditor } = this.props
+    logic.init(accountEditor)
   }
 
   render() {
+    const { accountEditor } = this.props
+
     const {
       accountInfo,
       updating,
@@ -90,7 +93,7 @@ class AccountEditorContainer extends React.Component {
       error,
       warn,
       statusMsg,
-    } = this.props.accountEditor
+    } = accountEditor
 
     /* debug('accountInfo editing->: ', accountInfo) */
 

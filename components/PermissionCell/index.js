@@ -8,7 +8,7 @@ import React from 'react'
 import R from 'ramda'
 import PropTypes from 'prop-types'
 
-import { AdderCell } from '../../components'
+import AdderCell from '../AdderCell'
 
 import {
   Wrapper,
@@ -35,8 +35,14 @@ const debug = makeDebugger('c:PermissionCell:index')
 const valueIsObj = v => isObject(v)
 const valueIsNotObj = R.complement(valueIsObj)
 
-const key = R.compose(R.head, R.keys)
-const value = R.compose(R.head, R.values)
+const key = R.compose(
+  R.head,
+  R.keys
+)
+const value = R.compose(
+  R.head,
+  R.values
+)
 
 const CommunityPermissions = ({ data }) => {
   if (!data) return <div />

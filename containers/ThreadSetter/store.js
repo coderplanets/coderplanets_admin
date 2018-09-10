@@ -15,7 +15,7 @@ const debug = makeDebugger('S:ThreadSetterStore')
 
 const ThreadSetterStore = t
   .model('ThreadSetterStore', {
-    pagedThreads: t.maybe(PagedThreads),
+    pagedThreads: t.maybeNull(PagedThreads),
   })
   .views(self => ({
     get root() {

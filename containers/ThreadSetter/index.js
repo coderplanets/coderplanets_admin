@@ -34,7 +34,8 @@ const ThreadsList = ({ communityId, threads, selectedids }) => (
 
 class ThreadSetterContainer extends React.Component {
   componentWillMount() {
-    logic.init(this.props.threadSetter)
+    const { threadSetter } = this.props
+    logic.init(threadSetter)
   }
 
   render() {

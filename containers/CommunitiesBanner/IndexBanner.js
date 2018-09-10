@@ -20,6 +20,7 @@ class IndexBanner extends React.Component {
   componentWillMount() {
     logic.loadCommunities()
   }
+
   render() {
     const { filteredCount, totalCount } = this.props
     return (

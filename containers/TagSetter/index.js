@@ -51,8 +51,9 @@ const TagsList = ({ tags, threadId, selectedids }) => (
 
 class TagSetterContainer extends React.Component {
   componentDidMount() {
-    logic.init(this.props.tagSetter)
-    logic.getPartialTags(this.props.editData)
+    const { tagSetter, editData } = this.props
+    logic.init(tagSetter)
+    logic.getPartialTags(editData)
   }
 
   render() {

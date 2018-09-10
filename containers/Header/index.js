@@ -8,10 +8,9 @@ import React from 'react'
 import R from 'ramda'
 import { inject, observer } from 'mobx-react'
 import keydown from 'react-keydown'
+import { Affix } from 'antd'
 
 import { ICON_CMD, ICON_ASSETS } from '../../config/assets'
-import { Affix } from '../../components'
-
 import { makeDebugger, storePlug, TYPE } from '../../utils'
 
 import {
@@ -160,7 +159,8 @@ const Header = ({ curRoute, leftOffset, fixed, isLogin, accountInfo }) => (
 
 class HeaderContainer extends React.Component {
   componentWillMount() {
-    logic.init(this.props.header)
+    const { header } = this.props
+    logic.init(header)
   }
 
   /* eslint-disable class-methods-use-this */
@@ -172,13 +172,9 @@ class HeaderContainer extends React.Component {
   /* eslint-enable class-methods-use-this */
 
   render() {
-    const {
-      fixed,
-      curRoute,
-      leftOffset,
-      accountInfo,
-      isLogin,
-    } = this.props.header
+    const { header } = this.props
+
+    const { fixed, curRoute, leftOffset, accountInfo, isLogin } = header
 
     // <Affix style={{ display: fixed ? 'block' : 'none' }}>
     return (

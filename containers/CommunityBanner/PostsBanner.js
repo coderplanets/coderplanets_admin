@@ -20,6 +20,7 @@ class PostsBanner extends React.Component {
   componentWillMount() {
     logic.loadPosts()
   }
+
   render() {
     const { filteredCount, totalCount } = this.props
     return (

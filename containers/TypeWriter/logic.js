@@ -23,9 +23,10 @@ const debug = makeDebugger('L:TypeWriter')
 /* eslint-enable no-unused-vars */
 
 let store = null
+let sub$ = null
 
-export function copyrightChange(articleType) {
-  store.markState({ articleType })
+export function copyrightChange(cpType) {
+  store.markState({ cpType })
 }
 
 export function changeView(curView) {
@@ -33,12 +34,12 @@ export function changeView(curView) {
 }
 
 function checkValid() {
-  const { body, title, articleType, linkAddr } = store
+  const { body, title, cpType, linkAddr } = store
   if (isEmptyValue(body) || isEmptyValue(title)) {
     meteorState(store, 'error', 5, '文章标题 或 文章内容 不能为空')
     return false
   }
-  if (articleType !== 'original' && isEmptyValue(linkAddr)) {
+  if (cpType !== 'original' && isEmptyValue(linkAddr)) {
     meteorState(store, 'error', 5, '请填写完整地址以方便跳转, http(s)://...')
     return false
   }
@@ -75,7 +76,7 @@ const getDigest = body => {
 // TODO move specfical logic outof here
 export function onPublish() {
   // debug('onPublish: ', store.body)
-  const { body, title, articleType } = store
+  const { body, title, cpType } = store
   if (checkValid()) {
     publishing()
 
@@ -87,18 +88,17 @@ export function onPublish() {
       body,
       digest,
       length,
-      community: store.curCommunity.title,
+      communityId: store.viewing.community.id,
     }
 
-    if (articleType !== 'original') variables.linkAddr = store.linkAddr
-    // debug('curCommunity: ', store.curCommunityName)
+    if (cpType !== 'original') variables.linkAddr = store.linkAddr
     // debug('variables-: ', variables)
+    // TODO: switch createJob
     sr71$.mutate(S.createPost, variables)
   }
 }
 
 export const canclePublish = () => {
-  debug('canclePublish')
   cancleLoading()
   // store.reset()
   store.closePreview()
@@ -121,6 +121,35 @@ function publishing(maybe = true) {
   store.markState({ publishing: maybe })
 }
 
+export function insertCode() {
+  dispatchEvent(EVENT.DRAFT_INSERT_SNIPPET, {
+    type: 'FUCK',
+    data: '```javascript\n\n```',
+  })
+}
+
+const openAttachment = att => {
+  if (!att) return false
+
+  const { id, title, body, digest } = att
+
+  store.markState({
+    id,
+    title,
+    body: body || digest || '',
+    isEdit: true,
+  })
+  // TODO: load if needed
+}
+
+const cancleMutate = () => {
+  store.reset()
+}
+
+// ###############################
+// Data & Error handlers
+// ###############################
+
 const DataSolver = [
   {
     match: asyncRes('createPost'),
@@ -134,13 +163,11 @@ const DataSolver = [
       // 3. notify the xxxPaper
     },
   },
-  {
-    match: asyncRes(EVENT.PREVIEW),
-    action: () => {},
-  },
 ]
 
-const cancleLoading = () => store.markState({ publishing: false })
+const cancleLoading = () => {
+  store.markState({ publishing: false })
+}
 
 const ErrSolver = [
   {
@@ -168,7 +195,21 @@ const ErrSolver = [
   },
 ]
 
-export function init(selectedStore) {
-  store = selectedStore
-  sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+export function init(_store, attachment) {
+  if (store) {
+    return openAttachment(attachment)
+  }
+  store = _store
+
+  if (sub$) sub$.unsubscribe()
+  sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+  openAttachment(attachment)
+}
+
+export function uninit() {
+  store.toast('info', {
+    title: 'todo',
+    msg: '草稿已保存',
+  })
+  cancleMutate()
 }

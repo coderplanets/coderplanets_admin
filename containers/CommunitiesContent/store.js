@@ -22,13 +22,13 @@ const debug = makeDebugger('S:CommunitiesContentStore')
 const CommunitiesContentStore = t
   .model('CommunitiesContentStore', {
     // all the communities
-    pagedCommunities: t.maybe(PagedCommunities),
-    pagedCategories: t.maybe(PagedCategories),
-    pagedTags: t.maybe(PagedTags),
-    pagedThreads: t.maybe(PagedThreads),
+    pagedCommunities: t.maybeNull(PagedCommunities),
+    pagedCategories: t.maybeNull(PagedCategories),
+    pagedTags: t.maybeNull(PagedTags),
+    pagedThreads: t.maybeNull(PagedThreads),
 
-    pagedPosts: t.maybe(PagedPosts),
-    pagedJobs: t.maybe(PagedJobs),
+    pagedPosts: t.maybeNull(PagedPosts),
+    pagedJobs: t.maybeNull(PagedJobs),
 
     communitiesLoading: t.optional(t.boolean, false),
     tagsLoading: t.optional(t.boolean, false),

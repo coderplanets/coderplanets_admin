@@ -1,9 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Img } from '../../components'
-
 import { ICON_CMD } from '../../config'
+import Img from '../Img'
 import { Animate } from '../../utils'
 
 const LoadingWrapper = styled.div`

@@ -24,7 +24,7 @@ const EditPermission = t.model('EditPermission', {
 const PreviewStore = t
   .model('PreviewStore', {
     visible: t.optional(t.boolean, false),
-    type: t.maybe(
+    type: t.maybeNull(
       t.enumeration('previewType', [
         TYPE.POST_PREVIEW_VIEW,
         TYPE.PREVIEW_ACCOUNT_VIEW,
@@ -50,12 +50,12 @@ const PreviewStore = t
         TYPE.PREVIEW_UPDATE_PERMISSION,
       ])
     ),
-    editCommunity: t.maybe(Community),
-    editCategory: t.maybe(Category),
-    editTag: t.maybe(Tag),
-    editArticle: t.maybe(Article),
-    editPermission: t.maybe(EditPermission),
-    /* editCategory: t.maybe(SelectCommunity), */
+    editCommunity: t.maybeNull(Community),
+    editCategory: t.maybeNull(Category),
+    editTag: t.maybeNull(Tag),
+    editArticle: t.maybeNull(Article),
+    editPermission: t.maybeNull(EditPermission),
+    /* editCategory: t.maybeNull(SelectCommunity), */
   })
   .views(self => ({
     get root() {

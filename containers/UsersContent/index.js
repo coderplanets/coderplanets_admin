@@ -34,13 +34,14 @@ const renderChildBanner = (route, store, restProps) => {
 
 class UsersContentContainer extends React.Component {
   componentWillMount() {
-    logic.init(this.props.usersContent)
+    const { usersContent } = this.props
+    logic.init(usersContent)
   }
 
   render() {
     const { usersContent } = this.props
     const { route } = usersContent
-    const restProps = { ...this.props.usersContent }
+    const restProps = { ...usersContent }
 
     return (
       <Wrapper>{renderChildBanner(route, usersContent, restProps)}</Wrapper>

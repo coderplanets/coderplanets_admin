@@ -37,7 +37,8 @@ const debug = makeDebugger('C:Doraemon')
 const HintIcon = ({ index, active, cur, length }) => {
   if (active === cur) {
     return <HintEnter src={`${ICON_CMD}/enter.svg`} />
-  } else if (length <= 9) {
+  }
+  if (length <= 9) {
     return <Hint>^ {index}</Hint>
   }
   return <span />
@@ -45,7 +46,8 @@ const HintIcon = ({ index, active, cur, length }) => {
 
 class DoraemonContainer extends React.Component {
   componentWillMount() {
-    logic.init(this.props.doraemon)
+    const { doraemon } = this.props
+    logic.init(doraemon)
   }
   // ref={infobar => (this[`infobar${suggestion.title}`] = infobar)}
   // ref={wraper => (this.wraper = wraper)}
