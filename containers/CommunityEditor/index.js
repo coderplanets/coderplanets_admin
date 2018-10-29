@@ -91,11 +91,6 @@ class CommunityEditorContainer extends React.Component {
           onChange={logic.profileChange('raw')}
         />
         <FormInputer
-          label="类别:"
-          value={communityData.category}
-          onChange={logic.profileChange('category')}
-        />
-        <FormInputer
           label="描述:"
           textarea
           value={communityData.desc}
