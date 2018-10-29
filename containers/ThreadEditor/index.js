@@ -3,7 +3,6 @@
  * ThreadEditor
  *
  */
-
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 // import { InputNumer } from 'antd'
