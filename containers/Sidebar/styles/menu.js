@@ -62,7 +62,6 @@ export const MenuTitle = styled.div`
   flex-grow: 1;
   max-width: 50%;
   opacity: 0.6;
-  margin-top: -10px;
 
   &:hover {
     color: ${theme('sidebar.menu_link')};
@@ -107,6 +106,7 @@ export const MenuItemIcon = styled(Img)`
   opacity: ${props => (props.active ? 1 : 0.5)};
   width: 22px;
   height: 22px;
+  display: block;
 `
 export const MenuCommunitiesIcon = MenuItemIcon.extend`
   fill: ${theme('sidebar.menu_link')};

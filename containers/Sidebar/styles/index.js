@@ -39,11 +39,10 @@ export const Footer = Banner.extend`
   bottom: 0px;
   width: 250px;
 `
-
 export const BannerLogo = styled(Img)`
   width: 22px;
   height: 22px;
-  border-radius: 100%;
+  display: block;
 `
 export const SearchLogo = styled(Img)`
   width: 22px;
@@ -52,5 +51,6 @@ export const SearchLogo = styled(Img)`
 `
 export const BannerTitle = styled.div`
   margin-left: 8px;
-  margin-top: -4px;
+  font-size: 0.9rem;
+  margin-top: 4px;
 `
