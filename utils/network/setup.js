@@ -5,11 +5,10 @@ import { onError } from 'apollo-link-error'
 import { ApolloClient } from 'apollo-client'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import fetch from 'isomorphic-fetch'
-import store from 'store'
 
 /* import { onError } from 'apollo-link-error' */
 
-import { makeDebugger } from '../../utils'
+import { makeDebugger, BStore } from '..'
 import { GRAPHQL_ENDPOINT } from '../../config'
 
 /* eslint-disable no-unused-vars */
@@ -30,7 +29,7 @@ const retryLink = new RetryLink({
     jitter: true,
   },
   attempts: {
-    max: 2,
+    max: 1,
     /* retryIf: error => !!error, */
   },
 })
@@ -39,28 +38,12 @@ const retryLink = new RetryLink({
 const errorLink = onError(({ graphQLErrors }) => {
   if (graphQLErrors) {
     /* graphQLErrors.map(({ message, path, detail }) => */
-    debug('[GraphQL error happend]')
-    /*
-       graphQLErrors.map(({ message }) =>
-       debug(`[error detail]: ${operation.operationName} ${message}`)
-       )
-     */
+    debug('[GraphQL error happend]: ')
+    graphQLErrors.map(({ message }) => debug(`[error detail--> ]:  ${message}`))
   }
-  // if (networkError) {
-  // debug(`[Network error]: ${networkError}`)
-  // }
 })
 
-let token = ''
-const user = store.get('user')
-
-if (user) {
-  token = store.get('user').token || ''
-}
-
-/* const token = */
-/* 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJtYXN0YW5pX3NlcnZlciIsImV4cCI6MTUyNTI2Nzc3NCwiaWF0IjoxNTI0MDU4MTc0LCJpc3MiOiJtYXN0YW5pX3NlcnZlciIsImp0aSI6IjdiNjdhYzJmLTIwMjYtNDMzNy04MjcyLTVmYjY0ZDMxMGVjNyIsIm5iZiI6MTUyNDA1ODE3Mywic3ViIjoiMTEyIiwidHlwIjoiYWNjZXNzIn0.mm0GuOhzs8UYikPZGnIKQpnGYJQiwzEtCx2xeRn1qcT3sOT6Yg3GvM303OxDoGHnrNf72HSjwVxiCO6mXkq8mg' */
-
+const token = BStore.get('token') || ''
 export const context = {
   headers: {
     special: 'Special header value',
@@ -68,9 +51,9 @@ export const context = {
   },
 }
 
-const link = ApolloLink.from([errorLink, retryLink, graphLink])
-/* const link = ApolloLink.from([retryLink, errorLink, graphLink]) */
-/* const link = ApolloLink.from([errorLink, graphLink]) */
+/* const link = ApolloLink.from([errorLink, retryLink, graphLink]) */
+const link = ApolloLink.from([retryLink, errorLink, graphLink])
+/* const link = ApolloLink.from([retryLink, graphLink]) */
 
 // disable cache in apollo-client
 // sse https://www.apollographql.com/docs/react/essentials/queries.html#graphql-config-options-fetchPolicy
@@ -92,5 +75,6 @@ export const client = new ApolloClient({
   /* cache: new InMemoryCache(), */
   cache: new InMemoryCache(),
   connectToDevTools: true,
+  /* shouldBatch: false, */
   defaultOptions,
 })

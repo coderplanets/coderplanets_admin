@@ -17,6 +17,7 @@ import ArticleViwer from '../ArticleViwer'
 import AccountViewer from '../AccountViewer'
 import AccountEditor from '../AccountEditor'
 import CommunityEditor from '../CommunityEditor'
+import ThreadEditor from '../ThreadEditor'
 import TagEditor from '../TagEditor'
 import CategoryEditor from '../CategoryEditor'
 import CategorySetter from '../CategorySetter'
@@ -102,7 +103,7 @@ const Viewer = ({
       return <CategorySetter editData={editCommunityData} />
     }
     case TYPE.PREVIEW_CREATE_THREAD: {
-      return <h3>PREVIEW_CREATE_THREAD</h3>
+      return <ThreadEditor />
     }
     case TYPE.PREVIEW_SET_THREAD: {
       return <ThreadSetter editData={editCommunityData} />

@@ -11,6 +11,7 @@ export { default as BannerCountBrief } from './BannerCountBrief'
 export { default as MarkDownPreviewer } from './MarkDownPreviewer'
 export { default as ContentFilter } from './ContentFilter'
 export { default as FileUploader } from './FileUploader'
+export { default as MarkDownRender } from './MarkDownRender'
 
 export { default as StateTree } from './StateTree'
 export { default as StatusBox } from './StatusBox'
