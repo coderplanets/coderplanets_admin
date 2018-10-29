@@ -1,7 +1,7 @@
 /*
-* PreviewStore store test
-*
-*/
+ * PreviewStore store test
+ *
+ */
 // import PreviewStore from '../index'
 
 it('1 + 1 = 2', () => {

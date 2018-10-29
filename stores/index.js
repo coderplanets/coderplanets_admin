@@ -6,7 +6,7 @@ export { default as PostsStore } from './PostsStore'
 export { default as BodylayoutStore } from './BodylayoutStore'
 export { default as ApiLayoutStore } from './ApiLayoutStore'
 export { default as SidebarStore } from './SidebarStore'
-export { default as PreviewStore } from './PreviewStore'
+export { default as PreviewStore } from '../containers/Preview/store'
 export { default as DoraemonStore } from './DoraemonStore'
 export { default as HeaderStore } from './HeaderStore'
 

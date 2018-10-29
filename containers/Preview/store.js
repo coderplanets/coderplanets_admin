@@ -7,7 +7,7 @@ import { types as t, getParent } from 'mobx-state-tree'
 
 // import { CMS_THREADS } from '../../config'
 
-import { Community, Category, Tag, Post, User } from '../SharedModel'
+import { Community, Category, Tag, Post, User } from '../../stores/SharedModel'
 import { markStates, TYPE, unholdPage, stripMobx } from '../../utils'
 
 // const debug = makeDebugger('S:PreviewStore')
@@ -44,6 +44,7 @@ const PreviewStore = t
         TYPE.PREVIEW_SET_CATEGORY,
         TYPE.PREVIEW_UPDATE_CATEGORY,
         // thread
+        TYPE.PREVIEW_CREATE_THREAD,
         TYPE.PREVIEW_SET_THREAD,
         // permission
         TYPE.PREVIEW_CREATE_PERMISSION,

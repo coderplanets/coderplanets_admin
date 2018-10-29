@@ -101,6 +101,9 @@ const Viewer = ({
     case TYPE.PREVIEW_SET_CATEGORY: {
       return <CategorySetter editData={editCommunityData} />
     }
+    case TYPE.PREVIEW_CREATE_THREAD: {
+      return <h3>PREVIEW_CREATE_THREAD</h3>
+    }
     case TYPE.PREVIEW_SET_THREAD: {
       return <ThreadSetter editData={editCommunityData} />
     }

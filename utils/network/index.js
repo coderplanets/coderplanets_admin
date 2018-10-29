@@ -1,7 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import { Observable } from 'rxjs/Observable'
-
-import 'rxjs/add/observable/fromPromise'
+import { from } from 'rxjs'
 
 /* import { makeDebugger } from '../../utils' */
 import { client, context } from './setup'
@@ -20,6 +18,7 @@ const doQuery = (query, variables) =>
       context,
     })
     .then(res => {
+      if (res.errors) return formatGraphErrors(res.errors)
       return res.data
     })
     .catch(formatGraphErrors)
@@ -40,20 +39,20 @@ const GET = url =>
     .catch(getCatchHandler)
 
 export const queryPromise = ({ query, variables }) =>
-  Observable.fromPromise(doQuery(query, variables))
+  from(doQuery(query, variables))
 
 export const mutatePromise = ({ mutation, variables }) =>
-  Observable.fromPromise(doMutate(mutation, variables))
+  from(doMutate(mutation, variables))
 
-export const restGetPromise = url => Observable.fromPromise(GET(url))
+export const restGetPromise = url => from(GET(url))
 
 /*
 
-const network = {
-  query,
-  mutate,
-  GET,
-}
+   const network = {
+   query,
+   mutate,
+   GET,
+   }
 
-export default network
-*/
+   export default network
+ */
