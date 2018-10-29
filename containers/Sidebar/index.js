@@ -67,7 +67,7 @@ class SidebarContainer extends React.Component {
     return (
       <Sidebar>
         <Banner>
-          <BannerLogo src={`${ICON_CMD}/rainbow_logo.svg`} />
+          <BannerLogo src={`${ICON_CMD}/keyboard_logo.svg`} />
           <BannerTitle onClick={logic.loadCommunities}>
             CPS 管理后台 @2018
           </BannerTitle>
