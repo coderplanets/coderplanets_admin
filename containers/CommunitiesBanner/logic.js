@@ -48,7 +48,6 @@ export const loadCategories = () =>
   sr71$.query(S.pagedCategories, { filter: {} })
 
 export function onAdd(thread) {
-  console.log('thread: ', thread)
   switch (thread) {
     case 'tags': {
       return dispatchEvent(EVENT.NAV_CREATE_TAG, {

@@ -178,6 +178,7 @@ const DataResolver = [
     match: asyncRes(EVENT.NAV_CREATE_THREAD),
     action: res => {
       const event = res[EVENT.NAV_CREATE_THREAD]
+      console.log('NAV_CREATE_THREAD data: ', event.data)
 
       store.markState({ editCommunity: event.data })
       store.open(event.type)

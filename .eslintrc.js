@@ -1,6 +1,6 @@
 module.exports = {
   extends: ['airbnb', 'plugin:react/recommended', 'prettier', 'prettier/react'],
-  plugins: ['prettier', 'react'],
+  plugins: ['prettier', 'react', 'cypress'],
   parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 2016,
@@ -13,26 +13,34 @@ module.exports = {
     es6: true,
     node: true,
     jest: true,
+    'cypress/globals': true,
   },
   rules: {
     'arrow-body-style': 0,
-    'no-param-reassign': 0, // heavilly used in store.actions
-    'no-use-before-define': 0, // heavilly used in store.views
+    // need for _store init
+    'no-underscore-dangle': 0,
+    // heavilly used in store.actions
+    'no-param-reassign': 0,
+    // heavilly used in store.views
+    'no-use-before-define': 0,
+    // force-return is unneeded
     'consistent-return': 0,
-    'no-nested-ternary': 0, // TODO
-    'no-shadow': 0, //TODO: currently just for entry
-    'no-return-assign': 0, //TODO currently only for BookStore
+    'no-shadow': 0,
+    // error could be object for parse by upfloor
     'prefer-promise-reject-errors': 0,
     'react/jsx-no-bind': 0,
+    // allow JSX in js files
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react/forbid-prop-types': 0,
+    // no need sort
     'react/sort-comp': 0,
     'react/prop-types': [1, { skipUndeclared: true }],
     'jsx-a11y/href-no-hash': 'off',
     'jsx-a11y/no-static-element-interactions': 0,
     'jsx-a11y/click-events-have-key-events': 0,
-    'import/no-named-as-default': 0,
-    'import/no-named-as-default-member': 0,
+
+    // for cypress test usage
+    'no-unused-expressions': 0,
 
     'prettier/prettier': [
       'error',

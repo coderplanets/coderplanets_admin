@@ -3,8 +3,9 @@ import { PAGE_SIZE } from '../../config'
 
 export const Thread = t.model('Thread', {
   id: t.maybeNull(t.string),
-  title: t.maybeNull(t.string),
-  raw: t.maybeNull(t.string),
+  index: t.optional(t.number, 0),
+  title: t.optional(t.string, ''),
+  raw: t.optional(t.string, ''),
 })
 
 export const PagedThreads = t.model('PagedThreads', {

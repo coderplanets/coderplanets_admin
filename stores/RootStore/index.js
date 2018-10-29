@@ -32,6 +32,7 @@ import {
   UsersContentStore,
   // editors
   CommunityEditorStore,
+  ThreadEditorStore,
   TagEditorStore,
   CategoryEditorStore,
   PermissionEditorStore,
@@ -96,6 +97,7 @@ const rootStore = t
     typeWriter: t.optional(TypeWriterStore, {}),
     accountEditor: t.optional(AccountEditorStore, {}),
     communityEditor: t.optional(CommunityEditorStore, {}),
+    threadEditor: t.optional(ThreadEditorStore, {}),
     tagEditor: t.optional(TagEditorStore, {}),
     categoryEditor: t.optional(CategoryEditorStore, {}),
     permissionEditor: t.optional(PermissionEditorStore, {}),

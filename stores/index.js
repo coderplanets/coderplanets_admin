@@ -35,6 +35,7 @@ export {
 
 // editors
 export { default as TagEditorStore } from '../containers/TagEditor/store'
+export { default as ThreadEditorStore } from '../containers/ThreadEditor/store'
 export {
   default as CommunityEditorStore,
 } from '../containers/CommunityEditor/store'
