@@ -28,6 +28,7 @@ const sr71$ = new SR71({
     EVENT.NAV_SET_CATEGORY,
     EVENT.NAV_UPDATE_CATEGORY,
     // threahd
+    EVENT.NAV_CREATE_THREAD,
     EVENT.NAV_SET_THREAD,
     // permission
     EVENT.NAV_UPDATE_PERMISSION,
@@ -167,6 +168,16 @@ const DataResolver = [
     match: asyncRes(EVENT.NAV_SET_CATEGORY),
     action: res => {
       const event = res[EVENT.NAV_SET_CATEGORY]
+
+      store.markState({ editCommunity: event.data })
+      store.open(event.type)
+      holdPage()
+    },
+  },
+  {
+    match: asyncRes(EVENT.NAV_CREATE_THREAD),
+    action: res => {
+      const event = res[EVENT.NAV_CREATE_THREAD]
 
       store.markState({ editCommunity: event.data })
       store.open(event.type)
