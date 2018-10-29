@@ -40,8 +40,6 @@ const updatableAttrs = [
   'nickname',
   'email',
   'location',
-  'company',
-  'education',
   'qq',
   'weibo',
   'weichat',

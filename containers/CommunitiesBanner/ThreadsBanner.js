@@ -46,7 +46,7 @@ class ThreadsBanner extends React.Component {
             </FilterTags>
           </OperationItem>
           <OperationDivider />
-          <OperationItem onClick={logic.onAdd}>
+          <OperationItem onClick={logic.onAdd.bind(this, 'threads')}>
             <OperationIconChart src={`${ICON_CMD}/plus.svg`} />
             添加
           </OperationItem>

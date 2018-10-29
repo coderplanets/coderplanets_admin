@@ -9,17 +9,14 @@ export { default as uid } from './uid'
 /*
  * utils functiosn
  */
+
 export {
   dispatchEvent,
   mapKeys,
   mapKey,
   mapValue,
-  isObject,
   maybe,
   objToArray,
-  notEmpty,
-  isEmptyNil,
-  isEmptyValue,
   toPercentNum,
   Global,
   onClient,
@@ -34,7 +31,19 @@ export {
   extractAttachments,
 } from './functions'
 
+export {
+  cast,
+  changeset,
+  notEmpty,
+  hasValue,
+  isEmptyValue,
+  nilOrEmpty,
+  isObject,
+  isEmptyNil,
+} from './validator'
+
 export { asyncErr, asyncRes } from './graphql_helper'
+
 export {
   getMainPath,
   getSubPath,
@@ -77,5 +86,6 @@ export {
 
 export { default as fakeUsers } from './fake_user'
 
+export { default as BStore } from './bstore'
 export { default as GA } from './analytics'
 export { Trans } from './i18n'

@@ -3,6 +3,8 @@ import React from 'react'
 import TimeAgo from 'timeago-react'
 
 import { ICON_CMD } from '../../config'
+/* import { fakeUsers, getRandomInt, Global, prettyNum } from '../../utils' */
+import { Global, prettyNum, uid } from '../../utils'
 
 import {
   AvatarsRow,
@@ -10,9 +12,10 @@ import {
   SpaceGrow,
   Pagi,
   CommentLoading,
-  MarkDownPreviewer,
+  MarkDownRender,
 } from '../../components'
 
+import * as logic from './logic'
 import CommentsFilter from './CommentsFilter'
 
 import {
@@ -49,17 +52,10 @@ import {
   ReplyToFloor,
 } from './styles/comments_list'
 
-import * as logic from './logic'
-import { uid, Global, prettyNum, makeDebugger } from '../../utils'
-
-/* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:CommentsList')
-/* eslint-enable no-unused-vars */
-
 const getSelection = () => {
   const selectText = Global.getSelection().toString()
   if (!R.isEmpty(selectText)) {
-    debug('getSelection', selectText)
+    /* console.log('getSelection', selectText) */
     // TODO: then use window.getSelection().getRangeAt(0).getBoundingClientRect() to draw a button
   }
 }
@@ -107,9 +103,11 @@ const ActionBottom = ({ data, accountInfo }) => {
 }
 
 const getAuthors = comment => {
+  /* eslint-disable no-return-assign */
   const replies = R.forEach(reply => {
     return (reply.author.extra_id = reply.id)
   }, R.clone(comment.replies))
+  /* eslint-enable */
 
   return R.pluck('author', replies)
 }
@@ -138,9 +136,7 @@ const Comment = ({ data, tobeDeleteId, accountInfo }) => (
                   total={data.repliesCount}
                 />
               </ReplyUsers>
-            ) : (
-              <div />
-            )}
+            ) : null}
           </CommentHeaderFirst>
           <TimeStamps>
             <TimeAgo datetime={data.insertedAt} locale="zh_CN" />
@@ -154,10 +150,8 @@ const Comment = ({ data, tobeDeleteId, accountInfo }) => (
               <ReplyToBody>{data.replyTo.body}</ReplyToBody>
               <ReplyToFloor>#{data.replyTo.floor}</ReplyToFloor>
             </ReplyBar>
-          ) : (
-            <div />
-          )}
-          <MarkDownPreviewer body={data.body} />
+          ) : null}
+          <MarkDownRender body={data.body} />
         </CommentContent>
         <CommentFooter>
           <Actions>
@@ -190,7 +184,7 @@ const Comment = ({ data, tobeDeleteId, accountInfo }) => (
 )
 
 const Lists = ({ entries, tobeDeleteId, accountInfo }) => (
-  <div>
+  <React.Fragment>
     {entries.map(c => (
       <div key={uid.gen()}>
         <Comment
@@ -200,48 +194,33 @@ const Lists = ({ entries, tobeDeleteId, accountInfo }) => (
         />
       </div>
     ))}
-  </div>
+  </React.Fragment>
 )
 
-const TotalCountText = ({ count }) => {
-  return (
-    <TotalCountWrapper>
-      {count > 0 ? (
-        <ListTitle id="lists-info">
-          收到 <TotalNum>{count}</TotalNum> 条评论:
-        </ListTitle>
-      ) : (
-        <div />
-      )}
-    </TotalCountWrapper>
-  )
-}
+const TotalCountText = ({ count }) => (
+  <TotalCountWrapper>
+    {count > 0 ? (
+      <ListTitle id="lists-info">
+        共收到 <TotalNum>{count}</TotalNum> 条评论:
+      </ListTitle>
+    ) : null}
+  </TotalCountWrapper>
+)
 
 const CommentsList = ({
-  entries,
   accountInfo,
-  restProps: {
-    totalCount,
-    pageSize,
-    pageNumber,
-    loading,
-    loadingFresh,
-    tobeDeleteId,
-    filterType,
-  },
+  pagedComments: { entries, totalCount, pageSize, pageNumber },
+  restProps: { loading, loadingFresh, tobeDeleteId, filterType },
 }) => (
-  <div>
+  <React.Fragment>
     <TotalHeader>
       <TotalCountText count={totalCount} />
-      <CommentsFilter filterType={filterType} />
+      <CommentsFilter filterType={filterType} show={totalCount >= 2} />
     </TotalHeader>
-
-    {loadingFresh ? (
+    {!loadingFresh ? null : (
       <CommentBlock>
         <CommentLoading />
       </CommentBlock>
-    ) : (
-      <div />
     )}
     <ListsContainer>
       {loading ? (
@@ -258,15 +237,17 @@ const CommentsList = ({
         />
       )}
     </ListsContainer>
-
     <Pagi
       left="-10px"
       pageNumber={pageNumber}
       pageSize={pageSize}
       totalCount={totalCount}
       onChange={logic.pageChange}
+      showBottomMsg
+      noMoreMsg="没有更多的评论了"
+      emptyMsg="目前还没有评论"
     />
-  </div>
+  </React.Fragment>
 )
 
 export default CommentsList

@@ -34,7 +34,7 @@ export const uploadPic = pic => {
 }
 
 export const mutateConfirm = () => {
-  const requiredArgs = ['title', 'desc', 'raw', 'category', 'logo']
+  const requiredArgs = ['title', 'desc', 'raw', 'logo']
   const args = {
     ...store.communityData,
   }

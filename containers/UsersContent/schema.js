@@ -10,11 +10,9 @@ const pagedUsers = gql`
         bio
         sex
         email
-        company
         qq
         weibo
         weichat
-        education
         subscribedCommunitiesCount
         location
         fromGithub

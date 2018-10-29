@@ -1,20 +1,8 @@
 import gql from 'graphql-tag'
 
 const createCommunity = gql`
-  mutation(
-    $title: String!
-    $desc: String!
-    $logo: String!
-    $raw: String!
-    $category: String!
-  ) {
-    createCommunity(
-      title: $title
-      desc: $desc
-      logo: $logo
-      raw: $raw
-      category: $category
-    ) {
+  mutation($title: String!, $desc: String!, $logo: String!, $raw: String!) {
+    createCommunity(title: $title, desc: $desc, logo: $logo, raw: $raw) {
       id
       title
       desc
@@ -29,7 +17,6 @@ const updateCommunity = gql`
     $desc: String
     $logo: String
     $raw: String
-    $category: String
   ) {
     updateCommunity(
       id: $id
@@ -37,7 +24,6 @@ const updateCommunity = gql`
       desc: $desc
       logo: $logo
       raw: $raw
-      category: $category
     ) {
       id
       title
