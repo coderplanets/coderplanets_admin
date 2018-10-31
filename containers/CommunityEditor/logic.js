@@ -9,7 +9,7 @@ import {
   TYPE,
   meteorState,
   closePreviewer,
-  castArgs,
+  cast,
 } from '../../utils'
 import S from './schema'
 import SR71 from '../../utils/network/sr71'
@@ -42,13 +42,10 @@ export const mutateConfirm = () => {
   store.markState({ mutating: true })
 
   if (store.isEdit) {
-    return sr71$.mutate(
-      S.updateCommunity,
-      castArgs(args, ['id', ...requiredArgs])
-    )
+    return sr71$.mutate(S.updateCommunity, cast(['id', ...requiredArgs], args))
   }
 
-  return sr71$.mutate(S.createCommunity, castArgs(args, requiredArgs))
+  return sr71$.mutate(S.createCommunity, cast(requiredArgs, args))
 }
 
 const initEditData = editData => {

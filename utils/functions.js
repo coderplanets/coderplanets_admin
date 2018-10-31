@@ -50,19 +50,6 @@ export const mapValue = R.compose(
 // reference: https://blog.carbonfive.com/2017/12/20/easy-pipeline-debugging-with-curried-console-log/
 export const Rlog = (arg = 'Rlog: ') => R.tap(log(arg))
 
-const validValues = R.compose(
-  R.not,
-  isEmptyNil
-)
-
-export const castArgs = (fields, optFields) => {
-  const emptyLists = R.repeat('', optFields.length)
-  const emptyFields = R.zipObj(optFields, emptyLists)
-  const validFields = R.pickBy(validValues, R.pick(optFields, fields))
-
-  return R.merge(emptyFields, validFields)
-}
-
 export const cutFrom = (val, cutnumber = 20) => {
   if (nilOrEmpty(val)) {
     return ''

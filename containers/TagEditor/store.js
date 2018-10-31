@@ -38,7 +38,7 @@ const TagEditorStore = t
     },
   }))
   .actions(self => ({
-    updateTag(sobj) {
+    updateEditing(sobj) {
       const tag = R.merge(self.tag, { ...sobj })
       self.markState({ tag })
     },

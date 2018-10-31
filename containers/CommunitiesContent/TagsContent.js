@@ -61,6 +61,15 @@ const columns = [
     },
   },
   {
+    title: 'topic',
+    width: 150,
+    dataIndex: 'topic',
+    align: 'center',
+    render: text => {
+      return <div>{text.title}</div>
+    },
+  },
+  {
     title: '创建时间',
     width: 150,
     dataIndex: 'insertedAt',

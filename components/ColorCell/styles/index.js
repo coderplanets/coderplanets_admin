@@ -7,8 +7,8 @@ export const ColorCell = styled.div`
 `
 
 export const ColorDot = styled.div`
-  width: 10px;
-  height: 10px;
+  width: 15px;
+  height: 15px;
   background: ${props => props.color};
   border-radius: 100%;
 `

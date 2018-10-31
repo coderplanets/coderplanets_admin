@@ -56,18 +56,25 @@ class TagEditorContainer extends React.Component {
         <FormInputer
           label="名称:"
           value={tagData.title}
-          onChange={logic.profileChange('title')}
+          onChange={logic.inputOnChange.bind(this, 'title')}
+        />
+        <FormInputer
+          label="topic:"
+          value={tagData.topicValue}
+          onChange={logic.inputOnChange.bind(this, 'topicValue')}
+          disabled={isEdit}
+          note="用于区分同一组件的不同 tags, 比如'帖子'和'同城'同样使用 PostThreads 组件，需要使用 topic 来区分各自的 tags"
         />
         <TagColorSelector
           label="颜色:"
           value={tagData.color}
-          onChange={logic.colorChange}
+          onChange={logic.inputOnChange.bind(this, 'color')}
         />
         <div style={showStyle}>
           <FormItem label="社区:">
             <CommunityMatrix
               data={pagedCommunitiesData}
-              onSelect={logic.communityChange}
+              onSelect={logic.inputOnChange.bind(this, 'community')}
               activeRaw={tagData.community ? tagData.community.raw : ''}
               hasAddon={false}
             />
@@ -78,7 +85,7 @@ class TagEditorContainer extends React.Component {
             label="thread:"
             options={CMS_THREADS}
             value={tagData.thread}
-            onChange={logic.threadChange}
+            onChange={logic.inputOnChange.bind(this, 'thread')}
           />
         </div>
         <Divider />

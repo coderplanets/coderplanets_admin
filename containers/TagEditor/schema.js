@@ -6,12 +6,14 @@ const createTag = gql`
     $title: String!
     $color: String!
     $communityId: ID!
+    $topic: String
   ) {
     createTag(
       thread: $thread
       title: $title
       color: $color
       communityId: $communityId
+      topic: $topic
     ) {
       id
       title

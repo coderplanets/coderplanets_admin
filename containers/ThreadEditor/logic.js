@@ -6,7 +6,7 @@ import {
   asyncErr,
   asyncRes,
   closePreviewer,
-  isObject,
+  updateEditing,
   ERR,
 } from '../../utils'
 
@@ -22,16 +22,8 @@ const debug = makeDebugger('L:ThreadEditor')
 
 let store = null
 
-export const inputOnChange = (part, e) => {
-  if (!store) return false
-  const value = isObject(e) ? e.target.value : e
-  store.updateEditing({ [part]: value })
-}
-
-export const mutateConfirm = () => {
-  console.log('mutateConfirm store: ', store.editThreadData)
+export const mutateConfirm = () =>
   sr71$.mutate(S.createThread, store.editThreadData)
-}
 
 export function cancleEdit() {
   store.markState({
@@ -40,6 +32,8 @@ export function cancleEdit() {
   })
   closePreviewer()
 }
+
+export const inputOnChange = (part, e) => updateEditing(store, part, e)
 
 // ###############################
 // Data & Error handlers
