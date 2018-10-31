@@ -1,26 +1,15 @@
 import gql from 'graphql-tag'
+import { F, P } from '../schemas'
 
 const pagedThreads = gql`
-  query($filter: PagedFilter!) {
-    pagedThreads(filter: $filter) {
-      entries {
-        id
-        title
-        raw
-      }
-      totalCount
-      totalPages
-      pageSize
-      pageNumber
-    }
-  }
+  ${P.pagedThreads}
 `
 const setThread = gql`
   mutation($communityId: ID!, $threadId: ID!) {
     setThread(communityId: $communityId, threadId: $threadId) {
       id
       threads {
-        title
+        ${F.thread}
       }
     }
   }
