@@ -25,7 +25,6 @@ export {
   Rlog,
   countWords,
   debounce,
-  castArgs,
   closePreviewer,
   extractMentions,
   extractAttachments,
@@ -60,6 +59,7 @@ export {
   stripMobx,
   $solver,
   observerHoc,
+  updateEditing,
 } from './mobx_helper'
 
 export {

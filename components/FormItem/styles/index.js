@@ -7,13 +7,14 @@ export const FormItemWrapper = styled.div`
   margin-bottom: 25px;
 `
 export const FormLable = styled.div`
-  font-size: 1em;
+  font-size: 0.9rem;
   color: grey;
   margin-right: 10px;
   margin-top: 5px;
   max-width: 20%;
   width: 20%;
   text-align: right;
+  min-width: 40px;
 `
 
 export const ChildWrapper = styled.div`

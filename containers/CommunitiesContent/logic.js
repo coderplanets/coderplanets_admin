@@ -255,6 +255,7 @@ const DataSolver = [
   {
     match: asyncRes('pagedTags'),
     action: ({ pagedTags }) => {
+      debug('load pagedTags: ', pagedTags)
       cancleLoading()
       store.markState({ pagedTags })
     },

@@ -5,8 +5,9 @@ import {
   asyncRes,
   makeDebugger,
   $solver,
-  castArgs,
+  cast,
   closePreviewer,
+  updateEditing,
 } from '../../utils'
 import SR71 from '../../utils/network/sr71'
 
@@ -34,24 +35,19 @@ export function getAllCommunities(page = 1) {
   sr71$.query(S.pagedCommunities, commonFilter(page))
 }
 
-export const profileChange = R.curry((thread, e) =>
-  store.updateTag({
-    [thread]: e.target.value,
-  })
-)
-
-export const colorChange = color => store.updateTag({ color })
-
-export const threadChange = thread => store.updateTag({ thread })
-
-export const communityChange = community => store.updateTag({ community })
-
 export const mutateConfirm = () => {
-  const requiredArgs = ['id', 'title', 'color', 'thread', 'community']
+  const requiredArgs = [
+    'id',
+    'title',
+    'color',
+    'thread',
+    'topicValue',
+    'community',
+  ]
   const args = { ...store.tagData }
 
   store.markState({ mutating: true })
-  const fargs = castArgs(args, requiredArgs)
+  const fargs = cast(requiredArgs, args)
 
   fargs.color = R.toUpper(fargs.color)
   fargs.communityId = fargs.community.id
@@ -60,13 +56,17 @@ export const mutateConfirm = () => {
     return sr71$.mutate(S.updateTag, fargs)
   }
 
+  fargs.topic = fargs.topicValue
   fargs.thread = R.toUpper(fargs.thread)
+  console.log('fargs --> ', fargs)
+
   return sr71$.mutate(S.createTag, fargs)
 }
 
 const initEditData = editData => {
   store.markState({
     tag: editData,
+    topicValue: editData.topic.title,
     isEdit: true,
   })
 }
@@ -78,6 +78,8 @@ export function cancleMutate() {
   })
   closePreviewer()
 }
+
+export const inputOnChange = (part, e) => updateEditing(store, part, e)
 
 // ###############################
 // Data & Error handlers

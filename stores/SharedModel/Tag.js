@@ -3,9 +3,17 @@ import { TAG_COLORS, CMS_THREADS, PAGE_SIZE } from '../../config'
 
 import { Community } from './Community'
 
+export const Topic = t.model('Topic', {
+  id: t.maybeNull(t.string),
+  title: t.optional(t.string, 'index'),
+  raw: t.optional(t.string, 'index'),
+})
+
 export const Tag = t.model('Tag', {
   id: t.maybeNull(t.string),
   title: t.maybeNull(t.string),
+  topic: t.optional(Topic, {}),
+  topicValue: t.optional(t.string, 'index'),
   color: t.optional(t.enumeration('color', TAG_COLORS), TAG_COLORS[0]),
   thread: t.optional(t.enumeration('thread', CMS_THREADS), CMS_THREADS[0]),
   community: t.maybeNull(Community),

@@ -29,7 +29,6 @@ export const CategoryTag = styled.div`
     border: 1px solid #97dbfc;
   }
 `
-
 export const DeleteCross = styled.div`
   margin-left: 8px;
   &:hover {

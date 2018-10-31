@@ -74,6 +74,10 @@ const pagedTagsRaw = `
           logo
           title
         }
+        topic {
+          title
+          raw
+        }
         insertedAt
         updatedAt
       }
