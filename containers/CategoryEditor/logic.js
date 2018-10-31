@@ -6,7 +6,7 @@ import {
   makeDebugger,
   closePreviewer,
   $solver,
-  castArgs,
+  cast,
 } from '../../utils'
 import S from './schema'
 import SR71 from '../../utils/network/sr71'
@@ -31,13 +31,10 @@ export const mutateConfirm = () => {
   const args = { ...store.categoryData }
 
   store.markState({ mutating: true })
-  const fargs = castArgs(args, requiredArgs)
+  const fargs = cast(requiredArgs, args)
 
   if (store.isEdit) {
-    return sr71$.mutate(
-      S.updateCategory,
-      castArgs(args, ['id', ...requiredArgs])
-    )
+    return sr71$.mutate(S.updateCategory, cast(['id', ...requiredArgs], args))
   }
   console.log('fargs --- xxx ', fargs)
   return sr71$.mutate(S.createCategory, fargs)

@@ -1,27 +1,8 @@
 import gql from 'graphql-tag'
+import { P } from '../schemas'
 
 const user = gql`
-  query user($id: ID!) {
-    user(id: $id) {
-      nickname
-      avatar
-      bio
-      fromGithub
-      location
-      qq
-      weibo
-      weichat
-      sex
-      githubProfile {
-        htmlUrl
-        login
-      }
-      contributes {
-        date
-        count
-      }
-    }
-  }
+  ${P.user}
 `
 
 const account = gql`

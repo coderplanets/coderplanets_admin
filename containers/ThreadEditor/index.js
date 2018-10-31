@@ -36,6 +36,7 @@ class ThreadEditorContainer extends React.Component {
       // isEdit,
     } = threadEditor
 
+    console.log('editThreadData --> ', editThreadData)
     return (
       <Wrapper>
         coderplanets
@@ -54,6 +55,7 @@ class ThreadEditorContainer extends React.Component {
         />
         <FormInputer
           label="索引:"
+          type="number"
           value={editThreadData.index}
           onChange={logic.inputOnChange.bind(this, 'index')}
         />

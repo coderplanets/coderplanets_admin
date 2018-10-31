@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { F } from '../schemas'
 
 const pagedCategories = gql`
   query($filter: PagedFilter!) {
@@ -12,17 +13,12 @@ const pagedCategories = gql`
           title
         }
         author {
-          id
-          nickname
-          avatar
+          ${F.author}
         }
         insertedAt
         updatedAt
       }
-      pageNumber
-      pageSize
-      totalCount
-      totalPages
+      ${F.pagedCounts}
     }
   }
 `

@@ -25,7 +25,6 @@ export {
   Rlog,
   countWords,
   debounce,
-  castArgs,
   closePreviewer,
   extractMentions,
   extractAttachments,
@@ -42,7 +41,14 @@ export {
   isEmptyNil,
 } from './validator'
 
-export { asyncErr, asyncRes } from './graphql_helper'
+export {
+  makeGQClient,
+  makeGithubExplore,
+  asyncErr,
+  asyncRes,
+  later,
+  pagedFilter,
+} from './graphql_helper'
 
 export {
   getMainPath,
@@ -60,6 +66,7 @@ export {
   stripMobx,
   $solver,
   observerHoc,
+  updateEditing,
 } from './mobx_helper'
 
 export {

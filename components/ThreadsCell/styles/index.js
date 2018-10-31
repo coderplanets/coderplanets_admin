@@ -6,11 +6,11 @@ import { Animate } from '../../../utils'
 export const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
 `
 export const Thread = styled.div`
   margin-right: 5px;
-  margin-bottom: 3px;
+  margin-bottom: 5px;
   padding: 0 5px;
   background: #f1f1f1;
   color: #6cbf6c;
