@@ -10,7 +10,6 @@ import RootStore from './RootStore'
 let rootStore = null
 
 const createRootStore = ({ langSetup, ...restData }) => {
-  /* return RootStore.create({ appLangs: langSetup, ...restData }, {}) */
   return RootStore.create({ appLangs: langSetup || {}, ...restData }, {})
 }
 

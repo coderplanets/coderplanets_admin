@@ -1,7 +1,5 @@
 import React from 'react'
 import { Provider } from 'mobx-react'
-import { request } from 'graphql-request'
-import { GRAPHQL_ENDPOINT } from '../../config'
 
 import GAWraper from '../../components/GAWraper'
 import initRootStore from '../../stores/init'
@@ -16,36 +14,48 @@ import Header from '../../containers/Header'
 import CommunitiesBanner from '../../containers/CommunitiesBanner'
 import CommunitiesContent from '../../containers/CommunitiesContent'
 
-import schema from '../../containers/CommunitiesContent/schema'
+import { P } from '../../containers/schemas'
 
-import { Global, queryStringToJSON /* mergeRouteQuery */ } from '../../utils'
+import {
+  makeGQClient,
+  // queryStringToJSON,
+  // getMainPath,
+  // getSubPath,
+  // extractThreadFromPath,
+  // subPath2Thread,
+  // TYPE,
+  BStore,
+  // nilOrEmpty,
+} from '../../utils'
+
 import Footer from '../../components/Footer'
 
 // try to fix safari bug
 // see https://github.com/yahoo/react-intl/issues/422
 global.Intl = require('intl')
 
+async function fetchData(props) {
+  const token = BStore.cookie.from_req(props.req, 'jwtToken')
+  const gqClient = makeGQClient(token)
+
+  const pagedTags = gqClient.request(P.pagedTags, {
+    filter: { page: 1, size: 30 },
+  })
+
+  return {
+    ...(await pagedTags),
+  }
+}
+
 export default class Index extends React.Component {
-  static async getInitialProps({ req, asPath }) {
-    const isServer = !!req
-    if (!isServer) return {}
+  static async getInitialProps(props) {
+    // const isServer = !!req
+    // if (!isServer) return {}
 
-    const data = await request(GRAPHQL_ENDPOINT, schema.pagedTagsRaw, {
-      filter: queryStringToJSON(asPath),
-      /* filter: mergeRouteQuery(query), */
-      /* filter: { page: 2, size: 20 }, */
-    })
-
-    /* eslint-disable */
-    const { locale, messages } = req || Global.__NEXT_DATA__.props
-    /* eslint-enable */
-    const langSetup = {}
-    langSetup[locale] = messages
+    const { pagedTags } = await fetchData(props)
 
     return {
-      langSetup,
-      /* communities: data.pagedCommunities, */
-      communitiesContent: { pagedTags: data.pagedTags },
+      communitiesContent: { pagedTags },
     }
   }
 
