@@ -17,7 +17,7 @@ import {
 import * as logic from './logic'
 
 class SubscribersBanner extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     logic.loadUsers()
   }
 

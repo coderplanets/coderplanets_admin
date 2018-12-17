@@ -89,8 +89,8 @@ const columns = [
 ]
 
 class ThreadsContent extends React.Component {
-  componentWillMount() {
-    console.log('ThreadsContent ,componentWillMount')
+  componentDidMount() {
+    console.log('ThreadsContent ,componentDidMount')
     logic.loadThreadsIfOnClient()
   }
 

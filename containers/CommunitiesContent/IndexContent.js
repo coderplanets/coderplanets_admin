@@ -163,7 +163,7 @@ const columns = [
 ]
 
 class IndexContent extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     logic.loadCommunitiesIfOnClient()
   }
 

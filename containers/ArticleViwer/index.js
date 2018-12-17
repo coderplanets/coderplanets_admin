@@ -40,7 +40,7 @@ const Viwer = ({ type, data, loading, onReaction }) => {
 }
 
 class ArticleViwerContainer extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { articleViwer } = this.props
     logic.init(articleViwer)
   }

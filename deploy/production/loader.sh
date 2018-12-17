@@ -2,7 +2,7 @@
 
 cd /root/web/
 
-pm2-runtime start npm --name "coderplanets_admin" -- run launch &
+pm2-runtime start npm --name "coderplanets_admin" -- run launch.prod &
 
 while true
 do

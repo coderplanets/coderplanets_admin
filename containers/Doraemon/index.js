@@ -45,7 +45,7 @@ const HintIcon = ({ index, active, cur, length }) => {
 }
 
 class DoraemonContainer extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { doraemon } = this.props
     logic.init(doraemon)
   }

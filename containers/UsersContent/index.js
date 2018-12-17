@@ -33,7 +33,7 @@ const renderChildBanner = (route, store, restProps) => {
 }
 
 class UsersContentContainer extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { usersContent } = this.props
     logic.init(usersContent)
   }

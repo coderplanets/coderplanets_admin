@@ -21,7 +21,7 @@ const debug = makeDebugger('C:Labeler')
 /* eslint-enable no-unused-vars */
 
 class LabelerContainer extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { labeler } = this.props
     logic.init(labeler)
   }

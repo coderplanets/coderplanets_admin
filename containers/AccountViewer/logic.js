@@ -11,6 +11,7 @@ import {
 } from '../../utils'
 import SR71 from '../../utils/network/sr71'
 import S from './schema'
+
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('L:AccountViewer')
 /* eslint-enable no-unused-vars */
@@ -20,6 +21,7 @@ const sr71$ = new SR71({
 })
 
 let store = null
+let sub$ = null
 
 export function loadUser() {}
 
@@ -80,7 +82,23 @@ const ErrSolver = [
   },
 ]
 
-export function init(selectedStore) {
-  store = selectedStore
-  sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+export const loadUserInfo = user => {
+  if (user) return loadUser(user)
+  loadAccount()
+}
+
+export function init(_store, user) {
+  store = _store
+
+  if (sub$) return loadUserInfo(user)
+  sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+
+  return loadUserInfo(user)
+}
+
+export function uninit() {
+  if (!sub$) return false
+  debug('===== do uninit')
+  sub$.unsubscribe()
+  sub$ = null
 }

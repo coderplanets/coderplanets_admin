@@ -17,7 +17,7 @@ import {
 import * as logic from './logic'
 
 class RolesBanner extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     // logic.loadTags()
   }
 

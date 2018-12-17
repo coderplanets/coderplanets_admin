@@ -100,7 +100,7 @@ const columns = [
 ]
 
 class TagsContent extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     logic.loadTags()
   }
 

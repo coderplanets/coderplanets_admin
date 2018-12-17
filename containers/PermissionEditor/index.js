@@ -23,12 +23,10 @@ const debug = makeDebugger('C:PermissionEditor')
 /* eslint-enable no-unused-vars */
 
 class PermissionEditorContainer extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { permissionEditor } = this.props
     logic.init(permissionEditor)
-  }
 
-  componentDidMount() {
     setTimeout(() => {
       ReactTooltip.rebuild()
     }, 1000)

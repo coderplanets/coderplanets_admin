@@ -43,7 +43,7 @@ const renderChildContent = (route, store, restProps) => {
 }
 
 class CommunityContentContainer extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { communityContent } = this.props
     logic.init(communityContent)
   }

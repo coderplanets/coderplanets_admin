@@ -13,31 +13,24 @@ const githubSignin = gql`
   }
 `
 
-const user = gql`
-  query user($id: ID!) {
-    user(id: $id) {
-      id
-      nickname
-      avatar
-      bio
-      fromGithub
-      location
-      qq
-      weibo
-      weichat
-      sex
-      githubProfile {
-        htmlUrl
-        login
+const sessionState = gql`
+  query {
+    sessionState {
+      isValid
+      user {
+        id
+        geoCity
+        nickname
+        avatar
       }
     }
   }
 `
 
 const schema = {
-  user,
   githubSignin,
   githubSigninRes,
+  sessionState,
 }
 
 export default schema
