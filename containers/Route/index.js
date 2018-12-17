@@ -19,7 +19,7 @@ const debug = makeDebugger('C:Route')
 /* eslint-enable no-unused-vars */
 
 class RouteContainer extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { route, router } = this.props
     init(route)
     syncRoute(router)

@@ -158,9 +158,13 @@ const Header = ({ curRoute, leftOffset, fixed, isLogin, accountInfo }) => (
 )
 
 class HeaderContainer extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { header } = this.props
     logic.init(header)
+  }
+
+  componentWillUnmount() {
+    logic.uninit()
   }
 
   /* eslint-disable class-methods-use-this */

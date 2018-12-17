@@ -17,7 +17,7 @@ import {
 import * as logic from './logic'
 
 class ThreadsBanner extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     logic.loadThreads()
   }
 

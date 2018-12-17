@@ -30,7 +30,7 @@ const debug = makeDebugger('C:TagEditor')
 /* eslint-enable no-unused-vars */
 
 class TagEditorContainer extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { tagEditor, editData } = this.props
     logic.init(tagEditor, editData)
   }

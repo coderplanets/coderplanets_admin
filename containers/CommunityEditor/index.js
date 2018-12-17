@@ -29,7 +29,7 @@ const debug = makeDebugger('C:CommunityEditor')
 /* eslint-enable no-unused-vars */
 
 class CommunityEditorContainer extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { communityEditor, editData } = this.props
     logic.init(communityEditor, editData)
   }

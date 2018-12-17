@@ -158,7 +158,7 @@ const columns = [
 ]
 
 class JobsContent extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     logic.loadJobs()
   }
 

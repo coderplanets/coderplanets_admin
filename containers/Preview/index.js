@@ -121,7 +121,7 @@ const Viewer = ({
 }
 
 class PreviewContainer extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { preview } = this.props
     logic.init(preview)
   }

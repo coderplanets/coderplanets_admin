@@ -39,7 +39,7 @@ const DomainBanner = ({ curRoute }) => {
    for some unkown reasion, pages/index will always be the entry in dev mode
  */
 class BannerContainer extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { banner } = this.props
     logic.init(banner)
   }

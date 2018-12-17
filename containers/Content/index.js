@@ -35,7 +35,7 @@ const DomainContent = ({ curRoute }) => {
    for some unkown reasion, pages/index will always be the entry in dev mode
  */
 class ContentContainer extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { content } = this.props
     logic.init(content)
   }

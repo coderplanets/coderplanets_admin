@@ -7,8 +7,8 @@
     "build:dev": "cross-env GOAL=dev next build",
     "launch-old": "cross-env GOAL=production next start -p ${SERVE_PORT}",
     "launch": "cross-env GOAL=production next start -p ${SERVE_PORT}",
-    "launch:dev": "cross-env GOAL=dev next start -p ${SERVE_PORT}",
-    "launch-server": "cross-env NODE_ENV=production next build && cross-env NODE_ENV=production node server"
+    "launch.dev": "cross-env GOAL=dev next start -p ${SERVE_PORT}",
+    "launch.prod": "cross-env GOAL=production next start -p ${SERVE_PORT}",
   },
   "dependencies": {
     "accepts": "^1.3.4",

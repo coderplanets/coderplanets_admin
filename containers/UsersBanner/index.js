@@ -48,7 +48,7 @@ const renderChildBanner = (curRoute, store) => {
 }
 
 class UsersBannerContainer extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { usersBanner } = this.props
     logic.init(usersBanner)
   }

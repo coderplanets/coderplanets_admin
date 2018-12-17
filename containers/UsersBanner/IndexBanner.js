@@ -17,7 +17,7 @@ import {
 import * as logic from './logic'
 
 class IndexBanner extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     logic.loadUsers()
   }
 

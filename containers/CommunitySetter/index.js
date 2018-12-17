@@ -42,7 +42,7 @@ const CommunitiesList = ({ thread, source, communities, selectedids }) => (
 )
 
 class CommunitySetterContainer extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { communitySetter } = this.props
     logic.init(communitySetter)
   }

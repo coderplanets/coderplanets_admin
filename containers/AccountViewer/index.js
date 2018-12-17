@@ -39,16 +39,13 @@ const ThemeSection = ({ themeKeys, curTheme }) => {
 }
 
 class AccountViewerContainer extends React.Component {
-  componentWillMount() {
-    const { accountViewer } = this.props
-    logic.init(accountViewer)
-    logic.loadAccount()
-  }
-
   componentDidMount() {
     /* force rebuild the tooltip, otherwise it won't work in some async cases */
     /* if you want to custom see: */
     /* https://github.com/wwayne/react-tooltip/blob/2364dc61332aa947b106dd4bbdd1f2b0e4b1e51d/src/index.scss */
+    const { accountViewer, user } = this.props
+    logic.init(accountViewer, user)
+
     setTimeout(() => {
       ReactTooltip.rebuild()
     }, 2000)
