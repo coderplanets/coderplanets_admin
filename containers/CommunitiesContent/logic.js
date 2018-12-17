@@ -20,8 +20,6 @@ import { PAGE_SIZE } from '../../config'
 import S from './schema'
 import SR71 from '../../utils/network/sr71'
 
-let sub$ = null
-
 const sr71$ = new SR71({
   resv_event: [EVENT.LOGOUT, EVENT.LOGIN, EVENT.PREVIEW_CLOSE],
 })
@@ -30,6 +28,7 @@ const sr71$ = new SR71({
 const debug = makeDebugger('L:CommunitiesContent')
 /* eslint-enable no-unused-vars */
 
+let sub$ = null
 let store = null
 
 const commonFilter = page => {
@@ -56,6 +55,7 @@ export function loadCommunities(page = 1) {
 export function loadCategories(page = 1) {
   scrollIntoEle(TYPE.APP_HEADER_ID)
   /* const size = PAGE_SIZE.COMMON */
+  console.log('the fuck store: ', store)
   store.markRoute({ page })
   store.markState({ categoriessLoading: true })
 
@@ -395,10 +395,18 @@ const ErrSolver = [
   },
 ]
 
-export function init(selectedStore) {
-  if (store) return false
-  store = selectedStore
+export function init(_store) {
+  store = _store
 
-  if (sub$) sub$.unsubscribe()
+  if (sub$) return loadCategories()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+
+  loadCategories()
+}
+
+export function uninit() {
+  if (!sub$) return false
+  debug('===== do uninit')
+  sub$.unsubscribe()
+  sub$ = null
 }

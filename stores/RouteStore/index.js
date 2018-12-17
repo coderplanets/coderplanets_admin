@@ -40,34 +40,27 @@ const RouteStore = t
     // /racket/jobs ..
 
     markRoute(query) {
-      if (!onClient || R.isEmpty(query)) return false
+      if (!onClient) return false
       const { mainPath, subPath, page } = query
+      query = R.pickBy(v => !R.isEmpty(v), query)
 
-      if (mainPath) {
-        self.mainPath = mainPath
-      }
-      if (subPath) {
-        self.subPath = subPath
-      }
+      if (mainPath) self.mainPath = mainPath
+      if (subPath) self.subPath = subPath
 
-      if (page && String(page) === '1') {
-        query = R.omit(['page'], query)
-      }
+      if (page && String(page) === '1') query = R.omit(['page'], query)
 
       const allQueryString = serializeQuery(query)
       const queryString = serializeQuery(R.omit(['mainPath', 'subPath'], query))
 
       const url = `/${allQueryString}`
-      let asPath = `/${self.mainPath}/${self.subPath}${queryString}`
-      if (self.subPath === 'index' || self.mainPath === self.subPath) {
-        asPath = `/${self.mainPath}${queryString}`
-      }
+      const asPath = `/${self.mainPath}/${self.subPath}${queryString}`
 
       // NOTE: shallow option only works for same page url
       // if page is diffrent, it will cause page reload
-      Router.push(url, asPath, {
-        shallow: true,
-      })
+      /* console.log('push url: ', url) */
+      Router.push(url, asPath, { shallow: true })
+      // see: https://stackoverflow.com/questions/824349/modify-the-url-without-reloading-the-page
+      /* return Global.history.pushState({}, null, url) */
     },
     markState(sobj) {
       markStates(sobj, self)
