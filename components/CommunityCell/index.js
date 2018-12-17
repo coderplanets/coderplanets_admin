@@ -12,6 +12,7 @@ import ReactTooltip from 'react-tooltip'
 import { ICON_CMD } from '../../config'
 
 import AdderCell from '../AdderCell'
+import CommunitiesLogoList from './CommunitiesLogoList'
 
 import {
   Wrapper,
@@ -29,28 +30,10 @@ import { uid, makeDebugger } from '../../utils'
 const debug = makeDebugger('c:CommunityCell:index')
 /* eslint-enable no-unused-vars */
 
-const tooltipOffset = JSON.stringify({ top: 1 })
-
 const SingleCommunity = ({ community }) => (
   <Wrapper>
     <CommunityLogo src={community.logo} />
     <Title>{community.title}</Title>
-  </Wrapper>
-)
-
-const CommunitiesLogoArray = ({ array }) => (
-  <Wrapper>
-    {array.map(c => (
-      <Wrapper key={uid.gen()}>
-        <div
-          data-tip={c.title}
-          data-for="community_cell"
-          data-offset={tooltipOffset}
-        >
-          <CommunityLogo src={c.logo} />
-        </div>
-      </Wrapper>
-    ))}
   </Wrapper>
 )
 
@@ -91,7 +74,7 @@ const renderContent = props => {
   if (!R.isEmpty(array)) {
     return (
       <Wrapper>
-        <CommunitiesLogoArray array={array} />
+        <CommunitiesLogoList array={array} />
       </Wrapper>
     )
   }

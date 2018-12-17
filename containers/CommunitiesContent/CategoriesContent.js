@@ -111,8 +111,6 @@ const columns = [
 
 class CategoriesContent extends React.Component {
   componentDidMount() {
-    logic.loadCategories()
-
     setTimeout(() => {
       ReactTooltip.rebuild()
     }, 2000)

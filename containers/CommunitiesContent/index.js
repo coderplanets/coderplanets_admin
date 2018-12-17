@@ -65,7 +65,12 @@ const renderChildContent = (curRoute, store, restProps) => {
 class CommunitiesContentContainer extends React.Component {
   componentDidMount() {
     const { communitiesContent } = this.props
+
     logic.init(communitiesContent)
+  }
+
+  componentWillUnmount() {
+    logic.uninit()
   }
 
   render() {
