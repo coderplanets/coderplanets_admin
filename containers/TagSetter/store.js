@@ -7,8 +7,7 @@ import { types as t, getParent } from 'mobx-state-tree'
 // import R from 'ramda'
 
 import { Tag } from '../../stores/SharedModel'
-import { markStates, makeDebugger, stripMobx } from '../../utils'
-/* import { CMS_THREADS } from '../../config' */
+import { markStates, makeDebugger, THREAD, stripMobx } from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('S:TagSetterStore')
@@ -19,7 +18,7 @@ const TagSetterStore = t
     tags: t.optional(t.array(Tag), []),
     loading: t.optional(t.boolean, false),
     activeCommunityRaw: t.optional(t.string, ''),
-    activeThread: t.optional(t.string, 'POST'), // t.optional(t.enumeration('thread', CMS_THREADS), CMS_THREADS[0]),
+    activeThread: t.optional(t.string, THREAD.POST),
   })
   .views(self => ({
     get root() {

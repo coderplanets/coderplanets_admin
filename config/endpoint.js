@@ -1,22 +1,40 @@
 /* config for different envs */
+import { ICON_CMD } from './assets'
 
 const getGraphQLEndpoint = () => {
+  /* console.log('process.env: ', process.env) */
+  console.log('process.env.GOAL: ', process.env.GOAL)
+  /* console.log('process.env.NODE_ENV: ', process.env.NODE_ENV) */
+  /* console.log('process.env.NODE_ENV: ', process.env.NODE_ENV) */
   switch (process.env.GOAL) {
     case 'production':
-      return 'http://api.coderplanets.com/graphiql'
+      return 'https://api.coderplanets.com/graphiql'
+    /* return 'http://localhost:4001/graphiql' */
 
     case 'dev':
-      return 'http://devapi.coderplanets.com/graphiql'
-
-    case 'local':
-      return 'http://localhost:4001/graphiql'
+      return 'https://devapi.coderplanets.com/graphiql'
+    /* return 'http://devapi.coderplanets.com' */
 
     default:
+      /* return 'https://api.coderplanets.com/graphiql' */
       return 'http://localhost:4001/graphiql'
   }
 }
+
 export const GRAPHQL_ENDPOINT = getGraphQLEndpoint()
-export const GITHUB_ADDR = 'https://github.com/coderplanets/coderplanets_admin'
+export const GITHUB_WEB_ADDR =
+  'https://github.com/coderplanets/coderplanets_web'
+export const GITHUB_SERVER_ADDR =
+  'https://github.com/coderplanets/coderplanets_server'
 export const GITHUB_ME = 'https://github.com/mydearxym'
-export const ISSUE_ADDR = `${GITHUB_ADDR}/issues/new`
+export const GITHUB_CPS_TEAM = 'https://github.com/orgs/coderplanets/people'
+export const ISSUE_ADDR = `${GITHUB_WEB_ADDR}/issues/new`
 export const MENTION_USER_ADDR = 'https://coderplanets.com/users/'
+
+export const COMMUNITY_WIKI =
+  'https://github.com/coderplanets/cps_wiki/blob/master'
+
+export const COMMUNITY_CHEATSHEET =
+  'https://github.com/coderplanets/cps_cheatsheets/blob/master'
+
+export const DEFAULT_USER_AVATAR = `${ICON_CMD}/alien_user3.svg`

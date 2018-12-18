@@ -8,7 +8,9 @@ import {
   dispatchEvent,
   EVENT,
   TYPE,
+  Global,
 } from '../../utils'
+
 import SR71 from '../../utils/network/sr71'
 import S from './schema'
 
@@ -23,36 +25,46 @@ const sr71$ = new SR71({
 let store = null
 let sub$ = null
 
-export function loadUser() {}
+export const loadAccount = () => {
+  markLoading(true)
 
-export function loadAccount() {
-  // load contributes ..
-  // load posts ...
-  sr71$.query(S.account, {})
+  store.markState({ viewingType: 'account' })
+  return sr71$.query(S.user, {})
 }
 
-export function changeTheme(name) {
-  store.changeTheme(name)
+export const loadUser = user => {
+  store.markState({ viewingType: 'user', viewingUser: user })
+  sr71$.query(S.user, { login: user.login })
 }
 
-export function logout() {
+export const changeTheme = name => store.changeTheme(name)
+
+export const editProfile = () =>
+  dispatchEvent(EVENT.PREVIEW_OPEN, { type: TYPE.PREVIEW_ACCOUNT_EDIT })
+
+export const onLogout = () => {
   store.logout()
-  dispatchEvent(EVENT.LOGOUT)
+
+  setTimeout(() => {
+    Global.location.reload(false)
+  }, 2000)
+  // dispatchEvent(EVENT.LOGOUT)
 }
 
-export function editProfile() {
-  dispatchEvent(EVENT.NAV_EDIT, {
-    type: TYPE.PREVIEW_ACCOUNT_EDIT,
-    data: { user: 'fuck' },
-  })
-}
+const markLoading = (maybe = true) => store.markState({ loading: maybe })
 
+// ###############################
+// Data & Error handlers
+// ###############################
 const DataSolver = [
   {
-    match: asyncRes('account'),
-    action: res => {
-      const data = res.account
-      store.updateAccount(data)
+    match: asyncRes('user'),
+    action: ({ user }) => {
+      markLoading(false)
+      if (store.viewingType === 'user') {
+        return store.markState({ viewingUser: user })
+      }
+      return store.updateAccount(user)
     },
   },
   {
@@ -66,18 +78,21 @@ const ErrSolver = [
     match: asyncErr(ERR.CRAPHQL),
     action: ({ details }) => {
       debug('ERR.CRAPHQL -->', details)
+      markLoading(false)
     },
   },
   {
     match: asyncErr(ERR.TIMEOUT),
     action: ({ details }) => {
       debug('ERR.TIMEOUT -->', details)
+      markLoading(false)
     },
   },
   {
     match: asyncErr(ERR.NETWORK),
     action: ({ details }) => {
       debug('ERR.NETWORK -->', details)
+      markLoading(false)
     },
   },
 ]
@@ -97,7 +112,7 @@ export function init(_store, user) {
 }
 
 export function uninit() {
-  if (!sub$) return false
+  if (store.loading || !sub$) return false
   debug('===== do uninit')
   sub$.unsubscribe()
   sub$ = null

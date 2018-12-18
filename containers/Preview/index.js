@@ -132,7 +132,6 @@ class PreviewContainer extends React.Component {
     const {
       visible,
       type,
-      themeKeys,
       curTheme,
       rootState,
       editCommunityData,
@@ -151,7 +150,6 @@ class PreviewContainer extends React.Component {
             <Viewer
               type={type}
               rootState={rootState}
-              themeKeys={themeKeys}
               curTheme={curTheme}
               editCommunityData={editCommunityData}
               editCategoryData={editCategoryData}

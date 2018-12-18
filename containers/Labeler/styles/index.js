@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { theme, Animate } from '../../../utils'
+import { theme, animate } from '../../../utils'
 import { Img } from '../../../components'
 
 export const Wrapper = styled.div``
@@ -10,7 +10,7 @@ export const LabelItem = styled.div`
   color: ${theme('editor.footer')};
   &:hover {
     color: #51abb2;
-    animation: ${Animate.pulse} 0.4s linear;
+    animation: ${animate.pulseRule};
   }
 `
 export const LabelIcon = styled(Img)`

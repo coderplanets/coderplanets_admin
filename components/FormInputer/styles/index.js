@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 // import { Img } from '../../../components'
-// import { Animate } from '../../../utils'
 
 export const FormInput = styled.div`
   width: 250px;

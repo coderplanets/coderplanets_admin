@@ -8,7 +8,7 @@
 import React from 'react'
 import CalendarHeatmap from 'react-calendar-heatmap'
 import ReactTooltip from 'react-tooltip'
-import R from 'ramda'
+// import R from 'ramda'
 
 import {
   Wrapper,
@@ -65,7 +65,7 @@ const getClass = value => {
   switch (true) {
     case value.count >= 1 && value.count < 6:
       return 'color-scale-1'
-    case value.count >= 7 && value.count < 16:
+    case value.count >= 6 && value.count < 16:
       return 'color-scale-2'
     case value.count >= 16 && value.count < 26:
       return 'color-scale-3'
@@ -78,22 +78,22 @@ const getClass = value => {
 
 const ContributeMap = ({ data }) => {
   /* if don't jadge empty(first load), the tool tip will not work */
+  /*
   if (R.isEmpty(data.records)) {
     return <div />
   }
+  */
   return (
     <Wrapper>
       <TitleWrapper>
-        <Title>6个月内贡献 {data.totalCount} 次内容</Title>
+        <Title>6个月内创作 {data.totalCount} 次内容</Title>
         <HelpText>记录规则？</HelpText>
       </TitleWrapper>
       <CalendarHeatmap
         startDate={data.startDate}
         endDate={data.endDate}
         showMonthLabels
-        onClick={value => {
-          debug(value)
-        }}
+        onClick={value => debug(value)}
         gutterSize={3}
         tooltipDataAttrs={customTooltipDataAttrs}
         monthLabels={monthLabels}
@@ -109,12 +109,12 @@ const ContributeMap = ({ data }) => {
       <DotWrapper>
         <DotList>
           <DotText>潜水&nbsp;&nbsp;</DotText>
-          <ColorDot color="#E2EEED" />
-          <ColorDot color="#DBE290" />
-          <ColorDot color="#99C06F" />
-          <ColorDot color="#609D4C" />
-          <ColorDot color="#61793E" />
-          <ColorDot color="#37642C" />
+          <ColorDot scale="empty" />
+          <ColorDot scale="1" />
+          <ColorDot scale="2" />
+          <ColorDot scale="3" />
+          <ColorDot scale="4" />
+          <ColorDot scale="5" />
           <DotText>&nbsp;高产</DotText>
         </DotList>
       </DotWrapper>

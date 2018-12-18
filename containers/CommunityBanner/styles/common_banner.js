@@ -4,12 +4,12 @@ import { Img } from '../../../components'
 
 import { BaseBanner, BaseBannerContent } from './index'
 
-export const BannerContainer = BaseBanner.extend`
+export const BannerContainer = styled(BaseBanner)`
   min-height: 100px;
   justify-content: flex-end;
   color: #707084;
 `
-export const BannerContentWrapper = BaseBannerContent.extend``
+export const BannerContentWrapper = styled(BaseBannerContent)``
 
 export const Operation = styled.div`
   align-self: flex-end;
@@ -26,7 +26,6 @@ export const OperationItem = styled.div`
   }
   transition: color 0.3s linear;
 `
-// animation: ${Animate.pulse} 0.3s linear;
 
 export const OperationDivider = styled.div`
   margin-left: 10px;
@@ -48,6 +47,6 @@ export const OperationIcon = styled(Img)`
   margin-top: 2px;
   margin-right: 3px;
 `
-export const OperationIconChart = OperationIcon.extend`
+export const OperationIconChart = styled(OperationIcon)`
   margin-top: 3px;
 `

@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 import { ICON_CMD } from '../../config'
 import Img from '../Img'
-import { Animate } from '../../utils'
 
 const LoadingWrapper = styled.div`
   margin-top: 20vh;
@@ -12,7 +11,6 @@ const LoadingIcon = styled(Img)`
   width: 50px;
   height: 50px;
   opacity: 0.8;
-  animation: ${Animate.wobble} 3s infinite;
 `
 
 const LoadingText = styled.div`

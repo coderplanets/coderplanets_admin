@@ -51,6 +51,7 @@ import {
   SidebarStore,
   TypeWriterStore,
   AccountEditorStore,
+  DocUploaderStore,
 } from '../index'
 
 /* eslint-disable no-unused-vars */
@@ -75,6 +76,7 @@ const rootStore = t
     sidebar: t.optional(SidebarStore, { menuItems: [] }),
     preview: t.optional(PreviewStore, { visible: false }),
     doraemon: t.optional(DoraemonStore, {}),
+    docUploader: t.optional(DocUploaderStore, {}),
 
     // layouts
     bodylayout: t.optional(BodylayoutStore, {}),

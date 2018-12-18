@@ -1,42 +1,41 @@
 import styled from 'styled-components'
 
-import { Img } from '../../../components'
-import { smokey, Animate } from '../../../utils'
+import Img from '../../../components/Img'
+import { animate, theme, cs } from '../../../utils'
 
 export const FilterWraper = styled.div`
   margin-right: 8px;
   margin-top: 8px;
-  ${smokey};
+  display: ${({ show }) => (show ? 'block' : 'none')};
+  ${cs.smokey};
 `
 export const Header = styled.div`
-  display: flex;
-  color: #5d8689;
+  ${cs.flex()};
+  color: ${theme('comment.title')};
 `
 
 export const FilterIcon = styled(Img)`
-  fill: #5d8689;
+  fill: ${theme('comment.title')};
   margin-right: 3px;
   width: 20px;
   height: 20px;
-  transform: ${props => (props.reverse ? 'rotate(180deg)' : '')};
+  transform: ${({ reverse }) => (reverse ? 'rotate(180deg)' : '')};
 `
-export const RecentlyIcon = FilterIcon.extend`
-  animation: ${Animate.rotate360} 0.6s linear;
+export const RecentlyIcon = styled(FilterIcon)`
+  animation: ${animate.rotate360Rule};
 `
-// animation: ${Animate.rotate360} 1s cubic-bezier(0, 0.56, 0.24, 0.72);
 export const MenuWrapper = styled.div`
+  ${cs.flexColumn('align-center')};
   width: 80px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   margin-top: 10px;
 `
 
 export const MenuItem = styled.div`
   margin-bottom: 10px;
-  color: ${props => (props.active === props.type ? '#58afb5' : '')};
+  color: ${({ active, type }) =>
+    active === type ? theme('comment.filterActive') : theme('comment.filter')};
   &:hover {
     cursor: pointer;
-    color: #58afb5;
+    color: ${theme('comment.filterActive')};
   }
 `

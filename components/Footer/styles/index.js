@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import { smokey } from '../../../utils'
+import { cs } from '../../../utils'
 
-const link = styled.a`
+const Link = styled.a`
   text-decoration: none;
   font-weight: bolder;
   color: #9fc0c5;
@@ -32,12 +32,12 @@ export const Divider = styled.div`
 
 export const GitSource = styled.div`
   margin-top: 2px;
-  ${smokey};
+  ${cs.smokey};
 `
 export const Powerby = styled.div`
   color: #b7c6d0;
 `
 
-export const PowerbyLink = link.extend``
-export const About = link.extend``
-export const Beian = link.extend``
+export const PowerbyLink = styled(Link)``
+export const About = styled(Link)``
+export const Beian = styled(Link)``

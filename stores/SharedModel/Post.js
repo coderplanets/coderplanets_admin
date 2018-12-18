@@ -4,7 +4,7 @@ import { PAGE_SIZE } from '../../config'
 
 import { User } from './User'
 import { Community } from './Community'
-import Comment from './Comment'
+import { Comment } from './Comment'
 import { Tag } from './Tag'
 
 export const Post = t.model('Post', {
@@ -32,7 +32,7 @@ export const Post = t.model('Post', {
 export const PagedPosts = t.model('PagedPosts', {
   entries: t.optional(t.array(Post), []),
   pageNumber: t.optional(t.number, 1),
-  pageSize: t.optional(t.number, PAGE_SIZE.COMMON),
+  pageSize: t.optional(t.number, PAGE_SIZE.D),
   totalCount: t.optional(t.number, 0),
   totalPages: t.optional(t.number, 0),
 })

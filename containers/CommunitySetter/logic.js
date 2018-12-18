@@ -23,7 +23,7 @@ const debug = makeDebugger('L:CommunitySetter')
 let store = null
 
 const commonFilter = page => {
-  const size = PAGE_SIZE.COMMON
+  const size = PAGE_SIZE.D
   return {
     filter: { page, size },
   }

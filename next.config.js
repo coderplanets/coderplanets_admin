@@ -1,112 +1,28 @@
 /* eslint-disable */
+const webpack = require('webpack')
+
+require('dotenv').config()
+const path = require('path')
+const fs = require('fs')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const Dotenv = require('dotenv-webpack')
+
 /* eslint-enable */
+
 const { ANALYZE } = process.env
-// export example
-// https://github.com/zeit/next.js/blob/canary/examples/with-static-export/next.config.js
-// https://github.com/infiniteluke/next-static/blob/master/next.config.js
 
 module.exports = {
-  // useFileSystemPublicRoutes: false,
-  // smartSlashes: false,
-  exportPathMap: () => {
-    return {
-      '/': { page: '/' },
-      /*
-         '/communities/tags': {
-         page: '/communities',
-         },
-       */
-      /*
-         '/communities/posts': {
-         page: '/communities',
-         },
-       */
-
-      '/communities': {
-        page: '/communities',
-        /* query: { page: 1, size: 20 }, */
-      },
-      /*
-      '/communities/tags': {
-        page: '/communities/tags',
-      },
-      */
-
-      '/communities?page=2&size=20': {
-        page: '/communities',
-        query: { page: 2, size: 20 },
-      },
-
-      /*
-         '/communities/_page/2/_size/20': {
-         page: '/communities',
-         query: { page: 2, size: 20 },
-         },
-       */
-
-      // '/javascript/posts/_q/page/2'
-      // '/javascript/jobs/_q/page/2'
-      // '/javascript/posts/_q/tag/all/page/2'
-      // '/javascript/posts/_q/tag/general/page/2'
-
-      '/communities/_q/page/2': {
-        page: '/communities',
-        query: { page: 2 },
-      },
-
-      /*
-         '/communities/page/1/size/20': {
-           page: '/communities',
-           asPath: '/communities/?page=2&size=20',
-           },
-         */
-
-      /*
-           '/racket': {
-           page: '/',
-           },
-           '/racket/posts': {
-           page: '/',
-           },
-         */
-
-      /* '/racket/tags': { */
-      /* page: '/', */
-      //  asPath: '/communities/posts',
-      /* }, */
-
-      /* '/js/posts': { page: '/', query: { main: 'js', sub: 'posts' } }, */
-      /* '/intro/i': { page: '/intro', query: { name: 'index' } }, */
-      /* '/intro/feature': { page: '/intro', query: { name: 'feature' } }, */
-      /* '/intro/theme': { page: '/intro', query: { name: 'theme' } }, */
-      /* '/intro/i18n': { page: '/intro', query: { name: 'i18n' } }, */
-      /* '/intro/example': { page: '/intro', query: { name: 'example' } }, */
-      /* '/intro/cmdpanel': { page: '/intro', query: { name: 'cmdpanel' } }, */
-      /* '/intro/graphql': { page: '/intro', query: { name: 'graphql' } }, */
-    }
-  },
+  // https://github.com/zeit/next.js/blob/canary/examples/with-static-export/next.config.js
+  // exportPathMap: () => {},
 
   webpack: (config, { isServer }) => {
-    /*
-    config.module.rules.push({
-      test: /\.md$/,
-      loader: 'raw-loader',
-    })
-    */
-    /*
-    config.module.rules.push(
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.(svg|eot|ttf|woff|woff2)$/,
-        use: 'url-loader',
-      }
+    config.plugins = config.plugins || []
+
+    config.plugins.push(new webpack.IgnorePlugin(/(?:\/tests|__mocks)/))
+    // moment locale size is too big
+    config.plugins.push(
+      new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /(en)/)
     )
-    */
 
     if (ANALYZE) {
       config.plugins.push(
@@ -116,15 +32,16 @@ module.exports = {
           openAnalyzer: true,
         })
       )
-      return config
     }
 
-    config.plugins.push(
-      new Dotenv({
-        path: './.env',
-        systemvars: true,
-      })
-    )
+    if (fs.existsSync('./.env')) {
+      config.plugins.push(
+        new Dotenv({
+          path: path.join(__dirname, '.env'),
+          systemvars: true,
+        })
+      )
+    }
 
     return config
   },
