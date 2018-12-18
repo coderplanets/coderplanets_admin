@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 // import { Img } from '../../../components'
-import { Animate } from '../../../utils'
+import { animate } from '../../../utils'
 
 export const FormItemWrapper = styled.div`
   display: flex;
@@ -35,7 +35,7 @@ export const ColorBot = styled.div`
 
   &:hover {
     cursor: pointer;
-    animation: ${Animate.pulse} 0.3s linear;
+    animation: ${animate.pulseRule};
     opacity: 0.6;
   }
 `

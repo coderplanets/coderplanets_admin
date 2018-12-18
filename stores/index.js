@@ -7,7 +7,7 @@ export { default as BodylayoutStore } from './BodylayoutStore'
 export { default as ApiLayoutStore } from './ApiLayoutStore'
 export { default as SidebarStore } from './SidebarStore'
 export { default as PreviewStore } from '../containers/Preview/store'
-export { default as DoraemonStore } from './DoraemonStore'
+export { default as DoraemonStore } from '../containers/Doraemon/store'
 export { default as HeaderStore } from '../containers/Header/store'
 
 export { default as CurCommunity } from './CurCommunity'
@@ -59,6 +59,7 @@ export {
 export { default as ThreadSetterStore } from '../containers/ThreadSetter/store'
 
 // toolbox
+export { default as DocUploaderStore } from '../containers/DocUploader/store'
 export { default as TypeWriterStore } from '../containers/TypeWriter/store'
 export { default as CommentsStore } from '../containers/Comments/store'
 export {

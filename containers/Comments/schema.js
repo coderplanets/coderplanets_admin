@@ -1,17 +1,16 @@
 import gql from 'graphql-tag'
+import { F } from '../schemas'
 
-const comments = gql`
-  query comments($id: ID!, $filter: CommentsFilter!, $userHasLogin: Boolean!) {
-    comments(id: $id, filter: $filter) {
+const pagedComments = gql`
+  query pagedComments(
+    $id: ID!
+    $filter: CommentsFilter!
+    $thread: CmsThread
+    $userHasLogin: Boolean!
+  ) {
+    pagedComments(id: $id, filter: $filter, thread: $thread) {
       entries {
-        id
-        body
-        floor
-        author {
-          id
-          nickname
-          avatar
-        }
+        ${F.comment}
         viewerHasLiked @include(if: $userHasLogin)
         viewerHasDisliked @include(if: $userHasLogin)
         replyTo {
@@ -19,29 +18,18 @@ const comments = gql`
           body
           floor
           author {
-            id
-            avatar
-            nickname
+            ${F.author}
           }
         }
         replies(filter: { first: 5 }) {
           id
           author {
-            id
-            avatar
-            nickname
+            ${F.author}
           }
         }
         repliesCount
-        likesCount
-        dislikesCount
-        insertedAt
-        updatedAt
       }
-      pageNumber
-      pageSize
-      totalCount
-      totalPages
+      ${F.pagedCounts}
     }
   }
 `
@@ -107,7 +95,7 @@ const undoDislikeComment = gql`
 `
 
 const schema = {
-  comments,
+  pagedComments,
   createComment,
   replyComment,
   deleteComment,

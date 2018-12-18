@@ -66,7 +66,7 @@ export function onCommunityChildMenuChange(activeThread) {
 }
 
 export function loadCommunities(page = 1) {
-  const size = PAGE_SIZE.COMMON
+  const size = PAGE_SIZE.D
   const args = {
     filter: { page, size },
   }

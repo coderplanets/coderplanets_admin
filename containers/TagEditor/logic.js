@@ -25,7 +25,7 @@ const debug = makeDebugger('L:TagEditor')
 let store = null
 
 const commonFilter = page => {
-  const size = PAGE_SIZE.COMMON + 10
+  const size = PAGE_SIZE.M
   return {
     filter: { page, size },
   }

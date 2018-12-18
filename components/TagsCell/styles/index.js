@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import Img from '../../Img'
-import { Animate } from '../../../utils'
+import { animate } from '../../../utils'
 
 export const UnsetText = styled.div`
   color: tomato;
@@ -36,7 +36,7 @@ export const DeleteCross = styled.div`
   margin-left: 8px;
   &:hover {
     cursor: pointer;
-    animation: ${Animate.pulse} 0.3s linear;
+    animation: ${animate.pulseRule};
   }
 `
 

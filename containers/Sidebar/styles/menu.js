@@ -13,6 +13,7 @@ export const MenuItem = styled.ul`
   height: 95vh;
   overflow-y: scroll;
   transition: left 0.2s;
+  padding-left: 0;
 `
 /*
    &:hover {
@@ -108,7 +109,7 @@ export const MenuItemIcon = styled(Img)`
   height: 22px;
   display: block;
 `
-export const MenuCommunitiesIcon = MenuItemIcon.extend`
+export const MenuCommunitiesIcon = styled(MenuItemIcon)`
   fill: ${theme('sidebar.menu_link')};
 `
 

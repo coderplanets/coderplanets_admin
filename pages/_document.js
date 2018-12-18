@@ -5,15 +5,20 @@ import { ServerStyleSheet } from 'styled-components'
 
 // http://image.mzliaoba.com/lib/antd.css
 export default class MyDocument extends Document {
-  render() {
+  static getInitialProps({ renderPage }) {
     const sheet = new ServerStyleSheet()
-    const main = sheet.collectStyles(<Main />)
+    const page = renderPage(App => props =>
+      sheet.collectStyles(<App {...props} />)
+    )
     const styleTags = sheet.getStyleElement()
+    return { ...page, styleTags }
+  }
+
+  render() {
     return (
       <html>
         <Head>
           <meta name="renderer" content="webkit" />
-          <title>mastani</title>
           <link
             href="https://cdn.bootcss.com/antd/3.5.2/antd.min.css"
             rel="stylesheet"
@@ -35,10 +40,10 @@ export default class MyDocument extends Document {
               `,
             }}
           />
-          {styleTags}
+          {this.props.styleTags}
         </Head>
         <body id="body">
-          <div className="root">{main}</div>
+          <Main />
           <NextScript />
         </body>
         <link

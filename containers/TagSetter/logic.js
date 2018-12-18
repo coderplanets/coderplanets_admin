@@ -20,15 +20,6 @@ const debug = makeDebugger('L:TagSetter')
 
 let store = null
 
-/*
-const commonFilter = page => {
-  const size = PAGE_SIZE.COMMON
-  return {
-    filter: { page, size },
-  }
-}
-*/
-
 export function onAdd(thread, id, tagId, communityId, selectedIds) {
   if (!R.contains(tagId, selectedIds)) {
     const args = { id, tagId, communityId }

@@ -1,7 +1,7 @@
 /*
-* CommentsStore store test
-*
-*/
+ * CommentsStore store test
+ *
+ */
 
 // import R from 'ramda'
 

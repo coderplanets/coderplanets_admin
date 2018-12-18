@@ -107,10 +107,26 @@ export const TYPE = {
   USERS_REFRESH: 'USERS_REFRESH',
 }
 
+export const COMMUNITY_SPEC_THREADS = {
+  USER: 'user',
+  JOB: 'job',
+  VIDEO: 'video',
+  REPO: 'repo',
+  WIKI: 'wiki',
+  CHEATSHEET: 'cheatsheet',
+}
+
 export const THREAD = {
-  POST: 'POST',
-  JOB: 'JOB',
-  // ...
+  ...COMMUNITY_SPEC_THREADS,
+  POST: 'post',
+  // home spec
+  TECH: 'tech',
+  SHARE: 'share',
+  RADAR: 'radar',
+  CITY: 'city',
+  // city spec
+  GROUP: 'group',
+  COMPANY: 'company',
 }
 
 export const ROUTE = {
@@ -146,3 +162,7 @@ export const ROUTE = {
   // roles CURD (based on passports)
   ROLES: 'roles',
 }
+
+/* some svg icon are sensitive to fill color */
+/* some community svg need fill color, like city etc.. */
+export const NON_FILL_COMMUNITY = ['javascript']

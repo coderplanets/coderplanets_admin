@@ -1,34 +1,24 @@
 import styled from 'styled-components'
-import { lighten, darken } from 'polished'
-import { selectorColors } from '../../../utils'
 
-const getBackground = props => {
-  const themeName = props.type
-  return themeName === 'yellow'
-    ? darken(0.05, selectorColors[themeName])
-    : lighten(0.05, selectorColors[themeName])
-}
+import { theme, themeCoverMap, themeCoverIndexMap, cs } from '../../../utils'
 
-export const ThemeDot = styled.div`
-  width: 25px;
-  height: 25px;
-  border-radius: 100%;
+export const Dot = styled.div`
+  ${cs.circle('25px')};
+
   margin-right: 10px;
-  background: ${props => getBackground(props)};
+  background: ${({ name }) => themeCoverMap[name]};
+  border: ${({ name }) => (name === 'github' ? '1px solid lightgrey' : '')};
   position: relative;
   cursor: pointer;
-  color: ${props =>
-    props.active ? lighten(0.4, props.theme.body_bg) : getBackground(props)};
+  color: ${({ active, name }) =>
+    active ? theme('bodyBg') : themeCoverMap[name]};
 
   &:after {
     content: 'T';
     position: absolute;
-    color: ${props => (props.active ? '#ff9f8e' : '')};
-    top: 14%;
-    left: 35%;
+    color: ${({ active, name }) => (active ? themeCoverIndexMap[name] : '')};
+    top: 13%;
+    left: 34%;
   }
 `
-export const FlexWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`
+export const holder = 1

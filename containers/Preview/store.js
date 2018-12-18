@@ -5,14 +5,12 @@
 
 import { types as t, getParent } from 'mobx-state-tree'
 
-// import { CMS_THREADS } from '../../config'
-
 import { Community, Category, Tag, Post, User } from '../../stores/SharedModel'
 import { markStates, TYPE, unholdPage, stripMobx } from '../../utils'
 
 // const debug = makeDebugger('S:PreviewStore')
 const Article = t.model('Article', {
-  thread: t.string, // t.optional(t.enumeration('thread', CMS_THREADS), CMS_THREADS[0]),
+  thread: t.string,
   data: Post,
 })
 
@@ -79,9 +77,6 @@ const PreviewStore = t
     },
     get editPermissionData() {
       return stripMobx(self.editPermission)
-    },
-    get themeKeys() {
-      return self.root.theme.themeKeys
     },
     get curTheme() {
       return self.root.theme.curTheme

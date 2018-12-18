@@ -35,7 +35,7 @@ export const CommunityLogo = styled(Img)`
   height: 22px;
   display: block;
 `
-export const SettingLogo = CommunityLogo.extend`
+export const SettingLogo = styled(CommunityLogo)`
   fill: #6f7083;
 `
 
@@ -143,4 +143,3 @@ export const AffixHeader = styled.div`
 export const RawHeader = styled.div`
   display: ${props => (!props.fixed ? 'block' : 'none')};
 `
-// animation: ${Animate.fadeInRight} 0.2s linear;

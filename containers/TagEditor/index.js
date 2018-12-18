@@ -6,11 +6,7 @@
 
 import React from 'react'
 import { inject, observer } from 'mobx-react'
-
-// import Link from 'next/link'
-
-import { makeDebugger, storePlug } from '../../utils'
-import { CMS_THREADS } from '../../config'
+import R from 'ramda'
 
 import {
   Button,
@@ -22,7 +18,10 @@ import {
   TagColorSelector,
   CommunityMatrix,
 } from '../../components'
+
 import { Wrapper, ActionBtns, Divider } from './styles'
+
+import { makeDebugger, storePlug, THREAD } from '../../utils'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
@@ -83,7 +82,7 @@ class TagEditorContainer extends React.Component {
         <div style={showStyle}>
           <FormSelector
             label="thread:"
-            options={CMS_THREADS}
+            options={R.keys(THREAD)}
             value={tagData.thread}
             onChange={logic.inputOnChange.bind(this, 'thread')}
           />

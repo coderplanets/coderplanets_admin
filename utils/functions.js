@@ -3,6 +3,7 @@ import PubSub from 'pubsub-js'
 
 import { EVENT } from './constants'
 import { nilOrEmpty, isEmptyNil } from './validator'
+import { TAG_COLOR_ORDER } from '../config'
 
 /* eslint-disable */
 // TODO: document ?
@@ -46,6 +47,14 @@ export const mapValue = R.compose(
   R.head,
   R.values
 )
+
+export const sortByColor = source =>
+  R.sort(
+    (t1, t2) => TAG_COLOR_ORDER[t1.color] - TAG_COLOR_ORDER[t2.color],
+    source
+  )
+
+export const sortByIndex = source => R.sort((a, b) => a.index - b.index, source)
 
 // reference: https://blog.carbonfive.com/2017/12/20/easy-pipeline-debugging-with-curried-console-log/
 export const Rlog = (arg = 'Rlog: ') => R.tap(log(arg))

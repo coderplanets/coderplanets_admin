@@ -3,9 +3,9 @@
  */
 import R from 'ramda'
 
-import { Observable } from 'rxjs/Observable'
-import 'rxjs/add/observable/fromPromise'
+import { from } from 'rxjs'
 
+import { ICON_CMD } from '../../../config'
 import { notEmpty } from '../../../utils'
 
 const cmdSplit = R.compose(
@@ -31,8 +31,21 @@ const cmdInit = R.compose(
 
 export const startWithSlash = R.startsWith('/')
 
+export const searchablePrefix = R.compose(
+  R.not,
+  R.anyPass([
+    R.startsWith('/'),
+    R.startsWith('?'),
+    R.startsWith('#'),
+    R.startsWith('@'),
+    R.startsWith('>'),
+    R.startsWith('<'),
+  ])
+)
+
 export const startWithSpecialPrefix = R.anyPass([
   R.startsWith('?'),
+  R.startsWith('#'),
   R.startsWith('>'),
   R.startsWith('<'),
 ])
@@ -111,12 +124,26 @@ export class Advisor {
   }
 
   relateSuggestions$ = q =>
-    Observable.fromPromise(
-      new Promise(resolve => resolve(this.relateSuggestions(q)))
-    )
+    from(new Promise(resolve => resolve(this.relateSuggestions(q))))
 
-  specialSuggestions = val => ({
-    prefix: '/',
-    data: [this.getSuggestionPath(val)],
-  })
+  specialSuggestions = val => {
+    // console.log('this.getSuggestionPath(val): ', this.getSuggestionPath(val))
+    return {
+      prefix: R.head(val),
+      data: [
+        {
+          title: 'Doraemon Pocket 说明书',
+          desc: '包含搜索，设置，跳转以及开发扩展等使用说明',
+          raw: 'doraemon_help',
+          logo: `${ICON_CMD}/doraemon_cat.svg`,
+        },
+      ],
+    }
+    /*
+       return {
+       prefix: '/',
+       data: [this.getSuggestionPath(val)],
+       }
+     */
+  }
 }

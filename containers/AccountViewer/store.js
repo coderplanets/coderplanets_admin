@@ -6,25 +6,40 @@
 import { types as t, getParent } from 'mobx-state-tree'
 // import R from 'ramda'
 
-import { markStates, makeDebugger } from '../../utils'
+import { User, EmptyUser } from '../../stores/SharedModel'
+import { markStates, makeDebugger, stripMobx } from '../../utils'
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('S:AccountViewerStore')
 /* eslint-enable no-unused-vars */
 
 const AccountViewerStore = t
-  .model('AccountViewerStore', {})
+  .model('AccountViewerStore', {
+    viewingUser: t.optional(User, EmptyUser),
+    viewingType: t.optional(
+      t.enumeration('viewingType', ['account', 'user']),
+      'account'
+    ),
+    loading: t.optional(t.boolean, false),
+  })
   .views(self => ({
     get root() {
       return getParent(self)
     },
-    get themeKeys() {
-      return self.root.theme.themeKeys
-    },
     get subscribedCommunities() {
-      return self.root.account.subscribedCommunities
+      if (self.viewingType === 'user') {
+        return stripMobx(self.viewingUser.subscribedCommunities)
+      }
+
+      return stripMobx(self.root.account.subscribedCommunities)
     },
     get accountInfo() {
       return self.root.account.accountInfo
+    },
+    get userInfoData() {
+      if (self.viewingType === 'user') {
+        return stripMobx(self.viewingUser)
+      }
+      return self.accountInfo
     },
     get curTheme() {
       return self.root.theme.curTheme

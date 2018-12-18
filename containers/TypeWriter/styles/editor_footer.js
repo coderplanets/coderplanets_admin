@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import { Img } from '../../../components'
-import { Animate, theme } from '../../../utils'
+import { animate, theme } from '../../../utils'
 //
 export const Wrapper = styled.div`
   display: flex;
@@ -12,7 +12,7 @@ export const Item = styled.div`
   color: ${theme('editor.footer')};
   &:hover {
     color: #51abb2;
-    animation: ${Animate.pulse} 0.4s linear;
+    animation: ${animate.pulseRule};
   }
 `
 

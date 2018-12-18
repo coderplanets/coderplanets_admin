@@ -34,7 +34,7 @@ export const Banner = styled.div`
   padding-left: 18px;
 `
 
-export const Footer = Banner.extend`
+export const Footer = styled(Banner)`
   position: fixed;
   bottom: 0px;
   width: 250px;

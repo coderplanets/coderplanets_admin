@@ -24,6 +24,10 @@ export { default as ThemeSelector } from './ThemeSelector'
 export { default as CommunityMatrix } from './CommunityMatrix'
 export { default as GAWraper } from './GAWraper'
 export { default as Footer } from './Footer'
+
+export { default as UserBrief } from './UserBrief'
+export { default as FocusLine } from './FocusLine'
+
 // Table cell
 export { default as AdderCell } from './AdderCell'
 export { default as MaybeCell } from './MaybeCell'

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { Animate } from '../../../utils'
+import { animate } from '../../../utils'
 
 export const Wrapper = styled.div`
   background: #ffffff;
@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
-  animation: ${Animate.fadeInRight} 0.2s linear;
+  animation: ${animate.fadeInRightRule};
 `
 export const Divider = styled.div`
   border-top: 1px solid #e3eeed;

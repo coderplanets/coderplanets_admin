@@ -9,11 +9,11 @@ const SexIcon = styled(Img)`
   margin-left: 5px;
   cursor: pointer;
 `
-export const DudeIcon = SexIcon.extend`
+export const DudeIcon = styled(SexIcon)`
   fill: #869eec;
 `
 
-export const GirlIcon = SexIcon.extend`
+export const GirlIcon = styled(SexIcon)`
   fill: pink;
   margin-top: 1px;
 `

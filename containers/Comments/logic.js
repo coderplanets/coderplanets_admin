@@ -29,20 +29,21 @@ let store = null
 /* DESC_INSERTED, ASC_INSERTED */
 const defaultArgs = {
   fresh: false,
-  filter: { page: 1, size: PAGE_SIZE.COMMENTS, sort: TYPE.ASC_INSERTED },
+  filter: { page: 1, size: PAGE_SIZE.D, sort: TYPE.ASC_INSERTED },
 }
 
 export const loadComents = (args = {}) => {
   // debug('loadComents passed in: ', args)
   args = R.mergeDeepRight(defaultArgs, args)
-  args.id = store.activeArticle.id
+  args.id = store.viewingData.id
   args.userHasLogin = store.isLogin
+  args.thread = store.activeThread
 
   markLoading(args.fresh)
   store.markState({ filterType: args.filter.sort })
 
-  debug('loadComents query: ', args)
-  sr71$.query(S.comments, args)
+  debug('pagedComments args: ', args)
+  sr71$.query(S.pagedComments, args)
 }
 
 const markLoading = fresh => {
@@ -53,17 +54,20 @@ const markLoading = fresh => {
 }
 
 export function createComment() {
-  // TODO: validation...
-  store.markState({ creating: true })
+  if (!store.validator('create')) return false
 
-  sr71$.mutate(S.createComment, {
-    id: store.activeArticle.id,
+  store.markState({ creating: true })
+  const args = {
+    id: store.viewingData.id,
     body: store.editContent,
-  })
+    thread: store.activeThread,
+  }
+
+  debug('createComment args: ', args)
+  sr71$.mutate(S.createComment, args)
 }
 
 export function createCommentPreview() {
-  debug('createCommentPreview')
   store.markState({
     showInputEditor: false,
     showInputPreview: true,
@@ -82,6 +86,8 @@ export function previewReply(data) {
 }
 
 export function openInputBox() {
+  if (!store.isLogin) return store.authWarning({ hideToast: true })
+
   store.markState({
     showInputBox: true,
     showInputEditor: true,
@@ -103,6 +109,8 @@ export function onCommentInputBlur() {
 }
 
 export function createReplyComment() {
+  if (!store.validator('reply')) return false
+
   sr71$.mutate(S.replyComment, {
     id: store.replyToComment.id,
     body: store.replyContent,
@@ -158,9 +166,7 @@ export function closeReplyBox() {
 }
 
 export function onFilterChange(filterType) {
-  store.markState({
-    filterType,
-  })
+  store.markState({ filterType })
   loadComents({ filter: { page: 1, sort: filterType } })
 }
 
@@ -189,11 +195,21 @@ export function toggleDislikeComment(comment) {
   })
 }
 
+export function onUploadImageDone(url) {
+  dispatchEvent(EVENT.DRAFT_INSERT_SNIPPET, { data: `![](${url})` })
+}
+
+export function insertQuote() {
+  const data = '> '
+
+  dispatchEvent(EVENT.DRAFT_INSERT_SNIPPET, { data })
+}
+
 export function insertCode() {
-  dispatchEvent(EVENT.DRAFT_INSERT_SNIPPET, {
-    type: 'FUCK',
-    data: '```javascript\n\n```',
-  })
+  const communityRaw = store.curCommunity.raw
+  const data = `\`\`\`${communityRaw}\n\n\`\`\``
+
+  dispatchEvent(EVENT.DRAFT_INSERT_SNIPPET, { data })
 }
 
 export function onMention(user) {
@@ -209,11 +225,15 @@ export function deleteComment() {
 
 // show delete confirm
 export function onDelete(comment) {
-  store.markState({ tobeDeleteId: comment.id })
+  store.markState({
+    tobeDeleteId: comment.id,
+  })
 }
 
 export function cancleDelete() {
-  store.markState({ tobeDeleteId: null })
+  store.markState({
+    tobeDeleteId: null,
+  })
 }
 
 export function pageChange(page = 1) {
@@ -230,26 +250,21 @@ const cancelLoading = () => {
 // ###############################
 const DataSolver = [
   {
-    match: asyncRes(EVENT.PREVIEW),
-    action: () => {},
-  },
-  {
-    match: asyncRes('comments'),
-    action: ({ comments }) => {
-      debug('comments --> ', comments)
+    match: asyncRes('pagedComments'),
+    action: ({ pagedComments }) => {
       cancelLoading()
-      store.markState({
-        ...comments,
-      })
+      store.markState({ pagedComments })
     },
   },
   {
     match: asyncRes('createComment'),
-    action: ({ createComment }) => {
-      debug('createComment', createComment)
+    action: () => {
       store.markState({
+        showInputBox: false,
         showInputEditor: false,
         editContent: '',
+        creating: false,
+        loading: false,
       })
       loadComents({
         filter: { page: 1, sort: TYPE.DESC_INSERTED },
@@ -321,11 +336,16 @@ const ErrSolver = [
   },
 ]
 
-export function init(selectedStore) {
-  store = selectedStore
+export function init(_store, ssr = false) {
+  if (store) {
+    if (!ssr) return loadComents()
+    return false
+  }
+
+  store = _store
 
   if (sub$) sub$.unsubscribe()
-
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
-  loadComents()
+
+  if (!ssr) return loadComents()
 }

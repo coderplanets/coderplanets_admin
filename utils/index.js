@@ -2,7 +2,14 @@
  * constants used cross the site
  */
 
-export { EVENT, ERR, TYPE, ROUTE, THREAD } from './constants'
+export {
+  EVENT,
+  ERR,
+  TYPE,
+  ROUTE,
+  THREAD,
+  NON_FILL_COMMUNITY,
+} from './constants'
 
 export { makeDebugger } from './debug'
 export { default as uid } from './uid'
@@ -22,6 +29,8 @@ export {
   onClient,
   cutFrom,
   prettyNum,
+  sortByColor,
+  sortByIndex,
   Rlog,
   countWords,
   debounce,
@@ -54,9 +63,14 @@ export {
   getMainPath,
   getSubPath,
   getParameterByName,
+  getQueryFromUrl,
   queryStringToJSON,
   mergeRouteQuery,
   serializeQuery,
+  getDomain,
+  extractThreadFromPath,
+  subPath2Thread,
+  thread2Subpath,
 } from './route_helper'
 
 export {
@@ -78,21 +92,24 @@ export {
   hideDoraemonBarRecover,
 } from './dom_operator'
 
-export { default as Animate } from './animations'
-export { smokey, column, columnCenter } from './common_styles'
 /*
  * theme related
  */
 export {
   theme,
-  themeDict,
-  themeKeys,
-  themeColorMap,
-  selectorColors,
+  themeMeta,
+  themeSkins,
+  themeCoverMap,
+  themeCoverIndexMap,
 } from './themes'
 
 export { default as fakeUsers } from './fake_user'
 
+export { default as SOCIAL_LISTS } from './social_lists'
+
+// helpers
+export { default as cs } from './common_styles'
+export { default as animate } from './animations'
 export { default as BStore } from './bstore'
 export { default as GA } from './analytics'
 export { Trans } from './i18n'

@@ -10,7 +10,7 @@ import { inject, observer } from 'mobx-react'
 import keydown from 'react-keydown'
 import { Affix } from 'antd'
 
-import { ICON_CMD, ICON_ASSETS } from '../../config/assets'
+import { ICON_CMD, ICON_BASE } from '../../config/assets'
 import { makeDebugger, storePlug, TYPE } from '../../utils'
 
 import {
@@ -100,7 +100,7 @@ const MiniMap = ({ curRoute }) => {
     default: {
       return (
         <MiniMapWrapper>
-          <CommunityLogo src={`${ICON_ASSETS}/pl/${iconKey}.svg`} />
+          <CommunityLogo src={`${ICON_BASE}/pl/${iconKey}.svg`} />
           <MiniMapDivider />
           <MiniMapTitle>{mainPath}</MiniMapTitle>
           <SubRouteContent subPath={subPath} />

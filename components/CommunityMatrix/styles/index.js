@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import Img from '../../Img'
-import { smokey } from '../../../utils'
+import { cs } from '../../../utils'
 
 export const MatrixWrapper = styled.div`
   display: flex;
@@ -17,10 +17,10 @@ export const CommunityLogo = styled(Img)`
   padding-bottom: 3px;
   border-bottom: 2px solid;
   border-bottom-color: ${props => (props.active ? 'grey' : 'white')};
-  ${smokey};
+  ${cs.smokey};
   opacity: ${props => (props.len ? 1 : 0.5)};
 `
-export const GeneralPLogo = CommunityLogo.extend`
+export const GeneralPLogo = styled(CommunityLogo)`
   margin-top: 2px;
   width: 22px;
   height: 22px;

@@ -32,14 +32,14 @@ let sub$ = null
 let store = null
 
 const commonFilter = page => {
-  const size = PAGE_SIZE.COMMON
+  const size = PAGE_SIZE.D
   return {
     filter: { page, size },
   }
 }
 
 export function loadCommunities(page = 1) {
-  const size = PAGE_SIZE.COMMON
+  const size = PAGE_SIZE.D
   const args = {
     filter: { page, size },
   }
@@ -54,7 +54,6 @@ export function loadCommunities(page = 1) {
 
 export function loadCategories(page = 1) {
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  /* const size = PAGE_SIZE.COMMON */
   console.log('the fuck store: ', store)
   store.markRoute({ page })
   store.markState({ categoriessLoading: true })
@@ -72,7 +71,6 @@ export function loadTags(page = 1) {
 }
 
 export function loadThreads(page = 1) {
-  /* const size = PAGE_SIZE.COMMON */
   scrollIntoEle(TYPE.APP_HEADER_ID)
   store.markRoute({ page })
   store.markState({ tagsLoading: true })
@@ -81,7 +79,7 @@ export function loadThreads(page = 1) {
 }
 
 export function loadPosts(page = 1) {
-  const size = PAGE_SIZE.COMMON
+  const size = PAGE_SIZE.D
   const args = {
     filter: { page, size },
   }
@@ -92,7 +90,7 @@ export function loadPosts(page = 1) {
 }
 
 export function loadJobs(page = 1) {
-  const size = PAGE_SIZE.COMMON
+  const size = PAGE_SIZE.D
   const args = {
     filter: { page, size },
   }
@@ -103,10 +101,12 @@ export function loadJobs(page = 1) {
 }
 
 export function loadCommunitiesIfOnClient() {
+  /*
   if (!store.pagedCommunities) {
     debug('loadCommunitiesIfOnClient')
     loadCommunities()
   }
+  */
 }
 
 export function loadTagsIfOnClient() {
