@@ -23,9 +23,10 @@ const debug = makeDebugger('L:communitiesBanner')
 /* eslint-enable no-unused-vars */
 
 let store = null
+let sub$ = null
 
 export function loadCommunities() {
-  sr71$.query(S.pagedCommunities, { filter: {} })
+  sr71$.query(S.pagedCommunities, { filter: {}, userHasLogin: false })
 }
 
 export function loadTags() {
@@ -91,8 +92,10 @@ const DataSolver = [
   },
   {
     match: asyncRes('pagedCategories'),
-    action: ({ pagedCategories: { totalCount } }) =>
-      store.markState({ categoriesTotalCount: totalCount }),
+    action: ({ pagedCategories: { totalCount } }) => {
+      debug('get pagedCategories: ', totalCount)
+      store.markState({ categoriesTotalCount: totalCount })
+    },
   },
   {
     match: asyncRes('pagedPosts'),
@@ -148,7 +151,17 @@ const ErrSolver = [
   },
 ]
 
-export function init(selectedStore) {
-  store = selectedStore
+export function init(_store) {
+  store = _store
+  if (sub$) return loadCommunities() // loadCategories()
   sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+  loadCommunities()
+  // loadCategories()
+}
+
+export function uninit() {
+  if (!sub$) return false
+  debug('===== do uninit')
+  sub$.unsubscribe()
+  sub$ = null
 }

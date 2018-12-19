@@ -2,22 +2,9 @@ export const community = `
   id
   title
   raw
+  index
   desc
   logo
-  subscribersCount
-  insertedAt
-  updatedAt
-`
-
-export const category = `
-  id
-  title
-  raw
-`
-export const thread = `
-  id
-  title
-  raw
 `
 export const post = `
   id
@@ -85,11 +72,17 @@ export const tag = `
   id
   title
   color
+  thread
+  topic {
+    id
+    raw
+  }
 `
 export const author = `
   id
-  avatar
+  login
   nickname
+  avatar
 `
 export const user = `
   ${author}
@@ -111,10 +104,20 @@ export const user = `
   followersCount
   followingsCount
 `
+export const c11n = `
+  bannerLayout
+  contentsLayout
+  contentDivider
+  markViewed
+  displayDensity
+`
 export const achievement = `
   reputation
   contentsStaredCount
   contentsFavoritedCount
+  donateMember
+  seniorMember
+  sponsorMember
 `
 export const userBackgrounds = `
   workBackgrounds {
@@ -145,6 +148,7 @@ export const comment = `
     id
     nickname
     avatar
+    login
   }
   likesCount
   dislikesCount

@@ -104,6 +104,10 @@ class CommunitiesBannerContainer extends React.Component {
     logic.init(communitiesBanner)
   }
 
+  componentWillUnmount() {
+    logic.uninit()
+  }
+
   render() {
     const { communitiesBanner } = this.props
     const { curRoute } = communitiesBanner

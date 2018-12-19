@@ -1,10 +1,10 @@
 import styled from 'styled-components'
-import { cs } from '../../../utils'
+import { cs, theme } from '../../../utils'
 
 const Link = styled.a`
   text-decoration: none;
   font-weight: bolder;
-  color: #9fc0c5;
+  color: ${theme('banner.title')};
   transition: color 0.3s;
   &:hover {
     text-decoration: underline;
@@ -27,7 +27,7 @@ export const BeianInfo = styled.div`
 export const Divider = styled.div`
   margin-left: 12px;
   margin-right: 12px;
-  color: #b9cace;
+  color: ${theme('banner.title')};
 `
 
 export const GitSource = styled.div`
@@ -35,7 +35,7 @@ export const GitSource = styled.div`
   ${cs.smokey};
 `
 export const Powerby = styled.div`
-  color: #b7c6d0;
+  color: ${theme('banner.title')};
 `
 
 export const PowerbyLink = styled(Link)``

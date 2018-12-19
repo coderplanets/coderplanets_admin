@@ -31,7 +31,7 @@ export const MenuItemEach = styled.div`
   height: 50px;
   width: 100%;
   box-sizing: border-box;
-  color: ${theme('sidebar.menu_link')};
+  color: ${theme('sidebar.menuLink')};
 `
 export const MenuRow = styled.div`
   display: flex;
@@ -42,7 +42,7 @@ export const MenuRow = styled.div`
   padding-left: 15px;
 
   a {
-    color: ${theme('sidebar.menu_link')};
+    color: ${theme('sidebar.menuLink')};
     display: block;
     flex-grow: 1;
     max-width: 50%;
@@ -52,20 +52,20 @@ export const MenuRow = styled.div`
   &:hover {
     background-color: #047fbd;
     a {
-      color: ${theme('sidebar.menu_link')};
+      color: ${theme('sidebar.menuLink')};
     }
   }
 `
 
 export const MenuTitle = styled.div`
-  color: ${theme('sidebar.menu_link')};
+  color: ${theme('sidebar.menuLink')};
   display: block;
   flex-grow: 1;
   max-width: 50%;
   opacity: 0.6;
 
   &:hover {
-    color: ${theme('sidebar.menu_link')};
+    color: ${theme('sidebar.menuLink')};
     cursor: pointer;
   }
 `
@@ -104,23 +104,24 @@ export const MiniChartText = styled.div`
 `
 
 export const MenuItemIcon = styled(Img)`
+  fill: ${theme('sidebar.menuLink')};
   opacity: ${props => (props.active ? 1 : 0.5)};
   width: 22px;
   height: 22px;
   display: block;
 `
 export const MenuCommunitiesIcon = styled(MenuItemIcon)`
-  fill: ${theme('sidebar.menu_link')};
+  fill: ${theme('sidebar.menuLink')};
 `
 
+// margin-top: ${props => (props.active ? '10px' : '0px')};
+// margin-bottom: ${props => (props.active ? '10px' : '0px')};
 export const ChildrenWrapper = styled.div`
   padding-left: 23px;
   padding-top: ${props => (props.active ? '10px' : '0px')};
   padding-bottom: ${props => (props.active ? '10px' : '0px')};
   border-left: 1px solid #007baa;
   background: #006a9f;
-  margin-top: ${props => (props.active ? '10px' : '0px')};
-  margin-bottom: ${props => (props.active ? '10px' : '0px')};
   overflow: hidden;
   max-height: ${props => (props.active ? '400px' : '0px')};
   transition: max-height 0.5s ease-in-out;

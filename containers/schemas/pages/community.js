@@ -1,20 +1,45 @@
 import F from '../fragments'
 
-export const pagedCommunities = `
-  query($filter: PagedFilter!) {
-    pagedCommunities(filter: $filter) {
+// contributesDigest
+export const subscribedCommunities = `
+  query subscribedCommunities($userId: ID, $filter: PagedFilter!) {
+    subscribedCommunities(userId: $userId, filter: $filter) {
       entries {
         ${F.community}
-        categories {
-          ${F.category}
-        }
-        threads {
-          ${F.thread}
-        }
+        contributesDigest
       }
       ${F.pagedCounts}
     }
   }
 `
-
-export const holder = 1
+export const community = `
+  query community($id: ID, $raw: String) {
+    community(id: $id, raw: $raw) {
+      ${F.community}
+      threads {
+        title
+        raw
+        index
+      }
+      subscribersCount
+      editorsCount
+      postsCount
+      jobsCount
+      videosCount
+      reposCount
+    }
+  }
+`
+export const pagedCommunities = `
+  query($filter: CommunitiesFilter!, $userHasLogin: Boolean!) {
+    pagedCommunities(filter: $filter) {
+      entries {
+        ${F.community}
+        contributesDigest
+        subscribersCount
+        viewerHasSubscribed @include(if: $userHasLogin)
+      }
+      ${F.pagedCounts}
+    }
+  }
+`

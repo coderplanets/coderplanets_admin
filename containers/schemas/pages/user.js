@@ -1,8 +1,8 @@
 import F from '../fragments'
 
 export const user = `
-  query user($id: ID!, $userHasLogin: Boolean!) {
-    user(id: $id) {
+  query user($login: String!, $userHasLogin: Boolean!) {
+    user(login: $login) {
       ${F.author}
       views
       bio
@@ -22,19 +22,14 @@ export const user = `
       huaban
       followersCount
       followingsCount
-
       viewerHasFollowed @include(if: $userHasLogin)
-
       achievement {
-        reputation
-        contentsStaredCount
-        contentsFavoritedCount
+        ${F.achievement}
         sourceContribute {
           web
           server
         }
       }
-
       workBackgrounds {
         company
         title
@@ -69,4 +64,34 @@ export const user = `
   }
 `
 
-export const holder = 1
+export const sessionState = `
+  query {
+    sessionState {
+      isValid
+      user {
+        id
+        geoCity
+        nickname
+        avatar
+        bio
+        fromGithub
+        location
+        qq
+        weibo
+        weichat
+        sex
+        cmsPassport
+        customization {
+          ${F.c11n}
+        }
+        githubProfile {
+          htmlUrl
+          login
+        }
+        achievement {
+          ${F.achievement}
+        }
+      }
+    }
+  }
+`
