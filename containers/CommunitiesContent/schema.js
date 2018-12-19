@@ -8,7 +8,10 @@ const pagedCategories = gql`
   query($filter: PagedFilter!) {
     pagedCategories(filter: $filter) {
       entries {
-        ${F.category}
+        id
+        title
+        raw
+        index
         communities {
           id
           logo

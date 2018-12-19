@@ -6,13 +6,12 @@
 import { types as t } from 'mobx-state-tree'
 import { makeDebugger, markStates } from '../../utils'
 
-import RouteStore from '../RouteStore'
-
 import CommunitiesStore from '../CommunitiesStore'
 import { ThemeStore, ThemeDefaults } from '../ThemeStore'
 
 import {
   // domain
+  RouteStore,
   UsersStore,
   AccountStore,
   BodylayoutStore,

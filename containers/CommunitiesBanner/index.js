@@ -113,6 +113,7 @@ class CommunitiesBannerContainer extends React.Component {
     const { curRoute } = communitiesBanner
 
     // console.log('totalCount --> ', communitiesBanner.totalCount)
+    console.log('the fucking curRoute: ', curRoute)
     return (
       <BannerContainer>
         <ChildBanner curRoute={curRoute} store={stripMobx(communitiesBanner)} />
