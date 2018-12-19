@@ -11,6 +11,7 @@ import {
   EVENT,
   TYPE,
   THREAD,
+  ROUTE,
   scrollIntoEle,
   closePreviewer,
   dispatchEvent,
@@ -21,7 +22,12 @@ import S from './schema'
 import SR71 from '../../utils/network/sr71'
 
 const sr71$ = new SR71({
-  resv_event: [EVENT.LOGOUT, EVENT.LOGIN, EVENT.PREVIEW_CLOSE],
+  resv_event: [
+    EVENT.LOGOUT,
+    EVENT.LOGIN,
+    EVENT.PREVIEW_CLOSE,
+    EVENT.SIDEBAR_MENU_CHANGE,
+  ],
 })
 
 /* eslint-disable no-unused-vars */
@@ -360,6 +366,23 @@ const DataSolver = [
         default: {
           debug('unknow event: ', closeType)
           /* return loadPosts() */
+        }
+      }
+    },
+  },
+  {
+    match: asyncRes(EVENT.SIDEBAR_MENU_CHANGE),
+    action: res => {
+      const { mainPath, subPath } = res[EVENT.SIDEBAR_MENU_CHANGE].data
+      if (mainPath !== ROUTE.COMMUNITIES) return false
+      debug('unknow event: ', subPath)
+
+      switch (subPath) {
+        case ROUTE.CATEGORIES: {
+          return loadCategories()
+        }
+        default: {
+          return loadCommunities()
         }
       }
     },

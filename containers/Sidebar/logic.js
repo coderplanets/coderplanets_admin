@@ -11,6 +11,8 @@ import {
   makeDebugger,
   EVENT,
   ROUTE,
+  // TYPE,
+  dispatchEvent,
 } from '../../utils'
 import S from './schema'
 import { PAGE_SIZE } from '../../config'
@@ -22,6 +24,7 @@ const sr71$ = new SR71({
 })
 
 let store = null
+let sub$ = null
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('L:Sidebar')
@@ -53,8 +56,16 @@ export function extendMenuBar(communityRaw) {
   }
 }
 
-export function onMenuSelect(mainPath, subPath) {
+export function onRootMenuSelect(mainPath, subPath) {
+  console.log('onRootMenuSelect mainPath: ', mainPath)
+  console.log('onRootMenuSelect subPath: ', subPath)
+
   store.markRoute({ mainPath, subPath })
+
+  dispatchEvent(EVENT.SIDEBAR_MENU_CHANGE, {
+    // type: TYPE.SIDEBAR_MENU_CHANGE,
+    data: { mainPath, subPath },
+  })
 }
 
 export function onCommunityChildMenuChange(activeThread) {
@@ -104,6 +115,15 @@ const ErrSolver = [
 
 export function init(selectedStore) {
   store = selectedStore
-  sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+  if (sub$) return false
+  sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
   // loadCommunities()
+}
+
+export function uninit() {
+  if (!sub$) return false
+
+  debug('===== do uninit')
+  sub$.unsubscribe()
+  sub$ = null
 }

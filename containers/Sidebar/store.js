@@ -91,10 +91,10 @@ const SidebarStore = t
     },
 
     /*
-    loadSubscribedCommunities(data) {
-      self.root.account.loadSubscribedCommunities(data)
-    },
-    */
+       loadSubscribedCommunities(data) {
+       self.root.account.loadSubscribedCommunities(data)
+       },
+     */
     markState(sobj) {
       markStates(sobj, self)
     },

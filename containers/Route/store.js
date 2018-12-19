@@ -3,7 +3,7 @@
  *
  */
 
-import { types as t } from 'mobx-state-tree'
+import { types as t, getParent } from 'mobx-state-tree'
 import R from 'ramda'
 import Router from 'next/router'
 
@@ -16,6 +16,7 @@ const debug = makeDebugger('S:RouteStore')
 const Query = t.model('Query', {
   page: t.optional(t.string, '1'),
   size: t.optional(t.string, String(PAGE_SIZE.D)),
+  tab: t.maybeNull(t.string),
   // sort .... [when, ...]
   // view ... [chart, list ...]
 })
@@ -27,18 +28,15 @@ const RouteStore = t
     query: t.optional(Query, {}),
   })
   .views(self => ({
+    get root() {
+      return getParent(self)
+    },
     get curRoute() {
       const { mainPath, subPath } = self
       return { mainPath, subPath }
     },
   }))
   .actions(self => ({
-    // /communities/posts ..
-    // /communities/jobs ..
-    // .....
-    // /javascript/posts ..
-    // /racket/jobs ..
-
     markRoute(query) {
       if (!onClient) return false
       const { mainPath, subPath, page } = query

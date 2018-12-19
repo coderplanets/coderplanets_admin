@@ -1,11 +1,12 @@
 // domain store
+export { default as RouteStore } from '../containers/Route/store'
 export { default as AccountStore } from './AccountStore'
 export { default as UsersStore } from './UsersStore'
 export { default as PostsStore } from './PostsStore'
 
 export { default as BodylayoutStore } from './BodylayoutStore'
 export { default as ApiLayoutStore } from './ApiLayoutStore'
-export { default as SidebarStore } from './SidebarStore'
+export { default as SidebarStore } from '../containers/Sidebar/store'
 export { default as PreviewStore } from '../containers/Preview/store'
 export { default as DoraemonStore } from '../containers/Doraemon/store'
 export { default as HeaderStore } from '../containers/Header/store'
