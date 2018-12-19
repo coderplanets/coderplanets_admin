@@ -11,41 +11,20 @@ import { ThemeProvider } from 'styled-components'
 import { storePlug } from '../../utils'
 
 import AntOverWrite from './AntOverWrite'
-import NormalizeStyle from './NormalizeStyle'
 // import MarkDownStyle from './MarkDownStyle'
 import CodeHighlight from './CodeHighlight'
+import GlobalStyle from './GlobalStyle'
 
 // TODO: mv MarkDownStyle && CodeHighlight to it's own container
 
 const ThemeObserver = ({ children, theme }) => (
   <ThemeProvider theme={theme.themeData}>
-    <AntOverWrite>
-      <CodeHighlight>
-        <style global jsx>
-          {NormalizeStyle}
-        </style>
-        <style global jsx>{`
-          html {
-            background-color: ${theme.themeData.htmlBg};
-          }
-          *::-moz-selection {
-            background-color: ${theme.themeData.selection_bg} !important;
-          }
-
-          *::selection {
-            background-color: ${theme.themeData.selection_bg} !important;
-          }
-
-          a:hover {
-            color: ${theme.themeData.a.hover};
-          }
-          a:active {
-            color: ${theme.themeData.a.active};
-          }
-        `}</style>
-        <div>{children}</div>
-      </CodeHighlight>
-    </AntOverWrite>
+    <React.Fragment>
+      <div>{children}</div>
+      <AntOverWrite />
+      <CodeHighlight />
+      <GlobalStyle />
+    </React.Fragment>
   </ThemeProvider>
 )
 
