@@ -1,11 +1,5 @@
-/*
- * use normalize.css to reset global css
- * https://github.com/necolas/normalize.css
- *
- */
-
-// TODO' html background-color
-const NormalizeStyle = `
+// font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "MicrosoftYaHei", "WenQuanYi Micro Hei", sans-serif;
+const normalize = `
   html {
     line-height: 1.15; /* 1 */
     -ms-text-size-adjust: 100%; /* 2 */
@@ -15,21 +9,21 @@ const NormalizeStyle = `
   body {
     font-size: 14px !important;
     line-height: 1.5;
-    font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC, WenQuanYi Micro Hei, Arial, sans-serif;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Helvetica Neue","Helvetica",PingFang SC,PingFang TC,Hiragino Sans GB,STHeiti,Microsoft YaHei,Microsoft JhengHei,"WenQuanYi Micro Hei",sans-serif;
   }
 
   html,body{
     width: 100%;
     height: 100%;
- }
+  }
 
   ol, ul {
     list-style: none;
   }
 
   *, *:before, *:after {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+     -webkit-box-sizing: border-box;
     margin:0;
     padding:0;
     box-sizing: border-box;
@@ -116,7 +110,7 @@ const NormalizeStyle = `
   html [type="button"],
   [type="reset"],
   [type="submit"] {
-    -webkit-appearance: button;
+     -webkit-appearance: button;
   }
 
   button::-moz-focus-inner,
@@ -150,7 +144,7 @@ const NormalizeStyle = `
   }
 
   [type="search"] {
-    -webkit-appearance: textfield;
+     -webkit-appearance: textfield;
     outline-offset: -2px;
   }
 
@@ -160,7 +154,7 @@ const NormalizeStyle = `
   }
 
   ::-webkit-file-upload-button {
-    -webkit-appearance: button; /* 1 */
+     -webkit-appearance: button; /* 1 */
     font: inherit; /* 2 */
   }
 
@@ -183,4 +177,4 @@ const NormalizeStyle = `
   }
 `
 
-export default NormalizeStyle
+export default normalize
