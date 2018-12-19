@@ -4,9 +4,9 @@
 
 import { lighten, darken } from 'polished'
 
-const primaryColor = '#5EABB3'
+const primaryColor = '#717084' // '#5EABB3'
 
-const bannerBg = '#DAE6E5'
+const bannerBg = '#464652'
 const contentBg = '#E4EEED'
 const contentBoxBg = '#f9fcfc'
 const fontColor = primaryColor
@@ -47,7 +47,7 @@ const cyan = {
     pinkBtnText: '#fff !important',
   },
   header: {
-    fg: primaryColor,
+    fg: '#6E6F81',
     bg: bannerBg,
     spliter: darken(0.04, bannerBg),
     fixed: contentBoxBg,

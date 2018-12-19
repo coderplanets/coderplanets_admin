@@ -10,8 +10,6 @@
 
 import {
   community,
-  category,
-  thread,
   post,
   job,
   video,
@@ -19,6 +17,7 @@ import {
   author,
   tag,
   user,
+  c11n,
   achievement,
   userBackgrounds,
   userContributes,
@@ -31,8 +30,6 @@ import { pagedPosts, pagedJobs, pagedVideos, pagedRepos } from './paged'
 
 const F = {
   community,
-  category,
-  thread,
   post,
   job,
   video,
@@ -45,6 +42,7 @@ const F = {
   pagedRepos,
 
   user,
+  c11n,
   achievement,
   userBackgrounds,
   userContributes,

@@ -42,6 +42,7 @@ export function loadCommunities(page = 1) {
   const size = PAGE_SIZE.D
   const args = {
     filter: { page, size },
+    userHasLogin: false,
   }
   scrollIntoEle(TYPE.APP_HEADER_ID)
 
@@ -54,7 +55,6 @@ export function loadCommunities(page = 1) {
 
 export function loadCategories(page = 1) {
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  console.log('the fuck store: ', store)
   store.markRoute({ page })
   store.markState({ categoriessLoading: true })
 
@@ -112,14 +112,14 @@ export function loadCommunitiesIfOnClient() {
 export function loadTagsIfOnClient() {
   if (!store.pagedTags) {
     debug('loadTagsIfOnClient')
-    loadTags()
+    // loadTags()
   }
 }
 
 export function loadThreadsIfOnClient() {
   if (!store.pagedThreads) {
     debug('loadThreadsIfOnClient')
-    loadThreads()
+    // loadThreads()
   }
 }
 
@@ -244,11 +244,7 @@ const DataSolver = [
     match: asyncRes('pagedCommunities'),
     action: ({ pagedCommunities }) => {
       cancleLoading()
-      debug(
-        '## loadCommunities in the client .... pagedCommunities: ',
-        pagedCommunities.pageNumber
-      )
-
+      debug('pagedCommunities: ', pagedCommunities)
       store.markState({ pagedCommunities })
     },
   },
@@ -398,10 +394,10 @@ const ErrSolver = [
 export function init(_store) {
   store = _store
 
-  if (sub$) return loadCategories()
+  if (sub$) return loadCommunities() // loadCategories()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 
-  loadCategories()
+  loadCommunities() // loadCategories()
 }
 
 export function uninit() {

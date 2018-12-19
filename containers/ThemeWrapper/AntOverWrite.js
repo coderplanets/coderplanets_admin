@@ -237,6 +237,7 @@ const AntOverWrite = styled.div`
     background-color: ${theme('pagination.item_bg')};
     border-color: ${theme('pagination.item_border_color')};
   }
+
   .ant-pagination-item a {
     color: ${theme('pagination.inactive_num')};
   }
@@ -263,6 +264,7 @@ const AntOverWrite = styled.div`
   .ant-pagination-item-active {
     background: ${theme('button.primary')};
     border-radius: 50%;
+    border-color: ${theme('button.primary')};
   }
 
   .ant-pagination-item-active a {
@@ -318,9 +320,6 @@ const AntOverWrite = styled.div`
   }
 
   .ant-btn-red {
-    color: white;
-    background-color: tomato;
-    border-color: tomato;
   }
   .ant-btn-background-ghost.ant-btn-red {
     color: tomato;
