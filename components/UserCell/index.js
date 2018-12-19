@@ -14,14 +14,14 @@ import { makeDebugger } from '../../utils'
 const debug = makeDebugger('c:UserCell:index')
 /* eslint-enable no-unused-vars */
 
-const UserCell = ({ user, align, left, small }) => {
-  return (
+const UserCell = ({ user, align, left, small }) => (
+  <div>
     <UserCellWrapper align={align} left={left}>
       <Avatar src={user.avatar} alt={user.nickname} small={small} />
       <NickName>{user.nickname}</NickName>
     </UserCellWrapper>
-  )
-}
+  </div>
+)
 
 UserCell.propTypes = {
   // https://www.npmjs.com/package/prop-types

@@ -4,20 +4,26 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
+import R from 'ramda'
+import PubSub from 'pubsub-js'
 
 import { EditorState, ContentState, Modifier } from 'draft-js'
 import Editor from 'draft-js-plugins-editor'
-import PubSub from 'pubsub-js'
-
-import createMentionPlugin, {
-  defaultSuggestionsFilter,
-} from 'draft-js-mention-plugin'
+import createMentionPlugin from 'draft-js-mention-plugin'
+// import createLinkifyPlugin from 'draft-js-linkify-plugin'
 
 import toRawString from './exportContent'
-import { Wrapper } from './styles/editorStyle'
+import { Wrapper } from './styles/body_editor'
+
 import { EVENT, makeDebugger } from '../../utils'
 
-const themeClass = {
+/*
+const linkifyPlugin = createLinkifyPlugin({
+  theme: { link: 'typewriter-link' },
+})
+*/
+
+const mentionThemeClass = {
   mention: 'typewriter-mention',
   mentionSuggestions: 'typewriter-suggestions',
   mentionSuggestionsEntry: 'typewriter-mentionSuggestionsEntry',
@@ -27,47 +33,46 @@ const themeClass = {
 }
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:Comments')
+const debug = makeDebugger('C:BodyEditor')
 /* eslint-enable no-unused-vars */
 
-class MastaniEditor extends React.Component {
+const mentionFilter = (value, mentions) =>
+  R.filter(m => R.startsWith(value, R.toLower(m.name)), mentions)
+
+class BodyEditor extends React.Component {
   constructor(props) {
     super(props)
+
     this.mentionPlugin = createMentionPlugin({
-      theme: themeClass,
+      theme: mentionThemeClass,
       mentionPrefix: '@',
     })
+    this.initPubSub()
   }
 
   state = {
     editorState: EditorState.createEmpty(),
     suggestions: [],
+    mentionList: [],
     pub: null,
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.loadDraft()
     this.loadUserSuggestions()
   }
 
-  componentDidMount() {
-    /* DONT use loadDraft in componentDidMount, it will cause strange bug of mentions */
-    /* also onCHange empty issue in Draft.js */
-    /*
-       see: https://stackoverflow.com/questions/35884112/draftjs-how-to-initiate-an-editor-with-content
-       import {  ContentState } from 'draft-js'
-
-       const editorState={EditorState.createWithContent(
-       ContentState.createFromText('fuck')
-       )}
-     */
-    /* TODO: has to use setTimeout otherwise the mention not work */
-    setTimeout(() => {
-      this.focus()
-    }, 100)
-
-    this.initPubSub()
+  componentWillReceiveProps(nextProps) {
+    /* eslint-disable react/destructuring-assignment */
+    if (
+      nextProps.mentionList &&
+      !R.equals(nextProps.mentionList, this.state.mentionList)
+    ) {
+      this.loadUserSuggestions(nextProps.mentionList)
+    }
+    /* eslint-enable react/destructuring-assignment */
   }
+
   componentWillUnmount() {
     const { pub } = this.state
     PubSub.unsubscribe(pub)
@@ -78,22 +83,23 @@ class MastaniEditor extends React.Component {
     const pub = PubSub.subscribe(EVENT.DRAFT_INSERT_SNIPPET, (event, data) => {
       this.insertSnippet(data.data)
     })
-    this.setState({
-      pub,
+    this.setState({ pub })
+  }
+
+  loadDraft = () => {
+    const { body } = this.props
+
+    // see: https://stackoverflow.com/questions/35884112/draftjs-how-to-initiate-an-editor-with-content
+    const editorState = EditorState.createWithContent(
+      ContentState.createFromText(body)
+    )
+
+    this.setState({ editorState }, () => {
+      this.editor.componentWillMount()
     })
   }
 
   insertSnippet = data => {
-    /*
-       const curString = toRawString(this.state.editorState.getCurrentContent())
-       const contentState = ContentState.createFromText(
-       `${curString}\n\n${data}\n\n`
-       )
-       const editorState = EditorState.push(this.state.editorState, contentState)
-
-       this.setState({ editorState })
-     */
-
     const { editorState } = this.state
     /* const contentState = ContentState.createFromText('ni ma') */
     const contentState = editorState.getCurrentContent()
@@ -110,51 +116,41 @@ class MastaniEditor extends React.Component {
     })
   }
 
-  onBlur = () => {
-    /*
-    const selectionState = this.state.editorState.getSelection()
-    const { editorState } = this.state
-    const fuck = Modifier.splitBlock(
-      editorState.getCurrentContent(),
-      selectionState,
-      'this-is-me'
-    )
-
-    const fff = toRawString(fuck)
-    console.log('fffff: ', fff.split('\n'))
-    */
-  }
+  onBlur = () => {}
 
   onChange = editorState => {
+    const { onChange } = this.props
     // const oldString = toRawString(this.state.editorState.getCurrentContent())
     const newString = toRawString(editorState.getCurrentContent())
     // console.log('onChange raw: ', newString)
 
-    // if (oldString === newString) return false
-    // console.log('onChange: ', newString)
-    this.props.onChange(newString)
-    this.setState({
-      editorState,
-    })
+    onChange(newString)
+    this.setState({ editorState })
   }
 
   onSearchChange = ({ value }) => {
-    this.setState({
-      suggestions: defaultSuggestionsFilter(value, this.state.mentions),
-    })
+    /* console.log('onSearchChange value: ', value) */
+    const { onMentionSearch } = this.props
+    onMentionSearch(value)
+
+    this.setState(prevState => ({
+      suggestions: mentionFilter(value, prevState.mentionList),
+    }))
+  }
+
+  loadUserSuggestions = propsMentionList => {
+    /* eslint-disable react/destructuring-assignment */
+    const mentionList = propsMentionList || this.props.mentionList
+    // debug('loadUserSuggestions --->', mentionList)
+    this.setState({ suggestions: mentionList, mentionList })
+    /* eslint-enable react/destructuring-assignment */
   }
 
   onAddMention = user => {
-    // console.log('onAddMention: ', user)
-    this.props.onMention(user)
+    const { onMention } = this.props
+    onMention(user)
     // get the mention object selected
   }
-
-  /*
-     onBlur = () => {
-     if (this.props.onBlur) this.props.onBlur()
-     }
-   */
 
   focus = () => {
     if (this.editor) {
@@ -162,48 +158,25 @@ class MastaniEditor extends React.Component {
     }
   }
 
-  loadUserSuggestions = () => {
-    const { mentions } = this.props
-    /* debug('loadUserSuggestions --->', mentions) */
-    this.setState({
-      suggestions: mentions,
-      mentions,
-    })
-  }
-
   clearContent = () => {
     const editorState = EditorState.createWithContent(
       ContentState.createFromText('')
     )
-    this.setState({
-      editorState,
-    })
-  }
-
-  loadDraft = () => {
-    const editorState = EditorState.createWithContent(
-      ContentState.createFromText(this.props.body)
-    )
-    // somehow the onCHange behave strange
-    // see issue: https://github.com/facebook/draft-js/issues/1198
-
-    //     setTimeout(() => {
-    //   this.focus()
-    //    }, 150)
-
-    this.setState({
-      editorState,
-    })
+    this.setState({ editorState })
   }
 
   render() {
     const { MentionSuggestions } = this.mentionPlugin
     const plugins = [this.mentionPlugin]
+    const { editorState, suggestions } = this.state
+
+    /* console.log('mentionList-> ', this.props.mentionList) */
+    //  console.log('suggestions : ', suggestions)
 
     return (
       <Wrapper onClick={this.focus}>
         <Editor
-          editorState={this.state.editorState}
+          editorState={editorState}
           onChange={this.onChange}
           onBlur={this.onBlur}
           plugins={plugins}
@@ -213,7 +186,7 @@ class MastaniEditor extends React.Component {
         />
         <MentionSuggestions
           onSearchChange={this.onSearchChange}
-          suggestions={this.state.suggestions}
+          suggestions={suggestions}
           onAddMention={this.onAddMention}
         />
       </Wrapper>
@@ -221,24 +194,26 @@ class MastaniEditor extends React.Component {
   }
 }
 
-MastaniEditor.propTypes = {
-  mentions: PropTypes.arrayOf(
+BodyEditor.propTypes = {
+  mentionList: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number,
+      id: PropTypes.string,
       avatar: PropTypes.string,
       name: PropTypes.string,
     })
   ),
   body: PropTypes.string,
+  onMentionSearch: PropTypes.func,
   onMention: PropTypes.func,
   onChange: PropTypes.func,
 }
 
-MastaniEditor.defaultProps = {
+BodyEditor.defaultProps = {
   body: '',
-  mentions: [],
+  mentionList: [],
   onMention: debug,
+  onMentionSearch: debug,
   onChange: debug,
 }
 
-export default MastaniEditor
+export default BodyEditor

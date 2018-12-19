@@ -1,29 +1,48 @@
 import styled from 'styled-components' //
 
-import { Animate } from '../../../utils'
+import { animate, cs, theme } from '../../../utils'
 
-// height: 1em;
 export const Wrapper = styled.div`
-  height: 1em;
+  min-height: 1rem;
 `
 export const Msg = styled.span`
   margin-left: 5px;
 `
 
 export const SuccessMsgBox = styled.div`
-  color: yellowgreen;
-  animation: ${Animate.fadeInUp} 0.5s linear;
-  display: ${props => (props.success ? 'block' : 'none')};
+  color: ${theme('baseColor.green')};
+  animation: ${animate.fadeInUpRule};
+  display: ${({ show }) => (show ? 'block' : 'none')};
 `
 
 export const WarningMsgBox = styled.div`
   color: #e8c557;
-  animation: ${Animate.pulse} 0.3s linear;
-  display: ${props => (props.warn ? 'block' : 'none')};
+  animation: ${animate.pulseRule};
+  display: ${({ show }) => (show ? 'block' : 'none')};
 `
 
 export const ErrorMsgBox = styled.div`
-  color: tomato;
-  animation: ${Animate.shake} 0.3s linear;
-  display: ${props => (props.error ? 'block' : 'none')};
+  color: ${theme('baseColor.error')};
+  animation: ${animate.shakeRule};
+  display: ${({ show }) => (show ? 'block' : 'none')};
+`
+
+export const ErrorArrayWrapper = styled.div`
+  ${cs.flexColumn()};
+  color: ${theme('baseColor.error')};
+  animation: ${animate.shakeRule};
+`
+
+export const ErrorMsg = styled.div`
+  ${cs.flex()};
+`
+
+export const ErrorKey = styled.div`
+  min-width: 50px;
+  text-align: right;
+  margin-right: 6px;
+  opacity: 0.6;
+`
+export const ErrorDetail = styled.div`
+  opacity: 0.9;
 `

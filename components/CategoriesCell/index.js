@@ -7,11 +7,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import R from 'ramda'
-import shortid from 'shortid'
+import { Icon } from 'antd'
 
-import { ICON_ASSETS } from '../../config'
+import { ICON_CMD } from '../../config'
 
-import { AdderCell, Icon } from '../../components'
+import AdderCell from '../AdderCell'
+
 import {
   Wrapper,
   CategoryWrapper,
@@ -20,13 +21,14 @@ import {
   AddIcon,
 } from './styles'
 
+import { uid } from '../../utils'
 // import { inject, observer } from 'mobx-react'
 // import Link from 'next/link'
 
 const CategoriesList = ({ source, onDelete }) => (
   <CategoryWrapper>
     {source.categories.map(c => (
-      <CategoryTag key={shortid.generate()}>
+      <CategoryTag key={uid.gen()}>
         {c.title}
         <DeleteCross onClick={onDelete.bind(this, source.id, c)}>
           <Icon type="cross" />
@@ -52,7 +54,7 @@ class CategoriesCell extends React.Component {
           <Wrapper>
             <CategoriesList source={source} onDelete={onDelete} />
             <div onClick={onAdd.bind(this, source)}>
-              <AddIcon src={`${ICON_ASSETS}/cmd/plus.svg`} />
+              <AddIcon src={`${ICON_CMD}/plus.svg`} />
             </div>
           </Wrapper>
         )}

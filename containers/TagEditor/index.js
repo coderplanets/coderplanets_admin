@@ -6,11 +6,7 @@
 
 import React from 'react'
 import { inject, observer } from 'mobx-react'
-
-// import Link from 'next/link'
-
-import { makeDebugger, storePlug } from '../../utils'
-import { CMS_THREADS } from '../../config'
+import R from 'ramda'
 
 import {
   Button,
@@ -22,7 +18,10 @@ import {
   TagColorSelector,
   CommunityMatrix,
 } from '../../components'
+
 import { Wrapper, ActionBtns, Divider } from './styles'
+
+import { makeDebugger, storePlug, THREAD } from '../../utils'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
@@ -30,7 +29,7 @@ const debug = makeDebugger('C:TagEditor')
 /* eslint-enable no-unused-vars */
 
 class TagEditorContainer extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { tagEditor, editData } = this.props
     logic.init(tagEditor, editData)
   }
@@ -56,18 +55,25 @@ class TagEditorContainer extends React.Component {
         <FormInputer
           label="名称:"
           value={tagData.title}
-          onChange={logic.profileChange('title')}
+          onChange={logic.inputOnChange.bind(this, 'title')}
+        />
+        <FormInputer
+          label="topic:"
+          value={tagData.topicValue}
+          onChange={logic.inputOnChange.bind(this, 'topicValue')}
+          disabled={isEdit}
+          note="用于区分同一组件的不同 tags, 比如'帖子'和'同城'同样使用 PostThreads 组件，需要使用 topic 来区分各自的 tags"
         />
         <TagColorSelector
           label="颜色:"
           value={tagData.color}
-          onChange={logic.colorChange}
+          onChange={logic.inputOnChange.bind(this, 'color')}
         />
         <div style={showStyle}>
           <FormItem label="社区:">
             <CommunityMatrix
               data={pagedCommunitiesData}
-              onSelect={logic.communityChange}
+              onSelect={logic.inputOnChange.bind(this, 'community')}
               activeRaw={tagData.community ? tagData.community.raw : ''}
               hasAddon={false}
             />
@@ -76,9 +82,9 @@ class TagEditorContainer extends React.Component {
         <div style={showStyle}>
           <FormSelector
             label="thread:"
-            options={CMS_THREADS}
+            options={R.keys(THREAD)}
             value={tagData.thread}
-            onChange={logic.threadChange}
+            onChange={logic.inputOnChange.bind(this, 'thread')}
           />
         </div>
         <Divider />

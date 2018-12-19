@@ -8,10 +8,9 @@ import React from 'react'
 import R from 'ramda'
 import { inject, observer } from 'mobx-react'
 import keydown from 'react-keydown'
+import { Affix } from 'antd'
 
-import { ICON_ASSETS } from '../../config/assets'
-import { Affix } from '../../components'
-
+import { ICON_CMD, ICON_BASE } from '../../config/assets'
 import { makeDebugger, storePlug, TYPE } from '../../utils'
 
 import {
@@ -81,7 +80,7 @@ const MiniMap = ({ curRoute }) => {
     case 'communities': {
       return (
         <MiniMapWrapper>
-          <SettingLogo src={`${ICON_ASSETS}/cmd/all.svg`} />
+          <SettingLogo src={`${ICON_CMD}/all.svg`} />
           <MiniMapDivider />
           <MiniMapTitle>社区设置</MiniMapTitle>
           <SubRouteContent subPath={subPath} />
@@ -91,7 +90,7 @@ const MiniMap = ({ curRoute }) => {
     case 'users': {
       return (
         <MiniMapWrapper>
-          <SettingLogo src={`${ICON_ASSETS}/cmd/users.svg`} />
+          <SettingLogo src={`${ICON_CMD}/users.svg`} />
           <MiniMapDivider />
           <MiniMapTitle>用户设置</MiniMapTitle>
           <SubRouteContent subPath={subPath} />
@@ -101,7 +100,7 @@ const MiniMap = ({ curRoute }) => {
     default: {
       return (
         <MiniMapWrapper>
-          <CommunityLogo src={`${ICON_ASSETS}/pl/${iconKey}.svg`} />
+          <CommunityLogo src={`${ICON_BASE}/pl/${iconKey}.svg`} />
           <MiniMapDivider />
           <MiniMapTitle>{mainPath}</MiniMapTitle>
           <SubRouteContent subPath={subPath} />
@@ -129,20 +128,20 @@ const Header = ({ curRoute, leftOffset, fixed, isLogin, accountInfo }) => (
           ghost
           onClick={logic.previewState.bind(this, 'mst-state')}
         >
-          <StateIcon src={`${ICON_ASSETS}/cmd/header_state.svg`} />
+          <StateIcon src={`${ICON_CMD}/header_state.svg`} />
           <div>STATE</div>
         </StateButton>
 
-        <DividerIcon src={`${ICON_ASSETS}/cmd/more.svg`} />
+        <DividerIcon src={`${ICON_CMD}/more.svg`} />
       </div>
     </Admin>
 
     <Operations>
       <Search onClick={logic.openDoraemon}>
-        <HeaderIcon src={`${ICON_ASSETS}/cmd/search2.svg`} />
+        <HeaderIcon src={`${ICON_CMD}/search2.svg`} />
       </Search>
       <Notification onClick={logic.openPreview.bind(this, 'post')}>
-        <HeaderIcon src={`${ICON_ASSETS}/cmd/notification_none.svg`} />
+        <HeaderIcon src={`${ICON_CMD}/notification_none.svg`} />
       </Notification>
 
       {isLogin ? (
@@ -151,7 +150,7 @@ const Header = ({ curRoute, leftOffset, fixed, isLogin, accountInfo }) => (
         </User>
       ) : (
         <User onClick={logic.login}>
-          <HeaderIcon src={`${ICON_ASSETS}/cmd/header_user.svg`} />
+          <HeaderIcon src={`${ICON_CMD}/header_user.svg`} />
         </User>
       )}
     </Operations>
@@ -159,8 +158,13 @@ const Header = ({ curRoute, leftOffset, fixed, isLogin, accountInfo }) => (
 )
 
 class HeaderContainer extends React.Component {
-  componentWillMount() {
-    logic.init(this.props.header)
+  componentDidMount() {
+    const { header } = this.props
+    logic.init(header)
+  }
+
+  componentWillUnmount() {
+    logic.uninit()
   }
 
   /* eslint-disable class-methods-use-this */
@@ -172,13 +176,9 @@ class HeaderContainer extends React.Component {
   /* eslint-enable class-methods-use-this */
 
   render() {
-    const {
-      fixed,
-      curRoute,
-      leftOffset,
-      accountInfo,
-      isLogin,
-    } = this.props.header
+    const { header } = this.props
+
+    const { fixed, curRoute, leftOffset, accountInfo, isLogin } = header
 
     // <Affix style={{ display: fixed ? 'block' : 'none' }}>
     return (

@@ -24,59 +24,58 @@ let sub$ = null
 const debug = makeDebugger('L:Comments')
 /* eslint-enable no-unused-vars */
 
-let comments = null
-let commentsConflict = null
+let store = null
 
 /* DESC_INSERTED, ASC_INSERTED */
 const defaultArgs = {
   fresh: false,
-  filter: { page: 1, size: PAGE_SIZE.COMMENTS, sort: TYPE.ASC_INSERTED },
+  filter: { page: 1, size: PAGE_SIZE.D, sort: TYPE.ASC_INSERTED },
 }
 
 export const loadComents = (args = {}) => {
   // debug('loadComents passed in: ', args)
   args = R.mergeDeepRight(defaultArgs, args)
-  args.id = comments.activeArticle.id
-  args.userHasLogin = comments.isLogin
+  args.id = store.viewingData.id
+  args.userHasLogin = store.isLogin
+  args.thread = store.activeThread
 
   markLoading(args.fresh)
-  comments.markState({
-    filterType: args.filter.sort,
-  })
+  store.markState({ filterType: args.filter.sort })
 
-  debug('loadComents query: ', args)
-  sr71$.query(S.comments, args)
+  debug('pagedComments args: ', args)
+  sr71$.query(S.pagedComments, args)
 }
 
 const markLoading = fresh => {
   if (fresh) {
-    return comments.markState({ loadingFresh: true })
+    return store.markState({ loadingFresh: true })
   }
-  return comments.markState({ loading: true })
+  return store.markState({ loading: true })
 }
 
 export function createComment() {
-  // TODO: validation...
-  comments.markState({
-    creating: true,
-  })
+  if (!store.validator('create')) return false
 
-  sr71$.mutate(S.createComment, {
-    id: comments.activeArticle.id,
-    body: comments.editContent,
-  })
+  store.markState({ creating: true })
+  const args = {
+    id: store.viewingData.id,
+    body: store.editContent,
+    thread: store.activeThread,
+  }
+
+  debug('createComment args: ', args)
+  sr71$.mutate(S.createComment, args)
 }
 
 export function createCommentPreview() {
-  debug('createCommentPreview')
-  comments.markState({
+  store.markState({
     showInputEditor: false,
     showInputPreview: true,
   })
 }
 
 export function backToEditor() {
-  comments.markState({
+  store.markState({
     showInputEditor: true,
     showInputPreview: false,
   })
@@ -87,20 +86,22 @@ export function previewReply(data) {
 }
 
 export function openInputBox() {
-  comments.markState({
+  if (!store.isLogin) return store.authWarning({ hideToast: true })
+
+  store.markState({
     showInputBox: true,
     showInputEditor: true,
   })
 }
 
 export function openCommentEditor() {
-  comments.markState({
+  store.markState({
     showInputEditor: true,
   })
 }
 
 export function onCommentInputBlur() {
-  comments.markState({
+  store.markState({
     showInputBox: false,
     showInputPreview: false,
     showInputEditor: false,
@@ -108,21 +109,23 @@ export function onCommentInputBlur() {
 }
 
 export function createReplyComment() {
+  if (!store.validator('reply')) return false
+
   sr71$.mutate(S.replyComment, {
-    id: comments.replyToComment.id,
-    body: comments.replyContent,
+    id: store.replyToComment.id,
+    body: store.replyContent,
   })
 }
 
 export function onCommentInputChange(editContent) {
-  comments.markState({
+  store.markState({
     countCurrent: countWords(editContent),
     extractMentions: extractMentions(editContent),
     editContent,
   })
 }
 export function onReplyInputChange(replyContent) {
-  comments.markState({
+  store.markState({
     countCurrent: countWords(replyContent),
     extractMentions: extractMentions(replyContent),
     replyContent,
@@ -130,7 +133,7 @@ export function onReplyInputChange(replyContent) {
 }
 
 export function openReplyEditor(data) {
-  comments.markState({
+  store.markState({
     showReplyBox: true,
     showReplyEditor: true,
     showReplyPreview: false,
@@ -141,21 +144,21 @@ export function openReplyEditor(data) {
 export function replyCommentPreview() {
   debug('replyCommentPreview')
 
-  comments.markState({
+  store.markState({
     showReplyEditor: false,
     showReplyPreview: true,
   })
 }
 
 export function replyBackToEditor() {
-  comments.markState({
+  store.markState({
     showReplyEditor: true,
     showReplyPreview: false,
   })
 }
 
 export function closeReplyBox() {
-  comments.markState({
+  store.markState({
     showReplyBox: false,
     showReplyEditor: false,
     showReplyPreview: false,
@@ -163,9 +166,7 @@ export function closeReplyBox() {
 }
 
 export function onFilterChange(filterType) {
-  comments.markState({
-    filterType,
-  })
+  store.markState({ filterType })
   loadComents({ filter: { page: 1, sort: filterType } })
 }
 
@@ -194,44 +195,54 @@ export function toggleDislikeComment(comment) {
   })
 }
 
+export function onUploadImageDone(url) {
+  dispatchEvent(EVENT.DRAFT_INSERT_SNIPPET, { data: `![](${url})` })
+}
+
+export function insertQuote() {
+  const data = '> '
+
+  dispatchEvent(EVENT.DRAFT_INSERT_SNIPPET, { data })
+}
+
 export function insertCode() {
-  dispatchEvent(EVENT.DRAFT_INSERT_SNIPPET, {
-    type: 'FUCK',
-    data: '```javascript\n\n```',
-  })
+  const communityRaw = store.curCommunity.raw
+  const data = `\`\`\`${communityRaw}\n\n\`\`\``
+
+  dispatchEvent(EVENT.DRAFT_INSERT_SNIPPET, { data })
 }
 
 export function onMention(user) {
   debug('onMention: ', user)
-  comments.addReferUser(user)
+  store.addReferUser(user)
 }
 
 export function deleteComment() {
   sr71$.mutate(S.deleteComment, {
-    id: comments.tobeDeleteId,
+    id: store.tobeDeleteId,
   })
 }
 
 // show delete confirm
 export function onDelete(comment) {
-  comments.markState({
+  store.markState({
     tobeDeleteId: comment.id,
   })
 }
 
 export function cancleDelete() {
-  comments.markState({
+  store.markState({
     tobeDeleteId: null,
   })
 }
 
 export function pageChange(page = 1) {
   scrollIntoEle('lists-info')
-  loadComents({ filter: { page, sort: comments.filterType } })
+  loadComents({ filter: { page, sort: store.filterType } })
 }
 
 const cancelLoading = () => {
-  comments.markState({ loading: false, loadingFresh: false, creating: false })
+  store.markState({ loading: false, loadingFresh: false, creating: false })
 }
 
 // ###############################
@@ -239,26 +250,21 @@ const cancelLoading = () => {
 // ###############################
 const DataSolver = [
   {
-    match: asyncRes(EVENT.PREVIEW),
-    action: () => {},
-  },
-  {
-    match: asyncRes('comments'),
-    action: ({ comments }) => {
-      debug('comments --> ', comments)
+    match: asyncRes('pagedComments'),
+    action: ({ pagedComments }) => {
       cancelLoading()
-      commentsConflict.markState({
-        ...comments,
-      })
+      store.markState({ pagedComments })
     },
   },
   {
     match: asyncRes('createComment'),
-    action: ({ createComment }) => {
-      debug('createComment', createComment)
-      commentsConflict.markState({
+    action: () => {
+      store.markState({
+        showInputBox: false,
         showInputEditor: false,
         editContent: '',
+        creating: false,
+        loading: false,
       })
       loadComents({
         filter: { page: 1, sort: TYPE.DESC_INSERTED },
@@ -270,7 +276,7 @@ const DataSolver = [
     match: asyncRes('replyComment'),
     action: ({ replyComment }) => {
       debug('replyComment', replyComment)
-      commentsConflict.markState({
+      store.markState({
         showReplyBox: false,
         replyToComment: null,
       })
@@ -281,33 +287,28 @@ const DataSolver = [
   {
     match: asyncRes('likeComment'),
     action: ({ likeComment }) =>
-      commentsConflict.updateOneComment(likeComment.id, likeComment),
+      store.updateOneComment(likeComment.id, likeComment),
   },
   {
     match: asyncRes('undoLikeComment'),
     action: ({ undoLikeComment }) =>
-      commentsConflict.updateOneComment(undoLikeComment.id, undoLikeComment),
+      store.updateOneComment(undoLikeComment.id, undoLikeComment),
   },
   {
     match: asyncRes('dislikeComment'),
     action: ({ dislikeComment }) =>
-      commentsConflict.updateOneComment(dislikeComment.id, dislikeComment),
+      store.updateOneComment(dislikeComment.id, dislikeComment),
   },
   {
     match: asyncRes('undoDislikeComment'),
     action: ({ undoDislikeComment }) =>
-      commentsConflict.updateOneComment(
-        undoDislikeComment.id,
-        undoDislikeComment
-      ),
+      store.updateOneComment(undoDislikeComment.id, undoDislikeComment),
   },
   {
     match: asyncRes('deleteComment'),
     action: ({ deleteComment }) => {
       debug('deleteComment', deleteComment)
-      commentsConflict.markState({
-        tobeDeleteId: null,
-      })
+      store.markState({ tobeDeleteId: null })
       scrollIntoEle('lists-info')
       loadComents({ filter: { page: 1 }, fresh: true })
     },
@@ -335,12 +336,16 @@ const ErrSolver = [
   },
 ]
 
-export function init(selectedStore) {
-  comments = selectedStore
-  commentsConflict = comments
+export function init(_store, ssr = false) {
+  if (store) {
+    if (!ssr) return loadComents()
+    return false
+  }
+
+  store = _store
 
   if (sub$) sub$.unsubscribe()
-
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
-  loadComents()
+
+  if (!ssr) return loadComents()
 }

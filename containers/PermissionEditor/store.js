@@ -24,7 +24,7 @@ const AllRules = t.model('AllRules', {
 
 const PermissionEditorStore = t
   .model('PermissionEditorStore', {
-    pagedCommunities: t.maybe(PagedCommunities),
+    pagedCommunities: t.maybeNull(PagedCommunities),
     allRules: t.optional(AllRules, {}),
     curView: t.optional(
       t.enumeration('curView', ['general', 'community']),

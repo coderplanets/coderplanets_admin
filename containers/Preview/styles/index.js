@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import R from 'ramda'
-import { theme, TYPE, Animate } from '../../../utils'
+import { theme, TYPE, animate } from '../../../utils'
 
 const WIDE_CASE = [TYPE.POST_PREVIEW_VIEW, TYPE.PREVIEW_CREATE_POST]
 const WIDE_WIDTH = '70%'
@@ -90,7 +90,7 @@ export const Closer = styled.div`
       : 'block'};
 
   &:hover:after {
-    animation: ${Animate.rotate360} 2s cubic-bezier(0, 0.56, 0.24, 0.72);
+    animation: ${animate.rotate360CloseRule};
     font-weight: bold;
   }
   &:after {

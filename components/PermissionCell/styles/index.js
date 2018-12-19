@@ -28,7 +28,7 @@ export const Number = styled.span`
   border-radius: 100%;
   font-size: 0.9rem;
 `
-export const RootNumber = Number.extend`
+export const RootNumber = styled(Number)`
   color: orange;
 `
 

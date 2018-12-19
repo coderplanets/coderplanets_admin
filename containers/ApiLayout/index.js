@@ -19,12 +19,14 @@ const debug = makeDebugger('C:ApiLayout')
 /* eslint-enable no-unused-vars */
 
 class ApiLayoutContainer extends React.Component {
-  componentWillMount() {
-    logic.init(this.props.apiLayout)
+  componentDidMount() {
+    const { apiLayout } = this.props
+    logic.init(apiLayout)
   }
 
   render() {
-    return <Wrapper>{this.props.children}</Wrapper>
+    const { children } = this.props
+    return <Wrapper>{children}</Wrapper>
   }
 }
 

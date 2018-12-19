@@ -23,7 +23,7 @@ export const BaseBannerContent = styled.div`
   padding-bottom: 10px;
 `
 
-export const BannerContainer = BaseBanner.extend`
+export const BannerContainer = styled(BaseBanner)`
   min-height: 100px;
   justify-content: flex-end;
   color: #707084;

@@ -63,14 +63,20 @@ const renderChildContent = (curRoute, store, restProps) => {
 }
 
 class CommunitiesContentContainer extends React.Component {
-  componentWillMount() {
-    logic.init(this.props.communitiesContent)
+  componentDidMount() {
+    const { communitiesContent } = this.props
+
+    logic.init(communitiesContent)
+  }
+
+  componentWillUnmount() {
+    logic.uninit()
   }
 
   render() {
     const { communitiesContent } = this.props
     const { curRoute } = communitiesContent
-    const restProps = { ...this.props.communitiesContent }
+    const restProps = { ...communitiesContent }
 
     return (
       <Wrapper>

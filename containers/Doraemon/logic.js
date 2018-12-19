@@ -1,94 +1,63 @@
 import R from 'ramda'
 import Router from 'next/router'
-import store from 'store'
 
-import { DEFAULT_ICON } from '../../config/assets'
+import SR71 from '../../utils/network/sr71'
+import S from './schema'
+
+import {
+  makeDebugger,
+  Global,
+  dispatchEvent,
+  asyncRes,
+  asyncErr,
+  $solver,
+  EVENT,
+  TYPE,
+  ERR,
+  prettyNum,
+  THREAD,
+  cutFrom,
+} from '../../utils'
 
 import Pockect from './Pockect'
-import { makeDebugger, Global, dispatchEvent, EVENT } from '../../utils'
 import { SwissArmyKnife } from './helper/swissArmyKnife'
-
-import oauthPopup from './oauth_window'
+import githubLoginHandler from './oauth/github_handler'
 
 const debug = makeDebugger('L:Doraemon')
+const sr71$ = new SR71()
 
-let doraemon = null
+let sub$ = null
+let store = null
 let pockect$ = null
 let SAK = null
 let cmdResolver = []
 
-const reposIsEmpty = R.compose(R.isEmpty, R.prop('reposData'))
-const inputValueIsNotEmpty = R.compose(R.not, R.isEmpty, R.prop('inputValue'))
-const isNotSearching = R.compose(R.not, R.prop('searching'))
+const queryPocket = () => pockect$.query(store.inputValue)
 
-function queryPocket() {
-  pockect$.query(doraemon.inputValue)
-}
-
-function simuUserLogin() {
-  const data = {
-    id: '112',
-    token:
-      'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJtYXN0YW5pX3NlcnZlciIsImV4cCI6MTUyNTI2Nzc3NCwiaWF0IjoxNTI0MDU4MTc0LCJpc3MiOiJtYXN0YW5pX3NlcnZlciIsImp0aSI6IjdiNjdhYzJmLTIwMjYtNDMzNy04MjcyLTVmYjY0ZDMxMGVjNyIsIm5iZiI6MTUyNDA1ODE3Mywic3ViIjoiMTEyIiwidHlwIjoiYWNjZXNzIn0.mm0GuOhzs8UYikPZGnIKQpnGYJQiwzEtCx2xeRn1qcT3sOT6Yg3GvM303OxDoGHnrNf72HSjwVxiCO6mXkq8mg',
-    nickname: 'mydearxym',
-    avatar: 'https://avatars2.githubusercontent.com/u/6184465?v=4',
-    bio:
-      "everyday is the opportunity you can't get back,so live life to the fullest",
-    fromGithub: true,
+export const searchContents = title => {
+  switch (store.searchThread) {
+    case THREAD.POST: {
+      return sr71$.query(S.searchPosts, { title })
+    }
+    case THREAD.JOB: {
+      return sr71$.query(S.searchJobs, { title })
+    }
+    case THREAD.USER: {
+      return sr71$.query(S.searchUsers, { name: title })
+    }
+    case THREAD.VIDEO: {
+      return sr71$.query(S.searchVideos, { title })
+    }
+    case THREAD.REPO: {
+      return sr71$.query(S.searchRepos, { title })
+    }
+    default: {
+      return sr71$.query(S.searchCommunities, { title })
+    }
   }
-
-  store.set('user', data)
-
-  doraemon.updateAccount(data)
 }
 
-export function githubLoginHandler() {
-  // header.openPreview(type)
-  // TODO tell Doraemon to show login
-  debug('just previewAccount ..')
-
-  const clientId = '3b4281c5e54ffd801f85'
-  const info = 'from_github'
-  const cb = 'http://www.coderplanets.com'
-  const github = 'https://github.com/login/oauth/authorize'
-  const url = `${github}?client_id=${clientId}&state=${info}&redirect_uri=${cb}`
-
-  // debug(url)
-  // sr71$.data().subscribe($solver(DataSolver, ErrSolver))
-  // checkUserAccount()
-  // return false
-  // store.set('user', { token: user_token })
-  // signinGithub('71b0c5169ebbb7a124b9')
-  /* reference */
-  /* http://www.graphql.college/implementing-github-oauth-flow-in-react */
-
-  /* Global.location.href = url */
-  /* console.log('getParameterByName:', getParameterByName('recoe')) */
-  // popup('http://localhost:3000?code=djfiekdjfie')
-
-  oauthPopup(url)
-  simuUserLogin()
-
-  setTimeout(() => {
-    // use normal-http to signinGithub
-    // sync userinfo to store
-    // finally:
-    dispatchEvent(EVENT.LOGIN)
-  }, 5000)
-  /*
-
-     Global.addEventListener('message', e => {
-     if (e.origin === Global.location.origin) {
-     if (e.data.from_child) {
-     debug('收到合法消息: ', e.data)
-     Global.postMessage({ from_parent: true }, Global.location.href)
-     }
-     }
-     })
-   */
-}
-
-const initCmdResolver = () => {
+const initSpecCmdResolver = () => {
   cmdResolver = [
     {
       match: SAK.stepOneCmd('theme'),
@@ -109,7 +78,7 @@ const initCmdResolver = () => {
       action: () => {
         SAK.completeInput(true)
         queryPocket()
-        doraemon.markState({
+        store.markState({
           inputForOtherUse: true,
           inputValue: Global.localStorage.getItem('debug'),
         })
@@ -150,7 +119,7 @@ const initCmdResolver = () => {
             pathname: '/',
             query: { main: 'communities', sub: 'all' },
           },
-          '/communities/all'
+          '/communities'
         )
         hidePanel()
       },
@@ -159,15 +128,35 @@ const initCmdResolver = () => {
       match: SAK.stepTwoCmd('theme'),
       action: cmdpath => {
         const theme = R.last(cmdpath)
-        doraemon.changeTheme(theme)
+        store.changeTheme(theme)
       },
     },
     {
       match: SAK.stepTwoCmd('login'),
       action: cmdpath => {
         debug('stepTwoCmd login->: ', cmdpath)
-        githubLoginHandler()
-        hidePanel()
+        switch (R.last(cmdpath)) {
+          case 'github': {
+            hidePanel()
+            return githubLoginHandler(store, sr71$)
+          }
+          case 'weibo':
+          case 'twitter':
+          case 'google':
+          case 'weixin': {
+            const url =
+              'https://github.com/coderplanets/coderplanets_web/issues/251'
+            const win = window.open(url, '_blank')
+
+            // see https://stackoverflow.com/questions/4907843/open-a-url-in-a-new-tab-and-not-a-new-window-using-javascript
+            return win.focus()
+          }
+          default: {
+            debug('unsupported login method: ', cmdpath)
+            return hidePanel()
+          }
+        }
+
         /* reference */
         /* http://www.graphql.college/implementing-github-oauth-flow-in-react */
         /* SAK.completeInput(true) */
@@ -181,7 +170,7 @@ const initCmdResolver = () => {
         if (cmd === 'github') {
           Global.window.open('https://github.com/visionmedia/debug', '_blank')
         } else if (cmd === 'write') {
-          Global.localStorage.setItem('debug', doraemon.inputValue)
+          Global.localStorage.setItem('debug', store.inputValue)
           hidePanel()
         }
       },
@@ -212,8 +201,8 @@ const initCmdResolver = () => {
   ]
 }
 
-const doCmd = () => {
-  const cmd = doraemon.curCmdChain
+const doSpecCmd = () => {
+  const cmd = store.curCmdChain
   if (!cmd) return
 
   /* Do not use forEach, cause forEach will not break */
@@ -225,8 +214,20 @@ const doCmd = () => {
   return false
 }
 
+const doNavigate = () => {
+  const { id } = store.activeSuggestion
+  if (R.startsWith('user-raw', store.activeSuggestion.raw)) {
+    hidePanel()
+    return dispatchEvent(EVENT.PREVIEW_OPEN, {
+      type: TYPE.PREVIEW_USER_VIEW,
+      data: { id },
+    })
+  }
+
+  debug('doNavigate cmd: ', store.activeSuggestion)
+}
+
 export function handleShortCuts(e) {
-  //  debug('onKeyPress ..', e.key)
   switch (e.key) {
     case 'Tab': {
       SAK.completeInput()
@@ -235,9 +236,12 @@ export function handleShortCuts(e) {
       break
     }
     case 'Enter': {
-      doCmd()
-      // Cmder.doCmd()
-      // pockect$.doCmd()
+      if (store.showThreadSelector) {
+        doNavigate()
+      } else {
+        doSpecCmd()
+      }
+
       e.preventDefault()
       break
     }
@@ -260,66 +264,243 @@ export function handleShortCuts(e) {
   }
 }
 
-// TODO: not found hinter logic ..
-export const repoNotFound = R.allPass([
-  reposIsEmpty,
-  inputValueIsNotEmpty,
-  isNotSearching,
-])
-
-export function navSuggestion(direction) {
-  SAK.navSuggestion(direction)
-}
-
+export const navSuggestion = direction => SAK.navSuggestion(direction)
 // mounseEnter
-export function navToSuggestion(suggestion) {
-  SAK.navToSuggestion(suggestion)
+export const navToSuggestion = suggestion => SAK.navToSuggestion(suggestion)
+export const selectSuggestion = () => {
+  if (store.showThreadSelector) return doNavigate()
+  doSpecCmd()
 }
 
-export function getPrefixLogo(prefix) {
-  const { subscribedCommunities } = doraemon
-  if (R.isEmpty(subscribedCommunities) || R.isEmpty(prefix)) {
-    return DEFAULT_ICON
+export function inputOnBlur() {
+  if (!store.showThreadSelector && R.isEmpty(store.prefix)) {
+    hidePanel()
   }
-
-  const index = R.findIndex(e => {
-    return e.raw === prefix
-  }, subscribedCommunities)
-  if (index === -1) return DEFAULT_ICON
-
-  const { logo } = subscribedCommunities[index]
-  return logo
 }
 
 export function hidePanel() {
-  doraemon.hideDoraemon()
+  emptySearchStates()
+  store.hideDoraemon()
   pockect$.stop()
 }
 
-export function inputOnChange(e) {
-  const inputValue = e.target.value
-  doraemon.markState({
-    inputValue,
-    cmdChain: null,
-    // searching: true,
-  })
+export function inputOnChange({ target: { value: inputValue } }) {
+  store.markState({ inputValue, cmdChain: null })
   queryPocket()
 }
 
-export function init(selectedStore) {
-  doraemon = selectedStore
+export const searchThreadOnChange = searchThread => {
+  store.markState({ searchThread, showAlert: false })
+  searchContents(store.inputValue)
+}
 
-  pockect$ = new Pockect(doraemon)
-  SAK = new SwissArmyKnife(doraemon)
+const convert2Sugguestions = (data, searchedTotalCount) => {
+  if (searchedTotalCount === 0) {
+    store.markState({
+      showAlert: true,
+      showUtils: true,
+      searchedTotalCount,
+    })
+  }
+  store.markState({ searching: false, showUtils: true, searchedTotalCount })
+  store.loadSuggestions({ prefix: '', data })
+}
 
-  initCmdResolver()
+// ###############################
+// Data & Error handlers
+// ###############################
+const DataSolver = [
+  {
+    match: asyncRes('githubSignin'),
+    action: ({ githubSignin: { user, token } }) => {
+      store.setSession(user, token)
+      // Global.location.reload()
 
-  pockect$.cmdSuggesttion().subscribe(res => {
-    // debug('--> loadSuggestions res: ', res)
-    doraemon.loadSuggestions(res)
+      /* Global.location.href = Global.location.href */
+      // IMPORTANT
+      Global.location.reload()
+      /*
+      setTimeout(() => {
+        debug('before refresh page: ', Global.location.href)
+        Global.location.reload()
+      }, 1000)
+      */
+    },
+  },
+  {
+    match: asyncRes('searchCommunities'),
+    action: ({ searchCommunities }) => {
+      const data = R.map(
+        e => ({
+          id: e.id,
+          logo: e.logo,
+          raw: `community-raw-${e.id}`,
+          title: e.title,
+          desc: `${e.desc}`,
+        }),
+        searchCommunities.entries
+      )
+      const { totalCount } = searchCommunities
+      convert2Sugguestions(data, totalCount)
+    },
+  },
+  {
+    match: asyncRes('searchUsers'),
+    action: ({ searchUsers }) => {
+      const data = R.map(
+        e => ({
+          id: e.id,
+          logo: e.avatar,
+          raw: `user-raw-${e.id}`,
+          title: e.nickname,
+          desc: `${e.bio}`,
+        }),
+        searchUsers.entries
+      )
+      const { totalCount } = searchUsers
+      convert2Sugguestions(data, totalCount)
+    },
+  },
+  {
+    match: asyncRes('searchPosts'),
+    action: ({ searchPosts }) => {
+      const data = R.map(
+        e => ({
+          id: e.id,
+          logo: e.author.avatar,
+          raw: `post-raw-${e.id}`,
+          title: e.title,
+          desc: `${e.commentsCount}/${prettyNum(e.views)}  ${e.digest}`,
+        }),
+        searchPosts.entries
+      )
+      const { totalCount } = searchPosts
+      convert2Sugguestions(data, totalCount)
+    },
+  },
+  {
+    match: asyncRes('searchJobs'),
+    action: ({ searchJobs }) => {
+      const data = R.map(
+        e => ({
+          id: e.id,
+          logo: e.companyLogo,
+          raw: `job-raw-${e.id}`,
+          title: `${e.company} / ${e.title} / ${e.salary}`,
+          desc: `${prettyNum(e.views)}  ${e.digest}`,
+        }),
+        searchJobs.entries
+      )
+      const { totalCount } = searchJobs
+      convert2Sugguestions(data, totalCount)
+    },
+  },
+  {
+    match: asyncRes('searchVideos'),
+    action: ({ searchVideos }) => {
+      const data = R.map(
+        e => ({
+          id: e.id,
+          logo: e.thumbnil,
+          raw: `video-raw-${e.id}`,
+          title: `${e.title} / ${e.source} / ${e.salary}`,
+          desc: `${prettyNum(e.views)} ${e.duration}  ${e.desc}`,
+        }),
+        searchVideos.entries
+      )
+      const { totalCount } = searchVideos
+      convert2Sugguestions(data, totalCount)
+    },
+  },
+  {
+    match: asyncRes('searchRepos'),
+    action: ({ searchRepos }) => {
+      const data = R.map(
+        e => ({
+          id: e.id,
+          raw: `repo-raw-${e.id}`,
+          title: `${e.ownerName} / ${cutFrom(e.title, 30)}`,
+          desc: `star:${prettyNum(e.starCount)}  ${e.desc}`,
+        }),
+        searchRepos.entries
+      )
+      const { totalCount } = searchRepos
+      convert2Sugguestions(data, totalCount)
+    },
+  },
+]
+
+const ErrSolver = [
+  {
+    match: asyncErr(ERR.CRAPHQL),
+    action: ({ details }) => {
+      debug('ERR.CRAPHQL -->', details)
+      store.markState({ searching: false })
+    },
+  },
+  {
+    match: asyncErr(ERR.TIMEOUT),
+    action: ({ details }) => {
+      debug('ERR.TIMEOUT -->', details)
+      store.markState({ searching: false })
+    },
+  },
+  {
+    match: asyncErr(ERR.NETWORK),
+    action: ({ details }) => {
+      store.markState({ searching: false })
+      debug('ERR.NETWORK -->', details)
+    },
+  },
+]
+
+const emptySearchStates = () => {
+  store.markState({
+    searching: false,
+    showThreadSelector: false,
+    showAlert: false,
+    showUtils: false,
+    searchThread: 'community',
+  })
+}
+
+export function init(_store) {
+  if (store) return false
+
+  store = _store
+
+  pockect$ = new Pockect(store)
+  SAK = new SwissArmyKnife(store)
+
+  initSpecCmdResolver()
+
+  pockect$.search().subscribe(res => {
+    if (R.isEmpty(res)) return emptySearchStates()
+
+    store.markState({
+      searching: true,
+      showThreadSelector: true,
+      showAlert: false,
+      showUtils: false,
+    })
+    searchContents(res)
   })
 
-  pockect$.emptyInput().subscribe(() => {
-    doraemon.clearSuggestions()
+  pockect$.searchUser().subscribe(name => {
+    const nickname = R.slice(1, Infinity, name)
+    store.markState({
+      prefix: '@',
+      searchThread: THREAD.USER,
+      showThreadSelector: true,
+      showAlert: false,
+    })
+    if (R.isEmpty(nickname)) return false
+    searchContents(nickname)
   })
+
+  pockect$.cmdSuggesttion().subscribe(res => store.loadSuggestions(res))
+  pockect$.emptyInput().subscribe(() => store.clearSuggestions())
+
+  if (sub$) sub$.unsubscribe()
+  sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 }

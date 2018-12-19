@@ -14,7 +14,7 @@ const debug = makeDebugger('S:CategorySetterStore')
 
 const CategorySetterStore = t
   .model('CategorySetterStore', {
-    pagedCategories: t.maybe(PagedCategories),
+    pagedCategories: t.maybeNull(PagedCategories),
     Loading: t.optional(t.boolean, false),
   })
   .views(self => ({

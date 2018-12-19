@@ -28,7 +28,7 @@ const debug = makeDebugger('C:CategoryEditor')
 /* eslint-enable no-unused-vars */
 
 class CategoryEditorContainer extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { categoryEditor, editData } = this.props
 
     logic.init(categoryEditor, editData)

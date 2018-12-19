@@ -1,37 +1,8 @@
 import gql from 'graphql-tag'
-
-const pagedCommunitiesRaw = `
-  query($filter: PagedFilter!) {
-    pagedCommunities(filter: $filter) {
-      entries {
-        id
-        title
-        desc
-        raw
-        logo
-        subscribersCount
-        categories {
-          id
-          title
-        }
-        threads{
-          id
-          title
-          raw
-        }
-        insertedAt
-        updatedAt
-      }
-      pageNumber
-      pageSize
-      totalCount
-      totalPages
-    }
-  }
-`
+import { P, F } from '../schemas'
 
 const pagedCommunities = gql`
-  ${pagedCommunitiesRaw}
+  ${P.pagedCommunities}
 `
 const pagedCategories = gql`
   query($filter: PagedFilter!) {
@@ -40,155 +11,33 @@ const pagedCategories = gql`
         id
         title
         raw
+        index
         communities {
           id
           logo
           title
         }
         author {
-          id
-          nickname
-          avatar
+          ${F.author}
         }
         insertedAt
         updatedAt
       }
-      pageNumber
-      pageSize
-      totalCount
-      totalPages
+      ${F.pagedCounts}
     }
   }
 `
-
-const pagedTagsRaw = `
-  query($filter: PagedFilter!) {
-    pagedTags(filter: $filter) {
-      entries {
-        id
-        title
-        color
-        thread
-        community {
-          id
-          logo
-          title
-        }
-        insertedAt
-        updatedAt
-      }
-      pageNumber
-      pageSize
-      totalCount
-      totalPages
-    }
-  }
-`
-const pagedThreadsRaw = `
-  query($filter: PagedFilter!) {
-    pagedThreads(filter: $filter) {
-      entries {
-        id
-        title
-        raw
-      }
-      totalCount
-      totalPages
-      pageSize
-      pageNumber
-    }
-  }
-`
-
 const pagedTags = gql`
-  ${pagedTagsRaw}
+  ${P.pagedTags}
 `
-
 const pagedThreads = gql`
-  ${pagedThreadsRaw}
+  ${P.pagedThreads}
 `
-
 const pagedPosts = gql`
-  query($filter: PagedArticleFilter) {
-    pagedPosts(filter: $filter) {
-      entries {
-        id
-        title
-        digest
-        author {
-          id
-          nickname
-          avatar
-        }
-        communities {
-          id
-          title
-          logo
-          raw
-        }
-        tags {
-          id
-          title
-          color
-          thread
-          community {
-            id
-          }
-        }
-        commentsCount
-        commentsParticipatorsCount
-        views
-        favoritedCount
-        starredCount
-        insertedAt
-        updatedAt
-      }
-      totalCount
-      pageSize
-      pageNumber
-    }
-  }
+  ${P.pagedPosts}
 `
 const pagedJobs = gql`
-  query pagedJobs($filter: PagedArticleFilter) {
-    pagedJobs(filter: $filter) {
-      entries {
-        id
-        title
-        company
-        companyLogo
-        location
-        desc
-        body
-        insertedAt
-        updatedAt
-        views
-        author {
-          id
-          nickname
-          avatar
-        }
-        communities {
-          id
-          title
-          logo
-          raw
-        }
-        tags {
-          id
-          title
-          color
-          thread
-          community {
-            id
-          }
-        }
-      }
-      totalCount
-      pageSize
-      pageNumber
-    }
-  }
+  ${P.pagedJobs}
 `
 
 const deleteCommunity = gql`
@@ -261,11 +110,8 @@ const deleteCategory = gql`
 
 const schema = {
   pagedCommunities,
-  pagedCommunitiesRaw,
   pagedTags,
-  pagedTagsRaw,
   pagedThreads,
-  pagedThreadsRaw,
   pagedCategories,
   pagedPosts,
   pagedJobs,

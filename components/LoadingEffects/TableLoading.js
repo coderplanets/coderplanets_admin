@@ -1,10 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Img } from '../../components'
-
-import { ICON_ASSETS } from '../../config'
-import { Animate } from '../../utils'
+import { ICON_CMD } from '../../config'
+import Img from '../Img'
 
 const LoadingWrapper = styled.div`
   margin-top: 20vh;
@@ -13,7 +11,6 @@ const LoadingIcon = styled(Img)`
   width: 50px;
   height: 50px;
   opacity: 0.8;
-  animation: ${Animate.wobble} 3s infinite;
 `
 
 const LoadingText = styled.div`
@@ -24,7 +21,7 @@ const LoadingText = styled.div`
 
 const TableLoading = () => (
   <LoadingWrapper>
-    <LoadingIcon src={`${ICON_ASSETS}/cmd/rainbow_logo.svg`} />
+    <LoadingIcon src={`${ICON_CMD}/rainbow_logo.svg`} />
     <LoadingText>... 漫威的编剧真心可以 ...</LoadingText>
   </LoadingWrapper>
 )

@@ -23,10 +23,10 @@ let sub$ = null
 const debug = makeDebugger('L:CommunityContent')
 /* eslint-enable no-unused-vars */
 
-let communityContent = null
+let store = null
 
 const commonFilter = page => {
-  const size = PAGE_SIZE.COMMON
+  const size = PAGE_SIZE.D
   return {
     filter: { page, size },
   }
@@ -34,17 +34,15 @@ const commonFilter = page => {
 
 export function loadPosts(page = 1) {
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  communityContent.markState({
-    postsLoading: true,
-  })
+  store.markState({ postsLoading: true })
+
   sr71$.query(S.pagedPosts, commonFilter(page))
 }
 
 export function loadTags(page = 1) {
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  communityContent.markState({
-    tagsLoading: true,
-  })
+  store.markState({ tagsLoading: true })
+
   sr71$.query(S.pagedTags, commonFilter(page))
 }
 
@@ -55,7 +53,7 @@ export function onDelete() {}
 // Data & Error handlers
 // ###############################
 const cancleLoading = () => {
-  communityContent.markState({
+  store.markState({
     // communitiesLoading: false,
     postsLoading: false,
     // tagsLoading: false,
@@ -67,26 +65,22 @@ const DataSolver = [
     match: asyncRes('pagedPosts'),
     action: ({ pagedPosts }) => {
       cancleLoading()
-      communityContent.markState({
-        pagedPosts,
-      })
+      store.markState({ pagedPosts })
     },
   },
   {
     match: asyncRes('pagedTags'),
     action: ({ pagedTags }) => {
       cancleLoading()
-      communityContent.markState({
-        pagedTags,
-      })
+      store.markState({ pagedTags })
     },
   },
 ]
 const ErrSolver = []
 
 export function init(selectedStore) {
-  communityContent = selectedStore
-  debug(communityContent)
+  store = selectedStore
+  debug(store)
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 }

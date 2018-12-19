@@ -99,14 +99,21 @@ const ChildBanner = ({ curRoute, store }) => {
 }
 
 class CommunitiesBannerContainer extends React.Component {
-  componentWillMount() {
-    logic.init(this.props.communitiesBanner)
+  componentDidMount() {
+    const { communitiesBanner } = this.props
+    logic.init(communitiesBanner)
   }
+
+  componentWillUnmount() {
+    logic.uninit()
+  }
+
   render() {
     const { communitiesBanner } = this.props
     const { curRoute } = communitiesBanner
 
     // console.log('totalCount --> ', communitiesBanner.totalCount)
+    console.log('the fucking curRoute: ', curRoute)
     return (
       <BannerContainer>
         <ChildBanner curRoute={curRoute} store={stripMobx(communitiesBanner)} />

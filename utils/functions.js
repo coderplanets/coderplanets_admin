@@ -1,16 +1,15 @@
 import R from 'ramda'
 import PubSub from 'pubsub-js'
-import { EVENT } from '../utils'
+
+import { EVENT } from './constants'
+import { nilOrEmpty, isEmptyNil } from './validator'
+import { TAG_COLOR_ORDER } from '../config'
 
 /* eslint-disable */
 // TODO: document ?
 export const Global = typeof window !== 'undefined' ? window : global
 export const onClient = typeof window !== 'undefined' ? true : false
 
-export const isObject = value => {
-  const type = typeof value
-  return value != null && (type == 'object' || type == 'function')
-}
 /* eslint-enable */
 
 // see https://github.com/ramda/ramda/issues/1361
@@ -25,9 +24,6 @@ export const mapKeys = R.curry((fn, obj) => {
   )
 })
 
-export const notEmpty = R.compose(R.not, R.isEmpty)
-export const isEmptyValue = R.compose(R.isEmpty, R.trim)
-export const isEmptyNil = R.either(R.isNil, R.isEmpty)
 /* eslint-disable */
 const log = (...args) => data => {
   console.log.apply(null, args.concat([data]))
@@ -43,26 +39,31 @@ export const objToArray = input =>
     return { [key]: input[key] }
   })
 
-export const mapKey = R.compose(R.head, R.keys)
-export const mapValue = R.compose(R.head, R.values)
+export const mapKey = R.compose(
+  R.head,
+  R.keys
+)
+export const mapValue = R.compose(
+  R.head,
+  R.values
+)
+
+export const sortByColor = source =>
+  R.sort(
+    (t1, t2) => TAG_COLOR_ORDER[t1.color] - TAG_COLOR_ORDER[t2.color],
+    source
+  )
+
+export const sortByIndex = source => R.sort((a, b) => a.index - b.index, source)
 
 // reference: https://blog.carbonfive.com/2017/12/20/easy-pipeline-debugging-with-curried-console-log/
 export const Rlog = (arg = 'Rlog: ') => R.tap(log(arg))
 
-const validValues = R.compose(R.not, isEmptyNil)
-
-export const castArgs = (fields, optFields) => {
-  const emptyLists = R.repeat('', optFields.length)
-  const emptyFields = R.zipObj(optFields, emptyLists)
-  const validFields = R.pickBy(validValues, R.pick(optFields, fields))
-
-  return R.merge(emptyFields, validFields)
-}
-
 export const cutFrom = (val, cutnumber = 20) => {
-  if (isEmptyValue(val)) {
+  if (nilOrEmpty(val)) {
     return ''
-  } else if (val.length <= cutnumber) {
+  }
+  if (val.length <= cutnumber) {
     return val
   }
   return `${R.slice(0, cutnumber, val)} ...`

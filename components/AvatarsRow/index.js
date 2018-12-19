@@ -6,20 +6,23 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
 import R from 'ramda'
+import { Tooltip } from 'antd'
 
-import { makeDebugger, prettyNum } from '../../utils'
 import { ATATARS_LIST_LENGTH } from '../../config/general'
 
-import { Tooltip } from '../../components'
 import { Avatars, AvatarsItem, AvatarsImg, AvatarsMore } from './styles'
+
+import { makeDebugger, prettyNum } from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:AvatarsRow:index')
 /* eslint-enable no-unused-vars */
 
-const validUser = R.compose(R.not, R.isNil)
+const validUser = R.compose(
+  R.not,
+  R.isNil
+)
 
 const AvatarsRow = ({
   users,
@@ -34,21 +37,21 @@ const AvatarsRow = ({
   }
 
   users = R.filter(validUser, users)
+
   return (
     <Avatars height={height}>
-      {total <= users.length ? (
+      {total <= 1 ? (
         <span />
       ) : (
         <AvatarsItem onClick={onTotalSelect.bind(this, { users, total })}>
-          <AvatarsMore>{prettyNum(total)}</AvatarsMore>
+          <Tooltip title={`所有评论共 ${total} 条`}>
+            <AvatarsMore total={total}>{prettyNum(total)}</AvatarsMore>
+          </Tooltip>
         </AvatarsItem>
       )}
 
-      {R.slice(0, limit, R.reverse(users)).map(user => (
-        <AvatarsItem
-          key={shortid.generate()}
-          onClick={onUserSelect.bind(this, user)}
-        >
+      {R.slice(0, limit, users).map(user => (
+        <AvatarsItem key={user.id} onClick={onUserSelect.bind(this, user)}>
           <Tooltip title={user.nickname}>
             <AvatarsImg src={user.avatar} />
           </Tooltip>

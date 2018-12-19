@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
-import { Animate } from '../../../utils'
-import { Img } from '../../../components'
+import Img from '../../Img'
+import { animate } from '../../../utils'
 
 export const Wrapper = styled.div`
   display: flex;
@@ -35,7 +35,7 @@ export const DeleteCross = styled.div`
   margin-left: 8px;
   &:hover {
     cursor: pointer;
-    animation: ${Animate.pulse} 0.3s linear;
+    animation: ${animate.pulseRule};
   }
 `
 

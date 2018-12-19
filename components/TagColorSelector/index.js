@@ -6,11 +6,8 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
-
 import R from 'ramda'
 
-import { makeDebugger } from '../../utils'
 import { TAG_COLORS } from '../../config'
 
 import {
@@ -22,6 +19,8 @@ import {
   ColorBot,
 } from './styles'
 
+import { uid, makeDebugger } from '../../utils'
+
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:TagColorSelector:index')
 /* eslint-enable no-unused-vars */
@@ -32,7 +31,7 @@ const TagColorSelector = ({ label, value, onChange, note }) => (
 
     <SelectorWrapper>
       {TAG_COLORS.map(v => (
-        <BotWrapper key={shortid.generate()} active={value === v}>
+        <BotWrapper key={uid.gen()} active={value === v}>
           <ColorBot color={v} onClick={onChange.bind(this, v)} />
         </BotWrapper>
       ))}

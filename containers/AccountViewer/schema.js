@@ -1,60 +1,38 @@
 import gql from 'graphql-tag'
+import { F } from '../schemas'
 
 const user = gql`
-  query user($id: ID!) {
-    user(id: $id) {
-      nickname
-      avatar
-      bio
-      fromGithub
-      company
-      education
-      location
-      qq
-      weibo
-      weichat
-      sex
-      githubProfile {
-        htmlUrl
-        login
-      }
-      contributes {
-        date
-        count
-      }
-    }
-  }
-`
+  query user($login: String) {
+    user(login: $login) {
+      ${F.user}
 
-const account = gql`
-  query account {
-    account {
-      company
-      education
-      location
-      qq
-      weibo
-      weichat
-      sex
+      achievement {
+        ${F.achievement}
+      }
+      ${F.userBackgrounds}
+      fromGithub
       githubProfile {
         htmlUrl
         login
       }
       contributes {
-        records {
-          count
-          date
+        ${F.userContributes}
+      }
+      subscribedCommunities {
+        entries {
+          id
+          title
+          logo
+          raw
+          index
         }
-        startDate
-        endDate
+        pageSize
         totalCount
       }
     }
   }
 `
-
 const schema = {
-  account,
   user,
 }
 

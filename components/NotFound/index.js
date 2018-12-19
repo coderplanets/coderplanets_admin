@@ -8,8 +8,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import R from 'ramda'
 
-import { ICON_ASSETS, ISSUE_ADDR } from '../../config'
-import { makeDebugger } from '../../utils'
+import { ICON_BASE, ISSUE_ADDR } from '../../config'
 
 import {
   Icon404,
@@ -21,6 +20,9 @@ import {
   IssueLink,
   Desc,
 } from './styles'
+
+import { makeDebugger } from '../../utils'
+
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:NotFound:index')
 /* eslint-enable no-unused-vars */
@@ -28,13 +30,11 @@ const debug = makeDebugger('c:NotFound:index')
 const DefaultDesc = () => (
   <div>
     <div>
-      如果你发现是网站的问题，恳请你<IssueLink
-        href={ISSUE_ADDR}
-        rel="noopener noreferrer"
-        target="_blank"
-      >
+      如果你发现是网站的问题，恳请你
+      <IssueLink href={ISSUE_ADDR} rel="noopener noreferrer" target="_blank">
         提交issue
-      </IssueLink>，以便于开发者在第一时间修复。
+      </IssueLink>
+      ，以便于开发者在第一时间修复。
     </div>
   </div>
 )
@@ -43,7 +43,7 @@ const NotFound = ({ msg, desc }) => {
   return (
     <Wrapper>
       <Icon>
-        <Icon404 src={`${ICON_ASSETS}/404/nofound1.svg`} />
+        <Icon404 src={`${ICON_BASE}/404/nofound1.svg`} />
       </Icon>
       <Text>
         <Title>{msg}</Title>

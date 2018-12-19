@@ -7,19 +7,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { ICON_ASSETS } from '../../config'
-
-import { makeDebugger } from '../../utils'
+import { ICON_CMD } from '../../config'
 import { DudeIcon, GirlIcon } from './styles'
+import { makeDebugger } from '../../utils'
+
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:SexCell:index')
 /* eslint-enable no-unused-vars */
 
 const SexCell = ({ sex }) => {
   if (sex === 'dude') {
-    return <DudeIcon src={`${ICON_ASSETS}/cmd/dude.svg`} />
+    return <DudeIcon src={`${ICON_CMD}/dude.svg`} />
   }
-  return <GirlIcon src={`${ICON_ASSETS}/cmd/girl.svg`} />
+  return <GirlIcon src={`${ICON_CMD}/girl.svg`} />
 }
 
 SexCell.propTypes = {

@@ -9,7 +9,7 @@ import PropTypes from 'prop-types'
 
 import { makeDebugger } from '../../utils'
 
-import { ColorCell, ColorDot, ColorTitle } from './styles'
+import { ColorCell, ColorDot /* ColorTitle */ } from './styles'
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:ColorCell:index')
 /* eslint-enable no-unused-vars */
@@ -18,7 +18,7 @@ const ColorCellComponent = ({ color }) => {
   return (
     <ColorCell>
       <ColorDot color={color} />
-      <ColorTitle>{color}</ColorTitle>
+      {/* <ColorTitle>{color}</ColorTitle> */}
     </ColorCell>
   )
 }

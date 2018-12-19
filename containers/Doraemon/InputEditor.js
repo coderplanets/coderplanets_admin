@@ -7,35 +7,12 @@
 import React from 'react'
 import keydown from 'react-keydown'
 
-import { ICON_ASSETS } from '../../config'
-
 import * as logic from './logic'
 
-import {
-  EditorBar,
-  InputBar,
-  AddOn,
-  LoadingIcon,
-  PrefixSVGIcon,
-  PrefixSearchIcon,
-  PrefixMagicIcon,
-} from './styles'
+import { EditorBar, InputBar, PrefixWraper } from './styles/input_editor'
 
+import InputPrefix from './InputPrefix'
 // const debug = makeDebugger('C:Doraemon:InputEditor')
-
-const PrefixIcon = ({ prefix }) => {
-  switch (prefix) {
-    case '': {
-      return <PrefixSearchIcon src={`${ICON_ASSETS}/cmd/search.svg`} />
-    }
-    case '/': {
-      return <PrefixMagicIcon src={`${ICON_ASSETS}/cmd/magic.svg`} />
-    }
-    default: {
-      return <PrefixSVGIcon src={logic.getPrefixLogo(prefix)} />
-    }
-  }
-}
 
 export default class InputEditor extends React.Component {
   /* eslint-disable class-methods-use-this */
@@ -70,13 +47,9 @@ export default class InputEditor extends React.Component {
     // innerRef={input => (this.doraemonInput = input)}
     return (
       <EditorBar>
-        <AddOn>
-          {searching ? (
-            <LoadingIcon src={`${ICON_ASSETS}/cmd/search_loading.svg`} />
-          ) : (
-            <PrefixIcon prefix={prefix} />
-          )}
-        </AddOn>
+        <PrefixWraper>
+          <InputPrefix prefix={prefix} searching={searching} />
+        </PrefixWraper>
         <InputBar
           id="doraemonInputbar"
           spellCheck={false}
@@ -84,9 +57,10 @@ export default class InputEditor extends React.Component {
           autoCorrect="off"
           autoComplete="off"
           onKeyDown={logic.handleShortCuts}
-          onBlur={logic.hidePanel}
+          onBlur={logic.inputOnBlur}
           onChange={logic.inputOnChange}
           value={value}
+          placeholder="type ? for help"
         />
       </EditorBar>
     )

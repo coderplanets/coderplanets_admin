@@ -9,11 +9,10 @@ import { inject, observer } from 'mobx-react'
 
 // import Link from 'next/link'
 
-import {
-  CommunityBanner,
-  CommunitiesBanner,
-  UsersBanner,
-} from '../../containers'
+import CommunityBanner from '../CommunityBanner'
+import CommunitiesBanner from '../CommunitiesBanner'
+import UsersBanner from '../UsersBanner'
+
 import { makeDebugger, storePlug, ROUTE } from '../../utils'
 import * as logic from './logic'
 
@@ -40,12 +39,14 @@ const DomainBanner = ({ curRoute }) => {
    for some unkown reasion, pages/index will always be the entry in dev mode
  */
 class BannerContainer extends React.Component {
-  componentWillMount() {
-    logic.init(this.props.banner)
+  componentDidMount() {
+    const { banner } = this.props
+    logic.init(banner)
   }
 
   render() {
-    const { curRoute } = this.props.banner
+    const { banner } = this.props
+    const { curRoute } = banner
 
     return <DomainBanner curRoute={curRoute} />
   }

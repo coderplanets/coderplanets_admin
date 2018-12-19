@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { Img } from '../../../components'
+import Img from '../../Img'
 
 export const Wrapper = styled.div`
   /* border-right: 1px solid grey; */

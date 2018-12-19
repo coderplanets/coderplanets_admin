@@ -1,10 +1,10 @@
 import R from 'ramda'
 import React from 'react'
 import TimeAgo from 'timeago-react'
-import shortid from 'shortid'
 
-import { ICON_ASSETS } from '../../config'
-import { Global, prettyNum, makeDebugger } from '../../utils'
+import { ICON_CMD } from '../../config'
+/* import { fakeUsers, getRandomInt, Global, prettyNum } from '../../utils' */
+import { Global, prettyNum } from '../../utils'
 
 import {
   AvatarsRow,
@@ -12,7 +12,7 @@ import {
   SpaceGrow,
   Pagi,
   CommentLoading,
-  MarkDownPreviewer,
+  MarkDownRender,
 } from '../../components'
 
 import * as logic from './logic'
@@ -52,14 +52,10 @@ import {
   ReplyToFloor,
 } from './styles/comments_list'
 
-/* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:CommentsList')
-/* eslint-enable no-unused-vars */
-
 const getSelection = () => {
   const selectText = Global.getSelection().toString()
   if (!R.isEmpty(selectText)) {
-    debug('getSelection', selectText)
+    /* console.log('getSelection', selectText) */
     // TODO: then use window.getSelection().getRangeAt(0).getBoundingClientRect() to draw a button
   }
 }
@@ -86,11 +82,11 @@ const ActionBottom = ({ data, accountInfo }) => {
     return (
       <div style={{ display: 'flex' }}>
         <ReplyAction>
-          <ReplyIcon src={`${ICON_ASSETS}/cmd/edit.svg`} />
+          <ReplyIcon src={`${ICON_CMD}/edit.svg`} />
           编辑
         </ReplyAction>
         <ReplyAction onClick={logic.onDelete.bind(this, data)}>
-          <ReplyIcon src={`${ICON_ASSETS}/cmd/delete.svg`} />
+          <ReplyIcon src={`${ICON_CMD}/delete.svg`} />
           删除
         </ReplyAction>
       </div>
@@ -99,7 +95,7 @@ const ActionBottom = ({ data, accountInfo }) => {
   return (
     <div style={{ display: 'flex' }}>
       <ReplyAction onClick={logic.openReplyEditor.bind(this, data)}>
-        <ReplyIcon src={`${ICON_ASSETS}/cmd/nest_comment.svg`} />
+        <ReplyIcon src={`${ICON_CMD}/nest_comment.svg`} />
         回复
       </ReplyAction>
     </div>
@@ -107,9 +103,11 @@ const ActionBottom = ({ data, accountInfo }) => {
 }
 
 const getAuthors = comment => {
+  /* eslint-disable no-return-assign */
   const replies = R.forEach(reply => {
     return (reply.author.extra_id = reply.id)
   }, R.clone(comment.replies))
+  /* eslint-enable */
 
   return R.pluck('author', replies)
 }
@@ -138,9 +136,7 @@ const Comment = ({ data, tobeDeleteId, accountInfo }) => (
                   total={data.repliesCount}
                 />
               </ReplyUsers>
-            ) : (
-              <div />
-            )}
+            ) : null}
           </CommentHeaderFirst>
           <TimeStamps>
             <TimeAgo datetime={data.insertedAt} locale="zh_CN" />
@@ -149,21 +145,20 @@ const Comment = ({ data, tobeDeleteId, accountInfo }) => (
         <CommentContent>
           {data.replyTo ? (
             <ReplyBar>
-              回复&nbsp;{data.replyTo.author.nickname}:
+              回复&nbsp;
+              {data.replyTo.author.nickname}:
               <ReplyToBody>{data.replyTo.body}</ReplyToBody>
               <ReplyToFloor>#{data.replyTo.floor}</ReplyToFloor>
             </ReplyBar>
-          ) : (
-            <div />
-          )}
-          <MarkDownPreviewer body={data.body} />
+          ) : null}
+          <MarkDownRender body={data.body} />
         </CommentContent>
         <CommentFooter>
           <Actions>
             <VisiableAction>
               <div onClick={logic.toggleLikeComment.bind(this, data)}>
                 <UpIcon
-                  src={`${ICON_ASSETS}/cmd/up.svg`}
+                  src={`${ICON_CMD}/up.svg`}
                   viewerDid={data.viewerHasLiked}
                 />
               </div>
@@ -172,7 +167,7 @@ const Comment = ({ data, tobeDeleteId, accountInfo }) => (
             <VisiableAction>
               <div onClick={logic.toggleDislikeComment.bind(this, data)}>
                 <UpIcon
-                  src={`${ICON_ASSETS}/cmd/up.svg`}
+                  src={`${ICON_CMD}/up.svg`}
                   reverse
                   viewerDid={data.viewerHasDisliked}
                 />
@@ -189,9 +184,9 @@ const Comment = ({ data, tobeDeleteId, accountInfo }) => (
 )
 
 const Lists = ({ entries, tobeDeleteId, accountInfo }) => (
-  <div>
+  <React.Fragment>
     {entries.map(c => (
-      <div key={shortid.generate()}>
+      <div key={c.id}>
         <Comment
           data={c}
           tobeDeleteId={tobeDeleteId}
@@ -199,48 +194,33 @@ const Lists = ({ entries, tobeDeleteId, accountInfo }) => (
         />
       </div>
     ))}
-  </div>
+  </React.Fragment>
 )
 
-const TotalCountText = ({ count }) => {
-  return (
-    <TotalCountWrapper>
-      {count > 0 ? (
-        <ListTitle id="lists-info">
-          收到 <TotalNum>{count}</TotalNum> 条评论:
-        </ListTitle>
-      ) : (
-        <div />
-      )}
-    </TotalCountWrapper>
-  )
-}
+const TotalCountText = ({ count }) => (
+  <TotalCountWrapper>
+    {count > 0 ? (
+      <ListTitle id="lists-info">
+        共收到 <TotalNum>{count}</TotalNum> 条评论:
+      </ListTitle>
+    ) : null}
+  </TotalCountWrapper>
+)
 
 const CommentsList = ({
-  entries,
   accountInfo,
-  restProps: {
-    totalCount,
-    pageSize,
-    pageNumber,
-    loading,
-    loadingFresh,
-    tobeDeleteId,
-    filterType,
-  },
+  pagedComments: { entries, totalCount, pageSize, pageNumber },
+  restProps: { loading, loadingFresh, tobeDeleteId, filterType },
 }) => (
-  <div>
+  <React.Fragment>
     <TotalHeader>
       <TotalCountText count={totalCount} />
-      <CommentsFilter filterType={filterType} />
+      <CommentsFilter filterType={filterType} show={totalCount >= 2} />
     </TotalHeader>
-
-    {loadingFresh ? (
+    {!loadingFresh ? null : (
       <CommentBlock>
         <CommentLoading />
       </CommentBlock>
-    ) : (
-      <div />
     )}
     <ListsContainer>
       {loading ? (
@@ -257,15 +237,17 @@ const CommentsList = ({
         />
       )}
     </ListsContainer>
-
     <Pagi
       left="-10px"
       pageNumber={pageNumber}
       pageSize={pageSize}
       totalCount={totalCount}
       onChange={logic.pageChange}
+      showBottomMsg
+      noMoreMsg="没有更多的评论了"
+      emptyMsg="目前还没有评论"
     />
-  </div>
+  </React.Fragment>
 )
 
 export default CommentsList

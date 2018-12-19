@@ -11,6 +11,7 @@ import {
   EVENT,
   TYPE,
   THREAD,
+  ROUTE,
   scrollIntoEle,
   closePreviewer,
   dispatchEvent,
@@ -20,36 +21,39 @@ import { PAGE_SIZE } from '../../config'
 import S from './schema'
 import SR71 from '../../utils/network/sr71'
 
-let sub$ = null
-
 const sr71$ = new SR71({
-  resv_event: [EVENT.LOGOUT, EVENT.LOGIN, EVENT.PREVIEW_CLOSE],
+  resv_event: [
+    EVENT.LOGOUT,
+    EVENT.LOGIN,
+    EVENT.PREVIEW_CLOSE,
+    EVENT.SIDEBAR_MENU_CHANGE,
+  ],
 })
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('L:CommunitiesContent')
 /* eslint-enable no-unused-vars */
 
-let communitiesContent = null
+let sub$ = null
+let store = null
 
 const commonFilter = page => {
-  const size = PAGE_SIZE.COMMON
+  const size = PAGE_SIZE.D
   return {
     filter: { page, size },
   }
 }
 
 export function loadCommunities(page = 1) {
-  const size = PAGE_SIZE.COMMON
+  const size = PAGE_SIZE.D
   const args = {
     filter: { page, size },
+    userHasLogin: false,
   }
   scrollIntoEle(TYPE.APP_HEADER_ID)
 
-  communitiesContent.markState({ communitiesLoading: true })
-
-  communitiesContent.markRoute({ page })
-  /* const { route } = communitiesContent */
+  store.markState({ communitiesLoading: true })
+  store.markRoute({ page })
 
   /* args.filter = R.merge(args.filter, route.query) */
   sr71$.query(S.pagedCommunities, args)
@@ -57,69 +61,71 @@ export function loadCommunities(page = 1) {
 
 export function loadCategories(page = 1) {
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  /* const size = PAGE_SIZE.COMMON */
-  communitiesContent.markRoute({ page })
+  store.markRoute({ page })
+  store.markState({ categoriessLoading: true })
 
-  communitiesContent.markState({ categoriessLoading: true })
   sr71$.query(S.pagedCategories, commonFilter(page))
 }
 
 export function loadTags(page = 1) {
   scrollIntoEle(TYPE.APP_HEADER_ID)
 
-  communitiesContent.markRoute({ page })
-  communitiesContent.markState({ tagsLoading: true })
+  store.markRoute({ page })
+  store.markState({ tagsLoading: true })
 
   sr71$.query(S.pagedTags, commonFilter(page))
 }
 
 export function loadThreads(page = 1) {
-  /* const size = PAGE_SIZE.COMMON */
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  communitiesContent.markRoute({ page })
-  /*  */
-  communitiesContent.markState({ tagsLoading: true })
+  store.markRoute({ page })
+  store.markState({ tagsLoading: true })
+
   sr71$.query(S.pagedThreads, commonFilter(page))
 }
 
 export function loadPosts(page = 1) {
-  const size = PAGE_SIZE.COMMON
+  const size = PAGE_SIZE.D
   const args = {
     filter: { page, size },
   }
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  communitiesContent.markState({ postsLoading: true })
+  store.markState({ postsLoading: true })
+
   sr71$.query(S.pagedPosts, args)
 }
 
 export function loadJobs(page = 1) {
-  const size = PAGE_SIZE.COMMON
+  const size = PAGE_SIZE.D
   const args = {
     filter: { page, size },
   }
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  communitiesContent.markState({ jobsLoading: true })
+  store.markState({ jobsLoading: true })
+
   sr71$.query(S.pagedJobs, args)
 }
 
 export function loadCommunitiesIfOnClient() {
-  if (!communitiesContent.pagedCommunities) {
+  /*
+  if (!store.pagedCommunities) {
     debug('loadCommunitiesIfOnClient')
     loadCommunities()
   }
+  */
 }
 
 export function loadTagsIfOnClient() {
-  if (!communitiesContent.pagedTags) {
+  if (!store.pagedTags) {
     debug('loadTagsIfOnClient')
-    loadTags()
+    // loadTags()
   }
 }
 
 export function loadThreadsIfOnClient() {
-  if (!communitiesContent.pagedThreads) {
+  if (!store.pagedThreads) {
     debug('loadThreadsIfOnClient')
-    loadThreads()
+    // loadThreads()
   }
 }
 
@@ -230,7 +236,7 @@ export function unsetTag(threadId, tag) {
 
 /* when error occured cancle all the loading state */
 const cancleLoading = () => {
-  communitiesContent.markState({
+  store.markState({
     communitiesLoading: false,
     postsLoading: false,
     jobsLoading: false,
@@ -244,59 +250,44 @@ const DataSolver = [
     match: asyncRes('pagedCommunities'),
     action: ({ pagedCommunities }) => {
       cancleLoading()
-      debug(
-        '## loadCommunities in the client .... pagedCommunities: ',
-        pagedCommunities.pageNumber
-      )
-
-      communitiesContent.markState({
-        pagedCommunities,
-      })
+      debug('pagedCommunities: ', pagedCommunities)
+      store.markState({ pagedCommunities })
     },
   },
   {
     match: asyncRes('pagedTags'),
     action: ({ pagedTags }) => {
+      debug('load pagedTags: ', pagedTags)
       cancleLoading()
-      communitiesContent.markState({
-        pagedTags,
-      })
+      store.markState({ pagedTags })
     },
   },
   {
     match: asyncRes('pagedThreads'),
     action: ({ pagedThreads }) => {
       cancleLoading()
-      communitiesContent.markState({
-        pagedThreads,
-      })
+      store.markState({ pagedThreads })
     },
   },
   {
     match: asyncRes('pagedPosts'),
     action: ({ pagedPosts }) => {
       cancleLoading()
-      communitiesContent.markState({
-        pagedPosts,
-      })
+      store.markState({ pagedPosts })
     },
   },
   {
     match: asyncRes('pagedJobs'),
     action: ({ pagedJobs }) => {
       cancleLoading()
-      communitiesContent.markState({
-        pagedJobs,
-      })
+      store.markState({ pagedJobs })
     },
   },
   {
     match: asyncRes('pagedCategories'),
     action: ({ pagedCategories }) => {
       cancleLoading()
-      communitiesContent.markState({
-        pagedCategories,
-      })
+      store.markState({ pagedCategories })
     },
   },
   {
@@ -308,11 +299,11 @@ const DataSolver = [
     action: () => {
       switch (CurThread) {
         case THREAD.JOB: {
-          const { pageNumber } = communitiesContent.pagedJobsData
+          const { pageNumber } = store.pagedJobsData
           return loadJobs(pageNumber)
         }
         default: {
-          const { pageNumber } = communitiesContent.pagedPostsData
+          const { pageNumber } = store.pagedPostsData
           return loadPosts(pageNumber)
         }
       }
@@ -353,28 +344,45 @@ const DataSolver = [
       debug('PREVIEW_CLOSE --> ', closeType)
       switch (closeType) {
         case TYPE.COMMUNITIES_REFRESH: {
-          const { pageNumber } = communitiesContent.pagedCommunitiesData
+          const { pageNumber } = store.pagedCommunitiesData
           return loadCommunities(pageNumber)
         }
         case TYPE.TAGS_REFRESH: {
-          const { pageNumber } = communitiesContent.pagedTagsData
+          const { pageNumber } = store.pagedTagsData
           return loadTags(pageNumber)
         }
         case TYPE.GATEGORIES_REFRESH: {
-          const { pageNumber } = communitiesContent.pagedCategoriesData
+          const { pageNumber } = store.pagedCategoriesData
           return loadCategories(pageNumber)
         }
         case TYPE.POSTS_CONTENT_REFRESH: {
-          const { pageNumber } = communitiesContent.pagedPostsData
+          const { pageNumber } = store.pagedPostsData
           return loadPosts(pageNumber)
         }
         case TYPE.JOBS_CONTENT_REFRESH: {
-          const { pageNumber } = communitiesContent.pagedJobsData
+          const { pageNumber } = store.pagedJobsData
           return loadJobs(pageNumber)
         }
         default: {
           debug('unknow event: ', closeType)
           /* return loadPosts() */
+        }
+      }
+    },
+  },
+  {
+    match: asyncRes(EVENT.SIDEBAR_MENU_CHANGE),
+    action: res => {
+      const { mainPath, subPath } = res[EVENT.SIDEBAR_MENU_CHANGE].data
+      if (mainPath !== ROUTE.COMMUNITIES) return false
+      debug('unknow event: ', subPath)
+
+      switch (subPath) {
+        case ROUTE.CATEGORIES: {
+          return loadCategories()
+        }
+        default: {
+          return loadCommunities()
         }
       }
     },
@@ -406,10 +414,18 @@ const ErrSolver = [
   },
 ]
 
-export function init(selectedStore) {
-  if (communitiesContent) return false
-  communitiesContent = selectedStore
+export function init(_store) {
+  store = _store
 
-  if (sub$) sub$.unsubscribe()
+  if (sub$) return loadCommunities() // loadCategories()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+
+  loadCommunities() // loadCategories()
+}
+
+export function uninit() {
+  if (!sub$) return false
+  debug('===== do uninit')
+  sub$.unsubscribe()
+  sub$ = null
 }

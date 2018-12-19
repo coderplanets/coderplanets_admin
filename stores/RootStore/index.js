@@ -6,13 +6,12 @@
 import { types as t } from 'mobx-state-tree'
 import { makeDebugger, markStates } from '../../utils'
 
-import RouteStore from '../RouteStore'
-
 import CommunitiesStore from '../CommunitiesStore'
 import { ThemeStore, ThemeDefaults } from '../ThemeStore'
 
 import {
   // domain
+  RouteStore,
   UsersStore,
   AccountStore,
   BodylayoutStore,
@@ -32,6 +31,7 @@ import {
   UsersContentStore,
   // editors
   CommunityEditorStore,
+  ThreadEditorStore,
   TagEditorStore,
   CategoryEditorStore,
   PermissionEditorStore,
@@ -50,6 +50,7 @@ import {
   SidebarStore,
   TypeWriterStore,
   AccountEditorStore,
+  DocUploaderStore,
 } from '../index'
 
 /* eslint-disable no-unused-vars */
@@ -60,7 +61,7 @@ const rootStore = t
   .model({
     // domain stores
     account: t.optional(AccountStore, {}),
-    users: t.maybe(UsersStore),
+    users: t.maybeNull(UsersStore),
     route: t.optional(RouteStore, {}),
     curCommunity: t.optional(CurCommunity, {}),
     communities: t.optional(CommunitiesStore, {}),
@@ -74,6 +75,7 @@ const rootStore = t
     sidebar: t.optional(SidebarStore, { menuItems: [] }),
     preview: t.optional(PreviewStore, { visible: false }),
     doraemon: t.optional(DoraemonStore, {}),
+    docUploader: t.optional(DocUploaderStore, {}),
 
     // layouts
     bodylayout: t.optional(BodylayoutStore, {}),
@@ -96,6 +98,7 @@ const rootStore = t
     typeWriter: t.optional(TypeWriterStore, {}),
     accountEditor: t.optional(AccountEditorStore, {}),
     communityEditor: t.optional(CommunityEditorStore, {}),
+    threadEditor: t.optional(ThreadEditorStore, {}),
     tagEditor: t.optional(TagEditorStore, {}),
     categoryEditor: t.optional(CategoryEditorStore, {}),
     permissionEditor: t.optional(PermissionEditorStore, {}),

@@ -28,6 +28,7 @@ const sr71$ = new SR71({
     EVENT.NAV_SET_CATEGORY,
     EVENT.NAV_UPDATE_CATEGORY,
     // threahd
+    EVENT.NAV_CREATE_THREAD,
     EVENT.NAV_SET_THREAD,
     // permission
     EVENT.NAV_UPDATE_PERMISSION,
@@ -36,16 +37,16 @@ const sr71$ = new SR71({
 
 const debug = makeDebugger('L:Preview')
 
-let preview = null
+let store = null
 let sub$ = null
 
 export function closePreview() {
-  preview.close()
+  store.close()
 
   // force call Typewriter's componentWillUnmount to store the draft
-  // wait until preview move out of the screean
+  // wait until store move out of the screean
   setTimeout(() => {
-    preview.markState({ type: null })
+    store.markState({ type: null })
     debug('closePreview ...')
     dispatchEvent(EVENT.PREVIEW_CLOSED)
   }, 200)
@@ -65,7 +66,7 @@ const DataResolver = [
     action: res => {
       const event = res[EVENT.PREVIEW]
 
-      preview.open(event.type)
+      store.open(event.type)
       holdPage()
     },
   },
@@ -78,7 +79,7 @@ const DataResolver = [
     action: res => {
       const event = res[EVENT.NAV_EDIT]
 
-      preview.open(event.type)
+      store.open(event.type)
       loadDataForPreview(res[EVENT.NAV_EDIT])
       holdPage()
     },
@@ -88,7 +89,7 @@ const DataResolver = [
     action: res => {
       const event = res[EVENT.NAV_CREATE_POST]
 
-      preview.open(event.type)
+      store.open(event.type)
       holdPage()
     },
   },
@@ -97,7 +98,7 @@ const DataResolver = [
     action: res => {
       const event = res[EVENT.NAV_CREATE_COMMUNITY]
 
-      preview.open(event.type)
+      store.open(event.type)
       holdPage()
     },
   },
@@ -106,8 +107,8 @@ const DataResolver = [
     action: res => {
       const event = res[EVENT.NAV_UPDATE_COMMUNITY]
 
-      preview.markState({ editCommunity: event.data })
-      preview.open(event.type)
+      store.markState({ editCommunity: event.data })
+      store.open(event.type)
       holdPage()
     },
   },
@@ -115,13 +116,13 @@ const DataResolver = [
     match: asyncRes(EVENT.NAV_SET_COMMUNITY),
     action: res => {
       const event = res[EVENT.NAV_SET_COMMUNITY]
-      preview.markState({
+      store.markState({
         editArticle: {
           thread: event.data.thread,
           data: event.data.source,
         },
       })
-      preview.open(event.type)
+      store.open(event.type)
       holdPage()
     },
   },
@@ -130,7 +131,7 @@ const DataResolver = [
     action: res => {
       const event = res[EVENT.NAV_CREATE_TAG]
 
-      preview.open(event.type)
+      store.open(event.type)
       holdPage()
     },
   },
@@ -139,8 +140,8 @@ const DataResolver = [
     action: res => {
       const event = res[EVENT.NAV_UPDATE_TAG]
 
-      preview.markState({ editTag: event.data })
-      preview.open(event.type)
+      store.markState({ editTag: event.data })
+      store.open(event.type)
       holdPage()
     },
   },
@@ -149,7 +150,7 @@ const DataResolver = [
     action: res => {
       const event = res[EVENT.NAV_CREATE_CATEGORY]
 
-      preview.open(event.type)
+      store.open(event.type)
       holdPage()
     },
   },
@@ -158,8 +159,8 @@ const DataResolver = [
     action: res => {
       const event = res[EVENT.NAV_UPDATE_CATEGORY]
 
-      preview.markState({ editCategory: event.data })
-      preview.open(event.type)
+      store.markState({ editCategory: event.data })
+      store.open(event.type)
       holdPage()
     },
   },
@@ -168,8 +169,19 @@ const DataResolver = [
     action: res => {
       const event = res[EVENT.NAV_SET_CATEGORY]
 
-      preview.markState({ editCommunity: event.data })
-      preview.open(event.type)
+      store.markState({ editCommunity: event.data })
+      store.open(event.type)
+      holdPage()
+    },
+  },
+  {
+    match: asyncRes(EVENT.NAV_CREATE_THREAD),
+    action: res => {
+      const event = res[EVENT.NAV_CREATE_THREAD]
+      console.log('NAV_CREATE_THREAD data: ', event.data)
+
+      store.markState({ editCommunity: event.data })
+      store.open(event.type)
       holdPage()
     },
   },
@@ -178,8 +190,8 @@ const DataResolver = [
     action: res => {
       const event = res[EVENT.NAV_SET_THREAD]
 
-      preview.markState({ editCommunity: event.data })
-      preview.open(event.type)
+      store.markState({ editCommunity: event.data })
+      store.open(event.type)
       holdPage()
     },
   },
@@ -187,13 +199,13 @@ const DataResolver = [
     match: asyncRes(EVENT.NAV_SET_TAG),
     action: res => {
       const event = res[EVENT.NAV_SET_TAG]
-      preview.markState({
+      store.markState({
         editArticle: {
           thread: event.data.thread,
           data: event.data.source,
         },
       })
-      preview.open(event.type)
+      store.open(event.type)
       holdPage()
     },
   },
@@ -202,20 +214,20 @@ const DataResolver = [
     action: res => {
       const event = res[EVENT.NAV_UPDATE_PERMISSION]
       console.log('hello --> ')
-      preview.markState({
+      store.markState({
         editPermission: {
           type: event.data.type,
           data: event.data.source,
         },
       })
-      preview.open(event.type)
+      store.open(event.type)
       holdPage()
     },
   },
 ]
 
 export function init(selectedStore) {
-  preview = selectedStore
+  store = selectedStore
   if (sub$) sub$.unsubscribe()
 
   // sub$ = sr71$.data().subscribe(handleData)

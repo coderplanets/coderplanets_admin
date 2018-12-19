@@ -6,8 +6,16 @@
 import { types as t, getParent } from 'mobx-state-tree'
 import R from 'ramda'
 
-import { markStates, makeDebugger, stripMobx, TYPE } from '../../utils'
-import { Comment } from '../../stores/SharedModel'
+import {
+  markStates,
+  makeDebugger,
+  stripMobx,
+  TYPE,
+  changeset,
+  // THREAD,
+  // subPath2Thread,
+} from '../../utils'
+import { Comment, PagedComments, emptyPagiData } from '../../stores/SharedModel'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('S:CommentsStore')
@@ -34,7 +42,7 @@ const CommentsStore = t
     showReplyPreview: t.optional(t.boolean, false),
 
     // current to be delete comment id, use to target the confirm mask
-    tobeDeleteId: t.maybe(t.string),
+    tobeDeleteId: t.maybeNull(t.string),
     // words count for current comment (include reply comment)
     countCurrent: t.optional(t.number, 0),
     // cur filter type of comment list
@@ -51,12 +59,8 @@ const CommentsStore = t
     editContent: t.optional(t.string, ''),
     // content input of current reply comment editor
     replyContent: t.optional(t.string, ''),
-    // comments pagination data of current COMMUNITY / Thread
-    entries: t.optional(t.array(Comment), []),
-    totalCount: t.optional(t.number, 0),
-    pageNumber: t.optional(t.number, 0),
-    totalPages: t.optional(t.number, 0),
-    pageSize: t.optional(t.number, 0),
+    // comments pagination data of current COMMUNITY / PART
+    pagedComments: t.optional(PagedComments, emptyPagiData),
 
     // current "@user" in valid array format
     referUsers: t.optional(t.array(Mention), []),
@@ -64,7 +68,7 @@ const CommentsStore = t
     extractMentions: t.optional(t.array(t.string), []),
 
     // parrent comment of current reply
-    replyToComment: t.maybe(Comment),
+    replyToComment: t.maybeNull(Comment),
 
     // toggle loading for creating comment
     creating: t.optional(t.boolean, false),
@@ -79,6 +83,9 @@ const CommentsStore = t
     get root() {
       return getParent(self)
     },
+    get curRoute() {
+      return self.root.curRoute
+    },
     get isLogin() {
       return self.root.account.isLogin
     },
@@ -90,21 +97,52 @@ const CommentsStore = t
         referUsers
       )
     },
-
-    get entriesData() {
-      return stripMobx(self.entries)
+    get pagedCommentsData() {
+      return stripMobx(self.pagedComments)
     },
-
     get accountInfo() {
       return self.root.account.accountInfo
     },
-
-    get activeArticle() {
-      // TODO: based on tab
-      return self.root.postsPaper.active
+    get curCommunity() {
+      return stripMobx(self.root.viewing.community)
+    },
+    get activeThread() {
+      const { activeThread, viewingThread } = self.root.viewing
+      return R.toUpper(viewingThread || activeThread)
+    },
+    get viewingData() {
+      return self.root.viewingData
     },
   }))
   .actions(self => ({
+    authWarning(options) {
+      self.root.authWarning(options)
+    },
+    changesetErr(options) {
+      self.root.changesetErr(options)
+    },
+
+    validator(type) {
+      switch (type) {
+        case 'create': {
+          const result = changeset({ editContent: self.editContent })
+            .exsit({ editContent: '评论内容' }, self.changesetErr)
+            .done()
+
+          return result.passed
+        }
+        case 'reply': {
+          const result = changeset({ replyContent: self.replyContent })
+            .exsit({ replyContent: '回复内容' }, self.changesetErr)
+            .done()
+
+          return result.passed
+        }
+        default: {
+          return false
+        }
+      }
+    },
     addReferUser(user) {
       const index = R.findIndex(u => u.id === String(user.id), self.referUsers)
       if (index === -1) {

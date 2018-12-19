@@ -1,7 +1,5 @@
 import React from 'react'
 import { Provider } from 'mobx-react'
-import { request } from 'graphql-request'
-import { GRAPHQL_ENDPOINT } from '../config'
 
 import GAWraper from '../components/GAWraper'
 import initRootStore from '../stores/init'
@@ -17,45 +15,44 @@ import Header from '../containers/Header'
 import UsersBanner from '../containers/UsersBanner'
 import UsersContent from '../containers/UsersContent'
 
-import schema from '../containers/CommunitiesContent/schema'
+import { P } from '../containers/schemas'
 
-import { Global } from '../utils'
+import { makeGQClient, BStore } from '../utils'
 import Footer from '../components/Footer'
 // try to fix safari bug
 // see https://github.com/yahoo/react-intl/issues/422
 global.Intl = require('intl')
 
+async function fetchData(props) {
+  const token = BStore.cookie.from_req(props.req, 'jwtToken')
+  const gqClient = makeGQClient(token)
+  // const userHasLogin = nilOrEmpty(token) === false
+
+  const pagedCommunities = gqClient.request(P.pagedCommunities, {
+    filter: { page: 1, size: 30 },
+  })
+
+  return {
+    ...(await pagedCommunities),
+  }
+}
+
 export default class Index extends React.Component {
   // static async getInitialProps({ req, pathname, asPath }) {
-  static async getInitialProps({ req }) {
+  static async getInitialProps(props) {
     /* const isServer = !!req */
-    // console.log('getInitialProps pathname ---> ', pathname)
-    // console.log('getInitialProps asPath ---> ', asPath)
-    const data = await request(GRAPHQL_ENDPOINT, schema.pagedCommunitiesRaw, {
-      filter: { page: 1, size: 30 },
-    }) // .then(data => console.log(data))
-    /* eslint-disable */
-    const { locale, messages } = req || Global.__NEXT_DATA__.props
-    /* eslint-enable */
-    const langSetup = {}
-    langSetup[locale] = messages
+    console.log('## communities ## users page ..')
+    const { pagedCommunities } = await fetchData(props)
 
     return {
-      // version: store.version,
-      // messages,
-      // locale,
-      langSetup,
-      communities: data.pagedCommunities,
+      communities: pagedCommunities,
     }
   }
 
   constructor(props) {
     super(props)
     /* this.store = initRootStore(props.langSetup) */
-    this.store = initRootStore({
-      langSetup: props.langSetup,
-      communities: props.communities,
-    })
+    this.store = initRootStore({ ...props })
   }
 
   render() {

@@ -23,10 +23,10 @@ let sub$ = null
 const debug = makeDebugger('L:UsersContent')
 /* eslint-enable no-unused-vars */
 
-let usersContent = null
+let store = null
 
 const commonFilter = page => {
-  const size = PAGE_SIZE.COMMON
+  const size = PAGE_SIZE.D
   return {
     filter: { page, size },
   }
@@ -34,9 +34,7 @@ const commonFilter = page => {
 
 export function loadUsers(page = 1) {
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  usersContent.markState({
-    usersLoading: true,
-  })
+  store.markState({ usersLoading: true })
   sr71$.query(S.pagedUsers, commonFilter(page))
 }
 
@@ -57,20 +55,14 @@ export function onCmsPermissionMutate(source) {
 // Data & Error handlers
 // ###############################
 
-const cancleLoading = () => {
-  usersContent.markState({
-    usersLoading: false,
-  })
-}
+const cancleLoading = () => store.markState({ usersLoading: false })
 
 const DataSolver = [
   {
     match: asyncRes('pagedUsers'),
     action: ({ pagedUsers }) => {
       cancleLoading()
-      usersContent.markState({
-        pagedUsers,
-      })
+      store.markState({ pagedUsers })
     },
   },
   {
@@ -79,7 +71,7 @@ const DataSolver = [
       const closeType = res[EVENT.PREVIEW_CLOSE].type
       switch (closeType) {
         case TYPE.USERS_REFRESH: {
-          const { pageNumber } = usersContent.pagedUsersData
+          const { pageNumber } = store.pagedUsersData
           return loadUsers(pageNumber)
         }
         default: {
@@ -93,8 +85,8 @@ const DataSolver = [
 const ErrSolver = []
 
 export function init(selectedStore) {
-  usersContent = selectedStore
-  debug(usersContent)
+  store = selectedStore
+
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 }

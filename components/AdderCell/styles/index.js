@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
-import { Animate } from '../../../utils'
-import { Img } from '../../../components'
+import Img from '../../Img'
+import { animate } from '../../../utils'
 
 export const AddWrapper = styled.div`
   display: flex;
@@ -20,7 +20,7 @@ export const AddIcon = styled(Img)`
   ${AddWrapper}:hover & {
     cursor: pointer;
     fill: #646479;
-    animation: ${Animate.pulse} 0.3s linear;
+    animation: ${animate.pulseRule};
   }
 `
 

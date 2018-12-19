@@ -62,13 +62,6 @@ const columns = [
     },
   },
   {
-    title: 'education',
-    dataIndex: 'education',
-    align: 'center',
-    width: 150,
-    render: text => <MaybeCell text={text} />,
-  },
-  {
     title: 'cms权限',
     dataIndex: 'cmsPassportString',
     align: 'center',
@@ -77,14 +70,6 @@ const columns = [
       <PermissionCell source={record} onMutate={logic.onCmsPermissionMutate} />
     ),
   },
-  {
-    title: 'company',
-    dataIndex: 'company',
-    align: 'center',
-    width: 150,
-    render: text => <MaybeCell text={text} />,
-  },
-
   {
     title: 'email',
     dataIndex: 'email',
@@ -161,7 +146,7 @@ const columns = [
 ]
 
 class IndexContent extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     logic.loadUsers()
   }
 

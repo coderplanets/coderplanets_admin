@@ -13,32 +13,17 @@
  */
 
 import R from 'ramda'
+import skinsData from './skins'
 
-import Cyan from './Cyan'
-import Muzli from './Muzli'
-import SolarizedDark from './SolarizedDark'
-import Yellow from './Yellow'
-import Slack from './Slack'
-import Brown from './Brown'
-import CyanGreen from './CyanGreen'
-import Parse from './Parse'
+export const themeSkins = { ...skinsData }
 
-export const themeDict = {
-  default: { ...Parse },
-  cyan: { ...Cyan },
-  solarized: { ...SolarizedDark },
-  muzli: { ...Muzli },
-  yellow: { ...Yellow },
-  slack: { ...Slack },
-  brown: { ...Brown },
-  cyan_green: { ...CyanGreen },
-}
+// cover color of a theme
+export const themeCoverMap = R.map(R.path(['cover']), themeSkins)
+// the "T" color in themeSelector
+export const themeCoverIndexMap = R.map(R.path(['coverIndex']), themeSkins)
 
-export const themeKeys = R.keys(themeDict)
-
-export const selectorColors = R.map(R.path(['sidebar', 'bg']), themeDict)
-export const themeColorMap = R.map(R.path(['sidebar', 'bg']), themeDict)
-
-// shorthand for style-components
+// curried shorthand for style-components
 export const theme = themepath =>
   R.path(['theme', ...R.split('.', themepath)]) || 'wheat'
+
+export { default as themeMeta } from './theme_meta'

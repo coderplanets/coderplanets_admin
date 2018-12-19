@@ -14,7 +14,7 @@ const debug = makeDebugger('S:CommunityBannerStore')
 const CommunityBannerStore = t
   .model('CommunityBannerStore', {
     postsTotalCount: t.optional(t.number, 0),
-    filteredPostsCount: t.maybe(t.number),
+    filteredPostsCount: t.maybeNull(t.number),
     tagsTotalCount: t.optional(t.number, 0),
   })
   .views(self => ({

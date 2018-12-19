@@ -1,14 +1,15 @@
 // domain store
+export { default as RouteStore } from '../containers/Route/store'
 export { default as AccountStore } from './AccountStore'
 export { default as UsersStore } from './UsersStore'
 export { default as PostsStore } from './PostsStore'
 
 export { default as BodylayoutStore } from './BodylayoutStore'
 export { default as ApiLayoutStore } from './ApiLayoutStore'
-export { default as SidebarStore } from './SidebarStore'
-export { default as PreviewStore } from './PreviewStore'
-export { default as DoraemonStore } from './DoraemonStore'
-export { default as HeaderStore } from './HeaderStore'
+export { default as SidebarStore } from '../containers/Sidebar/store'
+export { default as PreviewStore } from '../containers/Preview/store'
+export { default as DoraemonStore } from '../containers/Doraemon/store'
+export { default as HeaderStore } from '../containers/Header/store'
 
 export { default as CurCommunity } from './CurCommunity'
 
@@ -35,6 +36,7 @@ export {
 
 // editors
 export { default as TagEditorStore } from '../containers/TagEditor/store'
+export { default as ThreadEditorStore } from '../containers/ThreadEditor/store'
 export {
   default as CommunityEditorStore,
 } from '../containers/CommunityEditor/store'
@@ -58,6 +60,7 @@ export {
 export { default as ThreadSetterStore } from '../containers/ThreadSetter/store'
 
 // toolbox
+export { default as DocUploaderStore } from '../containers/DocUploader/store'
 export { default as TypeWriterStore } from '../containers/TypeWriter/store'
 export { default as CommentsStore } from '../containers/Comments/store'
 export {

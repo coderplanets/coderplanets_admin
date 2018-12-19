@@ -7,24 +7,37 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 import Router, { withRouter } from 'next/router'
-// import Router, { withRouter } from 'next/router'
 
 // import Link from 'next/link'
 
 import { makeDebugger, storePlug } from '../../utils'
-import { init, syncRoute } from './logic'
+import { init, routeChange } from './logic'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('C:Route')
 /* eslint-enable no-unused-vars */
 
 class RouteContainer extends React.Component {
-  componentWillMount() {
-    init(this.props.route)
-    syncRoute(this.props.router)
+  /*
+     constructor(props) {
+     super(props)
+
+     const { route, router } = props
+     init(route, router)
+
+     Router.onRouteChangeComplete = () => {
+     const { route } = props
+     routeChange(route)
+     }
+     }
+   */
+  componentDidMount() {
+    const { route, router } = this.props
+    init(route, router)
+
     Router.onRouteChangeComplete = () => {
-      // Router.onRouteChangeStart = url => {
-      syncRoute(this.props.router)
+      const { route } = this.props
+      routeChange(route)
     }
   }
 

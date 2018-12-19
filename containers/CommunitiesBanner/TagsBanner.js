@@ -1,7 +1,6 @@
 import React from 'react'
 
-import { ICON_ASSETS } from '../../config'
-import * as logic from './logic'
+import { ICON_CMD } from '../../config'
 import { Tag, Popover, BannerCountBrief } from '../../components'
 
 import {
@@ -15,8 +14,10 @@ import {
   OperationIconChart,
 } from './styles/common_banner'
 
+import * as logic from './logic'
+
 class TagsBanner extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     logic.loadTags()
   }
 
@@ -31,7 +32,7 @@ class TagsBanner extends React.Component {
         />
         <Operation>
           <OperationItem>
-            <OperationIcon src={`${ICON_ASSETS}/cmd/filter2.svg`} />
+            <OperationIcon src={`${ICON_CMD}/filter2.svg`} />
             <Popover
               content={<div>兼容各个页面的 Filter 菜单</div>}
               trigger="hover"
@@ -45,13 +46,13 @@ class TagsBanner extends React.Component {
           </OperationItem>
           <OperationDivider />
           <OperationItem onClick={logic.onAdd.bind(this, 'tags')}>
-            <OperationIconChart src={`${ICON_ASSETS}/cmd/plus.svg`} />
+            <OperationIconChart src={`${ICON_CMD}/plus.svg`} />
             添加
           </OperationItem>
           <OperationDivider />
           <OperationItem>
-            <OperationIcon src={`${ICON_ASSETS}/cmd/chart.svg`} />
-            {/* <OperationIconChart src={`${ICON_ASSETS}/cmd/list.svg`} /> */}
+            <OperationIcon src={`${ICON_CMD}/chart.svg`} />
+            {/* <OperationIconChart src={`${ICON_CMD}/list.svg`} /> */}
             统计
           </OperationItem>
         </Operation>

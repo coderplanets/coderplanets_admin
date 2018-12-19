@@ -1,7 +1,6 @@
 import React from 'react'
 
-import { ROUTE } from '../../utils'
-import { ICON_ASSETS } from '../../config'
+import { ICON_CMD } from '../../config'
 
 import {
   MenuRow,
@@ -16,13 +15,14 @@ import {
   ChildrenNum,
 } from './styles/menu'
 
+import { ROUTE } from '../../utils'
 import * as logic from './logic'
 
 const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
   <ChildrenWrapper active={activeRaw === curRaw}>
     <ChildrenItem
       active={ROUTE.COMMUNITIES === activeThread}
-      onClick={logic.onMenuSelect.bind(this, 'communities', 'index')}
+      onClick={logic.onRootMenuSelect.bind(this, 'communities', 'index')}
     >
       <ChildrenItemInner>
         <ChildrenTitle>社区</ChildrenTitle>
@@ -31,7 +31,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
     </ChildrenItem>
     <ChildrenItem
       active={ROUTE.CATEGORIES === activeThread}
-      onClick={logic.onMenuSelect.bind(this, 'communities', 'categories')}
+      onClick={logic.onRootMenuSelect.bind(this, 'communities', 'categories')}
     >
       <ChildrenItemInner>
         <ChildrenTitle>分类</ChildrenTitle>
@@ -40,7 +40,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
     </ChildrenItem>
     <ChildrenItem
       active={ROUTE.TAGS === activeThread}
-      onClick={logic.onMenuSelect.bind(this, 'communities', 'tags')}
+      onClick={logic.onRootMenuSelect.bind(this, 'communities', 'tags')}
     >
       <ChildrenItemInner>
         <ChildrenTitle>标签</ChildrenTitle>
@@ -49,7 +49,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
     </ChildrenItem>
     <ChildrenItem
       active={ROUTE.EDITORS === activeThread}
-      onClick={logic.onMenuSelect.bind(this, 'communities', 'editors')}
+      onClick={logic.onRootMenuSelect.bind(this, 'communities', 'editors')}
     >
       <ChildrenItemInner>
         <ChildrenTitle>编辑</ChildrenTitle>
@@ -58,7 +58,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
     </ChildrenItem>
     <ChildrenItem
       active={ROUTE.THREADS === activeThread}
-      onClick={logic.onMenuSelect.bind(this, 'communities', 'threads')}
+      onClick={logic.onRootMenuSelect.bind(this, 'communities', 'threads')}
     >
       <ChildrenItemInner>
         <ChildrenTitle>Threads</ChildrenTitle>
@@ -67,7 +67,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
     </ChildrenItem>
     <ChildrenItem
       active={ROUTE.POSTS === activeThread}
-      onClick={logic.onMenuSelect.bind(this, 'communities', 'posts')}
+      onClick={logic.onRootMenuSelect.bind(this, 'communities', 'posts')}
     >
       <ChildrenItemInner>
         <ChildrenTitle>帖子</ChildrenTitle>
@@ -76,7 +76,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
     </ChildrenItem>
     <ChildrenItem
       active={ROUTE.JOBS === activeThread}
-      onClick={logic.onMenuSelect.bind(this, 'communities', 'jobs')}
+      onClick={logic.onRootMenuSelect.bind(this, 'communities', 'jobs')}
     >
       <ChildrenItemInner>
         <ChildrenTitle>招聘</ChildrenTitle>
@@ -94,7 +94,7 @@ const CommunitiesItemBar = ({ active }) => (
         active={active}
         onClick={logic.extendMenuBar.bind(this, ROUTE.COMMUNITIES)}
       >
-        <MenuCommunitiesIcon src={`${ICON_ASSETS}/cmd/all.svg`} />
+        <MenuCommunitiesIcon src={`${ICON_CMD}/all.svg`} />
         <div style={{ marginRight: 10 }} />
         {/* eslint-disable jsx-a11y/anchor-is-valid */}
         <MenuTitle>所有社区</MenuTitle>

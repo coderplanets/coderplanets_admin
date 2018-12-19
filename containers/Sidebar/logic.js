@@ -11,6 +11,8 @@ import {
   makeDebugger,
   EVENT,
   ROUTE,
+  // TYPE,
+  dispatchEvent,
 } from '../../utils'
 import S from './schema'
 import { PAGE_SIZE } from '../../config'
@@ -21,14 +23,15 @@ const sr71$ = new SR71({
   resv_event: [EVENT.LOGOUT, EVENT.LOGIN, EVENT.ROUTE_CHANGE],
 })
 
-let sidebar = null
+let store = null
+let sub$ = null
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('L:Sidebar')
 /* eslint-enable no-unused-vars */
 
 export function pin() {
-  sidebar.markState({ pin: !sidebar.pin })
+  store.markState({ pin: !store.pin })
 }
 
 export function extendMenuBar(communityRaw) {
@@ -53,23 +56,28 @@ export function extendMenuBar(communityRaw) {
   }
 }
 
-export function onMenuSelect(mainPath, subPath) {
-  sidebar.markRoute({ mainPath, subPath })
+export function onRootMenuSelect(mainPath, subPath) {
+  console.log('onRootMenuSelect mainPath: ', mainPath)
+  console.log('onRootMenuSelect subPath: ', subPath)
+
+  store.markRoute({ mainPath, subPath })
+
+  dispatchEvent(EVENT.SIDEBAR_MENU_CHANGE, {
+    // type: TYPE.SIDEBAR_MENU_CHANGE,
+    data: { mainPath, subPath },
+  })
 }
 
 export function onCommunityChildMenuChange(activeThread) {
-  let asPath = `/${sidebar.activeRaw}/${activeThread}`
+  let asPath = `/${store.activeRaw}/${activeThread}`
   if (R.isEmpty(activeThread)) {
-    asPath = `/${sidebar.activeRaw}`
+    asPath = `/${store.activeRaw}`
   }
   Router.push('/', asPath)
 }
 
 export function loadCommunities(page = 1) {
-  // const { accountInfo, isLogin } = sidebar
-  //  const user = store.get('user')
-
-  const size = PAGE_SIZE.COMMON
+  const size = PAGE_SIZE.D
   const args = {
     filter: { page, size },
   }
@@ -80,9 +88,7 @@ export function loadCommunities(page = 1) {
 const DataSolver = [
   {
     match: asyncRes('pagedCommunities'),
-    action: ({ pagedCommunities }) => {
-      sidebar.loadCommunities(pagedCommunities)
-    },
+    action: ({ pagedCommunities }) => store.loadCommunities(pagedCommunities),
   },
 ]
 
@@ -108,7 +114,16 @@ const ErrSolver = [
 ]
 
 export function init(selectedStore) {
-  sidebar = selectedStore
-  sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+  store = selectedStore
+  if (sub$) return false
+  sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
   // loadCommunities()
+}
+
+export function uninit() {
+  if (!sub$) return false
+
+  debug('===== do uninit')
+  sub$.unsubscribe()
+  sub$ = null
 }

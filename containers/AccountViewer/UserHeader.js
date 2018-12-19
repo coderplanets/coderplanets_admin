@@ -1,7 +1,6 @@
 import React from 'react'
-import shortid from 'shortid'
 
-import { ICON_ASSETS } from '../../config'
+import { ICON_CMD } from '../../config'
 import { A, Button, Icon } from '../../components'
 
 import {
@@ -16,27 +15,29 @@ import {
   EditIcon,
 } from './styles/user_header'
 
+import { uid } from '../../utils'
+
 const tooltipOffset = JSON.stringify({ top: 5, left: 3 })
 const SocalIcons = ({ accountInfo: { githubProfile } }) => (
   <BriefInfo>
     <div
-      key={shortid.generate()}
+      key={uid.gen()}
       data-tip="站内主页"
       data-offset={tooltipOffset}
       data-delay-show="500"
     >
-      <SocalIcon src={`${ICON_ASSETS}/cmd/home.svg`} />
+      <SocalIcon src={`${ICON_CMD}/home.svg`} />
     </div>
 
     {githubProfile ? (
       <A href={githubProfile.htmlUrl}>
         <div
-          key={shortid.generate()}
+          key={uid.gen()}
           data-tip={githubProfile.htmlUrl}
           data-offset={tooltipOffset}
           data-delay-show="500"
         >
-          <SocalIcon src={`${ICON_ASSETS}/cmd/github.svg`} />
+          <SocalIcon src={`${ICON_CMD}/github.svg`} />
         </div>
       </A>
     ) : (
@@ -56,7 +57,7 @@ const UserHeaderSection = ({ accountInfo, logout, editProfile }) => (
             {accountInfo.nickname}
             {/* eslint-disable */}
             <div onClick={editProfile}>
-              <EditIcon src={`${ICON_ASSETS}/cmd/edit.svg`} />
+              <EditIcon src={`${ICON_CMD}/edit.svg`} />
             </div>
             {/* eslint-enable */}
           </UserName>

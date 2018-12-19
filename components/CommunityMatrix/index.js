@@ -7,8 +7,9 @@
 import React from 'react'
 import R from 'ramda'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
 import ReactTooltip from 'react-tooltip'
+
+import { ICON_CMD } from '../../config'
 
 import {
   MatrixWrapper,
@@ -16,9 +17,8 @@ import {
   GeneralPLogo,
   AddOnWrapper,
 } from './styles'
-import { ICON_ASSETS } from '../../config'
 
-import { makeDebugger } from '../../utils'
+import { makeDebugger, uid } from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:CommunityMatrix:index')
@@ -30,7 +30,7 @@ const Communities = ({ list, onSelect, activeRaw, lens }) => (
   <React.Fragment>
     {list.map(c => (
       <div
-        key={shortid.generate()}
+        key={uid.gen()}
         onClick={onSelect.bind(this, c)}
         data-place="right"
         data-tip={c.title}
@@ -85,7 +85,7 @@ class CommunityMatrix extends React.Component {
           onClick={onAddOnSelect}
           show={hasAddon}
         >
-          <GeneralPLogo src={`${ICON_ASSETS}/cmd/all.svg`} />
+          <GeneralPLogo src={`${ICON_CMD}/all.svg`} />
         </AddOnWrapper>
       </MatrixWrapper>
     )

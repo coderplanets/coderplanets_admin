@@ -1,24 +1,24 @@
 import styled from 'styled-components'
 
-import { Img } from '../../../components'
-import { theme, column, Animate, smokey } from '../../../utils'
+import Img from '../../../components/Img'
 import { ReplyBarBase, ReplyToBodyBase, ReplyToFloorBase } from './index'
 
-export const ReplyBar = ReplyBarBase.extend`
+import { theme, animate, cs } from '../../../utils'
+
+export const ReplyBar = styled(ReplyBarBase)`
   margin-left: -2px;
 `
-export const ReplyToBody = ReplyToBodyBase.extend``
-export const ReplyToFloor = ReplyToFloorBase.extend``
+export const ReplyToBody = styled(ReplyToBodyBase)``
+export const ReplyToFloor = styled(ReplyToFloorBase)``
 
 // min-height: 300px;
 export const ListsContainer = styled.div`
-  ${column};
+  ${cs.flexColumn('')};
   border-radius: 4px;
 `
 
 export const TotalHeader = styled.div`
-  display: flex;
-  align-items: center;
+  ${cs.flex('align-center')};
   margin-top: 25px;
   margin-bottom: 10px;
 `
@@ -27,18 +27,18 @@ export const TotalCountWrapper = styled.div`
 `
 
 export const ListTitle = styled.div`
-  color: #62868a;
+  color: ${theme('comment.title')};
   font-size: 1rem;
   margin-left: 2px;
 `
 
 export const TotalNum = styled.span`
-  color: orange;
+  color: ${theme('comment.number')};
   font-size: 1.3em;
 `
 
 export const FloorNum = styled.div`
-  color: #b5ddb3;
+  color: ${theme('comment.floor')};
   font-size: 1rem;
   align-self: center;
   margin-left: 5px;
@@ -46,28 +46,29 @@ export const FloorNum = styled.div`
 `
 
 export const CommentBlock = styled.div`
-  display: flex;
+  ${cs.flex()};
   margin-bottom: 16px;
   padding: 15px;
   padding-left: 20px;
   position: relative;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
   border-radius: 3px;
-  background: ${theme('preview.article_bg')};
+  background: ${theme('preview.articleBg')};
 `
 
 // filter: blur(3px);
 export const CommentWrapper = styled.div`
-  display: flex;
-  flex-grow: 1;
-  filter: ${props => (props.tobeDelete ? 'blur(3px)' : '')};
+  ${cs.flexGrow()};
+  filter: ${({ tobeDelete }) => (tobeDelete ? 'blur(3px)' : '')};
 `
 export const DeleteHintText = styled.div`
-  color: tomato;
+  color: ${theme('baseColor.error')};
   font-size: 1.3em;
   margin-bottom: 10px;
 `
 export const DeleteOverlay = styled.div`
+  ${cs.flexColumn('align-both')};
+
   position: absolute;
   margin-top: -15px;
   margin-left: -20px;
@@ -75,92 +76,77 @@ export const DeleteOverlay = styled.div`
   height: 100%;
   border-radius: 5px;
   z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  visibility: ${props => (props.show ? 'visible' : 'hidden')};
-  animation: ${Animate.pulse} 0.3s linear;
+  visibility: ${({ show }) => (show ? 'visible' : 'hidden')};
+  animation: ${animate.pulseRule};
 `
 export const DeleteBtnGroup = styled.div`
-  display: flex;
+  ${cs.flex()};
 `
-
 export const CommentUserInfo = styled.div`
   margin-right: 15px;
 `
-
-export const CommentAvatar = styled.img`
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
+export const CommentAvatar = styled(Img)`
+  ${cs.circle('38px')};
+  opacity: ${theme('avatarOpacity')};
 `
-
 export const CommentHeader = styled.div`
-  margin-bottom: 12px;
-  ${column};
+  ${cs.flexColumn()};
+  margin-bottom: 5px;
+  margin-top: -1px;
 `
-
 export const CommentHeaderFirst = styled.div`
-  display: flex;
+  ${cs.flex()};
 `
-
 export const CommentUserName = styled.div`
-  color: #678689;
-  font-size: 1.3em;
-  display: flex;
-  flex-grow: 1;
-`
+  ${cs.flexGrow()};
 
+  color: ${theme('comment.username')};
+  font-size: 1rem;
+`
 export const TimeStamps = styled.div`
-  color: #9a9a9a;
+  color: ${theme('comment.placeholder')};
+  font-size: 0.9rem;
 `
-
 export const CommentBodyInfo = styled.div`
+  ${cs.flexColumn()};
   width: 100%;
-  ${column};
 `
 export const CommentContent = styled.div`
-  color: #888894;
-  font-size: 1.1em;
+  font-size: 0.9rem;
 `
-
 export const CommentFooter = styled.div`
+  ${cs.flex()};
   margin-top: 15px;
-  display: flex;
 `
 export const Actions = styled.div`
-  display: flex;
-  flex-grow: 1;
+  ${cs.flexGrow()};
   margin-left: -4px;
 `
-
 export const ReplyUsers = styled.div`
-  display: flex;
+  ${cs.flex()};
   margin-top: -4px;
 `
 export const ReplyTitle = styled.div`
-  color: #c5dadb;
+  color: ${theme('comment.reply')};
   margin-top: 4px;
   margin-right: 5px;
 `
-
 export const VisiableAction = styled.div`
-  display: flex;
-  color: #90a5a6;
+  ${cs.flex()};
+  color: ${theme('comment.action')};
   margin-right: 10px;
   &:hover {
     cursor: pointer;
     font-weight: bold;
   }
 `
-
 export const ActionNumber = styled.div`
   font-size: 1.2em;
+  color: ${theme('comment.action')};
 `
 
 export const LikeIcon = styled(Img)`
-  fill: #6b8688;
+  fill: ${theme('comment.icon')};
   margin-right: 3px;
   margin-top: 2px;
   width: 20px;
@@ -168,16 +154,17 @@ export const LikeIcon = styled(Img)`
 `
 
 export const UpIcon = styled(Img)`
-  fill: ${props => (props.viewerDid ? 'orange' : '#6b8688')};
+  fill: ${({ viewerDid }) =>
+    viewerDid ? theme('comment.didIcon') : theme('comment.icon')};
   margin-right: 3px;
   margin-top: 2px;
   width: 20px;
   height: 20px;
-  transform: ${props => (props.reverse ? 'rotate(180deg)' : '')};
-  ${smokey};
+  transform: ${({ reverse }) => (reverse ? 'rotate(180deg)' : '')};
+  ${cs.smokey};
 `
 export const ReplyIcon = styled(Img)`
-  fill: #6b8688;
+  fill: ${theme('comment.icon')};
   margin-right: 5px;
   margin-top: 1px;
   width: 18px;
@@ -185,8 +172,8 @@ export const ReplyIcon = styled(Img)`
 `
 
 export const ReplyAction = styled.div`
-  display: flex;
-  color: #90a5a6;
+  ${cs.flex()};
+  color: ${theme('comment.action')};
   margin-right: 12px;
   cursor: pointer;
   font-weight: bold;
@@ -197,10 +184,4 @@ export const ReplyAction = styled.div`
     opacity: 1;
   }
   transition: opacity 0.3s;
-`
-
-export const Pagi = styled.div`
-  text-align: center;
-  margin-top: 40px;
-  margin-bottom: 30px;
 `

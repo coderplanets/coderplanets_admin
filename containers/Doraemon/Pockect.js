@@ -1,20 +1,20 @@
-import { Observable } from 'rxjs/Observable'
-import { Subject } from 'rxjs/Subject'
+import { Subject, of } from 'rxjs'
+import R from 'ramda'
 import PubSub from 'pubsub-js'
 
-// import 'rxjs/add/observable/of'
-import 'rxjs/add/operator/do'
-import 'rxjs/add/operator/catch'
-import 'rxjs/add/operator/switchMap'
-import 'rxjs/add/operator/debounceTime'
-import 'rxjs/add/operator/takeUntil'
-// import 'rxjs/add/operator/distinctUntilChanged'
-import 'rxjs/add/operator/map'
-import 'rxjs/add/operator/filter'
-import 'rxjs/add/operator/merge'
+import {
+  catchError,
+  switchMap,
+  debounceTime,
+  takeUntil,
+  map,
+  filter,
+  merge,
+} from 'rxjs/operators'
 
 import { makeDebugger, isEmptyValue, EVENT } from '../../utils'
 import {
+  searchablePrefix,
   startWithSpecialPrefix,
   startWithSlash,
   Advisor,
@@ -37,24 +37,32 @@ export default class Pockect {
     this.stop$ = new Subject() // esc, pageClick  ...
     // TODO: netfix search use throttle
     // see: https://www.youtube.com/watch?v=XRYN2xt11Ek
-    this.cmdInput$ = this.input$.debounceTime(200) // .distinctUntilChanged()
+    this.generalInput$ = this.input$.pipe(debounceTime(200)) // .distinctUntilChanged()
 
     PubSub.subscribe(EVENT.LOGIN_PANEL, () => {
       this.store.handleLogin()
       this.input$.next('/login/')
     })
 
-    this.cmdSuggestionCommon = this.cmdInput$
-      .filter(startWithSlash)
-      .switchMap(q => this.advisor.relateSuggestions$(q).takeUntil(this.stop$))
-      .catch(() => Observable.of([]))
+    /* this.search$ = this.generalInput$.pipe(filter(v => !searchablePrefix(v))) */
+    this.search$ = this.generalInput$.pipe(filter(searchablePrefix))
+    this.searchUser$ = this.generalInput$.pipe(filter(R.startsWith('@')))
 
-    this.cmdSuggestionSpecial = this.cmdInput$
-      .filter(startWithSpecialPrefix) // > < ?
-      .map(this.advisor.specialSuggestions)
+    this.cmdSuggestionCommon = this.generalInput$.pipe(
+      filter(startWithSlash),
+      switchMap(q =>
+        this.advisor.relateSuggestions$(q).pipe(takeUntil(this.stop$))
+      ),
+      catchError(() => of([]))
+    )
 
-    this.cmdSuggesttion$ = this.cmdSuggestionCommon.merge(
-      this.cmdSuggestionSpecial
+    this.cmdSuggestionSpecial = this.generalInput$.pipe(
+      filter(startWithSpecialPrefix),
+      map(this.advisor.specialSuggestions)
+    )
+
+    this.cmdSuggesttion$ = this.cmdSuggestionCommon.pipe(
+      merge(this.cmdSuggestionSpecial)
     )
   }
 
@@ -70,11 +78,19 @@ export default class Pockect {
     this.stop$.next()
   }
 
+  search() {
+    return this.search$
+  }
+
+  searchUser() {
+    return this.searchUser$
+  }
+
   cmdSuggesttion() {
     return this.cmdSuggesttion$
   }
 
   emptyInput() {
-    return this.input$.filter(isEmptyValue)
+    return this.input$.pipe(filter(isEmptyValue))
   }
 }

@@ -1,5 +1,5 @@
 // import R from 'ramda'
-import store from 'store'
+// import store from 'store'
 
 import {
   asyncRes,
@@ -16,20 +16,21 @@ import {
 
 import SR71 from '../../utils/network/sr71'
 // import sr71$ from '../../utils/network/sr71_simple'
-import S from './schema'
 
-const sr71$ = new SR71()
+import S from './schema'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('L:Header')
 /* eslint-enable no-unused-vars */
 
-let header = null
-/* const sub$ = null */
+const sr71$ = new SR71()
+
+let store = null
+let sub$ = null
 /* const user_token = */
 
 export function previewState() {
-  // header.openPreview(type)
+  // store.openPreview(type)
   dispatchEvent(EVENT.PREVIEW, {
     type: TYPE.PREVIEW_ROOT_STORE,
   })
@@ -43,18 +44,7 @@ export function signinGithub(code) {
   sr71$.mutate(S.githubSignin, args)
 }
 
-export function checkUserAccount() {
-  // debug('checkUserAccount: to get user breif')
-  const user = store.get('user')
-  if (user) {
-    // NOTICE: if store is not valid json, user will be typeof string
-    // header.updateAccount({ ...user })
-    sr71$.query(S.user, { id: user.id })
-  } else {
-    // not shoe
-    debug('do nothing')
-  }
-}
+export const checkSesstionState = () => sr71$.query(S.sessionState, {})
 
 export function previewAccount() {
   dispatchEvent(EVENT.PREVIEW, {
@@ -69,7 +59,6 @@ export function login() {
 }
 
 export function openPreview() {
-  // header.openPreview(type)
   dispatchEvent(EVENT.PREVIEW, {
     type: TYPE.PREVIEW_ACCOUNT_VIEW,
     data: { hello: 'world' },
@@ -77,13 +66,13 @@ export function openPreview() {
 }
 
 export function openDoraemon() {
-  header.openDoraemon()
+  store.openDoraemon()
 }
 
 const DataSolver = [
   {
-    match: asyncRes('user'),
-    action: ({ user }) => header.updateAccount(user),
+    match: asyncRes('sessionState'),
+    action: ({ sessionState: state }) => store.updateSesstion(state),
   },
   {
     // TODO move it to user side view
@@ -97,7 +86,7 @@ const DataSolver = [
     action: ({ user }) => {
       debug('dataResolver userRes  --->', user)
       /* store.set('user', { ...data }) */
-      header.updateAccount(user)
+      store.updateAccount(user)
     },
   },
 ]
@@ -123,11 +112,18 @@ const ErrSolver = [
   },
 ]
 
-export function init(selectedStore) {
-  header = selectedStore
-  // if (sub$) sub$.unsubscribe()
-  /* sub$ = sr71$.data().subscribe(handleData) */
-  // sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+export function init(_store) {
+  store = _store
+
+  if (sub$) return checkSesstionState()
+
   sr71$.data().subscribe($solver(DataSolver, ErrSolver))
-  checkUserAccount()
+  checkSesstionState()
+}
+
+export function uninit() {
+  if (!sub$) return false
+  debug('===== do uninit')
+  sub$.unsubscribe()
+  sub$ = null
 }

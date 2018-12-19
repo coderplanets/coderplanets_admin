@@ -4,16 +4,16 @@ import { PAGE_SIZE } from '../../config'
 
 import { User } from './User'
 import { Community } from './Community'
-import Comment from './Comment'
+import { Comment } from './Comment'
 import { Tag } from './Tag'
 
 export const Post = t.model('Post', {
-  id: t.maybe(t.string),
-  title: t.maybe(t.string),
-  body: t.maybe(t.string),
-  digest: t.maybe(t.string),
+  id: t.maybeNull(t.string),
+  title: t.maybeNull(t.string),
+  body: t.maybeNull(t.string),
+  digest: t.maybeNull(t.string),
   // author: t.optional(User, {}),
-  author: t.maybe(User),
+  author: t.maybeNull(User),
 
   communities: t.optional(t.array(Community), []),
   tags: t.optional(t.array(Tag), []),
@@ -32,7 +32,7 @@ export const Post = t.model('Post', {
 export const PagedPosts = t.model('PagedPosts', {
   entries: t.optional(t.array(Post), []),
   pageNumber: t.optional(t.number, 1),
-  pageSize: t.optional(t.number, PAGE_SIZE.COMMON),
+  pageSize: t.optional(t.number, PAGE_SIZE.D),
   totalCount: t.optional(t.number, 0),
   totalPages: t.optional(t.number, 0),
 })

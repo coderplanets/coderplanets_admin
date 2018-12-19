@@ -8,12 +8,6 @@ import React from 'react'
 import { inject, observer } from 'mobx-react'
 import R from 'ramda'
 
-import shortid from 'shortid'
-// import Link from 'next/link'
-
-import { makeDebugger, storePlug } from '../../utils'
-import * as logic from './logic'
-
 import { CommunityMatrix } from '../../components'
 import {
   Wrapper,
@@ -25,6 +19,9 @@ import {
   ThreadText,
 } from './styles'
 
+import { uid, makeDebugger, storePlug } from '../../utils'
+import * as logic from './logic'
+
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('C:TagSetter')
 /* eslint-enable no-unused-vars */
@@ -33,7 +30,7 @@ const TagsList = ({ tags, threadId, selectedids }) => (
   <CategoryWrapper>
     {tags.map(c => (
       <CategoryTag
-        key={shortid.generate()}
+        key={uid.gen()}
         active={R.contains(c.id, selectedids)}
         onClick={logic.onAdd.bind(
           this,
@@ -54,8 +51,9 @@ const TagsList = ({ tags, threadId, selectedids }) => (
 
 class TagSetterContainer extends React.Component {
   componentDidMount() {
-    logic.init(this.props.tagSetter)
-    logic.getPartialTags(this.props.editData)
+    const { tagSetter, editData } = this.props
+    logic.init(tagSetter)
+    logic.getPartialTags(editData)
   }
 
   render() {

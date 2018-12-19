@@ -34,7 +34,7 @@ const columns = [
   {
     title: 'raw',
     width: 200,
-    dataIndex: 'author',
+    dataIndex: 'raw',
     align: 'center',
   },
   /*
@@ -89,8 +89,8 @@ const columns = [
 ]
 
 class ThreadsContent extends React.Component {
-  componentWillMount() {
-    console.log('ThreadsContent ,componentWillMount')
+  componentDidMount() {
+    console.log('ThreadsContent ,componentDidMount')
     logic.loadThreadsIfOnClient()
   }
 

@@ -1,7 +1,5 @@
 import React from 'react'
 import { Provider } from 'mobx-react'
-import { request } from 'graphql-request'
-import { GRAPHQL_ENDPOINT } from '../../config'
 
 import GAWraper from '../../components/GAWraper'
 import initRootStore from '../../stores/init'
@@ -16,13 +14,15 @@ import Header from '../../containers/Header'
 import CommunitiesBanner from '../../containers/CommunitiesBanner'
 import CommunitiesContent from '../../containers/CommunitiesContent'
 
-import schema from '../../containers/CommunitiesContent/schema'
+import { P } from '../../containers/schemas'
 
 import {
-  Global,
-  queryStringToJSON,
+  makeGQClient,
+  // Global,
+  // queryStringToJSON,
   /* mergeRouteQuery */
-  getSubPath,
+  // getSubPath,
+  BStore,
 } from '../../utils'
 import Footer from '../../components/Footer'
 
@@ -38,45 +38,43 @@ global.Intl = require('intl')
    直接被路由到子文件
  */
 /*
-const getSubPath = props => {
-  const asPathList = parsePathList(props)
+   const getSubPath = props => {
+   const asPathList = parsePathList(props)
 
-  return asPathList.length > 1 ? asPathList[1] : null
+   return asPathList.length > 1 ? asPathList[1] : null
+   }
+ */
+
+async function fetchData(props) {
+  const token = BStore.cookie.from_req(props.req, 'jwtToken')
+  const gqClient = makeGQClient(token)
+
+  const pagedCommunities = gqClient.request(P.pagedCommunities, {
+    filter: { page: 1, size: 30 },
+    userHasLogin: false,
+  })
+
+  return {
+    ...(await pagedCommunities),
+  }
 }
-*/
 
 /* filter: mergeRouteQuery(query), */
 export default class Index extends React.Component {
   static async getInitialProps(props) {
-    const { req, asPath } = props
-    const isServer = !!req
-    if (!isServer) return {}
+    // const isServer = !!req
+    // if (!isServer) return {}
 
-    console.log('## communities ## page ..')
+    console.log('## communities ## index page ..')
 
-    let querySchema = schema.pagedCommunitiesRaw
-    if (getSubPath(props) === 'tags') {
-      querySchema = schema.pagedTagsRaw
-    }
-
-    const data = await request(GRAPHQL_ENDPOINT, querySchema, {
-      filter: queryStringToJSON(asPath),
-    })
-    /* eslint-disable */
-    const { locale, messages } = req || Global.__NEXT_DATA__.props
-    console.log('locale --> ', locale)
-    console.log('messages --> ', messages)
-    /* eslint-enable */
-    const langSetup = {}
-    langSetup[locale] = messages
+    const { pagedCommunities } = await fetchData(props)
 
     return {
       // version: store.version,
       // messages,
       // locale,
-      langSetup,
-      communities: data.pagedCommunities,
-      communitiesContent: { ...data },
+      communities: pagedCommunities,
+      communitiesContent: pagedCommunities,
     }
   }
 

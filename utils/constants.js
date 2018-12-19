@@ -19,6 +19,10 @@ export const EVENT = {
   NAV_CREATE_POST: 'NAV_CREATE_POST',
   REFRESH_POSTS: 'REFRESH_POSTS',
 
+  // menu
+  SIDEBAR_MENU_CHANGE: 'SIDEBAR_MENU_CHANGE',
+  // ROUTE_COMMUNITY_MENU_CHANGE: 'ROUTE_COMMUNITY_MENU_CHANGE',
+
   // admin
   NAV_CREATE_COMMUNITY: 'NAV_CREATE_COMMUNITY',
   NAV_UPDATE_COMMUNITY: 'NAV_UPDATE_COMMUNITY',
@@ -31,6 +35,7 @@ export const EVENT = {
   NAV_UPDATE_CATEGORY: 'NAV_UPDATE_CATEGORY',
   NAV_SET_CATEGORY: 'NAV_SET_CATEGORY',
   // thread
+  NAV_CREATE_THREAD: 'NAV_CREATE_THREAD',
   NAV_SET_THREAD: 'NAV_SET_THREAD',
   // tag
   NAV_SET_TAG: 'NAV_SET_TAG',
@@ -79,6 +84,7 @@ export const TYPE = {
   PREVIEW_UPDATE_CATEGORY: 'PREVIEW_UPDATE_CATEGORY',
   PREVIEW_SET_CATEGORY: 'PREVIEW_SET_CATEGORY',
   // >> threads
+  PREVIEW_CREATE_THREAD: 'PREVIEW_CREATE_THREAD',
   PREVIEW_SET_THREAD: 'PREVIEW_SET_THREAD',
   // >> permission
   PREVIEW_CREATE_PERMISSION: 'PREVIEW_CREATE_PERMISSION',
@@ -105,10 +111,26 @@ export const TYPE = {
   USERS_REFRESH: 'USERS_REFRESH',
 }
 
+export const COMMUNITY_SPEC_THREADS = {
+  USER: 'user',
+  JOB: 'job',
+  VIDEO: 'video',
+  REPO: 'repo',
+  WIKI: 'wiki',
+  CHEATSHEET: 'cheatsheet',
+}
+
 export const THREAD = {
-  POST: 'POST',
-  JOB: 'JOB',
-  // ...
+  ...COMMUNITY_SPEC_THREADS,
+  POST: 'post',
+  // home spec
+  TECH: 'tech',
+  SHARE: 'share',
+  RADAR: 'radar',
+  CITY: 'city',
+  // city spec
+  GROUP: 'group',
+  COMPANY: 'company',
 }
 
 export const ROUTE = {
@@ -144,3 +166,7 @@ export const ROUTE = {
   // roles CURD (based on passports)
   ROLES: 'roles',
 }
+
+/* some svg icon are sensitive to fill color */
+/* some community svg need fill color, like city etc.. */
+export const NON_FILL_COMMUNITY = ['javascript']

@@ -8,11 +8,11 @@ import React from 'react'
 import R from 'ramda'
 import PropTypes from 'prop-types'
 import ReactTooltip from 'react-tooltip'
-import shortid from 'shortid'
 
-import { ICON_ASSETS } from '../../config'
-import { makeDebugger } from '../../utils'
-import { AdderCell } from '../../components'
+import { ICON_CMD } from '../../config'
+
+import AdderCell from '../AdderCell'
+import CommunitiesLogoList from './CommunitiesLogoList'
 
 import {
   Wrapper,
@@ -24,11 +24,11 @@ import {
   AddIcon,
 } from './styles'
 
+import { uid, makeDebugger } from '../../utils'
+
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:CommunityCell:index')
 /* eslint-enable no-unused-vars */
-
-const tooltipOffset = JSON.stringify({ top: 1 })
 
 const SingleCommunity = ({ community }) => (
   <Wrapper>
@@ -37,26 +37,10 @@ const SingleCommunity = ({ community }) => (
   </Wrapper>
 )
 
-const CommunitiesLogoArray = ({ array }) => (
-  <Wrapper>
-    {array.map(c => (
-      <Wrapper key={shortid.generate()}>
-        <div
-          data-tip={c.title}
-          data-for="community_cell"
-          data-offset={tooltipOffset}
-        >
-          <CommunityLogo src={c.logo} />
-        </div>
-      </Wrapper>
-    ))}
-  </Wrapper>
-)
-
 const CommunitiesSetter = ({ array, source, thread, onDelete }) => (
   <Wrapper>
     {array.map(c => (
-      <SetterWrapper key={shortid.generate()}>
+      <SetterWrapper key={uid.gen()}>
         <CommunityLogo src={c.logo} />
         <DeleteCross onClick={onDelete.bind(this, thread, source, c.id)}>
           x
@@ -71,7 +55,8 @@ const renderContent = props => {
   const { data, array, withSetter, source, thread, onAdd, onDelete } = props
   if (!R.isEmpty(data)) {
     return <SingleCommunity community={data} />
-  } else if (withSetter && !R.isEmpty(array)) {
+  }
+  if (withSetter && !R.isEmpty(array)) {
     return (
       <Wrapper>
         <CommunitiesSetter
@@ -81,14 +66,15 @@ const renderContent = props => {
           onDelete={onDelete}
         />
         <div onClick={onAdd.bind(this, thread, source)}>
-          <AddIcon src={`${ICON_ASSETS}/cmd/plus.svg`} />
+          <AddIcon src={`${ICON_CMD}/plus.svg`} />
         </div>
       </Wrapper>
     )
-  } else if (!R.isEmpty(array)) {
+  }
+  if (!R.isEmpty(array)) {
     return (
       <Wrapper>
-        <CommunitiesLogoArray array={array} />
+        <CommunitiesLogoList array={array} />
       </Wrapper>
     )
   }

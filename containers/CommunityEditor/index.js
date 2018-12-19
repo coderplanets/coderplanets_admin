@@ -29,10 +29,11 @@ const debug = makeDebugger('C:CommunityEditor')
 /* eslint-enable no-unused-vars */
 
 class CommunityEditorContainer extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { communityEditor, editData } = this.props
     logic.init(communityEditor, editData)
   }
+
   componentWillUnmount() {
     logic.uninit()
   }
@@ -88,11 +89,6 @@ class CommunityEditorContainer extends React.Component {
           value={communityData.raw}
           note="用作 router 的唯一值，只能用英文。建议用社区的 translate 作为 raw 值， 比如 'javascript 中文社区'， 对应的 raw 值为 'javascript'"
           onChange={logic.profileChange('raw')}
-        />
-        <FormInputer
-          label="类别:"
-          value={communityData.category}
-          onChange={logic.profileChange('category')}
         />
         <FormInputer
           label="描述:"

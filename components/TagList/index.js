@@ -6,13 +6,11 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
 
-// import TagsLoading from '../../components/LoadingEffects/TagsLoading'
+import { ICON_CMD } from '../../config'
 import { Wrapper, TagItem, TagDot, TagTitle, AllTagIcon } from './styles'
+import { uid, makeDebugger } from '../../utils'
 
-import { ICON_ASSETS } from '../../config'
-import { makeDebugger } from '../../utils'
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:TagList:index')
 /* eslint-enable no-unused-vars */
@@ -30,7 +28,7 @@ const TagList = ({ tags, active, onSelect }) => {
             color: '',
           })}
         >
-          <AllTagIcon src={`${ICON_ASSETS}/cmd/all_tags.svg`} />
+          <AllTagIcon src={`${ICON_CMD}/all_tags.svg`} />
           <TagTitle>全部标签</TagTitle>
         </TagItem>
       ) : (
@@ -39,7 +37,7 @@ const TagList = ({ tags, active, onSelect }) => {
 
       {tags.map(tag => (
         <TagItem
-          key={shortid.generate()}
+          key={uid.gen()}
           onClick={onSelect.bind(this, {
             title: tag.title,
             color: tag.color,

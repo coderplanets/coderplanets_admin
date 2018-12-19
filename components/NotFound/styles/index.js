@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { Img } from '../../../components'
 
+import Img from '../../Img'
 import { theme } from '../../../utils'
 
 export const Wrapper = styled.div`
@@ -39,7 +39,7 @@ export const Desc = styled.div`
   color: #b8c8c8;
 `
 
-const link = styled.a`
+const Link = styled.a`
   text-decoration: none;
   font-weight: bolder;
   color: ${theme('header.fg')};
@@ -50,6 +50,6 @@ const link = styled.a`
   }
 `
 
-export const IssueLink = link.extend`
+export const IssueLink = styled(Link)`
   margin-left: 3px;
 `

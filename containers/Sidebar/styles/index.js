@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 /* import { darken } from 'polished' */
-import { Img } from '../../../components'
+import Img from '../../../components/Img'
 import { theme } from '../../../utils'
 
 // 纯css，div隐藏滚动条，保留鼠标滚动效果。
@@ -34,16 +34,15 @@ export const Banner = styled.div`
   padding-left: 18px;
 `
 
-export const Footer = Banner.extend`
+export const Footer = styled(Banner)`
   position: fixed;
   bottom: 0px;
   width: 250px;
 `
-
 export const BannerLogo = styled(Img)`
   width: 22px;
   height: 22px;
-  border-radius: 100%;
+  display: block;
 `
 export const SearchLogo = styled(Img)`
   width: 22px;
@@ -52,5 +51,6 @@ export const SearchLogo = styled(Img)`
 `
 export const BannerTitle = styled.div`
   margin-left: 8px;
-  margin-top: -4px;
+  font-size: 0.9rem;
+  margin-top: 4px;
 `

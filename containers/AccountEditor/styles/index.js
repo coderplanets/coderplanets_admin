@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import { Img } from '../../../components'
-import { Animate } from '../../../utils'
+import { animate } from '../../../utils'
 
 export const Wrapper = styled.div`
   padding-top: 20px;
@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
-  animation: ${Animate.fadeInRight} 0.2s linear;
+  animation: ${animate.fadeInRightRule};
 `
 
 export const AvatarPic = styled.img`
@@ -55,11 +55,11 @@ const SexIcon = styled(Img)`
 /* props.active === props.item ? theme('font', props) : 'grey'}; */
 export const Dude = styled.div``
 export const Girl = styled.div``
-export const DudeIcon = SexIcon.extend`
+export const DudeIcon = styled(SexIcon)`
   fill: ${props => (props.value === 'dude' ? '#869eec' : 'lightgrey')};
 `
 
-export const GirlIcon = SexIcon.extend`
+export const GirlIcon = styled(SexIcon)`
   fill: ${props => (props.value === 'girl' ? 'pink' : 'lightgrey')};
   margin-top: 1px;
 `
