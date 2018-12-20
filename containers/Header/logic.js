@@ -65,10 +65,6 @@ export function openPreview() {
   })
 }
 
-export function openDoraemon() {
-  store.openDoraemon()
-}
-
 const DataSolver = [
   {
     match: asyncRes('sessionState'),

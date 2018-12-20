@@ -1,8 +1,6 @@
 import React from 'react'
-import TimeAgo from 'timeago-react'
 import ReactTooltip from 'react-tooltip'
 
-import { cutFrom } from '../../utils'
 import {
   Pagi,
   Table,
@@ -11,9 +9,11 @@ import {
   Space,
   UserCell,
   CommunityCell,
+  TimeStampCell,
 } from '../../components'
 
 import { OperationWrapper } from './styles'
+import { Trans } from '../../utils'
 import * as logic from './logic'
 
 /* eslint-disable react/display-name */
@@ -30,7 +30,7 @@ const columns = [
     dataIndex: 'title',
     align: 'center',
     render: text => {
-      return <div>{cutFrom(text, 15)}</div>
+      return <div>{Trans(text)}</div>
     },
   },
   {
@@ -38,9 +38,6 @@ const columns = [
     width: 150,
     dataIndex: 'raw',
     align: 'center',
-    render: text => {
-      return <div>{cutFrom(text, 15)}</div>
-    },
   },
   {
     title: '社区',
@@ -53,7 +50,7 @@ const columns = [
   },
   {
     title: '创建者',
-    width: 160,
+    width: 180,
     dataIndex: 'author',
     align: 'center',
     render: author => {
@@ -61,21 +58,11 @@ const columns = [
     },
   },
   {
-    title: '创建时间',
-    width: 150,
-    dataIndex: 'insertedAt',
+    title: '时间戳',
+    width: 120,
     align: 'center',
-    render: text => {
-      return <TimeAgo datetime={text} locale="zh_CN" />
-    },
-  },
-  {
-    title: '上次更新',
-    width: 150,
-    dataIndex: 'updatedAt',
-    align: 'center',
-    render: text => {
-      return <TimeAgo datetime={text} locale="zh_CN" />
+    render: (text, record) => {
+      return <TimeStampCell data={record} />
     },
   },
   {
@@ -117,10 +104,7 @@ class CategoriesContent extends React.Component {
   }
 
   render() {
-    const {
-      data,
-      restProps: { categoriesLoading },
-    } = this.props
+    const { data, restProps: { categoriesLoading } } = this.props
 
     return (
       <div>

@@ -41,6 +41,9 @@ const CommunitiesBannerStore = t
     },
   }))
   .actions(self => ({
+    openDoraemon() {
+      self.root.openDoraemon()
+    },
     markState(sobj) {
       markStates(sobj, self)
     },

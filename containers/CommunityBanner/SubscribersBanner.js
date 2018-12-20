@@ -56,7 +56,7 @@ class SubscribersBanner extends React.Component {
           <OperationItem>
             <OperationIcon src={`${ICON_CMD}/chart.svg`} />
             {/* <OperationIconChart src={`${ICON_CMD}/list.svg`} /> */}
-            统计
+            图表
           </OperationItem>
         </Operation>
       </BannerContentWrapper>

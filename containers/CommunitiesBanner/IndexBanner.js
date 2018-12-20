@@ -42,8 +42,12 @@ class IndexBanner extends React.Component {
             </Popover>
             <FilterTags>
               <Tag closable>最多xx</Tag>
-              <Tag closable>最少..</Tag>
             </FilterTags>
+          </OperationItem>
+          <OperationDivider />
+          <OperationItem onClick={logic.onSearch}>
+            <OperationIconChart src={`${ICON_CMD}/search2.svg`} />
+            搜索
           </OperationItem>
           <OperationDivider />
           <OperationItem onClick={logic.onAdd.bind(this, 'communities')}>
@@ -54,7 +58,7 @@ class IndexBanner extends React.Component {
           <OperationItem>
             <OperationIcon src={`${ICON_CMD}/chart.svg`} />
             {/* <OperationIconChart src={`${ICON_CMD}/list.svg`} /> */}
-            统计
+            图表
           </OperationItem>
         </Operation>
       </BannerContentWrapper>

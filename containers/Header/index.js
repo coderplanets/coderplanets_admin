@@ -22,7 +22,6 @@ import {
   MiniMapTitle,
   MiniMapDivider,
   Admin,
-  Search,
   Notification,
   HeaderIcon,
   UserAvatar,
@@ -137,9 +136,6 @@ const Header = ({ curRoute, leftOffset, fixed, isLogin, accountInfo }) => (
     </Admin>
 
     <Operations>
-      <Search onClick={logic.openDoraemon}>
-        <HeaderIcon src={`${ICON_CMD}/search2.svg`} />
-      </Search>
       <Notification onClick={logic.openPreview.bind(this, 'post')}>
         <HeaderIcon src={`${ICON_CMD}/notification_none.svg`} />
       </Notification>

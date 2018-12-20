@@ -7,7 +7,7 @@ import { lighten, darken } from 'polished'
 const primaryColor = '#717084' // '#5EABB3'
 
 const bannerBg = '#464652'
-const contentBg = '#E4EEED'
+const contentBg = '#FFFFFF'
 const contentBoxBg = '#f9fcfc'
 const fontColor = primaryColor
 const sidebarBg = '#1C4752'

@@ -45,6 +45,10 @@ export function loadJobs() {
   sr71$.query(S.pagedJobs, { filter: {} })
 }
 
+export function onSearch() {
+  store.openDoraemon()
+}
+
 export const loadCategories = () =>
   sr71$.query(S.pagedCategories, { filter: {} })
 

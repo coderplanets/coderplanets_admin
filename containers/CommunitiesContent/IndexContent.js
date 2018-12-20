@@ -117,7 +117,7 @@ const columns = [
   },
   {
     title: '时间戳',
-    width: 150,
+    width: 120,
     align: 'center',
     render: (text, record) => {
       return <TimeStampCell data={record} />
@@ -161,7 +161,10 @@ class IndexContent extends React.Component {
   }
 
   render() {
-    const { data, restProps: { communitiesLoading } } = this.props
+    const {
+      data,
+      restProps: { communitiesLoading },
+    } = this.props
 
     return (
       <React.Fragment>
