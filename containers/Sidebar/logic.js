@@ -57,13 +57,9 @@ export function extendMenuBar(communityRaw) {
 }
 
 export function onRootMenuSelect(mainPath, subPath) {
-  console.log('onRootMenuSelect mainPath: ', mainPath)
-  console.log('onRootMenuSelect subPath: ', subPath)
-
   store.markRoute({ mainPath, subPath })
 
   dispatchEvent(EVENT.SIDEBAR_MENU_CHANGE, {
-    // type: TYPE.SIDEBAR_MENU_CHANGE,
     data: { mainPath, subPath },
   })
 }

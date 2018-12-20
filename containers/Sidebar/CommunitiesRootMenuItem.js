@@ -21,7 +21,7 @@ import * as logic from './logic'
 const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
   <ChildrenWrapper active={activeRaw === curRaw}>
     <ChildrenItem
-      active={ROUTE.COMMUNITIES === activeThread}
+      active={ROUTE.COMMUNITIES === activeThread || activeThread === 'index'}
       onClick={logic.onRootMenuSelect.bind(this, 'communities', 'index')}
     >
       <ChildrenItemInner>

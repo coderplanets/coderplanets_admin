@@ -30,6 +30,7 @@ async function fetchData(props) {
 
   const pagedCommunities = gqClient.request(P.pagedCommunities, {
     filter: { page: 1, size: 30 },
+    userHasLogin: false,
   })
 
   return {

@@ -88,6 +88,7 @@ export function loadPosts(page = 1) {
   const size = PAGE_SIZE.D
   const args = {
     filter: { page, size },
+    userHasLogin: false,
   }
   scrollIntoEle(TYPE.APP_HEADER_ID)
   store.markState({ postsLoading: true })
@@ -116,17 +117,11 @@ export function loadCommunitiesIfOnClient() {
 }
 
 export function loadTagsIfOnClient() {
-  if (!store.pagedTags) {
-    debug('loadTagsIfOnClient')
-    // loadTags()
-  }
+  debug('loadTagsIfOnClient')
 }
 
 export function loadThreadsIfOnClient() {
-  if (!store.pagedThreads) {
-    debug('loadThreadsIfOnClient')
-    // loadThreads()
-  }
+  debug('loadThreadsIfOnClient')
 }
 
 export function onEdit(record) {
@@ -380,6 +375,15 @@ const DataSolver = [
       switch (subPath) {
         case ROUTE.CATEGORIES: {
           return loadCategories()
+        }
+        case ROUTE.TAGS: {
+          return loadTags()
+        }
+        case ROUTE.THREADS: {
+          return loadThreads()
+        }
+        case ROUTE.POSTS: {
+          return loadPosts()
         }
         default: {
           return loadCommunities()

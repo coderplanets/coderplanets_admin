@@ -146,9 +146,7 @@ const columns = [
 ]
 
 class IndexContent extends React.Component {
-  componentDidMount() {
-    logic.loadUsers()
-  }
+  componentDidMount() {}
 
   render() {
     const {

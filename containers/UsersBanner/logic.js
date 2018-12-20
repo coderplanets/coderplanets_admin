@@ -15,7 +15,7 @@ const debug = makeDebugger('L:UsersBanner')
 let store = null
 
 export function loadUsers() {
-  sr71$.query(S.pagedUsers, { filter: {} })
+  sr71$.query(S.pagedUsers, { filter: {}, userHasLogin: false })
 }
 
 export function onAdd() {}

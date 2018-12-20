@@ -10,6 +10,7 @@ import { inject, observer } from 'mobx-react'
 // import Link from 'next/link'
 import CommunityContent from '../CommunityContent'
 import CommunitiesContent from '../CommunitiesContent'
+import UsersContent from '../UsersContent'
 // import { CommunityContent, CommunitiesContent } from '.'
 
 import { makeDebugger, storePlug, ROUTE } from '../../utils'
@@ -23,6 +24,9 @@ const DomainContent = ({ curRoute }) => {
   switch (curRoute.mainPath) {
     case ROUTE.COMMUNITIES: {
       return <CommunitiesContent />
+    }
+    case ROUTE.USERS: {
+      return <UsersContent />
     }
     default: {
       return <CommunityContent />

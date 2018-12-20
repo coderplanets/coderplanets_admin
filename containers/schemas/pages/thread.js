@@ -4,7 +4,9 @@ export const pagedThreads = `
   query($filter: PagedFilter!) {
     pagedThreads(filter: $filter) {
       entries {
-        ${F.thread}
+        id
+        title
+        raw
       }
       ${F.pagedCounts}
     }

@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
 
 import { ICON_CMD } from '../../config'
 
@@ -21,37 +20,23 @@ import * as logic from './logic'
 
 const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
   <ChildrenWrapper active={activeRaw === curRaw}>
-    <ChildrenItem active={ROUTE.USERS === activeThread}>
-      <Link href="/users">
-        <ChildrenItemInner>
-          <ChildrenTitle>注册用户</ChildrenTitle>
-          <ChildrenNum>23</ChildrenNum>
-        </ChildrenItemInner>
-      </Link>
+    <ChildrenItem
+      active={ROUTE.USERS === activeThread || activeThread === 'index'}
+      onClick={logic.onRootMenuSelect.bind(this, 'users', 'index')}
+    >
+      <ChildrenItemInner>
+        <ChildrenTitle>注册用户</ChildrenTitle>
+        <ChildrenNum>23</ChildrenNum>
+      </ChildrenItemInner>
     </ChildrenItem>
-    <ChildrenItem active={ROUTE.PAYS === activeThread}>
-      <Link href="/users" as="/users/pays">
-        <ChildrenItemInner>
-          <ChildrenTitle>衣食父母</ChildrenTitle>
-          <ChildrenNum>22</ChildrenNum>
-        </ChildrenItemInner>
-      </Link>
-    </ChildrenItem>
-    <ChildrenItem active={ROUTE.PASSPORTS === activeThread}>
-      <Link href="/users" as="/users/passports">
-        <ChildrenItemInner>
-          <ChildrenTitle>权限</ChildrenTitle>
-          <ChildrenNum>22</ChildrenNum>
-        </ChildrenItemInner>
-      </Link>
-    </ChildrenItem>
-    <ChildrenItem active={ROUTE.ROLES === activeThread}>
-      <Link href="/users" as="/users/roles">
-        <ChildrenItemInner>
-          <ChildrenTitle>角色</ChildrenTitle>
-          <ChildrenNum>445</ChildrenNum>
-        </ChildrenItemInner>
-      </Link>
+    <ChildrenItem
+      active={ROUTE.PAYS === activeThread}
+      onClick={logic.onRootMenuSelect.bind(this, 'users', 'pays')}
+    >
+      <ChildrenItemInner>
+        <ChildrenTitle>衣食父母</ChildrenTitle>
+        <ChildrenNum>22</ChildrenNum>
+      </ChildrenItemInner>
     </ChildrenItem>
   </ChildrenWrapper>
 )

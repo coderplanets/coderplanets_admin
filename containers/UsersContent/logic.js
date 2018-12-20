@@ -6,6 +6,7 @@ import {
   // ERR,
   EVENT,
   TYPE,
+  ROUTE,
   dispatchEvent,
   scrollIntoEle,
 } from '../../utils'
@@ -15,7 +16,7 @@ import S from './schema'
 import SR71 from '../../utils/network/sr71'
 
 const sr71$ = new SR71({
-  resv_event: [EVENT.PREVIEW_CLOSE],
+  resv_event: [EVENT.PREVIEW_CLOSE, EVENT.SIDEBAR_MENU_CHANGE],
 })
 let sub$ = null
 
@@ -29,10 +30,13 @@ const commonFilter = page => {
   const size = PAGE_SIZE.D
   return {
     filter: { page, size },
+    userHasLogin: false,
   }
 }
 
 export function loadUsers(page = 1) {
+  debug('do loadUsers')
+
   scrollIntoEle(TYPE.APP_HEADER_ID)
   store.markState({ usersLoading: true })
   sr71$.query(S.pagedUsers, commonFilter(page))
@@ -62,6 +66,7 @@ const DataSolver = [
     match: asyncRes('pagedUsers'),
     action: ({ pagedUsers }) => {
       cancleLoading()
+      debug('get pagedUsers: ', pagedUsers)
       store.markState({ pagedUsers })
     },
   },
@@ -81,12 +86,50 @@ const DataSolver = [
       }
     },
   },
+  {
+    match: asyncRes(EVENT.SIDEBAR_MENU_CHANGE),
+    action: res => {
+      const { mainPath, subPath } = res[EVENT.SIDEBAR_MENU_CHANGE].data
+      debug('mainPath  event: ', mainPath)
+      debug('mainPath  subPath: ', subPath)
+
+      if (mainPath !== ROUTE.USERS) return false
+      loadUsers()
+
+      /*
+         switch (subPath) {
+         case ROUTE.CATEGORIES: {
+         return loadCategories()
+         }
+         case ROUTE.TAGS: {
+         return loadTags()
+         }
+         case ROUTE.THREADS: {
+         return loadThreads()
+         }
+         case ROUTE.POSTS: {
+         return loadPosts()
+         }
+         default: {
+         return loadCommunities()
+         }
+         }
+       */
+    },
+  },
 ]
 const ErrSolver = []
 
-export function init(selectedStore) {
-  store = selectedStore
+export function init(_store) {
+  store = _store
 
-  if (sub$) sub$.unsubscribe()
+  if (sub$) return false
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+}
+
+export function uninit() {
+  if (!sub$) return false
+  debug('===== do uninit')
+  // sub$.unsubscribe()
+  // sub$ = null
 }

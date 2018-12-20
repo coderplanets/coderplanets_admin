@@ -22,12 +22,13 @@ const debug = makeDebugger('C:UsersContent')
 const renderChildBanner = (route, store, restProps) => {
   const { pagedUsersData } = store
 
+  console.log('pagedUsersData: ', pagedUsersData)
   switch (route.subPath) {
     case ROUTE.USERS: {
       return <IndexContent data={pagedUsersData} restProps={restProps} />
     }
     default: {
-      return <h2>Index</h2>
+      return <IndexContent data={pagedUsersData} restProps={restProps} />
     }
   }
 }
@@ -36,6 +37,10 @@ class UsersContentContainer extends React.Component {
   componentDidMount() {
     const { usersContent } = this.props
     logic.init(usersContent)
+  }
+
+  componentWillUnmount() {
+    logic.uninit()
   }
 
   render() {

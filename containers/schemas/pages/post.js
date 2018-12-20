@@ -43,6 +43,9 @@ export const pagedPosts = `
         digest
         linkAddr
         copyRight
+        communities {
+          ${F.community}
+        }
         commentsCount
         commentsParticipators(filter: { first: 5 }) {
           ${F.author}
