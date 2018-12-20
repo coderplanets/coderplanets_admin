@@ -1,7 +1,4 @@
 import React from 'react'
-import TimeAgo from 'timeago-react'
-
-/* import { Pagination } from 'antd' */
 
 import { cutFrom } from '../../utils'
 import {
@@ -14,6 +11,7 @@ import {
   CategoriesCell,
   ThreadsCell,
   ContentsCountCell,
+  TimeStampCell,
 } from '../../components'
 
 import { CommunityIcon, OperationWrapper } from './styles'
@@ -118,21 +116,11 @@ const columns = [
     },
   },
   {
-    title: '创建时间',
+    title: '时间戳',
     width: 150,
-    dataIndex: 'insertedAt',
     align: 'center',
-    render: text => {
-      return <TimeAgo datetime={text} locale="zh_CN" />
-    },
-  },
-  {
-    title: '上次更新',
-    width: 150,
-    dataIndex: 'updatedAt',
-    align: 'center',
-    render: text => {
-      return <TimeAgo datetime={text} locale="zh_CN" />
+    render: (text, record) => {
+      return <TimeStampCell data={record} />
     },
   },
   {

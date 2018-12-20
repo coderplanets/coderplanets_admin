@@ -40,7 +40,6 @@ const ContentsCountCell = ({
 }
 
 ContentsCountCell.propTypes = {
-  // https://www.npmjs.com/package/prop-types
   data: PropTypes.shape({
     postsCount: PropTypes.number,
     jobsCount: PropTypes.number,

@@ -41,6 +41,7 @@ export { default as PermissionCell } from './PermissionCell'
 export { default as ThreadsCell } from './ThreadsCell'
 
 export { default as ContentsCountCell } from './ContentsCountCell'
+export { default as TimeStampCell } from './TimeStampCell'
 // form
 export { default as FormItem } from './FormItem'
 export { default as FormInputer } from './FormInputer'
