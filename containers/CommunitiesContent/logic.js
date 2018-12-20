@@ -421,10 +421,10 @@ const ErrSolver = [
 export function init(_store) {
   store = _store
 
-  if (sub$) return loadCommunities() // loadCategories()
+  if (sub$) return // loadCommunities() // loadCategories()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 
-  loadCommunities() // loadCategories()
+  // loadCommunities() // loadCategories()
 }
 
 export function uninit() {

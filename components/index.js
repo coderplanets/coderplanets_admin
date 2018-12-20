@@ -39,6 +39,8 @@ export { default as CategoriesCell } from './CategoriesCell'
 export { default as TagsCell } from './TagsCell'
 export { default as PermissionCell } from './PermissionCell'
 export { default as ThreadsCell } from './ThreadsCell'
+
+export { default as ContentsCountCell } from './ContentsCountCell'
 // form
 export { default as FormItem } from './FormItem'
 export { default as FormInputer } from './FormInputer'

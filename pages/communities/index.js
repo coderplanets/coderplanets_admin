@@ -37,21 +37,12 @@ global.Intl = require('intl')
    这个函数的存在是 dev 模式下的 bug, 生产环境下是不需要（不起作用的）的，生产环境下会
    直接被路由到子文件
  */
-/*
-   const getSubPath = props => {
-   const asPathList = parsePathList(props)
-
-   return asPathList.length > 1 ? asPathList[1] : null
-   }
- */
-
 async function fetchData(props) {
   const token = BStore.cookie.from_req(props.req, 'jwtToken')
   const gqClient = makeGQClient(token)
 
   const pagedCommunities = gqClient.request(P.pagedCommunities, {
     filter: { page: 1, size: 30 },
-    userHasLogin: false,
   })
 
   return {
@@ -74,7 +65,8 @@ export default class Index extends React.Component {
       // messages,
       // locale,
       communities: pagedCommunities,
-      communitiesContent: pagedCommunities,
+      communitiesContent: { pagedCommunities },
+      communitiesBanner: { totalCount: pagedCommunities.totalCount },
     }
   }
 

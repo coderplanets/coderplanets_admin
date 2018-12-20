@@ -31,13 +31,28 @@ export const community = `
   }
 `
 export const pagedCommunities = `
-  query($filter: CommunitiesFilter!, $userHasLogin: Boolean!) {
+  query($filter: CommunitiesFilter!) {
     pagedCommunities(filter: $filter) {
       entries {
         ${F.community}
+        threads {
+          id
+          title
+          raw
+        }
+        categories {
+          id
+          title
+          raw
+        }
+        postsCount
+        jobsCount
+        videosCount
+        reposCount
         contributesDigest
         subscribersCount
-        viewerHasSubscribed @include(if: $userHasLogin)
+        insertedAt
+        updatedAt
       }
       ${F.pagedCounts}
     }

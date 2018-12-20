@@ -21,7 +21,7 @@ import {
   AddIcon,
 } from './styles'
 
-import { uid } from '../../utils'
+import { uid, Trans } from '../../utils'
 // import { inject, observer } from 'mobx-react'
 // import Link from 'next/link'
 
@@ -29,7 +29,7 @@ const CategoriesList = ({ source, onDelete }) => (
   <CategoryWrapper>
     {source.categories.map(c => (
       <CategoryTag key={uid.gen()}>
-        {c.title}
+        {Trans(c.title)}
         <DeleteCross onClick={onDelete.bind(this, source.id, c)}>
           <Icon type="cross" />
         </DeleteCross>

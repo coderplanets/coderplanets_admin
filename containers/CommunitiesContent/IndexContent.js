@@ -13,9 +13,11 @@ import {
   Popconfirm,
   CategoriesCell,
   ThreadsCell,
+  ContentsCountCell,
 } from '../../components'
 
 import { CommunityIcon, OperationWrapper } from './styles'
+
 import * as logic from './logic'
 
 /* eslint-disable react/display-name */
@@ -111,6 +113,9 @@ const columns = [
     width: 100,
     dataIndex: 'postsCount',
     align: 'center',
+    render: (text, record) => {
+      return <ContentsCountCell data={record} />
+    },
   },
   {
     title: '创建时间',
@@ -168,10 +173,7 @@ class IndexContent extends React.Component {
   }
 
   render() {
-    const {
-      data,
-      restProps: { communitiesLoading },
-    } = this.props
+    const { data, restProps: { communitiesLoading } } = this.props
 
     return (
       <React.Fragment>

@@ -153,9 +153,9 @@ const ErrSolver = [
 
 export function init(_store) {
   store = _store
-  if (sub$) return loadCommunities() // loadCategories()
+  if (sub$) return false // loadCommunities() // loadCategories()
   sr71$.data().subscribe($solver(DataSolver, ErrSolver))
-  loadCommunities()
+  // loadCommunities()
   // loadCategories()
 }
 
