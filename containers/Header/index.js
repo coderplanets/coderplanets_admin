@@ -7,7 +7,6 @@
 import React from 'react'
 import R from 'ramda'
 import { inject, observer } from 'mobx-react'
-import keydown from 'react-keydown'
 import { Affix } from 'antd'
 
 import { ICON_CMD, ICON_BASE } from '../../config/assets'
@@ -162,14 +161,6 @@ class HeaderContainer extends React.Component {
   componentWillUnmount() {
     logic.uninit()
   }
-
-  /* eslint-disable class-methods-use-this */
-  @keydown(['ctrl+p'])
-  openDoraemon() {
-    // debug('openDoraemon')
-    logic.openDoraemon()
-  }
-  /* eslint-enable class-methods-use-this */
 
   render() {
     const { header } = this.props

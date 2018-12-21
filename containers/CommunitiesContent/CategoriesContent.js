@@ -104,7 +104,10 @@ class CategoriesContent extends React.Component {
   }
 
   render() {
-    const { data, restProps: { categoriesLoading } } = this.props
+    const {
+      data,
+      restProps: { categoriesLoading },
+    } = this.props
 
     return (
       <div>

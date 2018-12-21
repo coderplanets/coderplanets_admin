@@ -1,30 +1,31 @@
 import React from 'react'
 import { Provider } from 'mobx-react'
 
-import GAWraper from '../../components/GAWraper'
-import initRootStore from '../../stores/init'
-import ThemeWrapper from '../../containers/ThemeWrapper'
-import MultiLanguage from '../../containers/MultiLanguage'
-import Sidebar from '../../containers/Sidebar'
-import Preview from '../../containers/Preview'
-import Doraemon from '../../containers/Doraemon'
-import Route from '../../containers/Route'
-import BodyLayout from '../../containers/BodyLayout'
-import Header from '../../containers/Header'
-import CommunitiesBanner from '../../containers/CommunitiesBanner'
-import CommunitiesContent from '../../containers/CommunitiesContent'
+import GAWraper from '../components/GAWraper'
+import initRootStore from '../stores/init'
+import ThemeWrapper from '../containers/ThemeWrapper'
+import MultiLanguage from '../containers/MultiLanguage'
+import Sidebar from '../containers/Sidebar'
+import Preview from '../containers/Preview'
+import Doraemon from '../containers/Doraemon'
+import Route from '../containers/Route'
+import BodyLayout from '../containers/BodyLayout'
+import Header from '../containers/Header'
+import CommunitiesBanner from '../containers/CommunitiesBanner'
+import CommunitiesContent from '../containers/CommunitiesContent'
 
-import { P } from '../../containers/schemas'
+import { P } from '../containers/schemas'
 
 import {
   makeGQClient,
   // Global,
   // queryStringToJSON,
   /* mergeRouteQuery */
-  // getSubPath,
+  getMainPath,
+  getSubPath,
   BStore,
-} from '../../utils'
-import Footer from '../../components/Footer'
+} from '../utils'
+import Footer from '../components/Footer'
 
 // try to fix safari bug
 // see https://github.com/yahoo/react-intl/issues/422
@@ -40,6 +41,9 @@ global.Intl = require('intl')
 async function fetchData(props) {
   const token = BStore.cookie.from_req(props.req, 'jwtToken')
   const gqClient = makeGQClient(token)
+
+  const subpath = getSubPath(props)
+  console.log('subpath --> ', subpath)
 
   const pagedCommunities = gqClient.request(P.pagedCommunities, {
     filter: { page: 1, size: 30 },
@@ -57,16 +61,15 @@ export default class Index extends React.Component {
     // if (!isServer) return {}
 
     console.log('## communities ## index page ..')
+    const subPath = getSubPath(props)
+    const mainPath = getMainPath(props)
 
     const { pagedCommunities } = await fetchData(props)
 
     return {
-      // version: store.version,
-      // messages,
-      // locale,
+      route: { mainPath, subPath },
       communities: pagedCommunities,
       communitiesContent: { pagedCommunities },
-      communitiesBanner: { totalCount: pagedCommunities.totalCount },
     }
   }
 

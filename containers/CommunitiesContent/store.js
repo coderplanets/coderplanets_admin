@@ -13,8 +13,10 @@ import {
   PagedThreads,
   PagedCategories,
   PagedCommunities,
+  emptyPagiData,
 } from '../../stores/SharedModel'
 import { markStates, makeDebugger, stripMobx } from '../../utils'
+
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('S:CommunitiesContentStore')
 /* eslint-enable no-unused-vars */
@@ -22,13 +24,13 @@ const debug = makeDebugger('S:CommunitiesContentStore')
 const CommunitiesContentStore = t
   .model('CommunitiesContentStore', {
     // all the communities
-    pagedCommunities: t.maybeNull(PagedCommunities),
-    pagedCategories: t.maybeNull(PagedCategories),
-    pagedTags: t.maybeNull(PagedTags),
-    pagedThreads: t.maybeNull(PagedThreads),
+    pagedCommunities: t.optional(PagedCommunities, emptyPagiData),
+    pagedCategories: t.optional(PagedCategories, emptyPagiData),
+    pagedTags: t.optional(PagedTags, emptyPagiData),
+    pagedThreads: t.optional(PagedThreads, emptyPagiData),
 
-    pagedPosts: t.maybeNull(PagedPosts),
-    pagedJobs: t.maybeNull(PagedJobs),
+    pagedPosts: t.optional(PagedPosts, emptyPagiData),
+    pagedJobs: t.optional(PagedJobs, emptyPagiData),
 
     communitiesLoading: t.optional(t.boolean, false),
     tagsLoading: t.optional(t.boolean, false),

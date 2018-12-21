@@ -14,7 +14,7 @@ const debug = makeDebugger('S:CommunitiesBannerStore')
 const CommunitiesBannerStore = t
   .model('CommunitiesBannerStore', {
     // communities: totalCount of all
-    totalCount: t.optional(t.number, 0),
+    // totalCount: t.optional(t.number, 0),
     filteredTotalCount: t.maybeNull(t.number),
     // categories
     categoriesTotalCount: t.optional(t.number, 0),
@@ -35,6 +35,9 @@ const CommunitiesBannerStore = t
   .views(self => ({
     get root() {
       return getParent(self)
+    },
+    get totalCount() {
+      return self.root.communitiesContent.pagedCommunities.totalCount
     },
     get curRoute() {
       return self.root.curRoute

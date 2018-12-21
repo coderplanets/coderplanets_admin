@@ -16,54 +16,45 @@ import {
 
 import * as logic from './logic'
 
-class IndexBanner extends React.Component {
-  componentDidMount() {
-    logic.loadCommunities()
-  }
-
-  render() {
-    const { filteredCount, totalCount } = this.props
-    return (
-      <BannerContentWrapper>
-        <BannerCountBrief
-          filteredCount={filteredCount}
-          totalCount={totalCount}
-          thread="社区"
-          unit="个"
-        />
-        <Operation>
-          <OperationItem>
-            <OperationIcon src={`${ICON_CMD}/filter2.svg`} />
-            <Popover
-              content={<div>兼容各个页面的 Filter 菜单</div>}
-              trigger="hover"
-            >
-              <OperationTitle>过滤</OperationTitle>
-            </Popover>
-            <FilterTags>
-              <Tag closable>最多xx</Tag>
-            </FilterTags>
-          </OperationItem>
-          <OperationDivider />
-          <OperationItem onClick={logic.onSearch}>
-            <OperationIconChart src={`${ICON_CMD}/search2.svg`} />
-            搜索
-          </OperationItem>
-          <OperationDivider />
-          <OperationItem onClick={logic.onAdd.bind(this, 'communities')}>
-            <OperationIconChart src={`${ICON_CMD}/plus.svg`} />
-            添加
-          </OperationItem>
-          <OperationDivider />
-          <OperationItem>
-            <OperationIcon src={`${ICON_CMD}/chart.svg`} />
-            {/* <OperationIconChart src={`${ICON_CMD}/list.svg`} /> */}
-            图表
-          </OperationItem>
-        </Operation>
-      </BannerContentWrapper>
-    )
-  }
-}
+const IndexBanner = ({ filteredCount, totalCount }) => (
+  <BannerContentWrapper>
+    <BannerCountBrief
+      filteredCount={filteredCount}
+      totalCount={totalCount}
+      thread="社区"
+      unit="个"
+    />
+    <Operation>
+      <OperationItem>
+        <OperationIcon src={`${ICON_CMD}/filter2.svg`} />
+        <Popover
+          content={<div>兼容各个页面的 Filter 菜单</div>}
+          trigger="hover"
+        >
+          <OperationTitle>过滤</OperationTitle>
+        </Popover>
+        <FilterTags>
+          <Tag closable>最多xx</Tag>
+        </FilterTags>
+      </OperationItem>
+      <OperationDivider />
+      <OperationItem onClick={logic.onSearch}>
+        <OperationIconChart src={`${ICON_CMD}/search2.svg`} />
+        搜索
+      </OperationItem>
+      <OperationDivider />
+      <OperationItem onClick={logic.onAdd.bind(this, 'communities')}>
+        <OperationIconChart src={`${ICON_CMD}/plus.svg`} />
+        添加
+      </OperationItem>
+      <OperationDivider />
+      <OperationItem>
+        <OperationIcon src={`${ICON_CMD}/chart.svg`} />
+        {/* <OperationIconChart src={`${ICON_CMD}/list.svg`} /> */}
+        图表
+      </OperationItem>
+    </Operation>
+  </BannerContentWrapper>
+)
 
 export default IndexBanner

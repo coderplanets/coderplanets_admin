@@ -20,10 +20,9 @@ import { BannerContainer } from './styles'
 const debug = makeDebugger('C:CommunitiesBanner')
 /* eslint-enable no-unused-vars */
 
-const ChildBanner = ({ curRoute, store }) => {
+const ChildBanner = ({ curRoute, totalCount, restProps }) => {
   const {
     // communities
-    totalCount,
     filteredTotalCount,
     // tags
     tagsTotalCount,
@@ -40,7 +39,7 @@ const ChildBanner = ({ curRoute, store }) => {
     // jobs
     jobsTotalCount,
     filteredJobsCount,
-  } = store
+  } = restProps
 
   switch (curRoute.subPath) {
     case ROUTE.CATEGORIES: {
@@ -110,13 +109,18 @@ class CommunitiesBannerContainer extends React.Component {
 
   render() {
     const { communitiesBanner } = this.props
-    const { curRoute } = communitiesBanner
+    const { curRoute, totalCount } = communitiesBanner
 
     // console.log('totalCount --> ', communitiesBanner.totalCount)
-    console.log('the fucking curRoute: ', curRoute)
+    console.log('the fucking totalCount: ', totalCount)
+
     return (
       <BannerContainer>
-        <ChildBanner curRoute={curRoute} store={stripMobx(communitiesBanner)} />
+        <ChildBanner
+          curRoute={curRoute}
+          totalCount={totalCount}
+          restProps={stripMobx(communitiesBanner)}
+        />
       </BannerContainer>
     )
   }
