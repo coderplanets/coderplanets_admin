@@ -46,6 +46,7 @@ async function fetchData(props) {
   const subpath = getSubPath(props)
   console.log('subpath --> ', subpath)
 
+  // const sessionState = gqClient.request(P.sessionState)
   const pagedContents = gqClient.request(ssrPagedSchema(subpath), {
     filter: { page: 1, size: 30 },
   })
@@ -79,23 +80,10 @@ export default class Index extends React.Component {
       return { statusCode: 404, target: subPath }
     }
 
-    const { pagedCommunities } = resp
+    // const { pagedCommunities } = resp
     const pagedContents = ssrPagedContents(mainPath, subPath, resp)
 
-    return R.merge(
-      {
-        route: { mainPath, subPath },
-        communities: pagedCommunities,
-      },
-      pagedContents
-    )
-    /*
-    return {
-      route: { mainPath, subPath },
-      communities: pagedCommunities,
-      communitiesContent: { pagedCommunities },
-    }
-    */
+    return R.merge({ route: { mainPath, subPath } }, pagedContents)
   }
 
   constructor(props) {

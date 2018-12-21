@@ -10,7 +10,7 @@ const bannerBg = '#464652'
 const contentBg = '#FFFFFF'
 const contentBoxBg = '#f9fcfc'
 const fontColor = primaryColor
-const sidebarBg = '#1C4752'
+const sidebarBg = '#005680'
 const markdownFont = '#9eb8bd'
 
 const descText = '#a3bbbd'

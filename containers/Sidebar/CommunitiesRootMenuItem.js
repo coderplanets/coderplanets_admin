@@ -18,7 +18,7 @@ import {
 import { ROUTE } from '../../utils'
 import * as logic from './logic'
 
-const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
+const MenuChildren = ({ activeRaw, curRaw, activeThread, countsInfo }) => (
   <ChildrenWrapper active={activeRaw === curRaw}>
     <ChildrenItem
       active={ROUTE.COMMUNITIES === activeThread || activeThread === 'index'}
@@ -26,7 +26,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
     >
       <ChildrenItemInner>
         <ChildrenTitle>社区</ChildrenTitle>
-        <ChildrenNum>23</ChildrenNum>
+        <ChildrenNum>{countsInfo.communitiesTotalCount}</ChildrenNum>
       </ChildrenItemInner>
     </ChildrenItem>
     <ChildrenItem
@@ -35,7 +35,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
     >
       <ChildrenItemInner>
         <ChildrenTitle>分类</ChildrenTitle>
-        <ChildrenNum>22</ChildrenNum>
+        <ChildrenNum>{countsInfo.categoriesTotalCount}</ChildrenNum>
       </ChildrenItemInner>
     </ChildrenItem>
     <ChildrenItem
@@ -44,7 +44,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
     >
       <ChildrenItemInner>
         <ChildrenTitle>标签</ChildrenTitle>
-        <ChildrenNum>22</ChildrenNum>
+        <ChildrenNum>{countsInfo.tagsTotalCount}</ChildrenNum>
       </ChildrenItemInner>
     </ChildrenItem>
     <ChildrenItem
@@ -53,7 +53,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
     >
       <ChildrenItemInner>
         <ChildrenTitle>编辑</ChildrenTitle>
-        <ChildrenNum>22</ChildrenNum>
+        <ChildrenNum>--</ChildrenNum>
       </ChildrenItemInner>
     </ChildrenItem>
     <ChildrenItem
@@ -62,7 +62,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
     >
       <ChildrenItemInner>
         <ChildrenTitle>Threads</ChildrenTitle>
-        <ChildrenNum>11</ChildrenNum>
+        <ChildrenNum>{countsInfo.threadsTotalCount}</ChildrenNum>
       </ChildrenItemInner>
     </ChildrenItem>
     <ChildrenItem
@@ -71,7 +71,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
     >
       <ChildrenItemInner>
         <ChildrenTitle>帖子</ChildrenTitle>
-        <ChildrenNum>445</ChildrenNum>
+        <ChildrenNum>{countsInfo.postsTotalCount}</ChildrenNum>
       </ChildrenItemInner>
     </ChildrenItem>
     <ChildrenItem
@@ -80,7 +80,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
     >
       <ChildrenItemInner>
         <ChildrenTitle>招聘</ChildrenTitle>
-        <ChildrenNum>111</ChildrenNum>
+        <ChildrenNum>--</ChildrenNum>
       </ChildrenItemInner>
     </ChildrenItem>
   </ChildrenWrapper>
@@ -103,7 +103,7 @@ const CommunitiesItemBar = ({ active }) => (
   </MenuItemEach>
 )
 
-const CommunitiesRootMenuItem = ({ activeRaw, activeThread }) => (
+const CommunitiesRootMenuItem = ({ activeRaw, activeThread, countsInfo }) => (
   <MenuItemWrapper>
     <div>
       <CommunitiesItemBar active={activeRaw === ROUTE.COMMUNITIES} />
@@ -111,6 +111,7 @@ const CommunitiesRootMenuItem = ({ activeRaw, activeThread }) => (
         activeRaw={activeRaw}
         curRaw={ROUTE.COMMUNITIES}
         activeThread={activeThread}
+        countsInfo={countsInfo}
       />
     </div>
   </MenuItemWrapper>

@@ -138,7 +138,7 @@ const rootStore = t
   .actions(self => ({
     afterCreate() {
       // self.communities.load()
-      self.sidebar.load()
+      // self.sidebar.load()
       // self.posts.load()
     },
     setHeaderFix(fix) {

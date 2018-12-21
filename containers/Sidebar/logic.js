@@ -30,9 +30,7 @@ let sub$ = null
 const debug = makeDebugger('L:Sidebar')
 /* eslint-enable no-unused-vars */
 
-export function pin() {
-  store.markState({ pin: !store.pin })
-}
+export const pin = () => store.markState({ pin: !store.pin })
 
 export function extendMenuBar(communityRaw) {
   switch (communityRaw) {
@@ -81,10 +79,30 @@ export function loadCommunities(page = 1) {
   sr71$.query(S.pagedCommunities, args)
 }
 
+export const searchCommunities = title =>
+  sr71$.query(S.searchCommunities, { title })
+
+export const searchOnChange = e => {
+  const searchValue = e.target.value
+  store.markState({ searchValue })
+  if (!R.isEmpty(searchValue)) {
+    searchCommunities(searchValue)
+  }
+}
+
+// ###############################
+// Data & Error handlers
+// ###############################
 const DataSolver = [
   {
     match: asyncRes('pagedCommunities'),
     action: ({ pagedCommunities }) => store.loadCommunities(pagedCommunities),
+  },
+  {
+    match: asyncRes('searchCommunities'),
+    action: ({ searchCommunities: matchedCommunities }) => {
+      store.markState({ matchedCommunities })
+    },
   },
 ]
 

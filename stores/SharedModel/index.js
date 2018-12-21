@@ -18,10 +18,4 @@ export { Job, PagedJobs } from './Job'
 
 export { EmptyUser, User, SimpleUser } from './User'
 
-export const emptyPagiData = {
-  entries: [],
-  pageNumber: 1,
-  pageSize: 20,
-  totalCount: 0,
-  totalPages: 0,
-}
+export { emptyPagiData } from './general'

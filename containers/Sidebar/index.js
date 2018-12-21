@@ -8,49 +8,17 @@ import { inject, observer } from 'mobx-react'
 
 import { ICON_CMD } from '../../config'
 
-import CommunityMenuItem from './CommunityMenuItem'
-import CommunitiesRootMenuItem from './CommunitiesRootMenuItem'
-import UsersRootMenuItem from './UsersRootMenuItem'
+import MenuList from './MenuList'
+import SearchBox from './SearchBox'
 
-import {
-  Sidebar,
-  Banner,
-  Footer,
-  BannerLogo,
-  BannerTitle,
-  SearchLogo,
-} from './styles'
+import { Sidebar, Banner, Footer, BannerTitle, BannerLogo } from './styles'
 
-import { MenuItem } from './styles/menu'
-
-import { uid, makeDebugger, storePlug } from '../../utils'
+import { makeDebugger, storePlug } from '../../utils'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('C:Sidebar:index')
 /* eslint-enable no-unused-vars */
-
-const MenuList = ({ items, activeRaw, activeThread }) => {
-  const listItems = (
-    <div>
-      <CommunitiesRootMenuItem
-        activeRaw={activeRaw}
-        activeThread={activeThread}
-      />
-      <UsersRootMenuItem activeRaw={activeRaw} activeThread={activeThread} />
-
-      {items.map(item => (
-        <CommunityMenuItem
-          key={uid.gen()}
-          item={item}
-          activeRaw={activeRaw}
-          activeThread={activeThread}
-        />
-      ))}
-    </div>
-  )
-  return <MenuItem>{listItems}</MenuItem>
-}
 
 class SidebarContainer extends React.Component {
   componentDidMount() {
@@ -64,7 +32,13 @@ class SidebarContainer extends React.Component {
 
   render() {
     const { sidebar } = this.props
-    const { subscribedCommunities, activeRaw, activeThread } = sidebar
+    const {
+      subscribedCommunities,
+      activeRaw,
+      activeThread,
+      countsInfo,
+      searchValue,
+    } = sidebar
     //    onMouseLeave={logic.leaveSidebar}
     // onMouseLeave is not unreliable in chrome: https://github.com/facebook/react/issues/4492
 
@@ -79,11 +53,11 @@ class SidebarContainer extends React.Component {
         <MenuList
           items={subscribedCommunities}
           activeRaw={activeRaw}
+          countsInfo={countsInfo}
           activeThread={activeThread}
         />
         <Footer>
-          <SearchLogo src={`${ICON_CMD}/search2.svg`} />
-          <BannerTitle>综合搜索等</BannerTitle>
+          <SearchBox value={searchValue} />
         </Footer>
       </Sidebar>
     )

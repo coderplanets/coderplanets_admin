@@ -8,13 +8,18 @@ import { MenuItem } from './styles/menu'
 
 import { uid } from '../../utils'
 
-const MenuList = ({ items, activeRaw, activeThread }) => (
+const MenuList = ({ items, activeRaw, activeThread, countsInfo }) => (
   <MenuItem>
     <CommunitiesRootMenuItem
       activeRaw={activeRaw}
       activeThread={activeThread}
+      countsInfo={countsInfo}
     />
-    <UsersRootMenuItem activeRaw={activeRaw} activeThread={activeThread} />
+    <UsersRootMenuItem
+      activeRaw={activeRaw}
+      activeThread={activeThread}
+      countsInfo={countsInfo}
+    />
 
     {items.map(item => (
       <CommunityMenuItem
@@ -22,6 +27,7 @@ const MenuList = ({ items, activeRaw, activeThread }) => (
         item={item}
         activeRaw={activeRaw}
         activeThread={activeThread}
+        countsInfo={countsInfo}
       />
     ))}
   </MenuItem>

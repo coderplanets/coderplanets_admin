@@ -1,7 +1,8 @@
 import { types as t } from 'mobx-state-tree'
 import { Community } from './Community'
+import { emptyPagiData } from './general'
 
-const SubscribedCommunities = t.model('SubscribedCommunities', {
+const PagedCommunities = t.model('PagedCommunities', {
   entries: t.optional(t.array(Community), []),
   totalCount: t.optional(t.number, 0),
 })
@@ -39,11 +40,12 @@ export const User = t.model('User', {
   qq: t.maybeNull(t.string),
   weichat: t.maybeNull(t.string),
   weibo: t.maybeNull(t.string),
+  editableCommunities: t.optional(PagedCommunities, emptyPagiData),
 
   fromGithub: t.optional(t.boolean, false),
   /* fromWeixin: t.optional(t.boolean, false), */
   /* subscribedCommunities: t.optional(SubscribedCommunities, {}), */
-  subscribedCommunities: t.maybeNull(SubscribedCommunities),
+  subscribedCommunities: t.maybeNull(PagedCommunities),
   subscribedCommunitiesCount: t.optional(t.number, 0),
   contributes: t.optional(Contributes, {}),
   githubProfile: t.maybeNull(GithubProfile),

@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { F } from '../schemas'
 
 const githubSigninRes = 'githubSignin'
 const githubSignin = gql`
@@ -22,6 +23,12 @@ const sessionState = gql`
         geoCity
         nickname
         avatar
+        editableCommunities {
+          entries {
+            ${F.community}
+          }
+          totalCount
+        }
       }
     }
   }

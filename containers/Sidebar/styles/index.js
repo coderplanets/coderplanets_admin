@@ -40,17 +40,11 @@ export const Footer = styled(Banner)`
   width: 250px;
 `
 export const BannerLogo = styled(Img)`
-  width: 22px;
-  height: 22px;
   display: block;
-`
-export const SearchLogo = styled(Img)`
   width: 22px;
   height: 22px;
-  fill: #0098b8;
 `
 export const BannerTitle = styled.div`
   margin-left: 8px;
   font-size: 0.9rem;
-  margin-top: 4px;
 `
