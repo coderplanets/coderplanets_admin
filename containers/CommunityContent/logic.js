@@ -81,6 +81,13 @@ const ErrSolver = []
 export function init(selectedStore) {
   store = selectedStore
   debug(store)
-  if (sub$) sub$.unsubscribe()
+  if (sub$) return false
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+}
+
+export function uninit() {
+  if (!sub$) return false
+  debug('===== do uninit')
+  sub$.unsubscribe()
+  sub$ = null
 }

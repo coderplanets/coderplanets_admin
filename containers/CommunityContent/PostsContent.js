@@ -131,7 +131,7 @@ const columns = [
 
 class PostsContent extends React.Component {
   componentDidMount() {
-    logic.loadPosts()
+    // logic.loadPosts()
   }
 
   render() {

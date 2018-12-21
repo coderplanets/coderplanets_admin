@@ -33,9 +33,25 @@ const searchCommunities = gql`
   }
 `
 
+const countStatus = gql`
+  query {
+    countStatus {
+      communitiesCount
+      postsCount
+      jobsCount
+      videosCount
+      reposCount
+      categoriesCount
+      tagsCount
+      threadsCount
+    }
+  }
+`
+
 const schema = {
   communities,
   searchCommunities,
+  countStatus,
 }
 
 export default schema

@@ -48,6 +48,10 @@ class CommunityContentContainer extends React.Component {
     logic.init(communityContent)
   }
 
+  componentWillUnmount() {
+    logic.uninit()
+  }
+
   render() {
     const { communityContent } = this.props
     const { route } = communityContent

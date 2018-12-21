@@ -79,6 +79,8 @@ export function loadCommunities(page = 1) {
   sr71$.query(S.pagedCommunities, args)
 }
 
+export const loadCountStatus = () => sr71$.query(S.countStatus, {})
+
 export const searchCommunities = title =>
   sr71$.query(S.searchCommunities, { title })
 
@@ -102,6 +104,12 @@ const DataSolver = [
     match: asyncRes('searchCommunities'),
     action: ({ searchCommunities: matchedCommunities }) => {
       store.markState({ matchedCommunities })
+    },
+  },
+  {
+    match: asyncRes('countStatus'),
+    action: ({ countStatus: rootCountStatus }) => {
+      store.markState({ rootCountStatus })
     },
   },
 ]
@@ -129,8 +137,9 @@ const ErrSolver = [
 
 export function init(selectedStore) {
   store = selectedStore
-  if (sub$) return false
+  if (sub$) return loadCountStatus()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+  loadCountStatus()
   // loadCommunities()
 }
 

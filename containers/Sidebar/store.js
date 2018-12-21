@@ -14,26 +14,16 @@ import { makeDebugger, markStates, ROUTE, stripMobx } from '../../utils'
 const debug = makeDebugger('S:SidebarStore')
 /* eslint-enable no-unused-vars */
 
-/*
-   const validParts = [
-   ROUTE.COMMUNITIES,
-   ROUTE.COMMUNITY,
-   ROUTE.POSTS,
-   ROUTE.JOBS,
-   ROUTE.ACTIVITIES,
-   ROUTE.CHEATSHEETS,
-   ROUTE.CATEGORIES,
-   ROUTE.EDITORS,
-   ROUTE.THREADS,
-   ROUTE.TAGS,
-   ROUTE.SUBSCRIBERS,
-
-   ROUTE.USERS,
-   ROUTE.PAYS,
-   ROUTE.PASSPORTS,
-   ROUTE.ROLES,
-   ]
- */
+const RootCountStatus = t.model('RootCountStatus', {
+  communitiesCount: t.optional(t.number, 0),
+  postsCount: t.optional(t.number, 0),
+  jobsCount: t.optional(t.number, 0),
+  videosCount: t.optional(t.number, 0),
+  reposCount: t.optional(t.number, 0),
+  categoriesCount: t.optional(t.number, 0),
+  tagsCount: t.optional(t.number, 0),
+  threadsCount: t.optional(t.number, 0),
+})
 
 const SidebarStore = t
   .model('SidebarStore', {
@@ -41,6 +31,7 @@ const SidebarStore = t
     pin: t.optional(t.boolean, true),
     searchValue: t.optional(t.string, ''),
     matchedCommunities: t.optional(PagedCommunities, emptyPagiData),
+    rootCountStatus: t.optional(RootCountStatus, {}),
     // theme: t.string, // view staff
     // curSelectItem: t.string, // view staff
     // searchBox: t.string, // complex data
@@ -75,6 +66,9 @@ const SidebarStore = t
       const { subPath } = self.root.route
 
       return R.isEmpty(subPath) ? ROUTE.COMMUNITIES : subPath
+    },
+    get rootCountStatusData() {
+      return stripMobx(self.rootCountStatus)
     },
 
     get communitiesTotalCount() {

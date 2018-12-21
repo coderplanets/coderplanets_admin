@@ -26,7 +26,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread, countsInfo }) => (
     >
       <ChildrenItemInner>
         <ChildrenTitle>社区</ChildrenTitle>
-        <ChildrenNum>{countsInfo.communitiesTotalCount}</ChildrenNum>
+        <ChildrenNum>{countsInfo.communitiesCount}</ChildrenNum>
       </ChildrenItemInner>
     </ChildrenItem>
     <ChildrenItem
@@ -35,7 +35,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread, countsInfo }) => (
     >
       <ChildrenItemInner>
         <ChildrenTitle>分类</ChildrenTitle>
-        <ChildrenNum>{countsInfo.categoriesTotalCount}</ChildrenNum>
+        <ChildrenNum>{countsInfo.categoriesCount}</ChildrenNum>
       </ChildrenItemInner>
     </ChildrenItem>
     <ChildrenItem
@@ -44,7 +44,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread, countsInfo }) => (
     >
       <ChildrenItemInner>
         <ChildrenTitle>标签</ChildrenTitle>
-        <ChildrenNum>{countsInfo.tagsTotalCount}</ChildrenNum>
+        <ChildrenNum>{countsInfo.tagsCount}</ChildrenNum>
       </ChildrenItemInner>
     </ChildrenItem>
     <ChildrenItem
@@ -62,7 +62,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread, countsInfo }) => (
     >
       <ChildrenItemInner>
         <ChildrenTitle>Threads</ChildrenTitle>
-        <ChildrenNum>{countsInfo.threadsTotalCount}</ChildrenNum>
+        <ChildrenNum>{countsInfo.threadsCount}</ChildrenNum>
       </ChildrenItemInner>
     </ChildrenItem>
     <ChildrenItem
@@ -71,7 +71,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread, countsInfo }) => (
     >
       <ChildrenItemInner>
         <ChildrenTitle>帖子</ChildrenTitle>
-        <ChildrenNum>{countsInfo.postsTotalCount}</ChildrenNum>
+        <ChildrenNum>{countsInfo.postsCount}</ChildrenNum>
       </ChildrenItemInner>
     </ChildrenItem>
     <ChildrenItem
@@ -80,7 +80,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread, countsInfo }) => (
     >
       <ChildrenItemInner>
         <ChildrenTitle>招聘</ChildrenTitle>
-        <ChildrenNum>--</ChildrenNum>
+        <ChildrenNum>{countsInfo.jobsCount}</ChildrenNum>
       </ChildrenItemInner>
     </ChildrenItem>
   </ChildrenWrapper>
@@ -103,18 +103,21 @@ const CommunitiesItemBar = ({ active }) => (
   </MenuItemEach>
 )
 
-const CommunitiesRootMenuItem = ({ activeRaw, activeThread, countsInfo }) => (
-  <MenuItemWrapper>
-    <div>
-      <CommunitiesItemBar active={activeRaw === ROUTE.COMMUNITIES} />
-      <MenuChildren
-        activeRaw={activeRaw}
-        curRaw={ROUTE.COMMUNITIES}
-        activeThread={activeThread}
-        countsInfo={countsInfo}
-      />
-    </div>
-  </MenuItemWrapper>
-)
+const CommunitiesRootMenuItem = ({ activeRaw, activeThread, countsInfo }) => {
+  console.log('get fucking countsInfo: ', countsInfo)
+  return (
+    <MenuItemWrapper>
+      <div>
+        <CommunitiesItemBar active={activeRaw === ROUTE.COMMUNITIES} />
+        <MenuChildren
+          activeRaw={activeRaw}
+          curRaw={ROUTE.COMMUNITIES}
+          activeThread={activeThread}
+          countsInfo={countsInfo}
+        />
+      </div>
+    </MenuItemWrapper>
+  )
+}
 
 export default CommunitiesRootMenuItem
