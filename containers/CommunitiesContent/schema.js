@@ -1,31 +1,11 @@
 import gql from 'graphql-tag'
-import { P, F } from '../schemas'
+import { P } from '../schemas'
 
 const pagedCommunities = gql`
   ${P.pagedCommunities}
 `
 const pagedCategories = gql`
-  query($filter: PagedFilter!) {
-    pagedCategories(filter: $filter) {
-      entries {
-        id
-        title
-        raw
-        index
-        communities {
-          id
-          logo
-          title
-        }
-        author {
-          ${F.author}
-        }
-        insertedAt
-        updatedAt
-      }
-      ${F.pagedCounts}
-    }
-  }
+  ${P.pagedCategories}
 `
 const pagedTags = gql`
   ${P.pagedTags}

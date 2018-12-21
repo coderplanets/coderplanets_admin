@@ -1,5 +1,6 @@
 import React from 'react'
 import { Provider } from 'mobx-react'
+import R from 'ramda'
 
 import GAWraper from '../components/GAWraper'
 import initRootStore from '../stores/init'
@@ -14,8 +15,6 @@ import Header from '../containers/Header'
 import CommunitiesBanner from '../containers/CommunitiesBanner'
 import CommunitiesContent from '../containers/CommunitiesContent'
 
-import { P } from '../containers/schemas'
-
 import {
   makeGQClient,
   // Global,
@@ -24,6 +23,8 @@ import {
   getMainPath,
   getSubPath,
   BStore,
+  ssrPagedSchema,
+  ssrPagedContents,
 } from '../utils'
 import Footer from '../components/Footer'
 
@@ -45,12 +46,12 @@ async function fetchData(props) {
   const subpath = getSubPath(props)
   console.log('subpath --> ', subpath)
 
-  const pagedCommunities = gqClient.request(P.pagedCommunities, {
+  const pagedContents = gqClient.request(ssrPagedSchema(subpath), {
     filter: { page: 1, size: 30 },
   })
 
   return {
-    ...(await pagedCommunities),
+    ...(await pagedContents),
   }
 }
 
@@ -64,13 +65,37 @@ export default class Index extends React.Component {
     const subPath = getSubPath(props)
     const mainPath = getMainPath(props)
 
-    const { pagedCommunities } = await fetchData(props)
+    let resp
+    try {
+      resp = await fetchData(props)
+    } catch ({ response: { errors } }) {
+      /*
+      if (ssrAmbulance.hasLoginError(errors)) {
+        resp = await fetchData(props, { realname: false })
+      } else {
+        return { statusCode: 404, target: subPath }
+      }
+      */
+      return { statusCode: 404, target: subPath }
+    }
 
+    const { pagedCommunities } = resp
+    const pagedContents = ssrPagedContents(mainPath, subPath, resp)
+
+    return R.merge(
+      {
+        route: { mainPath, subPath },
+        communities: pagedCommunities,
+      },
+      pagedContents
+    )
+    /*
     return {
       route: { mainPath, subPath },
       communities: pagedCommunities,
       communitiesContent: { pagedCommunities },
     }
+    */
   }
 
   constructor(props) {

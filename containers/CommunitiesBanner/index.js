@@ -20,21 +20,25 @@ import { BannerContainer } from './styles'
 const debug = makeDebugger('C:CommunitiesBanner')
 /* eslint-enable no-unused-vars */
 
-const ChildBanner = ({ curRoute, totalCount, restProps }) => {
+const ChildBanner = ({
+  curRoute,
+  totalCount,
+  tagsTotalCount,
+  categoriesTotalCount,
+  threadsTotalCount,
+  postsTotalCount,
+  restProps,
+}) => {
   const {
     // communities
     filteredTotalCount,
     // tags
-    tagsTotalCount,
     filterdTagsCount,
     // threads
-    threadsTotalCount,
     filterdThreadsCount,
     // categories
-    categoriesTotalCount,
     filterdCategoriesCount,
     // posts
-    postsTotalCount,
     filteredPostsCount,
     // jobs
     jobsTotalCount,
@@ -109,16 +113,24 @@ class CommunitiesBannerContainer extends React.Component {
 
   render() {
     const { communitiesBanner } = this.props
-    const { curRoute, totalCount } = communitiesBanner
-
-    // console.log('totalCount --> ', communitiesBanner.totalCount)
-    console.log('the fucking totalCount: ', totalCount)
+    const {
+      curRoute,
+      totalCount,
+      tagsTotalCount,
+      categoriesTotalCount,
+      threadsTotalCount,
+      postsTotalCount,
+    } = communitiesBanner
 
     return (
       <BannerContainer>
         <ChildBanner
           curRoute={curRoute}
           totalCount={totalCount}
+          categoriesTotalCount={categoriesTotalCount}
+          threadsTotalCount={threadsTotalCount}
+          tagsTotalCount={tagsTotalCount}
+          postsTotalCount={postsTotalCount}
           restProps={stripMobx(communitiesBanner)}
         />
       </BannerContainer>

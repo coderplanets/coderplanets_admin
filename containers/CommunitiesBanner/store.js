@@ -17,16 +17,13 @@ const CommunitiesBannerStore = t
     // totalCount: t.optional(t.number, 0),
     filteredTotalCount: t.maybeNull(t.number),
     // categories
-    categoriesTotalCount: t.optional(t.number, 0),
     filterdCategoriesCount: t.maybeNull(t.number),
     // tags
-    tagsTotalCount: t.optional(t.number, 0),
     filterdTagsCount: t.maybeNull(t.number),
     // threads
-    threadsTotalCount: t.optional(t.number, 0),
     filterdThreadsCount: t.maybeNull(t.number),
     // posts
-    postsTotalCount: t.optional(t.number, 0),
+    // postsTotalCount: t.optional(t.number, 0),
     filteredPostsCount: t.maybeNull(t.number),
     // jobs
     jobsTotalCount: t.optional(t.number, 0),
@@ -38,6 +35,18 @@ const CommunitiesBannerStore = t
     },
     get totalCount() {
       return self.root.communitiesContent.pagedCommunities.totalCount
+    },
+    get categoriesTotalCount() {
+      return self.root.communitiesContent.pagedCategories.totalCount
+    },
+    get tagsTotalCount() {
+      return self.root.communitiesContent.pagedTags.totalCount
+    },
+    get threadsTotalCount() {
+      return self.root.communitiesContent.pagedThreads.totalCount
+    },
+    get postsTotalCount() {
+      return self.root.communitiesContent.pagedPosts.totalCount
     },
     get curRoute() {
       return self.root.curRoute

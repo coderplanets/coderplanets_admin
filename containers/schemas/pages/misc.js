@@ -16,6 +16,14 @@ export const pagedCategories = `
         title
         raw
         index
+        communities {
+          ${F.community}
+        }
+        author {
+          ${F.author}
+        }
+        insertedAt
+        updatedAt
       }
       ${F.pagedCounts}
     }
