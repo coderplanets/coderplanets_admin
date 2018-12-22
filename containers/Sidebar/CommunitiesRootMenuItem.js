@@ -123,15 +123,13 @@ const CommunitiesItemBar = ({ active }) => (
 
 const CommunitiesRootMenuItem = ({ activeRaw, activeThread, countsInfo }) => (
   <MenuItemWrapper>
-    <div>
-      <CommunitiesItemBar active={activeRaw === ROUTE.COMMUNITIES} />
-      <MenuChildren
-        activeRaw={activeRaw}
-        curRaw={ROUTE.COMMUNITIES}
-        activeThread={activeThread}
-        countsInfo={countsInfo}
-      />
-    </div>
+    <CommunitiesItemBar active={activeRaw === ROUTE.COMMUNITIES} />
+    <MenuChildren
+      activeRaw={activeRaw}
+      curRaw={ROUTE.COMMUNITIES}
+      activeThread={activeThread}
+      countsInfo={countsInfo}
+    />
   </MenuItemWrapper>
 )
 

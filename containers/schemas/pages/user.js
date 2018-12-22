@@ -64,6 +64,33 @@ export const user = `
   }
 `
 
+export const pagedUsers = `
+  query pagedUsers($filter: PagedUsersFilter!) {
+    pagedUsers(filter: $filter) {
+      entries {
+        id
+        nickname
+        avatar
+        bio
+        sex
+        email
+        qq
+        weibo
+        weichat
+        subscribedCommunitiesCount
+        location
+        fromGithub
+        insertedAt
+        cmsPassportString
+      }
+      pageNumber
+      pageSize
+      totalCount
+      totalPages
+    }
+  }
+`
+
 export const sessionState = `
   query {
     sessionState {

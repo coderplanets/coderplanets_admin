@@ -28,13 +28,12 @@ async function fetchData(props) {
   const gqClient = makeGQClient(token)
   // const userHasLogin = nilOrEmpty(token) === false
 
-  const pagedCommunities = gqClient.request(P.pagedCommunities, {
+  const pagedUsers = gqClient.request(P.pagedUsers, {
     filter: { page: 1, size: 30 },
-    userHasLogin: false,
   })
 
   return {
-    ...(await pagedCommunities),
+    ...(await pagedUsers),
   }
 }
 
@@ -43,10 +42,10 @@ export default class Index extends React.Component {
   static async getInitialProps(props) {
     /* const isServer = !!req */
     console.log('## communities ## users page ..')
-    const { pagedCommunities } = await fetchData(props)
+    const { pagedUsers } = await fetchData(props)
 
     return {
-      communities: pagedCommunities,
+      usersContent: { pagedUsers },
     }
   }
 

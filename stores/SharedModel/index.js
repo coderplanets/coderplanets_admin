@@ -18,6 +18,6 @@ export { Job, PagedJobs } from './Job'
 export { Repo, PagedRepos } from './Repo'
 export { Video, PagedVideos } from './Video'
 
-export { EmptyUser, User, SimpleUser } from './User'
+export { EmptyUser, User, PagedUsers, SimpleUser } from './User'
 
 export { emptyPagiData } from './general'

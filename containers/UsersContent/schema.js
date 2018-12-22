@@ -1,30 +1,8 @@
 import gql from 'graphql-tag'
+import { P } from '../schemas'
 
 const pagedUsers = gql`
-  query pagedUsers($filter: PagedUsersFilter!) {
-    pagedUsers(filter: $filter) {
-      entries {
-        id
-        nickname
-        avatar
-        bio
-        sex
-        email
-        qq
-        weibo
-        weichat
-        subscribedCommunitiesCount
-        location
-        fromGithub
-        insertedAt
-        cmsPassportString
-      }
-      pageNumber
-      pageSize
-      totalCount
-      totalPages
-    }
-  }
+  ${P.pagedUsers}
 `
 
 const schema = {

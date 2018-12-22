@@ -146,8 +146,8 @@ export const ROUTE = {
 
   COMMUNITY: 'community',
 
-  USERS_RAW: 'users',
   USERS: 'users',
+  SENIOR: 'senior',
   // valid part
   POSTS: 'posts',
   JOBS: 'jobs',

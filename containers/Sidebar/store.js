@@ -8,7 +8,7 @@ import R from 'ramda'
 
 import { PagedCommunities, emptyPagiData } from '../../stores/SharedModel'
 
-import { makeDebugger, markStates, ROUTE, stripMobx } from '../../utils'
+import { makeDebugger, markStates, stripMobx } from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('S:SidebarStore')
@@ -63,9 +63,10 @@ const SidebarStore = t
       return self.root.route.mainPath
     },
     get activeThread() {
-      const { subPath } = self.root.route
+      const { subPath, mainPath } = self.root.route
 
-      return R.isEmpty(subPath) ? ROUTE.COMMUNITIES : subPath
+      // return R.isEmpty(subPath) ? ROUTE.COMMUNITIES : subPath
+      return R.isEmpty(subPath) ? mainPath : subPath
     },
     get rootCountStatusData() {
       return stripMobx(self.rootCountStatus)

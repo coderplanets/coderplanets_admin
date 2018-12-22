@@ -1,8 +1,8 @@
 // import R from 'ramda'
 
-import { makeDebugger, $solver, asyncRes } from '../../utils'
+import { makeDebugger, $solver } from '../../utils'
 
-import S from './schema'
+// import S from './schema'
 import SR71 from '../../utils/network/sr71'
 
 const sr71$ = new SR71()
@@ -14,29 +14,19 @@ const debug = makeDebugger('L:UsersBanner')
 
 let store = null
 
-export function loadUsers() {
-  sr71$.query(S.pagedUsers, { filter: {}, userHasLogin: false })
-}
-
 export function onAdd() {}
 
 // ###############################
 // Data & Error handlers
 // ###############################
 
-const DataSolver = [
-  {
-    match: asyncRes('pagedUsers'),
-    action: ({ pagedUsers: { totalCount: usersTotalCount } }) => {
-      store.markState({ usersTotalCount })
-    },
-  },
-]
+const DataSolver = []
 const ErrSolver = []
 
-export function init(selectedStore) {
-  store = selectedStore
+export function init(_store) {
+  store = _store
+  debug(store)
 
-  if (sub$) sub$.unsubscribe()
+  if (sub$) return false
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 }

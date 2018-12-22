@@ -26,16 +26,16 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
     >
       <ChildrenItemInner>
         <ChildrenTitle>注册用户</ChildrenTitle>
-        <ChildrenNum>23</ChildrenNum>
+        <ChildrenNum>--</ChildrenNum>
       </ChildrenItemInner>
     </ChildrenItem>
     <ChildrenItem
-      active={ROUTE.PAYS === activeThread}
-      onClick={logic.onRootMenuSelect.bind(this, 'users', 'pays')}
+      active={ROUTE.SENIOR === activeThread}
+      onClick={logic.onRootMenuSelect.bind(this, 'users', ROUTE.SENIOR)}
     >
       <ChildrenItemInner>
-        <ChildrenTitle>衣食父母</ChildrenTitle>
-        <ChildrenNum>22</ChildrenNum>
+        <ChildrenTitle>高级用户</ChildrenTitle>
+        <ChildrenNum>--</ChildrenNum>
       </ChildrenItemInner>
     </ChildrenItem>
   </ChildrenWrapper>
@@ -47,7 +47,7 @@ const UsersItemBar = ({ activeRaw, curRaw }) => (
     <div>
       <MenuRow
         active={activeRaw === curRaw}
-        onClick={logic.extendMenuBar.bind(this, ROUTE.USERS_RAW)}
+        onClick={logic.extendMenuBar.bind(this, ROUTE.USERS)}
       >
         <MenuCommunitiesIcon src={`${ICON_CMD}/users.svg`} />
         <div style={{ marginRight: 10 }} />
@@ -60,14 +60,12 @@ const UsersItemBar = ({ activeRaw, curRaw }) => (
 
 const UsersRootMenuItem = ({ activeRaw, activeThread }) => (
   <MenuItemWrapper>
-    <div>
-      <UsersItemBar activeRaw={activeRaw} curRaw={ROUTE.USERS_RAW} />
-      <MenuChildren
-        activeRaw={activeRaw}
-        curRaw={ROUTE.USERS_RAW}
-        activeThread={activeThread}
-      />
-    </div>
+    <UsersItemBar activeRaw={activeRaw} curRaw={ROUTE.USERS} />
+    <MenuChildren
+      activeRaw={activeRaw}
+      curRaw={ROUTE.USERS}
+      activeThread={activeThread}
+    />
   </MenuItemWrapper>
 )
 

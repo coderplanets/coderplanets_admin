@@ -14,8 +14,6 @@ import * as logic from './logic'
 
 import IndexBanner from './IndexBanner'
 import PaysBanner from './PaysBanner'
-import PassportsBanner from './PassportsBanner'
-import RolesBanner from './RolesBanner'
 
 import { BannerContainer } from './styles'
 
@@ -23,25 +21,16 @@ import { BannerContainer } from './styles'
 const debug = makeDebugger('C:UsersBanner')
 /* eslint-enable no-unused-vars */
 
-const renderChildBanner = (curRoute, store) => {
-  const { usersTotalCount, filteredCount } = store
+const renderChildBanner = (curRoute, totalCount, store) => {
+  const { filteredCount } = store
 
   switch (curRoute.subPath) {
     case ROUTE.PAYS: {
       return <PaysBanner totalCount={200} filteredCount={100} />
     }
-    case ROUTE.PASSPORTS: {
-      return <PassportsBanner totalCount={200} filteredCount={100} />
-    }
-    case ROUTE.ROLES: {
-      return <RolesBanner totalCount={200} filteredCount={100} />
-    }
     default: {
       return (
-        <IndexBanner
-          totalCount={usersTotalCount}
-          filteredCount={filteredCount}
-        />
+        <IndexBanner totalCount={totalCount} filteredCount={filteredCount} />
       )
     }
   }
@@ -55,11 +44,11 @@ class UsersBannerContainer extends React.Component {
 
   render() {
     const { usersBanner } = this.props
-    const { curRoute } = usersBanner
+    const { curRoute, totalCount } = usersBanner
 
     return (
       <BannerContainer>
-        {renderChildBanner(curRoute, usersBanner)}
+        {renderChildBanner(curRoute, totalCount, usersBanner)}
       </BannerContainer>
     )
   }

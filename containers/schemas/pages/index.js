@@ -2,7 +2,7 @@ import { pagedPosts, post } from './post'
 import { pagedJobs, job } from './job'
 import { pagedVideos, video } from './video'
 import { pagedRepos, repo } from './repo'
-import { user, sessionState } from './user'
+import { user, pagedUsers, sessionState } from './user'
 import { community, subscribedCommunities, pagedCommunities } from './community'
 import { pagedComments } from './comment'
 import { pagedCategories, partialTags } from './misc'
@@ -37,6 +37,7 @@ const P = {
   repo,
   // user
   user,
+  pagedUsers,
   sessionState,
   // cheatsheet
   cheatsheet,

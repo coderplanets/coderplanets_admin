@@ -22,10 +22,9 @@ const debug = makeDebugger('C:UsersContent')
 const renderChildBanner = (route, store, restProps) => {
   const { pagedUsersData } = store
 
-  console.log('pagedUsersData: ', pagedUsersData)
   switch (route.subPath) {
-    case ROUTE.USERS: {
-      return <IndexContent data={pagedUsersData} restProps={restProps} />
+    case ROUTE.SENIOR: {
+      return <h3>SENIOR 用户</h3>
     }
     default: {
       return <IndexContent data={pagedUsersData} restProps={restProps} />

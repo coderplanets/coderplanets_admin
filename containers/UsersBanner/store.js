@@ -13,15 +13,16 @@ const debug = makeDebugger('S:UsersBannerStore')
 
 const UsersBannerStore = t
   .model('UsersBannerStore', {
-    usersTotalCount: t.optional(t.number, 0),
     filteredUsersCount: t.maybeNull(t.number),
   })
   .views(self => ({
     get root() {
       return getParent(self)
     },
+    get totalCount() {
+      return self.root.usersContent.pagedUsers.totalCount
+    },
     get filteredCount() {
-      if (!self.filteredUsersCount) return self.usersTotalCount
       return self.filteredUsersCount
     },
     get curRoute() {
