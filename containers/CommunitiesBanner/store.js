@@ -28,6 +28,8 @@ const CommunitiesBannerStore = t
     // jobs
     jobsTotalCount: t.optional(t.number, 0),
     filteredJobsCount: t.maybeNull(t.number),
+    // repo
+    filteredReposCount: t.maybeNull(t.number),
   })
   .views(self => ({
     get root() {
@@ -47,6 +49,9 @@ const CommunitiesBannerStore = t
     },
     get postsTotalCount() {
       return self.root.communitiesContent.pagedPosts.totalCount
+    },
+    get reposTotalCount() {
+      return self.root.communitiesContent.pagedRepos.totalCount
     },
     get curRoute() {
       return self.root.curRoute
