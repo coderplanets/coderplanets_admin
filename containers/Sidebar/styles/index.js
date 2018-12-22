@@ -47,4 +47,5 @@ export const BannerLogo = styled(Img)`
 export const BannerTitle = styled.div`
   margin-left: 8px;
   font-size: 0.9rem;
+  margin-top: 4px;
 `

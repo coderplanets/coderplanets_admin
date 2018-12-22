@@ -15,6 +15,8 @@ export { Category, PagedCategories } from './Category'
 
 export { Post, PagedPosts } from './Post'
 export { Job, PagedJobs } from './Job'
+export { Repo, PagedRepos } from './Repo'
+export { Video, PagedVideos } from './Video'
 
 export { EmptyUser, User, SimpleUser } from './User'
 

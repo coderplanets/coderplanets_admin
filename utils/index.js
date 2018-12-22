@@ -9,6 +9,7 @@ export {
   ROUTE,
   THREAD,
   NON_FILL_COMMUNITY,
+  C11N,
 } from './constants'
 
 export { makeDebugger } from './debug'

@@ -14,6 +14,7 @@ import { makeDebugger, storePlug, ROUTE } from '../../utils'
 import IndexContent from './IndexContent'
 import PostsContent from './PostsContent'
 import JobsContent from './JobsContent'
+import ReposContent from './ReposContent'
 import CategoriesContent from './CategoriesContent'
 import TagsContent from './TagsContent'
 import ThreadsContent from './ThreadsContent'
@@ -33,7 +34,9 @@ const renderChildContent = (curRoute, store, restProps) => {
     pagedThreadsData,
     pagedPostsData,
     pagedJobsData,
+    pagedReposData,
   } = store
+  console.log('render pagedReposData: ', pagedReposData)
 
   switch (curRoute.subPath) {
     case ROUTE.TAGS: {
@@ -55,6 +58,12 @@ const renderChildContent = (curRoute, store, restProps) => {
     }
     case ROUTE.JOBS: {
       return <JobsContent data={pagedJobsData} restProps={restProps} />
+    }
+    case ROUTE.REPOS: {
+      return <ReposContent data={pagedReposData} restProps={restProps} />
+    }
+    case ROUTE.VIDEOS: {
+      return <h3>VIDEOS Content</h3>
     }
     default: {
       return <IndexContent data={pagedCommunitiesData} restProps={restProps} />

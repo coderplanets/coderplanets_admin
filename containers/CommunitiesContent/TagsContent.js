@@ -118,42 +118,29 @@ const columns = [
   },
 ]
 
-class TagsContent extends React.Component {
-  componentDidMount() {
-    logic.loadTagsIfOnClient()
-  }
-
-  render() {
-    const {
-      data,
-      restProps: { tagsLoading },
-    } = this.props
-
-    return (
+const TagsContent = ({ data, restProps: { tagsLoading } }) => (
+  <React.Fragment>
+    {data ? (
       <div>
-        {data ? (
-          <div>
-            <Table
-              columns={columns}
-              dataSource={data.entries}
-              scroll={{ x: 1500 }}
-              loading={TableLoading(tagsLoading)}
-              pagination={false}
-            />
-            <Pagi
-              left="-10px"
-              pageNumber={data.pageNumber}
-              pageSize={data.pageSize}
-              totalCount={data.totalCount}
-              onChange={logic.loadTags}
-            />
-          </div>
-        ) : (
-          <div />
-        )}
+        <Table
+          columns={columns}
+          dataSource={data.entries}
+          scroll={{ x: 1500 }}
+          loading={TableLoading(tagsLoading)}
+          pagination={false}
+        />
+        <Pagi
+          left="-10px"
+          pageNumber={data.pageNumber}
+          pageSize={data.pageSize}
+          totalCount={data.totalCount}
+          onChange={logic.loadTags}
+        />
       </div>
-    )
-  }
-}
+    ) : (
+      <div />
+    )}
+  </React.Fragment>
+)
 
 export default TagsContent

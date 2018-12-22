@@ -43,8 +43,6 @@ class SidebarContainer extends React.Component {
     //    onMouseLeave={logic.leaveSidebar}
     // onMouseLeave is not unreliable in chrome: https://github.com/facebook/react/issues/4492
 
-    console.log('rootCountStatusData: ', rootCountStatusData)
-
     return (
       <Sidebar>
         <Banner>

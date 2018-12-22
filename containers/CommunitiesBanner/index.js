@@ -54,7 +54,6 @@ const ChildBanner = ({
         />
       )
     }
-
     case ROUTE.TAGS: {
       return (
         <TagsBanner
@@ -89,6 +88,12 @@ const ChildBanner = ({
           filteredCount={filteredJobsCount}
         />
       )
+    }
+    case ROUTE.REPOS: {
+      return <h3>REPOS Banner</h3>
+    }
+    case ROUTE.VIDEOS: {
+      return <h3>VIDEOS Banner</h3>
     }
     default: {
       return (

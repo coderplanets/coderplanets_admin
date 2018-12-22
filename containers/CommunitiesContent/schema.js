@@ -19,6 +19,9 @@ const pagedPosts = gql`
 const pagedJobs = gql`
   ${P.pagedJobs}
 `
+const pagedRepos = gql`
+  ${P.pagedRepos}
+`
 
 const deleteCommunity = gql`
   mutation($id: ID!) {
@@ -95,6 +98,7 @@ const schema = {
   pagedCategories,
   pagedPosts,
   pagedJobs,
+  pagedRepos,
   unsetThread,
   deleteCommunity,
   unsetCategory,

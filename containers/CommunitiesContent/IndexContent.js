@@ -155,40 +155,27 @@ const columns = [
   },
 ]
 
-class IndexContent extends React.Component {
-  componentDidMount() {
-    logic.loadCommunitiesIfOnClient()
-  }
-
-  render() {
-    const {
-      data,
-      restProps: { communitiesLoading },
-    } = this.props
-
-    return (
+const IndexContent = ({ data, restProps: { communitiesLoading } }) => (
+  <React.Fragment>
+    {data ? (
       <React.Fragment>
-        {data ? (
-          <React.Fragment>
-            <Table
-              columns={columns}
-              dataSource={data.entries}
-              scroll={{ x: 1800 }}
-              loading={TableLoading(communitiesLoading)}
-              pagination={false}
-            />
-            <Pagi
-              left="-10px"
-              pageNumber={data.pageNumber}
-              pageSize={data.pageSize}
-              totalCount={data.totalCount}
-              onChange={logic.loadCommunities}
-            />
-          </React.Fragment>
-        ) : null}
+        <Table
+          columns={columns}
+          dataSource={data.entries}
+          scroll={{ x: 1800 }}
+          loading={TableLoading(communitiesLoading)}
+          pagination={false}
+        />
+        <Pagi
+          left="-10px"
+          pageNumber={data.pageNumber}
+          pageSize={data.pageSize}
+          totalCount={data.totalCount}
+          onChange={logic.loadCommunities}
+        />
       </React.Fragment>
-    )
-  }
-}
+    ) : null}
+  </React.Fragment>
+)
 
 export default IndexContent

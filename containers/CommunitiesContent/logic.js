@@ -84,7 +84,7 @@ export function loadThreads(page = 1) {
   sr71$.query(S.pagedThreads, commonFilter(page))
 }
 
-export function loadPosts(page = 1) {
+export const loadPosts = (page = 1) => {
   const size = PAGE_SIZE.D
   const args = {
     filter: { page, size },
@@ -96,7 +96,7 @@ export function loadPosts(page = 1) {
   sr71$.query(S.pagedPosts, args)
 }
 
-export function loadJobs(page = 1) {
+export const loadJobs = (page = 1) => {
   const size = PAGE_SIZE.D
   const args = {
     filter: { page, size },
@@ -107,42 +107,32 @@ export function loadJobs(page = 1) {
   sr71$.query(S.pagedJobs, args)
 }
 
-export function loadCommunitiesIfOnClient() {
-  /*
-  if (!store.pagedCommunities) {
-    debug('loadCommunitiesIfOnClient')
-    loadCommunities()
+export const loadRepos = (page = 1) => {
+  const size = PAGE_SIZE.D
+  const args = {
+    filter: { page, size },
   }
-  */
-}
+  scrollIntoEle(TYPE.APP_HEADER_ID)
+  store.markState({ jobsLoading: true })
 
-export function loadTagsIfOnClient() {
-  debug('loadTagsIfOnClient')
-}
-
-export function loadThreadsIfOnClient() {
-  debug('loadThreadsIfOnClient')
+  sr71$.query(S.pagedRepos, args)
 }
 
 export function onEdit(record) {
   debug('unMatched edit: ', record)
 }
 
-export function onEditCategory(record) {
-  debug('onEditCategory', record)
-
+export const onEditCategory = record =>
   dispatchEvent(EVENT.NAV_UPDATE_CATEGORY, {
     type: TYPE.PREVIEW_UPDATE_CATEGORY,
     data: record,
   })
-}
 
-export function onEditTag(record) {
+export const onEditTag = record =>
   dispatchEvent(EVENT.NAV_UPDATE_TAG, {
     type: TYPE.PREVIEW_UPDATE_TAG,
     data: record,
   })
-}
 
 // TODO rename to onDeleteCommunity
 export function onDelete(record) {
@@ -159,7 +149,7 @@ export function onDeleteCagegory(record) {
   sr71$.mutate(S.deleteCategory, args)
 }
 
-export function setCommunity(thread, source) {
+export const setCommunity = (thread, source) =>
   dispatchEvent(EVENT.NAV_SET_COMMUNITY, {
     type: TYPE.PREVIEW_SET_COMMUNITY,
     data: {
@@ -167,7 +157,6 @@ export function setCommunity(thread, source) {
       thread,
     },
   })
-}
 
 let CurThread = THREAD.POST
 export function unsetCommunity(thread, source, communityId) {
@@ -181,35 +170,31 @@ export function unsetCommunity(thread, source, communityId) {
   sr71$.mutate(S.unsetCommunity, args)
 }
 
-export function unsetThread(communityId, thread) {
+export const unsetThread = (communityId, thread) =>
   sr71$.mutate(S.unsetThread, {
     threadId: thread.id,
     communityId,
   })
-}
 
-export function setThread(source) {
+export const setThread = source =>
   dispatchEvent(EVENT.NAV_SET_THREAD, {
     type: TYPE.PREVIEW_SET_THREAD,
     data: source,
   })
-}
 
-export function unsetCategory(communityId, category) {
+export const unsetCategory = (communityId, category) =>
   sr71$.mutate(S.unsetCategory, {
     communityId,
     categoryId: category.id,
   })
-}
 
-export function setCategory(source) {
+export const setCategory = source =>
   dispatchEvent(EVENT.NAV_SET_CATEGORY, {
     type: TYPE.PREVIEW_SET_CATEGORY,
     data: source,
   })
-}
 
-export function setTag(thread, source) {
+export const setTag = (thread, source) =>
   dispatchEvent(EVENT.NAV_SET_TAG, {
     type: TYPE.PREVIEW_SET_TAG,
     data: {
@@ -217,7 +202,6 @@ export function setTag(thread, source) {
       source,
     },
   })
-}
 
 export function unsetTag(threadId, tag) {
   const args = {
@@ -276,6 +260,14 @@ const DataSolver = [
     action: ({ pagedJobs }) => {
       cancleLoading()
       store.markState({ pagedJobs })
+    },
+  },
+  {
+    match: asyncRes('pagedRepos'),
+    action: ({ pagedRepos }) => {
+      cancleLoading()
+      console.log('pagedRepos: ', pagedRepos)
+      store.markState({ pagedRepos })
     },
   },
   {
@@ -384,6 +376,12 @@ const DataSolver = [
         }
         case ROUTE.POSTS: {
           return loadPosts()
+        }
+        case ROUTE.JOBS: {
+          return loadJobs()
+        }
+        case ROUTE.REPOS: {
+          return loadRepos()
         }
         default: {
           return loadCommunities()

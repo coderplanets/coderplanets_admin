@@ -151,6 +151,9 @@ export const ROUTE = {
   // valid part
   POSTS: 'posts',
   JOBS: 'jobs',
+  VIDEOS: 'videos',
+  REPOS: 'repos',
+
   ACTIVITIES: 'activities',
   CHEATSHEETS: 'cheatsheets',
   EDITORS: 'editors',
@@ -165,6 +168,25 @@ export const ROUTE = {
   PASSPORTS: 'passports',
   // roles CURD (based on passports)
   ROLES: 'roles',
+}
+
+// customization
+export const C11N = {
+  DIGEST: 'digest',
+  LIST: 'list',
+  BRIEF: 'brief',
+}
+
+export const PAYMENT_USAGE = {
+  SENIOR: 'SENIOR',
+  GIRLS_CODE_TOO_PLAN: 'GirlsCodeTooPlan',
+  DONATE: 'DONATE',
+  SPONSOR: 'SPONSOR',
+}
+
+export const PAYMENT_METHOD = {
+  ALIPAY: 'ALIPAY',
+  WECHAT: 'WECHAT',
 }
 
 /* some svg icon are sensitive to fill color */

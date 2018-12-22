@@ -61,7 +61,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread, countsInfo }) => (
       onClick={logic.onRootMenuSelect.bind(this, 'communities', 'threads')}
     >
       <ChildrenItemInner>
-        <ChildrenTitle>Threads</ChildrenTitle>
+        <ChildrenTitle>版块(Threads)</ChildrenTitle>
         <ChildrenNum>{countsInfo.threadsCount}</ChildrenNum>
       </ChildrenItemInner>
     </ChildrenItem>
@@ -81,6 +81,24 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread, countsInfo }) => (
       <ChildrenItemInner>
         <ChildrenTitle>招聘</ChildrenTitle>
         <ChildrenNum>{countsInfo.jobsCount}</ChildrenNum>
+      </ChildrenItemInner>
+    </ChildrenItem>
+    <ChildrenItem
+      active={ROUTE.REPOS === activeThread}
+      onClick={logic.onRootMenuSelect.bind(this, 'communities', 'repos')}
+    >
+      <ChildrenItemInner>
+        <ChildrenTitle>项目</ChildrenTitle>
+        <ChildrenNum>{countsInfo.reposCount}</ChildrenNum>
+      </ChildrenItemInner>
+    </ChildrenItem>
+    <ChildrenItem
+      active={ROUTE.VIDEOS === activeThread}
+      onClick={logic.onRootMenuSelect.bind(this, 'communities', 'videos')}
+    >
+      <ChildrenItemInner>
+        <ChildrenTitle>视频</ChildrenTitle>
+        <ChildrenNum>{countsInfo.videosCount}</ChildrenNum>
       </ChildrenItemInner>
     </ChildrenItem>
   </ChildrenWrapper>
@@ -103,21 +121,18 @@ const CommunitiesItemBar = ({ active }) => (
   </MenuItemEach>
 )
 
-const CommunitiesRootMenuItem = ({ activeRaw, activeThread, countsInfo }) => {
-  console.log('get fucking countsInfo: ', countsInfo)
-  return (
-    <MenuItemWrapper>
-      <div>
-        <CommunitiesItemBar active={activeRaw === ROUTE.COMMUNITIES} />
-        <MenuChildren
-          activeRaw={activeRaw}
-          curRaw={ROUTE.COMMUNITIES}
-          activeThread={activeThread}
-          countsInfo={countsInfo}
-        />
-      </div>
-    </MenuItemWrapper>
-  )
-}
+const CommunitiesRootMenuItem = ({ activeRaw, activeThread, countsInfo }) => (
+  <MenuItemWrapper>
+    <div>
+      <CommunitiesItemBar active={activeRaw === ROUTE.COMMUNITIES} />
+      <MenuChildren
+        activeRaw={activeRaw}
+        curRaw={ROUTE.COMMUNITIES}
+        activeThread={activeThread}
+        countsInfo={countsInfo}
+      />
+    </div>
+  </MenuItemWrapper>
+)
 
 export default CommunitiesRootMenuItem

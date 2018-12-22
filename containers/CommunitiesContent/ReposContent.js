@@ -1,7 +1,6 @@
 import React from 'react'
 import TimeAgo from 'timeago-react'
 
-import { cutFrom } from '../../utils'
 import {
   Pagi,
   Table,
@@ -28,21 +27,14 @@ const columns = [
   {
     title: '标题',
     width: 300,
-    dataIndex: 'title',
-    align: 'center',
+    align: 'left',
     fixed: 'left',
-    render: text => {
-      return <div>{cutFrom(text, 15)}</div>
-    },
-  },
-  {
-    title: '摘要',
-    width: 400,
-    dataIndex: 'digest',
-    align: 'center',
-    render: text => {
-      return <div>{cutFrom(text, 10)}</div>
-    },
+    render: (text, record) => (
+      <div>
+        <div>{record.ownerName}</div>
+        <div>{record.title}</div>
+      </div>
+    ),
   },
   {
     title: '作者',
@@ -89,18 +81,6 @@ const columns = [
     title: '浏览',
     width: 100,
     dataIndex: 'views',
-    align: 'center',
-  },
-  {
-    title: '收藏',
-    width: 100,
-    dataIndex: 'favoritedCount',
-    align: 'center',
-  },
-  {
-    title: '点赞',
-    width: 100,
-    dataIndex: 'starredCount',
     align: 'center',
   },
   {
@@ -164,7 +144,7 @@ const columns = [
   },
 ]
 
-const PostsContent = ({ data, restProps: { communitiesLoading } }) => (
+const ReposContent = ({ data, restProps: { communitiesLoading } }) => (
   <React.Fragment>
     {data ? (
       <div>
@@ -187,4 +167,4 @@ const PostsContent = ({ data, restProps: { communitiesLoading } }) => (
   </React.Fragment>
 )
 
-export default PostsContent
+export default ReposContent

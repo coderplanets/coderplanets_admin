@@ -38,92 +38,77 @@ const columns = [
     align: 'center',
   },
   /*
-  {
-    title: '创建时间',
-    width: 150,
-    dataIndex: 'insertedAt',
-    align: 'center',
-    render: text => {
-      return <TimeAgo datetime={text} locale="zh_CN" />
-    },
-  },
-  {
-    title: '上次更新',
-    width: 150,
-    dataIndex: 'updatedAt',
-    align: 'center',
-    render: text => {
-      return <TimeAgo datetime={text} locale="zh_CN" />
-    },
-  },
-  {
-    title: '操作',
-    width: 200,
-    dataIndex: '',
-    align: 'center',
-    render: (text, record) => {
-      return (
-        <OperationWrapper>
-          <Button
-            size="small"
-            type="primary"
-            ghost
-            onClick={logic.onEdit.bind(this, record)}
-          >
-            编辑
-          </Button>
-          <Space right="10px" />
-          <Button
-            size="small"
-            type="red"
-            ghost
-            onClick={logic.onDelete.bind(this, record)}
-          >
-            删除
-          </Button>
-        </OperationWrapper>
-      )
-    },
-  },
-  */
+     {
+     title: '创建时间',
+     width: 150,
+     dataIndex: 'insertedAt',
+     align: 'center',
+     render: text => {
+     return <TimeAgo datetime={text} locale="zh_CN" />
+     },
+     },
+     {
+     title: '上次更新',
+     width: 150,
+     dataIndex: 'updatedAt',
+     align: 'center',
+     render: text => {
+     return <TimeAgo datetime={text} locale="zh_CN" />
+     },
+     },
+     {
+     title: '操作',
+     width: 200,
+     dataIndex: '',
+     align: 'center',
+     render: (text, record) => {
+     return (
+     <OperationWrapper>
+     <Button
+     size="small"
+     type="primary"
+     ghost
+     onClick={logic.onEdit.bind(this, record)}
+     >
+     编辑
+     </Button>
+     <Space right="10px" />
+     <Button
+     size="small"
+     type="red"
+     ghost
+     onClick={logic.onDelete.bind(this, record)}
+     >
+     删除
+     </Button>
+     </OperationWrapper>
+     )
+     },
+     },
+   */
 ]
 
-class ThreadsContent extends React.Component {
-  componentDidMount() {
-    console.log('ThreadsContent ,componentDidMount')
-    logic.loadThreadsIfOnClient()
-  }
-
-  render() {
-    const {
-      data,
-      restProps: { communitiesLoading },
-    } = this.props
-    return (
+const ThreadsContent = ({ data, restProps: { communitiesLoading } }) => (
+  <React.Fragment>
+    {data ? (
       <div>
-        {data ? (
-          <div>
-            <Table
-              columns={columns}
-              dataSource={data.entries}
-              scroll={{ x: 2000 }}
-              loading={TableLoading(communitiesLoading)}
-              pagination={false}
-            />
-            <Pagi
-              left="-10px"
-              pageNumber={data.pageNumber}
-              pageSize={data.pageSize}
-              totalCount={data.totalCount}
-              onChange={logic.loadJobs}
-            />
-          </div>
-        ) : (
-          <div />
-        )}
+        <Table
+          columns={columns}
+          dataSource={data.entries}
+          scroll={{ x: 2000 }}
+          loading={TableLoading(communitiesLoading)}
+          pagination={false}
+        />
+        <Pagi
+          left="-10px"
+          pageNumber={data.pageNumber}
+          pageSize={data.pageSize}
+          totalCount={data.totalCount}
+          onChange={logic.loadJobs}
+        />
       </div>
-    )
-  }
-}
+    ) : null}
+  </React.Fragment>
+)
 
 export default ThreadsContent

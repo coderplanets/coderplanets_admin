@@ -33,12 +33,13 @@ export const repo = `
 `
 
 export const pagedRepos = `
-  query($filter: PagedArticleFilter, $userHasLogin: Boolean!) {
+  query($filter: PagedArticleFilter) {
     pagedRepos(filter: $filter) {
       entries {
         ${F.repo}
         views
         releaseTag
+        repoUrl
         author {
           ${F.author}
         }
@@ -48,7 +49,6 @@ export const pagedRepos = `
         tags {
           ${F.tag}
         }
-        viewerHasViewed @include(if: $userHasLogin)
       }
       ${F.pagedCounts}
     }

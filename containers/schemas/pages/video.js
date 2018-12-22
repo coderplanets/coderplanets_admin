@@ -34,14 +34,13 @@ export const video = `
   }
 `
 export const pagedVideos = `
-  query($filter: PagedArticleFilter, $userHasLogin: Boolean!) {
+  query($filter: PagedArticleFilter) {
     pagedVideos(filter: $filter) {
       entries {
        ${F.video}
         author {
           ${F.author}
         }
-        viewerHasViewed @include(if: $userHasLogin)
       }
       ${F.pagedCounts}
     }

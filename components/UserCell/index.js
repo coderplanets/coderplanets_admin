@@ -9,7 +9,7 @@ import PropTypes from 'prop-types'
 
 import { UserCellWrapper, Avatar, NickName } from './styles'
 
-import { makeDebugger } from '../../utils'
+import { makeDebugger, cutFrom } from '../../utils'
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:UserCell:index')
 /* eslint-enable no-unused-vars */
@@ -18,7 +18,7 @@ const UserCell = ({ user, align, left, small }) => (
   <div>
     <UserCellWrapper align={align} left={left}>
       <Avatar src={user.avatar} alt={user.nickname} small={small} />
-      <NickName>{user.nickname}</NickName>
+      <NickName>{cutFrom(user.nickname, 15)}</NickName>
     </UserCellWrapper>
   </div>
 )

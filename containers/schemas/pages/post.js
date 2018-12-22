@@ -36,7 +36,7 @@ export const post = `
   }
 `
 export const pagedPosts = `
-  query($filter: PagedPostsFilter, $userHasLogin: Boolean!) {
+  query($filter: PagedPostsFilter) {
     pagedPosts(filter: $filter) {
       entries {
         ${F.post}
@@ -56,7 +56,6 @@ export const pagedPosts = `
         author {
           ${F.author}
         }
-        viewerHasViewed @include(if: $userHasLogin)
       }
       ${F.pagedCounts}
     }
