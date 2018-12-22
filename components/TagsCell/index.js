@@ -12,53 +12,25 @@ import { ICON_CMD } from '../../config'
 
 // import { inject, observer } from 'mobx-react'
 // import Link from 'next/link'
+import TagsList from './TagsList'
 import AdderCell from '../AdderCell'
 
-import {
-  Wrapper,
-  ListWrapper,
-  TagWrapper,
-  DeleteCross,
-  AddIcon,
-} from './styles'
+import { Wrapper, AddIcon } from './styles'
 
-import { uid } from '../../utils'
-
-const TagsList = ({ source, onDelete }) => (
-  <ListWrapper>
-    {source.tags.map(c => (
-      <TagWrapper key={uid.gen()} onClick={onDelete.bind(this, source.id, c)}>
-        {c.title}
-        <DeleteCross>x</DeleteCross>
-      </TagWrapper>
-    ))}
-  </ListWrapper>
+const TagsCell = ({ thread, source, onDelete, onAdd }) => (
+  <React.Fragment>
+    {R.isEmpty(source.tags) ? (
+      <AdderCell onAdd={onAdd.bind(this, thread, source)} />
+    ) : (
+      <Wrapper>
+        <TagsList source={source} onDelete={onDelete} />
+        <div onClick={onAdd.bind(this, thread, source)}>
+          <AddIcon src={`${ICON_CMD}/plus.svg`} />
+        </div>
+      </Wrapper>
+    )}
+  </React.Fragment>
 )
-
-class TagsCell extends React.Component {
-  componentDidMount() {}
-
-  componentWillUnmount() {}
-
-  render() {
-    const { thread, source, onDelete, onAdd } = this.props
-
-    return (
-      <React.Fragment>
-        {R.isEmpty(source.tags) ? (
-          <AdderCell onAdd={onAdd.bind(this, thread, source)} />
-        ) : (
-          <Wrapper>
-            <TagsList source={source} onDelete={onDelete} />
-            <div onClick={onAdd.bind(this, thread, source)}>
-              <AddIcon src={`${ICON_CMD}/plus.svg`} />
-            </div>
-          </Wrapper>
-        )}
-      </React.Fragment>
-    )
-  }
-}
 
 export default TagsCell
 
