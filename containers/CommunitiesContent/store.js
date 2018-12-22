@@ -10,6 +10,7 @@ import {
   PagedPosts,
   PagedJobs,
   PagedRepos,
+  PagedVideos,
   PagedTags,
   PagedThreads,
   PagedCategories,
@@ -34,12 +35,15 @@ const CommunitiesContentStore = t
     pagedPosts: t.optional(PagedPosts, emptyPagiData),
     pagedJobs: t.optional(PagedJobs, emptyPagiData),
     pagedRepos: t.optional(PagedRepos, emptyPagiData),
+    pagedVideos: t.optional(PagedVideos, emptyPagiData),
 
     communitiesLoading: t.optional(t.boolean, false),
     tagsLoading: t.optional(t.boolean, false),
     categoriesLoading: t.optional(t.boolean, false),
     postsLoading: t.optional(t.boolean, false),
     jobsLoading: t.optional(t.boolean, false),
+    reposLoading: t.optional(t.boolean, false),
+    videosLoading: t.optional(t.boolean, false),
   })
   .views(self => ({
     get root() {
@@ -71,6 +75,9 @@ const CommunitiesContentStore = t
     },
     get pagedReposData() {
       return stripMobx(self.pagedRepos)
+    },
+    get pagedVideosData() {
+      return stripMobx(self.pagedVideos)
     },
   }))
   .actions(self => ({

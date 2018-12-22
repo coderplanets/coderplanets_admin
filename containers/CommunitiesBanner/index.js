@@ -14,6 +14,7 @@ import ThreadsBanner from './ThreadsBanner'
 import PostsBanner from './PostsBanner'
 import JobsBanner from './JobsBanner'
 import ReposBanner from './ReposBanner'
+import VideosBanner from './VideosBanner'
 
 import { BannerContainer } from './styles'
 
@@ -28,7 +29,9 @@ const ChildBanner = ({
   categoriesTotalCount,
   threadsTotalCount,
   postsTotalCount,
+  jobsTotalCount,
   reposTotalCount,
+  videosTotalCount,
   restProps,
 }) => {
   const {
@@ -43,10 +46,11 @@ const ChildBanner = ({
     // posts
     filteredPostsCount,
     // jobs
-    jobsTotalCount,
     filteredJobsCount,
     // repo
     filteredReposCount,
+    // video
+    filteredVideosCount,
   } = restProps
 
   switch (curRoute.subPath) {
@@ -102,7 +106,12 @@ const ChildBanner = ({
       )
     }
     case ROUTE.VIDEOS: {
-      return <h3>VIDEOS Banner</h3>
+      return (
+        <VideosBanner
+          totalCount={videosTotalCount}
+          filteredCount={filteredVideosCount}
+        />
+      )
     }
     default: {
       return (
@@ -134,7 +143,9 @@ class CommunitiesBannerContainer extends React.Component {
       categoriesTotalCount,
       threadsTotalCount,
       postsTotalCount,
+      jobsTotalCount,
       reposTotalCount,
+      videosTotalCount,
     } = communitiesBanner
 
     return (
@@ -146,7 +157,9 @@ class CommunitiesBannerContainer extends React.Component {
           threadsTotalCount={threadsTotalCount}
           tagsTotalCount={tagsTotalCount}
           postsTotalCount={postsTotalCount}
+          jobsTotalCount={jobsTotalCount}
           reposTotalCount={reposTotalCount}
+          videosTotalCount={videosTotalCount}
           restProps={stripMobx(communitiesBanner)}
         />
       </BannerContainer>

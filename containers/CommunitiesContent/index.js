@@ -15,6 +15,7 @@ import IndexContent from './IndexContent'
 import PostsContent from './PostsContent'
 import JobsContent from './JobsContent'
 import ReposContent from './ReposContent'
+import VideosContent from './VideosContent'
 import CategoriesContent from './CategoriesContent'
 import TagsContent from './TagsContent'
 import ThreadsContent from './ThreadsContent'
@@ -35,9 +36,9 @@ const renderChildContent = (curRoute, store, restProps) => {
     pagedPostsData,
     pagedJobsData,
     pagedReposData,
+    pagedVideosData,
   } = store
-  console.log('render pagedReposData: ', pagedReposData)
-
+  // console.log('render pagedJobsData: ', pagedJobsData)
   switch (curRoute.subPath) {
     case ROUTE.TAGS: {
       return <TagsContent data={pagedTagsData} restProps={restProps} />
@@ -63,7 +64,7 @@ const renderChildContent = (curRoute, store, restProps) => {
       return <ReposContent data={pagedReposData} restProps={restProps} />
     }
     case ROUTE.VIDEOS: {
-      return <h3>VIDEOS Content</h3>
+      return <VideosContent data={pagedVideosData} restProps={restProps} />
     }
     default: {
       return <IndexContent data={pagedCommunitiesData} restProps={restProps} />

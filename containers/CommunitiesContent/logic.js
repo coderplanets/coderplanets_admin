@@ -113,9 +113,20 @@ export const loadRepos = (page = 1) => {
     filter: { page, size },
   }
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  store.markState({ jobsLoading: true })
+  store.markState({ reposLoading: true })
 
   sr71$.query(S.pagedRepos, args)
+}
+
+export const loadVideos = (page = 1) => {
+  const size = PAGE_SIZE.D
+  const args = {
+    filter: { page, size },
+  }
+  scrollIntoEle(TYPE.APP_HEADER_ID)
+  store.markState({ videosLoading: true })
+
+  sr71$.query(S.pagedVideos, args)
 }
 
 export function onEdit(record) {
@@ -266,8 +277,15 @@ const DataSolver = [
     match: asyncRes('pagedRepos'),
     action: ({ pagedRepos }) => {
       cancleLoading()
-      console.log('pagedRepos: ', pagedRepos)
       store.markState({ pagedRepos })
+    },
+  },
+  {
+    match: asyncRes('pagedVideos'),
+    action: ({ pagedVideos }) => {
+      cancleLoading()
+      debug('pagedVideos: ', pagedVideos)
+      store.markState({ pagedVideos })
     },
   },
   {
@@ -382,6 +400,9 @@ const DataSolver = [
         }
         case ROUTE.REPOS: {
           return loadRepos()
+        }
+        case ROUTE.VIDEOS: {
+          return loadVideos()
         }
         default: {
           return loadCommunities()

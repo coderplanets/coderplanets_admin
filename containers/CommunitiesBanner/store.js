@@ -13,23 +13,15 @@ const debug = makeDebugger('S:CommunitiesBannerStore')
 
 const CommunitiesBannerStore = t
   .model('CommunitiesBannerStore', {
-    // communities: totalCount of all
-    // totalCount: t.optional(t.number, 0),
-    filteredTotalCount: t.maybeNull(t.number),
-    // categories
-    filterdCategoriesCount: t.maybeNull(t.number),
-    // tags
-    filterdTagsCount: t.maybeNull(t.number),
-    // threads
-    filterdThreadsCount: t.maybeNull(t.number),
-    // posts
-    // postsTotalCount: t.optional(t.number, 0),
-    filteredPostsCount: t.maybeNull(t.number),
-    // jobs
-    jobsTotalCount: t.optional(t.number, 0),
-    filteredJobsCount: t.maybeNull(t.number),
-    // repo
-    filteredReposCount: t.maybeNull(t.number),
+    filteredTotalCount: t.maybeNull(t.number), // communities
+    filterdCategoriesCount: t.maybeNull(t.number), // categories
+    filterdTagsCount: t.maybeNull(t.number), // tags
+    filterdThreadsCount: t.maybeNull(t.number), // threads
+
+    filteredPostsCount: t.maybeNull(t.number), // posts
+    filteredJobsCount: t.maybeNull(t.number), // jobs
+    filteredReposCount: t.maybeNull(t.number), // repo
+    filteredVideosCount: t.maybeNull(t.number), // video
   })
   .views(self => ({
     get root() {
@@ -50,8 +42,14 @@ const CommunitiesBannerStore = t
     get postsTotalCount() {
       return self.root.communitiesContent.pagedPosts.totalCount
     },
+    get jobsTotalCount() {
+      return self.root.communitiesContent.pagedJobs.totalCount
+    },
     get reposTotalCount() {
       return self.root.communitiesContent.pagedRepos.totalCount
+    },
+    get videosTotalCount() {
+      return self.root.communitiesContent.pagedVideos.totalCount
     },
     get curRoute() {
       return self.root.curRoute

@@ -83,31 +83,31 @@ const columns = [
     align: 'center',
   },
   /*
-  {
-    title: '收藏',
-    width: 100,
-    dataIndex: 'favoritedCount',
-    align: 'center',
-  },
-  {
-    title: '点赞',
-    width: 100,
-    dataIndex: 'starredCount',
-    align: 'center',
-  },
-  {
-    title: '评论数',
-    width: 100,
-    dataIndex: 'commentsCount',
-    align: 'center',
-  },
-  {
-    title: '评论参与',
-    width: 150,
-    dataIndex: 'commentsParticipatorsCount',
-    align: 'center',
-  },
- */
+     {
+     title: '收藏',
+     width: 100,
+     dataIndex: 'favoritedCount',
+     align: 'center',
+     },
+     {
+     title: '点赞',
+     width: 100,
+     dataIndex: 'starredCount',
+     align: 'center',
+     },
+     {
+     title: '评论数',
+     width: 100,
+     dataIndex: 'commentsCount',
+     align: 'center',
+     },
+     {
+     title: '评论参与',
+     width: 150,
+     dataIndex: 'commentsParticipatorsCount',
+     align: 'center',
+     },
+   */
   {
     title: '创建时间',
     width: 150,
@@ -157,7 +157,7 @@ const columns = [
   },
 ]
 
-const JobsContent = ({ data, restProps: { communitiesLoading } }) => (
+const VideosContent = ({ data, restProps: { communitiesLoading } }) => (
   <React.Fragment>
     {data ? (
       <div>
@@ -180,4 +180,4 @@ const JobsContent = ({ data, restProps: { communitiesLoading } }) => (
   </React.Fragment>
 )
 
-export default JobsContent
+export default VideosContent

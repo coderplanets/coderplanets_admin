@@ -19,6 +19,9 @@ export const ssrPagedSchema = subpath => {
     case ROUTE.REPOS: {
       return P.pagedRepos
     }
+    case ROUTE.VIDEOS: {
+      return P.pagedVideos
+    }
     default: {
       return P.pagedCommunities
     }
@@ -50,6 +53,11 @@ export const ssrPagedContents = (mainPath, subPath, resp) => {
     case ROUTE.REPOS: {
       return {
         communitiesContent: { pagedRepos: resp.pagedRepos },
+      }
+    }
+    case ROUTE.VIDEOS: {
+      return {
+        communitiesContent: { pagedVideos: resp.pagedVideos },
       }
     }
     default: {

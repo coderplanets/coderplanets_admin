@@ -33,6 +33,7 @@ export const Video = t.model('Video', {
   viewerHasStarred: t.optional(t.boolean, false),
   favoritedCategoryId: t.maybeNull(t.string),
 
+  commentsCount: t.optional(t.number, 0),
   pagedCommentsParticipators: t.optional(PagedUsers, {}),
 
   publishAt: t.maybeNull(t.string),

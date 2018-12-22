@@ -50,6 +50,8 @@ export const Repo = t.model('Reop', {
   tags: t.optional(t.array(Tag), []),
 
   lastSync: t.maybeNull(t.string),
+
+  commentsCount: t.optional(t.number, 0),
   pagedCommentsParticipators: t.optional(PagedUsers, {}),
 
   viewerHasViewed: t.optional(t.boolean, false),

@@ -41,6 +41,13 @@ export const pagedVideos = `
         author {
           ${F.author}
         }
+        commentsCount
+        communities {
+          ${F.community}
+        }
+        tags {
+          ${F.tag}
+        }
       }
       ${F.pagedCounts}
     }
