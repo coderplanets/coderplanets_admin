@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { cutFrom } from '../../utils'
 import {
   Pagi,
   Table,
@@ -33,28 +32,19 @@ const columns = [
     align: 'center',
     fixed: 'left',
     width: 80,
-    render: text => {
-      // TODO: jadge image type before render, currently only svg supported
-      return <CommunityIcon src={text} />
-    },
+    render: text => <CommunityIcon src={text} />,
   },
   {
     title: '名称',
     width: 200,
     dataIndex: 'title',
     align: 'center',
-    render: text => {
-      return <div>{cutFrom(text, 15)}</div>
-    },
   },
   {
     title: '描述',
     width: 300,
     dataIndex: 'desc',
-    align: 'center',
-    render: text => {
-      return <div>{cutFrom(text, 10)}</div>
-    },
+    align: 'left',
   },
   {
     title: 'threads',
@@ -75,9 +65,6 @@ const columns = [
     width: 150,
     dataIndex: 'raw',
     align: 'center',
-    render: text => {
-      return <div>{cutFrom(text, 10)}</div>
-    },
   },
   {
     title: '类别',
@@ -111,17 +98,13 @@ const columns = [
     width: 100,
     dataIndex: 'postsCount',
     align: 'center',
-    render: (text, record) => {
-      return <ContentsCountCell data={record} />
-    },
+    render: (text, record) => <ContentsCountCell data={record} />,
   },
   {
     title: '时间戳',
     width: 120,
     align: 'center',
-    render: (text, record) => {
-      return <TimeStampCell data={record} />
-    },
+    render: (text, record) => <TimeStampCell data={record} />,
   },
   {
     title: '操作',

@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { cutFrom } from '../../utils'
 import {
   Pagi,
   Table,
@@ -13,6 +12,8 @@ import {
 } from '../../components'
 
 import { OperationWrapper } from './styles'
+
+import { Trans } from '../../utils'
 import * as logic from './logic'
 
 /* eslint-disable react/display-name */
@@ -26,48 +27,50 @@ const columns = [
   },
   {
     title: '标题',
-    width: 200,
+    width: 120,
     dataIndex: 'title',
-    align: 'center',
-    render: text => {
-      return <div>{cutFrom(text, 15)}</div>
-    },
+    align: 'left',
+    render: text => (
+      <div>
+        {Trans(text)}({text})
+      </div>
+    ),
   },
   {
     title: '颜色',
-    width: 80,
+    width: 60,
     dataIndex: 'color',
     align: 'center',
-    render: text => {
-      return <ColorCell color={text} />
-    },
+    render: text => <ColorCell color={text} />,
   },
   {
     title: '社区',
     width: 200,
     dataIndex: 'community',
     align: 'center',
-    render: community => {
-      return <CommunityCell data={community} />
-    },
+    render: community => <CommunityCell data={community} />,
   },
   {
     title: '版块',
     width: 200,
     dataIndex: 'thread',
     align: 'center',
-    render: text => {
-      return <div>{text}</div>
-    },
+    render: text => (
+      <div>
+        {Trans(text)}({text})
+      </div>
+    ),
   },
   {
-    title: 'topic',
+    title: '子话题',
     width: 150,
     dataIndex: 'topic',
     align: 'center',
-    render: text => {
-      return <div>{text.title}</div>
-    },
+    render: text => (
+      <div>
+        {Trans(text.title)}({text.title})
+      </div>
+    ),
   },
   {
     title: '时间戳',
@@ -80,29 +83,27 @@ const columns = [
     width: 200,
     dataIndex: '',
     align: 'center',
-    render: (text, record) => {
-      return (
-        <OperationWrapper>
-          <Button
-            size="small"
-            type="primary"
-            ghost
-            onClick={logic.onEditTag.bind(this, record)}
-          >
-            编辑
-          </Button>
-          <Space right="10px" />
-          <Button
-            size="small"
-            type="red"
-            ghost
-            onClick={logic.onDeleteTag.bind(this, record)}
-          >
-            删除
-          </Button>
-        </OperationWrapper>
-      )
-    },
+    render: (text, record) => (
+      <OperationWrapper>
+        <Button
+          size="small"
+          type="primary"
+          ghost
+          onClick={logic.onEditTag.bind(this, record)}
+        >
+          编辑
+        </Button>
+        <Space right="10px" />
+        <Button
+          size="small"
+          type="red"
+          ghost
+          onClick={logic.onDeleteTag.bind(this, record)}
+        >
+          删除
+        </Button>
+      </OperationWrapper>
+    ),
   },
 ]
 

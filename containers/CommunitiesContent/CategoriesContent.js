@@ -29,9 +29,7 @@ const columns = [
     width: 150,
     dataIndex: 'title',
     align: 'center',
-    render: text => {
-      return <div>{Trans(text)}</div>
-    },
+    render: text => <div>{Trans(text)}</div>,
   },
   {
     title: 'raw',
@@ -44,55 +42,47 @@ const columns = [
     width: 260,
     dataIndex: 'communities',
     align: 'center',
-    render: communities => {
-      return <CommunityCell array={communities} />
-    },
+    render: communities => <CommunityCell array={communities} />,
   },
   {
     title: '创建者',
     width: 180,
     dataIndex: 'author',
     align: 'center',
-    render: author => {
-      return <UserCell user={author} />
-    },
+    render: text => <UserCell user={text} />,
   },
   {
     title: '时间戳',
     width: 120,
     align: 'center',
-    render: (text, record) => {
-      return <TimeStampCell data={record} />
-    },
+    render: (text, record) => <TimeStampCell data={record} />,
   },
   {
     title: '操作',
     width: 200,
     dataIndex: '',
     align: 'center',
-    render: (text, record) => {
-      return (
-        <OperationWrapper>
-          <Button
-            size="small"
-            type="primary"
-            ghost
-            onClick={logic.onEditCategory.bind(this, record)}
-          >
-            编辑
-          </Button>
-          <Space right="10px" />
-          <Button
-            size="small"
-            type="red"
-            ghost
-            onClick={logic.onDeleteCagegory.bind(this, record)}
-          >
-            删除
-          </Button>
-        </OperationWrapper>
-      )
-    },
+    render: (text, record) => (
+      <OperationWrapper>
+        <Button
+          size="small"
+          type="primary"
+          ghost
+          onClick={logic.onEditCategory.bind(this, record)}
+        >
+          编辑
+        </Button>
+        <Space right="10px" />
+        <Button
+          size="small"
+          type="red"
+          ghost
+          onClick={logic.onDeleteCagegory.bind(this, record)}
+        >
+          删除
+        </Button>
+      </OperationWrapper>
+    ),
   },
 ]
 

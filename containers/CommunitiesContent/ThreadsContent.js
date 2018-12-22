@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { cutFrom } from '../../utils'
 import { Pagi, Table, TableLoading } from '../../components'
 
 /* import { OperationWrapper } from './styles' */
+import { Trans } from '../../utils'
 import * as logic from './logic'
 
 /* eslint-disable react/display-name */
@@ -19,7 +19,11 @@ const columns = [
     width: 300,
     dataIndex: 'title',
     align: 'center',
-    render: text => <div>{cutFrom(text, 15)}</div>,
+    render: text => (
+      <div>
+        {Trans(text)}({text})
+      </div>
+    ),
   },
   {
     title: 'raw',
