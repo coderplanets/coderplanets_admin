@@ -48,6 +48,8 @@ export const pagedVideos = `
         tags {
           ${F.tag}
         }
+        insertedAt
+        updatedAt
       }
       ${F.pagedCounts}
     }

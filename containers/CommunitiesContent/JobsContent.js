@@ -1,7 +1,7 @@
 import React from 'react'
-import TimeAgo from 'timeago-react'
 
 import { cutFrom } from '../../utils'
+
 import {
   Pagi,
   Table,
@@ -11,6 +11,7 @@ import {
   UserCell,
   CommunityCell,
   TagsCell,
+  TimeStampCell,
 } from '../../components'
 
 import { OperationWrapper } from './styles'
@@ -82,49 +83,25 @@ const columns = [
     dataIndex: 'views',
     align: 'center',
   },
-  /*
-  {
-    title: '收藏',
-    width: 100,
-    dataIndex: 'favoritedCount',
-    align: 'center',
-  },
-  {
-    title: '点赞',
-    width: 100,
-    dataIndex: 'starredCount',
-    align: 'center',
-  },
   {
     title: '评论数',
     width: 100,
     dataIndex: 'commentsCount',
     align: 'center',
   },
+  /*
+     {
+     title: '收藏',
+     width: 100,
+     dataIndex: 'favoritedCount',
+     align: 'center',
+     },
+   */
   {
-    title: '评论参与',
-    width: 150,
-    dataIndex: 'commentsParticipatorsCount',
+    title: '时间戳',
+    width: 120,
     align: 'center',
-  },
- */
-  {
-    title: '创建时间',
-    width: 150,
-    dataIndex: 'insertedAt',
-    align: 'center',
-    render: text => {
-      return <TimeAgo datetime={text} locale="zh_CN" />
-    },
-  },
-  {
-    title: '上次更新',
-    width: 150,
-    dataIndex: 'updatedAt',
-    align: 'center',
-    render: text => {
-      return <TimeAgo datetime={text} locale="zh_CN" />
-    },
+    render: (text, record) => <TimeStampCell data={record} />,
   },
   {
     title: '操作',

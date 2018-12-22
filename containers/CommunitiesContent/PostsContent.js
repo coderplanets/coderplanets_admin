@@ -1,7 +1,5 @@
 import React from 'react'
-import TimeAgo from 'timeago-react'
 
-import { cutFrom } from '../../utils'
 import {
   Pagi,
   Table,
@@ -11,6 +9,7 @@ import {
   UserCell,
   CommunityCell,
   TagsCell,
+  TimeStampCell,
 } from '../../components'
 
 import { OperationWrapper } from './styles'
@@ -27,21 +26,21 @@ const columns = [
   },
   {
     title: '标题',
-    width: 300,
+    width: 250,
     dataIndex: 'title',
-    align: 'center',
+    align: 'left',
     fixed: 'left',
     render: text => {
-      return <div>{cutFrom(text, 15)}</div>
+      return <div>{text}</div>
     },
   },
   {
     title: '摘要',
-    width: 400,
+    width: 300,
     dataIndex: 'digest',
     align: 'center',
     render: text => {
-      return <div>{cutFrom(text, 10)}</div>
+      return <div>{text}</div>
     },
   },
   {
@@ -92,6 +91,12 @@ const columns = [
     align: 'center',
   },
   {
+    title: '评论数',
+    width: 100,
+    dataIndex: 'commentsCount',
+    align: 'center',
+  },
+  {
     title: '收藏',
     width: 100,
     dataIndex: 'favoritedCount',
@@ -104,34 +109,10 @@ const columns = [
     align: 'center',
   },
   {
-    title: '评论数',
-    width: 100,
-    dataIndex: 'commentsCount',
+    title: '时间戳',
+    width: 120,
     align: 'center',
-  },
-  {
-    title: '评论参与',
-    width: 150,
-    dataIndex: 'commentsParticipatorsCount',
-    align: 'center',
-  },
-  {
-    title: '创建时间',
-    width: 150,
-    dataIndex: 'insertedAt',
-    align: 'center',
-    render: text => {
-      return <TimeAgo datetime={text} locale="zh_CN" />
-    },
-  },
-  {
-    title: '上次更新',
-    width: 150,
-    dataIndex: 'updatedAt',
-    align: 'center',
-    render: text => {
-      return <TimeAgo datetime={text} locale="zh_CN" />
-    },
+    render: (text, record) => <TimeStampCell data={record} />,
   },
   {
     title: '操作',

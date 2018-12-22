@@ -1,17 +1,7 @@
 import React from 'react'
-/* import TimeAgo from 'timeago-react' */
 
 import { cutFrom } from '../../utils'
-import {
-  Pagi,
-  Table,
-  TableLoading,
-  /* Button, */
-  /* Space, */
-  /* UserCell, */
-  /* CommunityCell, */
-  /* TagsCell, */
-} from '../../components'
+import { Pagi, Table, TableLoading } from '../../components'
 
 /* import { OperationWrapper } from './styles' */
 import * as logic from './logic'
@@ -38,24 +28,6 @@ const columns = [
     align: 'center',
   },
   /*
-     {
-     title: '创建时间',
-     width: 150,
-     dataIndex: 'insertedAt',
-     align: 'center',
-     render: text => {
-     return <TimeAgo datetime={text} locale="zh_CN" />
-     },
-     },
-     {
-     title: '上次更新',
-     width: 150,
-     dataIndex: 'updatedAt',
-     align: 'center',
-     render: text => {
-     return <TimeAgo datetime={text} locale="zh_CN" />
-     },
-     },
      {
      title: '操作',
      width: 200,

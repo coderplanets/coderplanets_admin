@@ -61,7 +61,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread, countsInfo }) => (
       onClick={logic.onRootMenuSelect.bind(this, 'communities', 'threads')}
     >
       <ChildrenItemInner>
-        <ChildrenTitle>版块(Threads)</ChildrenTitle>
+        <ChildrenTitle>频道/版块</ChildrenTitle>
         <ChildrenNum>{countsInfo.threadsCount}</ChildrenNum>
       </ChildrenItemInner>
     </ChildrenItem>
@@ -88,7 +88,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread, countsInfo }) => (
       onClick={logic.onRootMenuSelect.bind(this, 'communities', 'repos')}
     >
       <ChildrenItemInner>
-        <ChildrenTitle>项目</ChildrenTitle>
+        <ChildrenTitle>开源项目</ChildrenTitle>
         <ChildrenNum>{countsInfo.reposCount}</ChildrenNum>
       </ChildrenItemInner>
     </ChildrenItem>

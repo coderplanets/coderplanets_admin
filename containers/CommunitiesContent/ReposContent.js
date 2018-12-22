@@ -1,5 +1,4 @@
 import React from 'react'
-import TimeAgo from 'timeago-react'
 
 import {
   Pagi,
@@ -10,6 +9,7 @@ import {
   UserCell,
   CommunityCell,
   TagsCell,
+  TimeStampCell,
 } from '../../components'
 
 import { OperationWrapper } from './styles'
@@ -90,28 +90,10 @@ const columns = [
     align: 'center',
   },
   {
-    title: '评论参与',
-    width: 150,
-    dataIndex: 'commentsParticipatorsCount',
+    title: '时间戳',
+    width: 120,
     align: 'center',
-  },
-  {
-    title: '创建时间',
-    width: 150,
-    dataIndex: 'insertedAt',
-    align: 'center',
-    render: text => {
-      return <TimeAgo datetime={text} locale="zh_CN" />
-    },
-  },
-  {
-    title: '上次更新',
-    width: 150,
-    dataIndex: 'updatedAt',
-    align: 'center',
-    render: text => {
-      return <TimeAgo datetime={text} locale="zh_CN" />
-    },
+    render: (text, record) => <TimeStampCell data={record} />,
   },
   {
     title: '操作',

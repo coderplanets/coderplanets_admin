@@ -18,7 +18,7 @@ const UserCell = ({ user, align, left, small }) => (
   <div>
     <UserCellWrapper align={align} left={left}>
       <Avatar src={user.avatar} alt={user.nickname} small={small} />
-      <NickName>{cutFrom(user.nickname, 15)}</NickName>
+      <NickName>{cutFrom(user.nickname, 10)}</NickName>
     </UserCellWrapper>
   </div>
 )

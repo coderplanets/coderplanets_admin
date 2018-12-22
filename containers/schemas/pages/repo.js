@@ -49,6 +49,8 @@ export const pagedRepos = `
         tags {
           ${F.tag}
         }
+        insertedAt
+        updatedAt
       }
       ${F.pagedCounts}
     }

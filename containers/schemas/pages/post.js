@@ -47,15 +47,14 @@ export const pagedPosts = `
           ${F.community}
         }
         commentsCount
-        commentsParticipators(filter: { first: 5 }) {
-          ${F.author}
-        }
         tags {
           ${F.tag}
         }
         author {
           ${F.author}
         }
+        insertedAt
+        updatedAt
       }
       ${F.pagedCounts}
     }

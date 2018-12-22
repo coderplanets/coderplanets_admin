@@ -38,6 +38,7 @@ export const Divider = styled.div`
 
 export const CategoryWrapper = styled.div`
   display: flex;
+  padding-left: 20px;
   margin-bottom: 30px;
   align-items: center;
   flex-wrap: wrap;

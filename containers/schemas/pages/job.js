@@ -46,6 +46,8 @@ export const pagedJobs = `
         tags {
           ${F.tag}
         }
+        insertedAt
+        updatedAt
       }
       ${F.pagedCounts}
     }
