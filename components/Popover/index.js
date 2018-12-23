@@ -19,18 +19,16 @@ const renderContent = content => {
   return <ContentContainer>{content}</ContentContainer>
 }
 
-const PopoverComponent = ({ title, children, content, trigger, placement }) => {
-  return (
-    <Popover
-      content={renderContent(content)}
-      placement={placement}
-      title={title}
-      trigger={trigger}
-    >
-      {children}
-    </Popover>
-  )
-}
+const PopoverComponent = ({ title, children, content, trigger, placement }) => (
+  <Popover
+    content={renderContent(content)}
+    placement={placement}
+    title={title}
+    trigger={trigger}
+  >
+    {children}
+  </Popover>
+)
 
 PopoverComponent.propTypes = {
   children: PropTypes.node.isRequired,
