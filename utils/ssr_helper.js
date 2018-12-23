@@ -29,6 +29,35 @@ export const ssrPagedSchema = subpath => {
 }
 
 export const ssrPagedContents = (mainPath, subPath, resp) => {
+  switch (mainPath) {
+    case ROUTE.COMMUNITIES: {
+      return ssrCommunitiesContents(subPath, resp)
+    }
+
+    default: {
+      return ssrCommunityContents(subPath, resp)
+    }
+  }
+}
+
+// communityContent
+const ssrCommunityContents = (subPath, resp) => {
+  switch (subPath) {
+    case ROUTE.POSTS: {
+      return {
+        communityContent: { pagedPosts: resp.pagedPosts },
+      }
+    }
+
+    default: {
+      return {
+        communityContent: { pagedPosts: resp.pagedPosts },
+      }
+    }
+  }
+}
+
+const ssrCommunitiesContents = (subPath, resp) => {
   switch (subPath) {
     case ROUTE.CATEGORIES: {
       return {

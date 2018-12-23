@@ -46,10 +46,10 @@ app.prepare().then(() => {
     return renderAndCache(req, res, '/users', req.query)
   })
 
-  server.get('/:main/:sub?', (req, res) => {
+  server.get('/:community/:thread', (req, res) => {
     // console.log('match me user')
     // return app.render(req, res, '/user', req.query)
-    return renderAndCache(req, res, '/', req.query)
+    return renderAndCache(req, res, '/community', req.query)
   })
 
   server.get('*', (req, res) => handle(req, res))

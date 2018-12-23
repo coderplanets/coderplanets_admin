@@ -139,12 +139,10 @@ export const ROUTE = {
   // id is used for UI when item is active
   // communities CURD
   COMMUNITIES: 'communities',
+  COMMUNITY: 'community',
   // communities categories CURD
-  CATEGORIES: 'categories',
   TAGS: 'tags',
   THREADS: 'threads',
-
-  COMMUNITY: 'community',
 
   USERS: 'users',
   SENIOR: 'senior',
