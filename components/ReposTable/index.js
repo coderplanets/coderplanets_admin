@@ -1,14 +1,12 @@
 /*
  *
- * VideosTable
+ * ReposTable
  *
  */
 
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Table, Button } from 'antd'
-
-import { OperationWrapper } from './styles'
 
 import Pagi from '../Pagi'
 import { TableLoading } from '../LoadingEffects'
@@ -18,19 +16,15 @@ import CommunityCell from '../CommunityCell'
 import TagsCell from '../TagsCell'
 import TimeStampCell from '../TimeStampCell'
 
-import { makeDebugger, cutFrom, TYPE } from '../../utils'
+import { OperationWrapper } from './styles'
+
+import { makeDebugger, TYPE } from '../../utils'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:VideosTable:index')
+const debug = makeDebugger('c:ReposTable:index')
 /* eslint-enable no-unused-vars */
 
-class VideosTable extends React.Component {
-  /*
-     constructor(props) {
-     super(props)
-     }
-   */
-
+class ReposTable extends React.PureComponent {
   columns() {
     const {
       setCommunity,
@@ -52,33 +46,41 @@ class VideosTable extends React.Component {
       {
         title: '标题',
         width: 300,
-        dataIndex: 'title',
-        align: 'center',
+        align: 'left',
         fixed: 'left',
-        render: text => <div>{cutFrom(text, 15)}</div>,
+        render: (text, record) => (
+          <div>
+            <div>{record.ownerName}</div>
+            <div>{record.title}</div>
+          </div>
+        ),
       },
       {
         title: '作者',
         width: 200,
         dataIndex: 'author',
         align: 'center',
-        render: author => <UserCell user={author} />,
+        render: author => {
+          return <UserCell user={author} />
+        },
       },
       {
         title: '社区',
         width: 150,
         dataIndex: 'communities',
         align: 'center',
-        render: (communities, record) => (
-          <CommunityCell
-            array={communities}
-            source={record}
-            thread={TYPE.VIDEO}
-            onDelete={unsetCommunity}
-            onAdd={setCommunity}
-            withSetter
-          />
-        ),
+        render: (communities, record) => {
+          return (
+            <CommunityCell
+              array={communities}
+              source={record}
+              thread={TYPE.REPO}
+              onDelete={unsetCommunity}
+              onAdd={setCommunity}
+              withSetter
+            />
+          )
+        },
       },
       {
         title: '标签',
@@ -87,7 +89,7 @@ class VideosTable extends React.Component {
         align: 'center',
         render: (tags, record) => (
           <TagsCell
-            thread={TYPE.VIDEO}
+            thread={TYPE.REPO}
             source={record}
             onDelete={unsetTag}
             onAdd={setTag}
@@ -101,25 +103,11 @@ class VideosTable extends React.Component {
         align: 'center',
       },
       {
-        title: '评论',
+        title: '评论数',
         width: 100,
         dataIndex: 'commentsCount',
         align: 'center',
       },
-      /*
-         {
-         title: '收藏',
-         width: 100,
-         dataIndex: 'favoritedCount',
-         align: 'center',
-         },
-         {
-         title: '点赞',
-         width: 100,
-         dataIndex: 'starredCount',
-         align: 'center',
-         },
-       */
       {
         title: '时间戳',
         width: 120,
@@ -131,27 +119,29 @@ class VideosTable extends React.Component {
         width: 200,
         dataIndex: '',
         align: 'center',
-        render: (text, record) => (
-          <OperationWrapper>
-            <Button
-              size="small"
-              type="primary"
-              ghost
-              onClick={onEdit.bind(this, record)}
-            >
-              编辑
-            </Button>
-            <Space right="10px" />
-            <Button
-              size="small"
-              type="red"
-              ghost
-              onClick={onDelete.bind(this, record)}
-            >
-              删除
-            </Button>
-          </OperationWrapper>
-        ),
+        render: (text, record) => {
+          return (
+            <OperationWrapper>
+              <Button
+                size="small"
+                type="primary"
+                ghost
+                onClick={onEdit.bind(this, record)}
+              >
+                编辑
+              </Button>
+              <Space right="10px" />
+              <Button
+                size="small"
+                type="red"
+                ghost
+                onClick={onDelete.bind(this, record)}
+              >
+                删除
+              </Button>
+            </OperationWrapper>
+          )
+        },
       },
     ]
   }
@@ -184,10 +174,11 @@ class VideosTable extends React.Component {
   }
 }
 
-VideosTable.propTypes = {
+ReposTable.propTypes = {
   data: PropTypes.any.isRequired,
   loading: PropTypes.bool,
   pageChange: PropTypes.func,
+
   setCommunity: PropTypes.func,
   unsetCommunity: PropTypes.func,
   unsetTag: PropTypes.func,
@@ -196,9 +187,10 @@ VideosTable.propTypes = {
   onDelete: PropTypes.func,
 }
 
-VideosTable.defaultProps = {
+ReposTable.defaultProps = {
   loading: false,
   pageChange: debug,
+
   setCommunity: debug,
   unsetCommunity: debug,
   unsetTag: debug,
@@ -207,4 +199,4 @@ VideosTable.defaultProps = {
   onDelete: debug,
 }
 
-export default React.memo(VideosTable)
+export default ReposTable

@@ -59,6 +59,8 @@ export const TYPE = {
 
   POST: 'POST',
   JOB: 'JOB',
+  REPO: 'REPO',
+  VIDEO: 'VIDEO',
   FAVORITE: 'FAVORITE',
   STAR: 'STAR',
   WATCH: 'WATCH',
