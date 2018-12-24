@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { F } from '../schemas'
+import { F, P } from '../schemas'
 
 const communities = gql`
   query($filter: PagedFilter!) {
@@ -20,6 +20,9 @@ const communities = gql`
       totalPages
     }
   }
+`
+const community = gql`
+  ${P.community}
 `
 
 const searchCommunities = gql`
@@ -50,6 +53,7 @@ const countStatus = gql`
 
 const schema = {
   communities,
+  community,
   searchCommunities,
   countStatus,
 }

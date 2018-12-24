@@ -35,21 +35,18 @@ export const pin = () => store.markState({ pin: !store.pin })
 export function extendMenuBar(communityRaw) {
   switch (communityRaw) {
     case ROUTE.COMMUNITIES: {
-      /* return Router.push(`/${ROUTE.COMMUNITIES}`, `/${communityRaw}/`) */
-      return Router.push(
-        {
-          pathname: `/${ROUTE.COMMUNITIES}`,
-          asPath: `/${communityRaw}/`,
-        }
-        /* `/${ROUTE.COMMUNITIES}`, `/${communityRaw}/` */
-      )
+      return Router.push({
+        pathname: `/${ROUTE.COMMUNITIES}`,
+        asPath: `/${communityRaw}/`,
+      })
     }
     case ROUTE.USERS: {
       return Router.push(`/${ROUTE.USERS}`, `/${communityRaw}/`)
     }
     default: {
       const asPath = `/${communityRaw}/${ROUTE.POSTS}`
-      return Router.push('/', asPath)
+      Router.push('/', asPath)
+      return loadCommunity(communityRaw)
     }
   }
 }
@@ -62,13 +59,7 @@ export function onRootMenuSelect(mainPath, subPath) {
   })
 }
 
-export function onCommunityChildMenuChange(activeThread) {
-  let asPath = `/${store.activeRaw}/${activeThread}`
-  if (R.isEmpty(activeThread)) {
-    asPath = `/${store.activeRaw}`
-  }
-  Router.push('/', asPath)
-}
+export const loadCommunity = raw => sr71$.query(S.community, { raw })
 
 export function loadCommunities(page = 1) {
   const size = PAGE_SIZE.D
@@ -96,6 +87,11 @@ export const searchOnChange = e => {
 // Data & Error handlers
 // ###############################
 const DataSolver = [
+  {
+    match: asyncRes('community'),
+    action: ({ community: activeCommunity }) =>
+      store.markState({ activeCommunity }),
+  },
   {
     match: asyncRes('pagedCommunities'),
     action: ({ pagedCommunities }) => store.loadCommunities(pagedCommunities),

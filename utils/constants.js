@@ -145,6 +145,7 @@ export const ROUTE = {
   // communities categories CURD
   TAGS: 'tags',
   THREADS: 'threads',
+  CATEGORIES: 'categories',
 
   USERS: 'users',
   SENIOR: 'senior',

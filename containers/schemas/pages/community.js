@@ -16,11 +16,7 @@ export const community = `
   query community($id: ID, $raw: String) {
     community(id: $id, raw: $raw) {
       ${F.community}
-      threads {
-        title
-        raw
-        index
-      }
+      contributesDigest
       subscribersCount
       editorsCount
       postsCount

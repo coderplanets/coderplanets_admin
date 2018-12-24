@@ -22,7 +22,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread, countsInfo }) => (
   <ChildrenWrapper active={activeRaw === curRaw}>
     <ChildrenItem
       active={ROUTE.COMMUNITIES === activeThread || activeThread === 'index'}
-      onClick={logic.onRootMenuSelect.bind(this, 'communities', 'index')}
+      onClick={logic.onRootMenuSelect.bind(this, ROUTE.COMMUNITIES, 'index')}
     >
       <ChildrenItemInner>
         <ChildrenTitle>社区</ChildrenTitle>
@@ -31,7 +31,11 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread, countsInfo }) => (
     </ChildrenItem>
     <ChildrenItem
       active={ROUTE.CATEGORIES === activeThread}
-      onClick={logic.onRootMenuSelect.bind(this, 'communities', 'categories')}
+      onClick={logic.onRootMenuSelect.bind(
+        this,
+        ROUTE.COMMUNITIES,
+        ROUTE.CATEGORIES
+      )}
     >
       <ChildrenItemInner>
         <ChildrenTitle>分类</ChildrenTitle>
@@ -40,7 +44,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread, countsInfo }) => (
     </ChildrenItem>
     <ChildrenItem
       active={ROUTE.TAGS === activeThread}
-      onClick={logic.onRootMenuSelect.bind(this, 'communities', 'tags')}
+      onClick={logic.onRootMenuSelect.bind(this, ROUTE.COMMUNITIES, ROUTE.TAGS)}
     >
       <ChildrenItemInner>
         <ChildrenTitle>标签</ChildrenTitle>
@@ -49,7 +53,11 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread, countsInfo }) => (
     </ChildrenItem>
     <ChildrenItem
       active={ROUTE.EDITORS === activeThread}
-      onClick={logic.onRootMenuSelect.bind(this, 'communities', 'editors')}
+      onClick={logic.onRootMenuSelect.bind(
+        this,
+        ROUTE.COMMUNITIES,
+        ROUTE.EDITORS
+      )}
     >
       <ChildrenItemInner>
         <ChildrenTitle>编辑</ChildrenTitle>
@@ -58,7 +66,11 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread, countsInfo }) => (
     </ChildrenItem>
     <ChildrenItem
       active={ROUTE.THREADS === activeThread}
-      onClick={logic.onRootMenuSelect.bind(this, 'communities', 'threads')}
+      onClick={logic.onRootMenuSelect.bind(
+        this,
+        ROUTE.COMMUNITIES,
+        ROUTE.THREADS
+      )}
     >
       <ChildrenItemInner>
         <ChildrenTitle>频道/版块</ChildrenTitle>
@@ -67,7 +79,11 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread, countsInfo }) => (
     </ChildrenItem>
     <ChildrenItem
       active={ROUTE.POSTS === activeThread}
-      onClick={logic.onRootMenuSelect.bind(this, 'communities', 'posts')}
+      onClick={logic.onRootMenuSelect.bind(
+        this,
+        ROUTE.COMMUNITIES,
+        ROUTE.POSTS
+      )}
     >
       <ChildrenItemInner>
         <ChildrenTitle>帖子</ChildrenTitle>
@@ -76,7 +92,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread, countsInfo }) => (
     </ChildrenItem>
     <ChildrenItem
       active={ROUTE.JOBS === activeThread}
-      onClick={logic.onRootMenuSelect.bind(this, 'communities', 'jobs')}
+      onClick={logic.onRootMenuSelect.bind(this, ROUTE.COMMUNITIES, ROUTE.JOBS)}
     >
       <ChildrenItemInner>
         <ChildrenTitle>招聘</ChildrenTitle>
@@ -85,7 +101,11 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread, countsInfo }) => (
     </ChildrenItem>
     <ChildrenItem
       active={ROUTE.REPOS === activeThread}
-      onClick={logic.onRootMenuSelect.bind(this, 'communities', 'repos')}
+      onClick={logic.onRootMenuSelect.bind(
+        this,
+        ROUTE.COMMUNITIES,
+        ROUTE.REPOS
+      )}
     >
       <ChildrenItemInner>
         <ChildrenTitle>开源项目</ChildrenTitle>
@@ -94,7 +114,11 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread, countsInfo }) => (
     </ChildrenItem>
     <ChildrenItem
       active={ROUTE.VIDEOS === activeThread}
-      onClick={logic.onRootMenuSelect.bind(this, 'communities', 'videos')}
+      onClick={logic.onRootMenuSelect.bind(
+        this,
+        ROUTE.COMMUNITIES,
+        ROUTE.VIDEOS
+      )}
     >
       <ChildrenItemInner>
         <ChildrenTitle>视频</ChildrenTitle>

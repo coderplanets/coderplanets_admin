@@ -292,6 +292,7 @@ const DataSolver = [
     match: asyncRes('pagedCategories'),
     action: ({ pagedCategories }) => {
       cancleLoading()
+      debug('pagedCategories: ', pagedCategories)
       store.markState({ pagedCategories })
     },
   },
@@ -380,7 +381,6 @@ const DataSolver = [
     action: res => {
       const { mainPath, subPath } = res[EVENT.SIDEBAR_MENU_CHANGE].data
       if (mainPath !== ROUTE.COMMUNITIES) return false
-      debug('unknow event: ', subPath)
 
       switch (subPath) {
         case ROUTE.CATEGORIES: {
@@ -440,10 +440,8 @@ const ErrSolver = [
 export function init(_store) {
   store = _store
 
-  if (sub$) return // loadCommunities() // loadCategories()
+  if (sub$) return false
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
-
-  // loadCommunities() // loadCategories()
 }
 
 export function uninit() {

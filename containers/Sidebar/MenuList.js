@@ -13,6 +13,7 @@ const MenuList = ({
   activeRaw,
   activeThread,
   rootCountStatusData,
+  activeCommunityData,
   countsInfo,
 }) => (
   <MenuItem>
@@ -31,6 +32,7 @@ const MenuList = ({
       <CommunityMenuItem
         key={uid.gen()}
         item={item}
+        community={activeCommunityData}
         activeRaw={activeRaw}
         activeThread={activeThread}
         countsInfo={countsInfo}

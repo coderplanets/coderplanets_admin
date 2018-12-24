@@ -15,6 +15,8 @@ import Header from '../containers/Header'
 import CommunityBanner from '../containers/CommunityBanner'
 import CommunityContent from '../containers/CommunityContent'
 
+import { P } from '../containers/schemas'
+
 import {
   makeGQClient,
   getMainPath,
@@ -23,6 +25,7 @@ import {
   ssrPagedSchema,
   ssrPagedContents,
 } from '../utils'
+
 import Footer from '../components/Footer'
 
 // try to fix safari bug
@@ -38,14 +41,16 @@ async function fetchData(props) {
   const gqClient = makeGQClient(token)
 
   const subpath = getSubPath(props)
+  const mainPath = getMainPath(props)
   console.log('subpath --> ', subpath)
 
-  // const sessionState = gqClient.request(P.sessionState)
+  const community = gqClient.request(P.community, { raw: mainPath })
   const pagedContents = gqClient.request(ssrPagedSchema(subpath), {
     filter: { page: 1, size: 30 },
   })
 
   return {
+    ...(await community),
     ...(await pagedContents),
   }
 }
@@ -72,10 +77,13 @@ export default class Index extends React.Component {
       return { statusCode: 404, target: subPath }
     }
 
-    // const { pagedCommunities } = resp
+    const { community } = resp
     const pagedContents = ssrPagedContents(mainPath, subPath, resp)
 
-    return R.merge({ route: { mainPath, subPath } }, pagedContents)
+    return R.merge(
+      { sidebar: { activeCommunity: community }, route: { mainPath, subPath } },
+      pagedContents
+    )
   }
 
   constructor(props) {

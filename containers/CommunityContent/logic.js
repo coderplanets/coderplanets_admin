@@ -6,7 +6,8 @@ import {
   $solver,
   // ERR,
   makeDebugger,
-  // EVENT,
+  EVENT,
+  ROUTE,
   TYPE,
   scrollIntoEle,
 } from '../../utils'
@@ -16,7 +17,10 @@ import S from './schema'
 
 import SR71 from '../../utils/network/sr71'
 
-const sr71$ = new SR71()
+const sr71$ = new SR71({
+  resv_event: [EVENT.SIDEBAR_MENU_CHANGE],
+})
+
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
@@ -25,10 +29,10 @@ const debug = makeDebugger('L:CommunityContent')
 
 let store = null
 
-const commonFilter = page => {
+const commonFilter = (page, community = 'home') => {
   const size = PAGE_SIZE.D
   return {
-    filter: { page, size },
+    filter: { page, size, community },
   }
 }
 
@@ -36,7 +40,9 @@ export function loadPosts(page = 1) {
   scrollIntoEle(TYPE.APP_HEADER_ID)
   store.markState({ postsLoading: true })
 
-  sr71$.query(S.pagedPosts, commonFilter(page))
+  const { mainPath: community } = store.curRoute
+
+  sr71$.query(S.pagedPosts, commonFilter(page, community))
 }
 
 export function loadTags(page = 1) {
@@ -73,6 +79,40 @@ const DataSolver = [
     action: ({ pagedTags }) => {
       cancleLoading()
       store.markState({ pagedTags })
+    },
+  },
+  {
+    match: asyncRes(EVENT.SIDEBAR_MENU_CHANGE),
+    action: res => {
+      const { /* mainPath */ subPath } = res[EVENT.SIDEBAR_MENU_CHANGE].data
+      debug('SIDEBAR_MENU_CHANGE ', res[EVENT.SIDEBAR_MENU_CHANGE].data)
+
+      switch (subPath) {
+        case ROUTE.CATEGORIES: {
+          return console.log('todo')
+        }
+        case ROUTE.TAGS: {
+          return loadTags()
+        }
+        case ROUTE.THREADS: {
+          return console.log('todo')
+        }
+        case ROUTE.POSTS: {
+          return loadPosts()
+        }
+        case ROUTE.JOBS: {
+          return console.log('todo')
+        }
+        case ROUTE.REPOS: {
+          return console.log('todo')
+        }
+        case ROUTE.VIDEOS: {
+          return console.log('todo')
+        }
+        default: {
+          return console.log('todo')
+        }
+      }
     },
   },
 ]

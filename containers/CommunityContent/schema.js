@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { P } from '../schemas'
 
 const communities = gql`
   query communities($filter: PagedFilter!) {
@@ -20,60 +21,39 @@ const communities = gql`
     }
   }
 `
-const pagedTags = gql`
-  query($filter: PagedFilter!) {
-    pagedTags(filter: $filter) {
-      entries {
-        id
-        title
-        color
-        thread
-        insertedAt
-        updatedAt
-      }
-      pageNumber
-      pageSize
-      totalCount
-      totalPages
-    }
-  }
+
+const pagedCategories = gql`
+  ${P.pagedCategories}
 `
-// TODO: use common schema
+const pagedTags = gql`
+  ${P.pagedTags}
+`
+const pagedThreads = gql`
+  ${P.pagedThreads}
+`
 const pagedPosts = gql`
-  query pagedPosts($filter: PagedArticleFilter) {
-    pagedPosts(filter: $filter) {
-      entries {
-        id
-        title
-        digest
-        author {
-          id
-          nickname
-          avatar
-        }
-        communities {
-          id
-          title
-        }
-        commentsCount
-        commentsParticipatorsCount
-        views
-        favoritedCount
-        starredCount
-        insertedAt
-        updatedAt
-      }
-      totalCount
-      pageSize
-      pageNumber
-    }
-  }
+  ${P.pagedPosts}
+`
+const pagedJobs = gql`
+  ${P.pagedJobs}
+`
+const pagedRepos = gql`
+  ${P.pagedRepos}
+`
+const pagedVideos = gql`
+  ${P.pagedVideos}
 `
 
 const schema = {
   communities,
+
   pagedTags,
+  pagedThreads,
+  pagedCategories,
   pagedPosts,
+  pagedJobs,
+  pagedRepos,
+  pagedVideos,
 }
 
 export default schema

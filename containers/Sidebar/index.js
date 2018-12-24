@@ -39,6 +39,7 @@ class SidebarContainer extends React.Component {
       countsInfo,
       searchValue,
       rootCountStatusData,
+      activeCommunityData,
     } = sidebar
     //    onMouseLeave={logic.leaveSidebar}
     // onMouseLeave is not unreliable in chrome: https://github.com/facebook/react/issues/4492
@@ -55,6 +56,7 @@ class SidebarContainer extends React.Component {
           items={subscribedCommunities}
           activeRaw={activeRaw}
           rootCountStatusData={rootCountStatusData}
+          activeCommunityData={activeCommunityData}
           countsInfo={countsInfo}
           activeThread={activeThread}
         />

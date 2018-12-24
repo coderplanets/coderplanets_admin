@@ -6,7 +6,11 @@
 import { types as t, getParent } from 'mobx-state-tree'
 import R from 'ramda'
 
-import { PagedCommunities, emptyPagiData } from '../../stores/SharedModel'
+import {
+  PagedCommunities,
+  emptyPagiData,
+  Community,
+} from '../../stores/SharedModel'
 
 import { makeDebugger, markStates, stripMobx } from '../../utils'
 
@@ -32,6 +36,7 @@ const SidebarStore = t
     searchValue: t.optional(t.string, ''),
     matchedCommunities: t.optional(PagedCommunities, emptyPagiData),
     rootCountStatus: t.optional(RootCountStatus, {}),
+    activeCommunity: t.maybeNull(Community),
     // theme: t.string, // view staff
     // curSelectItem: t.string, // view staff
     // searchBox: t.string, // complex data
@@ -105,7 +110,9 @@ const SidebarStore = t
         postsTotalCount,
       }
     },
-
+    get activeCommunityData() {
+      return stripMobx(self.activeCommunity)
+    },
     get subscribedCommunities() {
       if (!R.isEmpty(self.searchValue)) {
         const { entries } = self.matchedCommunities

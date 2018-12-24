@@ -31,7 +31,7 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
     </ChildrenItem>
     <ChildrenItem
       active={ROUTE.SENIOR === activeThread}
-      onClick={logic.onRootMenuSelect.bind(this, 'users', ROUTE.SENIOR)}
+      onClick={logic.onRootMenuSelect.bind(this, ROUTE.USERS, ROUTE.SENIOR)}
     >
       <ChildrenItemInner>
         <ChildrenTitle>高级用户</ChildrenTitle>

@@ -33,14 +33,18 @@ const CommunityContentStore = t
     pagedTags: t.optional(PagedTags, emptyPagiData),
     pagedThreads: t.optional(PagedThreads, emptyPagiData),
 
-    postsLoading: t.optional(t.boolean, false),
     tagsLoading: t.optional(t.boolean, false),
+    categoriesLoading: t.optional(t.boolean, false),
+    postsLoading: t.optional(t.boolean, false),
+    jobsLoading: t.optional(t.boolean, false),
+    reposLoading: t.optional(t.boolean, false),
+    videosLoading: t.optional(t.boolean, false),
   })
   .views(self => ({
     get root() {
       return getParent(self)
     },
-    get route() {
+    get curRoute() {
       const { mainPath, subPath } = self.root.route
       return {
         mainPath,
