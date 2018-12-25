@@ -11,8 +11,6 @@ export { default as PreviewStore } from '../containers/Preview/store'
 export { default as DoraemonStore } from '../containers/Doraemon/store'
 export { default as HeaderStore } from '../containers/Header/store'
 
-export { default as CurCommunity } from './CurCommunity'
-
 // banner store
 export { default as BannerStore } from '../containers/Banner/store'
 export { default as UsersBannerStore } from '../containers/UsersBanner/store'

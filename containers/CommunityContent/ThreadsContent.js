@@ -2,9 +2,11 @@ import React from 'react'
 
 import ThreadsTable from '../../components/ThreadsTable'
 
+// import { OperationWrapper } from './styles'
 // import * as logic from './logic'
 
-const ReposContent = ({ data, restProps: { threadsLoading } }) => (
+/* eslint-disable react/display-name */
+const PostsContent = ({ data, restProps: { threadsLoading } }) => (
   <ThreadsTable
     data={data}
     loading={threadsLoading}
@@ -13,4 +15,4 @@ const ReposContent = ({ data, restProps: { threadsLoading } }) => (
   />
 )
 
-export default ReposContent
+export default PostsContent

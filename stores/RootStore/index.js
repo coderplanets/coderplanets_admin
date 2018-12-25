@@ -18,7 +18,6 @@ import {
   PostsStore,
   ApiLayoutStore,
   HeaderStore,
-  CurCommunity,
   // banner
   BannerStore,
   CommunitiesBannerStore,
@@ -63,7 +62,6 @@ const rootStore = t
     account: t.optional(AccountStore, {}),
     users: t.maybeNull(UsersStore),
     route: t.optional(RouteStore, {}),
-    curCommunity: t.optional(CurCommunity, {}),
     communities: t.optional(CommunitiesStore, {}),
     posts: t.optional(PostsStore, {}),
     comments: t.optional(CommentsStore, {}),

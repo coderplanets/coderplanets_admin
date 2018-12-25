@@ -71,9 +71,9 @@ const Pagi = ({
 }
 
 Pagi.propTypes = {
-  pageNumber: PropTypes.number.isRequired,
-  pageSize: PropTypes.number.isRequired,
-  totalCount: PropTypes.number.isRequired,
+  pageNumber: PropTypes.number,
+  pageSize: PropTypes.number,
+  totalCount: PropTypes.number,
   // showBottomMsg: PropTypes.bool,
   emptyMsg: PropTypes.string,
   noMoreMsg: PropTypes.string,
@@ -86,6 +86,10 @@ Pagi.propTypes = {
 }
 
 Pagi.defaultProps = {
+  pageNumber: 1,
+  pageSize: 20,
+  totalCount: 0,
+
   emptyMsg: '还没有评论',
   noMoreMsg: '没有更多评论了',
   showBottomMsg: false,

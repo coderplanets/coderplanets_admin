@@ -16,6 +16,7 @@ import JobsContent from './JobsContent'
 import TagsContent from './TagsContent'
 import VideosContent from './VideosContent'
 import ReposContent from './ReposContent'
+import ThreadsContent from './ThreadsContent'
 
 import { Wrapper } from './styles'
 import * as logic from './logic'
@@ -31,6 +32,7 @@ const ChildContent = ({
   pagedVideosData,
   pagedReposData,
   pagedTagsData,
+  pagedThreadsData,
   restProps,
 }) => {
   switch (curRoute.subPath) {
@@ -48,6 +50,9 @@ const ChildContent = ({
     }
     case ROUTE.TAGS: {
       return <TagsContent data={pagedTagsData} restProps={restProps} />
+    }
+    case ROUTE.THREADS: {
+      return <ThreadsContent data={pagedThreadsData} restProps={restProps} />
     }
     case ROUTE.EDITORS: {
       return <h2>Editors Content</h2>
@@ -77,9 +82,11 @@ class CommunityContentContainer extends React.Component {
       pagedVideosData,
       pagedReposData,
       pagedTagsData,
+      pagedThreadsData,
     } = communityContent
     const restProps = { ...communityContent }
 
+    console.log('hello hello activeCommunityData: ', pagedThreadsData)
     return (
       <Wrapper>
         <ChildContent
@@ -89,6 +96,7 @@ class CommunityContentContainer extends React.Component {
           pagedVideosData={pagedVideosData}
           pagedReposData={pagedReposData}
           pagedTagsData={pagedTagsData}
+          pagedThreadsData={pagedThreadsData}
           restProps={restProps}
         />
       </Wrapper>

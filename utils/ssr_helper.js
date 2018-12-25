@@ -135,6 +135,10 @@ export const ssrCommunityFilter = (community, subPath) => {
         all: true,
       }
     }
+    case ROUTE.THREADS: {
+      return { filter: { page: 1, size: 30 } }
+    }
+
     default: {
       return { filter: { page: 1, size: 30, community } }
     }

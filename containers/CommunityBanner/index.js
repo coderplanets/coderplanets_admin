@@ -33,6 +33,7 @@ const ChildBanner = ({
   videosTotalCount,
   reposTotalCount,
   tagsTotalCount,
+  threadsTotalCount,
   restProps,
 }) => {
   const {
@@ -87,7 +88,7 @@ const ChildBanner = ({
       )
     }
     case ROUTE.THREADS: {
-      return <ThreadsBanner totalCount={301} filteredCount={100} />
+      return <ThreadsBanner totalCount={threadsTotalCount} />
     }
     default: {
       return <h2>Index of Community</h2>
@@ -110,6 +111,7 @@ class CommunityBannerContainer extends React.Component {
       videosTotalCount,
       reposTotalCount,
       tagsTotalCount,
+      threadsTotalCount,
     } = communityBanner
 
     return (
@@ -121,6 +123,7 @@ class CommunityBannerContainer extends React.Component {
           videosTotalCount={videosTotalCount}
           reposTotalCount={reposTotalCount}
           tagsTotalCount={tagsTotalCount}
+          threadsTotalCount={threadsTotalCount}
           restProps={stripMobx(communityBanner)}
         />
       </BannerContainer>

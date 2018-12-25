@@ -39,6 +39,9 @@ const CommunityBannerStore = t
     get tagsTotalCount() {
       return self.root.communityContent.pagedTags.length
     },
+    get threadsTotalCount() {
+      return self.root.sidebar.activeCommunityData.threads.length
+    },
     get curRoute() {
       const { mainPath, subPath } = self.root.route
       return {

@@ -66,6 +66,9 @@ const CommunityContentStore = t
     get pagedTagsData() {
       return { entries: stripMobx(self.pagedTags) }
     },
+    get pagedThreadsData() {
+      return { entries: self.root.sidebar.activeCommunityData.threads }
+    },
   }))
   .actions(self => ({
     markState(sobj) {
