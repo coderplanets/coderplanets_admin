@@ -269,6 +269,7 @@ const DataSolver = [
   {
     match: asyncRes('pagedJobs'),
     action: ({ pagedJobs }) => {
+      console.log('pagedJobs get: ', pagedJobs)
       cancleLoading()
       store.markState({ pagedJobs })
     },

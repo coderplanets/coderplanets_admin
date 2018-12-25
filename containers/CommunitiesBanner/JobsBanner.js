@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { ICON_CMD } from '../../config'
-import { Tag, Popover, BannerCountBrief } from '../../components'
+import { Popover, BannerCountBrief } from '../../components'
 
 import {
   BannerContentWrapper,
@@ -9,7 +9,6 @@ import {
   OperationItem,
   OperationDivider,
   OperationTitle,
-  FilterTags,
   OperationIcon,
   OperationIconChart,
 } from './styles/common_banner'
@@ -31,6 +30,11 @@ class JobsBanner extends React.Component {
           thread="招聘贴"
         />
         <Operation>
+          <OperationItem onClick={console.log}>
+            <OperationIconChart src={`${ICON_CMD}/refresh.svg`} />
+            刷新
+          </OperationItem>
+          <OperationDivider />
           <OperationItem>
             <OperationIcon src={`${ICON_CMD}/filter2.svg`} />
             <Popover
@@ -39,10 +43,6 @@ class JobsBanner extends React.Component {
             >
               <OperationTitle>过滤</OperationTitle>
             </Popover>
-            <FilterTags>
-              <Tag closable>最多xx</Tag>
-              <Tag closable>最少..</Tag>
-            </FilterTags>
           </OperationItem>
           <OperationDivider />
           <OperationItem onClick={logic.onAdd}>
