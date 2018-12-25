@@ -9,7 +9,7 @@ import { inject, observer } from 'mobx-react'
 
 // import Link from 'next/link'
 
-import { makeDebugger, storePlug, ROUTE } from '../../utils'
+import { makeDebugger, storePlug, stripMobx, ROUTE } from '../../utils'
 import * as logic from './logic'
 
 import PostsBanner from './PostsBanner'
@@ -23,17 +23,15 @@ import { BannerContainer } from './styles'
 const debug = makeDebugger('C:CommunityBanner')
 /* eslint-enable no-unused-vars */
 
-const renderChildBanner = (route, store) => {
-  const {
-    /* totalCount, */
-    /* curTotalCount, */
-    tagsTotalCount,
-    postsTotalCount,
-    filteredPostsCount,
-    /* curPostsTotalCount, */
-  } = store
+const ChildBanner = ({
+  curRoute,
+  postsTotalCount,
+  tagsTotalCount,
+  restProps,
+}) => {
+  const { filteredPostsCount } = restProps
 
-  switch (route.subPath) {
+  switch (curRoute.subPath) {
     case ROUTE.POSTS: {
       return (
         <PostsBanner
@@ -70,11 +68,16 @@ class CommunityBannerContainer extends React.Component {
 
   render() {
     const { communityBanner } = this.props
-    const { route } = communityBanner
+    const { route, postsTotalCount, tagsTotalCount } = communityBanner
 
     return (
       <BannerContainer>
-        {renderChildBanner(route, communityBanner)}
+        <ChildBanner
+          curRoute={route}
+          postsTotalCount={postsTotalCount}
+          tagsTotalCount={tagsTotalCount}
+          restProps={stripMobx(communityBanner)}
+        />
       </BannerContainer>
     )
   }

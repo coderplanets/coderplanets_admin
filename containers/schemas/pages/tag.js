@@ -23,4 +23,22 @@ export const pagedTags = `
   }
 `
 
-export const holder = 1
+export const partialTags = `
+  query($community: String, $thread: CmsThread, $all: Boolean) {
+    partialTags(community: $community all: $all, thread: $thread) {
+      ${F.tag}
+      thread
+      community {
+        id
+        logo
+        title
+      }
+      topic {
+        title
+        raw
+      }
+      insertedAt
+      updatedAt
+    }
+  }
+`

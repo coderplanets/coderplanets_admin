@@ -25,8 +25,8 @@ const communities = gql`
 const pagedCategories = gql`
   ${P.pagedCategories}
 `
-const pagedTags = gql`
-  ${P.pagedTags}
+const partialTags = gql`
+  ${P.partialTags}
 `
 const pagedThreads = gql`
   ${P.pagedThreads}
@@ -47,7 +47,7 @@ const pagedVideos = gql`
 const schema = {
   communities,
 
-  pagedTags,
+  partialTags,
   pagedThreads,
   pagedCategories,
   pagedPosts,

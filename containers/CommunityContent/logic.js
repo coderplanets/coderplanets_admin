@@ -39,17 +39,16 @@ const commonFilter = (page, community = 'home') => {
 export function loadPosts(page = 1) {
   scrollIntoEle(TYPE.APP_HEADER_ID)
   store.markState({ postsLoading: true })
-
   const { mainPath: community } = store.curRoute
-
   sr71$.query(S.pagedPosts, commonFilter(page, community))
 }
 
-export function loadTags(page = 1) {
+export function loadTags() {
   scrollIntoEle(TYPE.APP_HEADER_ID)
   store.markState({ tagsLoading: true })
 
-  sr71$.query(S.pagedTags, commonFilter(page))
+  const { mainPath: community } = store.curRoute
+  sr71$.query(S.partialTags, { community, all: true })
 }
 
 export function onEdit() {}
@@ -62,7 +61,7 @@ const cancleLoading = () => {
   store.markState({
     // communitiesLoading: false,
     postsLoading: false,
-    // tagsLoading: false,
+    tagsLoading: false,
   })
 }
 
@@ -75,10 +74,10 @@ const DataSolver = [
     },
   },
   {
-    match: asyncRes('pagedTags'),
-    action: ({ pagedTags }) => {
+    match: asyncRes('partialTags'),
+    action: ({ partialTags }) => {
       cancleLoading()
-      store.markState({ pagedTags })
+      store.markState({ pagedTags: partialTags })
     },
   },
   {

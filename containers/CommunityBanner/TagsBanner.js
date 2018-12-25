@@ -16,50 +16,41 @@ import {
 
 import * as logic from './logic'
 
-class TagsBanner extends React.Component {
-  componentDidMount() {
-    logic.loadTags()
-  }
-
-  render() {
-    const { totalCount, filteredCount } = this.props
-    return (
-      <BannerContentWrapper>
-        <BannerCountBrief
-          filteredCount={filteredCount}
-          totalCount={totalCount}
-          thread="标签"
-          unit="个"
-        />
-        <Operation>
-          <OperationItem>
-            <OperationIcon src={`${ICON_CMD}/filter2.svg`} />
-            <Popover
-              content={<div>兼容各个页面的 Filter 菜单</div>}
-              trigger="hover"
-            >
-              <OperationTitle>过滤</OperationTitle>
-            </Popover>
-            <FilterTags>
-              <Tag closable>最多xx</Tag>
-              <Tag closable>最少..</Tag>
-            </FilterTags>
-          </OperationItem>
-          <OperationDivider />
-          <OperationItem onClick={logic.onAdd}>
-            <OperationIconChart src={`${ICON_CMD}/plus.svg`} />
-            添加
-          </OperationItem>
-          <OperationDivider />
-          <OperationItem>
-            <OperationIcon src={`${ICON_CMD}/chart.svg`} />
-            {/* <OperationIconChart src={`${ICON_CMD}/list.svg`} /> */}
-            图表
-          </OperationItem>
-        </Operation>
-      </BannerContentWrapper>
-    )
-  }
-}
+const TagsBanner = ({ totalCount, filteredCount }) => (
+  <BannerContentWrapper>
+    <BannerCountBrief
+      filteredCount={filteredCount}
+      totalCount={totalCount}
+      thread="标签"
+      unit="个"
+    />
+    <Operation>
+      <OperationItem>
+        <OperationIcon src={`${ICON_CMD}/filter2.svg`} />
+        <Popover
+          content={<div>兼容各个页面的 Filter 菜单</div>}
+          trigger="hover"
+        >
+          <OperationTitle>过滤</OperationTitle>
+        </Popover>
+        <FilterTags>
+          <Tag closable>最多xx</Tag>
+          <Tag closable>最少..</Tag>
+        </FilterTags>
+      </OperationItem>
+      <OperationDivider />
+      <OperationItem onClick={logic.onAdd}>
+        <OperationIconChart src={`${ICON_CMD}/plus.svg`} />
+        添加
+      </OperationItem>
+      <OperationDivider />
+      <OperationItem>
+        <OperationIcon src={`${ICON_CMD}/chart.svg`} />
+        {/* <OperationIconChart src={`${ICON_CMD}/list.svg`} /> */}
+        图表
+      </OperationItem>
+    </Operation>
+  </BannerContentWrapper>
+)
 
 export default TagsBanner

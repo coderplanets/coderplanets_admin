@@ -44,8 +44,12 @@ export function extendMenuBar(communityRaw) {
       return Router.push(`/${ROUTE.USERS}`, `/${communityRaw}/`)
     }
     default: {
-      const asPath = `/${communityRaw}/${ROUTE.POSTS}`
-      Router.push('/', asPath)
+      /*
+         const asPath = `/${communityRaw}/${ROUTE.POSTS}`
+         Router.push('/', asPath)
+       */
+
+      onRootMenuSelect(communityRaw, ROUTE.POSTS)
       return loadCommunity(communityRaw)
     }
   }

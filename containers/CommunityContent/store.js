@@ -11,7 +11,7 @@ import {
   PagedJobs,
   PagedRepos,
   PagedVideos,
-  PagedTags,
+  Tag,
   PagedThreads,
   PagedCategories,
   emptyPagiData,
@@ -30,7 +30,7 @@ const CommunityContentStore = t
     pagedVideos: t.optional(PagedVideos, emptyPagiData),
 
     pagedCategories: t.optional(PagedCategories, emptyPagiData),
-    pagedTags: t.optional(PagedTags, emptyPagiData),
+    pagedTags: t.optional(t.array(Tag), []),
     pagedThreads: t.optional(PagedThreads, emptyPagiData),
 
     tagsLoading: t.optional(t.boolean, false),
@@ -55,7 +55,7 @@ const CommunityContentStore = t
       return stripMobx(self.pagedPosts)
     },
     get pagedTagsData() {
-      return stripMobx(self.pagedTags)
+      return { entries: stripMobx(self.pagedTags) }
     },
   }))
   .actions(self => ({

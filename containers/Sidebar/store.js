@@ -36,7 +36,7 @@ const SidebarStore = t
     searchValue: t.optional(t.string, ''),
     matchedCommunities: t.optional(PagedCommunities, emptyPagiData),
     rootCountStatus: t.optional(RootCountStatus, {}),
-    activeCommunity: t.maybeNull(Community),
+    activeCommunity: t.optional(Community, {}),
     // theme: t.string, // view staff
     // curSelectItem: t.string, // view staff
     // searchBox: t.string, // complex data

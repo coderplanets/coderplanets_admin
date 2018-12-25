@@ -101,7 +101,7 @@ const MenuChildren = ({ community, activeRaw, activeThread, curRaw }) => (
     >
       <ChildrenItemInner>
         <ChildrenTitle>threads</ChildrenTitle>
-        <ChildrenNum>--</ChildrenNum>
+        <ChildrenNum>{community.threadsCount}</ChildrenNum>
       </ChildrenItemInner>
     </ChildrenItem>
     <ChildrenItem
@@ -110,7 +110,7 @@ const MenuChildren = ({ community, activeRaw, activeThread, curRaw }) => (
     >
       <ChildrenItemInner>
         <ChildrenTitle>标签</ChildrenTitle>
-        <ChildrenNum>--</ChildrenNum>
+        <ChildrenNum>{community.tagsCount}</ChildrenNum>
       </ChildrenItemInner>
     </ChildrenItem>
     <ChildrenItem
@@ -125,16 +125,18 @@ const MenuChildren = ({ community, activeRaw, activeThread, curRaw }) => (
   </ChildrenWrapper>
 )
 
-const CommunityMenuItem = ({ community, item, activeRaw, activeThread }) => (
-  <MenuItemWrapper>
-    <MenuItemBar item={item} activeRaw={activeRaw} curRaw={item.raw} />
-    <MenuChildren
-      community={community}
-      activeRaw={activeRaw}
-      activeThread={activeThread}
-      curRaw={item.raw}
-    />
-  </MenuItemWrapper>
-)
+const CommunityMenuItem = ({ community, item, activeRaw, activeThread }) => {
+  return (
+    <MenuItemWrapper>
+      <MenuItemBar item={item} activeRaw={activeRaw} curRaw={item.raw} />
+      <MenuChildren
+        community={community}
+        activeRaw={activeRaw}
+        activeThread={activeThread}
+        curRaw={item.raw}
+      />
+    </MenuItemWrapper>
+  )
+}
 
 export default CommunityMenuItem

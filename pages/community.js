@@ -23,6 +23,7 @@ import {
   getSubPath,
   BStore,
   ssrPagedSchema,
+  ssrCommunityFilter,
   ssrPagedContents,
 } from '../utils'
 
@@ -42,12 +43,12 @@ async function fetchData(props) {
 
   const subpath = getSubPath(props)
   const mainPath = getMainPath(props)
-  console.log('subpath --> ', subpath)
 
   const community = gqClient.request(P.community, { raw: mainPath })
-  const pagedContents = gqClient.request(ssrPagedSchema(subpath), {
-    filter: { page: 1, size: 30 },
-  })
+  const pagedContents = gqClient.request(
+    ssrPagedSchema(subpath, { partialTags: true }),
+    ssrCommunityFilter(mainPath, subpath)
+  )
 
   return {
     ...(await community),

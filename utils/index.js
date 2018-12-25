@@ -107,7 +107,11 @@ export {
 export { default as fakeUsers } from './fake_user'
 export { default as SOCIAL_LISTS } from './social_lists'
 
-export { ssrPagedSchema, ssrPagedContents } from './ssr_helper'
+export {
+  ssrPagedSchema,
+  ssrPagedContents,
+  ssrCommunityFilter,
+} from './ssr_helper'
 
 // helpers
 export { default as cs } from './common_styles'

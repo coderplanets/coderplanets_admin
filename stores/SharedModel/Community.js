@@ -28,6 +28,10 @@ export const Community = t.model('Community', {
   jobsCount: t.optional(t.number, 0),
   videosCount: t.optional(t.number, 0),
   reposCount: t.optional(t.number, 0),
+
+  threadsCount: t.optional(t.number, 0),
+  tagsCount: t.optional(t.number, 0),
+
   viewerHasSubscribed: t.maybeNull(t.boolean),
   threads: t.optional(t.array(Thread), []),
   insertedAt: t.optional(t.string, ''),

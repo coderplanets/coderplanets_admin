@@ -18,10 +18,6 @@ export function loadPosts() {
   sr71$.query(S.pagedPosts, { filter: {} })
 }
 
-export function loadTags() {
-  sr71$.query(S.pagedTags, { filter: {} })
-}
-
 // TODO: should be loadSubscribers
 export function loadUsers() {}
 

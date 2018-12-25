@@ -2,12 +2,15 @@
 import { P } from '../containers/schemas'
 import { ROUTE } from './constants'
 
-export const ssrPagedSchema = subpath => {
+export const ssrPagedSchema = (subpath, opt = {}) => {
   switch (subpath) {
     case ROUTE.CATEGORIES: {
       return P.pagedCategories
     }
     case ROUTE.TAGS: {
+      if (opt.partialTags) {
+        return P.partialTags
+      }
       return P.pagedTags
     }
     case ROUTE.THREADS: {
@@ -48,7 +51,11 @@ const ssrCommunityContents = (subPath, resp) => {
         communityContent: { pagedPosts: resp.pagedPosts },
       }
     }
-
+    case ROUTE.TAGS: {
+      return {
+        communityContent: { pagedTags: resp.partialTags },
+      }
+    }
     default: {
       return {
         communityContent: { pagedPosts: resp.pagedPosts },
@@ -93,6 +100,20 @@ const ssrCommunitiesContents = (subPath, resp) => {
       return {
         communitiesContent: { pagedCommunities: resp.pagedCommunities },
       }
+    }
+  }
+}
+
+export const ssrCommunityFilter = (community, subPath) => {
+  switch (subPath) {
+    case ROUTE.TAGS: {
+      return {
+        community,
+        all: true,
+      }
+    }
+    default: {
+      return { filter: { page: 1, size: 30, community } }
     }
   }
 }

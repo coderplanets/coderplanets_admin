@@ -13,13 +13,19 @@ const debug = makeDebugger('S:CommunityBannerStore')
 
 const CommunityBannerStore = t
   .model('CommunityBannerStore', {
-    postsTotalCount: t.optional(t.number, 0),
+    // postsTotalCount: t.optional(t.number, 0),
     filteredPostsCount: t.maybeNull(t.number),
-    tagsTotalCount: t.optional(t.number, 0),
+    // tagsTotalCount: t.optional(t.number, 0),
   })
   .views(self => ({
     get root() {
       return getParent(self)
+    },
+    get postsTotalCount() {
+      return self.root.communityContent.pagedPosts.totalCount
+    },
+    get tagsTotalCount() {
+      return self.root.communityContent.pagedTags.length
     },
     get route() {
       const { mainPath, subPath } = self.root.route

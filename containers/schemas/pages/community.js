@@ -23,6 +23,8 @@ export const community = `
       jobsCount
       videosCount
       reposCount
+      threadsCount
+      tagsCount
     }
   }
 `
