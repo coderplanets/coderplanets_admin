@@ -1,5 +1,4 @@
 import R from 'ramda'
-import Router from 'next/router'
 /* import store from 'store' */
 
 // const debug = makeDebugger('L:sidebar')
@@ -35,20 +34,12 @@ export const pin = () => store.markState({ pin: !store.pin })
 export function extendMenuBar(communityRaw) {
   switch (communityRaw) {
     case ROUTE.COMMUNITIES: {
-      return Router.push({
-        pathname: `/${ROUTE.COMMUNITIES}`,
-        asPath: `/${communityRaw}/`,
-      })
+      return store.markRoute({ mainPath: ROUTE.COMMUNITIES, subPath: 'index' })
     }
     case ROUTE.USERS: {
-      return Router.push(`/${ROUTE.USERS}`, `/${communityRaw}/`)
+      return store.markRoute({ mainPath: ROUTE.USERS, subPath: 'index' })
     }
     default: {
-      /*
-         const asPath = `/${communityRaw}/${ROUTE.POSTS}`
-         Router.push('/', asPath)
-       */
-
       onRootMenuSelect(communityRaw, ROUTE.POSTS)
       return loadCommunity(communityRaw)
     }
