@@ -54,6 +54,9 @@ const CommunityContentStore = t
     get pagedPostsData() {
       return stripMobx(self.pagedPosts)
     },
+    get pagedJobsData() {
+      return stripMobx(self.pagedJobs)
+    },
     get pagedTagsData() {
       return { entries: stripMobx(self.pagedTags) }
     },

@@ -12,6 +12,7 @@ import { inject, observer } from 'mobx-react'
 import { makeDebugger, storePlug, ROUTE } from '../../utils'
 
 import PostsContent from './PostsContent'
+import JobsContent from './JobsContent'
 import TagsContent from './TagsContent'
 
 import { Wrapper } from './styles'
@@ -21,15 +22,19 @@ import * as logic from './logic'
 const debug = makeDebugger('C:CommunityContent')
 /* eslint-enable no-unused-vars */
 
-const renderChildContent = (curRoute, store, restProps) => {
-  const { pagedPostsData, pagedTagsData } = store
-
+const ChildContent = ({
+  curRoute,
+  pagedPostsData,
+  pagedJobsData,
+  pagedTagsData,
+  restProps,
+}) => {
   switch (curRoute.subPath) {
     case ROUTE.POSTS: {
       return <PostsContent data={pagedPostsData} restProps={restProps} />
     }
     case ROUTE.JOBS: {
-      return <h3>ROUTE.JOBS</h3>
+      return <JobsContent data={pagedJobsData} restProps={restProps} />
     }
     case ROUTE.REPOS: {
       return <h3>ROUTE.REPOS</h3>
@@ -61,12 +66,23 @@ class CommunityContentContainer extends React.Component {
 
   render() {
     const { communityContent } = this.props
-    const { curRoute } = communityContent
+    const {
+      curRoute,
+      pagedPostsData,
+      pagedJobsData,
+      pagedTagsData,
+    } = communityContent
     const restProps = { ...communityContent }
 
     return (
       <Wrapper>
-        {renderChildContent(curRoute, communityContent, restProps)}
+        <ChildContent
+          curRoute={curRoute}
+          pagedPostsData={pagedPostsData}
+          pagedJobsData={pagedJobsData}
+          pagedTagsData={pagedTagsData}
+          restProps={restProps}
+        />
       </Wrapper>
     )
   }

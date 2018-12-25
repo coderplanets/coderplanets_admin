@@ -13,6 +13,7 @@ import { makeDebugger, storePlug, stripMobx, ROUTE } from '../../utils'
 import * as logic from './logic'
 
 import PostsBanner from './PostsBanner'
+import JobsBanner from './JobsBanner'
 import TagsBanner from './TagsBanner'
 import ThreadsBanner from './ThreadsBanner'
 import SubscribersBanner from './SubscribersBanner'
@@ -26,10 +27,11 @@ const debug = makeDebugger('C:CommunityBanner')
 const ChildBanner = ({
   curRoute,
   postsTotalCount,
+  jobsTotalCount,
   tagsTotalCount,
   restProps,
 }) => {
-  const { filteredPostsCount } = restProps
+  const { filteredPostsCount, filteredJobsCount } = restProps
 
   switch (curRoute.subPath) {
     case ROUTE.POSTS: {
@@ -37,6 +39,14 @@ const ChildBanner = ({
         <PostsBanner
           totalCount={postsTotalCount}
           filteredCount={filteredPostsCount}
+        />
+      )
+    }
+    case ROUTE.JOBS: {
+      return (
+        <JobsBanner
+          totalCount={jobsTotalCount}
+          filteredCount={filteredJobsCount}
         />
       )
     }
@@ -68,13 +78,19 @@ class CommunityBannerContainer extends React.Component {
 
   render() {
     const { communityBanner } = this.props
-    const { route, postsTotalCount, tagsTotalCount } = communityBanner
+    const {
+      curRoute,
+      postsTotalCount,
+      jobsTotalCount,
+      tagsTotalCount,
+    } = communityBanner
 
     return (
       <BannerContainer>
         <ChildBanner
-          curRoute={route}
+          curRoute={curRoute}
           postsTotalCount={postsTotalCount}
+          jobsTotalCount={jobsTotalCount}
           tagsTotalCount={tagsTotalCount}
           restProps={stripMobx(communityBanner)}
         />

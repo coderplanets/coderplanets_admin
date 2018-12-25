@@ -15,6 +15,7 @@ const CommunityBannerStore = t
   .model('CommunityBannerStore', {
     // postsTotalCount: t.optional(t.number, 0),
     filteredPostsCount: t.maybeNull(t.number),
+    filteredJobsCount: t.maybeNull(t.number),
     // tagsTotalCount: t.optional(t.number, 0),
   })
   .views(self => ({
@@ -24,10 +25,13 @@ const CommunityBannerStore = t
     get postsTotalCount() {
       return self.root.communityContent.pagedPosts.totalCount
     },
+    get jobsTotalCount() {
+      return self.root.communityContent.pagedJobs.totalCount
+    },
     get tagsTotalCount() {
       return self.root.communityContent.pagedTags.length
     },
-    get route() {
+    get curRoute() {
       const { mainPath, subPath } = self.root.route
       return {
         mainPath,

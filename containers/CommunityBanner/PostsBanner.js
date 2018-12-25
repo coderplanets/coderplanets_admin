@@ -30,6 +30,11 @@ class PostsBanner extends React.Component {
           totalCount={totalCount}
         />
         <Operation>
+          <OperationItem onClick={console.log}>
+            <OperationIconChart src={`${ICON_CMD}/refresh.svg`} />
+            刷新
+          </OperationItem>
+          <OperationDivider />
           <OperationItem>
             <OperationIcon src={`${ICON_CMD}/filter2.svg`} />
             <Popover

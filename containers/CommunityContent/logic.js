@@ -43,6 +43,13 @@ export function loadPosts(page = 1) {
   sr71$.query(S.pagedPosts, commonFilter(page, community))
 }
 
+export function loadJobs(page = 1) {
+  scrollIntoEle(TYPE.APP_HEADER_ID)
+  store.markState({ jobsLoading: true })
+  const { mainPath: community } = store.curRoute
+  sr71$.query(S.pagedJobs, commonFilter(page, community))
+}
+
 export function loadTags() {
   scrollIntoEle(TYPE.APP_HEADER_ID)
   store.markState({ tagsLoading: true })
@@ -61,6 +68,7 @@ const cancleLoading = () => {
   store.markState({
     // communitiesLoading: false,
     postsLoading: false,
+    jobsLoading: false,
     tagsLoading: false,
   })
 }
@@ -71,6 +79,13 @@ const DataSolver = [
     action: ({ pagedPosts }) => {
       cancleLoading()
       store.markState({ pagedPosts })
+    },
+  },
+  {
+    match: asyncRes('pagedJobs'),
+    action: ({ pagedJobs }) => {
+      cancleLoading()
+      store.markState({ pagedJobs })
     },
   },
   {
@@ -100,7 +115,7 @@ const DataSolver = [
           return loadPosts()
         }
         case ROUTE.JOBS: {
-          return console.log('todo')
+          return loadJobs()
         }
         case ROUTE.REPOS: {
           return console.log('todo')
