@@ -17,6 +17,7 @@ const CommunityBannerStore = t
     filteredPostsCount: t.maybeNull(t.number),
     filteredJobsCount: t.maybeNull(t.number),
     filteredVideosCount: t.maybeNull(t.number),
+    filteredReposCount: t.maybeNull(t.number),
     // tagsTotalCount: t.optional(t.number, 0),
   })
   .views(self => ({
@@ -31,6 +32,9 @@ const CommunityBannerStore = t
     },
     get videosTotalCount() {
       return self.root.communityContent.pagedVideos.totalCount
+    },
+    get reposTotalCount() {
+      return self.root.communityContent.pagedRepos.totalCount
     },
     get tagsTotalCount() {
       return self.root.communityContent.pagedTags.length

@@ -15,6 +15,7 @@ import PostsContent from './PostsContent'
 import JobsContent from './JobsContent'
 import TagsContent from './TagsContent'
 import VideosContent from './VideosContent'
+import ReposContent from './ReposContent'
 
 import { Wrapper } from './styles'
 import * as logic from './logic'
@@ -28,6 +29,7 @@ const ChildContent = ({
   pagedPostsData,
   pagedJobsData,
   pagedVideosData,
+  pagedReposData,
   pagedTagsData,
   restProps,
 }) => {
@@ -39,7 +41,7 @@ const ChildContent = ({
       return <JobsContent data={pagedJobsData} restProps={restProps} />
     }
     case ROUTE.REPOS: {
-      return <h3>ROUTE.REPOS</h3>
+      return <ReposContent data={pagedReposData} restProps={restProps} />
     }
     case ROUTE.VIDEOS: {
       return <VideosContent data={pagedVideosData} restProps={restProps} />
@@ -73,11 +75,10 @@ class CommunityContentContainer extends React.Component {
       pagedPostsData,
       pagedJobsData,
       pagedVideosData,
+      pagedReposData,
       pagedTagsData,
     } = communityContent
     const restProps = { ...communityContent }
-
-    console.log('the fuck pagedVideosData: ', pagedVideosData)
 
     return (
       <Wrapper>
@@ -86,6 +87,7 @@ class CommunityContentContainer extends React.Component {
           pagedPostsData={pagedPostsData}
           pagedJobsData={pagedJobsData}
           pagedVideosData={pagedVideosData}
+          pagedReposData={pagedReposData}
           pagedTagsData={pagedTagsData}
           restProps={restProps}
         />

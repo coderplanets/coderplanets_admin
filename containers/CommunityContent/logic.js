@@ -57,6 +57,13 @@ export function loadVideos(page = 1) {
   sr71$.query(S.pagedVideos, commonFilter(page, community))
 }
 
+export function loadRepos(page = 1) {
+  scrollIntoEle(TYPE.APP_HEADER_ID)
+  store.markState({ reposLoading: true })
+  const { mainPath: community } = store.curRoute
+  sr71$.query(S.pagedRepos, commonFilter(page, community))
+}
+
 export function loadTags() {
   scrollIntoEle(TYPE.APP_HEADER_ID)
   store.markState({ tagsLoading: true })
@@ -105,6 +112,13 @@ const DataSolver = [
     },
   },
   {
+    match: asyncRes('pagedRepos'),
+    action: ({ pagedRepos }) => {
+      cancleLoading()
+      store.markState({ pagedRepos })
+    },
+  },
+  {
     match: asyncRes('partialTags'),
     action: ({ partialTags }) => {
       cancleLoading()
@@ -131,7 +145,7 @@ const DataSolver = [
           return loadJobs()
         }
         case ROUTE.REPOS: {
-          return console.log('todo')
+          return loadRepos()
         }
         case ROUTE.VIDEOS: {
           return loadVideos()

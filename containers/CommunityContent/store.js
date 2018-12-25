@@ -60,6 +60,9 @@ const CommunityContentStore = t
     get pagedVideosData() {
       return stripMobx(self.pagedVideos)
     },
+    get pagedReposData() {
+      return stripMobx(self.pagedRepos)
+    },
     get pagedTagsData() {
       return { entries: stripMobx(self.pagedTags) }
     },
