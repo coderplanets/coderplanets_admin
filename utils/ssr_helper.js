@@ -59,6 +59,11 @@ const ssrCommunityContents = (subPath, resp) => {
         communityContent: { pagedJobs: resp.pagedJobs },
       }
     }
+    case ROUTE.VIDEOS: {
+      return {
+        communityContent: { pagedVideos: resp.pagedVideos },
+      }
+    }
     case ROUTE.TAGS: {
       return {
         communityContent: { pagedTags: resp.partialTags },

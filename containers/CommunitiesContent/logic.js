@@ -225,15 +225,16 @@ export function unsetTag(threadId, tag) {
 }
 
 /* when error occured cancle all the loading state */
-const cancleLoading = () => {
+const cancleLoading = () =>
   store.markState({
     communitiesLoading: false,
     postsLoading: false,
     jobsLoading: false,
+    reposLoading: false,
+    videosLoading: false,
     tagsLoading: false,
     categoriessLoading: false,
   })
-}
 
 const DataSolver = [
   {

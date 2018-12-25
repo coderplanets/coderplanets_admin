@@ -50,6 +50,13 @@ export function loadJobs(page = 1) {
   sr71$.query(S.pagedJobs, commonFilter(page, community))
 }
 
+export function loadVideos(page = 1) {
+  scrollIntoEle(TYPE.APP_HEADER_ID)
+  store.markState({ videosLoading: true })
+  const { mainPath: community } = store.curRoute
+  sr71$.query(S.pagedVideos, commonFilter(page, community))
+}
+
 export function loadTags() {
   scrollIntoEle(TYPE.APP_HEADER_ID)
   store.markState({ tagsLoading: true })
@@ -69,6 +76,8 @@ const cancleLoading = () => {
     // communitiesLoading: false,
     postsLoading: false,
     jobsLoading: false,
+    videosLoading: false,
+    reposLoading: false,
     tagsLoading: false,
   })
 }
@@ -89,6 +98,13 @@ const DataSolver = [
     },
   },
   {
+    match: asyncRes('pagedVideos'),
+    action: ({ pagedVideos }) => {
+      cancleLoading()
+      store.markState({ pagedVideos })
+    },
+  },
+  {
     match: asyncRes('partialTags'),
     action: ({ partialTags }) => {
       cancleLoading()
@@ -102,9 +118,6 @@ const DataSolver = [
       debug('SIDEBAR_MENU_CHANGE ', res[EVENT.SIDEBAR_MENU_CHANGE].data)
 
       switch (subPath) {
-        case ROUTE.CATEGORIES: {
-          return console.log('todo')
-        }
         case ROUTE.TAGS: {
           return loadTags()
         }
@@ -121,7 +134,7 @@ const DataSolver = [
           return console.log('todo')
         }
         case ROUTE.VIDEOS: {
-          return console.log('todo')
+          return loadVideos()
         }
         default: {
           return console.log('todo')

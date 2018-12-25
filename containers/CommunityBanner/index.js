@@ -14,6 +14,7 @@ import * as logic from './logic'
 
 import PostsBanner from './PostsBanner'
 import JobsBanner from './JobsBanner'
+import VideosBanner from './VideosBanner'
 import TagsBanner from './TagsBanner'
 import ThreadsBanner from './ThreadsBanner'
 import SubscribersBanner from './SubscribersBanner'
@@ -28,10 +29,15 @@ const ChildBanner = ({
   curRoute,
   postsTotalCount,
   jobsTotalCount,
+  videosTotalCount,
   tagsTotalCount,
   restProps,
 }) => {
-  const { filteredPostsCount, filteredJobsCount } = restProps
+  const {
+    filteredPostsCount,
+    filteredJobsCount,
+    filteredVideosCount,
+  } = restProps
 
   switch (curRoute.subPath) {
     case ROUTE.POSTS: {
@@ -47,6 +53,14 @@ const ChildBanner = ({
         <JobsBanner
           totalCount={jobsTotalCount}
           filteredCount={filteredJobsCount}
+        />
+      )
+    }
+    case ROUTE.VIDEOS: {
+      return (
+        <VideosBanner
+          totalCount={videosTotalCount}
+          filteredCount={filteredVideosCount}
         />
       )
     }
@@ -82,6 +96,7 @@ class CommunityBannerContainer extends React.Component {
       curRoute,
       postsTotalCount,
       jobsTotalCount,
+      videosTotalCount,
       tagsTotalCount,
     } = communityBanner
 
@@ -91,6 +106,7 @@ class CommunityBannerContainer extends React.Component {
           curRoute={curRoute}
           postsTotalCount={postsTotalCount}
           jobsTotalCount={jobsTotalCount}
+          videosTotalCount={videosTotalCount}
           tagsTotalCount={tagsTotalCount}
           restProps={stripMobx(communityBanner)}
         />

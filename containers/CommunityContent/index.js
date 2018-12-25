@@ -14,6 +14,7 @@ import { makeDebugger, storePlug, ROUTE } from '../../utils'
 import PostsContent from './PostsContent'
 import JobsContent from './JobsContent'
 import TagsContent from './TagsContent'
+import VideosContent from './VideosContent'
 
 import { Wrapper } from './styles'
 import * as logic from './logic'
@@ -26,6 +27,7 @@ const ChildContent = ({
   curRoute,
   pagedPostsData,
   pagedJobsData,
+  pagedVideosData,
   pagedTagsData,
   restProps,
 }) => {
@@ -40,7 +42,7 @@ const ChildContent = ({
       return <h3>ROUTE.REPOS</h3>
     }
     case ROUTE.VIDEOS: {
-      return <h3>ROUTE.VIDEOS</h3>
+      return <VideosContent data={pagedVideosData} restProps={restProps} />
     }
     case ROUTE.TAGS: {
       return <TagsContent data={pagedTagsData} restProps={restProps} />
@@ -70,9 +72,12 @@ class CommunityContentContainer extends React.Component {
       curRoute,
       pagedPostsData,
       pagedJobsData,
+      pagedVideosData,
       pagedTagsData,
     } = communityContent
     const restProps = { ...communityContent }
+
+    console.log('the fuck pagedVideosData: ', pagedVideosData)
 
     return (
       <Wrapper>
@@ -80,6 +85,7 @@ class CommunityContentContainer extends React.Component {
           curRoute={curRoute}
           pagedPostsData={pagedPostsData}
           pagedJobsData={pagedJobsData}
+          pagedVideosData={pagedVideosData}
           pagedTagsData={pagedTagsData}
           restProps={restProps}
         />
