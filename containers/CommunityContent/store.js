@@ -11,6 +11,7 @@ import {
   PagedJobs,
   PagedRepos,
   PagedVideos,
+  PagedUsers,
   Tag,
   PagedThreads,
   PagedCategories,
@@ -33,12 +34,15 @@ const CommunityContentStore = t
     pagedTags: t.optional(t.array(Tag), []),
     pagedThreads: t.optional(PagedThreads, emptyPagiData),
 
+    pagedSubscribers: t.optional(PagedUsers, emptyPagiData),
+
     tagsLoading: t.optional(t.boolean, false),
     categoriesLoading: t.optional(t.boolean, false),
     postsLoading: t.optional(t.boolean, false),
     jobsLoading: t.optional(t.boolean, false),
     reposLoading: t.optional(t.boolean, false),
     videosLoading: t.optional(t.boolean, false),
+    usersLoading: t.optional(t.boolean, false),
   })
   .views(self => ({
     get root() {
@@ -68,6 +72,12 @@ const CommunityContentStore = t
     },
     get pagedThreadsData() {
       return { entries: self.root.sidebar.activeCommunityData.threads }
+    },
+    get pagedSubscribersData() {
+      return stripMobx(self.pagedSubscribers)
+    },
+    get activeCommunity() {
+      return self.root.sidebar.activeCommunityData
     },
   }))
   .actions(self => ({

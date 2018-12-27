@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { P } from '../schemas'
+import { P, F } from '../schemas'
 
 const communities = gql`
   query communities($filter: PagedFilter!) {
@@ -18,6 +18,17 @@ const communities = gql`
       pageSize
       totalCount
       totalPages
+    }
+  }
+`
+
+const communitySubscribers = gql`
+  query($id: ID!, $filter: PagedFilter!) {
+    communitySubscribers(id: $id, filter: $filter) {
+      entries {
+        ${F.user}
+      }
+      ${F.pagedCounts}
     }
   }
 `
@@ -54,6 +65,7 @@ const schema = {
   pagedJobs,
   pagedRepos,
   pagedVideos,
+  communitySubscribers,
 }
 
 export default schema

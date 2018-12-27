@@ -61,3 +61,14 @@ export const pagedCommunities = `
     }
   }
 `
+
+export const communitySubscribers = `
+  query($id: ID, $community: String, $filter: PagedFilter!) {
+    communitySubscribers(id: $id, community: $community, filter: $filter) {
+      entries {
+        ${F.user}
+      }
+      ${F.pagedCounts}
+    }
+  }
+`

@@ -64,6 +64,20 @@ export function loadRepos(page = 1) {
   sr71$.query(S.pagedRepos, commonFilter(page, community))
 }
 
+export function loadSubscribers(page = 1) {
+  scrollIntoEle(TYPE.APP_HEADER_ID)
+  store.markState({ usersLoading: true })
+
+  const size = PAGE_SIZE.D
+  const args = {
+    id: store.activeCommunity.id,
+    filter: { page, size },
+  }
+  console.log('preview args: ', args)
+
+  sr71$.query(S.communitySubscribers, args)
+}
+
 export function loadTags() {
   scrollIntoEle(TYPE.APP_HEADER_ID)
   store.markState({ tagsLoading: true })
@@ -86,6 +100,7 @@ const cancleLoading = () => {
     videosLoading: false,
     reposLoading: false,
     tagsLoading: false,
+    usersLoading: false,
   })
 }
 
@@ -95,6 +110,15 @@ const DataSolver = [
     action: ({ pagedPosts }) => {
       cancleLoading()
       store.markState({ pagedPosts })
+    },
+  },
+  {
+    match: asyncRes('communitySubscribers'),
+    action: ({ communitySubscribers: pagedSubscribers }) => {
+      cancleLoading()
+      console.log('communitySubscribers get: ', pagedSubscribers)
+
+      store.markState({ pagedSubscribers })
     },
   },
   {
@@ -150,8 +174,11 @@ const DataSolver = [
         case ROUTE.VIDEOS: {
           return loadVideos()
         }
+        case ROUTE.SUBSCRIBERS: {
+          return loadSubscribers()
+        }
         default: {
-          return console.log('todo')
+          return console.log('todo: ', subPath)
         }
       }
     },

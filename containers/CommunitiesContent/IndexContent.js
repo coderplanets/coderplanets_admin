@@ -102,7 +102,7 @@ const columns = [
   },
   {
     title: '时间戳',
-    width: 120,
+    width: 140,
     align: 'center',
     render: (text, record) => <TimeStampCell data={record} />,
   },

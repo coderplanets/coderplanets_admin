@@ -18,15 +18,15 @@ import {
 import { ROUTE } from '../../utils'
 import * as logic from './logic'
 
-const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
+const MenuChildren = ({ community, activeRaw, curRaw, activeThread }) => (
   <ChildrenWrapper active={activeRaw === curRaw}>
     <ChildrenItem
       active={ROUTE.USERS === activeThread || activeThread === 'index'}
-      onClick={logic.onRootMenuSelect.bind(this, 'users', 'index')}
+      onClick={logic.onRootMenuSelect.bind(this, ROUTE.USERS, 'index')}
     >
       <ChildrenItemInner>
         <ChildrenTitle>注册用户</ChildrenTitle>
-        <ChildrenNum>--</ChildrenNum>
+        <ChildrenNum>{community.subscribersCount}</ChildrenNum>
       </ChildrenItemInner>
     </ChildrenItem>
     <ChildrenItem
@@ -42,26 +42,24 @@ const MenuChildren = ({ activeRaw, curRaw, activeThread }) => (
 )
 
 const UsersItemBar = ({ activeRaw, curRaw }) => (
-  //   <Link href={item.target.href} as={item.target.as}>
   <MenuItemEach>
-    <div>
-      <MenuRow
-        active={activeRaw === curRaw}
-        onClick={logic.extendMenuBar.bind(this, ROUTE.USERS)}
-      >
-        <MenuCommunitiesIcon src={`${ICON_CMD}/users.svg`} />
-        <div style={{ marginRight: 10 }} />
-        {/* eslint-disable jsx-a11y/anchor-is-valid */}
-        <MenuTitle>所有用户</MenuTitle>
-      </MenuRow>
-    </div>
+    <MenuRow
+      active={activeRaw === curRaw}
+      onClick={logic.extendMenuBar.bind(this, ROUTE.USERS)}
+    >
+      <MenuCommunitiesIcon src={`${ICON_CMD}/users.svg`} />
+      <div style={{ marginRight: 10 }} />
+      {/* eslint-disable jsx-a11y/anchor-is-valid */}
+      <MenuTitle>所有用户</MenuTitle>
+    </MenuRow>
   </MenuItemEach>
 )
 
-const UsersRootMenuItem = ({ activeRaw, activeThread }) => (
+const UsersRootMenuItem = ({ community, activeRaw, activeThread }) => (
   <MenuItemWrapper>
     <UsersItemBar activeRaw={activeRaw} curRaw={ROUTE.USERS} />
     <MenuChildren
+      community={community}
       activeRaw={activeRaw}
       curRaw={ROUTE.USERS}
       activeThread={activeThread}

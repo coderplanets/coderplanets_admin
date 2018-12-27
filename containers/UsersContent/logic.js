@@ -45,7 +45,7 @@ export function loadUsers(page = 1) {
 export function onEdit() {}
 export function onDelete() {}
 
-export function onCmsPermissionMutate(source) {
+export function cmsPermisstionOnChange(source) {
   dispatchEvent(EVENT.NAV_UPDATE_PERMISSION, {
     type: TYPE.PREVIEW_UPDATE_PERMISSION,
     data: {

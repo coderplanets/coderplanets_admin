@@ -24,6 +24,7 @@ const MenuList = ({
     />
     <UsersRootMenuItem
       activeRaw={activeRaw}
+      community={activeCommunityData}
       activeThread={activeThread}
       countsInfo={countsInfo}
     />

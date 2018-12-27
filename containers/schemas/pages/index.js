@@ -3,7 +3,12 @@ import { pagedJobs, job } from './job'
 import { pagedVideos, video } from './video'
 import { pagedRepos, repo } from './repo'
 import { user, pagedUsers, sessionState } from './user'
-import { community, subscribedCommunities, pagedCommunities } from './community'
+import {
+  community,
+  communitySubscribers,
+  subscribedCommunities,
+  pagedCommunities,
+} from './community'
 import { pagedComments } from './comment'
 import { pagedCategories } from './misc'
 import { pagedTags, partialTags } from './tag'
@@ -16,6 +21,7 @@ const P = {
   community,
   subscribedCommunities,
   pagedCommunities,
+  communitySubscribers,
   // comment
   pagedComments,
   // misc

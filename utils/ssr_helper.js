@@ -28,6 +28,9 @@ export const ssrPagedSchema = (subpath, opt = {}) => {
     case ROUTE.VIDEOS: {
       return P.pagedVideos
     }
+    case ROUTE.SUBSCRIBERS: {
+      return P.communitySubscribers
+    }
     default: {
       return P.pagedCommunities
     }
@@ -72,6 +75,11 @@ const ssrCommunityContents = (subPath, resp) => {
     case ROUTE.TAGS: {
       return {
         communityContent: { pagedTags: resp.partialTags },
+      }
+    }
+    case ROUTE.SUBSCRIBERS: {
+      return {
+        communityContent: { pagedSubscribers: resp.communitySubscribers },
       }
     }
     default: {
@@ -138,7 +146,9 @@ export const ssrCommunityFilter = (community, subPath) => {
     case ROUTE.THREADS: {
       return { filter: { page: 1, size: 30 } }
     }
-
+    case ROUTE.SUBSCRIBERS: {
+      return { filter: { page: 1, size: 30 }, community }
+    }
     default: {
       return { filter: { page: 1, size: 30, community } }
     }

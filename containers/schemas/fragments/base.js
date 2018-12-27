@@ -101,9 +101,10 @@ export const user = `
   instagram
   pinterest
   huaban
-  followersCount
-  followingsCount
 `
+/* followersCount */
+/* followingsCount */
+
 export const c11n = `
   bannerLayout
   contentsLayout
