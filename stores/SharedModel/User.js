@@ -1,9 +1,8 @@
 import { types as t } from 'mobx-state-tree'
+import { C11N } from 'utils'
+import { PAGE_SIZE } from 'config'
 import { Community /* PagedCommunities */ } from './Community'
 import { emptyPagiData } from './general'
-
-import { C11N } from '../../utils'
-import { PAGE_SIZE } from '../../config'
 
 const PagedCommunities = t.model('pagedCommunities', {
   entries: t.optional(t.array(Community), []),

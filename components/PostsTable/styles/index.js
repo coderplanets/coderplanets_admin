@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
+import { theme } from 'utils'
 import { Img } from '../..'
-import { theme } from '../../../utils'
 
 export const Wrapper = styled.div`
   min-height: 800px;

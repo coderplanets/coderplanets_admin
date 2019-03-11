@@ -9,11 +9,11 @@ import {
   ROUTE,
   dispatchEvent,
   scrollIntoEle,
-} from '../../utils'
-import { PAGE_SIZE } from '../../config'
+} from 'utils'
+import { PAGE_SIZE } from 'config'
 
+import SR71 from 'utils/network/sr71'
 import S from './schema'
-import SR71 from '../../utils/network/sr71'
 
 const sr71$ = new SR71({
   resv_event: [EVENT.PREVIEW_CLOSE, EVENT.SIDEBAR_MENU_CHANGE],

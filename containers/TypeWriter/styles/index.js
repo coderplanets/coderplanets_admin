@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
-import { Input } from '../../../components'
-import { theme } from '../../../utils'
+import { Input } from 'components'
+import { theme } from 'utils'
 
 export const ViewerWrapper = styled.div`
   display: ${({ active }) => (active ? 'block' : 'none')};

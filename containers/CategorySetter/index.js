@@ -8,9 +8,9 @@ import React from 'react'
 import { inject, observer } from 'mobx-react'
 import R from 'ramda'
 
+import { uid, makeDebugger, storePlug } from 'utils'
 import { Wrapper, Divider, CategoryWrapper, CategoryTag } from './styles'
 
-import { uid, makeDebugger, storePlug } from '../../utils'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */

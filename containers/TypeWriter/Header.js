@@ -1,7 +1,8 @@
 import React from 'react'
 
-import { ICON_CMD } from '../../config'
+import { ICON_CMD } from 'config'
 
+import { THREAD } from 'utils'
 import {
   Wrapper,
   UsageText,
@@ -10,7 +11,6 @@ import {
   BackToEditHint,
 } from './styles/header'
 
-import { THREAD } from '../../utils'
 import * as logic from './logic'
 
 const DoingText = ({ isEdit }) => {

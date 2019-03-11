@@ -7,11 +7,10 @@ import React from 'react'
 import { inject, observer } from 'mobx-react'
 // import { InputNumer } from 'antd'
 
-import { FormInputer, Icon, Button, StatusBox, Space } from '../../components'
+import { FormInputer, Icon, Button, StatusBox, Space } from 'components'
 
+import { makeDebugger, storePlug } from 'utils'
 import { Wrapper, Divider, ActionBtns } from './styles'
-
-import { makeDebugger, storePlug } from '../../utils'
 
 import * as logic from './logic'
 /* eslint-disable no-unused-vars */

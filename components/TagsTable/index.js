@@ -8,6 +8,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Table, Button } from 'antd'
 
+import { makeDebugger, Trans } from 'utils'
 import Pagi from '../Pagi'
 import { TableLoading } from '../LoadingEffects'
 import { Space } from '../BaseStyled'
@@ -16,8 +17,6 @@ import CommunityCell from '../CommunityCell'
 import TimeStampCell from '../TimeStampCell'
 
 import { OperationWrapper } from './styles'
-
-import { makeDebugger, Trans } from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:TagsTable:index')

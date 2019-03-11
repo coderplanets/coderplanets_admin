@@ -1,7 +1,7 @@
 // import R from 'ramda'
 
-import { makeDebugger, asyncRes, $solver } from '../../utils'
-import SR71 from '../../utils/network/sr71'
+import { makeDebugger, asyncRes, $solver } from 'utils'
+import SR71 from 'utils/network/sr71'
 
 import S from './schema'
 

@@ -5,8 +5,8 @@
 
 import { types as t, getParent } from 'mobx-state-tree'
 
-import { Community, Category, Tag, Post, User } from '../../stores/SharedModel'
-import { markStates, TYPE, unholdPage, stripMobx } from '../../utils'
+import { Community, Category, Tag, Post, User } from 'stores/SharedModel'
+import { markStates, TYPE, unholdPage, stripMobx } from 'utils'
 
 // const debug = makeDebugger('S:PreviewStore')
 const Article = t.model('Article', {

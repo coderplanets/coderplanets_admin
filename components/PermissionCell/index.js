@@ -8,6 +8,7 @@ import React from 'react'
 import R from 'ramda'
 import PropTypes from 'prop-types'
 
+import { uid, makeDebugger, isEmptyNil, isObject, objToArray } from 'utils'
 import AdderCell from '../AdderCell'
 
 import {
@@ -19,14 +20,6 @@ import {
   NumberInfo,
   PermissionWrapper,
 } from './styles'
-
-import {
-  uid,
-  makeDebugger,
-  isEmptyNil,
-  isObject,
-  objToArray,
-} from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:PermissionCell:index')

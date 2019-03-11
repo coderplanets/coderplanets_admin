@@ -9,8 +9,6 @@ import { inject, observer } from 'mobx-react'
 
 // import Link from 'next/link'
 
-import { makeDebugger, storePlug } from '../../utils'
-
 import {
   Button,
   Icon,
@@ -18,7 +16,8 @@ import {
   FormInputer,
   /* FormSelector, */
   /* TagColorSelector, */
-} from '../../components'
+} from 'components'
+import { makeDebugger, storePlug } from 'utils'
 
 import { Wrapper, ActionBtns, Divider } from './styles'
 import * as logic from './logic'

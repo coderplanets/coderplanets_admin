@@ -9,7 +9,7 @@ import fetch from 'isomorphic-fetch'
 /* import { onError } from 'apollo-link-error' */
 
 import { makeDebugger, BStore } from '..'
-import { GRAPHQL_ENDPOINT } from '../../config'
+import { GRAPHQL_ENDPOINT } from 'config'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('Network')

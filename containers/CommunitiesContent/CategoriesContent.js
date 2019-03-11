@@ -10,10 +10,10 @@ import {
   UserCell,
   CommunityCell,
   TimeStampCell,
-} from '../../components'
+} from 'components'
 
+import { Trans } from 'utils'
 import { OperationWrapper } from './styles'
-import { Trans } from '../../utils'
 import * as logic from './logic'
 
 /* eslint-disable react/display-name */

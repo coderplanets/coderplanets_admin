@@ -7,9 +7,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { makeDebugger } from 'utils'
 import { Wrapper, Content, Label, Count } from './styles'
-
-import { makeDebugger } from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:ContentsCountCell:index')

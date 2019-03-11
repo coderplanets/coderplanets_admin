@@ -1,7 +1,7 @@
 import React from 'react'
 
+import { uid } from 'utils'
 import { Wrapper, TagItem, TagDot, TagTitle } from './styles/tag_list'
-import { uid } from '../../utils'
 
 const TagList = ({ data }) => (
   <Wrapper>

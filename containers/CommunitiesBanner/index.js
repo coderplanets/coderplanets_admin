@@ -1,7 +1,7 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 
-import { storePlug, makeDebugger, ROUTE, stripMobx } from '../../utils'
+import { storePlug, makeDebugger, ROUTE, stripMobx } from 'utils'
 
 import * as logic from './logic'
 

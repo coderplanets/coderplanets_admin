@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
+import { theme } from 'utils'
 import Img from '../../Img'
-import { theme } from '../../../utils'
 
 export const Breadcrumbs = styled.div`
   max-width: 520px;

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-// import { Img } from '../../../components'
+// import { Img } from 'components'
 
 export const FormItemWrapper = styled.div`
   display: flex;

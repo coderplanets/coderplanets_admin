@@ -6,6 +6,7 @@
 import { types as t, getParent } from 'mobx-state-tree'
 import R from 'ramda'
 
+import { Comment, PagedComments, emptyPagiData } from 'stores/SharedModel'
 import {
   markStates,
   makeDebugger,
@@ -14,8 +15,7 @@ import {
   changeset,
   // THREAD,
   // subPath2Thread,
-} from '../../utils'
-import { Comment, PagedComments, emptyPagiData } from '../../stores/SharedModel'
+} from 'utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('S:CommentsStore')

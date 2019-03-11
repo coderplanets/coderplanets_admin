@@ -9,9 +9,9 @@ import R from 'ramda'
 import { inject, observer } from 'mobx-react'
 
 // import Link from 'next/link'
+import { uid, makeDebugger, storePlug } from 'utils'
 import { Wrapper, Divider, ThreadsWrapper, ThreadTag } from './styles'
 
-import { uid, makeDebugger, storePlug } from '../../utils'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */

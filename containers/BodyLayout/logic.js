@@ -1,4 +1,4 @@
-import { makeDebugger } from '../../utils'
+import { makeDebugger } from 'utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('L:BodyLayout')

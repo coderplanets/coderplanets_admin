@@ -9,8 +9,8 @@ import R from 'ramda'
 import { inject, observer } from 'mobx-react'
 import { Affix } from 'antd'
 
-import { ICON_CMD, ICON_BASE } from '../../config/assets'
-import { makeDebugger, storePlug, TYPE } from '../../utils'
+import { ICON_CMD, ICON_BASE } from 'config/assets'
+import { makeDebugger, storePlug, TYPE } from 'utils'
 
 import {
   HeaderWrapper,

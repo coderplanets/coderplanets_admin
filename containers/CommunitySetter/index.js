@@ -8,8 +8,9 @@ import React from 'react'
 import R from 'ramda'
 import { inject, observer } from 'mobx-react'
 
-import { Pagi } from '../../components'
+import { Pagi } from 'components'
 
+import { uid, makeDebugger, storePlug } from 'utils'
 import {
   Wrapper,
   Divider,
@@ -19,7 +20,6 @@ import {
   SetterTitle,
 } from './styles'
 
-import { uid, makeDebugger, storePlug } from '../../utils'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */

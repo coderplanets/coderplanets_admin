@@ -6,7 +6,7 @@
 import { types as t, getParent } from 'mobx-state-tree'
 import R from 'ramda'
 
-import { markStates, makeDebugger, stripMobx, BStore } from '../../utils'
+import { markStates, makeDebugger, stripMobx, BStore } from 'utils'
 import { User, EmptyUser } from '../SharedModel'
 
 /* eslint-disable no-unused-vars */

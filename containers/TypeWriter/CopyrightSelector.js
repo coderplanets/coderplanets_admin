@@ -2,10 +2,10 @@ import React from 'react'
 import R from 'ramda'
 // import PropTypes from 'prop-types'
 
-import { ICON_CMD } from '../../config'
+import { Popover } from 'components'
+import { ICON_CMD } from 'config'
 
-import { Popover } from '../../components'
-
+import { uid, THREAD } from 'utils'
 import {
   Wrapper,
   Selector,
@@ -17,7 +17,6 @@ import {
   MoreIcon,
 } from './styles/copyright_selector'
 
-import { uid, THREAD } from '../../utils'
 import { copyrightChange } from './logic'
 
 const FullOptions = [

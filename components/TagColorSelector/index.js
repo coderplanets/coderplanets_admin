@@ -8,8 +8,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import R from 'ramda'
 
-import { TAG_COLORS } from '../../config'
+import { TAG_COLORS } from 'config'
 
+import { uid, makeDebugger } from 'utils'
 import {
   FormItemWrapper,
   FormLable,
@@ -18,8 +19,6 @@ import {
   BotWrapper,
   ColorBot,
 } from './styles'
-
-import { uid, makeDebugger } from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:TagColorSelector:index')

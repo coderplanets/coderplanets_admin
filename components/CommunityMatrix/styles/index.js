@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
+import { cs } from 'utils'
 import Img from '../../Img'
-import { cs } from '../../../utils'
 
 export const MatrixWrapper = styled.div`
   display: flex;

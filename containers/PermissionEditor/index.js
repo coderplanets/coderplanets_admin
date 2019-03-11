@@ -8,14 +8,14 @@ import React from 'react'
 import { inject, observer } from 'mobx-react'
 import ReactTooltip from 'react-tooltip'
 
-import { UserCell, Button, Space, Icon } from '../../components'
+import { UserCell, Button, Space, Icon } from 'components'
 
+import { makeDebugger, storePlug } from 'utils'
 import { Wrapper, Divider, ActionBtns } from './styles'
 
 import CommunityList from './CommunityList'
 import PermissionList from './PermissionList'
 
-import { makeDebugger, storePlug } from '../../utils'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */

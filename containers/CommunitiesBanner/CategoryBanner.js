@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { ICON_CMD } from '../../config'
-import { BannerCountBrief } from '../../components'
+import { BannerCountBrief } from 'components'
+import { ICON_CMD } from 'config'
 
 import {
   BannerContentWrapper,

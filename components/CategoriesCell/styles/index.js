@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
+import { animate } from 'utils'
 import Img from '../../Img'
-import { animate } from '../../../utils'
 
 export const UnsetText = styled.div`
   color: tomato;

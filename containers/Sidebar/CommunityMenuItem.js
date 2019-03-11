@@ -1,8 +1,9 @@
 import React from 'react'
 // import Link from 'next/link'
 
-import { ICON_CMD } from '../../config'
+import { ICON_CMD } from 'config'
 
+import { cutFrom, ROUTE } from 'utils'
 import {
   MenuRow,
   MenuTitle,
@@ -17,7 +18,6 @@ import {
   SettingIcon,
 } from './styles/menu'
 
-import { cutFrom, ROUTE } from '../../utils'
 import * as logic from './logic'
 
 const MenuItemBar = ({ item, activeRaw, curRaw }) => (

@@ -9,8 +9,9 @@ import R from 'ramda'
 import PropTypes from 'prop-types'
 import ReactTooltip from 'react-tooltip'
 
-import { ICON_CMD } from '../../config'
+import { ICON_CMD } from 'config'
 
+import { uid, makeDebugger } from 'utils'
 import AdderCell from '../AdderCell'
 import CommunitiesLogoList from './CommunitiesLogoList'
 
@@ -23,8 +24,6 @@ import {
   UnknowText,
   AddIcon,
 } from './styles'
-
-import { uid, makeDebugger } from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:CommunityCell:index')

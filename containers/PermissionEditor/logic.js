@@ -9,9 +9,9 @@ import {
   TYPE,
   EVENT,
   closePreviewer,
-} from '../../utils'
-import SR71 from '../../utils/network/sr71'
-import { PAGE_SIZE } from '../../config'
+} from 'utils'
+import SR71 from 'utils/network/sr71'
+import { PAGE_SIZE } from 'config'
 
 import S from './schema'
 

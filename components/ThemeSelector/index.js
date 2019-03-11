@@ -7,10 +7,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { makeDebugger } from 'utils'
 import DotSelector from './DotSelector'
 import CardSelector from './CardSelector'
-
-import { makeDebugger } from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:ThemeSelector:index')

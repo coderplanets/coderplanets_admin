@@ -8,7 +8,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { makeDebugger, isEmptyNil } from '../../utils'
+import { makeDebugger, isEmptyNil } from 'utils'
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:MaybeCell:index')
 /* eslint-enable no-unused-vars */

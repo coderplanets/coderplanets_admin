@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { ICON_CMD } from '../../config'
-import { AvatarsRow, SpaceGrow } from '../../components'
+import { AvatarsRow, SpaceGrow } from 'components'
+import { ICON_CMD } from 'config'
 import WordsCounter from './WordsCounter'
 
 import {

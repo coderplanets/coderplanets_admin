@@ -1,7 +1,7 @@
 //
 import React from 'react'
 
-import { Space, StatusBox, Button, Icon } from '../../components'
+import { Space, StatusBox, Button, Icon } from 'components'
 import { canclePublish, onPublish } from './logic'
 
 import {

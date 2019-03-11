@@ -9,16 +9,15 @@ import R from 'ramda'
 import PropTypes from 'prop-types'
 import ReactTooltip from 'react-tooltip'
 
-import { ICON_CMD } from '../../config'
+import { ICON_CMD } from 'config'
 
+import { makeDebugger, uid } from 'utils'
 import {
   MatrixWrapper,
   CommunityLogo,
   GeneralPLogo,
   AddOnWrapper,
 } from './styles'
-
-import { makeDebugger, uid } from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:CommunityMatrix:index')

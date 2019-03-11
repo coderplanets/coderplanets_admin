@@ -8,6 +8,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Table, Button } from 'antd'
 
+import { makeDebugger, cutFrom, TYPE } from 'utils'
 import { OperationWrapper } from './styles'
 
 import Pagi from '../Pagi'
@@ -17,8 +18,6 @@ import UserCell from '../UserCell'
 import CommunityCell from '../CommunityCell'
 import TagsCell from '../TagsCell'
 import TimeStampCell from '../TimeStampCell'
-
-import { makeDebugger, cutFrom, TYPE } from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:VideosTable:index')

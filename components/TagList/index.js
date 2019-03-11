@@ -7,9 +7,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { ICON_CMD } from '../../config'
+import { ICON_CMD } from 'config'
+import { uid, makeDebugger } from 'utils'
 import { Wrapper, TagItem, TagDot, TagTitle, AllTagIcon } from './styles'
-import { uid, makeDebugger } from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:TagList:index')

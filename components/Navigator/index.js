@@ -7,9 +7,9 @@
 import React from 'react'
 // import PropTypes from 'prop-types'
 
-import { ICON_CMD } from '../../config'
+import { ICON_CMD } from 'config'
+import { makeDebugger } from 'utils'
 import { Breadcrumbs, Logo, LogoText, BetaLogo } from './style'
-import { makeDebugger } from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:Navigator:index')

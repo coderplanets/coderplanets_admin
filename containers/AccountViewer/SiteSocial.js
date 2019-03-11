@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { ICON_CMD } from '../../config'
+import { FocusLine } from 'components'
+import { ICON_CMD } from 'config'
 
-import { FocusLine } from '../../components'
 import NumSection from './NumSection'
 import {
   Wrapper,

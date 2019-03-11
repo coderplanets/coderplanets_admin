@@ -1,6 +1,6 @@
 import React from 'react'
 
-import PostsTable from '../../components/PostsTable'
+import PostsTable from 'components/PostsTable'
 
 // import { OperationWrapper } from './styles'
 import * as logic from './logic'

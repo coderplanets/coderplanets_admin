@@ -8,6 +8,7 @@ import React from 'react'
 // import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
 
+import { makeDebugger, storePlug } from 'utils'
 import Editor from './Editor'
 import Preview from './Preview'
 import MarkDownHelper from './MarkDownHelper'
@@ -17,7 +18,6 @@ import Footer from './Footer'
 import { Wrapper, ViewerWrapper } from './styles'
 
 import { init, uninit, changeView } from './logic'
-import { makeDebugger, storePlug } from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('C:TypeWriter')

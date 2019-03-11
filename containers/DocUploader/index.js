@@ -7,11 +7,11 @@ import React from 'react'
 import { inject, observer } from 'mobx-react'
 import PropTypes from 'prop-types'
 
-import { ASSETS_ENDPOINT } from '../../config'
+import { ASSETS_ENDPOINT } from 'config'
 
+import { makeDebugger, storePlug, uid } from 'utils'
 import { Wrapper, InputFile } from './styles'
 
-import { makeDebugger, storePlug, uid } from '../../utils'
 import { init, onUploadError, getOSSDir, getOSSFileName } from './logic'
 
 /* eslint-disable no-unused-vars */

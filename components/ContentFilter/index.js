@@ -7,9 +7,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Button, Row, Col, Tag } from 'antd'
+import { ICON_CMD } from 'config'
+import { makeDebugger, isEmptyValue } from 'utils'
 import Popover from '../Popover'
-
-import { ICON_CMD } from '../../config'
 
 import {
   Wrapper,
@@ -20,7 +20,6 @@ import {
   SelectItem,
 } from './styles'
 
-import { makeDebugger, isEmptyValue } from '../../utils'
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:ContentFilter:index')
 /* eslint-enable no-unused-vars */

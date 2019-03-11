@@ -1,7 +1,8 @@
 import React from 'react'
 
-import { ICON_CMD } from '../../config'
+import { ICON_CMD } from 'config'
 
+import { ROUTE } from 'utils'
 import {
   MenuRow,
   MenuTitle,
@@ -15,7 +16,6 @@ import {
   ChildrenNum,
 } from './styles/menu'
 
-import { ROUTE } from '../../utils'
 import * as logic from './logic'
 
 const MenuChildren = ({ activeRaw, curRaw, activeThread, countsInfo }) => (

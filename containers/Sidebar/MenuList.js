@@ -1,12 +1,11 @@
 import React from 'react'
 
+import { uid } from 'utils'
 import CommunityMenuItem from './CommunityMenuItem'
 import CommunitiesRootMenuItem from './CommunitiesRootMenuItem'
 import UsersRootMenuItem from './UsersRootMenuItem'
 
 import { MenuItem } from './styles/menu'
-
-import { uid } from '../../utils'
 
 const MenuList = ({
   items,

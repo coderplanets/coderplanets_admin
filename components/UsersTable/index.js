@@ -8,12 +8,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Table } from 'antd'
 
+import { makeDebugger } from 'utils'
 import Pagi from '../Pagi'
 import { TableLoading } from '../LoadingEffects'
 import MaybeCell from '../MaybeCell'
 import UserCell from '../UserCell'
 import TimeStampCell from '../TimeStampCell'
-import { makeDebugger } from '../../utils'
 
 import PermissionCell from '../PermissionCell'
 import SexCell from '../SexCell'

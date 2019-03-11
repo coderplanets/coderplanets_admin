@@ -2,10 +2,9 @@ import React from 'react'
 import withClickOutside from 'react-click-outside'
 import dynamic from 'next/dynamic'
 
-import { debounce } from '../../utils'
+import { MarkDownRender } from 'components'
+import { debounce } from 'utils'
 import * as logic from './logic'
-
-import { MarkDownRender } from '../../components'
 
 import {
   Container,

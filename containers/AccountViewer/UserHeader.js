@@ -1,8 +1,9 @@
 import React from 'react'
 
-import { ICON_CMD } from '../../config'
-import { A, Button, Icon } from '../../components'
+import { A, Button, Icon } from 'components'
+import { ICON_CMD } from 'config'
 
+import { uid } from 'utils'
 import {
   UserWrapper,
   UserInfo,
@@ -14,8 +15,6 @@ import {
   SocalIcon,
   EditIcon,
 } from './styles/user_header'
-
-import { uid } from '../../utils'
 
 const tooltipOffset = JSON.stringify({ top: 5, left: 3 })
 const SocalIcons = ({ accountInfo: { githubProfile } }) => (

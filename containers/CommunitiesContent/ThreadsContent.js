@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ThreadsTable from '../../components/ThreadsTable'
+import ThreadsTable from 'components/ThreadsTable'
 
 // import * as logic from './logic'
 

@@ -1,15 +1,7 @@
 import React from 'react'
 import R from 'ramda'
 
-import { ICON_CMD } from '../../config'
-
-import {
-  Wrapper,
-  PermissionWrapper,
-  PerItem,
-  PerTitle,
-  CheckIcon,
-} from './styles/permission_list'
+import { ICON_CMD } from 'config'
 
 import {
   uid,
@@ -19,7 +11,14 @@ import {
   mapKey,
   mapValue,
   objToArray,
-} from '../../utils'
+} from 'utils'
+import {
+  Wrapper,
+  PermissionWrapper,
+  PerItem,
+  PerTitle,
+  CheckIcon,
+} from './styles/permission_list'
 
 import { onRuleClick } from './logic'
 

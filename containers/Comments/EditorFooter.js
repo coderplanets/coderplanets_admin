@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { ICON_CMD } from '../../config'
+import { Space, Button, Icon } from 'components'
+import { ICON_CMD } from 'config'
 
 import DocUploader from '../DocUploader'
-import { Space, Button, Icon } from '../../components'
 
 import * as logic from './logic'
 

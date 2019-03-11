@@ -6,7 +6,7 @@
 import R from 'ramda'
 import { types as t, getParent } from 'mobx-state-tree'
 
-import { markStates, makeDebugger } from '../../utils'
+import { markStates, makeDebugger } from 'utils'
 import { Community } from '../SharedModel'
 
 /* eslint-disable no-unused-vars */

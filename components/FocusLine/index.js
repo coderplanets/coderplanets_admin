@@ -8,9 +8,9 @@ import React from 'react'
 import R from 'ramda'
 import PropTypes from 'prop-types'
 
+import { makeDebugger } from 'utils'
 import { Wrapper, Icon, TextWrapper, Text, Focus } from './styles'
 
-import { makeDebugger } from '../../utils'
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:FocusLine:index')
 /* eslint-enable no-unused-vars */

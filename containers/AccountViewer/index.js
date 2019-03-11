@@ -9,15 +9,15 @@ import { inject, observer } from 'mobx-react'
 import R from 'ramda'
 import ReactTooltip from 'react-tooltip'
 
-import { ThemeSelector, UserBrief, Maybe } from '../../components'
+import { ThemeSelector, UserBrief, Maybe } from 'components'
 
+import { makeDebugger, storePlug } from 'utils'
 import SiteSocial from './SiteSocial'
 import Planets from './Planets'
 import ContributeMap from './ContributeMap'
 
 import { AccountWrapper, AccountContent, ThemeWrapper, Divider } from './styles'
 
-import { makeDebugger, storePlug } from '../../utils'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */

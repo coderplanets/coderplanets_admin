@@ -7,9 +7,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { ASSETS_ENDPOINT } from 'config'
+import { makeDebugger } from 'utils'
 import { FileUploaderWrapper, InputFile } from './styles'
-import { ASSETS_ENDPOINT } from '../../config'
-import { makeDebugger } from '../../utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('C:FileUploader')

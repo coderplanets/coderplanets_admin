@@ -9,7 +9,7 @@ import { inject, observer } from 'mobx-react'
 
 // import Link from 'next/link'
 
-import { makeDebugger, storePlug, ROUTE } from '../../utils'
+import { makeDebugger, storePlug, ROUTE } from 'utils'
 
 import PostsContent from './PostsContent'
 import JobsContent from './JobsContent'

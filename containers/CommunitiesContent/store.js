@@ -16,9 +16,9 @@ import {
   PagedCategories,
   PagedCommunities,
   emptyPagiData,
-} from '../../stores/SharedModel'
+} from 'stores/SharedModel'
 
-import { markStates, makeDebugger, stripMobx } from '../../utils'
+import { markStates, makeDebugger, stripMobx } from 'utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('S:CommunitiesContentStore')

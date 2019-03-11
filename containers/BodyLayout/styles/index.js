@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { theme } from '../../../utils'
+import { theme } from 'utils'
 
 // transition: background-color 0.2s;
 const Body = styled.div`

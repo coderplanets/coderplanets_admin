@@ -12,11 +12,11 @@ import {
   ROUTE,
   // TYPE,
   dispatchEvent,
-} from '../../utils'
-import S from './schema'
-import { PAGE_SIZE } from '../../config'
+} from 'utils'
+import { PAGE_SIZE } from 'config'
 
-import SR71 from '../../utils/network/sr71'
+import SR71 from 'utils/network/sr71'
+import S from './schema'
 
 const sr71$ = new SR71({
   resv_event: [EVENT.LOGOUT, EVENT.LOGIN, EVENT.ROUTE_CHANGE],

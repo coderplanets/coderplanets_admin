@@ -6,14 +6,14 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 
-import { ICON_CMD } from '../../config'
+import { ICON_CMD } from 'config'
 
+import { makeDebugger, storePlug } from 'utils'
 import MenuList from './MenuList'
 import SearchBox from './SearchBox'
 
 import { Sidebar, Banner, Footer, BannerTitle, BannerLogo } from './styles'
 
-import { makeDebugger, storePlug } from '../../utils'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */

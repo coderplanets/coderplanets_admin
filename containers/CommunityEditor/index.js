@@ -9,9 +9,6 @@ import { inject, observer } from 'mobx-react'
 
 // import Link from 'next/link'
 
-import { makeDebugger, storePlug } from '../../utils'
-
-// TODO: EditableImage
 import {
   Button,
   Icon,
@@ -19,7 +16,10 @@ import {
   Space,
   FileUploader,
   StatusBox,
-} from '../../components'
+} from 'components'
+import { makeDebugger, storePlug } from 'utils'
+
+// TODO: EditableImage
 import { Wrapper, Logo, Divider, ActionBtns, ImageWrapper } from './styles'
 
 import * as logic from './logic'

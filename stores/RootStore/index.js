@@ -4,7 +4,7 @@
  */
 
 import { types as t } from 'mobx-state-tree'
-import { makeDebugger, markStates } from '../../utils'
+import { makeDebugger, markStates } from 'utils'
 
 import CommunitiesStore from '../CommunitiesStore'
 import { ThemeStore, ThemeDefaults } from '../ThemeStore'

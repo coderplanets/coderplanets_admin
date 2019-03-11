@@ -10,9 +10,9 @@ import { inject, observer } from 'mobx-react'
 
 // import Link from 'next/link'
 
+import { makeDebugger, storePlug } from 'utils'
 import PostViewer from './PostViewer'
 
-import { makeDebugger, storePlug } from '../../utils'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */

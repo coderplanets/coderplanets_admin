@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ReposTable from '../../components/ReposTable'
+import ReposTable from 'components/ReposTable'
 
 // import { OperationWrapper } from './styles'
 import * as logic from './logic'

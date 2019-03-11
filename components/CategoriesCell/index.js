@@ -9,8 +9,9 @@ import PropTypes from 'prop-types'
 import R from 'ramda'
 import { Icon } from 'antd'
 
-import { ICON_CMD } from '../../config'
+import { ICON_CMD } from 'config'
 
+import { uid, Trans } from 'utils'
 import AdderCell from '../AdderCell'
 
 import {
@@ -21,7 +22,6 @@ import {
   AddIcon,
 } from './styles'
 
-import { uid, Trans } from '../../utils'
 // import { inject, observer } from 'mobx-react'
 // import Link from 'next/link'
 

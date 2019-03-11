@@ -8,14 +8,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
 
-import { Modal } from '../../components'
+import { Modal } from 'components'
+import { makeDebugger, storePlug } from 'utils'
 import CommentEditor from './CommentEditor'
 import CommentsList from './CommentsList'
 import CommentReplyEditor from './CommentReplyEditor'
 
 import { Wrapper } from './styles'
 
-import { makeDebugger, storePlug } from '../../utils'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */

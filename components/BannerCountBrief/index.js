@@ -7,7 +7,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { makeDebugger, toPercentNum } from '../../utils'
+import { makeDebugger, toPercentNum } from 'utils'
 
 import {
   Result,

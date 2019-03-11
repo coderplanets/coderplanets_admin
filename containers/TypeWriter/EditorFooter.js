@@ -1,11 +1,12 @@
 import React from 'react'
 // import R from 'ramda'
 
-import { ICON_CMD } from '../../config'
+import { FileUploader, Maybe } from 'components'
+import { ICON_CMD } from 'config'
 
 import { Labeler } from '..'
-import { FileUploader, Maybe } from '../../components'
 
+import { THREAD } from 'utils'
 import {
   Wrapper,
   Item,
@@ -14,7 +15,6 @@ import {
   Divider,
 } from './styles/editor_footer'
 
-import { THREAD } from '../../utils'
 import { insertCode, onUploadImageDone } from './logic'
 
 const CodeInputer = ({ divider }) => (

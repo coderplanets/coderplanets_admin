@@ -1,10 +1,11 @@
 import React from 'react'
 import withClickOutside from 'react-click-outside'
 
-import { ICON_CMD, WORD_LIMIT } from '../../config'
+import { AvatarsRow, SpaceGrow, MarkDownPreviewer } from 'components'
+import { ICON_CMD, WORD_LIMIT } from 'config'
 
+import { debounce } from 'utils'
 import BodyEditor from '../TypeWriter/BodyEditor'
-import { AvatarsRow, SpaceGrow, MarkDownPreviewer } from '../../components'
 import EditorFooter from './EditorFooter'
 
 import {
@@ -25,7 +26,6 @@ import {
   PreviewWrapper,
 } from './styles/comment_replyer'
 
-import { debounce } from '../../utils'
 import * as logic from './logic'
 
 const fakeUser = {

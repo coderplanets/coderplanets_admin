@@ -9,7 +9,7 @@ import PropTypes from 'prop-types'
 
 import { Icon } from 'antd'
 
-import { makeDebugger } from '../../utils'
+import { makeDebugger } from 'utils'
 import {
   Wrapper,
   Msg,

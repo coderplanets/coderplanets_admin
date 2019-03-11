@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Button, Maybe } from '../../components'
+import { Button, Maybe } from 'components'
 import CopyrightSelector from './CopyrightSelector'
 
 import { Wrapper, CopyRightWrapper, PreviewBtn } from './styles/editor_header'

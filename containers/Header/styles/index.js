@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
-import { Button, Img } from '../../../components'
-import { theme } from '../../../utils'
+import { Button, Img } from 'components'
+import { theme } from 'utils'
 
 export const HeaderWrapper = styled.div`
   height: 33px;

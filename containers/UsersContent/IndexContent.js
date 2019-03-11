@@ -1,5 +1,5 @@
 import React from 'react'
-import UsersTable from '../../components/UsersTable'
+import UsersTable from 'components/UsersTable'
 
 import * as logic from './logic'
 

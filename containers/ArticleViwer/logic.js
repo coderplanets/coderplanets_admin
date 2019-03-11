@@ -1,8 +1,8 @@
 import R from 'ramda'
 
-import SR71 from '../../utils/network/sr71'
+import SR71 from 'utils/network/sr71'
+import { asyncRes, makeDebugger, EVENT, TYPE } from 'utils'
 import S from './schema'
-import { asyncRes, makeDebugger, EVENT, TYPE } from '../../utils'
 
 const sr71$ = new SR71({
   resv_event: [EVENT.PREVIEW_POST, EVENT.PREVIEW_CLOSED],

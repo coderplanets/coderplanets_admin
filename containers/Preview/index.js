@@ -10,7 +10,9 @@ import dynamic from 'next/dynamic'
 
 // import Link from 'next/link'
 
-import { makeDebugger, storePlug, TYPE } from '../../utils'
+import StateTree from 'components/StateTree'
+import TypeWriterLoading from 'components/LoadingEffects/TypeWriterLoading'
+import { makeDebugger, storePlug, TYPE } from 'utils'
 import * as logic from './logic'
 
 import ArticleViwer from '../ArticleViwer'
@@ -25,9 +27,6 @@ import ThreadSetter from '../ThreadSetter'
 import TagSetter from '../TagSetter'
 import CommunitySetter from '../CommunitySetter'
 import PermissionEditor from '../PermissionEditor'
-
-import StateTree from '../../components/StateTree'
-import TypeWriterLoading from '../../components/LoadingEffects/TypeWriterLoading'
 
 import {
   PreviewOverlay,

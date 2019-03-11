@@ -5,9 +5,9 @@
 
 import { types as t, getParent } from 'mobx-state-tree'
 // import R from 'ramda'
-import { PagedCategories } from '../../stores/SharedModel'
+import { PagedCategories } from 'stores/SharedModel'
 
-import { markStates, makeDebugger, stripMobx } from '../../utils'
+import { markStates, makeDebugger, stripMobx } from 'utils'
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('S:CategorySetterStore')
 /* eslint-enable no-unused-vars */

@@ -1,15 +1,9 @@
 import R from 'ramda'
 
-import {
-  makeDebugger,
-  $solver,
-  TYPE,
-  asyncRes,
-  closePreviewer,
-} from '../../utils'
-import { PAGE_SIZE } from '../../config'
+import { makeDebugger, $solver, TYPE, asyncRes, closePreviewer } from 'utils'
+import { PAGE_SIZE } from 'config'
 
-import SR71 from '../../utils/network/sr71'
+import SR71 from 'utils/network/sr71'
 import S from './schema'
 
 const sr71$ = new SR71()
