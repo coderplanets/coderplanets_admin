@@ -34,6 +34,7 @@ export const TAG_COLORS = [
   'yellowgreen',
   'brown',
   'grey',
+  'cadetblue',
 ]
 
 export const TAG_COLOR_ORDER = {
