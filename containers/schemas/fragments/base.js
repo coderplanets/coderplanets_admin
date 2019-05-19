@@ -84,11 +84,7 @@ export const author = `
   nickname
   avatar
 `
-export const user = `
-  ${author}
-  bio
-  location
-  sex
+export const userSocial = `
   qq
   weibo
   weichat
@@ -102,9 +98,17 @@ export const user = `
   pinterest
   huaban
 `
-/* followersCount */
-/* followingsCount */
-
+export const user = `
+  ${author}
+  sex
+  bio
+  location
+  social {
+    ${userSocial}
+  }
+  followersCount
+  followingsCount
+`
 export const c11n = `
   bannerLayout
   contentsLayout
@@ -146,10 +150,7 @@ export const comment = `
   body
   floor
   author {
-    id
-    nickname
-    avatar
-    login
+    ${author}
   }
   likesCount
   dislikesCount
@@ -161,9 +162,7 @@ export const commentParent = `
   title
   commentsCount
   author {
-    id
-    nickname
-    avatar
+    ${author}
   }
   communities {
     id

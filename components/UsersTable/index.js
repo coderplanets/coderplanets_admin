@@ -88,27 +88,6 @@ class UsersTable extends React.PureComponent {
         render: text => <MaybeCell text={text} />,
       },
       {
-        title: 'qq',
-        dataIndex: 'qq',
-        align: 'center',
-        width: 100,
-        render: text => <MaybeCell text={text} />,
-      },
-      {
-        title: 'weixin',
-        dataIndex: 'weixin',
-        align: 'center',
-        width: 150,
-        render: text => <MaybeCell text={text} />,
-      },
-      {
-        title: 'weibo',
-        dataIndex: 'weibo',
-        align: 'center',
-        width: 100,
-        render: text => <MaybeCell text={text} />,
-      },
-      {
         title: '位置',
         dataIndex: 'location',
         align: 'center',
