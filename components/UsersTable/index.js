@@ -48,6 +48,29 @@ class UsersTable extends React.PureComponent {
         },
       },
       {
+        title: '城市',
+        dataIndex: 'location',
+        align: 'left',
+        width: 120,
+        render: text => <MaybeCell text={text} align="left" />,
+      },
+      {
+        title: 'email',
+        dataIndex: 'email',
+        align: 'left',
+        width: 150,
+        render: text => <MaybeCell text={text} align="left" />,
+      },
+      {
+        title: '社交账号',
+        dataIndex: 'social',
+        align: 'center',
+        width: 150,
+        render: () => {
+          return <div>hello</div>
+        },
+      },
+      {
         title: '关注社区',
         dataIndex: 'subscribedCommunitiesCount',
         align: 'center',
@@ -81,20 +104,6 @@ class UsersTable extends React.PureComponent {
         ),
       },
       {
-        title: 'email',
-        dataIndex: 'email',
-        align: 'center',
-        width: 100,
-        render: text => <MaybeCell text={text} />,
-      },
-      {
-        title: '位置',
-        dataIndex: 'location',
-        align: 'center',
-        width: 220,
-        render: text => <MaybeCell text={text} />,
-      },
-      {
         title: '时间戳',
         width: 120,
         align: 'center',
@@ -105,6 +114,8 @@ class UsersTable extends React.PureComponent {
 
   render() {
     const { data, loading, pageOnChange } = this.props
+
+    console.log('UsersTable data: ', data)
 
     return (
       <React.Fragment>
