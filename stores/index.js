@@ -39,13 +39,17 @@ export {
   default as CommunityEditorStore,
 } from '@containers/CommunityEditor/store'
 
-export { default as CategoryEditorStore } from '@containers/CategoryEditor/store'
+export {
+  default as CategoryEditorStore,
+} from '@containers/CategoryEditor/store'
 export {
   default as PermissionEditorStore,
 } from '@containers/PermissionEditor/store'
 
 // setter
-export { default as CategorySetterStore } from '@containers/CategorySetter/store'
+export {
+  default as CategorySetterStore,
+} from '@containers/CategorySetter/store'
 
 export { default as TagSetterStore } from '@containers/TagSetter/store'
 export {
