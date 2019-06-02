@@ -7,7 +7,7 @@
     "prod": "cross-env GOAL=production run-p server lint:watch",
     "local": "cross-env NODE_ENV=local GOAL=local node server",
     "lint": "eslint --fix pages/**/*.js components/**/* containers/**/* stores/**/*",
-    "lint:watch": "esw -w pages/**/*.js components/**/* containers/**/* stores/**/*",
+    "lint:staged": "git diff --cached --name-only --diff-filter=ACRM | grep \".js$\" | xargs ./node_modules/.bin/eslint",
     "server": "npm run clean && node server.js",
     "build": "run-s dist clean",
     "build:clean": "run-s dist clean",
@@ -41,11 +41,6 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "npm run commitmsg"
     }
   },
   "dependencies": {
@@ -150,12 +145,13 @@
     "eslint-plugin-react": "7.11.0",
     "eslint-plugin-react-hooks": "^1.6.0",
     "eslint-watch": "4.0.2",
-    "husky": "^0.14.3",
+    "husky": "2.1.0",
     "jest": "23.4.2",
     "lint-staged": "7.2.0",
     "npm-run-all": "^4.1.1",
     "plop": "2.0.0",
     "prettier": "1.14.0",
+    "pretty-quick": "^1.11.0",
     "react-test-renderer": "16.4.2",
     "regenerator-runtime": "^0.13.1",
     "shelljs": "0.8.2",
