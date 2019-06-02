@@ -13,6 +13,7 @@ import Pagi from '../Pagi'
 import { TableLoading } from '../LoadingEffects'
 import MaybeCell from '../MaybeCell'
 import UserCell from '../UserCell'
+import SocialSell from '../SocialSell'
 import TimeStampCell from '../TimeStampCell'
 
 import PermissionCell from '../PermissionCell'
@@ -66,9 +67,7 @@ class UsersTable extends React.PureComponent {
         dataIndex: 'social',
         align: 'center',
         width: 150,
-        render: () => {
-          return <div>hello</div>
-        },
+        render: data => <SocialSell data={data} />,
       },
       {
         title: '关注社区',
