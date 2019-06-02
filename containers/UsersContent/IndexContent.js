@@ -7,7 +7,7 @@ const IndexContent = ({ data, restProps: { usersLoading } }) => (
   <UsersTable
     data={data}
     loading={usersLoading}
-    pageChange={loadUsers}
+    pageOnChange={loadUsers}
     cmsPermisstionOnChange={cmsPermisstionOnChange}
   />
 )

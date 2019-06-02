@@ -118,7 +118,7 @@ class TagsTable extends React.PureComponent {
   }
 
   render() {
-    const { data, loading, pageChange } = this.props
+    const { data, loading, pageOnChange } = this.props
 
     return (
       <React.Fragment>
@@ -136,7 +136,7 @@ class TagsTable extends React.PureComponent {
               pageNumber={data.pageNumber}
               pageSize={data.pageSize}
               totalCount={data.totalCount}
-              onChange={pageChange}
+              onChange={pageOnChange}
             />
           </div>
         ) : null}
@@ -148,7 +148,7 @@ class TagsTable extends React.PureComponent {
 TagsTable.propTypes = {
   data: PropTypes.any.isRequired,
   loading: PropTypes.bool,
-  pageChange: PropTypes.func,
+  pageOnChange: PropTypes.func,
 
   onEdit: PropTypes.func,
   onDelete: PropTypes.func,
@@ -156,7 +156,7 @@ TagsTable.propTypes = {
 
 TagsTable.defaultProps = {
   loading: false,
-  pageChange: debug,
+  pageOnChange: debug,
   onEdit: debug,
   onDelete: debug,
 }

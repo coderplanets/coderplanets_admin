@@ -236,7 +236,7 @@ export function cancleDelete() {
   })
 }
 
-export function pageChange(page = 1) {
+export function pageOnChange(page = 1) {
   scrollIntoEle('lists-info')
   loadComents({ filter: { page, sort: store.filterType } })
 }

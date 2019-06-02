@@ -241,7 +241,7 @@ const CommentsList = ({
       pageNumber={pageNumber}
       pageSize={pageSize}
       totalCount={totalCount}
-      onChange={logic.pageChange}
+      onChange={logic.pageOnChange}
       showBottomMsg
       noMoreMsg="没有更多的评论了"
       emptyMsg="目前还没有评论"
