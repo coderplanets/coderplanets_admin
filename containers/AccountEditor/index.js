@@ -7,11 +7,11 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 
-import { Input, Button, Icon, StatusBox } from 'components'
-import { ICON_CMD } from 'config'
+import { Input, Button, Icon, StatusBox } from '@components'
+import { ICON_CMD } from '@config'
 // import Link from 'next/link'
 
-import { makeDebugger, storePlug } from 'utils'
+import { makeDebugger, storePlug } from '@utils'
 import {
   Wrapper,
   BackIcon,

@@ -18,7 +18,7 @@ import UsersContent from 'containers/UsersContent'
 import { P } from 'containers/schemas'
 
 import Footer from 'components/Footer'
-import { makeGQClient, BStore } from 'utils'
+import { makeGQClient, BStore } from '@utils'
 // try to fix safari bug
 // see https://github.com/yahoo/react-intl/issues/422
 global.Intl = require('intl')

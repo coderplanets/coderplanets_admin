@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Popover, BannerCountBrief } from 'components'
-import { ICON_CMD } from 'config'
+import { Popover, BannerCountBrief } from '@components'
+import { ICON_CMD } from '@config'
 
 import {
   BannerContentWrapper,

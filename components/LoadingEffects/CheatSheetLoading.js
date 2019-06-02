@@ -7,7 +7,7 @@ import { withTheme } from 'styled-components'
 // import Loading, { Rect, Circle } from 'react-content-loader'
 import ContentLoader from 'react-content-loader'
 
-import { uid, makeDebugger } from 'utils'
+import { uid, makeDebugger } from '@utils'
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:LoadingEffects:index')
 /* eslint-enable no-unused-vars */

@@ -10,9 +10,9 @@ import {
   UserCell,
   CommunityCell,
   TimeStampCell,
-} from 'components'
+} from '@components'
 
-import { Trans } from 'utils'
+import { Trans } from '@utils'
 import { OperationWrapper } from './styles'
 import * as logic from './logic'
 

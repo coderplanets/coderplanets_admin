@@ -10,7 +10,7 @@ import { inject, observer } from 'mobx-react'
 import { Affix } from 'antd'
 
 import { ICON_CMD, ICON_BASE } from 'config/assets'
-import { makeDebugger, storePlug, TYPE } from 'utils'
+import { makeDebugger, storePlug, TYPE } from '@utils'
 
 import {
   HeaderWrapper,

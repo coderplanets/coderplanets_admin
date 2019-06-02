@@ -8,7 +8,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Table, Button } from 'antd'
 
-import { makeDebugger } from 'utils'
+import { makeDebugger } from '@utils'
 import { OperationWrapper } from './styles'
 
 import Pagi from '../Pagi'

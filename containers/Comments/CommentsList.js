@@ -9,10 +9,10 @@ import {
   Pagi,
   CommentLoading,
   MarkDownRender,
-} from 'components'
-import { ICON_CMD } from 'config'
-/* import { fakeUsers, getRandomInt, Global, prettyNum } from 'utils' */
-import { Global, prettyNum } from 'utils'
+} from '@components'
+import { ICON_CMD } from '@config'
+/* import { fakeUsers, getRandomInt, Global, prettyNum } from '@utils' */
+import { Global, prettyNum } from '@utils'
 
 import * as logic from './logic'
 import CommentsFilter from './CommentsFilter'

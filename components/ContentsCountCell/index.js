@@ -7,7 +7,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { makeDebugger } from 'utils'
+import { makeDebugger } from '@utils'
 import { Wrapper, Content, Label, Count } from './styles'
 
 /* eslint-disable no-unused-vars */

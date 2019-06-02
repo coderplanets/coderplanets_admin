@@ -8,7 +8,7 @@ import R from 'ramda'
 
 import { PagedCommunities, emptyPagiData, Community } from 'stores/SharedModel'
 
-import { makeDebugger, markStates, stripMobx } from 'utils'
+import { makeDebugger, markStates, stripMobx } from '@utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('S:SidebarStore')

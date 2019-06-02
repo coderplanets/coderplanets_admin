@@ -12,8 +12,8 @@ import mentionsPlugin from 'remarkable-mentions'
 import Prism from 'mastani-codehighlight'
 
 import MarkDownStyle from 'containers/ThemeWrapper/MarkDownStyle'
-import { MENTION_USER_ADDR } from 'config'
-import { makeDebugger } from 'utils'
+import { MENTION_USER_ADDR } from '@config'
+import { makeDebugger } from '@utils'
 
 import { PreviewerContainer } from './styles'
 

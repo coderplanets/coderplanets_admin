@@ -9,7 +9,7 @@ import R from 'ramda'
 import PropTypes from 'prop-types'
 import { Select } from 'antd'
 
-import { uid, makeDebugger } from 'utils'
+import { uid, makeDebugger } from '@utils'
 import FormItem from '../FormItem'
 import { Note } from './styles'
 

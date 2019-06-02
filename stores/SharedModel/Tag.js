@@ -1,6 +1,6 @@
 import { types as t } from 'mobx-state-tree'
-import { TAG_COLORS, PAGE_SIZE } from 'config'
-import { THREAD } from 'utils'
+import { TAG_COLORS, PAGE_SIZE } from '@config'
+import { THREAD } from '@utils'
 
 import { Community } from './Community'
 

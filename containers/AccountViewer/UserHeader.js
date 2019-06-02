@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { A, Button, Icon } from 'components'
-import { ICON_CMD } from 'config'
+import { A, Button, Icon } from '@components'
+import { ICON_CMD } from '@config'
 
-import { uid } from 'utils'
+import { uid } from '@utils'
 import {
   UserWrapper,
   UserInfo,

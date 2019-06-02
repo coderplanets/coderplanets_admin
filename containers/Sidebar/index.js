@@ -6,9 +6,9 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 
-import { ICON_CMD } from 'config'
+import { ICON_CMD } from '@config'
 
-import { makeDebugger, storePlug } from 'utils'
+import { makeDebugger, storePlug } from '@utils'
 import MenuList from './MenuList'
 import SearchBox from './SearchBox'
 

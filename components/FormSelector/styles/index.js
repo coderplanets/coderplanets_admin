@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-// import { Img } from 'components'
+// import { Img } from '@components'
 
 export const SelectorWrapper = styled.div`
   display: flex;

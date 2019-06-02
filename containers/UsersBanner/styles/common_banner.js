@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { Img } from 'components'
+import { Img } from '@components'
 import { BaseBanner, BaseBannerContent } from './index'
 
 export const BannerContainer = styled(BaseBanner)`

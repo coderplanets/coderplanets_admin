@@ -26,7 +26,7 @@ import {
   BStore,
   ssrPagedSchema,
   ssrPagedContents,
-} from 'utils'
+} from '@utils'
 
 // try to fix safari bug
 // see https://github.com/yahoo/react-intl/issues/422

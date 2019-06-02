@@ -2,10 +2,10 @@ import React from 'react'
 import R from 'ramda'
 // import PropTypes from 'prop-types'
 
-import { Popover } from 'components'
-import { ICON_CMD } from 'config'
+import { Popover } from '@components'
+import { ICON_CMD } from '@config'
 
-import { uid, THREAD } from 'utils'
+import { uid, THREAD } from '@utils'
 import {
   Wrapper,
   Selector,

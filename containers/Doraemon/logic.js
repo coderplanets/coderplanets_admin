@@ -15,7 +15,7 @@ import {
   prettyNum,
   THREAD,
   cutFrom,
-} from 'utils'
+} from '@utils'
 import S from './schema'
 
 import Pockect from './Pockect'

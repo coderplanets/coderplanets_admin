@@ -11,7 +11,7 @@ import { Tooltip } from 'antd'
 
 import { ATATARS_LIST_LENGTH } from 'config/general'
 
-import { makeDebugger, prettyNum } from 'utils'
+import { makeDebugger, prettyNum } from '@utils'
 import { Avatars, AvatarsItem, AvatarsImg, AvatarsMore } from './styles'
 
 /* eslint-disable no-unused-vars */

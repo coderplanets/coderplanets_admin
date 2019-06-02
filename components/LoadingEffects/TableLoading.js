@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { ICON_CMD } from 'config'
+import { ICON_CMD } from '@config'
 import Img from '../Img'
 
 const LoadingWrapper = styled.div`

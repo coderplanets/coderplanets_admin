@@ -9,7 +9,7 @@ import PropTypes from 'prop-types'
 import { Input, InputNumber } from 'antd'
 import R from 'ramda'
 
-import { makeDebugger } from 'utils'
+import { makeDebugger } from '@utils'
 import FormItem from '../FormItem'
 import { FormInput, Note } from './styles'
 

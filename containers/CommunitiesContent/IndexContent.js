@@ -11,7 +11,7 @@ import {
   ThreadsCell,
   ContentsCountCell,
   TimeStampCell,
-} from 'components'
+} from '@components'
 
 import { CommunityIcon, OperationWrapper } from './styles'
 

@@ -12,7 +12,7 @@ import {
   ERR,
   $solver,
   // getParameterByName,
-} from 'utils'
+} from '@utils'
 
 import SR71 from 'utils/network/sr71'
 // import sr71$ from 'utils/network/sr71_simple'

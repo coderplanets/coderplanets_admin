@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import Img from 'components/Img'
 // import { darken } from 'polished'
-import { theme } from 'utils'
+import { theme } from '@utils'
 import { Sidebar } from './index'
 
 export const MenuItem = styled.ul`

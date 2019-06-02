@@ -1,6 +1,6 @@
 import R from 'ramda'
 
-import { asyncRes, makeDebugger, $solver, closePreviewer, TYPE } from 'utils'
+import { asyncRes, makeDebugger, $solver, closePreviewer, TYPE } from '@utils'
 
 import SR71 from 'utils/network/sr71'
 import S from './schema'

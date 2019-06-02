@@ -7,8 +7,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { ASSETS_ENDPOINT } from 'config'
-import { makeDebugger } from 'utils'
+import { ASSETS_ENDPOINT } from '@config'
+import { makeDebugger } from '@utils'
 import { FileUploaderWrapper, InputFile } from './styles'
 
 /* eslint-disable no-unused-vars */

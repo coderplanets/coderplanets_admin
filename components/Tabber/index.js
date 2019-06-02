@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import R from 'ramda'
 import { Tabs } from '..'
 
-import { makeDebugger } from 'utils'
+import { makeDebugger } from '@utils'
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('c:Tabber:index')
 /* eslint-enable no-unused-vars */

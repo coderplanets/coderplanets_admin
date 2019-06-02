@@ -10,7 +10,7 @@ import Router, { withRouter } from 'next/router'
 
 // import Link from 'next/link'
 
-import { makeDebugger, storePlug } from 'utils'
+import { makeDebugger, storePlug } from '@utils'
 import { init, routeChange } from './logic'
 
 /* eslint-disable no-unused-vars */

@@ -9,9 +9,9 @@ import { inject, observer } from 'mobx-react'
 import R from 'ramda'
 import ReactTooltip from 'react-tooltip'
 
-import { ThemeSelector, UserBrief, Maybe } from 'components'
+import { ThemeSelector, UserBrief, Maybe } from '@components'
 
-import { makeDebugger, storePlug } from 'utils'
+import { makeDebugger, storePlug } from '@utils'
 import SiteSocial from './SiteSocial'
 import Planets from './Planets'
 import ContributeMap from './ContributeMap'

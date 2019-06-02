@@ -9,9 +9,9 @@ import PropTypes from 'prop-types'
 import R from 'ramda'
 import { Icon } from 'antd'
 
-import { ICON_CMD } from 'config'
+import { ICON_CMD } from '@config'
 
-import { uid, Trans } from 'utils'
+import { uid, Trans } from '@utils'
 import AdderCell from '../AdderCell'
 
 import {

@@ -1,7 +1,7 @@
 import React from 'react'
 
-// import { ICON_CMD } from 'config'
-import { uid } from 'utils'
+// import { ICON_CMD } from '@config'
+import { uid } from '@utils'
 import { Wrapper, CommunityLogo } from './styles/communities_logo_list'
 
 const tooltipOffset = JSON.stringify({ top: 1 })

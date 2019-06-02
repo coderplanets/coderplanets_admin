@@ -1,9 +1,9 @@
 import React from 'react'
 import R from 'ramda'
 
-import { ICON_CMD } from 'config'
+import { ICON_CMD } from '@config'
 
-import { THREAD } from 'utils'
+import { THREAD } from '@utils'
 import {
   InfoBar,
   Wrapper,

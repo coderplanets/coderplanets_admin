@@ -1,5 +1,5 @@
 import { types as t } from 'mobx-state-tree'
-import { PAGE_SIZE } from 'config'
+import { PAGE_SIZE } from '@config'
 
 export const Thread = t.model('Thread', {
   id: t.maybeNull(t.string),

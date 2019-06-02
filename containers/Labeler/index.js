@@ -8,9 +8,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
 
-import { Popover } from 'components'
-import { ICON_CMD } from 'config'
-import { makeDebugger, storePlug } from 'utils'
+import { Popover } from '@components'
+import { ICON_CMD } from '@config'
+import { makeDebugger, storePlug } from '@utils'
 
 import TagList from './TagList'
 import { Wrapper, LabelItem, LabelIcon, Title } from './styles'

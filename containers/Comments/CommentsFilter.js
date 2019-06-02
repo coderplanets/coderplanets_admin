@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { Popover } from 'components'
-import { TYPE } from 'utils'
-import { ICON_CMD } from 'config'
+import { Popover } from '@components'
+import { TYPE } from '@utils'
+import { ICON_CMD } from '@config'
 
 import {
   FilterWraper,

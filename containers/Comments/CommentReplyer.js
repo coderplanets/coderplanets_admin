@@ -1,10 +1,10 @@
 import React from 'react'
 import withClickOutside from 'react-click-outside'
 
-import { AvatarsRow, SpaceGrow, MarkDownPreviewer } from 'components'
-import { ICON_CMD, WORD_LIMIT } from 'config'
+import { AvatarsRow, SpaceGrow, MarkDownPreviewer } from '@components'
+import { ICON_CMD, WORD_LIMIT } from '@config'
 
-import { debounce } from 'utils'
+import { debounce } from '@utils'
 import BodyEditor from '../TypeWriter/BodyEditor'
 import EditorFooter from './EditorFooter'
 

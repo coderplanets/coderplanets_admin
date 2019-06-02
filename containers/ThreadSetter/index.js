@@ -9,7 +9,7 @@ import R from 'ramda'
 import { inject, observer } from 'mobx-react'
 
 // import Link from 'next/link'
-import { uid, makeDebugger, storePlug } from 'utils'
+import { uid, makeDebugger, storePlug } from '@utils'
 import { Wrapper, Divider, ThreadsWrapper, ThreadTag } from './styles'
 
 import * as logic from './logic'

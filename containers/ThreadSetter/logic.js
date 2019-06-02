@@ -1,7 +1,7 @@
 import R from 'ramda'
 
-import { makeDebugger, $solver, asyncRes, closePreviewer, TYPE } from 'utils'
-import { PAGE_SIZE } from 'config'
+import { makeDebugger, $solver, asyncRes, closePreviewer, TYPE } from '@utils'
+import { PAGE_SIZE } from '@config'
 
 import SR71 from 'utils/network/sr71'
 import S from './schema'

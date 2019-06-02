@@ -8,8 +8,8 @@ import React from 'react'
 import { inject, observer } from 'mobx-react'
 import R from 'ramda'
 
-import { CommunityMatrix } from 'components'
-import { uid, makeDebugger, storePlug } from 'utils'
+import { CommunityMatrix } from '@components'
+import { uid, makeDebugger, storePlug } from '@utils'
 import {
   Wrapper,
   Divider,

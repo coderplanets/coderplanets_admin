@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
-import { Input } from 'components'
-import { theme } from 'utils'
+import { Input } from '@components'
+import { theme } from '@utils'
 
 export const Wrapper = styled.div`
   padding: 20px;

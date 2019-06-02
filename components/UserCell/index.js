@@ -7,7 +7,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { makeDebugger, cutFrom } from 'utils'
+import { makeDebugger, cutFrom } from '@utils'
 import { UserCellWrapper, Avatar, NickName } from './styles'
 
 /* eslint-disable no-unused-vars */
