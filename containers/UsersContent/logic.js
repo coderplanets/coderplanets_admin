@@ -34,7 +34,7 @@ const commonFilter = page => {
   }
 }
 
-export function loadUsers(page = 1) {
+export const loadUsers = (page = 1) => {
   debug('do loadUsers')
 
   scrollIntoEle(TYPE.APP_HEADER_ID)
