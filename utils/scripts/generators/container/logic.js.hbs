@@ -1,20 +1,20 @@
 // import R from 'ramda'
 
-import { makeDebugger, $solver, asyncErr, ERR } from 'utils'
-import SR71 from 'utils/network/sr71'
+import { makeDebugger, $solver, asyncErr, ERR, errRescue } from '@utils'
 
+import SR71 from '@utils/async/sr71'
 // import S from './schema'
 
 const sr71$ = new SR71()
 let sub$ = null
-
-/* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:{{ properCase name }}')
-/* eslint-enable no-unused-vars */
-
 let store = null
 
-export function someMethod() {}
+/* eslint-disable-next-line */
+const debug = makeDebugger('L:{{ properCase name }}')
+
+export const someMethod = () => {}
+
+// const const cancleLoading = () => {}
 
 // ###############################
 // Data & Error handlers
@@ -23,30 +23,39 @@ export function someMethod() {}
 const DataSolver = []
 const ErrSolver = [
   {
-    match: asyncErr(ERR.CRAPHQL),
-    action: ({ details }) => {
-      debug('ERR.CRAPHQL -->', details)
+    match: asyncErr(ERR.GRAPHQL),
+    action: () => {
+      // cancleLoading()
     },
   },
   {
     match: asyncErr(ERR.TIMEOUT),
     action: ({ details }) => {
-      debug('ERR.TIMEOUT -->', details)
+      // cancleLoading()
+      errRescue({ type: ERR.TIMEOUT, details, path: '{{ properCase name }}' })
     },
   },
   {
     match: asyncErr(ERR.NETWORK),
-    action: ({ details }) => {
-      debug('ERR.NETWORK -->', details)
+    action: () => {
+      // cancleLoading()
+      errRescue({ type: ERR.NETWORK, path: '{{ properCase name }}' })
     },
   },
 ]
 
-export function init(_store) {
-  if (store) return false
+export const init = (_store) => {
   store = _store
 
   debug(store)
-  if (sub$) sub$.unsubscribe()
+  if (sub$) return false
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+}
+
+export const uninit = () => {
+  if (!sub$) return false
+  debug('===== do uninit')
+  sr71$.stop()
+  sub$.unsubscribe()
+  sub$ = null
 }
