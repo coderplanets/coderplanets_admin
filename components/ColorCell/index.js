@@ -7,7 +7,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { makeDebugger } from 'utils'
+import { makeDebugger } from '@utils'
 
 import { ColorCell, ColorDot /* ColorTitle */ } from './styles'
 /* eslint-disable no-unused-vars */

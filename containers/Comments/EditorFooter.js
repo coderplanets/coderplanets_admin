@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Space, Button, Icon } from 'components'
-import { ICON_CMD } from 'config'
+import { Space, Button, Icon } from '@components'
+import { ICON_CMD } from '@config'
 
 import DocUploader from '../DocUploader'
 

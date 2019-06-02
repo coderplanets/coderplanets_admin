@@ -8,7 +8,7 @@ import React from 'react'
 import R from 'ramda'
 import PropTypes from 'prop-types'
 
-import { uid, makeDebugger, isEmptyNil, isObject, objToArray } from 'utils'
+import { uid, makeDebugger, isEmptyNil, isObject, objToArray } from '@utils'
 import AdderCell from '../AdderCell'
 
 import {

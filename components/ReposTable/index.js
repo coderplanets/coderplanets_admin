@@ -8,7 +8,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Table, Button } from 'antd'
 
-import { makeDebugger, TYPE } from 'utils'
+import { makeDebugger, TYPE } from '@utils'
 import Pagi from '../Pagi'
 import { TableLoading } from '../LoadingEffects'
 import { Space } from '../BaseStyled'

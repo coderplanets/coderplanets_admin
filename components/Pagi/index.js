@@ -8,7 +8,7 @@ import React from 'react'
 import { Pagination } from 'antd'
 import PropTypes from 'prop-types'
 
-import { makeDebugger } from 'utils'
+import { makeDebugger } from '@utils'
 import { PagiWrapper, BottomMsg } from './styles'
 
 /* eslint-disable no-unused-vars */

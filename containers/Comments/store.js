@@ -15,7 +15,7 @@ import {
   changeset,
   // THREAD,
   // subPath2Thread,
-} from 'utils'
+} from '@utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('S:CommentsStore')

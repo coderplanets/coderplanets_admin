@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
-import { Img } from 'components'
-import { theme } from 'utils'
+import { Img } from '@components'
+import { theme } from '@utils'
 
 export const Divider = styled.span`
   margin: 0 8px;

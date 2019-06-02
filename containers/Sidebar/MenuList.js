@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { uid } from 'utils'
+import { uid } from '@utils'
 import CommunityMenuItem from './CommunityMenuItem'
 import CommunitiesRootMenuItem from './CommunitiesRootMenuItem'
 import UsersRootMenuItem from './UsersRootMenuItem'

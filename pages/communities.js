@@ -2,20 +2,20 @@ import React from 'react'
 import { Provider } from 'mobx-react'
 import R from 'ramda'
 
-import GAWraper from 'components/GAWraper'
+import GAWraper from '@components/GAWraper'
 import initRootStore from 'stores/init'
-import ThemeWrapper from 'containers/ThemeWrapper'
-import MultiLanguage from 'containers/MultiLanguage'
-import Sidebar from 'containers/Sidebar'
-import Preview from 'containers/Preview'
-import Doraemon from 'containers/Doraemon'
-import Route from 'containers/Route'
-import BodyLayout from 'containers/BodyLayout'
-import Header from 'containers/Header'
-import CommunitiesBanner from 'containers/CommunitiesBanner'
-import CommunitiesContent from 'containers/CommunitiesContent'
+import ThemeWrapper from '@containers/ThemeWrapper'
+import MultiLanguage from '@containers/MultiLanguage'
+import Sidebar from '@containers/Sidebar'
+import Preview from '@containers/Preview'
+import Doraemon from '@containers/Doraemon'
+import Route from '@containers/Route'
+import BodyLayout from '@containers/BodyLayout'
+import Header from '@containers/Header'
+import CommunitiesBanner from '@containers/CommunitiesBanner'
+import CommunitiesContent from '@containers/CommunitiesContent'
 
-import Footer from 'components/Footer'
+import Footer from '@components/Footer'
 import {
   makeGQClient,
   // Global,
@@ -26,7 +26,7 @@ import {
   BStore,
   ssrPagedSchema,
   ssrPagedContents,
-} from 'utils'
+} from '@utils'
 
 // try to fix safari bug
 // see https://github.com/yahoo/react-intl/issues/422

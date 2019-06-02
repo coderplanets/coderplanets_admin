@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ThreadsTable from 'components/ThreadsTable'
+import ThreadsTable from '@components/ThreadsTable'
 
 // import { OperationWrapper } from './styles'
 // import * as logic from './logic'

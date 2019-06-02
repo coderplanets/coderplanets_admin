@@ -1,6 +1,6 @@
 import React from 'react'
 
-import VideosTable from 'components/VideosTable'
+import VideosTable from '@components/VideosTable'
 
 import * as logic from './logic'
 

@@ -16,8 +16,8 @@ import {
   FormInputer,
   /* FormSelector, */
   /* TagColorSelector, */
-} from 'components'
-import { makeDebugger, storePlug } from 'utils'
+} from '@components'
+import { makeDebugger, storePlug } from '@utils'
 
 import { Wrapper, ActionBtns, Divider } from './styles'
 import * as logic from './logic'

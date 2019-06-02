@@ -8,7 +8,7 @@ import {
   closePreviewer,
   updateEditing,
   ERR,
-} from 'utils'
+} from '@utils'
 
 import SR71 from 'utils/network/sr71'
 import S from './schema'

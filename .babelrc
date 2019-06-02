@@ -1,5 +1,29 @@
 {
+  "presets": [
+    ["next/babel"]
+  ],
+  "env": {
+     "development": {
+       "plugins": ["inline-dotenv"]
+    },
+    "production": {
+      "presets": [
+        ["next/babel", {
+          "preset-env": {
+            "targets": {
+              "ie": "11"
+            },
+            "debug": false
+          }
+        }]
+      ]
+    },
+    "test": {
+      "plugins": ["inline-dotenv"]
+    }
+  },
   "plugins": [
+    "add-react-displayname",
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
     "transform-inline-environment-variables",
     [
@@ -26,31 +50,16 @@
     ["module-resolver", {
       "root": ["./"],
       "alias": {
-        "containers":"./containers",
-        "components":"./components",
-        "config":"./config",
-        "stores":"./stores",
-        "schemas":"./containers/schemas",
-        "utils":"./utils",
-        "Img": "./components/Img",
-        "SvgIcons": "./components/SvgIcons"
+        "@containers":"./containers",
+        "@components":"./components",
+        "@config":"./config",
+        "@stores":"./stores",
+        "@model":"./stores/SharedModel",
+        "@utils":"./utils",
+        "@schemas":"./containers/schemas",
+        "@Img": "./components/Img",
+        "@SvgIcons": "./components/SvgIcons"
       }
     }]
-  ],
-  "env": {
-     "development": {
-       "presets": ["next/babel"],
-       "plugins": ["inline-dotenv"]
-    },
-    "local": {
-       "presets": ["next/babel"],
-    },
-    "production": {
-      "presets": ["next/babel"]
-    },
-    "test": {
-      "presets": [["next/babel", { "preset-env": { "modules": "commonjs" } }]],
-      "plugins": ["inline-dotenv"]
-    }
-  }
+  ]
 }

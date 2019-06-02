@@ -16,8 +16,8 @@ import {
   Space,
   FileUploader,
   StatusBox,
-} from 'components'
-import { makeDebugger, storePlug } from 'utils'
+} from '@components'
+import { makeDebugger, storePlug } from '@utils'
 
 // TODO: EditableImage
 import { Wrapper, Logo, Divider, ActionBtns, ImageWrapper } from './styles'

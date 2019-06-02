@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { setLightness, setSaturation, opacify } from 'polished'
 
-/* import { theme } from 'utils' */
+/* import { theme } from '@utils' */
 
 // visibility: ${props => (props.active === props.name ? 'visible' : 'hidden')};
 

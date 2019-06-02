@@ -1,8 +1,8 @@
 import React from 'react'
 
-// import { ICON_CMD } from 'config'
+// import { ICON_CMD } from '@config'
 // import { Wrapper } from './styles'
-import { uid } from 'utils'
+import { uid } from '@utils'
 import { Wrapper, TagWrapper, ColorDot, DeleteCross } from './styles/tags_list'
 
 const TagsList = ({ source, onDelete }) => (

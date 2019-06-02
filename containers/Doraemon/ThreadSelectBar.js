@@ -1,7 +1,7 @@
 import React from 'react'
 
-// import { ICON_CMD } from 'config'
-import { THREAD } from 'utils'
+// import { ICON_CMD } from '@config'
+import { THREAD } from '@utils'
 import { Wrapper, Selector } from './styles/thread_select_bar'
 import { searchThreadOnChange } from './logic'
 

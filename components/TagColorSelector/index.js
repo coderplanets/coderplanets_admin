@@ -8,9 +8,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import R from 'ramda'
 
-import { TAG_COLORS } from 'config'
+import { TAG_COLORS } from '@config'
 
-import { uid, makeDebugger } from 'utils'
+import { uid, makeDebugger } from '@utils'
 import {
   FormItemWrapper,
   FormLable,

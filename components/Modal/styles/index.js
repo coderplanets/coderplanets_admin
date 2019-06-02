@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { theme, animate } from 'utils'
+import { theme, animate } from '@utils'
 import Img from '../../Img'
 
 // display: ${props => (props.show ? 'block' : 'none')};

@@ -7,7 +7,7 @@ import {
   onClient,
   Global,
   // queryStringToJSON /*  isEmptyNil, getParameterByName */,
-} from 'utils'
+} from '@utils'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('L:Route')

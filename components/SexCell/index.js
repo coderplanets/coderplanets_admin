@@ -7,8 +7,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { ICON_CMD } from 'config'
-import { makeDebugger } from 'utils'
+import { ICON_CMD } from '@config'
+import { makeDebugger } from '@utils'
 import { DudeIcon, GirlIcon } from './styles'
 
 /* eslint-disable no-unused-vars */

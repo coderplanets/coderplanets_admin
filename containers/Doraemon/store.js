@@ -12,7 +12,7 @@ import {
   hideDoraemonBarRecover,
   THREAD,
   stripMobx,
-} from 'utils'
+} from '@utils'
 import cmds from './helper/defaultSuggestion'
 
 // const debug = makeDebugger('S:DoraemonStore')

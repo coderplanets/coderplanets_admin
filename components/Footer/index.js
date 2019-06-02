@@ -6,7 +6,7 @@
 
 import React from 'react'
 
-import { makeDebugger } from 'utils'
+import { makeDebugger } from '@utils'
 import {
   Container,
   BaseInfo,

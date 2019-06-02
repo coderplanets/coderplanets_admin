@@ -1,9 +1,9 @@
 import React from 'react'
 // import Link from 'next/link'
 
-import { ICON_CMD } from 'config'
+import { ICON_CMD } from '@config'
 
-import { cutFrom, ROUTE } from 'utils'
+import { cutFrom, ROUTE } from '@utils'
 import {
   MenuRow,
   MenuTitle,

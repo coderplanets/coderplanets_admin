@@ -7,8 +7,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Button, Row, Col, Tag } from 'antd'
-import { ICON_CMD } from 'config'
-import { makeDebugger, isEmptyValue } from 'utils'
+import { ICON_CMD } from '@config'
+import { makeDebugger, isEmptyValue } from '@utils'
 import Popover from '../Popover'
 
 import {

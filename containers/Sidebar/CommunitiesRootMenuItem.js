@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { ICON_CMD } from 'config'
+import { ICON_CMD } from '@config'
 
-import { ROUTE } from 'utils'
+import { ROUTE } from '@utils'
 import {
   MenuRow,
   MenuTitle,

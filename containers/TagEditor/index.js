@@ -17,9 +17,9 @@ import {
   FormSelector,
   TagColorSelector,
   CommunityMatrix,
-} from 'components'
+} from '@components'
 
-import { makeDebugger, storePlug, THREAD } from 'utils'
+import { makeDebugger, storePlug, THREAD } from '@utils'
 import { Wrapper, ActionBtns, Divider } from './styles'
 
 import * as logic from './logic'

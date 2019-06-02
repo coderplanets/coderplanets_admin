@@ -8,10 +8,10 @@ import {
   cast,
   closePreviewer,
   updateEditing,
-} from 'utils'
+} from '@utils'
 import SR71 from 'utils/network/sr71'
 
-import { PAGE_SIZE } from 'config'
+import { PAGE_SIZE } from '@config'
 
 import S from './schema'
 

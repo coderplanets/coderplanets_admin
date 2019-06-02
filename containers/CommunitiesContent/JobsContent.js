@@ -1,6 +1,6 @@
 import React from 'react'
 
-import JobsTable from 'components/JobsTable'
+import JobsTable from '@components/JobsTable'
 
 import * as logic from './logic'
 

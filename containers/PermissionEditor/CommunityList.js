@@ -1,8 +1,8 @@
 import React from 'react'
 import R from 'ramda'
 
-import { CommunityMatrix } from 'components'
-import { isEmptyNil, isObject } from 'utils'
+import { CommunityMatrix } from '@components'
+import { isEmptyNil, isObject } from '@utils'
 import { Wrapper } from './styles/community_list'
 
 import { communitySelect, communityAddOnSelect } from './logic'

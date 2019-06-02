@@ -8,8 +8,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import R from 'ramda'
 
-import { ICON_CMD } from 'config'
-import { makeDebugger } from 'utils'
+import { ICON_CMD } from '@config'
+import { makeDebugger } from '@utils'
 
 import { Wrapper, SocalIcon } from './styles'
 

@@ -10,8 +10,8 @@ import {
   ROUTE,
   TYPE,
   scrollIntoEle,
-} from 'utils'
-import { PAGE_SIZE } from 'config'
+} from '@utils'
+import { PAGE_SIZE } from '@config'
 
 import SR71 from 'utils/network/sr71'
 import S from './schema'

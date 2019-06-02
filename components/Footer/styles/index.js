@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cs, theme } from 'utils'
+import { cs, theme } from '@utils'
 
 const Link = styled.a`
   text-decoration: none;

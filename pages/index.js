@@ -1,10 +1,10 @@
 import React from 'react'
 import { Provider } from 'mobx-react'
 /* import { request } from 'graphql-request' */
-/* import { GRAPHQL_ENDPOINT } from 'config' */
+/* import { GRAPHQL_ENDPOINT } from '@config' */
 
 import initRootStore from 'stores/init'
-import { GAWraper, Footer } from 'components'
+import { GAWraper, Footer } from '@components'
 
 import {
   Header,
@@ -17,9 +17,9 @@ import {
   Doraemon,
   Route,
   BodyLayout,
-} from 'containers'
+} from '@containers'
 
-import { P } from 'containers/schemas'
+import { P } from '@schemas'
 
 import {
   makeGQClient,
@@ -31,7 +31,7 @@ import {
   // TYPE,
   BStore,
   // nilOrEmpty,
-} from 'utils'
+} from '@utils'
 
 // try to fix safari bug
 // see https://github.com/yahoo/react-intl/issues/422

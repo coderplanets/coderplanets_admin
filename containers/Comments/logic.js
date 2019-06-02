@@ -11,9 +11,9 @@ import {
   countWords,
   dispatchEvent,
   extractMentions,
-} from 'utils'
+} from '@utils'
 
-import { PAGE_SIZE } from 'config'
+import { PAGE_SIZE } from '@config'
 import SR71 from 'utils/network/sr71'
 import S from './schema'
 

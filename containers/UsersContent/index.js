@@ -9,7 +9,7 @@ import { inject, observer } from 'mobx-react'
 
 // import Link from 'next/link'
 
-import { makeDebugger, storePlug, ROUTE } from 'utils'
+import { makeDebugger, storePlug, ROUTE } from '@utils'
 import * as logic from './logic'
 
 import { Wrapper } from './styles'

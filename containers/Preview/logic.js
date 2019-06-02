@@ -6,7 +6,7 @@ import {
   holdPage,
   TYPE,
   dispatchEvent,
-} from 'utils'
+} from '@utils'
 import SR71 from 'utils/network/sr71'
 
 // const sr71$ = new SR71({ resv_event: EVENT.PREVIEW })

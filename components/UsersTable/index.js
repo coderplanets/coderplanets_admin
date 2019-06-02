@@ -8,16 +8,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Table } from 'antd'
 
-import { makeDebugger } from 'utils'
-import Pagi from '../Pagi'
-import { TableLoading } from '../LoadingEffects'
-import MaybeCell from '../MaybeCell'
-import UserCell from '../UserCell'
-import SocialSell from '../SocialSell'
-import TimeStampCell from '../TimeStampCell'
+import { makeDebugger } from '@utils'
 
-import PermissionCell from '../PermissionCell'
-import SexCell from '../SexCell'
+import Pagi from '@components/Pagi'
+import { TableLoading } from '@components/LoadingEffects'
+import MaybeCell from '@components/MaybeCell'
+import UserCell from '@components/UserCell'
+import SocialSell from '@components/SocialSell'
+import TimeStampCell from '@components/TimeStampCell'
+
+import PermissionCell from '@components/PermissionCell'
+import SexCell from '@components/SexCell'
 
 // import { Wrapper } from './styles'
 
