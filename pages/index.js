@@ -17,9 +17,9 @@ import {
   Doraemon,
   Route,
   BodyLayout,
-} from 'containers'
+} from '@containers'
 
-import { P } from 'containers/schemas'
+import { P } from '@schemas'
 
 import {
   makeGQClient,

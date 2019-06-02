@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-// import Img from 'components/Img'
+// import Img from '@components/Img'
 // import { theme } from '@utils'
 import { ReplyBarBase, ReplyToBodyBase, ReplyToFloorBase } from './index'
 

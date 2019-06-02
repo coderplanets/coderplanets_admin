@@ -7,7 +7,7 @@ import R from 'ramda'
 import { types as t, getParent } from 'mobx-state-tree'
 
 import { markStates, makeDebugger } from '@utils'
-import { Community } from '../SharedModel'
+import { Community } from '@model'
 
 /* eslint-disable no-unused-vars */
 const debug = makeDebugger('S:communities')

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import Img from 'components/Img'
+import Img from '@components/Img'
 import { theme, animate, cs } from '@utils'
 
 export const LoadingIcon = styled(Img)`

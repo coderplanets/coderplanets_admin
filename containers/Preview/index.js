@@ -10,8 +10,8 @@ import dynamic from 'next/dynamic'
 
 // import Link from 'next/link'
 
-import StateTree from 'components/StateTree'
-import TypeWriterLoading from 'components/LoadingEffects/TypeWriterLoading'
+import StateTree from '@components/StateTree'
+import TypeWriterLoading from '@components/LoadingEffects/TypeWriterLoading'
 import { makeDebugger, storePlug, TYPE } from '@utils'
 import * as logic from './logic'
 

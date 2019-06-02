@@ -11,7 +11,7 @@ import remarkableemoj from 'remarkable-emoji'
 import mentionsPlugin from 'remarkable-mentions'
 import Prism from 'mastani-codehighlight'
 
-import MarkDownStyle from 'containers/ThemeWrapper/MarkDownStyle'
+import MarkDownStyle from '@containers/ThemeWrapper/MarkDownStyle'
 import { MENTION_USER_ADDR } from '@config'
 import { makeDebugger } from '@utils'
 

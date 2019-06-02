@@ -1,24 +1,24 @@
 import React from 'react'
 import { Provider } from 'mobx-react'
 
-import GAWraper from 'components/GAWraper'
-import initRootStore from 'stores/init'
-import ThemeWrapper from 'containers/ThemeWrapper'
-import MultiLanguage from 'containers/MultiLanguage'
-import Sidebar from 'containers/Sidebar'
-import Preview from 'containers/Preview'
-import Doraemon from 'containers/Doraemon'
-import Route from 'containers/Route'
-import BodyLayout from 'containers/BodyLayout'
-import Header from 'containers/Header'
-
-import UsersBanner from 'containers/UsersBanner'
-import UsersContent from 'containers/UsersContent'
-
-import { P } from 'containers/schemas'
-
-import Footer from 'components/Footer'
+import { P } from '@schemas'
 import { makeGQClient, BStore } from '@utils'
+
+import GAWraper from '@components/GAWraper'
+import initRootStore from 'stores/init'
+import ThemeWrapper from '@containers/ThemeWrapper'
+import MultiLanguage from '@containers/MultiLanguage'
+import Sidebar from '@containers/Sidebar'
+import Preview from '@containers/Preview'
+import Doraemon from '@containers/Doraemon'
+import Route from '@containers/Route'
+import BodyLayout from '@containers/BodyLayout'
+import Header from '@containers/Header'
+
+import UsersBanner from '@containers/UsersBanner'
+import UsersContent from '@containers/UsersContent'
+
+import Footer from '@components/Footer'
 // try to fix safari bug
 // see https://github.com/yahoo/react-intl/issues/422
 global.Intl = require('intl')

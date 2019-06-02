@@ -1,6 +1,6 @@
 import React from 'react'
 import TimeAgo from 'timeago-react'
-// import CommentsList from 'components/CommentsList'
+// import CommentsList from '@components/CommentsList'
 import { MarkDownPreviewer, PostLoading } from '@components'
 import { ICON_CMD } from '@config'
 import { TYPE } from '@utils'
