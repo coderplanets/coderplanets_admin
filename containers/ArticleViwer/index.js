@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import { inject, observer } from 'mobx-react'
 
 // import Link from 'next/link'
@@ -64,9 +64,9 @@ class ArticleViwerContainer extends React.Component {
 
 ArticleViwerContainer.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  articleViwer: PropTypes.object.isRequired,
-  type: PropTypes.oneOf(['post', 'tut', 'job']),
-  // onReaction: PropTypes.func.isRequired,
+  articleViwer: T.object.isRequired,
+  type: T.oneOf(['post', 'tut', 'job']),
+  // onReaction: T.func.isRequired,
 }
 
 ArticleViwerContainer.defaultProps = {

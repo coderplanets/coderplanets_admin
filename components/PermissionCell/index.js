@@ -6,7 +6,7 @@
 
 import React from 'react'
 import R from 'ramda'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 
 import { uid, makeDebugger, isEmptyNil, isObject, objToArray } from '@utils'
 import AdderCell from '../AdderCell'
@@ -90,8 +90,8 @@ const PermissionCell = ({ source, onMutate }) => {
 
 PermissionCell.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  onMutate: PropTypes.func.isRequired,
-  source: PropTypes.object.isRequired,
+  onMutate: T.func.isRequired,
+  source: T.object.isRequired,
 }
 
 PermissionCell.defaultProps = {}

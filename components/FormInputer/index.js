@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import { Input, InputNumber } from 'antd'
 import R from 'ramda'
 
@@ -71,12 +71,12 @@ const FormInputer = ({ label, value, onChange, note, type, disabled }) => {
 
 FormInputer.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  onChange: PropTypes.func,
-  label: PropTypes.string,
-  value: PropTypes.string,
-  note: PropTypes.string,
-  type: PropTypes.oneOf(['default', 'textarea', 'number']),
-  disabled: PropTypes.bool,
+  onChange: T.func,
+  label: T.string,
+  value: T.string,
+  note: T.string,
+  type: T.oneOf(['default', 'textarea', 'number']),
+  disabled: T.bool,
 }
 
 FormInputer.defaultProps = {

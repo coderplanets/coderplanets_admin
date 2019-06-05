@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import { Table, Button } from 'antd'
 
 import { makeDebugger, Trans } from '@utils'
@@ -146,12 +146,12 @@ class TagsTable extends React.PureComponent {
 }
 
 TagsTable.propTypes = {
-  data: PropTypes.any.isRequired,
-  loading: PropTypes.bool,
-  pageOnChange: PropTypes.func,
+  data: T.any.isRequired,
+  loading: T.bool,
+  pageOnChange: T.func,
 
-  onEdit: PropTypes.func,
-  onDelete: PropTypes.func,
+  onEdit: T.func,
+  onDelete: T.func,
 }
 
 TagsTable.defaultProps = {

@@ -6,7 +6,7 @@
 
 import React from 'react'
 import { Pagination } from 'antd'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 
 import { makeDebugger } from '@utils'
 import { PagiWrapper, BottomMsg } from './styles'
@@ -71,18 +71,18 @@ const Pagi = ({
 }
 
 Pagi.propTypes = {
-  pageNumber: PropTypes.number,
-  pageSize: PropTypes.number,
-  totalCount: PropTypes.number,
-  // showBottomMsg: PropTypes.bool,
-  emptyMsg: PropTypes.string,
-  noMoreMsg: PropTypes.string,
-  left: PropTypes.string,
-  top: PropTypes.string,
-  bottom: PropTypes.string,
-  showBottomMsg: PropTypes.bool,
+  pageNumber: T.number,
+  pageSize: T.number,
+  totalCount: T.number,
+  // showBottomMsg: T.bool,
+  emptyMsg: T.string,
+  noMoreMsg: T.string,
+  left: T.string,
+  top: T.string,
+  bottom: T.string,
+  showBottomMsg: T.bool,
 
-  onChange: PropTypes.func.isRequired,
+  onChange: T.func.isRequired,
 }
 
 Pagi.defaultProps = {

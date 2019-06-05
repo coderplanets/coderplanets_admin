@@ -4,7 +4,7 @@
  *
  */
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 
 import Remarkable from 'remarkable'
 import remarkableemoj from 'remarkable-emoji'
@@ -55,7 +55,7 @@ class MarkDownPreviewer extends React.Component {
 
 MarkDownPreviewer.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  body: PropTypes.string,
+  body: T.string,
 }
 
 MarkDownPreviewer.defaultProps = {

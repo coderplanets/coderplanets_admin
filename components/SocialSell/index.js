@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import R from 'ramda'
 
 import { ICON_CMD } from '@config'
@@ -39,7 +39,7 @@ const SocialSell = ({ data }) => {
 }
 
 SocialSell.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: T.object.isRequired,
 }
 
 SocialSell.defaultProps = {}

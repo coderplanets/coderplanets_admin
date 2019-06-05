@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import styled from 'styled-components'
 
 import { makeDebugger, isEmptyNil } from '@utils'
@@ -27,8 +27,8 @@ const MaybeCell = ({ text, align }) => {
 }
 
 MaybeCell.propTypes = {
-  text: PropTypes.string,
-  align: PropTypes.oneOf(['left', 'center', 'right']),
+  text: T.string,
+  align: T.oneOf(['left', 'center', 'right']),
 }
 
 MaybeCell.defaultProps = {

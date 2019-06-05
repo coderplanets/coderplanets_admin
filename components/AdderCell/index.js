@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 
 import { ICON_CMD } from '@config'
 
@@ -25,7 +25,7 @@ const AdderCell = ({ onAdd }) => (
 
 AdderCell.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  onAdd: PropTypes.func,
+  onAdd: T.func,
 }
 
 AdderCell.defaultProps = {

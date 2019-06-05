@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import { Table } from 'antd'
 
 import { makeDebugger } from '@utils'
@@ -143,10 +143,10 @@ class UsersTable extends React.PureComponent {
 }
 
 UsersTable.propTypes = {
-  data: PropTypes.any.isRequired,
-  loading: PropTypes.bool,
-  pageOnChange: PropTypes.func,
-  cmsPermisstionOnChange: PropTypes.func,
+  data: T.any.isRequired,
+  loading: T.bool,
+  pageOnChange: T.func,
+  cmsPermisstionOnChange: T.func,
 }
 
 UsersTable.defaultProps = {

@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import R from 'ramda'
 
 import { TAG_COLORS } from '@config'
@@ -40,10 +40,10 @@ const TagColorSelector = ({ label, value, onChange, note }) => (
 )
 
 TagColorSelector.propTypes = {
-  onChange: PropTypes.func,
-  label: PropTypes.string,
-  value: PropTypes.string,
-  note: PropTypes.string,
+  onChange: T.func,
+  label: T.string,
+  value: T.string,
+  note: T.string,
 }
 
 TagColorSelector.defaultProps = {

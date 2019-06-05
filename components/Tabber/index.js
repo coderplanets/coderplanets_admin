@@ -3,7 +3,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import R from 'ramda'
 import { Tabs } from '..'
 
@@ -41,8 +41,8 @@ const Tabber = ({ source, onChange }) => {
 
 Tabber.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  onChange: PropTypes.func.isRequired,
-  source: PropTypes.array.isRequired,
+  onChange: T.func.isRequired,
+  source: T.array.isRequired,
 }
 
 Tabber.defaultProps = {}

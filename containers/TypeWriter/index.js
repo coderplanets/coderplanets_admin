@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-// import PropTypes from 'prop-types'
+// import T from 'prop-types'
 import { inject, observer } from 'mobx-react'
 
 import { makeDebugger, storePlug } from '@utils'
@@ -107,7 +107,7 @@ class TypeWriterContainer extends React.Component {
 
 // TypeWriterContainer.propTypes = {
 // https://www.npmjs.com/package/prop-types
-// closePreview: PropTypes.func.isRequired,
+// closePreview: T.func.isRequired,
 // }
 
 // TypeWriterContainer.defaultProps = {}

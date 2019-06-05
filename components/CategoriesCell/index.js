@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import R from 'ramda'
 import { Icon } from 'antd'
 
@@ -67,9 +67,9 @@ export default CategoriesCell
 
 CategoriesCell.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  source: PropTypes.object.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  onAdd: PropTypes.func.isRequired,
+  source: T.object.isRequired,
+  onDelete: T.func.isRequired,
+  onAdd: T.func.isRequired,
 }
 
 CategoriesCell.defaultProps = {

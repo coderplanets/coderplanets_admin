@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 
 import { makeDebugger, toPercentNum } from '@utils'
 
@@ -69,10 +69,10 @@ const BannerCountBrief = ({ filteredCount, totalCount, thread, unit }) => (
 )
 
 BannerCountBrief.propTypes = {
-  filteredCount: PropTypes.number,
-  totalCount: PropTypes.number.isRequired,
-  unit: PropTypes.string,
-  thread: PropTypes.string,
+  filteredCount: T.number,
+  totalCount: T.number.isRequired,
+  unit: T.string,
+  thread: T.string,
 }
 
 BannerCountBrief.defaultProps = {

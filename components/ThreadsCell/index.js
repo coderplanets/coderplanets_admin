@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import R from 'ramda'
 import { Icon } from 'antd'
 
@@ -45,15 +45,15 @@ const ThreadsCell = ({ data, source, onDelete, onAdd }) => (
 
 ThreadsCell.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  source: PropTypes.object.isRequired,
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string,
-      raw: PropTypes.string,
+  source: T.object.isRequired,
+  data: T.arrayOf(
+    T.shape({
+      title: T.string,
+      raw: T.string,
     })
   ).isRequired,
-  onDelete: PropTypes.func,
-  onAdd: PropTypes.func,
+  onDelete: T.func,
+  onAdd: T.func,
 }
 
 ThreadsCell.defaultProps = {

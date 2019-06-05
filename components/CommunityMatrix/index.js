@@ -6,7 +6,7 @@
 
 import React from 'react'
 import R from 'ramda'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import ReactTooltip from 'react-tooltip'
 
 import { ICON_CMD } from '@config'
@@ -93,19 +93,19 @@ class CommunityMatrix extends React.Component {
 
 CommunityMatrix.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  data: PropTypes.shape({
+  data: T.shape({
     // TODO add shape
-    entries: PropTypes.array.isRequired,
-    pageNumber: PropTypes.number.isRequired,
-    pageSize: PropTypes.number.isRequired,
-    totalCount: PropTypes.number.isRequired,
+    entries: T.array.isRequired,
+    pageNumber: T.number.isRequired,
+    pageSize: T.number.isRequired,
+    totalCount: T.number.isRequired,
   }),
-  array: PropTypes.array,
-  onSelect: PropTypes.func,
-  onAddOnSelect: PropTypes.func,
-  activeRaw: PropTypes.string,
-  lens: PropTypes.arrayOf(PropTypes.string),
-  hasAddon: PropTypes.bool,
+  array: T.array,
+  onSelect: T.func,
+  onAddOnSelect: T.func,
+  activeRaw: T.string,
+  lens: T.arrayOf(T.string),
+  hasAddon: T.bool,
 }
 
 CommunityMatrix.defaultProps = {

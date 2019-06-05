@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 
 import { makeDebugger } from '@utils'
 
@@ -25,7 +25,7 @@ const ColorCellComponent = ({ color }) => {
 
 ColorCellComponent.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  color: PropTypes.string,
+  color: T.string,
 }
 
 ColorCellComponent.defaultProps = {

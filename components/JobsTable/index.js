@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import { Table, Button } from 'antd'
 
 import { makeDebugger, cutFrom } from '@utils'
@@ -178,15 +178,15 @@ class JobsTable extends React.PureComponent {
 }
 
 JobsTable.propTypes = {
-  data: PropTypes.any.isRequired,
-  loading: PropTypes.bool,
-  pageOnChange: PropTypes.func,
-  setCommunity: PropTypes.func,
-  unsetCommunity: PropTypes.func,
-  unsetTag: PropTypes.func,
-  setTag: PropTypes.func,
-  onEdit: PropTypes.func,
-  onDelete: PropTypes.func,
+  data: T.any.isRequired,
+  loading: T.bool,
+  pageOnChange: T.func,
+  setCommunity: T.func,
+  unsetCommunity: T.func,
+  unsetTag: T.func,
+  setTag: T.func,
+  onEdit: T.func,
+  onDelete: T.func,
 }
 
 JobsTable.defaultProps = {

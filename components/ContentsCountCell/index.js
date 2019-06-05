@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 
 import { makeDebugger } from '@utils'
 import { Wrapper, Content, Label, Count } from './styles'
@@ -39,11 +39,11 @@ const ContentsCountCell = ({
 }
 
 ContentsCountCell.propTypes = {
-  data: PropTypes.shape({
-    postsCount: PropTypes.number,
-    jobsCount: PropTypes.number,
-    videosCount: PropTypes.number,
-    reposCount: PropTypes.number,
+  data: T.shape({
+    postsCount: T.number,
+    jobsCount: T.number,
+    videosCount: T.number,
+    reposCount: T.number,
   }),
 }
 

@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import { inject, observer } from 'mobx-react'
 
 import { Modal } from '@components'
@@ -81,9 +81,9 @@ class CommentsContainer extends React.Component {
 }
 
 CommentsContainer.propTypes = {
-  onCreate: PropTypes.func,
-  ssr: PropTypes.bool,
-  comments: PropTypes.any.isRequired,
+  onCreate: T.func,
+  ssr: T.bool,
+  comments: T.any.isRequired,
 }
 
 CommentsContainer.defaultProps = {

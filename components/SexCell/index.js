@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 
 import { ICON_CMD } from '@config'
 import { makeDebugger } from '@utils'
@@ -24,7 +24,7 @@ const SexCell = ({ sex }) => {
 
 SexCell.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  sex: PropTypes.oneOf(['dude', 'girl']),
+  sex: T.oneOf(['dude', 'girl']),
 }
 
 SexCell.defaultProps = {

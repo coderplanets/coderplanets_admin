@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 
 import { makeDebugger } from '@utils'
 import { ICON_CMD } from '@config'
@@ -32,11 +32,11 @@ const Modal = ({ children, show, width, showCloseBtn, onClose }) => (
 
 Modal.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  children: PropTypes.node.isRequired,
-  show: PropTypes.bool,
-  onClose: PropTypes.func,
-  width: PropTypes.string,
-  showCloseBtn: PropTypes.bool,
+  children: T.node.isRequired,
+  show: T.bool,
+  onClose: T.func,
+  width: T.string,
+  showCloseBtn: T.bool,
 }
 
 Modal.defaultProps = {

@@ -6,7 +6,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import styled from 'styled-components'
 
 export const StyledA = styled.a`
@@ -26,13 +26,9 @@ const A = ({ href, target, children }) => (
 )
 
 A.propTypes = {
-  href: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
-  target: PropTypes.string,
+  href: T.oneOfType([T.string, T.object]).isRequired,
+  children: T.oneOfType([T.string, T.arrayOf(T.node), T.node]).isRequired,
+  target: T.string,
 }
 
 A.defaultProps = {

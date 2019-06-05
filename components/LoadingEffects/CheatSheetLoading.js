@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import Masonry from 'react-masonry-component'
 import R from 'ramda'
 import { withTheme } from 'styled-components'
@@ -46,8 +46,8 @@ const CheatSheetLoading = ({ column, theme }) => (
 )
 
 CheatSheetLoading.propTypes = {
-  column: PropTypes.number,
-  /* theme: PropTypes.object, */
+  column: T.number,
+  /* theme: T.object, */
 }
 
 CheatSheetLoading.defaultProps = {

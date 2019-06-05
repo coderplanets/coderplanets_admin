@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 
 import { makeDebugger } from '@utils'
 
@@ -23,8 +23,8 @@ const FormItem = ({ label, children }) => (
 )
 
 FormItem.propTypes = {
-  label: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
+  label: T.string.isRequired,
+  children: T.node.isRequired,
 }
 
 FormItem.defaultProps = {}
