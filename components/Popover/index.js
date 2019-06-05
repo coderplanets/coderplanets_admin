@@ -6,13 +6,13 @@
 
 import React from 'react'
 import { Popover } from 'antd'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 import { ContentContainer } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:Popover:index')
+const log = buildLog('c:Popover:index')
 /* eslint-enable no-unused-vars */
 
 const renderContent = content => {
@@ -31,11 +31,11 @@ const PopoverComponent = ({ title, children, content, trigger, placement }) => (
 )
 
 PopoverComponent.propTypes = {
-  children: PropTypes.node.isRequired,
-  content: PropTypes.node.isRequired,
-  title: PropTypes.string,
-  trigger: PropTypes.oneOf(['hover', 'click', 'focus']),
-  placement: PropTypes.oneOf(['bottomLeft', 'bottom', 'right']),
+  children: T.node.isRequired,
+  content: T.node.isRequired,
+  title: T.string,
+  trigger: T.oneOf(['hover', 'click', 'focus']),
+  placement: T.oneOf(['bottomLeft', 'bottom', 'right']),
 }
 
 PopoverComponent.defaultProps = {

@@ -4,7 +4,7 @@
  *
  */
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 
 import Remarkable from 'remarkable'
 import remarkableemoj from 'remarkable-emoji'
@@ -13,7 +13,7 @@ import Prism from 'mastani-codehighlight'
 
 import MarkDownStyle from '@containers/ThemeWrapper/MarkDownStyle'
 import { MENTION_USER_ADDR } from '@config'
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 
 import { PreviewerContainer } from './styles'
 
@@ -22,7 +22,7 @@ md.use(mentionsPlugin({ url: MENTION_USER_ADDR }))
 md.use(remarkableemoj)
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:MarkDownPreviewer:index')
+const log = buildLog('c:MarkDownPreviewer:index')
 /* eslint-enable no-unused-vars */
 
 // TODO: move it to components
@@ -55,7 +55,7 @@ class MarkDownPreviewer extends React.Component {
 
 MarkDownPreviewer.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  body: PropTypes.string,
+  body: T.string,
 }
 
 MarkDownPreviewer.defaultProps = {

@@ -7,9 +7,9 @@ import { types as t, getParent } from 'mobx-state-tree'
 // import R from 'ramda'
 
 import { PagedUsers, emptyPagiData } from 'stores/SharedModel'
-import { markStates, makeDebugger, stripMobx } from '@utils'
+import { markStates, buildLog, stripMobx } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('S:UsersContentStore')
+const log = buildLog('S:UsersContentStore')
 /* eslint-enable no-unused-vars */
 
 const UsersContentStore = t

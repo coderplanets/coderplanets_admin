@@ -4,12 +4,12 @@
  *
  */
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import Link from 'next/link'
 
 import { DEFAULT_USER_AVATAR } from '@config'
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 import {
   Wrapper,
   AvatarWrapper,
@@ -27,7 +27,7 @@ import DigestView from './DigestView'
 import Operators from './Operators'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:UserBrief')
+const log = buildLog('c:UserBrief')
 /* eslint-enable no-unused-vars */
 
 class UserBrief extends React.Component {
@@ -100,20 +100,20 @@ class UserBrief extends React.Component {
 }
 
 UserBrief.propTypes = {
-  user: PropTypes.object.isRequired,
-  displayStyle: PropTypes.oneOf(['default', 'sidebar']),
-  viewingType: PropTypes.oneOf(['account', 'user']),
-  showEdit: PropTypes.bool,
-  onEdit: PropTypes.func,
-  onLogout: PropTypes.func,
+  user: T.object.isRequired,
+  displayStyle: T.oneOf(['default', 'sidebar']),
+  viewingType: T.oneOf(['account', 'user']),
+  showEdit: T.bool,
+  onEdit: T.func,
+  onLogout: T.func,
 }
 
 UserBrief.defaultProps = {
   showEdit: false,
   displayStyle: 'default',
   viewingType: 'user',
-  onEdit: debug,
-  onLogout: debug,
+  onEdit: log,
+  onLogout: log,
 }
 
 export default UserBrief

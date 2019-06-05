@@ -9,13 +9,13 @@ import R from 'ramda'
 import { inject, observer } from 'mobx-react'
 
 // import Link from 'next/link'
-import { uid, makeDebugger, storePlug } from '@utils'
+import { uid, buildLog, storePlug } from '@utils'
 import { Wrapper, Divider, ThreadsWrapper, ThreadTag } from './styles'
 
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:ThreadSetter')
+const log = buildLog('C:ThreadSetter')
 /* eslint-enable no-unused-vars */
 
 const ThreadsList = ({ communityId, threads, selectedids }) => (
@@ -42,9 +42,9 @@ class ThreadSetterContainer extends React.Component {
     const { threadSetter, editData } = this.props
     const { pagedThreadsData } = threadSetter
 
-    debug('pagedThreads ... > ', pagedThreadsData)
+    log('pagedThreads ... > ', pagedThreadsData)
     const selectedids = R.pluck('id', editData.threads)
-    debug('selectedCids: ', selectedids)
+    log('selectedCids: ', selectedids)
 
     return (
       <Wrapper>

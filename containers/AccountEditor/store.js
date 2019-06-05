@@ -7,10 +7,10 @@ import { types as t, getParent } from 'mobx-state-tree'
 import R from 'ramda'
 
 import { User } from 'stores/SharedModel'
-import { markStates, makeDebugger, stripMobx } from '@utils'
+import { markStates, buildLog, stripMobx } from '@utils'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('S:AccountEditorStore')
+const log = buildLog('S:AccountEditorStore')
 /* eslint-enable no-unused-vars */
 
 const AccountEditorStore = t

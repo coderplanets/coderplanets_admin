@@ -10,7 +10,7 @@ import { inject, observer } from 'mobx-react'
 import { Affix } from 'antd'
 
 import { ICON_CMD, ICON_BASE } from 'config/assets'
-import { makeDebugger, storePlug, TYPE } from '@utils'
+import { buildLog, storePlug, TYPE } from '@utils'
 
 import {
   HeaderWrapper,
@@ -37,7 +37,7 @@ import {
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:Header')
+const log = buildLog('C:Header')
 /* eslint-enable no-unused-vars */
 
 const I18Dict = {

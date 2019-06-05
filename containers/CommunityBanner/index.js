@@ -9,7 +9,7 @@ import { inject, observer } from 'mobx-react'
 
 // import Link from 'next/link'
 
-import { makeDebugger, storePlug, stripMobx, ROUTE } from '@utils'
+import { buildLog, storePlug, stripMobx, ROUTE } from '@utils'
 import * as logic from './logic'
 
 import PostsBanner from './PostsBanner'
@@ -23,7 +23,7 @@ import SubscribersBanner from './SubscribersBanner'
 import { BannerContainer } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:CommunityBanner')
+const log = buildLog('C:CommunityBanner')
 /* eslint-enable no-unused-vars */
 
 const ChildBanner = ({

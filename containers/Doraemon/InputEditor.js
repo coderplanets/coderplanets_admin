@@ -12,13 +12,13 @@ import * as logic from './logic'
 import { EditorBar, InputBar, PrefixWraper } from './styles/input_editor'
 
 import InputPrefix from './InputPrefix'
-// const debug = makeDebugger('C:Doraemon:InputEditor')
+// const log = buildLog('C:Doraemon:InputEditor')
 
 export default class InputEditor extends React.Component {
   /* eslint-disable class-methods-use-this */
   @keydown(['ctrl+g', 'ctrl+c'])
   hidePanel() {
-    //     debug('this bitch? ')
+    //     log('this bitch? ')
     logic.hidePanel()
   }
 

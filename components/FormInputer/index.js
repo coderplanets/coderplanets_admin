@@ -5,16 +5,16 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import { Input, InputNumber } from 'antd'
 import R from 'ramda'
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 import FormItem from '../FormItem'
 import { FormInput, Note } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:FormInputer:index')
+const log = buildLog('c:FormInputer:index')
 /* eslint-enable no-unused-vars */
 
 const { TextArea } = Input
@@ -71,16 +71,16 @@ const FormInputer = ({ label, value, onChange, note, type, disabled }) => {
 
 FormInputer.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  onChange: PropTypes.func,
-  label: PropTypes.string,
-  value: PropTypes.string,
-  note: PropTypes.string,
-  type: PropTypes.oneOf(['default', 'textarea', 'number']),
-  disabled: PropTypes.bool,
+  onChange: T.func,
+  label: T.string,
+  value: T.string,
+  note: T.string,
+  type: T.oneOf(['default', 'textarea', 'number']),
+  disabled: T.bool,
 }
 
 FormInputer.defaultProps = {
-  onChange: debug,
+  onChange: log,
   value: '',
   label: '',
   note: '',

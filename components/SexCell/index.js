@@ -5,14 +5,14 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 
 import { ICON_CMD } from '@config'
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 import { DudeIcon, GirlIcon } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:SexCell:index')
+const log = buildLog('c:SexCell:index')
 /* eslint-enable no-unused-vars */
 
 const SexCell = ({ sex }) => {
@@ -24,7 +24,7 @@ const SexCell = ({ sex }) => {
 
 SexCell.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  sex: PropTypes.oneOf(['dude', 'girl']),
+  sex: T.oneOf(['dude', 'girl']),
 }
 
 SexCell.defaultProps = {

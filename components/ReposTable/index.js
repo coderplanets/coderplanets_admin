@@ -5,10 +5,10 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import { Table, Button } from 'antd'
 
-import { makeDebugger, TYPE } from '@utils'
+import { buildLog, TYPE } from '@utils'
 import Pagi from '../Pagi'
 import { TableLoading } from '../LoadingEffects'
 import { Space } from '../BaseStyled'
@@ -20,7 +20,7 @@ import TimeStampCell from '../TimeStampCell'
 import { OperationWrapper } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:ReposTable:index')
+const log = buildLog('c:ReposTable:index')
 /* eslint-enable no-unused-vars */
 
 class ReposTable extends React.PureComponent {
@@ -174,28 +174,28 @@ class ReposTable extends React.PureComponent {
 }
 
 ReposTable.propTypes = {
-  data: PropTypes.any.isRequired,
-  loading: PropTypes.bool,
-  pageOnChange: PropTypes.func,
+  data: T.any.isRequired,
+  loading: T.bool,
+  pageOnChange: T.func,
 
-  setCommunity: PropTypes.func,
-  unsetCommunity: PropTypes.func,
-  unsetTag: PropTypes.func,
-  setTag: PropTypes.func,
-  onEdit: PropTypes.func,
-  onDelete: PropTypes.func,
+  setCommunity: T.func,
+  unsetCommunity: T.func,
+  unsetTag: T.func,
+  setTag: T.func,
+  onEdit: T.func,
+  onDelete: T.func,
 }
 
 ReposTable.defaultProps = {
   loading: false,
-  pageOnChange: debug,
+  pageOnChange: log,
 
-  setCommunity: debug,
-  unsetCommunity: debug,
-  unsetTag: debug,
-  setTag: debug,
-  onEdit: debug,
-  onDelete: debug,
+  setCommunity: log,
+  unsetCommunity: log,
+  unsetTag: log,
+  setTag: log,
+  onEdit: log,
+  onDelete: log,
 }
 
 export default ReposTable

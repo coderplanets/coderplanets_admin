@@ -12,7 +12,7 @@ import dynamic from 'next/dynamic'
 
 import StateTree from '@components/StateTree'
 import TypeWriterLoading from '@components/LoadingEffects/TypeWriterLoading'
-import { makeDebugger, storePlug, TYPE } from '@utils'
+import { buildLog, storePlug, TYPE } from '@utils'
 import * as logic from './logic'
 
 import ArticleViwer from '../ArticleViwer'
@@ -38,7 +38,7 @@ import {
 } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:Preview')
+const log = buildLog('C:Preview')
 /* eslint-enable no-unused-vars */
 
 const DynamicTypeWriter = dynamic(import('../TypeWriter'), {

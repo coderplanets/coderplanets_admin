@@ -5,13 +5,13 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 
-import { makeDebugger, cutFrom } from '@utils'
+import { buildLog, cutFrom } from '@utils'
 import { UserCellWrapper, Avatar, NickName } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:UserCell:index')
+const log = buildLog('c:UserCell:index')
 /* eslint-enable no-unused-vars */
 
 const UserCell = ({ user, align, left, small }) => (
@@ -25,14 +25,14 @@ const UserCell = ({ user, align, left, small }) => (
 
 UserCell.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  user: PropTypes.shape({
-    id: PropTypes.string,
-    avatar: PropTypes.string,
-    nickname: PropTypes.string,
+  user: T.shape({
+    id: T.string,
+    avatar: T.string,
+    nickname: T.string,
   }).isRequired,
-  align: PropTypes.string,
-  left: PropTypes.string,
-  small: PropTypes.bool,
+  align: T.string,
+  left: T.string,
+  small: T.bool,
 }
 
 UserCell.defaultProps = {

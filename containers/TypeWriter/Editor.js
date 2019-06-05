@@ -3,7 +3,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 
 import EditorHeader from './EditorHeader'
 import BodyEditor from './BodyEditor'
@@ -32,11 +32,11 @@ const Editor = ({ cpType, thread, title, body, linkAddr }) => (
 
 Editor.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  thread: PropTypes.string.isRequired,
-  cpType: PropTypes.string.isRequired,
-  body: PropTypes.string,
-  title: PropTypes.string,
-  linkAddr: PropTypes.string,
+  thread: T.string.isRequired,
+  cpType: T.string.isRequired,
+  body: T.string,
+  title: T.string,
+  linkAddr: T.string,
 }
 
 Editor.defaultProps = {

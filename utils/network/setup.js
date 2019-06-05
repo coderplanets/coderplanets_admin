@@ -8,11 +8,11 @@ import fetch from 'isomorphic-fetch'
 
 /* import { onError } from 'apollo-link-error' */
 
-import { makeDebugger, BStore } from '..'
+import { buildLog, BStore } from '..'
 import { GRAPHQL_ENDPOINT } from '@config'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('Network')
+const log = buildLog('Network')
 /* eslint-enable no-unused-vars */
 
 const graphLink = new HttpLink({ uri: GRAPHQL_ENDPOINT, fetch })
@@ -38,8 +38,8 @@ const retryLink = new RetryLink({
 const errorLink = onError(({ graphQLErrors }) => {
   if (graphQLErrors) {
     /* graphQLErrors.map(({ message, path, detail }) => */
-    debug('[GraphQL error happend]: ')
-    graphQLErrors.map(({ message }) => debug(`[error detail--> ]:  ${message}`))
+    log('[GraphQL error happend]: ')
+    graphQLErrors.map(({ message }) => log(`[error detail--> ]:  ${message}`))
   }
 })
 

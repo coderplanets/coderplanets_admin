@@ -1,13 +1,6 @@
 import R from 'ramda'
 
-import {
-  asyncRes,
-  TYPE,
-  makeDebugger,
-  closePreviewer,
-  $solver,
-  cast,
-} from '@utils'
+import { asyncRes, TYPE, buildLog, closePreviewer, $solver, cast } from '@utils'
 import SR71 from 'utils/network/sr71'
 import S from './schema'
 
@@ -15,7 +8,7 @@ const sr71$ = new SR71()
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:CategoryEditor')
+const log = buildLog('L:CategoryEditor')
 /* eslint-enable no-unused-vars */
 
 let store = null

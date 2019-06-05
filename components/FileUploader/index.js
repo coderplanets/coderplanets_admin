@@ -5,14 +5,14 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 
 import { ASSETS_ENDPOINT } from '@config'
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 import { FileUploaderWrapper, InputFile } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:FileUploader')
+const log = buildLog('C:FileUploader')
 /* eslint-enable no-unused-vars */
 
 const getFullDir = (dir, nestDir) => {
@@ -116,21 +116,21 @@ class FileUploader extends React.Component {
 
 FileUploader.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
-  onUploadStart: PropTypes.func,
-  onUploadError: PropTypes.func,
-  onUploadDone: PropTypes.func,
+  children: T.oneOfType([T.string, T.node]).isRequired,
+  onUploadStart: T.func,
+  onUploadError: T.func,
+  onUploadDone: T.func,
 
-  dir: PropTypes.oneOf(['posts', 'communities', 'jobs', 'activities']),
-  nestDir: PropTypes.bool,
+  dir: T.oneOf(['posts', 'communities', 'jobs', 'activities']),
+  nestDir: T.bool,
 }
 
 FileUploader.defaultProps = {
   dir: 'posts',
   nestDir: true,
-  onUploadStart: debug,
-  onUploadError: debug,
-  onUploadDone: debug,
+  onUploadStart: log,
+  onUploadError: log,
+  onUploadDone: log,
 }
 
 export default FileUploader

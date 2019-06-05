@@ -6,12 +6,12 @@
 
 import React from 'react'
 import R from 'ramda'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import ReactTooltip from 'react-tooltip'
 
 import { ICON_CMD } from '@config'
 
-import { uid, makeDebugger } from '@utils'
+import { uid, buildLog } from '@utils'
 import AdderCell from '../AdderCell'
 import CommunitiesLogoList from './CommunitiesLogoList'
 
@@ -26,7 +26,7 @@ import {
 } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:CommunityCell:index')
+const log = buildLog('c:CommunityCell:index')
 /* eslint-enable no-unused-vars */
 
 const SingleCommunity = ({ community }) => (
@@ -100,23 +100,23 @@ const CommunityCell = props => (
 CommunityCell.propTypes = {
   // https://www.npmjs.com/package/prop-types
   /* eslint-disable */
-  data: PropTypes.shape({
-    id: PropTypes.string,
-    logo: PropTypes.string,
-    title: PropTypes.string,
+  data: T.shape({
+    id: T.string,
+    logo: T.string,
+    title: T.string,
   }),
 
-  array: PropTypes.arrayOf(
-    PropTypes.shape({
-      logo: PropTypes.string,
-      title: PropTypes.string,
+  array: T.arrayOf(
+    T.shape({
+      logo: T.string,
+      title: T.string,
     })
   ),
-  withSetter: PropTypes.bool,
-  thread: PropTypes.string,
-  source: PropTypes.object,
-  onDelete: PropTypes.func,
-  onAdd: PropTypes.func,
+  withSetter: T.bool,
+  thread: T.string,
+  source: T.object,
+  onDelete: T.func,
+  onAdd: T.func,
   /* eslint-enable */
 }
 
@@ -126,8 +126,8 @@ CommunityCell.defaultProps = {
   thread: 'POST',
   withSetter: false,
   source: {},
-  onDelete: debug,
-  onAdd: debug,
+  onDelete: log,
+  onAdd: log,
 }
 
 export default CommunityCell

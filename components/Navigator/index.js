@@ -5,14 +5,14 @@
  */
 
 import React from 'react'
-// import PropTypes from 'prop-types'
+// import T from 'prop-types'
 
 import { ICON_CMD } from '@config'
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 import { Breadcrumbs, Logo, LogoText, BetaLogo } from './style'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:Navigator:index')
+const log = buildLog('c:Navigator:index')
 /* eslint-enable no-unused-vars */
 
 const Navigator = () => (

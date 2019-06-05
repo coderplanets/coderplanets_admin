@@ -5,10 +5,10 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import { Table, Button } from 'antd'
 
-import { makeDebugger, cutFrom, TYPE } from '@utils'
+import { buildLog, cutFrom, TYPE } from '@utils'
 import { OperationWrapper } from './styles'
 
 import Pagi from '../Pagi'
@@ -20,7 +20,7 @@ import TagsCell from '../TagsCell'
 import TimeStampCell from '../TimeStampCell'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:VideosTable:index')
+const log = buildLog('c:VideosTable:index')
 /* eslint-enable no-unused-vars */
 
 class VideosTable extends React.Component {
@@ -184,26 +184,26 @@ class VideosTable extends React.Component {
 }
 
 VideosTable.propTypes = {
-  data: PropTypes.any.isRequired,
-  loading: PropTypes.bool,
-  pageOnChange: PropTypes.func,
-  setCommunity: PropTypes.func,
-  unsetCommunity: PropTypes.func,
-  unsetTag: PropTypes.func,
-  setTag: PropTypes.func,
-  onEdit: PropTypes.func,
-  onDelete: PropTypes.func,
+  data: T.any.isRequired,
+  loading: T.bool,
+  pageOnChange: T.func,
+  setCommunity: T.func,
+  unsetCommunity: T.func,
+  unsetTag: T.func,
+  setTag: T.func,
+  onEdit: T.func,
+  onDelete: T.func,
 }
 
 VideosTable.defaultProps = {
   loading: false,
-  pageOnChange: debug,
-  setCommunity: debug,
-  unsetCommunity: debug,
-  unsetTag: debug,
-  setTag: debug,
-  onEdit: debug,
-  onDelete: debug,
+  pageOnChange: log,
+  setCommunity: log,
+  unsetCommunity: log,
+  unsetTag: log,
+  setTag: log,
+  onEdit: log,
+  onDelete: log,
 }
 
 export default React.memo(VideosTable)

@@ -5,7 +5,7 @@
  */
 import React from 'react'
 import R from 'ramda'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 
 import Remarkable from 'remarkable'
 import remarkableemoj from 'remarkable-emoji'
@@ -14,7 +14,7 @@ import Prism from 'mastani-codehighlight'
 
 import MarkDownStyle from '@containers/ThemeWrapper/MarkDownStyle'
 import { MENTION_USER_ADDR } from '@config'
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 import { PreviewerContainer } from './styles'
 
 const md = new Remarkable('full', {
@@ -25,7 +25,7 @@ md.use(mentionsPlugin({ url: MENTION_USER_ADDR }))
 md.use(remarkableemoj)
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:MarkDownRender:index')
+const log = buildLog('c:MarkDownRender:index')
 /* eslint-enable no-unused-vars */
 
 class MarkDownRender extends React.Component {
@@ -78,7 +78,7 @@ class MarkDownRender extends React.Component {
 
 MarkDownRender.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  body: PropTypes.string,
+  body: T.string,
 }
 
 MarkDownRender.defaultProps = {

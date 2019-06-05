@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import Masonry from 'react-masonry-component'
 import R from 'ramda'
 import { withTheme } from 'styled-components'
@@ -7,9 +7,9 @@ import { withTheme } from 'styled-components'
 // import Loading, { Rect, Circle } from 'react-content-loader'
 import ContentLoader from 'react-content-loader'
 
-import { uid, makeDebugger } from '@utils'
+import { uid, buildLog } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:LoadingEffects:index')
+const log = buildLog('c:LoadingEffects:index')
 /* eslint-enable no-unused-vars */
 
 /* eslint-disable no-unused-vars */
@@ -46,8 +46,8 @@ const CheatSheetLoading = ({ column, theme }) => (
 )
 
 CheatSheetLoading.propTypes = {
-  column: PropTypes.number,
-  /* theme: PropTypes.object, */
+  column: T.number,
+  /* theme: T.object, */
 }
 
 CheatSheetLoading.defaultProps = {

@@ -1,7 +1,7 @@
 import {
   asyncRes,
   $solver,
-  makeDebugger,
+  buildLog,
   EVENT,
   holdPage,
   TYPE,
@@ -35,7 +35,7 @@ const sr71$ = new SR71({
   ],
 })
 
-const debug = makeDebugger('L:Preview')
+const log = buildLog('L:Preview')
 
 let store = null
 let sub$ = null
@@ -47,13 +47,13 @@ export function closePreview() {
   // wait until store move out of the screean
   setTimeout(() => {
     store.markState({ type: null })
-    debug('closePreview ...')
+    log('closePreview ...')
     dispatchEvent(EVENT.PREVIEW_CLOSED)
   }, 200)
 }
 
 function loadDataForPreview(info) {
-  debug('loadDataForPreview --> : ', info)
+  log('loadDataForPreview --> : ', info)
   if (info.type === TYPE.POST_PREVIEW_VIEW) {
     dispatchEvent(EVENT.PREVIEW_POST, { type: TYPE.POST, data: info.data })
     // loadPost(info.data)

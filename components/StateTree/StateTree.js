@@ -5,14 +5,14 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import ReactJson from 'react-json-view'
 
-/* import PropTypes from 'prop-types' */
+/* import T from 'prop-types' */
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:StateTree:index')
+const log = buildLog('c:StateTree:index')
 /* eslint-enable no-unused-vars */
 
 /* apathy flat ocean tube */
@@ -31,7 +31,7 @@ const StateTree = ({ json }) => (
 )
 
 StateTree.propTypes = {
-  json: PropTypes.object.isRequired,
+  json: T.object.isRequired,
   // https://www.npmjs.com/package/prop-types
 }
 

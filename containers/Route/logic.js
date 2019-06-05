@@ -1,7 +1,7 @@
 // import R from 'ramda'
 
 import {
-  makeDebugger,
+  buildLog,
   getMainPath,
   getSubPath,
   onClient,
@@ -10,7 +10,7 @@ import {
 } from '@utils'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:Route')
+const log = buildLog('L:Route')
 /* eslint-enable no-unused-vars */
 let store = null
 
@@ -20,11 +20,11 @@ export function routeChange() {
     const browserSubPath = getSubPath({ asPath: Global.location.pathname })
 
     /*
-       debug('browserMainPath -> ', browserMainPath)
-       debug('browserSubPath -> ', browserSubPath)
+       log('browserMainPath -> ', browserMainPath)
+       log('browserSubPath -> ', browserSubPath)
 
-       debug('store.mainPath: ', store.mainPath)
-       debug('store.subPath: ', store.subPath)
+       log('store.mainPath: ', store.mainPath)
+       log('store.subPath: ', store.subPath)
      */
 
     const pathChange =

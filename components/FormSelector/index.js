@@ -6,15 +6,15 @@
 
 import React from 'react'
 import R from 'ramda'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import { Select } from 'antd'
 
-import { uid, makeDebugger } from '@utils'
+import { uid, buildLog } from '@utils'
 import FormItem from '../FormItem'
 import { Note } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:FormSelector:index')
+const log = buildLog('c:FormSelector:index')
 /* eslint-enable no-unused-vars */
 
 const { Option } = Select
@@ -40,15 +40,15 @@ const FormSelector = ({ label, options, value, onChange, note }) => (
 
 FormSelector.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  options: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onChange: PropTypes.func,
-  label: PropTypes.string,
-  value: PropTypes.string,
-  note: PropTypes.string,
+  options: T.arrayOf(T.string).isRequired,
+  onChange: T.func,
+  label: T.string,
+  value: T.string,
+  note: T.string,
 }
 
 FormSelector.defaultProps = {
-  onChange: debug,
+  onChange: log,
   value: '',
   label: '',
   note: '',

@@ -5,10 +5,10 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import { Button, Row, Col, Tag } from 'antd'
 import { ICON_CMD } from '@config'
-import { makeDebugger, isEmptyValue } from '@utils'
+import { buildLog, isEmptyValue } from '@utils'
 import Popover from '../Popover'
 
 import {
@@ -21,7 +21,7 @@ import {
 } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:ContentFilter:index')
+const log = buildLog('c:ContentFilter:index')
 /* eslint-enable no-unused-vars */
 
 const filterDict = {
@@ -163,11 +163,11 @@ const ContentFilter = ({ onSelect, activeWhen, activeSort, activeLength }) => (
 
 ContentFilter.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  activeWhen: PropTypes.string,
-  activeSort: PropTypes.string,
-  activeLength: PropTypes.string,
+  activeWhen: T.string,
+  activeSort: T.string,
+  activeLength: T.string,
 
-  onSelect: PropTypes.func.isRequired,
+  onSelect: T.func.isRequired,
 }
 
 ContentFilter.defaultProps = {

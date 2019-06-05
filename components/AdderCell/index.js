@@ -5,15 +5,15 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 
 import { ICON_CMD } from '@config'
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 import { AddWrapper, AddIcon, AddText } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:AdderCell:index')
+const log = buildLog('c:AdderCell:index')
 /* eslint-enable no-unused-vars */
 
 const AdderCell = ({ onAdd }) => (
@@ -25,11 +25,11 @@ const AdderCell = ({ onAdd }) => (
 
 AdderCell.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  onAdd: PropTypes.func,
+  onAdd: T.func,
 }
 
 AdderCell.defaultProps = {
-  onAdd: debug,
+  onAdd: log,
 }
 
 export default AdderCell

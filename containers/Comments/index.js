@@ -5,11 +5,11 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import { inject, observer } from 'mobx-react'
 
 import { Modal } from '@components'
-import { makeDebugger, storePlug } from '@utils'
+import { buildLog, storePlug } from '@utils'
 import CommentEditor from './CommentEditor'
 import CommentsList from './CommentsList'
 import CommentReplyEditor from './CommentReplyEditor'
@@ -19,7 +19,7 @@ import { Wrapper } from './styles'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:Comments')
+const log = buildLog('C:Comments')
 /* eslint-enable no-unused-vars */
 
 class CommentsContainer extends React.Component {
@@ -81,13 +81,13 @@ class CommentsContainer extends React.Component {
 }
 
 CommentsContainer.propTypes = {
-  onCreate: PropTypes.func,
-  ssr: PropTypes.bool,
-  comments: PropTypes.any.isRequired,
+  onCreate: T.func,
+  ssr: T.bool,
+  comments: T.any.isRequired,
 }
 
 CommentsContainer.defaultProps = {
-  onCreate: debug,
+  onCreate: log,
   ssr: false,
 }
 

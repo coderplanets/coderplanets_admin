@@ -5,9 +5,9 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 
-import { makeDebugger, toPercentNum } from '@utils'
+import { buildLog, toPercentNum } from '@utils'
 
 import {
   Result,
@@ -18,7 +18,7 @@ import {
 } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:BannerCountBrief:index')
+const log = buildLog('c:BannerCountBrief:index')
 /* eslint-enable no-unused-vars */
 
 const CountBrief = ({ filteredCount, totalCount, thread, unit }) => {
@@ -69,10 +69,10 @@ const BannerCountBrief = ({ filteredCount, totalCount, thread, unit }) => (
 )
 
 BannerCountBrief.propTypes = {
-  filteredCount: PropTypes.number,
-  totalCount: PropTypes.number.isRequired,
-  unit: PropTypes.string,
-  thread: PropTypes.string,
+  filteredCount: T.number,
+  totalCount: T.number.isRequired,
+  unit: T.string,
+  thread: T.string,
 }
 
 BannerCountBrief.defaultProps = {

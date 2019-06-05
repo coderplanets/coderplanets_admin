@@ -11,7 +11,7 @@ import { Input, Button, Icon, StatusBox } from '@components'
 import { ICON_CMD } from '@config'
 // import Link from 'next/link'
 
-import { makeDebugger, storePlug } from '@utils'
+import { buildLog, storePlug } from '@utils'
 import {
   Wrapper,
   BackIcon,
@@ -32,7 +32,7 @@ import {
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:AccountEditor')
+const log = buildLog('C:AccountEditor')
 /* eslint-enable no-unused-vars */
 
 const { TextArea } = Input
@@ -94,7 +94,7 @@ class AccountEditorContainer extends React.Component {
       statusMsg,
     } = accountEditor
 
-    /* debug('accountInfo editing->: ', accountInfo) */
+    /* log('accountInfo editing->: ', accountInfo) */
 
     return (
       <Wrapper>

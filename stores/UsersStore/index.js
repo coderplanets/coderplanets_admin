@@ -5,10 +5,10 @@
 
 import { types as t, getParent } from 'mobx-state-tree'
 // import R from 'ramda'
-import { markStates, makeDebugger } from '@utils'
+import { markStates, buildLog } from '@utils'
 import { User } from '@model'
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('S:UsersStore')
+const log = buildLog('S:UsersStore')
 /* eslint-enable no-unused-vars */
 
 const UsersStore = t

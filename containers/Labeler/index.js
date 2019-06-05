@@ -5,19 +5,19 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import { inject, observer } from 'mobx-react'
 
 import { Popover } from '@components'
 import { ICON_CMD } from '@config'
-import { makeDebugger, storePlug } from '@utils'
+import { buildLog, storePlug } from '@utils'
 
 import TagList from './TagList'
 import { Wrapper, LabelItem, LabelIcon, Title } from './styles'
 
 import * as logic from './logic'
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:Labeler')
+const log = buildLog('C:Labeler')
 /* eslint-enable no-unused-vars */
 
 class LabelerContainer extends React.Component {
@@ -62,9 +62,9 @@ class LabelerContainer extends React.Component {
 
 LabelerContainer.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  label: PropTypes.oneOf(['标签', '薪资', '城市']),
-  // label: PropTypes.oneOf(['tag', 'salary', 'city']),
-  iconSrc: PropTypes.string,
+  label: T.oneOf(['标签', '薪资', '城市']),
+  // label: T.oneOf(['tag', 'salary', 'city']),
+  iconSrc: T.string,
 }
 
 LabelerContainer.defaultProps = {

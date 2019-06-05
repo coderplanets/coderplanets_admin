@@ -3,7 +3,7 @@ import Router from 'next/router'
 
 import SR71 from 'utils/network/sr71'
 import {
-  makeDebugger,
+  buildLog,
   Global,
   dispatchEvent,
   asyncRes,
@@ -22,7 +22,7 @@ import Pockect from './Pockect'
 import { SwissArmyKnife } from './helper/swissArmyKnife'
 import githubLoginHandler from './oauth/github_handler'
 
-const debug = makeDebugger('L:Doraemon')
+const log = buildLog('L:Doraemon')
 const sr71$ = new SR71()
 
 let sub$ = null
@@ -73,32 +73,32 @@ const initSpecCmdResolver = () => {
       },
     },
     {
-      match: SAK.stepOneCmd('debug'),
+      match: SAK.stepOneCmd('log'),
       action: () => {
         SAK.completeInput(true)
         queryPocket()
         store.markState({
           inputForOtherUse: true,
-          inputValue: Global.localStorage.getItem('debug'),
+          inputValue: Global.localStorage.getItem('log'),
         })
       },
     },
     {
       match: SAK.stepOneCmd('hforward'),
       action: () => {
-        debug('SAK.stepOneCmd hforward')
+        log('SAK.stepOneCmd hforward')
       },
     },
     {
       match: SAK.stepOneCmd('hbackward'),
       action: () => {
-        debug('SAK.stepOneCmd hbackward')
+        log('SAK.stepOneCmd hbackward')
       },
     },
     {
       match: SAK.stepOneCmd('cheatsheet'),
       action: () => {
-        debug('SAK.stepOneCmd cheatsheet')
+        log('SAK.stepOneCmd cheatsheet')
         Router.push(
           {
             pathname: '/',
@@ -112,7 +112,7 @@ const initSpecCmdResolver = () => {
     {
       match: SAK.stepOneCmd('communities'),
       action: () => {
-        debug('SAK.stepOneCmd communities')
+        log('SAK.stepOneCmd communities')
         Router.push(
           {
             pathname: '/',
@@ -133,7 +133,7 @@ const initSpecCmdResolver = () => {
     {
       match: SAK.stepTwoCmd('login'),
       action: cmdpath => {
-        debug('stepTwoCmd login->: ', cmdpath)
+        log('stepTwoCmd login->: ', cmdpath)
         switch (R.last(cmdpath)) {
           case 'github': {
             hidePanel()
@@ -151,7 +151,7 @@ const initSpecCmdResolver = () => {
             return win.focus()
           }
           default: {
-            debug('unsupported login method: ', cmdpath)
+            log('unsupported login method: ', cmdpath)
             return hidePanel()
           }
         }
@@ -163,13 +163,13 @@ const initSpecCmdResolver = () => {
       },
     },
     {
-      match: SAK.stepTwoCmd('debug'),
+      match: SAK.stepTwoCmd('log'),
       action: cmdpath => {
         const cmd = R.last(cmdpath)
         if (cmd === 'github') {
-          Global.window.open('https://github.com/visionmedia/debug', '_blank')
+          Global.window.open('https://github.com/visionmedia/log', '_blank')
         } else if (cmd === 'write') {
-          Global.localStorage.setItem('debug', store.inputValue)
+          Global.localStorage.setItem('log', store.inputValue)
           hidePanel()
         }
       },
@@ -177,7 +177,7 @@ const initSpecCmdResolver = () => {
     {
       match: SAK.communityLinker,
       action: cmdpath => {
-        debug('communityLinker: ', cmdpath)
+        log('communityLinker: ', cmdpath)
 
         // Router.push(url, as)
         // TODO: use route store  method
@@ -194,7 +194,7 @@ const initSpecCmdResolver = () => {
     {
       match: SAK.communityInsideLinker,
       action: cmdpath => {
-        debug('communityInsideLinker: ', cmdpath)
+        log('communityInsideLinker: ', cmdpath)
       },
     },
   ]
@@ -223,7 +223,7 @@ const doNavigate = () => {
     })
   }
 
-  debug('doNavigate cmd: ', store.activeSuggestion)
+  log('doNavigate cmd: ', store.activeSuggestion)
 }
 
 export function handleShortCuts(e) {
@@ -257,7 +257,7 @@ export function handleShortCuts(e) {
       break
     }
     default: {
-      //  debug('onKeyPress: ', e.key)
+      //  log('onKeyPress: ', e.key)
       break
     }
   }
@@ -320,7 +320,7 @@ const DataSolver = [
       Global.location.reload()
       /*
       setTimeout(() => {
-        debug('before refresh page: ', Global.location.href)
+        log('before refresh page: ', Global.location.href)
         Global.location.reload()
       }, 1000)
       */
@@ -433,14 +433,14 @@ const ErrSolver = [
   {
     match: asyncErr(ERR.CRAPHQL),
     action: ({ details }) => {
-      debug('ERR.CRAPHQL -->', details)
+      log('ERR.CRAPHQL -->', details)
       store.markState({ searching: false })
     },
   },
   {
     match: asyncErr(ERR.TIMEOUT),
     action: ({ details }) => {
-      debug('ERR.TIMEOUT -->', details)
+      log('ERR.TIMEOUT -->', details)
       store.markState({ searching: false })
     },
   },
@@ -448,7 +448,7 @@ const ErrSolver = [
     match: asyncErr(ERR.NETWORK),
     action: ({ details }) => {
       store.markState({ searching: false })
-      debug('ERR.NETWORK -->', details)
+      log('ERR.NETWORK -->', details)
     },
   },
 ]

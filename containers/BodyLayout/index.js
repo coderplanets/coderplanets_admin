@@ -5,7 +5,7 @@
 */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import keydown from 'react-keydown'
 
@@ -25,7 +25,7 @@ class BodyLayoutContainer extends React.Component {
   /* eslint-disable class-methods-use-this */
   @keydown(['ctrl+p'])
   openDoraemon() {
-    // debug('openDoraemon')
+    // log('openDoraemon')
     logic.openDoraemon()
   }
   /* eslint-enable class-methods-use-this */
@@ -39,8 +39,8 @@ class BodyLayoutContainer extends React.Component {
 }
 
 BodyLayoutContainer.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.element),
-  bodylayout: PropTypes.object.isRequired,
+  children: T.arrayOf(T.element),
+  bodylayout: T.object.isRequired,
 }
 
 BodyLayoutContainer.defaultProps = {

@@ -5,17 +5,17 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import R from 'ramda'
 import { Tooltip } from 'antd'
 
 import { ATATARS_LIST_LENGTH } from 'config/general'
 
-import { makeDebugger, prettyNum } from '@utils'
+import { buildLog, prettyNum } from '@utils'
 import { Avatars, AvatarsItem, AvatarsImg, AvatarsMore } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:AvatarsRow:index')
+const log = buildLog('c:AvatarsRow:index')
 /* eslint-enable no-unused-vars */
 
 const validUser = R.compose(
@@ -61,27 +61,27 @@ const AvatarsRow = ({
 }
 
 AvatarsRow.propTypes = {
-  users: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      avatar: PropTypes.string,
-      nickname: PropTypes.string,
-      extra_id: PropTypes.string,
+  users: T.arrayOf(
+    T.shape({
+      id: T.string,
+      avatar: T.string,
+      nickname: T.string,
+      extra_id: T.string,
     })
   ),
-  total: PropTypes.number.isRequired,
-  height: PropTypes.string,
-  limit: PropTypes.number,
-  onUserSelect: PropTypes.func,
-  onTotalSelect: PropTypes.func,
+  total: T.number.isRequired,
+  height: T.string,
+  limit: T.number,
+  onUserSelect: T.func,
+  onTotalSelect: T.func,
 }
 
 AvatarsRow.defaultProps = {
   height: '32px',
   users: [],
   limit: ATATARS_LIST_LENGTH.POSTS,
-  onUserSelect: debug,
-  onTotalSelect: debug,
+  onUserSelect: log,
+  onTotalSelect: log,
 }
 
 export default AvatarsRow

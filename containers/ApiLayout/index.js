@@ -5,17 +5,17 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import { inject, observer } from 'mobx-react'
 
 // import Link from 'next/link'
 
-import { makeDebugger, storePlug } from '@utils'
+import { buildLog, storePlug } from '@utils'
 import Wrapper from './styles'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:ApiLayout')
+const log = buildLog('C:ApiLayout')
 /* eslint-enable no-unused-vars */
 
 class ApiLayoutContainer extends React.Component {
@@ -31,8 +31,8 @@ class ApiLayoutContainer extends React.Component {
 }
 
 ApiLayoutContainer.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.element),
-  apiLayout: PropTypes.object.isRequired,
+  children: T.arrayOf(T.element),
+  apiLayout: T.object.isRequired,
 }
 
 ApiLayoutContainer.defaultProps = {

@@ -5,14 +5,14 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 import { ICON_CMD } from '@config'
 import { Mask, Wrapper, CloseBtn, ChildrenWrapper } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:Modal:index')
+const log = buildLog('c:Modal:index')
 /* eslint-enable no-unused-vars */
 
 const Modal = ({ children, show, width, showCloseBtn, onClose }) => (
@@ -32,16 +32,16 @@ const Modal = ({ children, show, width, showCloseBtn, onClose }) => (
 
 Modal.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  children: PropTypes.node.isRequired,
-  show: PropTypes.bool,
-  onClose: PropTypes.func,
-  width: PropTypes.string,
-  showCloseBtn: PropTypes.bool,
+  children: T.node.isRequired,
+  show: T.bool,
+  onClose: T.func,
+  width: T.string,
+  showCloseBtn: T.bool,
 }
 
 Modal.defaultProps = {
   show: false,
-  onClose: debug,
+  onClose: log,
   width: '600px',
   showCloseBtn: false,
 }

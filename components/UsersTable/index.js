@@ -5,10 +5,10 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import { Table } from 'antd'
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 
 import Pagi from '@components/Pagi'
 import { TableLoading } from '@components/LoadingEffects'
@@ -23,7 +23,7 @@ import SexCell from '@components/SexCell'
 // import { Wrapper } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:UsersTable:index')
+const log = buildLog('c:UsersTable:index')
 /* eslint-enable no-unused-vars */
 
 class UsersTable extends React.PureComponent {
@@ -143,16 +143,16 @@ class UsersTable extends React.PureComponent {
 }
 
 UsersTable.propTypes = {
-  data: PropTypes.any.isRequired,
-  loading: PropTypes.bool,
-  pageOnChange: PropTypes.func,
-  cmsPermisstionOnChange: PropTypes.func,
+  data: T.any.isRequired,
+  loading: T.bool,
+  pageOnChange: T.func,
+  cmsPermisstionOnChange: T.func,
 }
 
 UsersTable.defaultProps = {
   loading: false,
-  pageOnChange: debug,
-  cmsPermisstionOnChange: debug,
+  pageOnChange: log,
+  cmsPermisstionOnChange: log,
 }
 
 export default UsersTable

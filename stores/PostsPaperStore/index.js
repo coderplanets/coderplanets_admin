@@ -6,10 +6,10 @@
 import { types as t, getParent } from 'mobx-state-tree'
 import R from 'ramda'
 
-import { markStates, makeDebugger, stripMobx, TYPE } from '@utils'
+import { markStates, buildLog, stripMobx, TYPE } from '@utils'
 import { Article } from '@model'
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('S:PostsPaperStore')
+const log = buildLog('S:PostsPaperStore')
 /* eslint-enable no-unused-vars */
 
 /* const filters = { */
@@ -100,7 +100,7 @@ const PostsPaperStore = t
     selectFilter(filter, val) {
       // TODO
       const community = 'js'
-      debug('curCommunity', self.curCommunity)
+      log('curCommunity', self.curCommunity)
       const curFilter = self.filters.get(community, filter)
       const newFilter = curFilter
         ? R.merge(curFilter, { [filter]: val })

@@ -19,13 +19,13 @@ import {
   CommunityMatrix,
 } from '@components'
 
-import { makeDebugger, storePlug, THREAD } from '@utils'
+import { buildLog, storePlug, THREAD } from '@utils'
 import { Wrapper, ActionBtns, Divider } from './styles'
 
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:TagEditor')
+const log = buildLog('C:TagEditor')
 /* eslint-enable no-unused-vars */
 
 class TagEditorContainer extends React.Component {

@@ -5,10 +5,10 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import { Table, Button } from 'antd'
 
-import { makeDebugger, Trans } from '@utils'
+import { buildLog, Trans } from '@utils'
 import Pagi from '../Pagi'
 import { TableLoading } from '../LoadingEffects'
 import { Space } from '../BaseStyled'
@@ -19,7 +19,7 @@ import TimeStampCell from '../TimeStampCell'
 import { OperationWrapper } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:TagsTable:index')
+const log = buildLog('c:TagsTable:index')
 /* eslint-enable no-unused-vars */
 
 class TagsTable extends React.PureComponent {
@@ -146,19 +146,19 @@ class TagsTable extends React.PureComponent {
 }
 
 TagsTable.propTypes = {
-  data: PropTypes.any.isRequired,
-  loading: PropTypes.bool,
-  pageOnChange: PropTypes.func,
+  data: T.any.isRequired,
+  loading: T.bool,
+  pageOnChange: T.func,
 
-  onEdit: PropTypes.func,
-  onDelete: PropTypes.func,
+  onEdit: T.func,
+  onDelete: T.func,
 }
 
 TagsTable.defaultProps = {
   loading: false,
-  pageOnChange: debug,
-  onEdit: debug,
-  onDelete: debug,
+  pageOnChange: log,
+  onEdit: log,
+  onDelete: log,
 }
 
 export default TagsTable

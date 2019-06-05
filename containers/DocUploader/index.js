@@ -5,17 +5,17 @@
  */
 import React from 'react'
 import { inject, observer } from 'mobx-react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 
 import { ASSETS_ENDPOINT } from '@config'
 
-import { makeDebugger, storePlug, uid } from '@utils'
+import { buildLog, storePlug, uid } from '@utils'
 import { Wrapper, InputFile } from './styles'
 
 import { init, onUploadError, getOSSDir, getOSSFileName } from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:DocUploader')
+const log = buildLog('C:DocUploader')
 /* eslint-enable no-unused-vars */
 
 class DocUploaderContainer extends React.Component {
@@ -131,16 +131,16 @@ class DocUploaderContainer extends React.Component {
 }
 
 DocUploaderContainer.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
-  onUploadStart: PropTypes.func,
-  onUploadError: PropTypes.func,
-  onUploadDone: PropTypes.func,
-  docUploader: PropTypes.any.isRequired,
+  children: T.oneOfType([T.string, T.node]).isRequired,
+  onUploadStart: T.func,
+  onUploadError: T.func,
+  onUploadDone: T.func,
+  docUploader: T.any.isRequired,
 }
 
 DocUploaderContainer.defaultProps = {
-  onUploadStart: debug,
-  onUploadDone: debug,
+  onUploadStart: log,
+  onUploadDone: log,
   onUploadError,
 }
 

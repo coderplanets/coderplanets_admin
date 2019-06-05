@@ -6,13 +6,13 @@
 import R from 'ramda'
 import { types as t, getParent } from 'mobx-state-tree'
 
-import { markStates, makeDebugger } from '@utils'
+import { markStates, buildLog } from '@utils'
 import { Community } from '@model'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('S:communities')
+const log = buildLog('S:communities')
 /* eslint-enable no-unused-vars */
-// const debug = makeDebugger('S:CommunitiesStore')
+// const log = buildLog('S:CommunitiesStore')
 
 const CommunitiesStore = t
   .model('CommunitiesStore', {
@@ -31,7 +31,7 @@ const CommunitiesStore = t
     // cheatsheet: t.optional(CheatSheetModal, { title: '', desc: '', raw: '' }),
     // jobs: ...
     // themes: ...
-    // debug: ...
+    // log: ...
     // user: ...
     // cmds: t.map(CmdModel),
   })

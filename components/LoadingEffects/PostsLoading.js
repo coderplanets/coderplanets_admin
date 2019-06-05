@@ -1,6 +1,6 @@
 import React from 'react'
 import R from 'ramda'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import styled, { withTheme } from 'styled-components'
 import ContentLoader from 'react-content-loader'
 
@@ -43,7 +43,7 @@ const PostsLoading = ({ num, theme }) => {
 }
 
 PostsLoading.propTypes = {
-  num: PropTypes.number,
+  num: T.number,
 }
 
 PostsLoading.defaultProps = {

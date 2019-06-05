@@ -5,12 +5,12 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import R from 'ramda'
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:Maybe:index')
+const log = buildLog('c:Maybe:index')
 /* eslint-enable no-unused-vars */
 
 const MaybeLoading = ({ loading }) => {
@@ -26,9 +26,9 @@ const Maybe = ({ children, data, loading }) => {
 
 Maybe.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  children: PropTypes.node.isRequired,
-  data: PropTypes.any,
-  loading: PropTypes.node,
+  children: T.node.isRequired,
+  data: T.any,
+  loading: T.node,
 }
 
 Maybe.defaultProps = {

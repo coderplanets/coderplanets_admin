@@ -8,9 +8,9 @@ import R from 'ramda'
 
 import { Thread } from 'stores/SharedModel'
 
-import { markStates, makeDebugger, stripMobx } from '@utils'
+import { markStates, buildLog, stripMobx } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('S:ThreadEditor')
+const log = buildLog('S:ThreadEditor')
 /* eslint-enable no-unused-vars */
 
 const ThreadEditor = t

@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import R from 'ramda'
 
 import { ICON_CMD } from '@config'
@@ -36,11 +36,11 @@ export default TagsCell
 
 TagsCell.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  /* communityId: PropTypes.number.isRequired, */
-  source: PropTypes.object.isRequired,
-  thread: PropTypes.string,
-  onDelete: PropTypes.func.isRequired,
-  onAdd: PropTypes.func.isRequired,
+  /* communityId: T.number.isRequired, */
+  source: T.object.isRequired,
+  thread: T.string,
+  onDelete: T.func.isRequired,
+  onAdd: T.func.isRequired,
 }
 
 TagsCell.defaultProps = {

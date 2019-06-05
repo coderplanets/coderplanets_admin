@@ -5,14 +5,14 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 
 import { FormItemWrapper, FormLable, ChildWrapper } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:FormItem:index')
+const log = buildLog('c:FormItem:index')
 /* eslint-enable no-unused-vars */
 
 const FormItem = ({ label, children }) => (
@@ -23,8 +23,8 @@ const FormItem = ({ label, children }) => (
 )
 
 FormItem.propTypes = {
-  label: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
+  label: T.string.isRequired,
+  children: T.node.isRequired,
 }
 
 FormItem.defaultProps = {}

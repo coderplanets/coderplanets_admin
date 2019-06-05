@@ -9,12 +9,12 @@ import { inject, observer } from 'mobx-react'
 
 import { FormInputer, Icon, Button, StatusBox, Space } from '@components'
 
-import { makeDebugger, storePlug } from '@utils'
+import { buildLog, storePlug } from '@utils'
 import { Wrapper, Divider, ActionBtns } from './styles'
 
 import * as logic from './logic'
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:ThreadEditor')
+const log = buildLog('C:ThreadEditor')
 /* eslint-enable no-unused-vars */
 
 class ThreadEditorContainer extends React.Component {

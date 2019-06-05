@@ -2,7 +2,7 @@ import R from 'ramda'
 import {
   asyncRes,
   asyncErr,
-  makeDebugger,
+  buildLog,
   EVENT,
   ERR,
   TYPE,
@@ -21,7 +21,7 @@ const sr71$ = new SR71()
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:Comments')
+const log = buildLog('L:Comments')
 /* eslint-enable no-unused-vars */
 
 let store = null
@@ -33,7 +33,7 @@ const defaultArgs = {
 }
 
 export const loadComents = (args = {}) => {
-  // debug('loadComents passed in: ', args)
+  // log('loadComents passed in: ', args)
   args = R.mergeDeepRight(defaultArgs, args)
   args.id = store.viewingData.id
   args.userHasLogin = store.isLogin
@@ -42,7 +42,7 @@ export const loadComents = (args = {}) => {
   markLoading(args.fresh)
   store.markState({ filterType: args.filter.sort })
 
-  debug('pagedComments args: ', args)
+  log('pagedComments args: ', args)
   sr71$.query(S.pagedComments, args)
 }
 
@@ -63,7 +63,7 @@ export function createComment() {
     thread: store.activeThread,
   }
 
-  debug('createComment args: ', args)
+  log('createComment args: ', args)
   sr71$.mutate(S.createComment, args)
 }
 
@@ -82,7 +82,7 @@ export function backToEditor() {
 }
 
 export function previewReply(data) {
-  debug('previewReply --> : ', data)
+  log('previewReply --> : ', data)
 }
 
 export function openInputBox() {
@@ -142,7 +142,7 @@ export function openReplyEditor(data) {
 }
 
 export function replyCommentPreview() {
-  debug('replyCommentPreview')
+  log('replyCommentPreview')
 
   store.markState({
     showReplyEditor: false,
@@ -172,7 +172,7 @@ export function onFilterChange(filterType) {
 
 export function toggleLikeComment(comment) {
   // TODO: check login first
-  debug('likeComment: ', comment)
+  log('likeComment: ', comment)
   if (comment.viewerHasLiked) {
     return sr71$.mutate(S.undoLikeComment, {
       id: comment.id,
@@ -213,7 +213,7 @@ export function insertCode() {
 }
 
 export function onMention(user) {
-  debug('onMention: ', user)
+  log('onMention: ', user)
   store.addReferUser(user)
 }
 
@@ -275,7 +275,7 @@ const DataSolver = [
   {
     match: asyncRes('replyComment'),
     action: ({ replyComment }) => {
-      debug('replyComment', replyComment)
+      log('replyComment', replyComment)
       store.markState({
         showReplyBox: false,
         replyToComment: null,
@@ -307,7 +307,7 @@ const DataSolver = [
   {
     match: asyncRes('deleteComment'),
     action: ({ deleteComment }) => {
-      debug('deleteComment', deleteComment)
+      log('deleteComment', deleteComment)
       store.markState({ tobeDeleteId: null })
       scrollIntoEle('lists-info')
       loadComents({ filter: { page: 1 }, fresh: true })
@@ -319,19 +319,19 @@ const ErrSolver = [
   {
     match: asyncErr(ERR.CRAPHQL),
     action: ({ details }) => {
-      debug('ERR.CRAPHQL -->', details)
+      log('ERR.CRAPHQL -->', details)
     },
   },
   {
     match: asyncErr(ERR.TIMEOUT),
     action: ({ details }) => {
-      debug('ERR.TIMEOUT -->', details)
+      log('ERR.TIMEOUT -->', details)
     },
   },
   {
     match: asyncErr(ERR.NETWORK),
     action: ({ details }) => {
-      debug('ERR.NETWORK -->', details)
+      log('ERR.NETWORK -->', details)
     },
   },
 ]

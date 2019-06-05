@@ -5,14 +5,14 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 
 import { ICON_CMD } from '@config'
-import { uid, makeDebugger } from '@utils'
+import { uid, buildLog } from '@utils'
 import { Wrapper, TagItem, TagDot, TagTitle, AllTagIcon } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:TagList:index')
+const log = buildLog('c:TagList:index')
 /* eslint-enable no-unused-vars */
 
 const TagList = ({ tags, active, onSelect }) => {
@@ -55,17 +55,17 @@ const TagList = ({ tags, active, onSelect }) => {
 }
 
 TagList.propTypes = {
-  tags: PropTypes.arrayOf(
-    PropTypes.shape({
-      color: PropTypes.string,
-      title: PropTypes.string,
+  tags: T.arrayOf(
+    T.shape({
+      color: T.string,
+      title: T.string,
     })
   ).isRequired,
-  active: PropTypes.shape({
-    color: PropTypes.string,
-    title: PropTypes.string,
+  active: T.shape({
+    color: T.string,
+    title: T.string,
   }),
-  onSelect: PropTypes.func.isRequired,
+  onSelect: T.func.isRequired,
   // https://www.npmjs.com/package/prop-types
 }
 

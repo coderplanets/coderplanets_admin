@@ -5,10 +5,10 @@
  */
 
 import React from 'react'
-// import PropTypes from 'prop-types'
+// import T from 'prop-types'
 import { inject, observer } from 'mobx-react'
 
-import { makeDebugger, storePlug } from '@utils'
+import { buildLog, storePlug } from '@utils'
 import Editor from './Editor'
 import Preview from './Preview'
 import MarkDownHelper from './MarkDownHelper'
@@ -20,7 +20,7 @@ import { Wrapper, ViewerWrapper } from './styles'
 import { init, uninit, changeView } from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:TypeWriter')
+const log = buildLog('C:TypeWriter')
 /* eslint-enable no-unused-vars */
 
 const View = ({ curView, thread, cpType, title, body, linkAddr }) => {
@@ -58,7 +58,7 @@ class TypeWriterContainer extends React.Component {
   }
 
   componentWillUnmount() {
-    debug('TODO: store state to localstarange')
+    log('TODO: store state to localstarange')
     // Message.success('草稿已经保存')
     uninit()
   }
@@ -107,7 +107,7 @@ class TypeWriterContainer extends React.Component {
 
 // TypeWriterContainer.propTypes = {
 // https://www.npmjs.com/package/prop-types
-// closePreview: PropTypes.func.isRequired,
+// closePreview: T.func.isRequired,
 // }
 
 // TypeWriterContainer.defaultProps = {}

@@ -7,7 +7,7 @@ import {
   asyncErr,
   $solver,
   ERR,
-  makeDebugger,
+  buildLog,
   EVENT,
   TYPE,
   THREAD,
@@ -31,7 +31,7 @@ const sr71$ = new SR71({
 })
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:CommunitiesContent')
+const log = buildLog('L:CommunitiesContent')
 /* eslint-enable no-unused-vars */
 
 let sub$ = null
@@ -130,7 +130,7 @@ export const loadVideos = (page = 1) => {
 }
 
 export function onEdit(record) {
-  debug('unMatched edit: ', record)
+  log('unMatched edit: ', record)
 }
 
 export const onEditCategory = record =>
@@ -241,14 +241,14 @@ const DataSolver = [
     match: asyncRes('pagedCommunities'),
     action: ({ pagedCommunities }) => {
       cancleLoading()
-      debug('pagedCommunities: ', pagedCommunities)
+      log('pagedCommunities: ', pagedCommunities)
       store.markState({ pagedCommunities })
     },
   },
   {
     match: asyncRes('pagedTags'),
     action: ({ pagedTags }) => {
-      debug('load pagedTags: ', pagedTags)
+      log('load pagedTags: ', pagedTags)
       cancleLoading()
       store.markState({ pagedTags })
     },
@@ -286,7 +286,7 @@ const DataSolver = [
     match: asyncRes('pagedVideos'),
     action: ({ pagedVideos }) => {
       cancleLoading()
-      debug('pagedVideos: ', pagedVideos)
+      log('pagedVideos: ', pagedVideos)
       store.markState({ pagedVideos })
     },
   },
@@ -294,7 +294,7 @@ const DataSolver = [
     match: asyncRes('pagedCategories'),
     action: ({ pagedCategories }) => {
       cancleLoading()
-      debug('pagedCategories: ', pagedCategories)
+      log('pagedCategories: ', pagedCategories)
       store.markState({ pagedCategories })
     },
   },
@@ -349,7 +349,7 @@ const DataSolver = [
     match: asyncRes(EVENT.PREVIEW_CLOSE),
     action: res => {
       const closeType = res[EVENT.PREVIEW_CLOSE].type
-      debug('PREVIEW_CLOSE --> ', closeType)
+      log('PREVIEW_CLOSE --> ', closeType)
       switch (closeType) {
         case TYPE.COMMUNITIES_REFRESH: {
           const { pageNumber } = store.pagedCommunitiesData
@@ -372,7 +372,7 @@ const DataSolver = [
           return loadJobs(pageNumber)
         }
         default: {
-          debug('unknow event: ', closeType)
+          log('unknow event: ', closeType)
           /* return loadPosts() */
         }
       }
@@ -418,7 +418,7 @@ const ErrSolver = [
   {
     match: asyncErr(ERR.CRAPHQL),
     action: ({ details }) => {
-      debug('ERR.CRAPHQL -->', details[0].detail)
+      log('ERR.CRAPHQL -->', details[0].detail)
       message.error(details[0].detail)
       cancleLoading()
     },
@@ -426,14 +426,14 @@ const ErrSolver = [
   {
     match: asyncErr(ERR.TIMEOUT),
     action: ({ details }) => {
-      debug('ERR.TIMEOUT -->', details)
+      log('ERR.TIMEOUT -->', details)
       cancleLoading()
     },
   },
   {
     match: asyncErr(ERR.NETWORK),
     action: ({ details }) => {
-      debug('ERR.NETWORK -->', details)
+      log('ERR.NETWORK -->', details)
       cancleLoading()
     },
   },
@@ -448,7 +448,7 @@ export function init(_store) {
 
 export function uninit() {
   if (!sub$) return false
-  debug('===== do uninit')
+  log('===== do uninit')
   sub$.unsubscribe()
   sub$ = null
 }

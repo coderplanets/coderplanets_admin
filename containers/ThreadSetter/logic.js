@@ -1,6 +1,6 @@
 import R from 'ramda'
 
-import { makeDebugger, $solver, asyncRes, closePreviewer, TYPE } from '@utils'
+import { buildLog, $solver, asyncRes, closePreviewer, TYPE } from '@utils'
 import { PAGE_SIZE } from '@config'
 
 import SR71 from 'utils/network/sr71'
@@ -10,7 +10,7 @@ const sr71$ = new SR71()
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:ThreadSetter')
+const log = buildLog('L:ThreadSetter')
 /* eslint-enable no-unused-vars */
 
 let store = null
@@ -50,7 +50,7 @@ const ErrSolver = []
 
 export function init(selectedStore) {
   store = selectedStore
-  debug(store)
+  log(store)
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 

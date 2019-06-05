@@ -3,13 +3,13 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import R from 'ramda'
 import { Tabs } from '..'
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:Tabber:index')
+const log = buildLog('c:Tabber:index')
 /* eslint-enable no-unused-vars */
 
 const { TabPane } = Tabs
@@ -28,7 +28,7 @@ const translator = {
 
 const Tabber = ({ source, onChange }) => {
   const tabitems = R.values(source)
-  //   debug('tabitems: ', tabitems)
+  //   log('tabitems: ', tabitems)
   //   <Tabs onChange={onChange} activeKey={'Js--jobs'}>
   return (
     <Tabs onChange={onChange}>
@@ -41,8 +41,8 @@ const Tabber = ({ source, onChange }) => {
 
 Tabber.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  onChange: PropTypes.func.isRequired,
-  source: PropTypes.array.isRequired,
+  onChange: T.func.isRequired,
+  source: T.array.isRequired,
 }
 
 Tabber.defaultProps = {}

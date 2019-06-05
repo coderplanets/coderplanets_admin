@@ -3,7 +3,7 @@
 import {
   asyncRes,
   asyncErr,
-  makeDebugger,
+  buildLog,
   $solver,
   ERR,
   EVENT,
@@ -19,7 +19,7 @@ const sr71$ = new SR71({
   resv_event: [EVENT.PREVIEW_CLOSE],
 })
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:communitiesBanner')
+const log = buildLog('L:communitiesBanner')
 /* eslint-enable no-unused-vars */
 
 let store = null
@@ -70,7 +70,7 @@ export function onAdd(thread) {
       })
     }
     default: {
-      debug('onAdd default: ', thread)
+      log('onAdd default: ', thread)
       return dispatchEvent(EVENT.NAV_CREATE_COMMUNITY, {
         type: TYPE.PREVIEW_CREATE_COMMUNITY,
       })
@@ -97,7 +97,7 @@ const DataSolver = [
   {
     match: asyncRes('pagedCategories'),
     action: ({ pagedCategories: { totalCount } }) => {
-      debug('get pagedCategories: ', totalCount)
+      log('get pagedCategories: ', totalCount)
       store.markState({ categoriesTotalCount: totalCount })
     },
   },
@@ -126,7 +126,7 @@ const DataSolver = [
           return loadCategories()
         }
         default: {
-          debug('unknow event: ', closeType)
+          log('unknow event: ', closeType)
           /* return loadPosts() */
         }
       }
@@ -138,19 +138,19 @@ const ErrSolver = [
   {
     match: asyncErr(ERR.CRAPHQL),
     action: ({ details }) => {
-      debug('ERR.CRAPHQL -->', details)
+      log('ERR.CRAPHQL -->', details)
     },
   },
   {
     match: asyncErr(ERR.TIMEOUT),
     action: ({ details }) => {
-      debug('ERR.TIMEOUT -->', details)
+      log('ERR.TIMEOUT -->', details)
     },
   },
   {
     match: asyncErr(ERR.NETWORK),
     action: ({ details }) => {
-      debug('ERR.NETWORK -->', details)
+      log('ERR.NETWORK -->', details)
     },
   },
 ]
@@ -165,7 +165,7 @@ export function init(_store) {
 
 export function uninit() {
   if (!sub$) return false
-  debug('===== do uninit')
+  log('===== do uninit')
   sub$.unsubscribe()
   sub$ = null
 }

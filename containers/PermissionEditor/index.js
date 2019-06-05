@@ -10,7 +10,7 @@ import ReactTooltip from 'react-tooltip'
 
 import { UserCell, Button, Space, Icon } from '@components'
 
-import { makeDebugger, storePlug } from '@utils'
+import { buildLog, storePlug } from '@utils'
 import { Wrapper, Divider, ActionBtns } from './styles'
 
 import CommunityList from './CommunityList'
@@ -19,7 +19,7 @@ import PermissionList from './PermissionList'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:PermissionEditor')
+const log = buildLog('C:PermissionEditor')
 /* eslint-enable no-unused-vars */
 
 class PermissionEditorContainer extends React.Component {

@@ -1,7 +1,7 @@
 // import R from 'ramda'
 
 import {
-  makeDebugger,
+  buildLog,
   $solver,
   asyncErr,
   asyncRes,
@@ -17,7 +17,7 @@ const sr71$ = new SR71()
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:ThreadEditor')
+const log = buildLog('L:ThreadEditor')
 /* eslint-enable no-unused-vars */
 
 let store = null
@@ -53,19 +53,19 @@ const ErrSolver = [
   {
     match: asyncErr(ERR.CRAPHQL),
     action: ({ details }) => {
-      debug('ERR.CRAPHQL -->', details)
+      log('ERR.CRAPHQL -->', details)
     },
   },
   {
     match: asyncErr(ERR.TIMEOUT),
     action: ({ details }) => {
-      debug('ERR.TIMEOUT -->', details)
+      log('ERR.TIMEOUT -->', details)
     },
   },
   {
     match: asyncErr(ERR.NETWORK),
     action: ({ details }) => {
-      debug('ERR.NETWORK -->', details)
+      log('ERR.NETWORK -->', details)
     },
   },
 ]
@@ -74,7 +74,7 @@ export function init(_store) {
   if (store) return false
   store = _store
 
-  debug(store)
+  log(store)
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 }

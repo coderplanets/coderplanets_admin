@@ -5,22 +5,22 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import { inject, observer } from 'mobx-react'
 
 // import Link from 'next/link'
 
-import { makeDebugger, storePlug } from '@utils'
+import { buildLog, storePlug } from '@utils'
 import PostViewer from './PostViewer'
 
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:ArticleViwer')
+const log = buildLog('C:ArticleViwer')
 /* eslint-enable no-unused-vars */
 
 const Viwer = ({ type, data, loading, onReaction }) => {
-  // debug('Viwer data: ', data)
+  // log('Viwer data: ', data)
   switch (type) {
     case 'post': {
       return (
@@ -64,9 +64,9 @@ class ArticleViwerContainer extends React.Component {
 
 ArticleViwerContainer.propTypes = {
   // https://www.npmjs.com/package/prop-types
-  articleViwer: PropTypes.object.isRequired,
-  type: PropTypes.oneOf(['post', 'tut', 'job']),
-  // onReaction: PropTypes.func.isRequired,
+  articleViwer: T.object.isRequired,
+  type: T.oneOf(['post', 'tut', 'job']),
+  // onReaction: T.func.isRequired,
 }
 
 ArticleViwerContainer.defaultProps = {

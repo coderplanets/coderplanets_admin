@@ -1,6 +1,6 @@
 // import R from 'ramda'
 
-import { makeDebugger, asyncRes, $solver } from '@utils'
+import { buildLog, asyncRes, $solver } from '@utils'
 import SR71 from 'utils/network/sr71'
 
 import S from './schema'
@@ -9,7 +9,7 @@ const sr71$ = new SR71()
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:CommunityBanner')
+const log = buildLog('L:CommunityBanner')
 /* eslint-enable no-unused-vars */
 
 let store = null

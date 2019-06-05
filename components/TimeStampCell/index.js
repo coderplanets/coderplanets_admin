@@ -5,14 +5,14 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import TimeAgo from 'timeago-react'
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 import { Wrapper, Content, Label, Count } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:TimeStampCell:index')
+const log = buildLog('c:TimeStampCell:index')
 /* eslint-enable no-unused-vars */
 
 const TimeStampCell = ({ data: { insertedAt, updatedAt } }) => (
@@ -33,9 +33,9 @@ const TimeStampCell = ({ data: { insertedAt, updatedAt } }) => (
 )
 
 TimeStampCell.propTypes = {
-  data: PropTypes.shape({
-    insertedAt: PropTypes.string,
-    updatedAt: PropTypes.string,
+  data: T.shape({
+    insertedAt: T.string,
+    updatedAt: T.string,
   }),
 }
 

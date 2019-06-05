@@ -5,12 +5,12 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import styled from 'styled-components'
 
-import { makeDebugger, isEmptyNil } from '@utils'
+import { buildLog, isEmptyNil } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:MaybeCell:index')
+const log = buildLog('c:MaybeCell:index')
 /* eslint-enable no-unused-vars */
 
 export const NoneText = styled.div`
@@ -27,8 +27,8 @@ const MaybeCell = ({ text, align }) => {
 }
 
 MaybeCell.propTypes = {
-  text: PropTypes.string,
-  align: PropTypes.oneOf(['left', 'center', 'right']),
+  text: T.string,
+  align: T.oneOf(['left', 'center', 'right']),
 }
 
 MaybeCell.defaultProps = {

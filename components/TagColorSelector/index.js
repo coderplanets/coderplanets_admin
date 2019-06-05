@@ -5,12 +5,12 @@
  */
 
 import React from 'react'
-import PropTypes from 'prop-types'
+import T from 'prop-types'
 import R from 'ramda'
 
 import { TAG_COLORS } from '@config'
 
-import { uid, makeDebugger } from '@utils'
+import { uid, buildLog } from '@utils'
 import {
   FormItemWrapper,
   FormLable,
@@ -21,7 +21,7 @@ import {
 } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:TagColorSelector:index')
+const log = buildLog('c:TagColorSelector:index')
 /* eslint-enable no-unused-vars */
 
 const TagColorSelector = ({ label, value, onChange, note }) => (
@@ -40,14 +40,14 @@ const TagColorSelector = ({ label, value, onChange, note }) => (
 )
 
 TagColorSelector.propTypes = {
-  onChange: PropTypes.func,
-  label: PropTypes.string,
-  value: PropTypes.string,
-  note: PropTypes.string,
+  onChange: T.func,
+  label: T.string,
+  value: T.string,
+  note: T.string,
 }
 
 TagColorSelector.defaultProps = {
-  onChange: debug,
+  onChange: log,
   value: '',
   label: '',
   note: '',

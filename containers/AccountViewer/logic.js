@@ -2,7 +2,7 @@
 import {
   asyncRes,
   asyncErr,
-  makeDebugger,
+  buildLog,
   $solver,
   ERR,
   dispatchEvent,
@@ -15,7 +15,7 @@ import SR71 from 'utils/network/sr71'
 import S from './schema'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:AccountViewer')
+const log = buildLog('L:AccountViewer')
 /* eslint-enable no-unused-vars */
 
 const sr71$ = new SR71({
@@ -77,21 +77,21 @@ const ErrSolver = [
   {
     match: asyncErr(ERR.CRAPHQL),
     action: ({ details }) => {
-      debug('ERR.CRAPHQL -->', details)
+      log('ERR.CRAPHQL -->', details)
       markLoading(false)
     },
   },
   {
     match: asyncErr(ERR.TIMEOUT),
     action: ({ details }) => {
-      debug('ERR.TIMEOUT -->', details)
+      log('ERR.TIMEOUT -->', details)
       markLoading(false)
     },
   },
   {
     match: asyncErr(ERR.NETWORK),
     action: ({ details }) => {
-      debug('ERR.NETWORK -->', details)
+      log('ERR.NETWORK -->', details)
       markLoading(false)
     },
   },
@@ -113,7 +113,7 @@ export function init(_store, user) {
 
 export function uninit() {
   if (store.loading || !sub$) return false
-  debug('===== do uninit')
+  log('===== do uninit')
   sub$.unsubscribe()
   sub$ = null
 }

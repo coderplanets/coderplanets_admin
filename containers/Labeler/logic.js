@@ -1,6 +1,6 @@
 import R from 'ramda'
 
-import { makeDebugger, $solver, asyncRes } from '@utils'
+import { buildLog, $solver, asyncRes } from '@utils'
 import SR71 from 'utils/network/sr71'
 
 import S from './schema'
@@ -9,7 +9,7 @@ const sr71$ = new SR71()
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:Labeler')
+const log = buildLog('L:Labeler')
 /* eslint-enable no-unused-vars */
 
 let store = null
@@ -42,7 +42,7 @@ export function init(_store) {
   if (store) return false
   store = _store
 
-  debug(store)
+  log(store)
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 }
