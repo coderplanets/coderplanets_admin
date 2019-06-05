@@ -15,7 +15,7 @@ import {
 } from '@utils'
 import cmds from './helper/defaultSuggestion'
 
-// const debug = makeDebugger('S:DoraemonStore')
+// const debug = buildLog('S:DoraemonStore')
 
 const convertThreadsToMaps = com => {
   const { title, desc, logo, raw } = com

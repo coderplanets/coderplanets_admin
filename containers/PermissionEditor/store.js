@@ -8,9 +8,9 @@ import { types as t, getParent } from 'mobx-state-tree'
 
 import { PagedCommunities } from 'stores/SharedModel'
 
-import { markStates, makeDebugger, stripMobx } from '@utils'
+import { markStates, buildLog, stripMobx } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('S:PermissionEditorStore')
+const debug = buildLog('S:PermissionEditorStore')
 /* eslint-enable no-unused-vars */
 
 const CmsRules = t.model('CmsRules', {

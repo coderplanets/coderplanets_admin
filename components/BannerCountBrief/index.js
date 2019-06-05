@@ -7,7 +7,7 @@
 import React from 'react'
 import T from 'prop-types'
 
-import { makeDebugger, toPercentNum } from '@utils'
+import { buildLog, toPercentNum } from '@utils'
 
 import {
   Result,
@@ -18,7 +18,7 @@ import {
 } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:BannerCountBrief:index')
+const debug = buildLog('c:BannerCountBrief:index')
 /* eslint-enable no-unused-vars */
 
 const CountBrief = ({ filteredCount, totalCount, thread, unit }) => {

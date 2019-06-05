@@ -12,7 +12,7 @@ import * as logic from './logic'
 import { EditorBar, InputBar, PrefixWraper } from './styles/input_editor'
 
 import InputPrefix from './InputPrefix'
-// const debug = makeDebugger('C:Doraemon:InputEditor')
+// const debug = buildLog('C:Doraemon:InputEditor')
 
 export default class InputEditor extends React.Component {
   /* eslint-disable class-methods-use-this */

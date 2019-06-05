@@ -8,7 +8,7 @@ import React from 'react'
 import T from 'prop-types'
 import { Table, Button } from 'antd'
 
-import { makeDebugger, Trans } from '@utils'
+import { buildLog, Trans } from '@utils'
 import Pagi from '../Pagi'
 import { TableLoading } from '../LoadingEffects'
 import { Space } from '../BaseStyled'
@@ -16,7 +16,7 @@ import { Space } from '../BaseStyled'
 import { OperationWrapper } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:ThreadsTable:index')
+const debug = buildLog('c:ThreadsTable:index')
 /* eslint-enable no-unused-vars */
 
 class ThreadsTable extends React.PureComponent {

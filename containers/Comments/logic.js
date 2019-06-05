@@ -2,7 +2,7 @@ import R from 'ramda'
 import {
   asyncRes,
   asyncErr,
-  makeDebugger,
+  buildLog,
   EVENT,
   ERR,
   TYPE,
@@ -21,7 +21,7 @@ const sr71$ = new SR71()
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:Comments')
+const debug = buildLog('L:Comments')
 /* eslint-enable no-unused-vars */
 
 let store = null

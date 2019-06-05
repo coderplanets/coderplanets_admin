@@ -9,7 +9,7 @@ import { inject, observer } from 'mobx-react'
 
 // import Link from 'next/link'
 
-import { makeDebugger, storePlug, ROUTE } from '@utils'
+import { buildLog, storePlug, ROUTE } from '@utils'
 import CommunityBanner from '../CommunityBanner'
 import CommunitiesBanner from '../CommunitiesBanner'
 import UsersBanner from '../UsersBanner'
@@ -17,7 +17,7 @@ import UsersBanner from '../UsersBanner'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:Banner')
+const debug = buildLog('C:Banner')
 /* eslint-enable no-unused-vars */
 
 const DomainBanner = ({ curRoute }) => {

@@ -8,11 +8,11 @@ import React from 'react'
 import T from 'prop-types'
 
 import { ASSETS_ENDPOINT } from '@config'
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 import { FileUploaderWrapper, InputFile } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:FileUploader')
+const debug = buildLog('C:FileUploader')
 /* eslint-enable no-unused-vars */
 
 const getFullDir = (dir, nestDir) => {

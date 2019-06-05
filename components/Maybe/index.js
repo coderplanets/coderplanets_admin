@@ -8,9 +8,9 @@ import React from 'react'
 import T from 'prop-types'
 import R from 'ramda'
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:Maybe:index')
+const debug = buildLog('c:Maybe:index')
 /* eslint-enable no-unused-vars */
 
 const MaybeLoading = ({ loading }) => {

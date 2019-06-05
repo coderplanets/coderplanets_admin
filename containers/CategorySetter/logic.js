@@ -1,6 +1,6 @@
 import R from 'ramda'
 
-import { makeDebugger, $solver, TYPE, asyncRes, closePreviewer } from '@utils'
+import { buildLog, $solver, TYPE, asyncRes, closePreviewer } from '@utils'
 import { PAGE_SIZE } from '@config'
 
 import SR71 from 'utils/network/sr71'
@@ -10,7 +10,7 @@ const sr71$ = new SR71()
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:CategorySetter')
+const debug = buildLog('L:CategorySetter')
 /* eslint-enable no-unused-vars */
 
 let store = null

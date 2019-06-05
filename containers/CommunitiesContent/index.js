@@ -9,7 +9,7 @@ import { inject, observer } from 'mobx-react'
 // import Link from 'next/link'
 /* import { withRouter } from 'next/router' */
 
-import { makeDebugger, storePlug, ROUTE } from '@utils'
+import { buildLog, storePlug, ROUTE } from '@utils'
 
 import IndexContent from './IndexContent'
 import PostsContent from './PostsContent'
@@ -24,7 +24,7 @@ import { Wrapper } from './styles'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:CommunitiesContent')
+const debug = buildLog('C:CommunitiesContent')
 /* eslint-enable no-unused-vars */
 
 const renderChildContent = (curRoute, store, restProps) => {

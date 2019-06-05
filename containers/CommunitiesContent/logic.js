@@ -7,7 +7,7 @@ import {
   asyncErr,
   $solver,
   ERR,
-  makeDebugger,
+  buildLog,
   EVENT,
   TYPE,
   THREAD,
@@ -31,7 +31,7 @@ const sr71$ = new SR71({
 })
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:CommunitiesContent')
+const debug = buildLog('L:CommunitiesContent')
 /* eslint-enable no-unused-vars */
 
 let sub$ = null

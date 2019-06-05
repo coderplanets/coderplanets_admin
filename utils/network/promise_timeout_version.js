@@ -2,7 +2,7 @@
 import { timeout } from 'promise-timeout'
 import fetch from 'isomorphic-fetch'
 
-import { makeDebugger } from '../'
+import { buildLog } from '../'
 import {
   client,
   context,
@@ -13,7 +13,7 @@ import {
 
 import { getThenHandler, getCatchHandler, formatGraphErrors } from './handler'
 
-const debug = makeDebugger('Network')
+const debug = buildLog('Network')
 
 const query = query =>
   timeout(

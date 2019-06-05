@@ -4,10 +4,10 @@ import R from 'ramda'
 
 import { Observable } from 'rxjs/Observable'
 
-import { makeDebugger, notEmpty } from '@utils'
+import { buildLog, notEmpty } from '@utils'
 import { TIMEOUT_THRESHOLD, GRAPHQL_TIMEOUT } from './setup'
 
-const debug = makeDebugger('Network')
+const debug = buildLog('Network')
 
 export const TimoutObservable = Observable.of({
   error: 'TimeoutError',

@@ -3,7 +3,7 @@ import Router from 'next/router'
 
 import SR71 from 'utils/network/sr71'
 import {
-  makeDebugger,
+  buildLog,
   Global,
   dispatchEvent,
   asyncRes,
@@ -22,7 +22,7 @@ import Pockect from './Pockect'
 import { SwissArmyKnife } from './helper/swissArmyKnife'
 import githubLoginHandler from './oauth/github_handler'
 
-const debug = makeDebugger('L:Doraemon')
+const debug = buildLog('L:Doraemon')
 const sr71$ = new SR71()
 
 let sub$ = null

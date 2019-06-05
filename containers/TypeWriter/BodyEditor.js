@@ -12,7 +12,7 @@ import Editor from 'draft-js-plugins-editor'
 import createMentionPlugin from 'draft-js-mention-plugin'
 // import createLinkifyPlugin from 'draft-js-linkify-plugin'
 
-import { EVENT, makeDebugger } from '@utils'
+import { EVENT, buildLog } from '@utils'
 import toRawString from './exportContent'
 import { Wrapper } from './styles/body_editor'
 
@@ -32,7 +32,7 @@ const mentionThemeClass = {
 }
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:BodyEditor')
+const debug = buildLog('C:BodyEditor')
 /* eslint-enable no-unused-vars */
 
 const mentionFilter = (value, mentions) =>

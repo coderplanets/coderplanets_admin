@@ -11,7 +11,7 @@ import ReactTooltip from 'react-tooltip'
 
 import { ThemeSelector, UserBrief, Maybe } from '@components'
 
-import { makeDebugger, storePlug } from '@utils'
+import { buildLog, storePlug } from '@utils'
 import SiteSocial from './SiteSocial'
 import Planets from './Planets'
 import ContributeMap from './ContributeMap'
@@ -21,7 +21,7 @@ import { AccountWrapper, AccountContent, ThemeWrapper, Divider } from './styles'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:AccountViewer')
+const debug = buildLog('C:AccountViewer')
 /* eslint-enable no-unused-vars */
 
 const ThemeSection = ({ curTheme }) => (

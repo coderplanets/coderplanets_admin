@@ -8,7 +8,7 @@ import React from 'react'
 // import T from 'prop-types'
 import { inject, observer } from 'mobx-react'
 
-import { makeDebugger, storePlug } from '@utils'
+import { buildLog, storePlug } from '@utils'
 import Editor from './Editor'
 import Preview from './Preview'
 import MarkDownHelper from './MarkDownHelper'
@@ -20,7 +20,7 @@ import { Wrapper, ViewerWrapper } from './styles'
 import { init, uninit, changeView } from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:TypeWriter')
+const debug = buildLog('C:TypeWriter')
 /* eslint-enable no-unused-vars */
 
 const View = ({ curView, thread, cpType, title, body, linkAddr }) => {

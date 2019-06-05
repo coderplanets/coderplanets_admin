@@ -1,7 +1,7 @@
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:BodyLayout')
+const debug = buildLog('L:BodyLayout')
 /* eslint-enable no-unused-vars */
 
 let bodylayout = null

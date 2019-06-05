@@ -10,9 +10,9 @@ import ReactJson from 'react-json-view'
 
 /* import T from 'prop-types' */
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:StateTree:index')
+const debug = buildLog('c:StateTree:index')
 /* eslint-enable no-unused-vars */
 
 /* apathy flat ocean tube */

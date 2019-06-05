@@ -7,9 +7,9 @@ import T from 'prop-types'
 import R from 'ramda'
 import { Tabs } from '..'
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:Tabber:index')
+const debug = buildLog('c:Tabber:index')
 /* eslint-enable no-unused-vars */
 
 const { TabPane } = Tabs

@@ -17,13 +17,13 @@ import {
   /* FormSelector, */
   /* TagColorSelector, */
 } from '@components'
-import { makeDebugger, storePlug } from '@utils'
+import { buildLog, storePlug } from '@utils'
 
 import { Wrapper, ActionBtns, Divider } from './styles'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:CategoryEditor')
+const debug = buildLog('C:CategoryEditor')
 /* eslint-enable no-unused-vars */
 
 class CategoryEditorContainer extends React.Component {

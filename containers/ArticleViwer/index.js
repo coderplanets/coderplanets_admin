@@ -10,13 +10,13 @@ import { inject, observer } from 'mobx-react'
 
 // import Link from 'next/link'
 
-import { makeDebugger, storePlug } from '@utils'
+import { buildLog, storePlug } from '@utils'
 import PostViewer from './PostViewer'
 
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:ArticleViwer')
+const debug = buildLog('C:ArticleViwer')
 /* eslint-enable no-unused-vars */
 
 const Viwer = ({ type, data, loading, onReaction }) => {

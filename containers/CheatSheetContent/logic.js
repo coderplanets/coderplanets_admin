@@ -1,12 +1,12 @@
 /* import R from 'ramda' */
 
-import { makeDebugger, $solver } from '@utils'
+import { buildLog, $solver } from '@utils'
 import SR71 from 'utils/network/sr71'
 
 const sr71$ = new SR71()
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:CheatSheetContent')
+const debug = buildLog('L:CheatSheetContent')
 /* eslint-enable no-unused-vars */
 
 let cheatSheetContent = null

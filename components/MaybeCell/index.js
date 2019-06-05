@@ -8,9 +8,9 @@ import React from 'react'
 import T from 'prop-types'
 import styled from 'styled-components'
 
-import { makeDebugger, isEmptyNil } from '@utils'
+import { buildLog, isEmptyNil } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:MaybeCell:index')
+const debug = buildLog('c:MaybeCell:index')
 /* eslint-enable no-unused-vars */
 
 export const NoneText = styled.div`

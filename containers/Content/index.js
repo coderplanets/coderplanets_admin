@@ -8,7 +8,7 @@ import React from 'react'
 import { inject, observer } from 'mobx-react'
 
 // import Link from 'next/link'
-import { makeDebugger, storePlug, ROUTE } from '@utils'
+import { buildLog, storePlug, ROUTE } from '@utils'
 import CommunityContent from '../CommunityContent'
 import CommunitiesContent from '../CommunitiesContent'
 import UsersContent from '../UsersContent'
@@ -17,7 +17,7 @@ import UsersContent from '../UsersContent'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:Content')
+const debug = buildLog('C:Content')
 /* eslint-enable no-unused-vars */
 
 const DomainContent = ({ curRoute }) => {

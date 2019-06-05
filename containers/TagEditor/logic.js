@@ -3,7 +3,7 @@ import R from 'ramda'
 import {
   TYPE,
   asyncRes,
-  makeDebugger,
+  buildLog,
   $solver,
   cast,
   closePreviewer,
@@ -19,7 +19,7 @@ const sr71$ = new SR71()
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:TagEditor')
+const debug = buildLog('L:TagEditor')
 /* eslint-enable no-unused-vars */
 
 let store = null

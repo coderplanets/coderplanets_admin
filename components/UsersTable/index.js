@@ -8,7 +8,7 @@ import React from 'react'
 import T from 'prop-types'
 import { Table } from 'antd'
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 
 import Pagi from '@components/Pagi'
 import { TableLoading } from '@components/LoadingEffects'
@@ -23,7 +23,7 @@ import SexCell from '@components/SexCell'
 // import { Wrapper } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:UsersTable:index')
+const debug = buildLog('c:UsersTable:index')
 /* eslint-enable no-unused-vars */
 
 class UsersTable extends React.PureComponent {

@@ -1,7 +1,7 @@
 import {
   asyncRes,
   $solver,
-  makeDebugger,
+  buildLog,
   EVENT,
   holdPage,
   TYPE,
@@ -35,7 +35,7 @@ const sr71$ = new SR71({
   ],
 })
 
-const debug = makeDebugger('L:Preview')
+const debug = buildLog('L:Preview')
 
 let store = null
 let sub$ = null

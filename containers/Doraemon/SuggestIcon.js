@@ -16,7 +16,7 @@ import {
   DoraemonIcon,
   ThemeDot,
 } from './styles/suggest_icon'
-// const debug = makeDebugger('C:Doraemon:NodeIcon')
+// const debug = buildLog('C:Doraemon:NodeIcon')
 
 const SuggestIcon = ({ round, suggestion: { raw, logo, cmd } }) => {
   /* const lowerRaw = R.toLower(raw) */

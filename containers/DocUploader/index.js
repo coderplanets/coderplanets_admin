@@ -9,13 +9,13 @@ import T from 'prop-types'
 
 import { ASSETS_ENDPOINT } from '@config'
 
-import { makeDebugger, storePlug, uid } from '@utils'
+import { buildLog, storePlug, uid } from '@utils'
 import { Wrapper, InputFile } from './styles'
 
 import { init, onUploadError, getOSSDir, getOSSFileName } from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:DocUploader')
+const debug = buildLog('C:DocUploader')
 /* eslint-enable no-unused-vars */
 
 class DocUploaderContainer extends React.Component {

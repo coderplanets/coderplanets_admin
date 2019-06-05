@@ -8,11 +8,11 @@ import React from 'react'
 import T from 'prop-types'
 
 import { ICON_CMD } from '@config'
-import { uid, makeDebugger } from '@utils'
+import { uid, buildLog } from '@utils'
 import { Wrapper, TagItem, TagDot, TagTitle, AllTagIcon } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:TagList:index')
+const debug = buildLog('c:TagList:index')
 /* eslint-enable no-unused-vars */
 
 const TagList = ({ tags, active, onSelect }) => {

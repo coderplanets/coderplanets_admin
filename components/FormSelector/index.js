@@ -9,12 +9,12 @@ import R from 'ramda'
 import T from 'prop-types'
 import { Select } from 'antd'
 
-import { uid, makeDebugger } from '@utils'
+import { uid, buildLog } from '@utils'
 import FormItem from '../FormItem'
 import { Note } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:FormSelector:index')
+const debug = buildLog('c:FormSelector:index')
 /* eslint-enable no-unused-vars */
 
 const { Option } = Select

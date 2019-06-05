@@ -7,9 +7,9 @@ import { types as t, getParent } from 'mobx-state-tree'
 // import R from 'ramda'
 
 import { PagedCommunities } from 'stores/SharedModel'
-import { markStates, makeDebugger, stripMobx } from '@utils'
+import { markStates, buildLog, stripMobx } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('S:CommunitySetterStore')
+const debug = buildLog('S:CommunitySetterStore')
 /* eslint-enable no-unused-vars */
 
 const CommunitySetterStore = t

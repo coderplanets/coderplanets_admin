@@ -7,11 +7,11 @@
 import React from 'react'
 import T from 'prop-types'
 
-import { makeDebugger, cutFrom } from '@utils'
+import { buildLog, cutFrom } from '@utils'
 import { UserCellWrapper, Avatar, NickName } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:UserCell:index')
+const debug = buildLog('c:UserCell:index')
 /* eslint-enable no-unused-vars */
 
 const UserCell = ({ user, align, left, small }) => (

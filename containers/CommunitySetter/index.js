@@ -10,7 +10,7 @@ import { inject, observer } from 'mobx-react'
 
 import { Pagi } from '@components'
 
-import { uid, makeDebugger, storePlug } from '@utils'
+import { uid, buildLog, storePlug } from '@utils'
 import {
   Wrapper,
   Divider,
@@ -23,7 +23,7 @@ import {
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:CommunitySetter')
+const debug = buildLog('C:CommunitySetter')
 /* eslint-enable no-unused-vars */
 
 const CommunitiesList = ({ thread, source, communities, selectedids }) => (

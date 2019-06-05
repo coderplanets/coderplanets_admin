@@ -8,11 +8,11 @@ import React from 'react'
 import R from 'ramda'
 import T from 'prop-types'
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 import { Wrapper, Icon, TextWrapper, Text, Focus } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:FocusLine:index')
+const debug = buildLog('c:FocusLine:index')
 /* eslint-enable no-unused-vars */
 
 const FocusLine = ({ iconSrc, before, focus, after }) => (

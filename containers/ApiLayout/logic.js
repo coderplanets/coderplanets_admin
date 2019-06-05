@@ -1,9 +1,9 @@
 // import R from 'ramda'
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:ApiLayout')
+const debug = buildLog('L:ApiLayout')
 /* eslint-enable no-unused-vars */
 
 let apiLayout = null

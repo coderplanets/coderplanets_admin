@@ -11,13 +11,13 @@ import { Icon } from 'antd'
 
 import { ICON_CMD } from '@config'
 
-import { uid, makeDebugger, Trans } from '@utils'
+import { uid, buildLog, Trans } from '@utils'
 import AdderCell from '../AdderCell'
 
 import { Wrapper, Thread, DeleteCross, AddIcon } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:ThreadsCell:index')
+const debug = buildLog('c:ThreadsCell:index')
 /* eslint-enable no-unused-vars */
 
 const ThreadsCell = ({ data, source, onDelete, onAdd }) => (

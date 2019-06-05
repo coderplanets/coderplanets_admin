@@ -9,7 +9,7 @@ import Link from 'next/link'
 
 import { DEFAULT_USER_AVATAR } from '@config'
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 import {
   Wrapper,
   AvatarWrapper,
@@ -27,7 +27,7 @@ import DigestView from './DigestView'
 import Operators from './Operators'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:UserBrief')
+const debug = buildLog('c:UserBrief')
 /* eslint-enable no-unused-vars */
 
 class UserBrief extends React.Component {

@@ -10,12 +10,12 @@ import { inject, observer } from 'mobx-react'
 
 // import Link from 'next/link'
 
-import { makeDebugger, storePlug } from '@utils'
+import { buildLog, storePlug } from '@utils'
 import Wrapper from './styles'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:ApiLayout')
+const debug = buildLog('C:ApiLayout')
 /* eslint-enable no-unused-vars */
 
 class ApiLayoutContainer extends React.Component {

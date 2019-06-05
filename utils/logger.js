@@ -21,7 +21,7 @@ if (
   } catch (e) {
     /* eslint-disable no-console */
     console.error('Mastani could not enable debug.')
-    console.error(e)
+    /* console.error(e) */
     /* eslint-enable no-console */
   }
 
@@ -33,13 +33,13 @@ if (
  * Create a namespaced debug function.
  * @param {String} namespace Usually a component name.
  * @example
- * import { makeDebugger } from 'src/lib'
- * const debug = makeDebugger('namespace')
+ * import { buildLog } from 'src/lib'
+ * const log = buildLog('namespace')
  *
  * debug('Some message')
  * @returns {Function}
  */
-export const makeDebugger = namespace => _debug(`${namespace}`)
+export const buildLog = namespace => _debug(`${namespace}`)
 
 /**
  * Default debugger, simple log.
@@ -47,4 +47,4 @@ export const makeDebugger = namespace => _debug(`${namespace}`)
  * import { debug } from 'src/lib'
  * debug('Some message')
  */
-export const debug = makeDebugger('log')
+export const log = buildLog('log')

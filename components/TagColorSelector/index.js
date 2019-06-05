@@ -10,7 +10,7 @@ import R from 'ramda'
 
 import { TAG_COLORS } from '@config'
 
-import { uid, makeDebugger } from '@utils'
+import { uid, buildLog } from '@utils'
 import {
   FormItemWrapper,
   FormLable,
@@ -21,7 +21,7 @@ import {
 } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:TagColorSelector:index')
+const debug = buildLog('c:TagColorSelector:index')
 /* eslint-enable no-unused-vars */
 
 const TagColorSelector = ({ label, value, onChange, note }) => (

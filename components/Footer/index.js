@@ -6,7 +6,7 @@
 
 import React from 'react'
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 import {
   Container,
   BaseInfo,
@@ -19,7 +19,7 @@ import {
   GitSource,
 } from './styles'
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:Footer:index')
+const debug = buildLog('c:Footer:index')
 /* eslint-enable no-unused-vars */
 
 const Footer = () => {

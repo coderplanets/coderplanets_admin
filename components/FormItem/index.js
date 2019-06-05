@@ -7,12 +7,12 @@
 import React from 'react'
 import T from 'prop-types'
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 
 import { FormItemWrapper, FormLable, ChildWrapper } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:FormItem:index')
+const debug = buildLog('c:FormItem:index')
 /* eslint-enable no-unused-vars */
 
 const FormItem = ({ label, children }) => (

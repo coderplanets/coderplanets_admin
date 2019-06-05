@@ -9,7 +9,7 @@ import { inject, observer } from 'mobx-react'
 import R from 'ramda'
 
 import { CommunityMatrix } from '@components'
-import { uid, makeDebugger, storePlug } from '@utils'
+import { uid, buildLog, storePlug } from '@utils'
 import {
   Wrapper,
   Divider,
@@ -23,7 +23,7 @@ import {
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:TagSetter')
+const debug = buildLog('C:TagSetter')
 /* eslint-enable no-unused-vars */
 
 const TagsList = ({ tags, threadId, selectedids }) => (

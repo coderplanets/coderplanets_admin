@@ -8,7 +8,7 @@ import React from 'react'
 import T from 'prop-types'
 import { Table, Button } from 'antd'
 
-import { makeDebugger, TYPE } from '@utils'
+import { buildLog, TYPE } from '@utils'
 import Pagi from '../Pagi'
 import { TableLoading } from '../LoadingEffects'
 import { Space } from '../BaseStyled'
@@ -20,7 +20,7 @@ import TimeStampCell from '../TimeStampCell'
 import { OperationWrapper } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:ReposTable:index')
+const debug = buildLog('c:ReposTable:index')
 /* eslint-enable no-unused-vars */
 
 class ReposTable extends React.PureComponent {

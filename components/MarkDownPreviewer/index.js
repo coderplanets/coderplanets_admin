@@ -13,7 +13,7 @@ import Prism from 'mastani-codehighlight'
 
 import MarkDownStyle from '@containers/ThemeWrapper/MarkDownStyle'
 import { MENTION_USER_ADDR } from '@config'
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 
 import { PreviewerContainer } from './styles'
 
@@ -22,7 +22,7 @@ md.use(mentionsPlugin({ url: MENTION_USER_ADDR }))
 md.use(remarkableemoj)
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:MarkDownPreviewer:index')
+const debug = buildLog('c:MarkDownPreviewer:index')
 /* eslint-enable no-unused-vars */
 
 // TODO: move it to components

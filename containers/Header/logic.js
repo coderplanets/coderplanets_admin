@@ -4,7 +4,7 @@
 import {
   asyncRes,
   asyncErr,
-  makeDebugger,
+  buildLog,
   dispatchEvent,
   EVENT,
   TYPE,
@@ -20,7 +20,7 @@ import SR71 from 'utils/network/sr71'
 import S from './schema'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:Header')
+const debug = buildLog('L:Header')
 /* eslint-enable no-unused-vars */
 
 const sr71$ = new SR71()

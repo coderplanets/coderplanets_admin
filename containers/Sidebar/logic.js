@@ -1,13 +1,13 @@
 import R from 'ramda'
 /* import store from 'store' */
 
-// const debug = makeDebugger('L:sidebar')
+// const debug = buildLog('L:sidebar')
 import {
   asyncRes,
   asyncErr,
   $solver,
   ERR,
-  makeDebugger,
+  buildLog,
   EVENT,
   ROUTE,
   // TYPE,
@@ -26,7 +26,7 @@ let store = null
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:Sidebar')
+const debug = buildLog('L:Sidebar')
 /* eslint-enable no-unused-vars */
 
 export const pin = () => store.markState({ pin: !store.pin })

@@ -9,7 +9,7 @@ import { inject, observer } from 'mobx-react'
 
 // import Link from 'next/link'
 
-import { makeDebugger, storePlug, ROUTE } from '@utils'
+import { buildLog, storePlug, ROUTE } from '@utils'
 import * as logic from './logic'
 
 import IndexBanner from './IndexBanner'
@@ -18,7 +18,7 @@ import PaysBanner from './PaysBanner'
 import { BannerContainer } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:UsersBanner')
+const debug = buildLog('C:UsersBanner')
 /* eslint-enable no-unused-vars */
 
 const renderChildBanner = (curRoute, totalCount, store) => {

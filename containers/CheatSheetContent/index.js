@@ -11,7 +11,7 @@ import randomColor from 'randomcolor'
 import { Row, Col, Divider } from 'antd'
 // import Link from 'next/link'
 
-import { uid, makeDebugger, storePlug } from '@utils'
+import { uid, buildLog, storePlug } from '@utils'
 import { Entry, CheatsheetItem } from './styles'
 
 import * as logic from './logic'
@@ -52,7 +52,7 @@ const cheatsheetData = {
 }
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:CheatSheetContent')
+const debug = buildLog('C:CheatSheetContent')
 /* eslint-enable no-unused-vars */
 
 const Langs = ({ base }) => {

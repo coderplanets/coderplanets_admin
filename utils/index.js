@@ -12,7 +12,7 @@ export {
   C11N,
 } from './constants'
 
-export { makeDebugger } from './debug'
+export { buildLog } from './logger'
 export { default as uid } from './uid'
 /*
  * utils functiosn

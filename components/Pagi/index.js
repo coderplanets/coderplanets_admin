@@ -8,11 +8,11 @@ import React from 'react'
 import { Pagination } from 'antd'
 import T from 'prop-types'
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 import { PagiWrapper, BottomMsg } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:Pagi:index')
+const debug = buildLog('c:Pagi:index')
 /* eslint-enable no-unused-vars */
 
 const hasExtraPage = (totalCount, pageSize) => totalCount > pageSize

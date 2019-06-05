@@ -7,7 +7,7 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 
-import { makeDebugger, storePlug } from '@utils'
+import { buildLog, storePlug } from '@utils'
 import { PageOverlay, PanelContainer } from './styles'
 
 import InputEditor from './InputEditor'
@@ -20,7 +20,7 @@ import UtilsBar from './UtilsBar'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:Doraemon')
+const debug = buildLog('C:Doraemon')
 /* eslint-enable no-unused-vars */
 class DoraemonContainer extends React.Component {
   constructor(props) {

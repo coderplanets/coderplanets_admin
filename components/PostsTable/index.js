@@ -8,7 +8,7 @@ import React from 'react'
 import T from 'prop-types'
 import { Table, Button } from 'antd'
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 import { OperationWrapper } from './styles'
 
 import Pagi from '../Pagi'
@@ -20,7 +20,7 @@ import TagsCell from '../TagsCell'
 import TimeStampCell from '../TimeStampCell'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:PostsTable:index')
+const debug = buildLog('c:PostsTable:index')
 /* eslint-enable no-unused-vars */
 
 class PostsTable extends React.Component {

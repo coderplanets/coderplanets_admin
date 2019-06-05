@@ -11,7 +11,7 @@ import ReactTooltip from 'react-tooltip'
 
 import { ICON_CMD } from '@config'
 
-import { makeDebugger, uid } from '@utils'
+import { buildLog, uid } from '@utils'
 import {
   MatrixWrapper,
   CommunityLogo,
@@ -20,7 +20,7 @@ import {
 } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:CommunityMatrix:index')
+const debug = buildLog('c:CommunityMatrix:index')
 /* eslint-enable no-unused-vars */
 
 const tooltipOffset = JSON.stringify({ top: 5, right: -5 })

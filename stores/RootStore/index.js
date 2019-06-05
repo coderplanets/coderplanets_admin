@@ -4,7 +4,7 @@
  */
 
 import { types as t } from 'mobx-state-tree'
-import { makeDebugger, markStates } from '@utils'
+import { buildLog, markStates } from '@utils'
 
 import CommunitiesStore from '../CommunitiesStore'
 import { ThemeStore, ThemeDefaults } from '../ThemeStore'
@@ -53,7 +53,7 @@ import {
 } from '../index'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('S:rootStore')
+const debug = buildLog('S:rootStore')
 /* eslint-enable no-unused-vars */
 
 const rootStore = t

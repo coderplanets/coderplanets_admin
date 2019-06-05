@@ -8,9 +8,9 @@ import R from 'ramda'
 import Router from 'next/router'
 
 import { PAGE_SIZE } from '@config'
-import { onClient, markStates, makeDebugger, serializeQuery } from '@utils'
+import { onClient, markStates, buildLog, serializeQuery } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('S:RouteStore')
+const debug = buildLog('S:RouteStore')
 /* eslint-enable no-unused-vars */
 
 const Query = t.model('Query', {

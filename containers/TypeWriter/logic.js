@@ -4,7 +4,7 @@ import {
   asyncRes,
   asyncErr,
   $solver,
-  makeDebugger,
+  buildLog,
   isEmptyValue,
   dispatchEvent,
   EVENT,
@@ -19,7 +19,7 @@ import S from './schema'
 const sr71$ = new SR71()
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:TypeWriter')
+const debug = buildLog('L:TypeWriter')
 /* eslint-enable no-unused-vars */
 
 let store = null

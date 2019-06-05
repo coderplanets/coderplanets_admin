@@ -1,6 +1,6 @@
 // import R from 'ramda'
 
-import { makeDebugger, $solver, asyncErr, ERR } from '@utils'
+import { buildLog, $solver, asyncErr, ERR } from '@utils'
 import SR71 from 'utils/network/sr71'
 
 // import S from './schema'
@@ -9,7 +9,7 @@ const sr71$ = new SR71()
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:DocUploader')
+const debug = buildLog('L:DocUploader')
 /* eslint-enable no-unused-vars */
 
 let store = null

@@ -1,5 +1,5 @@
 import {
-  makeDebugger,
+  buildLog,
   asyncRes,
   // asyncErr,
   $solver,
@@ -21,7 +21,7 @@ const sr71$ = new SR71({
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:UsersContent')
+const debug = buildLog('L:UsersContent')
 /* eslint-enable no-unused-vars */
 
 let store = null

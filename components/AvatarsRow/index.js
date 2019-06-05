@@ -11,11 +11,11 @@ import { Tooltip } from 'antd'
 
 import { ATATARS_LIST_LENGTH } from 'config/general'
 
-import { makeDebugger, prettyNum } from '@utils'
+import { buildLog, prettyNum } from '@utils'
 import { Avatars, AvatarsItem, AvatarsImg, AvatarsMore } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:AvatarsRow:index')
+const debug = buildLog('c:AvatarsRow:index')
 /* eslint-enable no-unused-vars */
 
 const validUser = R.compose(

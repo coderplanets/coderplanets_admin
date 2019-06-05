@@ -8,7 +8,7 @@ import React from 'react'
 import T from 'prop-types'
 import { Table, Button } from 'antd'
 
-import { makeDebugger, cutFrom, TYPE } from '@utils'
+import { buildLog, cutFrom, TYPE } from '@utils'
 import { OperationWrapper } from './styles'
 
 import Pagi from '../Pagi'
@@ -20,7 +20,7 @@ import TagsCell from '../TagsCell'
 import TimeStampCell from '../TimeStampCell'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:VideosTable:index')
+const debug = buildLog('c:VideosTable:index')
 /* eslint-enable no-unused-vars */
 
 class VideosTable extends React.Component {

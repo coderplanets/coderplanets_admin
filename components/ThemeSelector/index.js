@@ -7,12 +7,12 @@
 import React from 'react'
 import T from 'prop-types'
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 import DotSelector from './DotSelector'
 import CardSelector from './CardSelector'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:ThemeSelector:index')
+const debug = buildLog('c:ThemeSelector:index')
 /* eslint-enable no-unused-vars */
 
 const ThemeSelector = ({ displayStyle, curTheme, changeTheme }) => {

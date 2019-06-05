@@ -7,11 +7,11 @@
 import React from 'react'
 import T from 'prop-types'
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 import { Wrapper, Content, Label, Count } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:ContentsCountCell:index')
+const debug = buildLog('c:ContentsCountCell:index')
 /* eslint-enable no-unused-vars */
 
 const ContentsCountCell = ({

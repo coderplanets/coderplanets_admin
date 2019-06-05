@@ -9,14 +9,14 @@ import { inject, observer } from 'mobx-react'
 
 // import Link from 'next/link'
 
-import { makeDebugger, storePlug, ROUTE } from '@utils'
+import { buildLog, storePlug, ROUTE } from '@utils'
 import * as logic from './logic'
 
 import { Wrapper } from './styles'
 import IndexContent from './IndexContent'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:UsersContent')
+const debug = buildLog('C:UsersContent')
 /* eslint-enable no-unused-vars */
 
 const renderChildBanner = (route, store, restProps) => {

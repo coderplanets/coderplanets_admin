@@ -2,7 +2,7 @@
 import {
   asyncRes,
   asyncErr,
-  makeDebugger,
+  buildLog,
   $solver,
   ERR,
   dispatchEvent,
@@ -15,7 +15,7 @@ import SR71 from 'utils/network/sr71'
 import S from './schema'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:AccountViewer')
+const debug = buildLog('L:AccountViewer')
 /* eslint-enable no-unused-vars */
 
 const sr71$ = new SR71({

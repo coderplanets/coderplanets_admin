@@ -12,7 +12,7 @@ import {
   merge,
 } from 'rxjs/operators'
 
-import { makeDebugger, isEmptyValue, EVENT } from '@utils'
+import { buildLog, isEmptyValue, EVENT } from '@utils'
 import {
   searchablePrefix,
   startWithSpecialPrefix,
@@ -21,7 +21,7 @@ import {
 } from './helper/advisor'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:Doraemon:pocket')
+const debug = buildLog('L:Doraemon:pocket')
 /* eslint-enable no-unused-vars */
 
 export default class Pockect {

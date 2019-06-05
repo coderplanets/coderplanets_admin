@@ -7,12 +7,12 @@
 import React from 'react'
 import T from 'prop-types'
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 import { ICON_CMD } from '@config'
 import { Mask, Wrapper, CloseBtn, ChildrenWrapper } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:Modal:index')
+const debug = buildLog('c:Modal:index')
 /* eslint-enable no-unused-vars */
 
 const Modal = ({ children, show, width, showCloseBtn, onClose }) => (

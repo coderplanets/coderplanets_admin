@@ -9,7 +9,7 @@ import T from 'prop-types'
 
 import { Icon } from 'antd'
 
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 import {
   Wrapper,
   Msg,
@@ -19,7 +19,7 @@ import {
 } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:StatusBox:index')
+const debug = buildLog('c:StatusBox:index')
 /* eslint-enable no-unused-vars */
 
 function getDefaultMsg(success, error) {

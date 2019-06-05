@@ -3,7 +3,7 @@
 import {
   asyncRes,
   asyncErr,
-  makeDebugger,
+  buildLog,
   $solver,
   ERR,
   EVENT,
@@ -19,7 +19,7 @@ const sr71$ = new SR71({
   resv_event: [EVENT.PREVIEW_CLOSE],
 })
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:communitiesBanner')
+const debug = buildLog('L:communitiesBanner')
 /* eslint-enable no-unused-vars */
 
 let store = null

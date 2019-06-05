@@ -8,11 +8,11 @@ import React from 'react'
 import T from 'prop-types'
 
 import { ICON_CMD } from '@config'
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 import { DudeIcon, GirlIcon } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:SexCell:index')
+const debug = buildLog('c:SexCell:index')
 /* eslint-enable no-unused-vars */
 
 const SexCell = ({ sex }) => {

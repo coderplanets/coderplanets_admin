@@ -11,7 +11,7 @@ import ReactTooltip from 'react-tooltip'
 
 import { ICON_CMD } from '@config'
 
-import { uid, makeDebugger } from '@utils'
+import { uid, buildLog } from '@utils'
 import AdderCell from '../AdderCell'
 import CommunitiesLogoList from './CommunitiesLogoList'
 
@@ -26,7 +26,7 @@ import {
 } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:CommunityCell:index')
+const debug = buildLog('c:CommunityCell:index')
 /* eslint-enable no-unused-vars */
 
 const SingleCommunity = ({ community }) => (

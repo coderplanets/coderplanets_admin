@@ -1,7 +1,7 @@
 // import R from 'ramda'
 
 import {
-  makeDebugger,
+  buildLog,
   getMainPath,
   getSubPath,
   onClient,
@@ -10,7 +10,7 @@ import {
 } from '@utils'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:Route')
+const debug = buildLog('L:Route')
 /* eslint-enable no-unused-vars */
 let store = null
 

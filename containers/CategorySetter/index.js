@@ -8,13 +8,13 @@ import React from 'react'
 import { inject, observer } from 'mobx-react'
 import R from 'ramda'
 
-import { uid, makeDebugger, storePlug } from '@utils'
+import { uid, buildLog, storePlug } from '@utils'
 import { Wrapper, Divider, CategoryWrapper, CategoryTag } from './styles'
 
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:CategorySetter')
+const debug = buildLog('C:CategorySetter')
 /* eslint-enable no-unused-vars */
 
 const CategoriesList = ({ communityId, categories, selectedids }) => (

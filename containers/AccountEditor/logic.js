@@ -3,7 +3,7 @@ import R from 'ramda'
 import {
   asyncRes,
   asyncErr,
-  makeDebugger,
+  buildLog,
   $solver,
   dispatchEvent,
   EVENT,
@@ -17,7 +17,7 @@ import S from './schema'
 const sr71$ = new SR71()
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:AccountEditor')
+const debug = buildLog('L:AccountEditor')
 /* eslint-enable no-unused-vars */
 
 let store = null

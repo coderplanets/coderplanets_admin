@@ -8,7 +8,7 @@ import React from 'react'
 import R from 'ramda'
 import T from 'prop-types'
 
-import { uid, makeDebugger, isEmptyNil, isObject, objToArray } from '@utils'
+import { uid, buildLog, isEmptyNil, isObject, objToArray } from '@utils'
 import AdderCell from '../AdderCell'
 
 import {
@@ -22,7 +22,7 @@ import {
 } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:PermissionCell:index')
+const debug = buildLog('c:PermissionCell:index')
 /* eslint-enable no-unused-vars */
 
 const valueIsObj = v => isObject(v)

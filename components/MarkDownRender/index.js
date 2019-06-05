@@ -14,7 +14,7 @@ import Prism from 'mastani-codehighlight'
 
 import MarkDownStyle from '@containers/ThemeWrapper/MarkDownStyle'
 import { MENTION_USER_ADDR } from '@config'
-import { makeDebugger } from '@utils'
+import { buildLog } from '@utils'
 import { PreviewerContainer } from './styles'
 
 const md = new Remarkable('full', {
@@ -25,7 +25,7 @@ md.use(mentionsPlugin({ url: MENTION_USER_ADDR }))
 md.use(remarkableemoj)
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('c:MarkDownRender:index')
+const debug = buildLog('c:MarkDownRender:index')
 /* eslint-enable no-unused-vars */
 
 class MarkDownRender extends React.Component {

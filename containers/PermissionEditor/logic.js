@@ -1,7 +1,7 @@
 import R from 'ramda'
 
 import {
-  makeDebugger,
+  buildLog,
   $solver,
   asyncRes,
   mapKey,
@@ -21,7 +21,7 @@ const sr71$ = new SR71({
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('L:PermissionEditor')
+const debug = buildLog('L:PermissionEditor')
 /* eslint-enable no-unused-vars */
 
 let store = null

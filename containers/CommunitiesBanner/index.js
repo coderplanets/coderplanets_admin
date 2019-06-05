@@ -1,7 +1,7 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 
-import { storePlug, makeDebugger, ROUTE, stripMobx } from '@utils'
+import { storePlug, buildLog, ROUTE, stripMobx } from '@utils'
 
 import * as logic from './logic'
 
@@ -19,7 +19,7 @@ import VideosBanner from './VideosBanner'
 import { BannerContainer } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = makeDebugger('C:CommunitiesBanner')
+const debug = buildLog('C:CommunitiesBanner')
 /* eslint-enable no-unused-vars */
 
 const ChildBanner = ({

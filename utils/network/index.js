@@ -1,13 +1,13 @@
 import fetch from 'isomorphic-fetch'
 import { from } from 'rxjs'
 
-/* import { makeDebugger } from '@utils' */
+/* import { buildLog } from '@utils' */
 import { client, context } from './setup'
 
 import { getThenHandler, getCatchHandler, formatGraphErrors } from './handler'
 
 /* eslint-disable no-unused-vars */
-/* const debug = makeDebugger('Network') */
+/* const debug = buildLog('Network') */
 /* eslint-enable no-unused-vars */
 
 const doQuery = (query, variables) =>
