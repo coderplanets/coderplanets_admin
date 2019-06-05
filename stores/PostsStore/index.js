@@ -9,7 +9,7 @@ import { types as t, getParent } from 'mobx-state-tree'
 import { markStates, buildLog, stripMobx } from '@utils'
 import { User } from '@model'
 /* eslint-disable no-unused-vars */
-const debug = buildLog('S:PostsStore')
+const log = buildLog('S:PostsStore')
 /* eslint-enable no-unused-vars */
 
 const posts = [
@@ -175,7 +175,7 @@ const PostsStore = t
       //      R.forEachObjIndexed((v, k) => {
       //      self.all.set(k, v)
       //      }, fakeData)
-      // debug('after: ', self.all.toJSON())
+      // log('after: ', self.all.toJSON())
     },
 
     markState(sobj) {

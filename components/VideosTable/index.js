@@ -20,7 +20,7 @@ import TagsCell from '../TagsCell'
 import TimeStampCell from '../TimeStampCell'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:VideosTable:index')
+const log = buildLog('c:VideosTable:index')
 /* eslint-enable no-unused-vars */
 
 class VideosTable extends React.Component {
@@ -197,13 +197,13 @@ VideosTable.propTypes = {
 
 VideosTable.defaultProps = {
   loading: false,
-  pageOnChange: debug,
-  setCommunity: debug,
-  unsetCommunity: debug,
-  unsetTag: debug,
-  setTag: debug,
-  onEdit: debug,
-  onDelete: debug,
+  pageOnChange: log,
+  setCommunity: log,
+  unsetCommunity: log,
+  unsetTag: log,
+  setTag: log,
+  onEdit: log,
+  onDelete: log,
 }
 
 export default React.memo(VideosTable)

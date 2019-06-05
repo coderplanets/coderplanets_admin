@@ -20,7 +20,7 @@ import { Wrapper, ViewerWrapper } from './styles'
 import { init, uninit, changeView } from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:TypeWriter')
+const log = buildLog('C:TypeWriter')
 /* eslint-enable no-unused-vars */
 
 const View = ({ curView, thread, cpType, title, body, linkAddr }) => {
@@ -58,7 +58,7 @@ class TypeWriterContainer extends React.Component {
   }
 
   componentWillUnmount() {
-    debug('TODO: store state to localstarange')
+    log('TODO: store state to localstarange')
     // Message.success('草稿已经保存')
     uninit()
   }

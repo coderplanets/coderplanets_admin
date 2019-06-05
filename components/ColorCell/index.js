@@ -11,7 +11,7 @@ import { buildLog } from '@utils'
 
 import { ColorCell, ColorDot /* ColorTitle */ } from './styles'
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:ColorCell:index')
+const log = buildLog('c:ColorCell:index')
 /* eslint-enable no-unused-vars */
 
 const ColorCellComponent = ({ color }) => {

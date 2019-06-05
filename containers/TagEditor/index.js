@@ -25,7 +25,7 @@ import { Wrapper, ActionBtns, Divider } from './styles'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:TagEditor')
+const log = buildLog('C:TagEditor')
 /* eslint-enable no-unused-vars */
 
 class TagEditorContainer extends React.Component {

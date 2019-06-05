@@ -21,7 +21,7 @@ import {
 } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:ContentFilter:index')
+const log = buildLog('c:ContentFilter:index')
 /* eslint-enable no-unused-vars */
 
 const filterDict = {

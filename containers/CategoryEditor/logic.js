@@ -8,7 +8,7 @@ const sr71$ = new SR71()
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('L:CategoryEditor')
+const log = buildLog('L:CategoryEditor')
 /* eslint-enable no-unused-vars */
 
 let store = null

@@ -17,7 +17,7 @@ import { Sidebar, Banner, Footer, BannerTitle, BannerLogo } from './styles'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:Sidebar:index')
+const log = buildLog('C:Sidebar:index')
 /* eslint-enable no-unused-vars */
 
 class SidebarContainer extends React.Component {

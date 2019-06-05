@@ -23,7 +23,7 @@ import SubscribersBanner from './SubscribersBanner'
 import { BannerContainer } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:CommunityBanner')
+const log = buildLog('C:CommunityBanner')
 /* eslint-enable no-unused-vars */
 
 const ChildBanner = ({

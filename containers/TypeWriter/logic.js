@@ -19,7 +19,7 @@ import S from './schema'
 const sr71$ = new SR71()
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('L:TypeWriter')
+const log = buildLog('L:TypeWriter')
 /* eslint-enable no-unused-vars */
 
 let store = null
@@ -47,7 +47,7 @@ function checkValid() {
 }
 
 export function onUploadImageDone(url) {
-  debug('onUploadImageDone: ', url)
+  log('onUploadImageDone: ', url)
   dispatchEvent(EVENT.DRAFT_INSERT_SNIPPET, {
     type: 'Image',
     data: `![](${url})`,
@@ -75,7 +75,7 @@ const getDigest = body => {
 }
 // TODO move specfical logic outof here
 export function onPublish() {
-  // debug('onPublish: ', store.body)
+  // log('onPublish: ', store.body)
   const { body, title, cpType } = store
   if (checkValid()) {
     publishing()
@@ -92,7 +92,7 @@ export function onPublish() {
     }
 
     if (cpType !== 'original') variables.linkAddr = store.linkAddr
-    // debug('variables-: ', variables)
+    // log('variables-: ', variables)
     // TODO: switch createJob
     sr71$.mutate(S.createPost, variables)
   }
@@ -105,7 +105,7 @@ export const canclePublish = () => {
 }
 
 export function bodyOnChange(body) {
-  // debug('editorOnChange: ', body)
+  // log('editorOnChange: ', body)
   store.markState({ body })
 }
 
@@ -174,7 +174,7 @@ const ErrSolver = [
     match: asyncErr(ERR.CRAPHQL),
     action: ({ details }) => {
       const errMsg = details[0].detail
-      debug('ERR.CRAPHQL -->', details)
+      log('ERR.CRAPHQL -->', details)
       meteorState(store, 'error', 5, errMsg)
       cancleLoading()
     },
@@ -182,14 +182,14 @@ const ErrSolver = [
   {
     match: asyncErr(ERR.TIMEOUT),
     action: ({ details }) => {
-      debug('ERR.TIMEOUT -->', details)
+      log('ERR.TIMEOUT -->', details)
       cancleLoading()
     },
   },
   {
     match: asyncErr(ERR.NETWORK),
     action: ({ details }) => {
-      debug('ERR.NETWORK -->', details)
+      log('ERR.NETWORK -->', details)
       cancleLoading()
     },
   },

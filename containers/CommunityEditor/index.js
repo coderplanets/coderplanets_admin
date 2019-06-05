@@ -25,7 +25,7 @@ import { Wrapper, Logo, Divider, ActionBtns, ImageWrapper } from './styles'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:CommunityEditor')
+const log = buildLog('C:CommunityEditor')
 /* eslint-enable no-unused-vars */
 
 class CommunityEditorContainer extends React.Component {

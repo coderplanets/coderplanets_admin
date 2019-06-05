@@ -19,7 +19,7 @@ import PermissionList from './PermissionList'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:PermissionEditor')
+const log = buildLog('C:PermissionEditor')
 /* eslint-enable no-unused-vars */
 
 class PermissionEditorContainer extends React.Component {

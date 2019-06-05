@@ -12,7 +12,7 @@ import { ICON_CMD } from '@config'
 import { Mask, Wrapper, CloseBtn, ChildrenWrapper } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:Modal:index')
+const log = buildLog('c:Modal:index')
 /* eslint-enable no-unused-vars */
 
 const Modal = ({ children, show, width, showCloseBtn, onClose }) => (
@@ -41,7 +41,7 @@ Modal.propTypes = {
 
 Modal.defaultProps = {
   show: false,
-  onClose: debug,
+  onClose: log,
   width: '600px',
   showCloseBtn: false,
 }

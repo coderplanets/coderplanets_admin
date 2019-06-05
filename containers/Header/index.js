@@ -37,7 +37,7 @@ import {
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:Header')
+const log = buildLog('C:Header')
 /* eslint-enable no-unused-vars */
 
 const I18Dict = {

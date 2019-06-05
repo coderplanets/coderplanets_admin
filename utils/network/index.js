@@ -7,7 +7,7 @@ import { client, context } from './setup'
 import { getThenHandler, getCatchHandler, formatGraphErrors } from './handler'
 
 /* eslint-disable no-unused-vars */
-/* const debug = buildLog('Network') */
+/* const log = buildLog('Network') */
 /* eslint-enable no-unused-vars */
 
 const doQuery = (query, variables) =>

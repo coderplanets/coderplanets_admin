@@ -22,7 +22,7 @@ md.use(mentionsPlugin({ url: MENTION_USER_ADDR }))
 md.use(remarkableemoj)
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:MarkDownPreviewer:index')
+const log = buildLog('c:MarkDownPreviewer:index')
 /* eslint-enable no-unused-vars */
 
 // TODO: move it to components

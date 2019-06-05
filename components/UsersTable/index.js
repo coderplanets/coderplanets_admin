@@ -23,7 +23,7 @@ import SexCell from '@components/SexCell'
 // import { Wrapper } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:UsersTable:index')
+const log = buildLog('c:UsersTable:index')
 /* eslint-enable no-unused-vars */
 
 class UsersTable extends React.PureComponent {
@@ -151,8 +151,8 @@ UsersTable.propTypes = {
 
 UsersTable.defaultProps = {
   loading: false,
-  pageOnChange: debug,
-  cmsPermisstionOnChange: debug,
+  pageOnChange: log,
+  cmsPermisstionOnChange: log,
 }
 
 export default UsersTable

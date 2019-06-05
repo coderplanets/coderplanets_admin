@@ -19,7 +19,7 @@ import {
   GitSource,
 } from './styles'
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:Footer:index')
+const log = buildLog('c:Footer:index')
 /* eslint-enable no-unused-vars */
 
 const Footer = () => {

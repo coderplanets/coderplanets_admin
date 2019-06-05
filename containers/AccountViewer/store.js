@@ -9,7 +9,7 @@ import { types as t, getParent } from 'mobx-state-tree'
 import { User, EmptyUser } from 'stores/SharedModel'
 import { markStates, buildLog, stripMobx } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = buildLog('S:AccountViewerStore')
+const log = buildLog('S:AccountViewerStore')
 /* eslint-enable no-unused-vars */
 
 const AccountViewerStore = t

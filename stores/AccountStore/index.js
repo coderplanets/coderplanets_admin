@@ -10,7 +10,7 @@ import { markStates, buildLog, stripMobx, BStore } from '@utils'
 import { User, EmptyUser } from '@model'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('S:AccountStore')
+const log = buildLog('S:AccountStore')
 /* eslint-enable no-unused-vars */
 
 const AccountStore = t
@@ -64,8 +64,8 @@ const AccountStore = t
       return self.sessionCleanup()
     },
     setSession(user, token) {
-      // debug('setSession user: ', user)
-      // debug('setSession token: ', token)
+      // log('setSession user: ', user)
+      // log('setSession token: ', token)
 
       BStore.set('user', user)
       BStore.set('token', token)

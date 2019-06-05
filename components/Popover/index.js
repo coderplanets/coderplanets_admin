@@ -12,7 +12,7 @@ import { buildLog } from '@utils'
 import { ContentContainer } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:Popover:index')
+const log = buildLog('c:Popover:index')
 /* eslint-enable no-unused-vars */
 
 const renderContent = content => {

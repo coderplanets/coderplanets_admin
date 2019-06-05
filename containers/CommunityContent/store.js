@@ -20,7 +20,7 @@ import {
 
 import { markStates, buildLog, stripMobx } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = buildLog('S:CommunityContentStore')
+const log = buildLog('S:CommunityContentStore')
 /* eslint-enable no-unused-vars */
 
 const CommunityContentStore = t

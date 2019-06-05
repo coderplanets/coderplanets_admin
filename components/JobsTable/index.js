@@ -20,7 +20,7 @@ import TimeStampCell from '../TimeStampCell'
 import { OperationWrapper } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:JobsTable:index')
+const log = buildLog('c:JobsTable:index')
 /* eslint-enable no-unused-vars */
 
 class JobsTable extends React.PureComponent {
@@ -191,13 +191,13 @@ JobsTable.propTypes = {
 
 JobsTable.defaultProps = {
   loading: false,
-  pageOnChange: debug,
-  setCommunity: debug,
-  unsetCommunity: debug,
-  unsetTag: debug,
-  setTag: debug,
-  onEdit: debug,
-  onDelete: debug,
+  pageOnChange: log,
+  setCommunity: log,
+  unsetCommunity: log,
+  unsetTag: log,
+  setTag: log,
+  onEdit: log,
+  onDelete: log,
 }
 
 export default JobsTable

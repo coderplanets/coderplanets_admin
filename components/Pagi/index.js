@@ -12,7 +12,7 @@ import { buildLog } from '@utils'
 import { PagiWrapper, BottomMsg } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:Pagi:index')
+const log = buildLog('c:Pagi:index')
 /* eslint-enable no-unused-vars */
 
 const hasExtraPage = (totalCount, pageSize) => totalCount > pageSize

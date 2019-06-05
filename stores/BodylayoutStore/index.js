@@ -7,7 +7,7 @@ import { types as t, getParent } from 'mobx-state-tree'
 
 import { buildLog } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = buildLog('S:BodylayoutStore')
+const log = buildLog('S:BodylayoutStore')
 /* eslint-enable no-unused-vars */
 
 const BodylayoutStore = t

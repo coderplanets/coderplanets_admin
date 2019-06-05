@@ -1,7 +1,7 @@
 import R from 'ramda'
 /* import store from 'store' */
 
-// const debug = buildLog('L:sidebar')
+// const log = buildLog('L:sidebar')
 import {
   asyncRes,
   asyncErr,
@@ -26,7 +26,7 @@ let store = null
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('L:Sidebar')
+const log = buildLog('L:Sidebar')
 /* eslint-enable no-unused-vars */
 
 export const pin = () => store.markState({ pin: !store.pin })
@@ -109,19 +109,19 @@ const ErrSolver = [
   {
     match: asyncErr(ERR.CRAPHQL),
     action: ({ details }) => {
-      debug('ERR.CRAPHQL -->', details)
+      log('ERR.CRAPHQL -->', details)
     },
   },
   {
     match: asyncErr(ERR.TIMEOUT),
     action: ({ details }) => {
-      debug('ERR.TIMEOUT -->', details)
+      log('ERR.TIMEOUT -->', details)
     },
   },
   {
     match: asyncErr(ERR.NETWORK),
     action: ({ details }) => {
-      debug('ERR.NETWORK -->', details)
+      log('ERR.NETWORK -->', details)
     },
   },
 ]
@@ -137,7 +137,7 @@ export function init(selectedStore) {
 export function uninit() {
   if (!sub$) return false
 
-  debug('===== do uninit')
+  log('===== do uninit')
   sub$.unsubscribe()
   sub$ = null
 }

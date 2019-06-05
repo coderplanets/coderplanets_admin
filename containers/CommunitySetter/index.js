@@ -23,7 +23,7 @@ import {
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:CommunitySetter')
+const log = buildLog('C:CommunitySetter')
 /* eslint-enable no-unused-vars */
 
 const CommunitiesList = ({ thread, source, communities, selectedids }) => (

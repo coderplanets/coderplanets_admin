@@ -25,7 +25,7 @@ class BodyLayoutContainer extends React.Component {
   /* eslint-disable class-methods-use-this */
   @keydown(['ctrl+p'])
   openDoraemon() {
-    // debug('openDoraemon')
+    // log('openDoraemon')
     logic.openDoraemon()
   }
   /* eslint-enable class-methods-use-this */

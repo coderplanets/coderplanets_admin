@@ -10,7 +10,7 @@ const sr71$ = new SR71()
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('L:CategorySetter')
+const log = buildLog('L:CategorySetter')
 /* eslint-enable no-unused-vars */
 
 let store = null

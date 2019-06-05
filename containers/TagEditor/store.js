@@ -9,7 +9,7 @@ import R from 'ramda'
 import { Tag, PagedCommunities } from 'stores/SharedModel'
 import { markStates, buildLog, stripMobx } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = buildLog('S:TagEditorStore')
+const log = buildLog('S:TagEditorStore')
 /* eslint-enable no-unused-vars */
 
 const TagEditorStore = t

@@ -12,7 +12,7 @@ import { buildLog } from '@utils'
 import { FormItemWrapper, FormLable, ChildWrapper } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:FormItem:index')
+const log = buildLog('c:FormItem:index')
 /* eslint-enable no-unused-vars */
 
 const FormItem = ({ label, children }) => (

@@ -27,7 +27,7 @@ import DigestView from './DigestView'
 import Operators from './Operators'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:UserBrief')
+const log = buildLog('c:UserBrief')
 /* eslint-enable no-unused-vars */
 
 class UserBrief extends React.Component {
@@ -112,8 +112,8 @@ UserBrief.defaultProps = {
   showEdit: false,
   displayStyle: 'default',
   viewingType: 'user',
-  onEdit: debug,
-  onLogout: debug,
+  onEdit: log,
+  onLogout: log,
 }
 
 export default UserBrief

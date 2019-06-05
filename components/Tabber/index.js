@@ -9,7 +9,7 @@ import { Tabs } from '..'
 
 import { buildLog } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:Tabber:index')
+const log = buildLog('c:Tabber:index')
 /* eslint-enable no-unused-vars */
 
 const { TabPane } = Tabs
@@ -28,7 +28,7 @@ const translator = {
 
 const Tabber = ({ source, onChange }) => {
   const tabitems = R.values(source)
-  //   debug('tabitems: ', tabitems)
+  //   log('tabitems: ', tabitems)
   //   <Tabs onChange={onChange} activeKey={'Js--jobs'}>
   return (
     <Tabs onChange={onChange}>

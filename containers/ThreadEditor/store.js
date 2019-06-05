@@ -10,7 +10,7 @@ import { Thread } from 'stores/SharedModel'
 
 import { markStates, buildLog, stripMobx } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = buildLog('S:ThreadEditor')
+const log = buildLog('S:ThreadEditor')
 /* eslint-enable no-unused-vars */
 
 const ThreadEditor = t

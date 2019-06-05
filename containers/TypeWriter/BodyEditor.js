@@ -32,7 +32,7 @@ const mentionThemeClass = {
 }
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:BodyEditor')
+const log = buildLog('C:BodyEditor')
 /* eslint-enable no-unused-vars */
 
 const mentionFilter = (value, mentions) =>
@@ -140,7 +140,7 @@ class BodyEditor extends React.Component {
   loadUserSuggestions = propsMentionList => {
     /* eslint-disable react/destructuring-assignment */
     const mentionList = propsMentionList || this.props.mentionList
-    // debug('loadUserSuggestions --->', mentionList)
+    // log('loadUserSuggestions --->', mentionList)
     this.setState({ suggestions: mentionList, mentionList })
     /* eslint-enable react/destructuring-assignment */
   }
@@ -210,9 +210,9 @@ BodyEditor.propTypes = {
 BodyEditor.defaultProps = {
   body: '',
   mentionList: [],
-  onMention: debug,
-  onMentionSearch: debug,
-  onChange: debug,
+  onMention: log,
+  onMentionSearch: log,
+  onChange: log,
 }
 
 export default BodyEditor

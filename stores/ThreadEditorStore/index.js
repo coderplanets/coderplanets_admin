@@ -8,7 +8,7 @@ import { types as t, getParent } from 'mobx-state-tree'
 
 import { markStates, buildLog } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = buildLog('S:ThreadEditorStore')
+const log = buildLog('S:ThreadEditorStore')
 /* eslint-enable no-unused-vars */
 
 const ThreadEditorStore = t

@@ -13,7 +13,7 @@ import {
 
 import { getThenHandler, getCatchHandler, formatGraphErrors } from './handler'
 
-const debug = buildLog('Network')
+const log = buildLog('Network')
 
 const query = query =>
   timeout(

@@ -12,7 +12,7 @@ import { buildLog } from '@utils'
 import { FileUploaderWrapper, InputFile } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:FileUploader')
+const log = buildLog('C:FileUploader')
 /* eslint-enable no-unused-vars */
 
 const getFullDir = (dir, nestDir) => {
@@ -128,9 +128,9 @@ FileUploader.propTypes = {
 FileUploader.defaultProps = {
   dir: 'posts',
   nestDir: true,
-  onUploadStart: debug,
-  onUploadError: debug,
-  onUploadDone: debug,
+  onUploadStart: log,
+  onUploadError: log,
+  onUploadDone: log,
 }
 
 export default FileUploader

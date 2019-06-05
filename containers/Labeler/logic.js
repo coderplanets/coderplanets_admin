@@ -9,7 +9,7 @@ const sr71$ = new SR71()
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('L:Labeler')
+const log = buildLog('L:Labeler')
 /* eslint-enable no-unused-vars */
 
 let store = null
@@ -42,7 +42,7 @@ export function init(_store) {
   if (store) return false
   store = _store
 
-  debug(store)
+  log(store)
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 }

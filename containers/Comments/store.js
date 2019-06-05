@@ -18,7 +18,7 @@ import {
 } from '@utils'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('S:CommentsStore')
+const log = buildLog('S:CommentsStore')
 /* eslint-enable no-unused-vars */
 
 const Mention = t.model('Mention', {

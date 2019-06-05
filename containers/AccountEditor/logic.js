@@ -17,7 +17,7 @@ import S from './schema'
 const sr71$ = new SR71()
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('L:AccountEditor')
+const log = buildLog('L:AccountEditor')
 /* eslint-enable no-unused-vars */
 
 let store = null
@@ -62,8 +62,8 @@ export const updateConfirm = () => {
   // TODO: 只去除 null 的即可，如果为空也是合法的
   const editing = pickUpdatable(store.accountInfo)
   const origin = pickUpdatable(store.accountOrigin)
-  /* debug('editing: ', editing) */
-  /* debug('origin: ', origin) */
+  /* log('editing: ', editing) */
+  /* log('origin: ', origin) */
 
   // TODO: 唯一的限制是 昵称不能为空
   if (R.equals(editing, origin)) {
@@ -120,14 +120,14 @@ const ErrSolver = [
   {
     match: asyncErr(ERR.TIMEOUT),
     action: ({ details }) => {
-      debug('ERR.TIMEOUT -->', details)
+      log('ERR.TIMEOUT -->', details)
       cancleLoading()
     },
   },
   {
     match: asyncErr(ERR.NETWORK),
     action: ({ details }) => {
-      debug('ERR.NETWORK -->', details)
+      log('ERR.NETWORK -->', details)
       cancleLoading()
     },
   },

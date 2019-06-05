@@ -25,7 +25,7 @@ md.use(mentionsPlugin({ url: MENTION_USER_ADDR }))
 md.use(remarkableemoj)
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:MarkDownRender:index')
+const log = buildLog('c:MarkDownRender:index')
 /* eslint-enable no-unused-vars */
 
 class MarkDownRender extends React.Component {

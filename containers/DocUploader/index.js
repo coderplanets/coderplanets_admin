@@ -15,7 +15,7 @@ import { Wrapper, InputFile } from './styles'
 import { init, onUploadError, getOSSDir, getOSSFileName } from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:DocUploader')
+const log = buildLog('C:DocUploader')
 /* eslint-enable no-unused-vars */
 
 class DocUploaderContainer extends React.Component {
@@ -139,8 +139,8 @@ DocUploaderContainer.propTypes = {
 }
 
 DocUploaderContainer.defaultProps = {
-  onUploadStart: debug,
-  onUploadDone: debug,
+  onUploadStart: log,
+  onUploadDone: log,
   onUploadError,
 }
 

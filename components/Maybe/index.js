@@ -10,7 +10,7 @@ import R from 'ramda'
 
 import { buildLog } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:Maybe:index')
+const log = buildLog('c:Maybe:index')
 /* eslint-enable no-unused-vars */
 
 const MaybeLoading = ({ loading }) => {

@@ -10,7 +10,7 @@ import { PagedCommunities } from 'stores/SharedModel'
 
 import { markStates, buildLog, stripMobx } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = buildLog('S:PermissionEditorStore')
+const log = buildLog('S:PermissionEditorStore')
 /* eslint-enable no-unused-vars */
 
 const CmsRules = t.model('CmsRules', {

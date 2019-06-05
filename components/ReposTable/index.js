@@ -20,7 +20,7 @@ import TimeStampCell from '../TimeStampCell'
 import { OperationWrapper } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:ReposTable:index')
+const log = buildLog('c:ReposTable:index')
 /* eslint-enable no-unused-vars */
 
 class ReposTable extends React.PureComponent {
@@ -188,14 +188,14 @@ ReposTable.propTypes = {
 
 ReposTable.defaultProps = {
   loading: false,
-  pageOnChange: debug,
+  pageOnChange: log,
 
-  setCommunity: debug,
-  unsetCommunity: debug,
-  unsetTag: debug,
-  setTag: debug,
-  onEdit: debug,
-  onDelete: debug,
+  setCommunity: log,
+  unsetCommunity: log,
+  unsetTag: log,
+  setTag: log,
+  onEdit: log,
+  onDelete: log,
 }
 
 export default ReposTable

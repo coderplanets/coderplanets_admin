@@ -14,7 +14,7 @@ import { buildLog, storePlug } from '@utils'
 import { init, routeChange } from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:Route')
+const log = buildLog('C:Route')
 /* eslint-enable no-unused-vars */
 
 class RouteContainer extends React.Component {

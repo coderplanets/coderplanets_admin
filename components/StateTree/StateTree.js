@@ -12,7 +12,7 @@ import ReactJson from 'react-json-view'
 
 import { buildLog } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:StateTree:index')
+const log = buildLog('c:StateTree:index')
 /* eslint-enable no-unused-vars */
 
 /* apathy flat ocean tube */

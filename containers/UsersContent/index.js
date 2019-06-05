@@ -16,7 +16,7 @@ import { Wrapper } from './styles'
 import IndexContent from './IndexContent'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:UsersContent')
+const log = buildLog('C:UsersContent')
 /* eslint-enable no-unused-vars */
 
 const renderChildBanner = (route, store, restProps) => {

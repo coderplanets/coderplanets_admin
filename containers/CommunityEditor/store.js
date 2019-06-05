@@ -10,7 +10,7 @@ import { Community } from 'stores/SharedModel'
 import { markStates, buildLog, stripMobx } from '@utils'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('S:CommunityEditorStore')
+const log = buildLog('S:CommunityEditorStore')
 /* eslint-enable no-unused-vars */
 
 const CommunityEditorStore = t

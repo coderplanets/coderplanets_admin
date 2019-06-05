@@ -9,7 +9,7 @@ import { PagedCategories } from 'stores/SharedModel'
 
 import { markStates, buildLog, stripMobx } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = buildLog('S:CategorySetterStore')
+const log = buildLog('S:CategorySetterStore')
 /* eslint-enable no-unused-vars */
 
 const CategorySetterStore = t

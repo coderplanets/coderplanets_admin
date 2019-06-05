@@ -21,7 +21,7 @@ import {
 } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:TagColorSelector:index')
+const log = buildLog('c:TagColorSelector:index')
 /* eslint-enable no-unused-vars */
 
 const TagColorSelector = ({ label, value, onChange, note }) => (
@@ -47,7 +47,7 @@ TagColorSelector.propTypes = {
 }
 
 TagColorSelector.defaultProps = {
-  onChange: debug,
+  onChange: log,
   value: '',
   label: '',
   note: '',

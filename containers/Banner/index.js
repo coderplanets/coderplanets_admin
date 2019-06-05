@@ -17,7 +17,7 @@ import UsersBanner from '../UsersBanner'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:Banner')
+const log = buildLog('C:Banner')
 /* eslint-enable no-unused-vars */
 
 const DomainBanner = ({ curRoute }) => {

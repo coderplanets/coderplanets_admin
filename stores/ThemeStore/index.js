@@ -10,7 +10,7 @@ import { DEFAULT_THEME } from '@config'
 import { buildLog, markStates, themeSkins } from '@utils'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('S:ThemeStore')
+const log = buildLog('S:ThemeStore')
 /* eslint-enable no-unused-vars */
 
 export const ThemeDefaults = {

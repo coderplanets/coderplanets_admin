@@ -10,7 +10,7 @@ import { PagedThreads } from 'stores/SharedModel'
 import { markStates, buildLog, stripMobx } from '@utils'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('S:ThreadSetterStore')
+const log = buildLog('S:ThreadSetterStore')
 /* eslint-enable no-unused-vars */
 
 const ThreadSetterStore = t

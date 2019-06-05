@@ -12,7 +12,7 @@ import { buildLog } from '@utils'
 import { Wrapper, Content, Label, Count } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:TimeStampCell:index')
+const log = buildLog('c:TimeStampCell:index')
 /* eslint-enable no-unused-vars */
 
 const TimeStampCell = ({ data: { insertedAt, updatedAt } }) => (

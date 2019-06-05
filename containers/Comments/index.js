@@ -19,7 +19,7 @@ import { Wrapper } from './styles'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:Comments')
+const log = buildLog('C:Comments')
 /* eslint-enable no-unused-vars */
 
 class CommentsContainer extends React.Component {
@@ -87,7 +87,7 @@ CommentsContainer.propTypes = {
 }
 
 CommentsContainer.defaultProps = {
-  onCreate: debug,
+  onCreate: log,
   ssr: false,
 }
 

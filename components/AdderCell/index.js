@@ -13,7 +13,7 @@ import { buildLog } from '@utils'
 import { AddWrapper, AddIcon, AddText } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:AdderCell:index')
+const log = buildLog('c:AdderCell:index')
 /* eslint-enable no-unused-vars */
 
 const AdderCell = ({ onAdd }) => (
@@ -29,7 +29,7 @@ AdderCell.propTypes = {
 }
 
 AdderCell.defaultProps = {
-  onAdd: debug,
+  onAdd: log,
 }
 
 export default AdderCell

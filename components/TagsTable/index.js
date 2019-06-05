@@ -19,7 +19,7 @@ import TimeStampCell from '../TimeStampCell'
 import { OperationWrapper } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:TagsTable:index')
+const log = buildLog('c:TagsTable:index')
 /* eslint-enable no-unused-vars */
 
 class TagsTable extends React.PureComponent {
@@ -156,9 +156,9 @@ TagsTable.propTypes = {
 
 TagsTable.defaultProps = {
   loading: false,
-  pageOnChange: debug,
-  onEdit: debug,
-  onDelete: debug,
+  pageOnChange: log,
+  onEdit: log,
+  onDelete: log,
 }
 
 export default TagsTable

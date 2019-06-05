@@ -15,7 +15,7 @@ import { buildLog, prettyNum } from '@utils'
 import { Avatars, AvatarsItem, AvatarsImg, AvatarsMore } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:AvatarsRow:index')
+const log = buildLog('c:AvatarsRow:index')
 /* eslint-enable no-unused-vars */
 
 const validUser = R.compose(
@@ -80,8 +80,8 @@ AvatarsRow.defaultProps = {
   height: '32px',
   users: [],
   limit: ATATARS_LIST_LENGTH.POSTS,
-  onUserSelect: debug,
-  onTotalSelect: debug,
+  onUserSelect: log,
+  onTotalSelect: log,
 }
 
 export default AvatarsRow

@@ -17,7 +17,7 @@ import AdderCell from '../AdderCell'
 import { Wrapper, Thread, DeleteCross, AddIcon } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:ThreadsCell:index')
+const log = buildLog('c:ThreadsCell:index')
 /* eslint-enable no-unused-vars */
 
 const ThreadsCell = ({ data, source, onDelete, onAdd }) => (
@@ -57,8 +57,8 @@ ThreadsCell.propTypes = {
 }
 
 ThreadsCell.defaultProps = {
-  onDelete: debug,
-  onAdd: debug,
+  onDelete: log,
+  onAdd: log,
 }
 
 export default ThreadsCell

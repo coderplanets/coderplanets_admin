@@ -14,7 +14,7 @@ import { Wrapper, Divider, ActionBtns } from './styles'
 
 import * as logic from './logic'
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:ThreadEditor')
+const log = buildLog('C:ThreadEditor')
 /* eslint-enable no-unused-vars */
 
 class ThreadEditorContainer extends React.Component {

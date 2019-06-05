@@ -19,7 +19,7 @@ import VideosBanner from './VideosBanner'
 import { BannerContainer } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:CommunitiesBanner')
+const log = buildLog('C:CommunitiesBanner')
 /* eslint-enable no-unused-vars */
 
 const ChildBanner = ({

@@ -23,7 +23,7 @@ const sr71$ = new SR71({
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('L:CommunityContent')
+const log = buildLog('L:CommunityContent')
 /* eslint-enable no-unused-vars */
 
 let store = null
@@ -152,7 +152,7 @@ const DataSolver = [
     match: asyncRes(EVENT.SIDEBAR_MENU_CHANGE),
     action: res => {
       const { /* mainPath */ subPath } = res[EVENT.SIDEBAR_MENU_CHANGE].data
-      debug('SIDEBAR_MENU_CHANGE ', res[EVENT.SIDEBAR_MENU_CHANGE].data)
+      log('SIDEBAR_MENU_CHANGE ', res[EVENT.SIDEBAR_MENU_CHANGE].data)
 
       switch (subPath) {
         case ROUTE.TAGS: {
@@ -187,14 +187,14 @@ const ErrSolver = []
 
 export function init(selectedStore) {
   store = selectedStore
-  debug(store)
+  log(store)
   if (sub$) return false
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 }
 
 export function uninit() {
   if (!sub$) return false
-  debug('===== do uninit')
+  log('===== do uninit')
   sub$.unsubscribe()
   sub$ = null
 }

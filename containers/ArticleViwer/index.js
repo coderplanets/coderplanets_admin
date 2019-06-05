@@ -16,11 +16,11 @@ import PostViewer from './PostViewer'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:ArticleViwer')
+const log = buildLog('C:ArticleViwer')
 /* eslint-enable no-unused-vars */
 
 const Viwer = ({ type, data, loading, onReaction }) => {
-  // debug('Viwer data: ', data)
+  // log('Viwer data: ', data)
   switch (type) {
     case 'post': {
       return (

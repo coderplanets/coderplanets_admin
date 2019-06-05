@@ -15,7 +15,7 @@ import Wrapper from './styles'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:ApiLayout')
+const log = buildLog('C:ApiLayout')
 /* eslint-enable no-unused-vars */
 
 class ApiLayoutContainer extends React.Component {

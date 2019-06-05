@@ -23,7 +23,7 @@ import {
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:TagSetter')
+const log = buildLog('C:TagSetter')
 /* eslint-enable no-unused-vars */
 
 const TagsList = ({ tags, threadId, selectedids }) => (

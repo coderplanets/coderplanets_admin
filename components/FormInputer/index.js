@@ -14,7 +14,7 @@ import FormItem from '../FormItem'
 import { FormInput, Note } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:FormInputer:index')
+const log = buildLog('c:FormInputer:index')
 /* eslint-enable no-unused-vars */
 
 const { TextArea } = Input
@@ -80,7 +80,7 @@ FormInputer.propTypes = {
 }
 
 FormInputer.defaultProps = {
-  onChange: debug,
+  onChange: log,
   value: '',
   label: '',
   note: '',

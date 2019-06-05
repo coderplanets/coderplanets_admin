@@ -14,7 +14,7 @@ import FormItem from '../FormItem'
 import { Note } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:FormSelector:index')
+const log = buildLog('c:FormSelector:index')
 /* eslint-enable no-unused-vars */
 
 const { Option } = Select
@@ -48,7 +48,7 @@ FormSelector.propTypes = {
 }
 
 FormSelector.defaultProps = {
-  onChange: debug,
+  onChange: log,
   value: '',
   label: '',
   note: '',

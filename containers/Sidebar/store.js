@@ -11,7 +11,7 @@ import { PagedCommunities, emptyPagiData, Community } from 'stores/SharedModel'
 import { buildLog, markStates, stripMobx } from '@utils'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('S:SidebarStore')
+const log = buildLog('S:SidebarStore')
 /* eslint-enable no-unused-vars */
 
 const RootCountStatus = t.model('RootCountStatus', {

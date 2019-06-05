@@ -52,7 +52,7 @@ const cheatsheetData = {
 }
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:CheatSheetContent')
+const log = buildLog('C:CheatSheetContent')
 /* eslint-enable no-unused-vars */
 
 const Langs = ({ base }) => {

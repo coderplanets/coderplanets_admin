@@ -20,7 +20,7 @@ import UtilsBar from './UtilsBar'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:Doraemon')
+const log = buildLog('C:Doraemon')
 /* eslint-enable no-unused-vars */
 class DoraemonContainer extends React.Component {
   constructor(props) {
@@ -47,7 +47,7 @@ class DoraemonContainer extends React.Component {
       searchedTotalCount,
     } = doraemon
 
-    // debug('suggestion.raw: ', suggestions.toJSON())
+    // log('suggestion.raw: ', suggestions.toJSON())
 
     return (
       <React.Fragment>

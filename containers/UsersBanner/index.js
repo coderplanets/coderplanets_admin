@@ -18,7 +18,7 @@ import PaysBanner from './PaysBanner'
 import { BannerContainer } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:UsersBanner')
+const log = buildLog('C:UsersBanner')
 /* eslint-enable no-unused-vars */
 
 const renderChildBanner = (curRoute, totalCount, store) => {

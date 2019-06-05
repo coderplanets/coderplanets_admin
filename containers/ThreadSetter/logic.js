@@ -10,7 +10,7 @@ const sr71$ = new SR71()
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('L:ThreadSetter')
+const log = buildLog('L:ThreadSetter')
 /* eslint-enable no-unused-vars */
 
 let store = null
@@ -50,7 +50,7 @@ const ErrSolver = []
 
 export function init(selectedStore) {
   store = selectedStore
-  debug(store)
+  log(store)
   if (sub$) sub$.unsubscribe()
   sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 

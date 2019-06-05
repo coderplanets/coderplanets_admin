@@ -7,7 +7,7 @@ import { buildLog, ERR } from '..'
 import { TIMEOUT_THRESHOLD } from './setup'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('Network')
+const log = buildLog('Network')
 /* eslint-enable no-unused-vars */
 
 export const TimoutObservable = of({
@@ -62,7 +62,7 @@ export const getThenHandler = res => {
         details: `${res.url}`,
       })
     default:
-      debug('unhandle error: ', res)
+      log('unhandle error: ', res)
       return Promise.reject({
         error: 10000,
         details: `${res.statusText}: unhandle`,

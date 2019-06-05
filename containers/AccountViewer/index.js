@@ -21,7 +21,7 @@ import { AccountWrapper, AccountContent, ThemeWrapper, Divider } from './styles'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:AccountViewer')
+const log = buildLog('C:AccountViewer')
 /* eslint-enable no-unused-vars */
 
 const ThemeSection = ({ curTheme }) => (

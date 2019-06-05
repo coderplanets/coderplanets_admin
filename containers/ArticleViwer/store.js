@@ -8,7 +8,7 @@ import R from 'ramda'
 
 import { markStates, buildLog, TYPE } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = buildLog('S:ArticleViwerStore')
+const log = buildLog('S:ArticleViwerStore')
 /* eslint-enable no-unused-vars */
 
 const Post = t.model('Post', {

@@ -12,7 +12,7 @@ import DotSelector from './DotSelector'
 import CardSelector from './CardSelector'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:ThemeSelector:index')
+const log = buildLog('c:ThemeSelector:index')
 /* eslint-enable no-unused-vars */
 
 const ThemeSelector = ({ displayStyle, curTheme, changeTheme }) => {

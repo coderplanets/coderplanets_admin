@@ -20,7 +20,7 @@ import SR71 from 'utils/network/sr71'
 import S from './schema'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('L:Header')
+const log = buildLog('L:Header')
 /* eslint-enable no-unused-vars */
 
 const sr71$ = new SR71()
@@ -37,7 +37,7 @@ export function previewState() {
 }
 
 export function signinGithub(code) {
-  debug('signin_github: ', code)
+  log('signin_github: ', code)
   const args = {
     code,
   }
@@ -54,7 +54,7 @@ export function previewAccount() {
 }
 
 export function login() {
-  debug('do login')
+  log('do login')
   dispatchEvent(EVENT.LOGIN_PANEL)
 }
 
@@ -74,13 +74,13 @@ const DataSolver = [
     // TODO move it to user side view
     match: asyncRes('githubSigninRes'),
     action: ({ githubSigninRes }) => {
-      debug('dataResolver  --->', githubSigninRes)
+      log('dataResolver  --->', githubSigninRes)
     },
   },
   {
     match: asyncRes('user'),
     action: ({ user }) => {
-      debug('dataResolver userRes  --->', user)
+      log('dataResolver userRes  --->', user)
       /* store.set('user', { ...data }) */
       store.updateAccount(user)
     },
@@ -91,19 +91,19 @@ const ErrSolver = [
   {
     match: asyncErr(ERR.CRAPHQL),
     action: ({ details }) => {
-      debug('ERR.CRAPHQL -->', details)
+      log('ERR.CRAPHQL -->', details)
     },
   },
   {
     match: asyncErr(ERR.TIMEOUT),
     action: ({ details }) => {
-      debug('ERR.TIMEOUT -->', details)
+      log('ERR.TIMEOUT -->', details)
     },
   },
   {
     match: asyncErr(ERR.NETWORK),
     action: ({ details }) => {
-      debug('ERR.NETWORK -->', details)
+      log('ERR.NETWORK -->', details)
     },
   },
 ]
@@ -119,7 +119,7 @@ export function init(_store) {
 
 export function uninit() {
   if (!sub$) return false
-  debug('===== do uninit')
+  log('===== do uninit')
   sub$.unsubscribe()
   sub$ = null
 }

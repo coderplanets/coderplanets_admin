@@ -10,7 +10,7 @@ import styled from 'styled-components'
 
 import { buildLog, isEmptyNil } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:MaybeCell:index')
+const log = buildLog('c:MaybeCell:index')
 /* eslint-enable no-unused-vars */
 
 export const NoneText = styled.div`

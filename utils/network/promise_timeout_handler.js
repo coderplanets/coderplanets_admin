@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable'
 import { buildLog, notEmpty } from '@utils'
 import { TIMEOUT_THRESHOLD, GRAPHQL_TIMEOUT } from './setup'
 
-const debug = buildLog('Network')
+const log = buildLog('Network')
 
 export const TimoutObservable = Observable.of({
   error: 'TimeoutError',
@@ -48,7 +48,7 @@ export const getThenHandler = res => {
         details: `${res.url}`,
       })
     default:
-      debug('unhandle error: ', res)
+      log('unhandle error: ', res)
       return Promise.reject({
         error: 10000,
         details: `${res.statusText}: unhandle`,

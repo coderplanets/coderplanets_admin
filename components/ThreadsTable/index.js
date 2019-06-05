@@ -16,7 +16,7 @@ import { Space } from '../BaseStyled'
 import { OperationWrapper } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:ThreadsTable:index')
+const log = buildLog('c:ThreadsTable:index')
 /* eslint-enable no-unused-vars */
 
 class ThreadsTable extends React.PureComponent {
@@ -130,15 +130,15 @@ ThreadsTable.propTypes = {
 
 ThreadsTable.defaultProps = {
   loading: false,
-  pageOnChange: debug,
+  pageOnChange: log,
   /*
-     setCommunity: debug,
-     unsetCommunity: debug,
-     unsetTag: debug,
-     setTag: debug,
+     setCommunity: log,
+     unsetCommunity: log,
+     unsetTag: log,
+     setTag: log,
    */
-  onEdit: debug,
-  onDelete: debug,
+  onEdit: log,
+  onDelete: log,
 }
 
 export default ThreadsTable

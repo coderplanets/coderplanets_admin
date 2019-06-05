@@ -10,7 +10,7 @@ import Router from 'next/router'
 import { PAGE_SIZE } from '@config'
 import { onClient, markStates, buildLog, serializeQuery } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = buildLog('S:RouteStore')
+const log = buildLog('S:RouteStore')
 /* eslint-enable no-unused-vars */
 
 const Query = t.model('Query', {

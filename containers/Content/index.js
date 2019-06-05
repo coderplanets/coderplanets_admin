@@ -17,7 +17,7 @@ import UsersContent from '../UsersContent'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:Content')
+const log = buildLog('C:Content')
 /* eslint-enable no-unused-vars */
 
 const DomainContent = ({ curRoute }) => {

@@ -8,7 +8,7 @@ import { types as t, getParent } from 'mobx-state-tree'
 import { Community, Category, Tag, Post, User } from 'stores/SharedModel'
 import { markStates, TYPE, unholdPage, stripMobx } from '@utils'
 
-// const debug = buildLog('S:PreviewStore')
+// const log = buildLog('S:PreviewStore')
 const Article = t.model('Article', {
   thread: t.string,
   data: Post,

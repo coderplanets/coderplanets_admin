@@ -18,7 +18,7 @@ import {
 } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:BannerCountBrief:index')
+const log = buildLog('c:BannerCountBrief:index')
 /* eslint-enable no-unused-vars */
 
 const CountBrief = ({ filteredCount, totalCount, thread, unit }) => {

@@ -8,7 +8,7 @@ import { types as t, getParent } from 'mobx-state-tree'
 
 import { markStates, buildLog, stripMobx } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = buildLog('S:TypeWriterStore')
+const log = buildLog('S:TypeWriterStore')
 /* eslint-enable no-unused-vars */
 
 const TypeWriterStore = t

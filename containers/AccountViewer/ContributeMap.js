@@ -22,7 +22,7 @@ import {
   DotList,
 } from './styles/contribute_map'
 
-const debug = buildLog('C:Comments')
+const log = buildLog('C:Comments')
 
 const customTooltipDataAttrs = value => ({
   'data-tip': value.date === null ? '' : `${value.count} 次 (${value.date})`,
@@ -92,7 +92,7 @@ const ContributeMap = ({ data }) => {
         startDate={data.startDate}
         endDate={data.endDate}
         showMonthLabels
-        onClick={value => debug(value)}
+        onClick={value => log(value)}
         gutterSize={3}
         tooltipDataAttrs={customTooltipDataAttrs}
         monthLabels={monthLabels}

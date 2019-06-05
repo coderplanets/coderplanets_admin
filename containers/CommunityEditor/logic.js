@@ -18,7 +18,7 @@ const sr71$ = new SR71()
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('L:CommunityEditor')
+const log = buildLog('L:CommunityEditor')
 /* eslint-enable no-unused-vars */
 
 let store = null
@@ -99,7 +99,7 @@ const ErrSolver = [
   {
     match: asyncErr(ERR.NETWORK),
     action: ({ details }) => {
-      debug('ERR.NETWORK -->', details)
+      log('ERR.NETWORK -->', details)
       cancleLoading()
     },
   },

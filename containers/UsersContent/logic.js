@@ -21,7 +21,7 @@ const sr71$ = new SR71({
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('L:UsersContent')
+const log = buildLog('L:UsersContent')
 /* eslint-enable no-unused-vars */
 
 let store = null
@@ -35,7 +35,7 @@ const commonFilter = page => {
 }
 
 export const loadUsers = (page = 1) => {
-  debug('do loadUsers')
+  log('do loadUsers')
 
   scrollIntoEle(TYPE.APP_HEADER_ID)
   store.markState({ usersLoading: true })
@@ -66,7 +66,7 @@ const DataSolver = [
     match: asyncRes('pagedUsers'),
     action: ({ pagedUsers }) => {
       cancleLoading()
-      debug('get pagedUsers: ', pagedUsers)
+      log('get pagedUsers: ', pagedUsers)
       store.markState({ pagedUsers })
     },
   },
@@ -80,7 +80,7 @@ const DataSolver = [
           return loadUsers(pageNumber)
         }
         default: {
-          debug('unknow event: ', closeType)
+          log('unknow event: ', closeType)
           /* return loadPosts() */
         }
       }
@@ -90,8 +90,8 @@ const DataSolver = [
     match: asyncRes(EVENT.SIDEBAR_MENU_CHANGE),
     action: res => {
       const { mainPath, subPath } = res[EVENT.SIDEBAR_MENU_CHANGE].data
-      debug('mainPath  event: ', mainPath)
-      debug('mainPath  subPath: ', subPath)
+      log('mainPath  event: ', mainPath)
+      log('mainPath  subPath: ', subPath)
 
       if (mainPath !== ROUTE.USERS) return false
       loadUsers()
@@ -129,7 +129,7 @@ export function init(_store) {
 
 export function uninit() {
   if (!sub$) return false
-  debug('===== do uninit')
+  log('===== do uninit')
   // sub$.unsubscribe()
   // sub$ = null
 }

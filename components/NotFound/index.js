@@ -23,7 +23,7 @@ import {
 } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:NotFound:index')
+const log = buildLog('c:NotFound:index')
 /* eslint-enable no-unused-vars */
 
 const DefaultDesc = () => (

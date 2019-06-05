@@ -9,7 +9,7 @@ const sr71$ = new SR71({
 })
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('L:ArticleViwer')
+const log = buildLog('L:ArticleViwer')
 /* eslint-enable no-unused-vars */
 
 let store = null
@@ -35,7 +35,7 @@ function queryPost(data) {
     id: data.id,
     userHasLogin: false,
   }
-  debug('--> queryPost make loading')
+  log('--> queryPost make loading')
   loading()
   sr71$.query(S.post, variables)
 }
@@ -52,7 +52,7 @@ const dataResolver = [
     match: asyncRes(EVENT.PREVIEW_POST),
     action: res => {
       const info = res[EVENT.PREVIEW_POST]
-      /* debug('EVENT.PREVIEW_POST: ', res[EVENT.PREVIEW_POST]) */
+      /* log('EVENT.PREVIEW_POST: ', res[EVENT.PREVIEW_POST]) */
       if (info.type === TYPE.POST) {
         store.load(TYPE.POST, res[EVENT.PREVIEW_POST].data)
         loading()
@@ -64,9 +64,9 @@ const dataResolver = [
     match: asyncRes(TYPE.REACTION),
     action: res => {
       // TODO: should be trigger
-      debug('reaction ', res)
+      log('reaction ', res)
       const info = res[TYPE.REACTION]
-      debug('hello? queryPost', info)
+      log('hello? queryPost', info)
 
       reloadReactions(info)
     },
@@ -74,7 +74,7 @@ const dataResolver = [
   {
     match: asyncRes(TYPE.UNDO_REACTION),
     action: res => {
-      debug('undoReaction ', res)
+      log('undoReaction ', res)
       const info = res[TYPE.UNDO_REACTION]
       reloadReactions(info)
     },
@@ -100,19 +100,19 @@ const dataResolver = [
 const handleData = res => {
   // TODO: handle Error
   if (res.error) {
-    debug('handleData error ----> : ', res)
+    log('handleData error ----> : ', res)
   }
   for (let i = 0; i < dataResolver.length; i += 1) {
     if (dataResolver[i].match(res)) {
       return dataResolver[i].action(res)
     }
   }
-  debug('handleData unhandle: ', res)
+  log('handleData unhandle: ', res)
 }
 
 export function init(selectedStore) {
   store = selectedStore
-  debug(store)
+  log(store)
   if (sub$) sub$.unsubscribe()
 
   sub$ = sr71$.data().subscribe(handleData)

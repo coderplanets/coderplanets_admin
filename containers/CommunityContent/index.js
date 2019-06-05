@@ -23,7 +23,7 @@ import { Wrapper } from './styles'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:CommunityContent')
+const log = buildLog('C:CommunityContent')
 /* eslint-enable no-unused-vars */
 
 const ChildContent = ({

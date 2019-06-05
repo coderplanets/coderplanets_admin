@@ -21,7 +21,7 @@ import {
 } from './helper/advisor'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('L:Doraemon:pocket')
+const log = buildLog('L:Doraemon:pocket')
 /* eslint-enable no-unused-vars */
 
 export default class Pockect {
@@ -67,14 +67,14 @@ export default class Pockect {
   }
 
   query(term) {
-    // debug('inputForOtherUse: ', this.store.inputForOtherUse)
+    // log('inputForOtherUse: ', this.store.inputForOtherUse)
     if (!this.store.inputForOtherUse) {
       this.input$.next(term)
     }
   }
 
   stop() {
-    //    debug('stop ...')
+    //    log('stop ...')
     this.stop$.next()
   }
 

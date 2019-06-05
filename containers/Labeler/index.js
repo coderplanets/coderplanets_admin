@@ -17,7 +17,7 @@ import { Wrapper, LabelItem, LabelIcon, Title } from './styles'
 
 import * as logic from './logic'
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:Labeler')
+const log = buildLog('C:Labeler')
 /* eslint-enable no-unused-vars */
 
 class LabelerContainer extends React.Component {

@@ -14,7 +14,7 @@ import { Wrapper, Divider, CategoryWrapper, CategoryTag } from './styles'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:CategorySetter')
+const log = buildLog('C:CategorySetter')
 /* eslint-enable no-unused-vars */
 
 const CategoriesList = ({ communityId, categories, selectedids }) => (

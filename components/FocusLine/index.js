@@ -12,7 +12,7 @@ import { buildLog } from '@utils'
 import { Wrapper, Icon, TextWrapper, Text, Focus } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:FocusLine:index')
+const log = buildLog('c:FocusLine:index')
 /* eslint-enable no-unused-vars */
 
 const FocusLine = ({ iconSrc, before, focus, after }) => (

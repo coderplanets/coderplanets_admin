@@ -8,7 +8,7 @@ import { types as t, getParent } from 'mobx-state-tree'
 
 import { markStates, buildLog } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = buildLog('S:CheatSheetContentStore')
+const log = buildLog('S:CheatSheetContentStore')
 /* eslint-enable no-unused-vars */
 
 const CheatSheetContentStore = t

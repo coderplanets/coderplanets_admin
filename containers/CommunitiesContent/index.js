@@ -24,7 +24,7 @@ import { Wrapper } from './styles'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:CommunitiesContent')
+const log = buildLog('C:CommunitiesContent')
 /* eslint-enable no-unused-vars */
 
 const renderChildContent = (curRoute, store, restProps) => {

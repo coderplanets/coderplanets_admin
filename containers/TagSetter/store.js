@@ -10,7 +10,7 @@ import { Tag } from 'stores/SharedModel'
 import { markStates, buildLog, THREAD, stripMobx } from '@utils'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('S:TagSetterStore')
+const log = buildLog('S:TagSetterStore')
 /* eslint-enable no-unused-vars */
 
 const TagSetterStore = t

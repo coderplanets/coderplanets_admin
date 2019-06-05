@@ -20,7 +20,7 @@ import {
 } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:CommunityMatrix:index')
+const log = buildLog('c:CommunityMatrix:index')
 /* eslint-enable no-unused-vars */
 
 const tooltipOffset = JSON.stringify({ top: 5, right: -5 })
@@ -116,8 +116,8 @@ CommunityMatrix.defaultProps = {
     totalCount: 0,
   },
   array: [],
-  onSelect: debug,
-  onAddOnSelect: debug,
+  onSelect: log,
+  onAddOnSelect: log,
   lens: [],
   hasAddon: true,
   activeRaw: '',

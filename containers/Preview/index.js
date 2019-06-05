@@ -38,7 +38,7 @@ import {
 } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:Preview')
+const log = buildLog('C:Preview')
 /* eslint-enable no-unused-vars */
 
 const DynamicTypeWriter = dynamic(import('../TypeWriter'), {

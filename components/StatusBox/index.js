@@ -19,7 +19,7 @@ import {
 } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:StatusBox:index')
+const log = buildLog('c:StatusBox:index')
 /* eslint-enable no-unused-vars */
 
 function getDefaultMsg(success, error) {

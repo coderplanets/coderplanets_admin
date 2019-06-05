@@ -12,7 +12,7 @@ import { uid, buildLog } from '@utils'
 import { Wrapper, TagItem, TagDot, TagTitle, AllTagIcon } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:TagList:index')
+const log = buildLog('c:TagList:index')
 /* eslint-enable no-unused-vars */
 
 const TagList = ({ tags, active, onSelect }) => {

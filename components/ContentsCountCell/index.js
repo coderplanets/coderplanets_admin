@@ -11,7 +11,7 @@ import { buildLog } from '@utils'
 import { Wrapper, Content, Label, Count } from './styles'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('c:ContentsCountCell:index')
+const log = buildLog('c:ContentsCountCell:index')
 /* eslint-enable no-unused-vars */
 
 const ContentsCountCell = ({

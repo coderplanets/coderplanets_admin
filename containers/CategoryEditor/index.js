@@ -23,7 +23,7 @@ import { Wrapper, ActionBtns, Divider } from './styles'
 import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('C:CategoryEditor')
+const log = buildLog('C:CategoryEditor')
 /* eslint-enable no-unused-vars */
 
 class CategoryEditorContainer extends React.Component {

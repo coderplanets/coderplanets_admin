@@ -53,7 +53,7 @@ import {
 } from '../index'
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('S:rootStore')
+const log = buildLog('S:rootStore')
 /* eslint-enable no-unused-vars */
 
 const rootStore = t

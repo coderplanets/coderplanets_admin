@@ -14,7 +14,7 @@ import { buildLog } from '@utils'
 import { Wrapper, SocalIcon } from './styles'
 
 /* eslint-disable-next-line */
-const debug = buildLog('c:SocialSell:index')
+const log = buildLog('c:SocialSell:index')
 
 const SocialSell = ({ data }) => {
   const validList = []

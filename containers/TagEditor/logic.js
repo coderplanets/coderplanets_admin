@@ -19,7 +19,7 @@ const sr71$ = new SR71()
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('L:TagEditor')
+const log = buildLog('L:TagEditor')
 /* eslint-enable no-unused-vars */
 
 let store = null

@@ -17,7 +17,7 @@ const sr71$ = new SR71()
 let sub$ = null
 
 /* eslint-disable no-unused-vars */
-const debug = buildLog('L:CommunitySetter')
+const log = buildLog('L:CommunitySetter')
 /* eslint-enable no-unused-vars */
 
 let store = null

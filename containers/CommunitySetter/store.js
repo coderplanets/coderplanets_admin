@@ -9,7 +9,7 @@ import { types as t, getParent } from 'mobx-state-tree'
 import { PagedCommunities } from 'stores/SharedModel'
 import { markStates, buildLog, stripMobx } from '@utils'
 /* eslint-disable no-unused-vars */
-const debug = buildLog('S:CommunitySetterStore')
+const log = buildLog('S:CommunitySetterStore')
 /* eslint-enable no-unused-vars */
 
 const CommunitySetterStore = t
