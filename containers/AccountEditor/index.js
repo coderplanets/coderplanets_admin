@@ -5,13 +5,11 @@
  */
 
 import React from 'react'
-import { inject, observer } from 'mobx-react'
+
+import { ICON_CMD } from '@config'
+import { buildLog, connectStore } from '@utils'
 
 import { Input, Button, Icon, StatusBox } from '@components'
-import { ICON_CMD } from '@config'
-// import Link from 'next/link'
-
-import { buildLog, storePlug } from '@utils'
 import {
   Wrapper,
   BackIcon,
@@ -29,7 +27,13 @@ import {
   GirlIcon,
 } from './styles'
 
-import * as logic from './logic'
+import {
+  useInit,
+  sexChange,
+  profileChange,
+  cancleEdit,
+  updateConfirm,
+} from './logic'
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('C:AccountEditor')
@@ -47,10 +51,10 @@ const SexItem = ({ label, value }) => (
   <FormItemWrapper>
     <SexLable>{label}</SexLable>
     <SexInput>
-      <Dude onClick={logic.sexChange.bind(this, 'dude')}>
+      <Dude onClick={sexChange.bind(this, 'dude')}>
         <DudeIcon src={`${ICON_CMD}/dude.svg`} value={value} />
       </Dude>
-      <Girl onClick={logic.sexChange.bind(this, 'girl')}>
+      <Girl onClick={sexChange.bind(this, 'girl')}>
         <GirlIcon src={`${ICON_CMD}/girl.svg`} value={value} />
       </Girl>
     </SexInput>
@@ -76,111 +80,97 @@ const FormItem = ({ label, textarea, value, onChange }) => (
   </FormItemWrapper>
 )
 
-class AccountEditorContainer extends React.Component {
-  componentDidMount() {
-    const { accountEditor } = this.props
-    logic.init(accountEditor)
-  }
+const AccountEditorContainer = ({ accountEditor }) => {
+  useInit(accountEditor)
 
-  render() {
-    const { accountEditor } = this.props
+  const {
+    accountInfo,
+    updating,
+    success,
+    error,
+    warn,
+    statusMsg,
+  } = accountEditor
 
-    const {
-      accountInfo,
-      updating,
-      success,
-      error,
-      warn,
-      statusMsg,
-    } = accountEditor
+  /* log('accountInfo editing->: ', accountInfo) */
 
-    /* log('accountInfo editing->: ', accountInfo) */
+  return (
+    <Wrapper>
+      {/* eslint-disable */}
+      <div onClick={logic.goBack}>
+        <BackIcon src={`${ICON_CMD}/goback.svg`} />
+      </div>
+      {/* eslint-enable */}
+      <Avatar src={accountInfo.avatar} />
+      <FormItem
+        label="昵称:"
+        value={accountInfo.nickname}
+        onChange={profileChange('nickname')}
+      />
+      <FormItem
+        label="邮箱:"
+        value={accountInfo.email}
+        onChange={profileChange('email')}
+      />
+      <FormItem
+        label="城市:"
+        value={accountInfo.location}
+        onChange={profileChange('location')}
+      />
+      <FormItem
+        label="公司:"
+        value={accountInfo.company}
+        onChange={profileChange('company')}
+      />
+      <FormItem
+        label="学校:"
+        value={accountInfo.education}
+        onChange={profileChange('education')}
+      />
+      <FormItem
+        label="QQ:"
+        value={accountInfo.qq}
+        onChange={profileChange('qq')}
+      />
+      <FormItem
+        label="微博:"
+        value={accountInfo.weibo}
+        onChange={profileChange('weibo')}
+      />
+      <FormItem
+        label="微信:"
+        value={accountInfo.weichat}
+        onChange={profileChange('weichat')}
+      />
+      <SexItem label="性别:" value={accountInfo.sex} />
+      <FormItem
+        label="简介:"
+        textarea
+        value={accountInfo.bio}
+        onChange={profileChange('bio')}
+      />
 
-    return (
-      <Wrapper>
-        {/* eslint-disable */}
-        <div onClick={logic.goBack}>
-          <BackIcon src={`${ICON_CMD}/goback.svg`} />
-        </div>
-        {/* eslint-enable */}
-        <Avatar src={accountInfo.avatar} />
-        <FormItem
-          label="昵称:"
-          value={accountInfo.nickname}
-          onChange={logic.profileChange('nickname')}
-        />
-        <FormItem
-          label="邮箱:"
-          value={accountInfo.email}
-          onChange={logic.profileChange('email')}
-        />
-        <FormItem
-          label="城市:"
-          value={accountInfo.location}
-          onChange={logic.profileChange('location')}
-        />
-        <FormItem
-          label="公司:"
-          value={accountInfo.company}
-          onChange={logic.profileChange('company')}
-        />
-        <FormItem
-          label="学校:"
-          value={accountInfo.education}
-          onChange={logic.profileChange('education')}
-        />
-        <FormItem
-          label="QQ:"
-          value={accountInfo.qq}
-          onChange={logic.profileChange('qq')}
-        />
-        <FormItem
-          label="微博:"
-          value={accountInfo.weibo}
-          onChange={logic.profileChange('weibo')}
-        />
-        <FormItem
-          label="微信:"
-          value={accountInfo.weichat}
-          onChange={logic.profileChange('weichat')}
-        />
-        <SexItem label="性别:" value={accountInfo.sex} />
-        <FormItem
-          label="简介:"
-          textarea
-          value={accountInfo.bio}
-          onChange={logic.profileChange('bio')}
-        />
+      <br />
+      <StatusBox success={success} error={error} warn={warn} msg={statusMsg} />
 
-        <br />
-        <StatusBox
-          success={success}
-          error={error}
-          warn={warn}
-          msg={statusMsg}
-        />
-
-        <Divider />
-        <ActionBtns>
-          <Button type="primary" ghost onClick={logic.cancleEdit}>
-            取消
+      <Divider />
+      <ActionBtns>
+        <Button type="primary" ghost onClick={cancleEdit}>
+          取消
+        </Button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {updating ? (
+          <Button type="primary" disabled>
+            <Icon type="loading" /> 保存中
           </Button>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          {updating ? (
-            <Button type="primary" disabled>
-              <Icon type="loading" /> 保存中
-            </Button>
-          ) : (
-            <Button type="primary" onClick={logic.updateConfirm}>
-              保存
-            </Button>
-          )}
-        </ActionBtns>
-      </Wrapper>
-    )
-  }
+        ) : (
+          <Button type="primary" onClick={updateConfirm}>
+            保存
+          </Button>
+        )}
+      </ActionBtns>
+    </Wrapper>
+  )
 }
 
-export default inject(storePlug('accountEditor'))(
-  observer(AccountEditorContainer)
-)
+export default connectStore(AccountEditorContainer)

@@ -66,9 +66,6 @@ const HeaderStore = t
     updateAccount(sobj) {
       self.root.account.updateAccount(sobj)
     },
-    openDoraemon() {
-      self.root.openDoraemon()
-    },
     openPreview(type) {
       self.root.openPreview(type)
     },

@@ -1,4 +1,6 @@
 import R from 'ramda'
+import { useEffect } from 'react'
+
 import {
   asyncSuit,
   buildLog,
@@ -51,7 +53,8 @@ const markLoading = fresh => {
   return store.markState({ loading: true })
 }
 
-export function createComment() {
+/* eslint-disable-next-line */
+export const createComment = R.curry((cb, e) => {
   if (!store.validator('create')) return false
 
   store.markState({ creating: true })
@@ -59,11 +62,14 @@ export function createComment() {
     id: store.viewingData.id,
     body: store.editContent,
     thread: store.activeThread,
+    community: store.communityRaw,
+    mentionUsers: R.map(user => ({ id: user.id }), store.referUsersData),
   }
 
   log('createComment args: ', args)
   sr71$.mutate(S.createComment, args)
-}
+  cb()
+})
 
 export function createCommentPreview() {
   store.markState({
@@ -334,16 +340,28 @@ const ErrSolver = [
   },
 ]
 
-export function init(_store, ssr = false) {
-  if (store) {
-    if (!ssr) return loadComents()
-    return false
-  }
+// ###############################
+// init & uninit
+// ###############################
+export const useInit = (_store, ssr) => {
+  useEffect(
+    () => {
+      // log('effect init')
+      store = _store
+      if (!sub$) {
+        sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+        if (!ssr) loadComents({ filter: { sort: TYPE.DESC_INSERTED } })
+      }
 
-  store = _store
+      return () => {
+        // log('effect uninit')
+        if (store.loading || store.loadingFresh || !sub$) return false
 
-  if (sub$) sub$.unsubscribe()
-  sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
-
-  if (!ssr) return loadComents()
+        sr71$.stop()
+        sub$.unsubscribe()
+        sub$ = null
+      }
+    },
+    [_store, ssr]
+  )
 }

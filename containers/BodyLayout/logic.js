@@ -4,12 +4,11 @@ import { buildLog } from '@utils'
 const log = buildLog('L:BodyLayout')
 /* eslint-enable no-unused-vars */
 
-let bodylayout = null
+let store = null
 
-export function openDoraemon() {
-  bodylayout.openDoraemon()
+export function init(_store) {
+  store = _store
+  log(store)
 }
 
-export function init(selectedStore) {
-  bodylayout = selectedStore
-}
+export const holder = 1

@@ -110,11 +110,7 @@ const MiniMap = ({ curRoute }) => {
 
 // {fixed ? <MiniMap curRoute={curRoute} /> : <Navigator />}
 const Header = ({ curRoute, leftOffset, fixed, isLogin, accountInfo }) => (
-  <HeaderWrapper
-    id="whereCallShowDoraemon"
-    leftOffset={leftOffset}
-    fixed={fixed}
-  >
+  <HeaderWrapper leftOffset={leftOffset} fixed={fixed}>
     <RouterWrapper>
       <MiniMap curRoute={curRoute} />
     </RouterWrapper>

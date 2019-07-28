@@ -1,6 +1,6 @@
 import R from 'ramda'
+import { useEffect } from 'react'
 import { message } from 'antd'
-/* import Router from 'next/router' */
 
 import { PAGE_SIZE } from '@config'
 
@@ -438,16 +438,23 @@ const ErrSolver = [
   },
 ]
 
-export function init(_store) {
-  store = _store
+// ###############################
+// init & uninit
+// ###############################
+export const useInit = _store => {
+  useEffect(
+    () => {
+      store = _store
+      if (sub$) return false
+      sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 
-  if (sub$) return false
-  sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
-}
-
-export function uninit() {
-  if (!sub$) return false
-  log('===== do uninit')
-  sub$.unsubscribe()
-  sub$ = null
+      return () => {
+        if (!sub$) return false
+        log('===== do uninit')
+        sub$.unsubscribe()
+        sub$ = null
+      }
+    },
+    [_store]
+  )
 }

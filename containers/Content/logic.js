@@ -1,12 +1,13 @@
 // import R from 'ramda'
+import { useEffect } from 'react'
 
-import { asyncSuit, buildLog, $solver } from '@utils'
+import { asyncSuit, buildLog } from '@utils'
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('L:Content')
 /* eslint-enable no-unused-vars */
 
-const { SR71 } = asyncSuit
+const { SR71, $solver } = asyncSuit
 const sr71$ = new SR71()
 
 let sub$ = null
@@ -21,9 +22,23 @@ export function someMethod() {}
 const DataSolver = []
 const ErrSolver = []
 
-export function init(selectedStore) {
-  store = selectedStore
-  log(store)
-  if (sub$) sub$.unsubscribe()
-  sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+// ###############################
+// init & uninit
+// ###############################
+export const useInit = _store => {
+  useEffect(
+    () => {
+      store = _store
+      log(store)
+      if (sub$) sub$.unsubscribe()
+      sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+
+      return () => {
+        if (!sub$) return false
+        sub$.unsubscribe()
+        sub$ = null
+      }
+    },
+    [_store]
+  )
 }

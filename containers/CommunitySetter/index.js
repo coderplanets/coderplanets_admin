@@ -6,11 +6,10 @@
 
 import React from 'react'
 import R from 'ramda'
-import { inject, observer } from 'mobx-react'
 
+import { uid, buildLog, connectStore } from '@utils'
 import { Pagi } from '@components'
 
-import { uid, buildLog, storePlug } from '@utils'
 import {
   Wrapper,
   Divider,
@@ -20,7 +19,7 @@ import {
   SetterTitle,
 } from './styles'
 
-import * as logic from './logic'
+import { useInit, setCommunity, getAllCommunities } from './logic'
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('C:CommunitySetter')
@@ -32,7 +31,7 @@ const CommunitiesList = ({ thread, source, communities, selectedids }) => (
       <CategoryTag
         key={uid.gen()}
         active={R.contains(c.id, selectedids)}
-        onClick={logic.setCommunity.bind(this, thread, source.id, c.id)}
+        onClick={setCommunity.bind(this, thread, source.id, c.id)}
       >
         <CommunityLogo src={c.logo} />
         {c.title}
@@ -41,51 +40,43 @@ const CommunitiesList = ({ thread, source, communities, selectedids }) => (
   </CategoryWrapper>
 )
 
-class CommunitySetterContainer extends React.Component {
-  componentDidMount() {
-    const { communitySetter } = this.props
-    logic.init(communitySetter)
-  }
+const CommunitySetterContainer = ({ communitySetter, editData }) => {
+  useInit(communitySetter)
 
-  render() {
-    const { communitySetter, editData } = this.props
-    const { pagedCommunitiesData } = communitySetter
-    const { thread } = editData
+  const { pagedCommunitiesData } = communitySetter
+  const { thread } = editData
 
-    const source = editData.data
-    const selectedids = R.pluck('id', source.communities)
+  const source = editData.data
+  const selectedids = R.pluck('id', source.communities)
 
-    return (
-      <Wrapper>
-        <SetterTitle>{source.title}</SetterTitle>
-        <h2>设置社区</h2>
-        <Divider />
-        {pagedCommunitiesData ? (
-          <React.Fragment>
-            <CommunitiesList
-              thread={thread}
-              source={source}
-              communities={pagedCommunitiesData.entries}
-              selectedids={selectedids}
+  return (
+    <Wrapper>
+      <SetterTitle>{source.title}</SetterTitle>
+      <h2>设置社区</h2>
+      <Divider />
+      {pagedCommunitiesData ? (
+        <React.Fragment>
+          <CommunitiesList
+            thread={thread}
+            source={source}
+            communities={pagedCommunitiesData.entries}
+            selectedids={selectedids}
+          />
+          <Divider />
+          <div>
+            <Pagi
+              pageNumber={pagedCommunitiesData.pageNumber}
+              pageSize={pagedCommunitiesData.pageSize}
+              totalCount={pagedCommunitiesData.totalCount}
+              onChange={getAllCommunities}
             />
-            <Divider />
-            <div>
-              <Pagi
-                pageNumber={pagedCommunitiesData.pageNumber}
-                pageSize={pagedCommunitiesData.pageSize}
-                totalCount={pagedCommunitiesData.totalCount}
-                onChange={logic.getAllCommunities}
-              />
-            </div>
-          </React.Fragment>
-        ) : (
-          <div />
-        )}
-      </Wrapper>
-    )
-  }
+          </div>
+        </React.Fragment>
+      ) : (
+        <div />
+      )}
+    </Wrapper>
+  )
 }
 
-export default inject(storePlug('communitySetter'))(
-  observer(CommunitySetterContainer)
-)
+export default connectStore(CommunitySetterContainer)

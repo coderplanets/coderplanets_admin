@@ -77,6 +77,7 @@ export {
 } from './route_helper'
 
 export {
+  connectStore,
   storePlug,
   markStates,
   meteorState,
@@ -86,14 +87,7 @@ export {
   updateEditing,
 } from './mobx_helper'
 
-export {
-  pageGoTop,
-  scrollIntoEle,
-  holdPage,
-  unholdPage,
-  focusDoraemonBar,
-  hideDoraemonBarRecover,
-} from './dom_operator'
+export { pageGoTop, scrollIntoEle, holdPage, unholdPage } from './dom_operator'
 
 /*
  * theme related

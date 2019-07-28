@@ -1,8 +1,8 @@
 /* import R from 'ramda' */
 
-import { buildLog, $solver } from '@utils'
-import SR71 from 'utils/network/sr71'
+import { buildLog, asyncSuit } from '@utils'
 
+const { SR71, $solver } = asyncSuit
 const sr71$ = new SR71()
 
 /* eslint-disable no-unused-vars */

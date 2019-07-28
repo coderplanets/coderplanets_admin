@@ -1,4 +1,5 @@
 // import R from 'ramda'
+import { useEffect } from 'react'
 
 import { asyncSuit, buildLog } from '@utils'
 
@@ -22,10 +23,23 @@ export function onAdd() {}
 const DataSolver = []
 const ErrSolver = []
 
-export function init(_store) {
-  store = _store
-  log(store)
+// ###############################
+// init & uninit
+// ###############################
+export const useInit = _store => {
+  useEffect(
+    () => {
+      store = _store
+      log(store)
+      if (sub$) sub$.unsubscribe()
+      sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 
-  if (sub$) return false
-  sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+      return () => {
+        if (!sub$) return false
+        sub$.unsubscribe()
+        sub$ = null
+      }
+    },
+    [_store]
+  )
 }

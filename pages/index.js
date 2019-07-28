@@ -14,7 +14,6 @@ import {
   MultiLanguage,
   Sidebar,
   Preview,
-  Doraemon,
   Route,
   BodyLayout,
 } from '@containers'
@@ -93,7 +92,6 @@ export default class Index extends React.Component {
             <MultiLanguage>
               <Sidebar />
               <Preview />
-              <Doraemon />
               <BodyLayout>
                 <Header />
                 <Banner />

@@ -44,7 +44,6 @@ import {
   AccountViewerStore,
   CommentsStore,
   // toolbox
-  DoraemonStore,
   PreviewStore,
   SidebarStore,
   TypeWriterStore,
@@ -72,7 +71,6 @@ const rootStore = t
     // toolbox
     sidebar: t.optional(SidebarStore, { menuItems: [] }),
     preview: t.optional(PreviewStore, { visible: false }),
-    doraemon: t.optional(DoraemonStore, {}),
     docUploader: t.optional(DocUploaderStore, {}),
 
     // layouts
@@ -141,9 +139,6 @@ const rootStore = t
     },
     setHeaderFix(fix) {
       self.header.setFix(fix)
-    },
-    openDoraemon() {
-      self.doraemon.open()
     },
     openPreview(type) {
       self.preview.open(type)

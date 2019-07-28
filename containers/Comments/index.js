@@ -6,78 +6,64 @@
 
 import React from 'react'
 import T from 'prop-types'
-import { inject, observer } from 'mobx-react'
+
+import { buildLog, connectStore } from '@utils'
 
 import { Modal } from '@components'
-import { buildLog, storePlug } from '@utils'
 import CommentEditor from './CommentEditor'
 import CommentsList from './CommentsList'
 import CommentReplyEditor from './CommentReplyEditor'
 
 import { Wrapper } from './styles'
 
-import * as logic from './logic'
+import { useInit, createComment } from './logic'
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('C:Comments')
 /* eslint-enable no-unused-vars */
 
-class CommentsContainer extends React.Component {
-  constructor(props) {
-    super(props)
+const CommentsContainer = ({ comments, ssr, onCreate }) => {
+  useInit(comments, ssr)
 
-    const { comments, ssr } = props
-    logic.init(comments, ssr)
-  }
+  const {
+    pagedCommentsData,
+    referUsersData,
+    accountInfo,
+    showReplyBox,
+    showReplyEditor,
+    showReplyPreview,
+  } = comments
 
-  onCreate() {
-    const { onCreate } = this.props
-    logic.createComment()
-    onCreate()
-  }
+  return (
+    <Wrapper>
+      <Modal show={showReplyBox}>
+        {/* NOTE: this is used for react-clickouside */}
+        {showReplyBox ? (
+          <CommentReplyEditor
+            accountInfo={accountInfo}
+            referUsers={referUsersData}
+            restProps={{ ...comments }}
+            show={showReplyEditor}
+            showReplyPreview={showReplyPreview}
+          />
+        ) : (
+          <div />
+        )}
+      </Modal>
 
-  render() {
-    const { comments } = this.props
-    const {
-      pagedCommentsData,
-      referUsersData,
-      accountInfo,
-      showReplyBox,
-      showReplyEditor,
-      showReplyPreview,
-    } = comments
-
-    return (
-      <Wrapper>
-        <Modal show={showReplyBox}>
-          {/* NOTE: this is used for react-clickouside */}
-          {showReplyBox ? (
-            <CommentReplyEditor
-              accountInfo={accountInfo}
-              referUsers={referUsersData}
-              restProps={{ ...comments }}
-              show={showReplyEditor}
-              showReplyPreview={showReplyPreview}
-            />
-          ) : (
-            <div />
-          )}
-        </Modal>
-
-        <CommentEditor
-          onCreate={this.onCreate.bind(this)}
-          accountInfo={accountInfo}
-          referUsers={referUsersData}
-          restProps={{ ...comments }}
-        />
-        <CommentsList
-          accountInfo={accountInfo}
-          pagedComments={pagedCommentsData}
-          restProps={{ ...comments }}
-        />
-      </Wrapper>
-    )
-  }
+      <CommentEditor
+        onCreate={createComment(onCreate)}
+        accountInfo={accountInfo}
+        referUsers={referUsersData}
+        restProps={{ ...comments }}
+      />
+      <CommentsList
+        accountInfo={accountInfo}
+        pagedComments={pagedCommentsData}
+        restProps={{ ...comments }}
+      />
+    </Wrapper>
+  )
 }
 
 CommentsContainer.propTypes = {
@@ -91,4 +77,4 @@ CommentsContainer.defaultProps = {
   ssr: false,
 }
 
-export default inject(storePlug('comments'))(observer(CommentsContainer))
+export default connectStore(CommentsContainer)

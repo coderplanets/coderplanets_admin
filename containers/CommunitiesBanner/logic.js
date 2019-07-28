@@ -1,5 +1,7 @@
 // import R from 'ramda'
 // import Router from 'next/router'
+import { useEffect } from 'react'
+
 import { asyncSuit, buildLog, ERR, EVENT, TYPE, send } from '@utils'
 
 import S from './schema'
@@ -34,10 +36,6 @@ export function loadPosts() {
 
 export function loadJobs() {
   sr71$.query(S.pagedJobs, { filter: {} })
-}
-
-export function onSearch() {
-  store.openDoraemon()
 }
 
 export const loadCategories = () =>
@@ -146,17 +144,23 @@ const ErrSolver = [
   },
 ]
 
-export function init(_store) {
-  store = _store
-  if (sub$) return false // loadCommunities() // loadCategories()
-  sr71$.data().subscribe($solver(DataSolver, ErrSolver))
-  // loadCommunities()
-  // loadCategories()
-}
+// ###############################
+// init & uninit
+// ###############################
+export const useInit = _store => {
+  useEffect(
+    () => {
+      store = _store
+      if (sub$) return false // loadCommunities() // loadCategories()
+      sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 
-export function uninit() {
-  if (!sub$) return false
-  log('===== do uninit')
-  sub$.unsubscribe()
-  sub$ = null
+      return () => {
+        if (!sub$) return false
+        log('===== do uninit')
+        sub$.unsubscribe()
+        sub$ = null
+      }
+    },
+    [_store]
+  )
 }

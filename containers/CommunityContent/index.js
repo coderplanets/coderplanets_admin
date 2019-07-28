@@ -5,11 +5,8 @@
  */
 
 import React from 'react'
-import { inject, observer } from 'mobx-react'
 
-// import Link from 'next/link'
-
-import { buildLog, storePlug, ROUTE } from '@utils'
+import { buildLog, connectStore, ROUTE } from '@utils'
 
 import PostsContent from './PostsContent'
 import JobsContent from './JobsContent'
@@ -20,7 +17,7 @@ import ThreadsContent from './ThreadsContent'
 import UsersContent from './UsersContent'
 
 import { Wrapper } from './styles'
-import * as logic from './logic'
+import { useInit } from './logic'
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('C:CommunityContent')
@@ -68,48 +65,36 @@ const ChildContent = ({
   }
 }
 
-class CommunityContentContainer extends React.Component {
-  componentDidMount() {
-    const { communityContent } = this.props
-    logic.init(communityContent)
-  }
+const CommunityContentContainer = ({ communityContent }) => {
+  useInit(communityContent)
 
-  componentWillUnmount() {
-    logic.uninit()
-  }
+  const {
+    curRoute,
+    pagedPostsData,
+    pagedJobsData,
+    pagedVideosData,
+    pagedReposData,
+    pagedTagsData,
+    pagedThreadsData,
+    pagedSubscribersData,
+  } = communityContent
+  const restProps = { ...communityContent }
 
-  render() {
-    const { communityContent } = this.props
-    const {
-      curRoute,
-      pagedPostsData,
-      pagedJobsData,
-      pagedVideosData,
-      pagedReposData,
-      pagedTagsData,
-      pagedThreadsData,
-      pagedSubscribersData,
-    } = communityContent
-    const restProps = { ...communityContent }
-
-    return (
-      <Wrapper>
-        <ChildContent
-          curRoute={curRoute}
-          pagedPostsData={pagedPostsData}
-          pagedJobsData={pagedJobsData}
-          pagedVideosData={pagedVideosData}
-          pagedReposData={pagedReposData}
-          pagedTagsData={pagedTagsData}
-          pagedThreadsData={pagedThreadsData}
-          pagedSubscribersData={pagedSubscribersData}
-          restProps={restProps}
-        />
-      </Wrapper>
-    )
-  }
+  return (
+    <Wrapper>
+      <ChildContent
+        curRoute={curRoute}
+        pagedPostsData={pagedPostsData}
+        pagedJobsData={pagedJobsData}
+        pagedVideosData={pagedVideosData}
+        pagedReposData={pagedReposData}
+        pagedTagsData={pagedTagsData}
+        pagedThreadsData={pagedThreadsData}
+        pagedSubscribersData={pagedSubscribersData}
+        restProps={restProps}
+      />
+    </Wrapper>
+  )
 }
 
-export default inject(storePlug('communityContent'))(
-  observer(CommunityContentContainer)
-)
+export default connectStore(CommunityContentContainer)

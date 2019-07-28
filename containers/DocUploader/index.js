@@ -6,17 +6,24 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 import T from 'prop-types'
+import R from 'ramda'
 
 import { ASSETS_ENDPOINT } from '@config'
+import { buildLog, storePlug, uid, Global } from '@utils'
 
-import { buildLog, storePlug, uid } from '@utils'
 import { Wrapper, InputFile } from './styles'
 
-import { init, onUploadError, getOSSDir, getOSSFileName } from './logic'
+import {
+  init,
+  uninit,
+  onUploadError,
+  getOSSDir,
+  getOSSFileName,
+  sendEvent,
+} from './logic'
 
-/* eslint-disable no-unused-vars */
+/* eslint-disable-next-line */
 const log = buildLog('C:DocUploader')
-/* eslint-enable no-unused-vars */
 
 class DocUploaderContainer extends React.Component {
   /*
@@ -36,20 +43,65 @@ class DocUploaderContainer extends React.Component {
 
   state = {
     ossClient: null,
+    ossScriptAnchor: null,
+    ossScriptLoaded: false,
     // use unique id to init the file input, otherwise it will be the some instance
     uniqueId: uid.gen(),
+    initTimestamp: Date.now() / 1000,
   }
 
   componentDidMount() {
-    const { docUploader } = this.props
+    this.loadScriptAndInitOSS()
+
+    const { docUploader, pasteImage } = this.props
     init(docUploader)
-    this.initOssClient()
+
+    // if (ossScriptLoaded) this.initOssClient()
+    if (pasteImage) this.initPasteWatcher()
   }
 
   componentWillUnmount() {
+    log('componentWillUnmount')
+    const { ossScriptLoaded, ossScriptAnchor } = this.state
+
     /* eslint-disable */
     delete this.state.ossClient
     /* eslint-enable */
+    const { pasteImage } = this.props
+    if (pasteImage) {
+      Global.removeEventListener('paste', this.handlePaste.bind(this), true)
+    }
+    uninit()
+
+    if (ossScriptLoaded) {
+      ossScriptAnchor.removeEventListener('load', () => {
+        this.setState({ ossScriptLoaded: false })
+      })
+    }
+  }
+
+  loadScriptAndInitOSS() {
+    let { ossScriptAnchor } = this.state
+
+    ossScriptAnchor = document.createElement('script')
+    ossScriptAnchor.src =
+      'https://gosspublic.alicdn.com/aliyun-oss-sdk-5.2.0.min.js'
+    ossScriptAnchor.async = true
+    document.getElementsByTagName('head')[0].appendChild(ossScriptAnchor)
+
+    ossScriptAnchor.addEventListener('load', () => {
+      log('load done')
+      this.initOssClient()
+      this.setState({ ossScriptLoaded: true, ossScriptAnchor })
+    })
+    ossScriptAnchor.addEventListener('error', () => {
+      this.setState({ ossScriptLoaded: false, ossScriptAnchor: null })
+    })
+  }
+
+  initPasteWatcher() {
+    log('initPasteWatcher')
+    Global.addEventListener('paste', this.handlePaste.bind(this), true)
   }
 
   initOssClient() {
@@ -74,6 +126,11 @@ class DocUploaderContainer extends React.Component {
     /* eslint-enable */
   }
 
+  handlePaste({ clipboardData: { files } }) {
+    const file = files[0]
+    this.doUploadFile(file)
+  }
+
   onUploadDone(url) {
     /* eslint-disable */
     this.props.onUploadDone(url)
@@ -82,35 +139,51 @@ class DocUploaderContainer extends React.Component {
     this.initOssClient()
   }
 
-  /* eslint-disable */
-  handleCHange(e) {
-    console.log('handleCHange e: ', e)
-    const files = e.target.files
-    /* console.log('handleCHange files: ', files) */
-    const theFile = files[0]
-    if (!theFile) return false
+  handleInputChange({ target: { files } }) {
+    // const {files} = e.target.files
+    const file = files[0]
 
-    const FileSize = theFile.size / 1024 / 1024
-    if (FileSize > 2) {
-      return alert('资源有限，请不要上传大于 2MB 的文件')
+    this.doUploadFile(file)
+  }
+
+  doUploadFile(file) {
+    const { ossScriptLoaded } = this.state
+    if (!ossScriptLoaded) return alert('脚本未加载...')
+    if (!file || !R.startsWith('image/', file.type)) return false
+
+    const fileSize = file.size / 1024 / 1024
+    if (fileSize > 2) return alert('资源有限，请不要上传大于 2MB 的文件')
+
+    const { onUploadStart, onUploadError } = this.props
+    const { ossClient, initTimestamp } = this.state
+
+    const curTimeStamp = Date.now() / 1000
+    if (curTimeStamp - initTimestamp <= 3) {
+      return false
     }
 
-    this.props.onUploadStart()
-    const filename = theFile.name
+    this.setState({ initTimestamp: curTimeStamp })
+
+    sendEvent('start')
+    onUploadStart()
+    const filename = file.name
     const fullpath = `${getOSSDir()}/${getOSSFileName(filename)}`
 
-    this.state.ossClient
-      .multipartUpload(fullpath, theFile)
+    ossClient
+      .multipartUpload(fullpath, file)
       .then(result => {
         const url = `${ASSETS_ENDPOINT}/${result.name}`
+        sendEvent('finish')
         this.onUploadDone(url)
       })
-      .catch(err => this.props.onUploadError(err))
+      .catch(err => {
+        sendEvent('finish')
+        onUploadError(err)
+      })
   }
-  /* eslint-enable */
 
   render() {
-    const { children } = this.props
+    const { children, fileType } = this.props
     const { uniqueId } = this.state
 
     return (
@@ -119,8 +192,8 @@ class DocUploaderContainer extends React.Component {
           type="file"
           name={`file-${uniqueId}`}
           id={`file-${uniqueId}`}
-          accept="image/*"
-          onChange={this.handleCHange.bind(this)}
+          accept={fileType}
+          onChange={this.handleInputChange.bind(this)}
         />
         {/* eslint-disable */}
         <label htmlFor={`file-${uniqueId}`}>{children}</label>
@@ -136,12 +209,16 @@ DocUploaderContainer.propTypes = {
   onUploadError: T.func,
   onUploadDone: T.func,
   docUploader: T.any.isRequired,
+  pasteImage: T.bool,
+  fileType: T.oneOf(['image/*']),
 }
 
 DocUploaderContainer.defaultProps = {
   onUploadStart: log,
   onUploadDone: log,
   onUploadError,
+  pasteImage: true,
+  fileType: 'image/*',
 }
 
 export default inject(storePlug('docUploader'))(observer(DocUploaderContainer))
