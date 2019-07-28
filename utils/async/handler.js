@@ -3,21 +3,27 @@ import R from 'ramda'
 /* import { Observable } from 'rxjs/Observable' */
 import { of } from 'rxjs'
 
-import { buildLog, ERR } from '..'
-import { TIMEOUT_THRESHOLD } from './setup'
+import { ERR } from '../constants'
 
-/* eslint-disable no-unused-vars */
-const log = buildLog('Network')
-/* eslint-enable no-unused-vars */
+import { TIMEOUT_THRESHOLD } from './setup'
+import { buildLog } from '../logger'
+
+/* eslint-disable-next-line */
+const log = buildLog('Async')
 
 export const TimoutObservable = of({
   error: ERR.TIMEOUT,
-  details: `server has no-response in ${TIMEOUT_THRESHOLD} secs`,
+  details: `server has no-response in ${Math.round(
+    (TIMEOUT_THRESHOLD / 1000) * 100
+  ) / 100} secs`,
 })
 
 // refator later
-const fomatDetail = errors => {
+const formatDetail = errors => {
   const details = []
+  // NOTE:  eadge case, fix latter
+  if (!errors) return {}
+
   errors.map(({ message, path, key, code }) => {
     if (Array.isArray(message)) {
       return message.map(msg => {
@@ -40,14 +46,15 @@ const fomatDetail = errors => {
 }
 
 export const formatGraphErrors = error => {
-  if (Array.isArray(error))
-    return { error: ERR.CRAPHQL, details: fomatDetail(error) }
+  if (Array.isArray(error)) {
+    return { error: ERR.GRAPHQL, details: formatDetail(error) }
+  }
 
   const { graphQLErrors } = error
   if (!R.isEmpty(graphQLErrors)) {
     // graphQLErrors may not catch in graph query (wrang sytax etc ...)
     // checkout this issue https://github.com/apollographql/apollo-client/issues/2810
-    return { error: ERR.CRAPHQL, details: fomatDetail(graphQLErrors) }
+    return { error: ERR.GRAPHQL, details: formatDetail(graphQLErrors) }
   }
   return { error: ERR.NETWORK, details: 'checkout your server or network' }
 }
@@ -72,10 +79,10 @@ export const getThenHandler = res => {
 
 export const getCatchHandler = err => {
   /*
-     if (!navigator.onLine) {
-     return { error: 'NET_OFFLINE', details: 'NET_OFFLINE' }
-     }
-   */
+  if (!navigator.onLine) {
+    return { error: 'NET_OFFLINE', details: 'NET_OFFLINE' }
+  }
+  */
 
   switch (true) {
     case err.error === ERR.NOT_FOUND:

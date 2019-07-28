@@ -1,15 +1,8 @@
-import {
-  asyncRes,
-  $solver,
-  buildLog,
-  EVENT,
-  holdPage,
-  TYPE,
-  send,
-} from '@utils'
-import SR71 from 'utils/network/sr71'
+import { asyncSuit, buildLog, EVENT, holdPage, TYPE, send } from '@utils'
 
-// const sr71$ = new SR71({ recieve: EVENT.PREVIEW })
+const log = buildLog('L:Preview')
+
+const { SR71, asyncRes, $solver } = asyncSuit
 const sr71$ = new SR71({
   recieve: [
     EVENT.NAV_EDIT,
@@ -34,8 +27,6 @@ const sr71$ = new SR71({
     EVENT.NAV_UPDATE_PERMISSION,
   ],
 })
-
-const log = buildLog('L:Preview')
 
 let store = null
 let sub$ = null

@@ -11,21 +11,10 @@ import {
   timeoutWith,
 } from 'rxjs/operators'
 
-// import 'rxjs/add/observable/of'
-// import 'rxjs/add/observable/fromEventPattern'
-
-/*
-   import 'rxjs/add/operator/debounceTime'
-   import 'rxjs/add/operator/do'
-   import 'rxjs/add/operator/switchMap'
-   import 'rxjs/add/operator/merge'
-   import 'rxjs/add/operator/timeoutWith'
- */
-
 import { TimoutObservable } from './handler'
 import { TIMEOUT_THRESHOLD } from './setup'
 
-import { queryPromise, mutatePromise, restGetPromise } from './index'
+import { queryPromise, mutatePromise, restGetPromise } from './methods'
 
 // import { debounceTime, switchMap, merge, timeoutWith } from 'rxjs/operator'
 
@@ -39,7 +28,6 @@ class SR71 {
     this.recieve = opts.recieve
 
     this.initEventSubscription()
-    /* this.query$ = this.queryInput$.debounceTime(300).switchMap(q => */
     this.query$ = this.queryInput$.pipe(
       debounce(() => timer(300)),
       switchMap(q =>
@@ -50,7 +38,6 @@ class SR71 {
       )
     )
 
-    /* this.mutate$ = this.mutateInput$.debounceTime(300).switchMap(q => */
     this.mutate$ = this.mutateInput$.pipe(
       debounce(() => timer(300)),
       switchMap(q =>
@@ -61,7 +48,6 @@ class SR71 {
       )
     )
 
-    /* this.restGet$ = this.getInput$.debounceTime(300).switchMap(q => */
     this.restGet$ = this.getInput$.pipe(
       debounce(() => timer(300)),
       switchMap(q =>

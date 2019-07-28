@@ -1,28 +1,14 @@
 // import R from 'ramda'
 // import store from 'store'
 
-import {
-  asyncRes,
-  asyncErr,
-  buildLog,
-  send,
-  EVENT,
-  TYPE,
-  /* Global, */
-  ERR,
-  $solver,
-  // getParameterByName,
-} from '@utils'
-
-import SR71 from 'utils/network/sr71'
-// import sr71$ from 'utils/network/sr71_simple'
-
+import { asyncSuit, buildLog, send, EVENT, TYPE, ERR } from '@utils'
 import S from './schema'
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('L:Header')
 /* eslint-enable no-unused-vars */
 
+const { SR71, asyncRes, asyncErr, $solver } = asyncSuit
 const sr71$ = new SR71()
 
 let store = null

@@ -1,17 +1,15 @@
 // import R from 'ramda'
 
-import { buildLog, $solver, asyncErr, ERR } from '@utils'
-import SR71 from 'utils/network/sr71'
-
-// import S from './schema'
-
-const sr71$ = new SR71()
-let sub$ = null
+import { asyncSuit, buildLog, ERR } from '@utils'
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('L:DocUploader')
 /* eslint-enable no-unused-vars */
 
+const { SR71, $solver, asyncErr } = asyncSuit
+const sr71$ = new SR71()
+
+let sub$ = null
 let store = null
 
 export function onUploadError(error) {

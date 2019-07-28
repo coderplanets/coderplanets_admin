@@ -117,6 +117,9 @@ export function toPercentNum(top, bottom) {
 export const send = (msg, data = {}) => PubSub.publish(msg, data)
 export const closePreviewer = (type = '') => send(EVENT.PREVIEW_CLOSE, { type })
 
+export const errRescue = ({ type, operation, details, path }) =>
+  send(EVENT.ERR_RESCUE, { type, data: { operation, details, path } })
+
 /* eslint-disable */
 export function debounce(func, wait, immediate) {
   let timeout

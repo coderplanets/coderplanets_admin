@@ -5,9 +5,7 @@ import { message } from 'antd'
 import { PAGE_SIZE } from '@config'
 
 import {
-  asyncRes,
-  asyncErr,
-  $solver,
+  asyncSuit,
   ERR,
   buildLog,
   EVENT,
@@ -19,9 +17,13 @@ import {
   send,
 } from '@utils'
 
-import SR71 from 'utils/network/sr71'
 import S from './schema'
 
+/* eslint-disable no-unused-vars */
+const log = buildLog('L:CommunitiesContent')
+/* eslint-enable no-unused-vars */
+
+const { SR71, asyncRes, asyncErr, $solver } = asyncSuit
 const sr71$ = new SR71({
   recieve: [
     EVENT.LOGOUT,
@@ -30,10 +32,6 @@ const sr71$ = new SR71({
     EVENT.SIDEBAR_MENU_CHANGE,
   ],
 })
-
-/* eslint-disable no-unused-vars */
-const log = buildLog('L:CommunitiesContent')
-/* eslint-enable no-unused-vars */
 
 let sub$ = null
 let store = null

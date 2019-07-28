@@ -1,23 +1,13 @@
 // import R from 'ramda'
-import {
-  asyncRes,
-  asyncErr,
-  buildLog,
-  $solver,
-  ERR,
-  send,
-  EVENT,
-  TYPE,
-  Global,
-} from '@utils'
+import { asyncSuit, buildLog, ERR, send, EVENT, TYPE, Global } from '@utils'
 
-import SR71 from 'utils/network/sr71'
 import S from './schema'
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('L:AccountViewer')
 /* eslint-enable no-unused-vars */
 
+const { SR71, $solver, asyncRes, asyncErr } = asyncSuit
 const sr71$ = new SR71({
   recieve: [EVENT.LOGIN],
 })

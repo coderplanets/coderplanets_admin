@@ -1,9 +1,7 @@
 import R from 'ramda'
 
 import {
-  asyncRes,
-  asyncErr,
-  $solver,
+  asyncSuit,
   buildLog,
   isEmptyValue,
   send,
@@ -13,14 +11,15 @@ import {
   countWords,
   extractAttachments,
 } from '@utils'
-import SR71 from 'utils/network/sr71'
-import S from './schema'
 
-const sr71$ = new SR71()
+import S from './schema'
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('L:TypeWriter')
 /* eslint-enable no-unused-vars */
+
+const { SR71, asyncRes, asyncErr, $solver } = asyncSuit
+const sr71$ = new SR71()
 
 let store = null
 let sub$ = null

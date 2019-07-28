@@ -1,17 +1,16 @@
 import R from 'ramda'
 
-import { asyncRes, buildLog, $solver, closePreviewer, TYPE } from '@utils'
-
-import SR71 from 'utils/network/sr71'
+import { asyncSuit, buildLog, closePreviewer, TYPE } from '@utils'
 import S from './schema'
-
-const sr71$ = new SR71()
-let sub$ = null
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('L:TagSetter')
 /* eslint-enable no-unused-vars */
 
+const { SR71, asyncRes, $solver } = asyncSuit
+const sr71$ = new SR71()
+
+let sub$ = null
 let store = null
 
 export function onAdd(thread, id, tagId, communityId, selectedIds) {

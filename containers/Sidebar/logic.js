@@ -2,32 +2,22 @@ import R from 'ramda'
 /* import store from 'store' */
 
 // const log = buildLog('L:sidebar')
-import {
-  asyncRes,
-  asyncErr,
-  $solver,
-  ERR,
-  buildLog,
-  EVENT,
-  ROUTE,
-  // TYPE,
-  send,
-} from '@utils'
 import { PAGE_SIZE } from '@config'
 
-import SR71 from 'utils/network/sr71'
+import { asyncSuit, ERR, buildLog, EVENT, ROUTE, send } from '@utils'
 import S from './schema'
 
+/* eslint-disable no-unused-vars */
+const log = buildLog('L:Sidebar')
+/* eslint-enable no-unused-vars */
+
+const { SR71, asyncRes, asyncErr, $solver } = asyncSuit
 const sr71$ = new SR71({
   recieve: [EVENT.LOGOUT, EVENT.LOGIN, EVENT.ROUTE_CHANGE],
 })
 
 let store = null
 let sub$ = null
-
-/* eslint-disable no-unused-vars */
-const log = buildLog('L:Sidebar')
-/* eslint-enable no-unused-vars */
 
 export const pin = () => store.markState({ pin: !store.pin })
 

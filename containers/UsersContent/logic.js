@@ -1,9 +1,6 @@
 import {
+  asyncSuit,
   buildLog,
-  asyncRes,
-  // asyncErr,
-  $solver,
-  // ERR,
   EVENT,
   TYPE,
   ROUTE,
@@ -12,18 +9,18 @@ import {
 } from '@utils'
 import { PAGE_SIZE } from '@config'
 
-import SR71 from 'utils/network/sr71'
 import S from './schema'
-
-const sr71$ = new SR71({
-  recieve: [EVENT.PREVIEW_CLOSE, EVENT.SIDEBAR_MENU_CHANGE],
-})
-let sub$ = null
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('L:UsersContent')
 /* eslint-enable no-unused-vars */
 
+const { SR71, asyncRes, $solver } = asyncSuit
+const sr71$ = new SR71({
+  recieve: [EVENT.PREVIEW_CLOSE, EVENT.SIDEBAR_MENU_CHANGE],
+})
+
+let sub$ = null
 let store = null
 
 const commonFilter = page => {

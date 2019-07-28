@@ -1,15 +1,15 @@
 // import R from 'ramda'
 
-import { buildLog, $solver } from '@utils'
-import SR71 from 'utils/network/sr71'
-
-const sr71$ = new SR71()
-let sub$ = null
+import { asyncSuit, buildLog, $solver } from '@utils'
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('L:Banner')
 /* eslint-enable no-unused-vars */
 
+const { SR71 } = asyncSuit
+const sr71$ = new SR71()
+
+let sub$ = null
 let store = null
 
 export function someMethod() {}

@@ -1,19 +1,18 @@
 import R from 'ramda'
 
 import {
-  asyncRes,
-  asyncErr,
+  asyncSuit,
   buildLog,
-  $solver,
   send,
   EVENT,
   ERR,
   TYPE,
   meteorState,
 } from '@utils'
-import SR71 from 'utils/network/sr71'
+
 import S from './schema'
 
+const { SR71, $solver, asyncRes, asyncErr } = asyncSuit
 const sr71$ = new SR71()
 
 /* eslint-disable no-unused-vars */

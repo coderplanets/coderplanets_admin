@@ -1,12 +1,10 @@
 import R from 'ramda'
 import {
-  asyncRes,
-  asyncErr,
+  asyncSuit,
   buildLog,
   EVENT,
   ERR,
   TYPE,
-  $solver,
   scrollIntoEle,
   countWords,
   send,
@@ -14,16 +12,16 @@ import {
 } from '@utils'
 
 import { PAGE_SIZE } from '@config'
-import SR71 from 'utils/network/sr71'
 import S from './schema'
-
-const sr71$ = new SR71()
-let sub$ = null
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('L:Comments')
 /* eslint-enable no-unused-vars */
 
+const { SR71, asyncRes, asyncErr, $solver } = asyncSuit
+const sr71$ = new SR71()
+
+let sub$ = null
 let store = null
 
 /* DESC_INSERTED, ASC_INSERTED */

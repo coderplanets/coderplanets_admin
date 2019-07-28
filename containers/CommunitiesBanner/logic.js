@@ -1,26 +1,17 @@
 // import R from 'ramda'
 // import Router from 'next/router'
-import {
-  asyncRes,
-  asyncErr,
-  buildLog,
-  $solver,
-  ERR,
-  EVENT,
-  TYPE,
-  send,
-} from '@utils'
-
-import SR71 from 'utils/network/sr71'
+import { asyncSuit, buildLog, ERR, EVENT, TYPE, send } from '@utils'
 
 import S from './schema'
 
-const sr71$ = new SR71({
-  recieve: [EVENT.PREVIEW_CLOSE],
-})
 /* eslint-disable no-unused-vars */
 const log = buildLog('L:communitiesBanner')
 /* eslint-enable no-unused-vars */
+
+const { SR71, asyncRes, asyncErr, $solver } = asyncSuit
+const sr71$ = new SR71({
+  recieve: [EVENT.PREVIEW_CLOSE],
+})
 
 let store = null
 let sub$ = null
