@@ -1,26 +1,17 @@
 // import R from 'ramda'
 // import Router from 'next/router'
-import {
-  asyncRes,
-  asyncErr,
-  buildLog,
-  $solver,
-  ERR,
-  EVENT,
-  TYPE,
-  dispatchEvent,
-} from '@utils'
-
-import SR71 from 'utils/network/sr71'
+import { asyncSuit, buildLog, ERR, EVENT, TYPE, send } from '@utils'
 
 import S from './schema'
 
-const sr71$ = new SR71({
-  resv_event: [EVENT.PREVIEW_CLOSE],
-})
 /* eslint-disable no-unused-vars */
 const log = buildLog('L:communitiesBanner')
 /* eslint-enable no-unused-vars */
+
+const { SR71, asyncRes, asyncErr, $solver } = asyncSuit
+const sr71$ = new SR71({
+  recieve: [EVENT.PREVIEW_CLOSE],
+})
 
 let store = null
 let sub$ = null
@@ -55,23 +46,23 @@ export const loadCategories = () =>
 export function onAdd(thread) {
   switch (thread) {
     case 'tags': {
-      return dispatchEvent(EVENT.NAV_CREATE_TAG, {
+      return send(EVENT.NAV_CREATE_TAG, {
         type: TYPE.PREVIEW_CREATE_TAG,
       })
     }
     case 'categories': {
-      return dispatchEvent(EVENT.NAV_CREATE_CATEGORY, {
+      return send(EVENT.NAV_CREATE_CATEGORY, {
         type: TYPE.PREVIEW_CREATE_CATEGORY,
       })
     }
     case 'threads': {
-      return dispatchEvent(EVENT.NAV_CREATE_THREAD, {
+      return send(EVENT.NAV_CREATE_THREAD, {
         type: TYPE.PREVIEW_CREATE_THREAD,
       })
     }
     default: {
       log('onAdd default: ', thread)
-      return dispatchEvent(EVENT.NAV_CREATE_COMMUNITY, {
+      return send(EVENT.NAV_CREATE_COMMUNITY, {
         type: TYPE.PREVIEW_CREATE_COMMUNITY,
       })
     }

@@ -2,6 +2,8 @@
  * constants used cross the site
  */
 
+export { default as asyncSuit } from './async_suit'
+
 export {
   EVENT,
   ERR,
@@ -19,7 +21,7 @@ export { default as uid } from './uid'
  */
 
 export {
-  dispatchEvent,
+  send,
   mapKeys,
   mapKey,
   mapValue,

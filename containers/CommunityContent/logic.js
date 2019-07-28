@@ -1,31 +1,20 @@
 // import R from 'ramda'
 
-import {
-  asyncRes,
-  // asyncErr,
-  $solver,
-  // ERR,
-  buildLog,
-  EVENT,
-  ROUTE,
-  TYPE,
-  scrollIntoEle,
-} from '@utils'
+import { asyncSuit, buildLog, EVENT, ROUTE, TYPE, scrollIntoEle } from '@utils'
 import { PAGE_SIZE } from '@config'
 
-import SR71 from 'utils/network/sr71'
 import S from './schema'
 
+const { SR71, asyncRes, $solver } = asyncSuit
 const sr71$ = new SR71({
-  resv_event: [EVENT.SIDEBAR_MENU_CHANGE],
+  recieve: [EVENT.SIDEBAR_MENU_CHANGE],
 })
-
-let sub$ = null
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('L:CommunityContent')
 /* eslint-enable no-unused-vars */
 
+let sub$ = null
 let store = null
 
 const commonFilter = (page, community = 'home') => {

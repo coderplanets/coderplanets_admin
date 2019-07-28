@@ -1,14 +1,13 @@
-import fetch from 'isomorphic-fetch'
 import { from } from 'rxjs'
+import fetch from 'isomorphic-fetch'
 
-/* import { buildLog } from '@utils' */
+import { buildLog } from '../logger'
 import { client, context } from './setup'
 
 import { getThenHandler, getCatchHandler, formatGraphErrors } from './handler'
 
-/* eslint-disable no-unused-vars */
-/* const log = buildLog('Network') */
-/* eslint-enable no-unused-vars */
+/* eslint-disable-next-line */
+const log = buildLog('Async')
 
 const doQuery = (query, variables) =>
   client
@@ -30,7 +29,12 @@ const doMutate = (mutation, variables) =>
       variables,
       context,
     })
-    .then(res => res.data)
+    .then(res => {
+      // once login user has mutation to server
+      // then clear all the cache store in Apollo client.
+      client.clearStore()
+      return res.data
+    })
     .catch(formatGraphErrors)
 
 const GET = url =>
@@ -45,14 +49,3 @@ export const mutatePromise = ({ mutation, variables }) =>
   from(doMutate(mutation, variables))
 
 export const restGetPromise = url => from(GET(url))
-
-/*
-
-   const network = {
-   query,
-   mutate,
-   GET,
-   }
-
-   export default network
- */

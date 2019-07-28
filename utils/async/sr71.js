@@ -11,35 +11,23 @@ import {
   timeoutWith,
 } from 'rxjs/operators'
 
-// import 'rxjs/add/observable/of'
-// import 'rxjs/add/observable/fromEventPattern'
-
-/*
-   import 'rxjs/add/operator/debounceTime'
-   import 'rxjs/add/operator/do'
-   import 'rxjs/add/operator/switchMap'
-   import 'rxjs/add/operator/merge'
-   import 'rxjs/add/operator/timeoutWith'
- */
-
 import { TimoutObservable } from './handler'
 import { TIMEOUT_THRESHOLD } from './setup'
 
-import { queryPromise, mutatePromise, restGetPromise } from './index'
+import { queryPromise, mutatePromise, restGetPromise } from './methods'
 
 // import { debounceTime, switchMap, merge, timeoutWith } from 'rxjs/operator'
 
 class SR71 {
-  constructor(opts = { resv_event: '' }) {
+  constructor(opts = { recieve: '' }) {
     this.getInput$ = new Subject()
     this.queryInput$ = new Subject()
     this.mutateInput$ = new Subject()
     this.stop$ = new Subject()
     this.eventInput$ = new Subject()
-    this.resv_event = opts.resv_event
+    this.recieve = opts.recieve
 
     this.initEventSubscription()
-    /* this.query$ = this.queryInput$.debounceTime(300).switchMap(q => */
     this.query$ = this.queryInput$.pipe(
       debounce(() => timer(300)),
       switchMap(q =>
@@ -50,7 +38,6 @@ class SR71 {
       )
     )
 
-    /* this.mutate$ = this.mutateInput$.debounceTime(300).switchMap(q => */
     this.mutate$ = this.mutateInput$.pipe(
       debounce(() => timer(300)),
       switchMap(q =>
@@ -61,7 +48,6 @@ class SR71 {
       )
     )
 
-    /* this.restGet$ = this.getInput$.debounceTime(300).switchMap(q => */
     this.restGet$ = this.getInput$.pipe(
       debounce(() => timer(300)),
       switchMap(q =>
@@ -81,12 +67,12 @@ class SR71 {
 
   // Private
   initEventSubscription() {
-    if (Array.isArray(this.resv_event)) {
+    if (Array.isArray(this.recieve)) {
       R.forEach(event => {
         this.subscriptEvent(event)
-      }, this.resv_event)
+      }, this.recieve)
     } else {
-      this.subscriptEvent(this.resv_event)
+      this.subscriptEvent(this.recieve)
     }
   }
 

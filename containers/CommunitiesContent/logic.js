@@ -2,10 +2,10 @@ import R from 'ramda'
 import { message } from 'antd'
 /* import Router from 'next/router' */
 
+import { PAGE_SIZE } from '@config'
+
 import {
-  asyncRes,
-  asyncErr,
-  $solver,
+  asyncSuit,
   ERR,
   buildLog,
   EVENT,
@@ -14,25 +14,24 @@ import {
   ROUTE,
   scrollIntoEle,
   closePreviewer,
-  dispatchEvent,
+  send,
 } from '@utils'
 
-import { PAGE_SIZE } from '@config'
-import SR71 from 'utils/network/sr71'
 import S from './schema'
 
+/* eslint-disable no-unused-vars */
+const log = buildLog('L:CommunitiesContent')
+/* eslint-enable no-unused-vars */
+
+const { SR71, asyncRes, asyncErr, $solver } = asyncSuit
 const sr71$ = new SR71({
-  resv_event: [
+  recieve: [
     EVENT.LOGOUT,
     EVENT.LOGIN,
     EVENT.PREVIEW_CLOSE,
     EVENT.SIDEBAR_MENU_CHANGE,
   ],
 })
-
-/* eslint-disable no-unused-vars */
-const log = buildLog('L:CommunitiesContent')
-/* eslint-enable no-unused-vars */
 
 let sub$ = null
 let store = null
@@ -134,13 +133,13 @@ export function onEdit(record) {
 }
 
 export const onEditCategory = record =>
-  dispatchEvent(EVENT.NAV_UPDATE_CATEGORY, {
+  send(EVENT.NAV_UPDATE_CATEGORY, {
     type: TYPE.PREVIEW_UPDATE_CATEGORY,
     data: record,
   })
 
 export const onEditTag = record =>
-  dispatchEvent(EVENT.NAV_UPDATE_TAG, {
+  send(EVENT.NAV_UPDATE_TAG, {
     type: TYPE.PREVIEW_UPDATE_TAG,
     data: record,
   })
@@ -161,7 +160,7 @@ export function onDeleteCagegory(record) {
 }
 
 export const setCommunity = (thread, source) =>
-  dispatchEvent(EVENT.NAV_SET_COMMUNITY, {
+  send(EVENT.NAV_SET_COMMUNITY, {
     type: TYPE.PREVIEW_SET_COMMUNITY,
     data: {
       source,
@@ -188,7 +187,7 @@ export const unsetThread = (communityId, thread) =>
   })
 
 export const setThread = source =>
-  dispatchEvent(EVENT.NAV_SET_THREAD, {
+  send(EVENT.NAV_SET_THREAD, {
     type: TYPE.PREVIEW_SET_THREAD,
     data: source,
   })
@@ -200,13 +199,13 @@ export const unsetCategory = (communityId, category) =>
   })
 
 export const setCategory = source =>
-  dispatchEvent(EVENT.NAV_SET_CATEGORY, {
+  send(EVENT.NAV_SET_CATEGORY, {
     type: TYPE.PREVIEW_SET_CATEGORY,
     data: source,
   })
 
 export const setTag = (thread, source) =>
-  dispatchEvent(EVENT.NAV_SET_TAG, {
+  send(EVENT.NAV_SET_TAG, {
     type: TYPE.PREVIEW_SET_TAG,
     data: {
       thread,

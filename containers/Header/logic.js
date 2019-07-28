@@ -1,28 +1,14 @@
 // import R from 'ramda'
 // import store from 'store'
 
-import {
-  asyncRes,
-  asyncErr,
-  buildLog,
-  dispatchEvent,
-  EVENT,
-  TYPE,
-  /* Global, */
-  ERR,
-  $solver,
-  // getParameterByName,
-} from '@utils'
-
-import SR71 from 'utils/network/sr71'
-// import sr71$ from 'utils/network/sr71_simple'
-
+import { asyncSuit, buildLog, send, EVENT, TYPE, ERR } from '@utils'
 import S from './schema'
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('L:Header')
 /* eslint-enable no-unused-vars */
 
+const { SR71, asyncRes, asyncErr, $solver } = asyncSuit
 const sr71$ = new SR71()
 
 let store = null
@@ -31,7 +17,7 @@ let sub$ = null
 
 export function previewState() {
   // store.openPreview(type)
-  dispatchEvent(EVENT.PREVIEW, {
+  send(EVENT.PREVIEW, {
     type: TYPE.PREVIEW_ROOT_STORE,
   })
 }
@@ -47,7 +33,7 @@ export function signinGithub(code) {
 export const checkSesstionState = () => sr71$.query(S.sessionState, {})
 
 export function previewAccount() {
-  dispatchEvent(EVENT.PREVIEW, {
+  send(EVENT.PREVIEW, {
     type: TYPE.PREVIEW_ACCOUNT_VIEW,
     data: { hello: 'world --- fuck' },
   })
@@ -55,11 +41,11 @@ export function previewAccount() {
 
 export function login() {
   log('do login')
-  dispatchEvent(EVENT.LOGIN_PANEL)
+  send(EVENT.LOGIN_PANEL)
 }
 
 export function openPreview() {
-  dispatchEvent(EVENT.PREVIEW, {
+  send(EVENT.PREVIEW, {
     type: TYPE.PREVIEW_ACCOUNT_VIEW,
     data: { hello: 'world' },
   })

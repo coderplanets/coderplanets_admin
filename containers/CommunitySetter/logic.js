@@ -1,25 +1,19 @@
 // import R from 'ramda'
 
-import {
-  buildLog,
-  $solver,
-  asyncRes,
-  closePreviewer,
-  TYPE,
-  THREAD,
-} from '@utils'
-import SR71 from 'utils/network/sr71'
-
 import { PAGE_SIZE } from '@config'
+
+import { asyncSuit, buildLog, closePreviewer, TYPE, THREAD } from '@utils'
+
 import S from './schema'
 
+const { SR71, asyncRes, $solver } = asyncSuit
 const sr71$ = new SR71()
-let sub$ = null
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('L:CommunitySetter')
 /* eslint-enable no-unused-vars */
 
+let sub$ = null
 let store = null
 
 const commonFilter = page => {

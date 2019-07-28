@@ -1,16 +1,16 @@
 import R from 'ramda'
 
-import SR71 from 'utils/network/sr71'
-import { asyncRes, buildLog, EVENT, TYPE } from '@utils'
+import { asyncSuit, buildLog, EVENT, TYPE } from '@utils'
 import S from './schema'
-
-const sr71$ = new SR71({
-  resv_event: [EVENT.PREVIEW_POST, EVENT.PREVIEW_CLOSED],
-})
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('L:ArticleViwer')
 /* eslint-enable no-unused-vars */
+
+const { SR71, asyncRes } = asyncSuit
+const sr71$ = new SR71({
+  recieve: [EVENT.PREVIEW_POST, EVENT.PREVIEW_CLOSED],
+})
 
 let store = null
 let sub$ = null

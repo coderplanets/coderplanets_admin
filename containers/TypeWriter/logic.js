@@ -1,26 +1,25 @@
 import R from 'ramda'
 
 import {
-  asyncRes,
-  asyncErr,
-  $solver,
+  asyncSuit,
   buildLog,
   isEmptyValue,
-  dispatchEvent,
+  send,
   EVENT,
   ERR,
   meteorState,
   countWords,
   extractAttachments,
 } from '@utils'
-import SR71 from 'utils/network/sr71'
-import S from './schema'
 
-const sr71$ = new SR71()
+import S from './schema'
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('L:TypeWriter')
 /* eslint-enable no-unused-vars */
+
+const { SR71, asyncRes, asyncErr, $solver } = asyncSuit
+const sr71$ = new SR71()
 
 let store = null
 let sub$ = null
@@ -48,7 +47,7 @@ function checkValid() {
 
 export function onUploadImageDone(url) {
   log('onUploadImageDone: ', url)
-  dispatchEvent(EVENT.DRAFT_INSERT_SNIPPET, {
+  send(EVENT.DRAFT_INSERT_SNIPPET, {
     type: 'Image',
     data: `![](${url})`,
   })
@@ -122,7 +121,7 @@ function publishing(maybe = true) {
 }
 
 export function insertCode() {
-  dispatchEvent(EVENT.DRAFT_INSERT_SNIPPET, {
+  send(EVENT.DRAFT_INSERT_SNIPPET, {
     type: 'FUCK',
     data: '```javascript\n\n```',
   })
@@ -157,7 +156,7 @@ const DataSolver = [
       cancleLoading()
       store.reset()
       store.closePreview()
-      dispatchEvent(EVENT.REFRESH_POSTS)
+      send(EVENT.REFRESH_POSTS)
       // 1. empty the store
       // 2. close the preview
       // 3. notify the xxxPaper

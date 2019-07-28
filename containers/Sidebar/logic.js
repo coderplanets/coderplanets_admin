@@ -2,32 +2,22 @@ import R from 'ramda'
 /* import store from 'store' */
 
 // const log = buildLog('L:sidebar')
-import {
-  asyncRes,
-  asyncErr,
-  $solver,
-  ERR,
-  buildLog,
-  EVENT,
-  ROUTE,
-  // TYPE,
-  dispatchEvent,
-} from '@utils'
 import { PAGE_SIZE } from '@config'
 
-import SR71 from 'utils/network/sr71'
+import { asyncSuit, ERR, buildLog, EVENT, ROUTE, send } from '@utils'
 import S from './schema'
-
-const sr71$ = new SR71({
-  resv_event: [EVENT.LOGOUT, EVENT.LOGIN, EVENT.ROUTE_CHANGE],
-})
-
-let store = null
-let sub$ = null
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('L:Sidebar')
 /* eslint-enable no-unused-vars */
+
+const { SR71, asyncRes, asyncErr, $solver } = asyncSuit
+const sr71$ = new SR71({
+  recieve: [EVENT.LOGOUT, EVENT.LOGIN, EVENT.ROUTE_CHANGE],
+})
+
+let store = null
+let sub$ = null
 
 export const pin = () => store.markState({ pin: !store.pin })
 
@@ -49,7 +39,7 @@ export function extendMenuBar(communityRaw) {
 export function onRootMenuSelect(mainPath, subPath) {
   store.markRoute({ mainPath, subPath })
 
-  dispatchEvent(EVENT.SIDEBAR_MENU_CHANGE, {
+  send(EVENT.SIDEBAR_MENU_CHANGE, {
     data: { mainPath, subPath },
   })
 }

@@ -1,14 +1,11 @@
 import R from 'ramda'
 import Router from 'next/router'
 
-import SR71 from 'utils/network/sr71'
 import {
+  asyncSuit,
   buildLog,
   Global,
-  dispatchEvent,
-  asyncRes,
-  asyncErr,
-  $solver,
+  send,
   EVENT,
   TYPE,
   ERR,
@@ -16,13 +13,18 @@ import {
   THREAD,
   cutFrom,
 } from '@utils'
-import S from './schema'
 
 import Pockect from './Pockect'
 import { SwissArmyKnife } from './helper/swissArmyKnife'
 import githubLoginHandler from './oauth/github_handler'
 
+import S from './schema'
+
+/* eslint-disable no-unused-vars */
 const log = buildLog('L:Doraemon')
+/* eslint-enable no-unused-vars */
+
+const { SR71, asyncRes, asyncErr, $solver } = asyncSuit
 const sr71$ = new SR71()
 
 let sub$ = null
@@ -217,7 +219,7 @@ const doNavigate = () => {
   const { id } = store.activeSuggestion
   if (R.startsWith('user-raw', store.activeSuggestion.raw)) {
     hidePanel()
-    return dispatchEvent(EVENT.PREVIEW_OPEN, {
+    return send(EVENT.PREVIEW_OPEN, {
       type: TYPE.PREVIEW_USER_VIEW,
       data: { id },
     })

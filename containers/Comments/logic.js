@@ -1,29 +1,27 @@
 import R from 'ramda'
 import {
-  asyncRes,
-  asyncErr,
+  asyncSuit,
   buildLog,
   EVENT,
   ERR,
   TYPE,
-  $solver,
   scrollIntoEle,
   countWords,
-  dispatchEvent,
+  send,
   extractMentions,
 } from '@utils'
 
 import { PAGE_SIZE } from '@config'
-import SR71 from 'utils/network/sr71'
 import S from './schema'
-
-const sr71$ = new SR71()
-let sub$ = null
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('L:Comments')
 /* eslint-enable no-unused-vars */
 
+const { SR71, asyncRes, asyncErr, $solver } = asyncSuit
+const sr71$ = new SR71()
+
+let sub$ = null
 let store = null
 
 /* DESC_INSERTED, ASC_INSERTED */
@@ -196,20 +194,20 @@ export function toggleDislikeComment(comment) {
 }
 
 export function onUploadImageDone(url) {
-  dispatchEvent(EVENT.DRAFT_INSERT_SNIPPET, { data: `![](${url})` })
+  send(EVENT.DRAFT_INSERT_SNIPPET, { data: `![](${url})` })
 }
 
 export function insertQuote() {
   const data = '> '
 
-  dispatchEvent(EVENT.DRAFT_INSERT_SNIPPET, { data })
+  send(EVENT.DRAFT_INSERT_SNIPPET, { data })
 }
 
 export function insertCode() {
   const communityRaw = store.curCommunity.raw
   const data = `\`\`\`${communityRaw}\n\n\`\`\``
 
-  dispatchEvent(EVENT.DRAFT_INSERT_SNIPPET, { data })
+  send(EVENT.DRAFT_INSERT_SNIPPET, { data })
 }
 
 export function onMention(user) {

@@ -1,26 +1,25 @@
 import R from 'ramda'
 
 import {
+  asyncSuit,
   buildLog,
-  $solver,
-  asyncRes,
-  asyncErr,
   ERR,
   TYPE,
   meteorState,
   closePreviewer,
   cast,
 } from '@utils'
-import SR71 from 'utils/network/sr71'
-import S from './schema'
 
-const sr71$ = new SR71()
-let sub$ = null
+import S from './schema'
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('L:CommunityEditor')
 /* eslint-enable no-unused-vars */
 
+const { SR71, asyncRes, asyncErr, $solver } = asyncSuit
+const sr71$ = new SR71()
+
+let sub$ = null
 let store = null
 
 export const profileChange = R.curry((thread, e) => {

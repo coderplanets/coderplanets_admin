@@ -1,19 +1,18 @@
 import R from 'ramda'
 
 import {
-  asyncRes,
-  asyncErr,
+  asyncSuit,
   buildLog,
-  $solver,
-  dispatchEvent,
+  send,
   EVENT,
   ERR,
   TYPE,
   meteorState,
 } from '@utils'
-import SR71 from 'utils/network/sr71'
+
 import S from './schema'
 
+const { SR71, $solver, asyncRes, asyncErr } = asyncSuit
 const sr71$ = new SR71()
 
 /* eslint-disable no-unused-vars */
@@ -23,7 +22,7 @@ const log = buildLog('L:AccountEditor')
 let store = null
 
 export function goBack() {
-  dispatchEvent(EVENT.PREVIEW, {
+  send(EVENT.PREVIEW, {
     type: TYPE.PREVIEW_ACCOUNT_VIEW,
   })
 }
@@ -86,7 +85,7 @@ export const updateConfirm = () => {
 }
 
 export function cancleEdit() {
-  dispatchEvent(EVENT.PREVIEW_CLOSE)
+  send(EVENT.PREVIEW_CLOSE)
 }
 
 export function updateDone() {

@@ -1,29 +1,28 @@
 import R from 'ramda'
 
+import { PAGE_SIZE } from '@config'
 import {
   buildLog,
-  $solver,
-  asyncRes,
+  asyncSuit,
   mapKey,
   mapValue,
   TYPE,
   EVENT,
   closePreviewer,
 } from '@utils'
-import SR71 from 'utils/network/sr71'
-import { PAGE_SIZE } from '@config'
 
 import S from './schema'
-
-const sr71$ = new SR71({
-  resv_event: [EVENT.PREVIEW_CLOSED],
-})
-let sub$ = null
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('L:PermissionEditor')
 /* eslint-enable no-unused-vars */
 
+const { SR71, asyncRes, $solver } = asyncSuit
+const sr71$ = new SR71({
+  recieve: [EVENT.PREVIEW_CLOSED],
+})
+
+let sub$ = null
 let store = null
 
 const commonFilter = page => {

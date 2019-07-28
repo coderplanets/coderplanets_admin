@@ -1,17 +1,16 @@
 import R from 'ramda'
 
-import { buildLog, $solver, asyncRes } from '@utils'
-import SR71 from 'utils/network/sr71'
-
+import { asyncSuit, buildLog } from '@utils'
 import S from './schema'
 
+const { SR71, asyncRes, $solver } = asyncSuit
 const sr71$ = new SR71()
-let sub$ = null
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('L:Labeler')
 /* eslint-enable no-unused-vars */
 
+let sub$ = null
 let store = null
 
 export function loadTags() {

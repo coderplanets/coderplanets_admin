@@ -1,25 +1,17 @@
 // import R from 'ramda'
 
-import {
-  buildLog,
-  $solver,
-  asyncErr,
-  asyncRes,
-  closePreviewer,
-  updateEditing,
-  ERR,
-} from '@utils'
+import { asyncSuit, buildLog, closePreviewer, updateEditing, ERR } from '@utils'
 
-import SR71 from 'utils/network/sr71'
 import S from './schema'
-
-const sr71$ = new SR71()
-let sub$ = null
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('L:ThreadEditor')
 /* eslint-enable no-unused-vars */
 
+const { SR71, asyncRes, asyncErr, $solver } = asyncSuit
+const sr71$ = new SR71()
+
+let sub$ = null
 let store = null
 
 export const mutateConfirm = () =>

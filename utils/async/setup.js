@@ -8,19 +8,29 @@ import fetch from 'isomorphic-fetch'
 
 /* import { onError } from 'apollo-link-error' */
 
-import { buildLog, BStore } from '..'
 import { GRAPHQL_ENDPOINT } from '@config'
+import { ERR } from '../constants'
 
-/* eslint-disable no-unused-vars */
-const log = buildLog('Network')
-/* eslint-enable no-unused-vars */
+import { errRescue } from '../functions'
+import { buildLog } from '../logger'
+import BStore from '../bstore'
+
+/* eslint-disable-next-line */
+const log = buildLog('Async')
 
 const graphLink = new HttpLink({ uri: GRAPHQL_ENDPOINT, fetch })
 
-export const TIMEOUT_THRESHOLD = 15000 // 5 sec
-export const GRAPHQL_TIMEOUT = 15000
-export const MUTIATION_TIMEOUT = 15000
-export const QUERY_TIMEOUT = 15000
+/* // for log
+   export const TIMEOUT_THRESHOLD = 10 // 10 sec
+   export const GRAPHQL_TIMEOUT = 10 // 10 sec
+   export const MUTIATION_TIMEOUT = 10 // 10 sec
+   export const QUERY_TIMEOUT = 10 // 10 sec
+ */
+
+export const TIMEOUT_THRESHOLD = 10000 // 10 sec
+export const GRAPHQL_TIMEOUT = 10000 // 10 sec
+export const MUTIATION_TIMEOUT = 10000 // 10 sec
+export const QUERY_TIMEOUT = 10000 // 10 sec
 
 const retryLink = new RetryLink({
   delay: {
@@ -35,13 +45,13 @@ const retryLink = new RetryLink({
 })
 
 /* const errorLink = onError(({ operation, graphQLErrors }) => { */
-const errorLink = onError(({ graphQLErrors }) => {
-  if (graphQLErrors) {
-    /* graphQLErrors.map(({ message, path, detail }) => */
-    log('[GraphQL error happend]: ')
-    graphQLErrors.map(({ message }) => log(`[error detail--> ]:  ${message}`))
-  }
-})
+const errorLink = onError(({ operation: { operationName }, graphQLErrors }) =>
+  errRescue({
+    type: ERR.GRAPHQL,
+    operation: operationName,
+    details: graphQLErrors,
+  })
+)
 
 const token = BStore.get('token') || ''
 export const context = {
@@ -58,16 +68,19 @@ const link = ApolloLink.from([retryLink, errorLink, graphLink])
 // disable cache in apollo-client
 // sse https://www.apollographql.com/docs/react/essentials/queries.html#graphql-config-options-fetchPolicy
 // see https://stackoverflow.com/questions/47879016/how-to-disable-cache-in-apollo-link-or-apollo-client
-const defaultOptions = {
-  watchQuery: {
-    fetchPolicy: 'network-only',
-    errorPolicy: 'ignore',
-  },
-  query: {
-    fetchPolicy: 'network-only',
-    errorPolicy: 'all',
-  },
-}
+/*
+   const defaultOptions = {
+   watchQuery: {
+   fetchPolicy: 'network-only',
+   errorPolicy: 'ignore',
+   },
+   query: {
+   fetchPolicy: 'network-only',
+   errorPolicy: 'all',
+   },
+   }
+ */
+
 // single-instance-pattern
 // see: https://k94n.com/es6-modules-single-instance-pattern
 export const client = new ApolloClient({
@@ -76,5 +89,5 @@ export const client = new ApolloClient({
   cache: new InMemoryCache(),
   connectToDevTools: true,
   /* shouldBatch: false, */
-  defaultOptions,
+  // defaultOptions,
 })
