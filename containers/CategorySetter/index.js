@@ -5,13 +5,12 @@
  */
 
 import React from 'react'
-import { inject, observer } from 'mobx-react'
 import R from 'ramda'
 
-import { uid, buildLog, storePlug } from '@utils'
+import { uid, buildLog, connectStore } from '@utils'
 import { Wrapper, Divider, CategoryWrapper, CategoryTag } from './styles'
 
-import * as logic from './logic'
+import { useInit, onAdd } from './logic'
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('C:CategorySetter')
@@ -23,7 +22,7 @@ const CategoriesList = ({ communityId, categories, selectedids }) => (
       <CategoryTag
         key={uid.gen()}
         active={R.contains(c.id, selectedids)}
-        onClick={logic.onAdd.bind(this, communityId, c.id, selectedids)}
+        onClick={onAdd.bind(this, communityId, c.id, selectedids)}
       >
         {c.title}
       </CategoryTag>
@@ -31,36 +30,28 @@ const CategoriesList = ({ communityId, categories, selectedids }) => (
   </CategoryWrapper>
 )
 
-class CategorySetterContainer extends React.Component {
-  componentDidMount() {
-    const { categorySetter } = this.props
-    logic.init(categorySetter)
-  }
+const CategorySetterContainer = ({ categorySetter, editData }) => {
+  useInit(categorySetter)
 
-  render() {
-    /* const mutating = false */
-    const { categorySetter, editData } = this.props
-    const { pagedCategories } = categorySetter
+  /* const mutating = false */
+  const { pagedCategories } = categorySetter
 
-    const selectedids = R.pluck('id', editData.categories)
+  const selectedids = R.pluck('id', editData.categories)
 
-    return (
-      <Wrapper>
-        coderplanets
-        <h2>设置社区分类</h2>
-        <Divider />
-        {pagedCategories ? (
-          <CategoriesList
-            communityId={editData.id}
-            categories={pagedCategories.entries}
-            selectedids={selectedids}
-          />
-        ) : null}
-      </Wrapper>
-    )
-  }
+  return (
+    <Wrapper>
+      coderplanets
+      <h2>设置社区分类</h2>
+      <Divider />
+      {pagedCategories && (
+        <CategoriesList
+          communityId={editData.id}
+          categories={pagedCategories.entries}
+          selectedids={selectedids}
+        />
+      )}
+    </Wrapper>
+  )
 }
 
-export default inject(storePlug('categorySetter'))(
-  observer(CategorySetterContainer)
-)
+export default connectStore(CategorySetterContainer)

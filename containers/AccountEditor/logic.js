@@ -1,4 +1,5 @@
 import R from 'ramda'
+import { useEffect } from 'react'
 
 import {
   asyncSuit,
@@ -20,6 +21,7 @@ const log = buildLog('L:AccountEditor')
 /* eslint-enable no-unused-vars */
 
 let store = null
+let sub$ = null
 
 export function goBack() {
   send(EVENT.PREVIEW, {
@@ -132,8 +134,23 @@ const ErrSolver = [
   },
 ]
 
-export function init(selectedStore) {
-  store = selectedStore
-  store.copyAccountInfo()
-  sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+// ###############################
+// init & uninit
+// ###############################
+export const useInit = _store => {
+  useEffect(
+    () => {
+      store = _store
+      // log('effect init')
+      store.copyAccountInfo()
+      sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+
+      return () => {
+        if (sub$) {
+          sub$.unsubscribe()
+        }
+      }
+    },
+    [_store]
+  )
 }

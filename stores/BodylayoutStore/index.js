@@ -10,21 +10,14 @@ import { buildLog } from '@utils'
 const log = buildLog('S:BodylayoutStore')
 /* eslint-enable no-unused-vars */
 
-const BodylayoutStore = t
-  .model('BodylayoutStore', {})
-  .views(self => ({
-    get root() {
-      return getParent(self)
-    },
+const BodylayoutStore = t.model('BodylayoutStore', {}).views(self => ({
+  get root() {
+    return getParent(self)
+  },
 
-    get sidebarPin() {
-      return self.root.sidebar.pin
-    },
-  }))
-  .actions(self => ({
-    openDoraemon() {
-      self.root.openDoraemon()
-    },
-  }))
+  get sidebarPin() {
+    return self.root.sidebar.pin
+  },
+}))
 
 export default BodylayoutStore

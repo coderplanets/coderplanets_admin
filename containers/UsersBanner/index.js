@@ -5,17 +5,14 @@
  */
 
 import React from 'react'
-import { inject, observer } from 'mobx-react'
 
-// import Link from 'next/link'
-
-import { buildLog, storePlug, ROUTE } from '@utils'
-import * as logic from './logic'
+import { buildLog, connectStore, ROUTE } from '@utils'
 
 import IndexBanner from './IndexBanner'
 import PaysBanner from './PaysBanner'
 
 import { BannerContainer } from './styles'
+import { useInit } from './logic'
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('C:UsersBanner')
@@ -36,22 +33,16 @@ const renderChildBanner = (curRoute, totalCount, store) => {
   }
 }
 
-class UsersBannerContainer extends React.Component {
-  componentDidMount() {
-    const { usersBanner } = this.props
-    logic.init(usersBanner)
-  }
+const UsersBannerContainer = ({ usersBanner }) => {
+  useInit(usersBanner)
 
-  render() {
-    const { usersBanner } = this.props
-    const { curRoute, totalCount } = usersBanner
+  const { curRoute, totalCount } = usersBanner
 
-    return (
-      <BannerContainer>
-        {renderChildBanner(curRoute, totalCount, usersBanner)}
-      </BannerContainer>
-    )
-  }
+  return (
+    <BannerContainer>
+      {renderChildBanner(curRoute, totalCount, usersBanner)}
+    </BannerContainer>
+  )
 }
 
-export default inject(storePlug('usersBanner'))(observer(UsersBannerContainer))
+export default connectStore(UsersBannerContainer)

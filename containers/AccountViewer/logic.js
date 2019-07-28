@@ -1,4 +1,5 @@
 // import R from 'ramda'
+import { useEffect } from 'react'
 import { asyncSuit, buildLog, ERR, send, EVENT, TYPE, Global } from '@utils'
 
 import S from './schema'
@@ -92,18 +93,25 @@ export const loadUserInfo = user => {
   loadAccount()
 }
 
-export function init(_store, user) {
-  store = _store
+// ###############################
+// init & uninit
+// ###############################
+export const useInit = (_store, user) => {
+  useEffect(
+    () => {
+      store = _store
+      if (sub$) return loadUserInfo(user)
+      sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 
-  if (sub$) return loadUserInfo(user)
-  sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+      loadUserInfo(user)
 
-  return loadUserInfo(user)
-}
-
-export function uninit() {
-  if (store.loading || !sub$) return false
-  log('===== do uninit')
-  sub$.unsubscribe()
-  sub$ = null
+      return () => {
+        if (store.loading || !sub$) return false
+        log('===== do uninit')
+        sub$.unsubscribe()
+        sub$ = null
+      }
+    },
+    [_store, user]
+  )
 }

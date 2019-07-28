@@ -5,12 +5,8 @@
  */
 
 import React from 'react'
-import { inject, observer } from 'mobx-react'
 
-// import Link from 'next/link'
-
-import { buildLog, storePlug, stripMobx, ROUTE } from '@utils'
-import * as logic from './logic'
+import { buildLog, connectStore, stripMobx, ROUTE } from '@utils'
 
 import PostsBanner from './PostsBanner'
 import JobsBanner from './JobsBanner'
@@ -21,6 +17,7 @@ import ThreadsBanner from './ThreadsBanner'
 import SubscribersBanner from './SubscribersBanner'
 
 import { BannerContainer } from './styles'
+import { useInit } from './logic'
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('C:CommunityBanner')
@@ -96,41 +93,33 @@ const ChildBanner = ({
   }
 }
 
-class CommunityBannerContainer extends React.Component {
-  componentDidMount() {
-    const { communityBanner } = this.props
-    logic.init(communityBanner)
-  }
+const CommunityBannerContainer = ({ communityBanner }) => {
+  useInit(communityBanner)
 
-  render() {
-    const { communityBanner } = this.props
-    const {
-      curRoute,
-      postsTotalCount,
-      jobsTotalCount,
-      videosTotalCount,
-      reposTotalCount,
-      tagsTotalCount,
-      threadsTotalCount,
-    } = communityBanner
+  const {
+    curRoute,
+    postsTotalCount,
+    jobsTotalCount,
+    videosTotalCount,
+    reposTotalCount,
+    tagsTotalCount,
+    threadsTotalCount,
+  } = communityBanner
 
-    return (
-      <BannerContainer>
-        <ChildBanner
-          curRoute={curRoute}
-          postsTotalCount={postsTotalCount}
-          jobsTotalCount={jobsTotalCount}
-          videosTotalCount={videosTotalCount}
-          reposTotalCount={reposTotalCount}
-          tagsTotalCount={tagsTotalCount}
-          threadsTotalCount={threadsTotalCount}
-          restProps={stripMobx(communityBanner)}
-        />
-      </BannerContainer>
-    )
-  }
+  return (
+    <BannerContainer>
+      <ChildBanner
+        curRoute={curRoute}
+        postsTotalCount={postsTotalCount}
+        jobsTotalCount={jobsTotalCount}
+        videosTotalCount={videosTotalCount}
+        reposTotalCount={reposTotalCount}
+        tagsTotalCount={tagsTotalCount}
+        threadsTotalCount={threadsTotalCount}
+        restProps={stripMobx(communityBanner)}
+      />
+    </BannerContainer>
+  )
 }
 
-export default inject(storePlug('communityBanner'))(
-  observer(CommunityBannerContainer)
-)
+export default connectStore(CommunityBannerContainer)

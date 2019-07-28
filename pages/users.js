@@ -10,7 +10,6 @@ import ThemeWrapper from '@containers/ThemeWrapper'
 import MultiLanguage from '@containers/MultiLanguage'
 import Sidebar from '@containers/Sidebar'
 import Preview from '@containers/Preview'
-import Doraemon from '@containers/Doraemon'
 import Route from '@containers/Route'
 import BodyLayout from '@containers/BodyLayout'
 import Header from '@containers/Header'
@@ -64,7 +63,6 @@ export default class Index extends React.Component {
             <MultiLanguage>
               <Sidebar />
               <Preview />
-              <Doraemon />
               <BodyLayout>
                 <Header />
                 <UsersBanner />

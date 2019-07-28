@@ -7535,6 +7535,10 @@ mkdirp@0.5.0:
   dependencies:
     minimist "0.0.8"
 
+mobx-react-lite@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.npmjs.org/mobx-react-lite/-/mobx-react-lite-1.4.1.tgz#7307a45901f97f9a07ebed32b654235507644e1a"
+
 mobx-react@5.3.6:
   version "5.3.6"
   resolved "https://registry.npmjs.org/mobx-react/-/mobx-react-5.3.6.tgz#0bead0173aed7d12ace4981b53c28db4d61de9ef"

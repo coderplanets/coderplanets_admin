@@ -1,4 +1,5 @@
 import R from 'ramda'
+import { useEffect } from 'react'
 
 import { asyncSuit, buildLog, EVENT, TYPE } from '@utils'
 import S from './schema'
@@ -110,10 +111,22 @@ const handleData = res => {
   log('handleData unhandle: ', res)
 }
 
-export function init(selectedStore) {
-  store = selectedStore
-  log(store)
-  if (sub$) sub$.unsubscribe()
+// ###############################
+// init & uninit
+// ###############################
+export const useInit = _store => {
+  useEffect(
+    () => {
+      store = _store
+      if (sub$) sub$.unsubscribe()
 
-  sub$ = sr71$.data().subscribe(handleData)
+      sub$ = sr71$.data().subscribe(handleData)
+
+      return () => {
+        if (sub$) sub$.unsubscribe()
+        sub$ = null
+      }
+    },
+    [_store]
+  )
 }

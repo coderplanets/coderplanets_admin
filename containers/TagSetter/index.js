@@ -5,11 +5,11 @@
  */
 
 import React from 'react'
-import { inject, observer } from 'mobx-react'
 import R from 'ramda'
 
+import { uid, buildLog, connectStore } from '@utils'
+
 import { CommunityMatrix } from '@components'
-import { uid, buildLog, storePlug } from '@utils'
 import {
   Wrapper,
   Divider,
@@ -20,7 +20,7 @@ import {
   ThreadText,
 } from './styles'
 
-import * as logic from './logic'
+import { useInit, onAdd, selectCommunity } from './logic'
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('C:TagSetter')
@@ -32,7 +32,7 @@ const TagsList = ({ tags, threadId, selectedids }) => (
       <CategoryTag
         key={uid.gen()}
         active={R.contains(c.id, selectedids)}
-        onClick={logic.onAdd.bind(
+        onClick={onAdd.bind(
           this,
           c.thread,
           threadId,
@@ -49,45 +49,38 @@ const TagsList = ({ tags, threadId, selectedids }) => (
   </CategoryWrapper>
 )
 
-class TagSetterContainer extends React.Component {
-  componentDidMount() {
-    const { tagSetter, editData } = this.props
-    logic.init(tagSetter)
-    logic.getPartialTags(editData)
-  }
+const TagSetterContainer = ({ tagSetter, editData }) => {
+  useInit(tagSetter)
 
-  render() {
-    const { tagSetter, editData } = this.props
-    const { tagsData, activeCommunityRaw } = tagSetter
+  const { tagsData, activeCommunityRaw } = tagSetter
 
-    const source = editData.data
-    const { communities } = source
-    /* const { thread } = editData */
-    const selectedids = R.pluck('id', source.tags)
-    const { id, title } = source
+  const source = editData.data
+  const { communities } = source
+  /* const { thread } = editData */
+  const selectedids = R.pluck('id', source.tags)
+  const { id, title } = source
 
-    return (
-      <Wrapper>
-        <SetterTitle>{title}</SetterTitle>
-        <h2>设置标签</h2>
-        <Divider />
-        {R.isEmpty(communities) ? (
-          <h4>该内容不属于任何社区,因此不能设置标签，请先设置社区</h4>
-        ) : (
-          <CommunityMatrix
-            array={communities}
-            activeRaw={activeCommunityRaw}
-            onSelect={logic.selectCommunity}
-            hasAddon={false}
-          />
-        )}
+  return (
+    <Wrapper>
+      <SetterTitle>{title}</SetterTitle>
+      <h2>设置标签</h2>
+      <Divider />
+      {R.isEmpty(communities) ? (
+        <h4>该内容不属于任何社区,因此不能设置标签，请先设置社区</h4>
+      ) : (
+        <CommunityMatrix
+          array={communities}
+          activeRaw={activeCommunityRaw}
+          onSelect={selectCommunity}
+          hasAddon={false}
+        />
+      )}
 
-        <Divider />
+      <Divider />
 
-        <TagsList tags={tagsData} threadId={id} selectedids={selectedids} />
-      </Wrapper>
-    )
-  }
+      <TagsList tags={tagsData} threadId={id} selectedids={selectedids} />
+    </Wrapper>
+  )
 }
 
-export default inject(storePlug('tagSetter'))(observer(TagSetterContainer))
+export default connectStore(TagSetterContainer)

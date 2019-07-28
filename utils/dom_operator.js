@@ -44,32 +44,4 @@ export const unholdPage = () => {
   }
 }
 
-export const focusDoraemonBar = () => {
-  const safeDocument = getDocument()
-
-  if (safeDocument) {
-    setTimeout(() => {
-      // side effect
-      // has to use setTimeout
-      // see: https://stackoverflow.com/questions/1096436/document-getelementbyidid-focus-is-not-working-for-firefox-or-chrome
-      try {
-        safeDocument.getElementById('doraemonInputbar').focus()
-      } catch (e) {
-        console.error(e)
-      }
-    }, 0)
-  }
-}
-
-export const hideDoraemonBarRecover = () => {
-  const safeDocument = getDocument()
-
-  if (safeDocument) {
-    // side effect
-    // onBlur will on focus the whole page, if not use this
-    // openDoraemon will not work until you click the page
-    document.getElementById('whereCallShowDoraemon').click()
-  }
-}
-
 /* eslint-enable no-undef */

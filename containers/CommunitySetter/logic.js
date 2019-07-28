@@ -1,4 +1,5 @@
 // import R from 'ramda'
+import { useEffect } from 'react'
 
 import { PAGE_SIZE } from '@config'
 
@@ -60,11 +61,24 @@ const DataSolver = [
 ]
 const ErrSolver = []
 
-export function init(selectedStore) {
-  store = selectedStore
+// ###############################
+// init & uninit
+// ###############################
+export const useInit = (_store, editData) => {
+  useEffect(
+    () => {
+      store = _store
+      if (sub$) sub$.unsubscribe()
+      sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
 
-  if (sub$) sub$.unsubscribe()
-  sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+      getAllCommunities()
 
-  getAllCommunities()
+      return () => {
+        if (!sub$) return false
+        sub$.unsubscribe()
+        sub$ = null
+      }
+    },
+    [_store, editData]
+  )
 }

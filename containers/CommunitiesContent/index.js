@@ -5,11 +5,8 @@
  */
 
 import React from 'react'
-import { inject, observer } from 'mobx-react'
-// import Link from 'next/link'
-/* import { withRouter } from 'next/router' */
 
-import { buildLog, storePlug, ROUTE } from '@utils'
+import { buildLog, connectStore, ROUTE } from '@utils'
 
 import IndexContent from './IndexContent'
 import PostsContent from './PostsContent'
@@ -21,7 +18,7 @@ import TagsContent from './TagsContent'
 import ThreadsContent from './ThreadsContent'
 import { Wrapper } from './styles'
 
-import * as logic from './logic'
+import { useInit } from './logic'
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('C:CommunitiesContent')
@@ -72,30 +69,17 @@ const renderChildContent = (curRoute, store, restProps) => {
   }
 }
 
-class CommunitiesContentContainer extends React.Component {
-  componentDidMount() {
-    const { communitiesContent } = this.props
+const CommunitiesContentContainer = ({ communitiesContent }) => {
+  useInit(communitiesContent)
 
-    logic.init(communitiesContent)
-  }
+  const { curRoute } = communitiesContent
+  const restProps = { ...communitiesContent }
 
-  componentWillUnmount() {
-    logic.uninit()
-  }
-
-  render() {
-    const { communitiesContent } = this.props
-    const { curRoute } = communitiesContent
-    const restProps = { ...communitiesContent }
-
-    return (
-      <Wrapper>
-        {renderChildContent(curRoute, communitiesContent, restProps)}
-      </Wrapper>
-    )
-  }
+  return (
+    <Wrapper>
+      {renderChildContent(curRoute, communitiesContent, restProps)}
+    </Wrapper>
+  )
 }
 
-export default inject(storePlug('communitiesContent'))(
-  observer(CommunitiesContentContainer)
-)
+export default connectStore(CommunitiesContentContainer)

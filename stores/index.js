@@ -8,7 +8,6 @@ export { default as BodylayoutStore } from './BodylayoutStore'
 export { default as ApiLayoutStore } from './ApiLayoutStore'
 export { default as SidebarStore } from '@containers/Sidebar/store'
 export { default as PreviewStore } from '@containers/Preview/store'
-export { default as DoraemonStore } from '@containers/Doraemon/store'
 export { default as HeaderStore } from '@containers/Header/store'
 
 // banner store

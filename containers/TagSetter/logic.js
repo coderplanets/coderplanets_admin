@@ -1,4 +1,5 @@
 import R from 'ramda'
+import { useEffect } from 'react'
 
 import { asyncSuit, buildLog, closePreviewer, TYPE } from '@utils'
 import S from './schema'
@@ -63,10 +64,27 @@ const DataSolver = [
 ]
 const ErrSolver = []
 
-export function init(selectedStore) {
-  store = selectedStore
-  if (sub$) sub$.unsubscribe()
-  sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+// getPartialTags(editData)
 
-  /* getAllTags() */
+// ###############################
+// init & uninit
+// ###############################
+export const useInit = (_store, editData) => {
+  useEffect(
+    () => {
+      store = _store
+      log(store)
+      if (sub$) sub$.unsubscribe()
+      sub$ = sr71$.data().subscribe($solver(DataSolver, ErrSolver))
+
+      getPartialTags(editData)
+
+      return () => {
+        if (!sub$) return false
+        sub$.unsubscribe()
+        sub$ = null
+      }
+    },
+    [_store, editData]
+  )
 }

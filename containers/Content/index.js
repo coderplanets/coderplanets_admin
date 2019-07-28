@@ -5,16 +5,15 @@
  */
 
 import React from 'react'
-import { inject, observer } from 'mobx-react'
 
-// import Link from 'next/link'
-import { buildLog, storePlug, ROUTE } from '@utils'
+import { buildLog, connectStore, ROUTE } from '@utils'
+
 import CommunityContent from '../CommunityContent'
 import CommunitiesContent from '../CommunitiesContent'
 import UsersContent from '../UsersContent'
 // import { CommunityContent, CommunitiesContent } from '.'
 
-import * as logic from './logic'
+import { useInit } from './logic'
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('C:Content')
@@ -38,18 +37,12 @@ const DomainContent = ({ curRoute }) => {
    NOTE: this container is only used for dev mode
    for some unkown reasion, pages/index will always be the entry in dev mode
  */
-class ContentContainer extends React.Component {
-  componentDidMount() {
-    const { content } = this.props
-    logic.init(content)
-  }
+const ContentContainer = ({ content }) => {
+  useInit(content)
 
-  render() {
-    const { content } = this.props
-    const { curRoute } = content
+  const { curRoute } = content
 
-    return <DomainContent curRoute={curRoute} />
-  }
+  return <DomainContent curRoute={curRoute} />
 }
 
-export default inject(storePlug('content'))(observer(ContentContainer))
+export default connectStore(ContentContainer)
