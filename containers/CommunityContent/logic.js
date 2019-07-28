@@ -17,7 +17,7 @@ import SR71 from 'utils/network/sr71'
 import S from './schema'
 
 const sr71$ = new SR71({
-  resv_event: [EVENT.SIDEBAR_MENU_CHANGE],
+  recieve: [EVENT.SIDEBAR_MENU_CHANGE],
 })
 
 let sub$ = null

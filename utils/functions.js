@@ -114,15 +114,8 @@ export function toPercentNum(top, bottom) {
   return `${fixedNum}%`
 }
 
-export const dispatchEvent = (msg, data = {}) => {
-  // TODO: check the msg is valid
-  // PubSub.publishSync(msg, data)
-  PubSub.publish(msg, data)
-}
-
-export const closePreviewer = (type = '') => {
-  dispatchEvent(EVENT.PREVIEW_CLOSE, { type })
-}
+export const send = (msg, data = {}) => PubSub.publish(msg, data)
+export const closePreviewer = (type = '') => send(EVENT.PREVIEW_CLOSE, { type })
 
 /* eslint-disable */
 export function debounce(func, wait, immediate) {

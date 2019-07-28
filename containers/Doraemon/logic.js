@@ -5,7 +5,7 @@ import SR71 from 'utils/network/sr71'
 import {
   buildLog,
   Global,
-  dispatchEvent,
+  send,
   asyncRes,
   asyncErr,
   $solver,
@@ -217,7 +217,7 @@ const doNavigate = () => {
   const { id } = store.activeSuggestion
   if (R.startsWith('user-raw', store.activeSuggestion.raw)) {
     hidePanel()
-    return dispatchEvent(EVENT.PREVIEW_OPEN, {
+    return send(EVENT.PREVIEW_OPEN, {
       type: TYPE.PREVIEW_USER_VIEW,
       data: { id },
     })

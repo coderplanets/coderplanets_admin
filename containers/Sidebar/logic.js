@@ -11,7 +11,7 @@ import {
   EVENT,
   ROUTE,
   // TYPE,
-  dispatchEvent,
+  send,
 } from '@utils'
 import { PAGE_SIZE } from '@config'
 
@@ -19,7 +19,7 @@ import SR71 from 'utils/network/sr71'
 import S from './schema'
 
 const sr71$ = new SR71({
-  resv_event: [EVENT.LOGOUT, EVENT.LOGIN, EVENT.ROUTE_CHANGE],
+  recieve: [EVENT.LOGOUT, EVENT.LOGIN, EVENT.ROUTE_CHANGE],
 })
 
 let store = null
@@ -49,7 +49,7 @@ export function extendMenuBar(communityRaw) {
 export function onRootMenuSelect(mainPath, subPath) {
   store.markRoute({ mainPath, subPath })
 
-  dispatchEvent(EVENT.SIDEBAR_MENU_CHANGE, {
+  send(EVENT.SIDEBAR_MENU_CHANGE, {
     data: { mainPath, subPath },
   })
 }

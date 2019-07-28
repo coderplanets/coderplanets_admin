@@ -5,7 +5,7 @@ import {
   asyncErr,
   buildLog,
   $solver,
-  dispatchEvent,
+  send,
   EVENT,
   ERR,
   TYPE,
@@ -23,7 +23,7 @@ const log = buildLog('L:AccountEditor')
 let store = null
 
 export function goBack() {
-  dispatchEvent(EVENT.PREVIEW, {
+  send(EVENT.PREVIEW, {
     type: TYPE.PREVIEW_ACCOUNT_VIEW,
   })
 }
@@ -86,7 +86,7 @@ export const updateConfirm = () => {
 }
 
 export function cancleEdit() {
-  dispatchEvent(EVENT.PREVIEW_CLOSE)
+  send(EVENT.PREVIEW_CLOSE)
 }
 
 export function updateDone() {

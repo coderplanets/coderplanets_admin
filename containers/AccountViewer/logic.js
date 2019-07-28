@@ -5,7 +5,7 @@ import {
   buildLog,
   $solver,
   ERR,
-  dispatchEvent,
+  send,
   EVENT,
   TYPE,
   Global,
@@ -19,7 +19,7 @@ const log = buildLog('L:AccountViewer')
 /* eslint-enable no-unused-vars */
 
 const sr71$ = new SR71({
-  resv_event: [EVENT.LOGIN],
+  recieve: [EVENT.LOGIN],
 })
 
 let store = null
@@ -40,7 +40,7 @@ export const loadUser = user => {
 export const changeTheme = name => store.changeTheme(name)
 
 export const editProfile = () =>
-  dispatchEvent(EVENT.PREVIEW_OPEN, { type: TYPE.PREVIEW_ACCOUNT_EDIT })
+  send(EVENT.PREVIEW_OPEN, { type: TYPE.PREVIEW_ACCOUNT_EDIT })
 
 export const onLogout = () => {
   store.logout()
@@ -48,7 +48,7 @@ export const onLogout = () => {
   setTimeout(() => {
     Global.location.reload(false)
   }, 2000)
-  // dispatchEvent(EVENT.LOGOUT)
+  // send(EVENT.LOGOUT)
 }
 
 const markLoading = (maybe = true) => store.markState({ loading: maybe })

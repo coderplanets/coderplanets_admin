@@ -6,7 +6,7 @@ import {
   $solver,
   buildLog,
   isEmptyValue,
-  dispatchEvent,
+  send,
   EVENT,
   ERR,
   meteorState,
@@ -48,7 +48,7 @@ function checkValid() {
 
 export function onUploadImageDone(url) {
   log('onUploadImageDone: ', url)
-  dispatchEvent(EVENT.DRAFT_INSERT_SNIPPET, {
+  send(EVENT.DRAFT_INSERT_SNIPPET, {
     type: 'Image',
     data: `![](${url})`,
   })
@@ -122,7 +122,7 @@ function publishing(maybe = true) {
 }
 
 export function insertCode() {
-  dispatchEvent(EVENT.DRAFT_INSERT_SNIPPET, {
+  send(EVENT.DRAFT_INSERT_SNIPPET, {
     type: 'FUCK',
     data: '```javascript\n\n```',
   })
@@ -157,7 +157,7 @@ const DataSolver = [
       cancleLoading()
       store.reset()
       store.closePreview()
-      dispatchEvent(EVENT.REFRESH_POSTS)
+      send(EVENT.REFRESH_POSTS)
       // 1. empty the store
       // 2. close the preview
       // 3. notify the xxxPaper

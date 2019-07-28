@@ -19,7 +19,7 @@ export { default as uid } from './uid'
  */
 
 export {
-  dispatchEvent,
+  send,
   mapKeys,
   mapKey,
   mapValue,

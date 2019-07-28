@@ -5,7 +5,7 @@ import {
   asyncRes,
   asyncErr,
   buildLog,
-  dispatchEvent,
+  send,
   EVENT,
   TYPE,
   /* Global, */
@@ -31,7 +31,7 @@ let sub$ = null
 
 export function previewState() {
   // store.openPreview(type)
-  dispatchEvent(EVENT.PREVIEW, {
+  send(EVENT.PREVIEW, {
     type: TYPE.PREVIEW_ROOT_STORE,
   })
 }
@@ -47,7 +47,7 @@ export function signinGithub(code) {
 export const checkSesstionState = () => sr71$.query(S.sessionState, {})
 
 export function previewAccount() {
-  dispatchEvent(EVENT.PREVIEW, {
+  send(EVENT.PREVIEW, {
     type: TYPE.PREVIEW_ACCOUNT_VIEW,
     data: { hello: 'world --- fuck' },
   })
@@ -55,11 +55,11 @@ export function previewAccount() {
 
 export function login() {
   log('do login')
-  dispatchEvent(EVENT.LOGIN_PANEL)
+  send(EVENT.LOGIN_PANEL)
 }
 
 export function openPreview() {
-  dispatchEvent(EVENT.PREVIEW, {
+  send(EVENT.PREVIEW, {
     type: TYPE.PREVIEW_ACCOUNT_VIEW,
     data: { hello: 'world' },
   })

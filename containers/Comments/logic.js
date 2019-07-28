@@ -9,7 +9,7 @@ import {
   $solver,
   scrollIntoEle,
   countWords,
-  dispatchEvent,
+  send,
   extractMentions,
 } from '@utils'
 
@@ -196,20 +196,20 @@ export function toggleDislikeComment(comment) {
 }
 
 export function onUploadImageDone(url) {
-  dispatchEvent(EVENT.DRAFT_INSERT_SNIPPET, { data: `![](${url})` })
+  send(EVENT.DRAFT_INSERT_SNIPPET, { data: `![](${url})` })
 }
 
 export function insertQuote() {
   const data = '> '
 
-  dispatchEvent(EVENT.DRAFT_INSERT_SNIPPET, { data })
+  send(EVENT.DRAFT_INSERT_SNIPPET, { data })
 }
 
 export function insertCode() {
   const communityRaw = store.curCommunity.raw
   const data = `\`\`\`${communityRaw}\n\n\`\`\``
 
-  dispatchEvent(EVENT.DRAFT_INSERT_SNIPPET, { data })
+  send(EVENT.DRAFT_INSERT_SNIPPET, { data })
 }
 
 export function onMention(user) {

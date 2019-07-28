@@ -7,7 +7,7 @@ import {
   EVENT,
   TYPE,
   ROUTE,
-  dispatchEvent,
+  send,
   scrollIntoEle,
 } from '@utils'
 import { PAGE_SIZE } from '@config'
@@ -16,7 +16,7 @@ import SR71 from 'utils/network/sr71'
 import S from './schema'
 
 const sr71$ = new SR71({
-  resv_event: [EVENT.PREVIEW_CLOSE, EVENT.SIDEBAR_MENU_CHANGE],
+  recieve: [EVENT.PREVIEW_CLOSE, EVENT.SIDEBAR_MENU_CHANGE],
 })
 let sub$ = null
 
@@ -46,7 +46,7 @@ export function onEdit() {}
 export function onDelete() {}
 
 export function cmsPermisstionOnChange(source) {
-  dispatchEvent(EVENT.NAV_UPDATE_PERMISSION, {
+  send(EVENT.NAV_UPDATE_PERMISSION, {
     type: TYPE.PREVIEW_UPDATE_PERMISSION,
     data: {
       type: 'cms',
