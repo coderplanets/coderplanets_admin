@@ -14,7 +14,7 @@ import {
   OperationIconChart,
 } from './styles/common_banner'
 
-import * as logic from './logic'
+import { onSearch, onAdd } from './logic'
 
 const IndexBanner = ({ filteredCount, totalCount }) => (
   <BannerContentWrapper>
@@ -38,12 +38,12 @@ const IndexBanner = ({ filteredCount, totalCount }) => (
         </FilterTags>
       </OperationItem>
       <OperationDivider />
-      <OperationItem onClick={logic.onSearch}>
+      <OperationItem onClick={onSearch}>
         <OperationIconChart src={`${ICON_CMD}/search2.svg`} />
         搜索
       </OperationItem>
       <OperationDivider />
-      <OperationItem onClick={logic.onAdd.bind(this, 'communities')}>
+      <OperationItem onClick={onAdd.bind(this, 'communities')}>
         <OperationIconChart src={`${ICON_CMD}/plus.svg`} />
         添加
       </OperationItem>

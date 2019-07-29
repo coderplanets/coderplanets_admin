@@ -41,6 +41,10 @@ export function loadJobs() {
 export const loadCategories = () =>
   sr71$.query(S.pagedCategories, { filter: {} })
 
+export const onSearch = () => {
+  log('TODO:  onSearch')
+}
+
 export function onAdd(thread) {
   switch (thread) {
     case 'tags': {
