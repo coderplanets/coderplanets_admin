@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { connectStore, buildLog, ROUTE, stripMobx } from '@utils'
+import { ROUTE } from '@constant'
+import { connectStore, buildLog, stripMobx } from '@utils'
 
 import IndexBanner from './IndexBanner'
 import EditorsBanner from './EditorsBanner'

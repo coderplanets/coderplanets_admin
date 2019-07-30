@@ -6,7 +6,8 @@
 
 import React from 'react'
 
-import { buildLog, connectStore, stripMobx, ROUTE } from '@utils'
+import { ROUTE } from '@constant'
+import { buildLog, connectStore, stripMobx } from '@utils'
 
 import PostsBanner from './PostsBanner'
 import JobsBanner from './JobsBanner'

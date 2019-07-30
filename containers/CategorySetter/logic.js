@@ -1,8 +1,9 @@
 import R from 'ramda'
 import { useEffect } from 'react'
 
-import { asyncSuit, buildLog, TYPE, closePreviewer } from '@utils'
 import { PAGE_SIZE } from '@config'
+import { TYPE } from '@constant'
+import { asyncSuit, buildLog, closePreviewer } from '@utils'
 
 import S from './schema'
 

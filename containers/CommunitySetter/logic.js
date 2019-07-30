@@ -2,8 +2,8 @@
 import { useEffect } from 'react'
 
 import { PAGE_SIZE } from '@config'
-
-import { asyncSuit, buildLog, closePreviewer, TYPE, THREAD } from '@utils'
+import { TYPE, THREAD } from '@constant'
+import { asyncSuit, buildLog, closePreviewer } from '@utils'
 
 import S from './schema'
 

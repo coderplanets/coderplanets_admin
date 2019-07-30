@@ -8,8 +8,8 @@ import React from 'react'
 import T from 'prop-types'
 import { Table, Button } from 'antd'
 
-import { buildLog, cutFrom, TYPE } from '@utils'
-import { OperationWrapper } from './styles'
+import { TYPE } from '@constant'
+import { buildLog, cutFrom } from '@utils'
 
 import Pagi from '../Pagi'
 import { TableLoading } from '../LoadingEffects'
@@ -18,6 +18,8 @@ import UserCell from '../UserCell'
 import CommunityCell from '../CommunityCell'
 import TagsCell from '../TagsCell'
 import TimeStampCell from '../TimeStampCell'
+
+import { OperationWrapper } from './styles'
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('c:VideosTable:index')

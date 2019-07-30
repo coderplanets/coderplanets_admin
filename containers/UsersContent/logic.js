@@ -1,13 +1,6 @@
-import {
-  asyncSuit,
-  buildLog,
-  EVENT,
-  TYPE,
-  ROUTE,
-  send,
-  scrollIntoEle,
-} from '@utils'
 import { PAGE_SIZE } from '@config'
+import { EVENT, TYPE, ROUTE } from '@constant'
+import { asyncSuit, buildLog, send, scrollIntoEle } from '@utils'
 
 import S from './schema'
 

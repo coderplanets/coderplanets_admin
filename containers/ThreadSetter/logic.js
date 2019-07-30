@@ -2,7 +2,9 @@ import R from 'ramda'
 import { useEffect } from 'react'
 
 import { PAGE_SIZE } from '@config'
-import { asyncSuit, buildLog, closePreviewer, TYPE } from '@utils'
+import { TYPE } from '@constant'
+import { asyncSuit, buildLog, closePreviewer } from '@utils'
+
 import S from './schema'
 
 /* eslint-disable no-unused-vars */

@@ -1,15 +1,8 @@
 import R from 'ramda'
 import { useEffect } from 'react'
 
-import {
-  asyncSuit,
-  buildLog,
-  ERR,
-  TYPE,
-  meteorState,
-  closePreviewer,
-  cast,
-} from '@utils'
+import { TYPE, ERR } from '@constant'
+import { asyncSuit, buildLog, meteorState, closePreviewer, cast } from '@utils'
 
 import S from './schema'
 

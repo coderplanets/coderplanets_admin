@@ -1,12 +1,12 @@
 import React from 'react'
 // import R from 'ramda'
 
-import { FileUploader, Maybe } from '@components'
 import { ICON_CMD } from '@config'
+import { THREAD } from '@constant'
+import { FileUploader, Maybe } from '@components'
 
 import { Labeler } from '..'
 
-import { THREAD } from '@utils'
 import {
   Wrapper,
   Item,

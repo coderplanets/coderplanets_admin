@@ -6,8 +6,9 @@
 import { types as t, getParent } from 'mobx-state-tree'
 // import R from 'ramda'
 
-import { Tag } from 'stores/SharedModel'
-import { markStates, buildLog, THREAD, stripMobx } from '@utils'
+import { Tag } from '@model'
+import { THREAD } from '@constant'
+import { markStates, buildLog, stripMobx } from '@utils'
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('S:TagSetterStore')

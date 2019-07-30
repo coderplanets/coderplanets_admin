@@ -2,15 +2,8 @@ import R from 'ramda'
 import { useEffect } from 'react'
 
 import { PAGE_SIZE } from '@config'
-import {
-  buildLog,
-  asyncSuit,
-  mapKey,
-  mapValue,
-  TYPE,
-  EVENT,
-  closePreviewer,
-} from '@utils'
+import { EVENT, TYPE } from '@constant'
+import { buildLog, asyncSuit, mapKey, mapValue, closePreviewer } from '@utils'
 
 import S from './schema'
 

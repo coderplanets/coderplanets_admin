@@ -1,6 +1,6 @@
 // import R from 'ramda'
 import { P } from '@schemas'
-import { ROUTE } from './constants'
+import { ROUTE } from '@constant'
 
 export const ssrPagedSchema = (subpath, opt = {}) => {
   switch (subpath) {

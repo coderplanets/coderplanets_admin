@@ -6,7 +6,7 @@
 import { types as t, getParent } from 'mobx-state-tree'
 // import R from 'ramda'
 
-import { PagedCommunities } from 'stores/SharedModel'
+import { PagedCommunities } from '@model'
 import { markStates, buildLog, stripMobx } from '@utils'
 /* eslint-disable no-unused-vars */
 const log = buildLog('S:CommunitySetterStore')

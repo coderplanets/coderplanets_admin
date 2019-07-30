@@ -1,8 +1,9 @@
 // import R from 'ramda'
 import { useEffect } from 'react'
 
-import { asyncSuit, buildLog, EVENT, ROUTE, TYPE, scrollIntoEle } from '@utils'
 import { PAGE_SIZE } from '@config'
+import { EVENT, ROUTE, TYPE } from '@constant'
+import { asyncSuit, buildLog, scrollIntoEle } from '@utils'
 
 import S from './schema'
 

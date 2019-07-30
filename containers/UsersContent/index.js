@@ -7,13 +7,12 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 
-// import Link from 'next/link'
+import { ROUTE } from '@constant'
+import { buildLog, storePlug } from '@utils'
 
-import { buildLog, storePlug, ROUTE } from '@utils'
-import * as logic from './logic'
-
-import { Wrapper } from './styles'
 import IndexContent from './IndexContent'
+import { Wrapper } from './styles'
+import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('C:UsersContent')

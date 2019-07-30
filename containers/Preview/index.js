@@ -8,12 +8,11 @@ import React from 'react'
 import { inject, observer } from 'mobx-react'
 import dynamic from 'next/dynamic'
 
-// import Link from 'next/link'
+import { TYPE } from '@constant'
+import { buildLog, storePlug } from '@utils'
 
 import StateTree from '@components/StateTree'
 import TypeWriterLoading from '@components/LoadingEffects/TypeWriterLoading'
-import { buildLog, storePlug, TYPE } from '@utils'
-import * as logic from './logic'
 
 import ArticleViwer from '../ArticleViwer'
 import AccountViewer from '../AccountViewer'
@@ -36,6 +35,7 @@ import {
   Closer,
   CloserInner,
 } from './styles'
+import * as logic from './logic'
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('C:Preview')

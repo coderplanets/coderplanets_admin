@@ -2,8 +2,9 @@ import React from 'react'
 // import Link from 'next/link'
 
 import { ICON_CMD } from '@config'
+import { ROUTE } from '@constant'
+import { cutFrom } from '@utils'
 
-import { cutFrom, ROUTE } from '@utils'
 import {
   MenuRow,
   MenuTitle,

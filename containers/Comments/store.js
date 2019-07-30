@@ -6,16 +6,9 @@
 import { types as t, getParent } from 'mobx-state-tree'
 import R from 'ramda'
 
-import { Comment, PagedComments, emptyPagiData } from 'stores/SharedModel'
-import {
-  markStates,
-  buildLog,
-  stripMobx,
-  TYPE,
-  changeset,
-  // THREAD,
-  // subPath2Thread,
-} from '@utils'
+import { TYPE } from '@constant'
+import { markStates, buildLog, stripMobx, changeset } from '@utils'
+import { Comment, PagedComments, emptyPagiData } from '@model'
 
 /* eslint-disable no-unused-vars */
 const log = buildLog('S:CommentsStore')

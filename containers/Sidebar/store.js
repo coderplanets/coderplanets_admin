@@ -6,7 +6,7 @@
 import { types as t, getParent } from 'mobx-state-tree'
 import R from 'ramda'
 
-import { PagedCommunities, emptyPagiData, Community } from 'stores/SharedModel'
+import { PagedCommunities, emptyPagiData, Community } from '@model'
 
 import { buildLog, markStates, stripMobx } from '@utils'
 

@@ -1,12 +1,11 @@
 import R from 'ramda'
 
+import { EVENT, ERR } from '@constant'
 import {
   asyncSuit,
   buildLog,
   isEmptyValue,
   send,
-  EVENT,
-  ERR,
   meteorState,
   countWords,
   extractAttachments,

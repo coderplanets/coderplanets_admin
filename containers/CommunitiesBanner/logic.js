@@ -2,7 +2,8 @@
 // import Router from 'next/router'
 import { useEffect } from 'react'
 
-import { asyncSuit, buildLog, ERR, EVENT, TYPE, send } from '@utils'
+import { EVENT, ERR, TYPE } from '@constant'
+import { asyncSuit, buildLog, send } from '@utils'
 
 import S from './schema'
 

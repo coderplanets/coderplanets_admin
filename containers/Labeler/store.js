@@ -5,7 +5,7 @@
 
 import { types as t, getParent } from 'mobx-state-tree'
 // import R from 'ramda'
-import { Tag } from 'stores/SharedModel'
+import { Tag } from '@model'
 
 import { markStates, buildLog, stripMobx } from '@utils'
 /* eslint-disable no-unused-vars */
