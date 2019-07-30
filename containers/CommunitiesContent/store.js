@@ -16,7 +16,7 @@ import {
   PagedCategories,
   PagedCommunities,
   emptyPagiData,
-} from 'stores/SharedModel'
+} from '@model'
 
 import { markStates, buildLog, stripMobx } from '@utils'
 

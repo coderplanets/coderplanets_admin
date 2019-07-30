@@ -55,6 +55,7 @@
         "@constant": "./utils/constant/",
         "@config":"./config",
         "@stores":"./stores",
+        "@model": "./stores/SharedModel",
         "@model":"./stores/SharedModel",
         "@utils":"./utils",
         "@schemas":"./containers/schemas",

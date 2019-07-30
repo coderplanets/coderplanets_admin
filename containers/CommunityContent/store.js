@@ -16,7 +16,7 @@ import {
   PagedThreads,
   PagedCategories,
   emptyPagiData,
-} from 'stores/SharedModel'
+} from '@model'
 
 import { markStates, buildLog, stripMobx } from '@utils'
 /* eslint-disable no-unused-vars */
