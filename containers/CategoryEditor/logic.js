@@ -1,7 +1,9 @@
 import R from 'ramda'
 import { useEffect } from 'react'
 
-import { asyncSuit, TYPE, buildLog, closePreviewer, cast } from '@utils'
+import { TYPE } from '@constant'
+import { asyncSuit, buildLog, closePreviewer, cast } from '@utils'
+
 import S from './schema'
 
 /* eslint-disable no-unused-vars */

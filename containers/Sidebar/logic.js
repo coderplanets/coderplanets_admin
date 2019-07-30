@@ -3,8 +3,9 @@ import R from 'ramda'
 
 // const log = buildLog('L:sidebar')
 import { PAGE_SIZE } from '@config'
+import { asyncSuit, buildLog, send } from '@utils'
+import { EVENT, ERR, ROUTE } from '@constant'
 
-import { asyncSuit, ERR, buildLog, EVENT, ROUTE, send } from '@utils'
 import S from './schema'
 
 /* eslint-disable no-unused-vars */

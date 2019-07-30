@@ -2,10 +2,12 @@ import React from 'react'
 import R from 'ramda'
 // import T from 'prop-types'
 
-import { Popover } from '@components'
 import { ICON_CMD } from '@config'
+import { THREAD } from '@constant'
+import { uid } from '@utils'
 
-import { uid, THREAD } from '@utils'
+import { Popover } from '@components'
+
 import {
   Wrapper,
   Selector,

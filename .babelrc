@@ -52,6 +52,7 @@
       "alias": {
         "@containers":"./containers",
         "@components":"./components",
+        "@constant": "./utils/constant/",
         "@config":"./config",
         "@stores":"./stores",
         "@model":"./stores/SharedModel",

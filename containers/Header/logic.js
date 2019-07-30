@@ -1,7 +1,9 @@
 // import R from 'ramda'
 // import store from 'store'
 
-import { asyncSuit, buildLog, send, EVENT, TYPE, ERR } from '@utils'
+import { EVENT, TYPE, ERR } from '@constant'
+import { asyncSuit, buildLog, send } from '@utils'
+
 import S from './schema'
 
 /* eslint-disable no-unused-vars */

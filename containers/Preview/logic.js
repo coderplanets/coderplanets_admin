@@ -1,4 +1,5 @@
-import { asyncSuit, buildLog, EVENT, holdPage, TYPE, send } from '@utils'
+import { EVENT, TYPE } from '@constant'
+import { asyncSuit, buildLog, holdPage, send } from '@utils'
 
 const log = buildLog('L:Preview')
 

@@ -8,6 +8,9 @@ import React from 'react'
 import { inject, observer } from 'mobx-react'
 import R from 'ramda'
 
+import { THREAD } from '@constant'
+import { buildLog, storePlug } from '@utils'
+
 import {
   Button,
   Icon,
@@ -19,7 +22,6 @@ import {
   CommunityMatrix,
 } from '@components'
 
-import { buildLog, storePlug, THREAD } from '@utils'
 import { Wrapper, ActionBtns, Divider } from './styles'
 
 import * as logic from './logic'

@@ -9,8 +9,9 @@ import R from 'ramda'
 import { inject, observer } from 'mobx-react'
 import { Affix } from 'antd'
 
-import { ICON_CMD, ICON_BASE } from 'config/assets'
-import { buildLog, storePlug, TYPE } from '@utils'
+import { ICON_CMD, ICON_BASE } from '@config'
+import { TYPE } from '@constant'
+import { buildLog, storePlug } from '@utils'
 
 import {
   HeaderWrapper,

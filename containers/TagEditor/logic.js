@@ -1,9 +1,9 @@
 import R from 'ramda'
 
 import { PAGE_SIZE } from '@config'
+import { TYPE } from '@constant'
 import {
   asyncSuit,
-  TYPE,
   buildLog,
   cast,
   closePreviewer,

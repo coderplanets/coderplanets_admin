@@ -3,15 +3,10 @@ import { useEffect } from 'react'
 import { message } from 'antd'
 
 import { PAGE_SIZE } from '@config'
-
+import { EVENT, ERR, TYPE, THREAD, ROUTE } from '@constant'
 import {
   asyncSuit,
-  ERR,
   buildLog,
-  EVENT,
-  TYPE,
-  THREAD,
-  ROUTE,
   scrollIntoEle,
   closePreviewer,
   send,

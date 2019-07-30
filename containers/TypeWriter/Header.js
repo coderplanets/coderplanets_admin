@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { ICON_CMD } from '@config'
+import { THREAD } from '@constant'
 
-import { THREAD } from '@utils'
 import {
   Wrapper,
   UsageText,

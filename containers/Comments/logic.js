@@ -1,19 +1,18 @@
 import R from 'ramda'
 import { useEffect } from 'react'
 
+import { PAGE_SIZE } from '@config'
+import { EVENT, ERR, TYPE } from '@constant'
+
 import {
   asyncSuit,
   buildLog,
-  EVENT,
-  ERR,
-  TYPE,
   scrollIntoEle,
   countWords,
   send,
   extractMentions,
 } from '@utils'
 
-import { PAGE_SIZE } from '@config'
 import S from './schema'
 
 /* eslint-disable no-unused-vars */

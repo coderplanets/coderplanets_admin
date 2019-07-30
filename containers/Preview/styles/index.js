@@ -1,7 +1,8 @@
+import R from 'ramda'
 import styled from 'styled-components'
 
-import R from 'ramda'
-import { theme, TYPE, animate } from '@utils'
+import { TYPE } from '@constant'
+import { theme, animate } from '@utils'
 
 const WIDE_CASE = [TYPE.POST_PREVIEW_VIEW, TYPE.PREVIEW_CREATE_POST]
 const WIDE_WIDTH = '70%'

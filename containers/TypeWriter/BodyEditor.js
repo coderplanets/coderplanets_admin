@@ -12,15 +12,17 @@ import Editor from 'draft-js-plugins-editor'
 import createMentionPlugin from 'draft-js-mention-plugin'
 // import createLinkifyPlugin from 'draft-js-linkify-plugin'
 
-import { EVENT, buildLog } from '@utils'
+import { EVENT } from '@constant'
+import { buildLog } from '@utils'
+
 import toRawString from './exportContent'
 import { Wrapper } from './styles/body_editor'
 
 /*
-const linkifyPlugin = createLinkifyPlugin({
-  theme: { link: 'typewriter-link' },
-})
-*/
+   const linkifyPlugin = createLinkifyPlugin({
+   theme: { link: 'typewriter-link' },
+   })
+ */
 
 const mentionThemeClass = {
   mention: 'typewriter-mention',
