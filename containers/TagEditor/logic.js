@@ -44,7 +44,7 @@ export const mutateConfirm = () => {
   ]
   const args = { ...store.tagData }
 
-  store.markState({ mutating: true })
+  store.mark({ mutating: true })
   const fargs = cast(requiredArgs, args)
 
   fargs.color = R.toUpper(fargs.color)
@@ -62,7 +62,7 @@ export const mutateConfirm = () => {
 }
 
 const initEditData = editData => {
-  store.markState({
+  store.mark({
     tag: editData,
     topicValue: editData.topic.title,
     isEdit: true,
@@ -70,7 +70,7 @@ const initEditData = editData => {
 }
 
 export function cancleMutate() {
-  store.markState({
+  store.mark({
     tag: {},
     isEdit: false,
   })
@@ -94,7 +94,7 @@ const DataSolver = [
   },
   {
     match: asyncRes('pagedCommunities'),
-    action: ({ pagedCommunities }) => store.markState({ pagedCommunities }),
+    action: ({ pagedCommunities }) => store.mark({ pagedCommunities }),
   },
 ]
 

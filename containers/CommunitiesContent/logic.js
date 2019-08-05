@@ -46,7 +46,7 @@ export function loadCommunities(page = 1) {
   }
   scrollIntoEle(TYPE.APP_HEADER_ID)
 
-  store.markState({ communitiesLoading: true })
+  store.mark({ communitiesLoading: true })
   store.markRoute({ page })
 
   /* args.filter = R.merge(args.filter, route.query) */
@@ -56,7 +56,7 @@ export function loadCommunities(page = 1) {
 export function loadCategories(page = 1) {
   scrollIntoEle(TYPE.APP_HEADER_ID)
   store.markRoute({ page })
-  store.markState({ categoriessLoading: true })
+  store.mark({ categoriessLoading: true })
 
   sr71$.query(S.pagedCategories, commonFilter(page))
 }
@@ -65,7 +65,7 @@ export function loadTags(page = 1) {
   scrollIntoEle(TYPE.APP_HEADER_ID)
 
   store.markRoute({ page })
-  store.markState({ tagsLoading: true })
+  store.mark({ tagsLoading: true })
 
   sr71$.query(S.pagedTags, commonFilter(page))
 }
@@ -73,7 +73,7 @@ export function loadTags(page = 1) {
 export function loadThreads(page = 1) {
   scrollIntoEle(TYPE.APP_HEADER_ID)
   store.markRoute({ page })
-  store.markState({ tagsLoading: true })
+  store.mark({ tagsLoading: true })
 
   sr71$.query(S.pagedThreads, commonFilter(page))
 }
@@ -85,7 +85,7 @@ export const loadPosts = (page = 1) => {
     userHasLogin: false,
   }
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  store.markState({ postsLoading: true })
+  store.mark({ postsLoading: true })
 
   sr71$.query(S.pagedPosts, args)
 }
@@ -96,7 +96,7 @@ export const loadJobs = (page = 1) => {
     filter: { page, size },
   }
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  store.markState({ jobsLoading: true })
+  store.mark({ jobsLoading: true })
 
   sr71$.query(S.pagedJobs, args)
 }
@@ -107,7 +107,7 @@ export const loadRepos = (page = 1) => {
     filter: { page, size },
   }
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  store.markState({ reposLoading: true })
+  store.mark({ reposLoading: true })
 
   sr71$.query(S.pagedRepos, args)
 }
@@ -118,7 +118,7 @@ export const loadVideos = (page = 1) => {
     filter: { page, size },
   }
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  store.markState({ videosLoading: true })
+  store.mark({ videosLoading: true })
 
   sr71$.query(S.pagedVideos, args)
 }
@@ -220,7 +220,7 @@ export function unsetTag(threadId, tag) {
 
 /* when error occured cancle all the loading state */
 const cancleLoading = () =>
-  store.markState({
+  store.mark({
     communitiesLoading: false,
     postsLoading: false,
     jobsLoading: false,
@@ -236,7 +236,7 @@ const DataSolver = [
     action: ({ pagedCommunities }) => {
       cancleLoading()
       log('pagedCommunities: ', pagedCommunities)
-      store.markState({ pagedCommunities })
+      store.mark({ pagedCommunities })
     },
   },
   {
@@ -244,21 +244,21 @@ const DataSolver = [
     action: ({ pagedTags }) => {
       log('load pagedTags: ', pagedTags)
       cancleLoading()
-      store.markState({ pagedTags })
+      store.mark({ pagedTags })
     },
   },
   {
     match: asyncRes('pagedThreads'),
     action: ({ pagedThreads }) => {
       cancleLoading()
-      store.markState({ pagedThreads })
+      store.mark({ pagedThreads })
     },
   },
   {
     match: asyncRes('pagedPosts'),
     action: ({ pagedPosts }) => {
       cancleLoading()
-      store.markState({ pagedPosts })
+      store.mark({ pagedPosts })
     },
   },
   {
@@ -266,14 +266,14 @@ const DataSolver = [
     action: ({ pagedJobs }) => {
       console.log('pagedJobs get: ', pagedJobs)
       cancleLoading()
-      store.markState({ pagedJobs })
+      store.mark({ pagedJobs })
     },
   },
   {
     match: asyncRes('pagedRepos'),
     action: ({ pagedRepos }) => {
       cancleLoading()
-      store.markState({ pagedRepos })
+      store.mark({ pagedRepos })
     },
   },
   {
@@ -281,7 +281,7 @@ const DataSolver = [
     action: ({ pagedVideos }) => {
       cancleLoading()
       log('pagedVideos: ', pagedVideos)
-      store.markState({ pagedVideos })
+      store.mark({ pagedVideos })
     },
   },
   {
@@ -289,7 +289,7 @@ const DataSolver = [
     action: ({ pagedCategories }) => {
       cancleLoading()
       log('pagedCategories: ', pagedCategories)
-      store.markState({ pagedCategories })
+      store.mark({ pagedCategories })
     },
   },
   {

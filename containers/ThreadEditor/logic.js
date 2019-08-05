@@ -20,7 +20,7 @@ export const mutateConfirm = () =>
   sr71$.mutate(S.createThread, store.editThreadData)
 
 export function cancleEdit() {
-  store.markState({
+  store.mark({
     community: {},
     isEdit: false,
   })

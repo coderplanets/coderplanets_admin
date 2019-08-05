@@ -71,7 +71,7 @@ export const $solver = R.curry((dataResolver, errResolver, data) => {
 
 export const markStates = (sobj, self) => {
   if (!isObject(sobj)) {
-    throw new Error('markState get invalid object, exepect a object')
+    throw new Error('mark get invalid object, exepect a object')
   }
   const selfKeys = R.keys(self)
   R.forEachObjIndexed((val, key) => {
@@ -93,13 +93,13 @@ export const meteorState = (store, state, secs, statusMsg = '') => {
     return false
   }
 
-  store.markState({
+  store.mark({
     [state]: true,
     statusMsg,
   })
 
   setTimeout(() => {
-    store.markState({
+    store.mark({
       [state]: false,
       statusMsg: '',
     })

@@ -28,35 +28,35 @@ const commonFilter = (page, community = 'home') => {
 
 export function loadPosts(page = 1) {
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  store.markState({ postsLoading: true })
+  store.mark({ postsLoading: true })
   const { mainPath: community } = store.curRoute
   sr71$.query(S.pagedPosts, commonFilter(page, community))
 }
 
 export function loadJobs(page = 1) {
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  store.markState({ jobsLoading: true })
+  store.mark({ jobsLoading: true })
   const { mainPath: community } = store.curRoute
   sr71$.query(S.pagedJobs, commonFilter(page, community))
 }
 
 export function loadVideos(page = 1) {
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  store.markState({ videosLoading: true })
+  store.mark({ videosLoading: true })
   const { mainPath: community } = store.curRoute
   sr71$.query(S.pagedVideos, commonFilter(page, community))
 }
 
 export function loadRepos(page = 1) {
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  store.markState({ reposLoading: true })
+  store.mark({ reposLoading: true })
   const { mainPath: community } = store.curRoute
   sr71$.query(S.pagedRepos, commonFilter(page, community))
 }
 
 export function loadSubscribers(page = 1) {
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  store.markState({ usersLoading: true })
+  store.mark({ usersLoading: true })
 
   const size = PAGE_SIZE.D
   const args = {
@@ -70,7 +70,7 @@ export function loadSubscribers(page = 1) {
 
 export function loadTags() {
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  store.markState({ tagsLoading: true })
+  store.mark({ tagsLoading: true })
 
   const { mainPath: community } = store.curRoute
   sr71$.query(S.partialTags, { community, all: true })
@@ -83,7 +83,7 @@ export function onDelete() {}
 // Data & Error handlers
 // ###############################
 const cancleLoading = () => {
-  store.markState({
+  store.mark({
     // communitiesLoading: false,
     postsLoading: false,
     jobsLoading: false,
@@ -99,7 +99,7 @@ const DataSolver = [
     match: asyncRes('pagedPosts'),
     action: ({ pagedPosts }) => {
       cancleLoading()
-      store.markState({ pagedPosts })
+      store.mark({ pagedPosts })
     },
   },
   {
@@ -108,35 +108,35 @@ const DataSolver = [
       cancleLoading()
       console.log('communitySubscribers get: ', pagedSubscribers)
 
-      store.markState({ pagedSubscribers })
+      store.mark({ pagedSubscribers })
     },
   },
   {
     match: asyncRes('pagedJobs'),
     action: ({ pagedJobs }) => {
       cancleLoading()
-      store.markState({ pagedJobs })
+      store.mark({ pagedJobs })
     },
   },
   {
     match: asyncRes('pagedVideos'),
     action: ({ pagedVideos }) => {
       cancleLoading()
-      store.markState({ pagedVideos })
+      store.mark({ pagedVideos })
     },
   },
   {
     match: asyncRes('pagedRepos'),
     action: ({ pagedRepos }) => {
       cancleLoading()
-      store.markState({ pagedRepos })
+      store.mark({ pagedRepos })
     },
   },
   {
     match: asyncRes('partialTags'),
     action: ({ partialTags }) => {
       cancleLoading()
-      store.markState({ pagedTags: partialTags })
+      store.mark({ pagedTags: partialTags })
     },
   },
   {

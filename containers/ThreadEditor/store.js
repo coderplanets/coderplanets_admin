@@ -38,9 +38,9 @@ const ThreadEditor = t
   .actions(self => ({
     updateEditing(sobj) {
       const editThread = R.merge(self.editThread, { ...sobj })
-      self.markState({ editThread })
+      self.mark({ editThread })
     },
-    markState(sobj) {
+    mark(sobj) {
       markStates(sobj, self)
     },
   }))

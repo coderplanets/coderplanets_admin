@@ -123,7 +123,7 @@ const SidebarStore = t
     markRoute(query) {
       self.root.route.markRoute(query)
     },
-    markState(sobj) {
+    mark(sobj) {
       markStates(sobj, self)
     },
     changeTheme(name) {

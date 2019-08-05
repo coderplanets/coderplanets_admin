@@ -54,12 +54,12 @@ const ArticleViwerStore = t
   .actions(self => ({
     load(upperType, data) {
       const type = R.toLower(upperType)
-      self.markState({
+      self.mark({
         type: upperType,
         [type]: R.merge(self[type], data),
       })
     },
-    markState(sobj) {
+    mark(sobj) {
       markStates(sobj, self)
     },
   }))

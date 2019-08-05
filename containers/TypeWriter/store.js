@@ -64,7 +64,7 @@ const TypeWriterStore = t
       self.root.closePreview()
     },
     reset() {
-      self.markState({
+      self.mark({
         title: '',
         linkAddr: '',
         body: '',
@@ -74,7 +74,7 @@ const TypeWriterStore = t
         // curView:
       })
     },
-    markState(sobj) {
+    mark(sobj) {
       markStates(sobj, self)
     },
   }))

@@ -43,7 +43,7 @@ export function setCommunity(thread, id, communityId) {
 const DataSolver = [
   {
     match: asyncRes('pagedCommunities'),
-    action: ({ pagedCommunities }) => store.markState({ pagedCommunities }),
+    action: ({ pagedCommunities }) => store.mark({ pagedCommunities }),
   },
   {
     match: asyncRes('setCommunity'),

@@ -32,12 +32,12 @@ const DataSolver = [
   {
     match: asyncRes('pagedPosts'),
     action: ({ pagedPosts: { totalCount: postsTotalCount } }) =>
-      store.markState({ postsTotalCount }),
+      store.mark({ postsTotalCount }),
   },
   {
     match: asyncRes('tags'),
     action: ({ tags: { totalCount: tagsTotalCount } }) => {
-      store.markState({ tagsTotalCount })
+      store.mark({ tagsTotalCount })
     },
   },
 ]

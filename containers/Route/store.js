@@ -60,7 +60,7 @@ const RouteStore = t
       // see: https://stackoverflow.com/questions/824349/modify-the-url-without-reloading-the-page
       /* return Global.history.pushState({}, null, url) */
     },
-    markState(sobj) {
+    mark(sobj) {
       markStates(sobj, self)
     },
   }))

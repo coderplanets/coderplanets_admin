@@ -72,7 +72,7 @@ const HeaderStore = t
     openPreview(type) {
       self.root.openPreview(type)
     },
-    markState(sobj) {
+    mark(sobj) {
       markStates(sobj, self)
     },
   }))

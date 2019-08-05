@@ -31,7 +31,7 @@ export function routeChange() {
       store.mainPath !== browserMainPath || store.subPath !== browserSubPath
 
     if (pathChange) {
-      store.markState({ mainPath: browserMainPath, subPath: browserSubPath })
+      store.mark({ mainPath: browserMainPath, subPath: browserSubPath })
     }
   }
 }
@@ -45,5 +45,5 @@ export function init(_store, routeObj) {
   const subPath = getSubPath(routeObj)
   const { query } = routeObj
 
-  store.markState({ mainPath, subPath, query })
+  store.mark({ mainPath, subPath, query })
 }

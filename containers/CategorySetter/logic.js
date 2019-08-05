@@ -42,7 +42,7 @@ const DataSolver = [
   {
     match: asyncRes('pagedCategories'),
     action: ({ pagedCategories }) =>
-      store.markState({
+      store.mark({
         pagedCategories,
       }),
   },

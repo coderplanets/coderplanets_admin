@@ -26,7 +26,7 @@ export const mutateConfirm = () => {
   const requiredArgs = ['title', 'raw']
   const args = { ...store.categoryData }
 
-  store.markState({ mutating: true })
+  store.mark({ mutating: true })
   const fargs = cast(requiredArgs, args)
 
   if (store.isEdit) {
@@ -37,7 +37,7 @@ export const mutateConfirm = () => {
 }
 
 export function cancleMutate() {
-  store.markState({
+  store.mark({
     category: {},
     isEdit: false,
   })
@@ -45,7 +45,7 @@ export function cancleMutate() {
 }
 
 const initEditData = editData =>
-  store.markState({ category: editData, isEdit: true })
+  store.mark({ category: editData, isEdit: true })
 
 // ###############################
 // Data & Error handlers

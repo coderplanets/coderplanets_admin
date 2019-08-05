@@ -24,11 +24,11 @@ let store = null
 let sub$ = null
 
 export function copyrightChange(cpType) {
-  store.markState({ cpType })
+  store.mark({ cpType })
 }
 
 export function changeView(curView) {
-  store.markState({ curView })
+  store.mark({ curView })
 }
 
 function checkValid() {
@@ -104,19 +104,19 @@ export const canclePublish = () => {
 
 export function bodyOnChange(body) {
   // log('editorOnChange: ', body)
-  store.markState({ body })
+  store.mark({ body })
 }
 
 export function titleOnChange(e) {
-  store.markState({ title: e.target.value })
+  store.mark({ title: e.target.value })
 }
 
 export function linkSourceOnChange(e) {
-  store.markState({ linkAddr: e.target.value })
+  store.mark({ linkAddr: e.target.value })
 }
 
 function publishing(maybe = true) {
-  store.markState({ publishing: maybe })
+  store.mark({ publishing: maybe })
 }
 
 export function insertCode() {
@@ -131,7 +131,7 @@ const openAttachment = att => {
 
   const { id, title, body, digest } = att
 
-  store.markState({
+  store.mark({
     id,
     title,
     body: body || digest || '',
@@ -164,7 +164,7 @@ const DataSolver = [
 ]
 
 const cancleLoading = () => {
-  store.markState({ publishing: false })
+  store.mark({ publishing: false })
 }
 
 const ErrSolver = [

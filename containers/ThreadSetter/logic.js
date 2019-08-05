@@ -41,7 +41,7 @@ export function onAdd(communityId, threadId, selectedids) {
 const DataSolver = [
   {
     match: asyncRes('pagedThreads'),
-    action: ({ pagedThreads }) => store.markState({ pagedThreads }),
+    action: ({ pagedThreads }) => store.mark({ pagedThreads }),
   },
   {
     match: asyncRes('setThread'),
