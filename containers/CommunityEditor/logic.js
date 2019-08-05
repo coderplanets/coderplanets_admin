@@ -32,7 +32,7 @@ export const mutateConfirm = () => {
     ...store.communityData,
   }
 
-  store.markState({ mutating: true })
+  store.mark({ mutating: true })
 
   if (store.isEdit) {
     return sr71$.mutate(S.updateCommunity, cast(['id', ...requiredArgs], args))
@@ -42,7 +42,7 @@ export const mutateConfirm = () => {
 }
 
 const initEditData = editData => {
-  store.markState({
+  store.mark({
     community: editData,
     isEdit: true,
   })
@@ -50,7 +50,7 @@ const initEditData = editData => {
 
 // TODO: move to utils: closePreviewer
 export function cancleEdit() {
-  store.markState({
+  store.mark({
     community: {},
     isEdit: false,
   })
@@ -62,7 +62,7 @@ export function cancleEdit() {
 // ###############################
 
 const cancleLoading = () => {
-  store.markState({ mutating: false })
+  store.mark({ mutating: false })
 }
 
 const DataSolver = [

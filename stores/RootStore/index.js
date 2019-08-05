@@ -159,7 +159,7 @@ const rootStore = t
     isLocaleExist(locale) {
       return !!self.langs.get(locale)
     },
-    markState(sobj) {
+    mark(sobj) {
       markStates(sobj, self)
     },
   }))

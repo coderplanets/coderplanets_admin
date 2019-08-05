@@ -126,7 +126,7 @@ const PostsPaperStore = t
     setHeaderFix(fix) {
       self.root.setHeaderFix(fix)
     },
-    markState(sobj) {
+    mark(sobj) {
       markStates(sobj, self)
     },
   }))

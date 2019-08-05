@@ -36,7 +36,7 @@ export const ThemeStore = t
     changeTheme(name) {
       self.curTheme = name
     },
-    markState(sobj) {
+    mark(sobj) {
       markStates(sobj, self)
     },
   }))

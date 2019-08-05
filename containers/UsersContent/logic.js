@@ -28,7 +28,7 @@ export const loadUsers = (page = 1) => {
   log('do loadUsers')
 
   scrollIntoEle(TYPE.APP_HEADER_ID)
-  store.markState({ usersLoading: true })
+  store.mark({ usersLoading: true })
   sr71$.query(S.pagedUsers, commonFilter(page))
 }
 
@@ -49,7 +49,7 @@ export function cmsPermisstionOnChange(source) {
 // Data & Error handlers
 // ###############################
 
-const cancleLoading = () => store.markState({ usersLoading: false })
+const cancleLoading = () => store.mark({ usersLoading: false })
 
 const DataSolver = [
   {
@@ -57,7 +57,7 @@ const DataSolver = [
     action: ({ pagedUsers }) => {
       cancleLoading()
       log('get pagedUsers: ', pagedUsers)
-      store.markState({ pagedUsers })
+      store.mark({ pagedUsers })
     },
   },
   {

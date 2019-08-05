@@ -32,7 +32,7 @@ export function getPartialTags({ thread, data: { communities } }) {
 }
 
 export function selectCommunity(community) {
-  store.markState({ activeCommunityRaw: community.raw })
+  store.mark({ activeCommunityRaw: community.raw })
 
   const args = {
     communityId: community.id,
@@ -43,7 +43,7 @@ export function selectCommunity(community) {
 }
 
 export function selectThread(activeThread) {
-  store.markState({ activeThread })
+  store.mark({ activeThread })
 }
 
 // ###############################
@@ -53,11 +53,11 @@ export function selectThread(activeThread) {
 const DataSolver = [
   {
     match: asyncRes('pagedTags'),
-    action: ({ pagedTags }) => store.markState({ pagedTags }),
+    action: ({ pagedTags }) => store.mark({ pagedTags }),
   },
   {
     match: asyncRes('partialTags'),
-    action: ({ partialTags: tags }) => store.markState({ tags }),
+    action: ({ partialTags: tags }) => store.mark({ tags }),
   },
   {
     match: asyncRes('setTag'),

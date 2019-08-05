@@ -30,7 +30,7 @@ export function onReaction(type, action, isUndo, data) {
 }
 
 function loading(maybe = true) {
-  store.markState({ postLoading: maybe })
+  store.mark({ postLoading: maybe })
 }
 
 function queryPost(data) {

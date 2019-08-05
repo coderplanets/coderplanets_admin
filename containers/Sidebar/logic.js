@@ -20,7 +20,7 @@ const sr71$ = new SR71({
 let store = null
 let sub$ = null
 
-export const pin = () => store.markState({ pin: !store.pin })
+export const pin = () => store.mark({ pin: !store.pin })
 
 export function extendMenuBar(communityRaw) {
   switch (communityRaw) {
@@ -63,7 +63,7 @@ export const searchCommunities = title =>
 
 export const searchOnChange = e => {
   const searchValue = e.target.value
-  store.markState({ searchValue })
+  store.mark({ searchValue })
   if (!R.isEmpty(searchValue)) {
     searchCommunities(searchValue)
   }
@@ -76,7 +76,7 @@ const DataSolver = [
   {
     match: asyncRes('community'),
     action: ({ community: activeCommunity }) =>
-      store.markState({ activeCommunity }),
+      store.mark({ activeCommunity }),
   },
   {
     match: asyncRes('pagedCommunities'),
@@ -85,13 +85,13 @@ const DataSolver = [
   {
     match: asyncRes('searchCommunities'),
     action: ({ searchCommunities: matchedCommunities }) => {
-      store.markState({ matchedCommunities })
+      store.mark({ matchedCommunities })
     },
   },
   {
     match: asyncRes('countStatus'),
     action: ({ countStatus: rootCountStatus }) => {
-      store.markState({ rootCountStatus })
+      store.mark({ rootCountStatus })
     },
   },
 ]

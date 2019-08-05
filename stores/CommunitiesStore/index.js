@@ -112,7 +112,7 @@ const CommunitiesStore = t
       }
     },
     load(sobj) {
-      self.markState(sobj)
+      self.mark(sobj)
       /*
          R.forEachObjIndexed((v, k) => {
          self.languages.set(k, v)
@@ -135,7 +135,7 @@ const CommunitiesStore = t
          }
        */
     },
-    markState(sobj) {
+    mark(sobj) {
       markStates(sobj, self)
     },
   }))

@@ -34,9 +34,9 @@ const CategoryEditorStore = t
   .actions(self => ({
     updateCategory(sobj) {
       const category = R.merge(self.category, { ...sobj })
-      self.markState({ category })
+      self.mark({ category })
     },
-    markState(sobj) {
+    mark(sobj) {
       markStates(sobj, self)
     },
   }))

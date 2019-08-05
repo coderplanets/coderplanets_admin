@@ -150,7 +150,7 @@ const CommentsStore = t
       const index = R.findIndex(R.propEq('id', id), self.entriesData)
       self.entries[index] = R.merge(self.entriesData[index], comment)
     },
-    markState(sobj) {
+    mark(sobj) {
       markStates(sobj, self)
     },
   }))

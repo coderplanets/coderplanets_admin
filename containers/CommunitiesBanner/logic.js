@@ -76,34 +76,34 @@ const DataSolver = [
   {
     match: asyncRes('pagedCommunities'),
     action: ({ pagedCommunities: { totalCount } }) =>
-      store.markState({ totalCount }),
+      store.mark({ totalCount }),
   },
   {
     match: asyncRes('pagedTags'),
     action: ({ pagedTags: { totalCount } }) =>
-      store.markState({ tagsTotalCount: totalCount }),
+      store.mark({ tagsTotalCount: totalCount }),
   },
   {
     match: asyncRes('pagedThreads'),
     action: ({ pagedThreads: { totalCount } }) =>
-      store.markState({ threadsTotalCount: totalCount }),
+      store.mark({ threadsTotalCount: totalCount }),
   },
   {
     match: asyncRes('pagedCategories'),
     action: ({ pagedCategories: { totalCount } }) => {
       log('get pagedCategories: ', totalCount)
-      store.markState({ categoriesTotalCount: totalCount })
+      store.mark({ categoriesTotalCount: totalCount })
     },
   },
   {
     match: asyncRes('pagedPosts'),
     action: ({ pagedPosts: { totalCount: postsTotalCount } }) =>
-      store.markState({ postsTotalCount }),
+      store.mark({ postsTotalCount }),
   },
   {
     match: asyncRes('pagedJobs'),
     action: ({ pagedJobs: { totalCount: jobsTotalCount } }) =>
-      store.markState({ jobsTotalCount }),
+      store.mark({ jobsTotalCount }),
   },
   {
     match: asyncRes(EVENT.PREVIEW_CLOSE),

@@ -94,7 +94,7 @@ const PreviewStore = t
       // self.type = TYPE.PREVIEW_ROOT_STORE
       unholdPage()
     },
-    markState(sobj) {
+    mark(sobj) {
       markStates(sobj, self)
     },
   }))

@@ -27,14 +27,14 @@ const commonFilter = page => {
 }
 
 export function communitySelect(community) {
-  store.markState({
+  store.mark({
     curView: 'community',
     curCommunityRaw: community.raw,
   })
 }
 
 export function communityAddOnSelect() {
-  store.markState({
+  store.mark({
     curView: 'general',
     curCommunityRaw: 'general',
   })
@@ -59,7 +59,7 @@ export function onRuleClick(rule) {
     selectRulesData = R.merge(selectRulesData, curCommunitySelectRules)
   }
 
-  store.markState({
+  store.mark({
     selectRules: JSON.stringify(selectRulesData),
   })
 }
@@ -78,7 +78,7 @@ export function confirm(userId) {
 }
 
 const cleanUp = () => {
-  store.markState({
+  store.mark({
     selectRules: '{}',
     curView: 'general',
     curCommunityRaw: 'general',
@@ -97,18 +97,18 @@ export function onCancle() {
 const DataSolver = [
   {
     match: asyncRes('pagedCommunities'),
-    action: ({ pagedCommunities }) => store.markState({ pagedCommunities }),
+    action: ({ pagedCommunities }) => store.mark({ pagedCommunities }),
   },
   {
     match: asyncRes('allPassportRulesString'),
     action: ({ allPassportRulesString: allRules }) =>
-      store.markState({ allRules }),
+      store.mark({ allRules }),
   },
   {
     match: asyncRes('stampCmsPassport'),
     action: () => {
       closePreviewer(TYPE.USERS_REFRESH)
-      store.markState({ selectRules: '{}' })
+      store.mark({ selectRules: '{}' })
     },
   },
   {

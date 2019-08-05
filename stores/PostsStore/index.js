@@ -178,7 +178,7 @@ const PostsStore = t
       // log('after: ', self.all.toJSON())
     },
 
-    markState(sobj) {
+    mark(sobj) {
       markStates(sobj, self)
     },
   }))

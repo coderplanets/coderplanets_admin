@@ -65,13 +65,13 @@ export const updateConfirm = () => {
     return false
   }
 
-  store.markState({ updating: true })
+  store.mark({ updating: true })
 
   sr71$.mutate(S.updateProfile, { profile: editing })
 
   /*
   setTimeout(() => {
-    store.markState({
+    store.mark({
       updating: false,
     })
     meteorState(store, 'error', 5, '自定义错误')
@@ -88,7 +88,7 @@ export function updateDone() {
   store.updateOrign(editing)
 }
 
-const cancleLoading = () => store.markState({ updating: false })
+const cancleLoading = () => store.mark({ updating: false })
 
 const DataSolver = [
   {

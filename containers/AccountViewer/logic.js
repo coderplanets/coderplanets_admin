@@ -21,12 +21,12 @@ let sub$ = null
 export const loadAccount = () => {
   markLoading(true)
 
-  store.markState({ viewingType: 'account' })
+  store.mark({ viewingType: 'account' })
   return sr71$.query(S.user, {})
 }
 
 export const loadUser = user => {
-  store.markState({ viewingType: 'user', viewingUser: user })
+  store.mark({ viewingType: 'user', viewingUser: user })
   sr71$.query(S.user, { login: user.login })
 }
 
@@ -44,7 +44,7 @@ export const onLogout = () => {
   // send(EVENT.LOGOUT)
 }
 
-const markLoading = (maybe = true) => store.markState({ loading: maybe })
+const markLoading = (maybe = true) => store.mark({ loading: maybe })
 
 // ###############################
 // Data & Error handlers
@@ -55,7 +55,7 @@ const DataSolver = [
     action: ({ user }) => {
       markLoading(false)
       if (store.viewingType === 'user') {
-        return store.markState({ viewingUser: user })
+        return store.mark({ viewingUser: user })
       }
       return store.updateAccount(user)
     },

@@ -38,9 +38,9 @@ const CommunityEditorStore = t
   .actions(self => ({
     updateCommunity(sobj) {
       const community = R.merge(self.community, { ...sobj })
-      self.markState({ community })
+      self.mark({ community })
     },
-    markState(sobj) {
+    mark(sobj) {
       markStates(sobj, self)
     },
   }))

@@ -53,10 +53,10 @@ const AccountEditorStore = t
 
     updateUser(sobj) {
       const user = R.merge(self.user, { ...sobj })
-      self.markState({ user })
+      self.mark({ user })
     },
 
-    markState(sobj) {
+    mark(sobj) {
       markStates(sobj, self)
     },
   }))

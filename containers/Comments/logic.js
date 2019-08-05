@@ -39,7 +39,7 @@ export const loadComents = (args = {}) => {
   args.thread = store.activeThread
 
   markLoading(args.fresh)
-  store.markState({ filterType: args.filter.sort })
+  store.mark({ filterType: args.filter.sort })
 
   log('pagedComments args: ', args)
   sr71$.query(S.pagedComments, args)
@@ -47,16 +47,16 @@ export const loadComents = (args = {}) => {
 
 const markLoading = fresh => {
   if (fresh) {
-    return store.markState({ loadingFresh: true })
+    return store.mark({ loadingFresh: true })
   }
-  return store.markState({ loading: true })
+  return store.mark({ loading: true })
 }
 
 /* eslint-disable-next-line */
 export const createComment = R.curry((cb, e) => {
   if (!store.validator('create')) return false
 
-  store.markState({ creating: true })
+  store.mark({ creating: true })
   const args = {
     id: store.viewingData.id,
     body: store.editContent,
@@ -71,14 +71,14 @@ export const createComment = R.curry((cb, e) => {
 })
 
 export function createCommentPreview() {
-  store.markState({
+  store.mark({
     showInputEditor: false,
     showInputPreview: true,
   })
 }
 
 export function backToEditor() {
-  store.markState({
+  store.mark({
     showInputEditor: true,
     showInputPreview: false,
   })
@@ -91,20 +91,20 @@ export function previewReply(data) {
 export function openInputBox() {
   if (!store.isLogin) return store.authWarning({ hideToast: true })
 
-  store.markState({
+  store.mark({
     showInputBox: true,
     showInputEditor: true,
   })
 }
 
 export function openCommentEditor() {
-  store.markState({
+  store.mark({
     showInputEditor: true,
   })
 }
 
 export function onCommentInputBlur() {
-  store.markState({
+  store.mark({
     showInputBox: false,
     showInputPreview: false,
     showInputEditor: false,
@@ -121,14 +121,14 @@ export function createReplyComment() {
 }
 
 export function onCommentInputChange(editContent) {
-  store.markState({
+  store.mark({
     countCurrent: countWords(editContent),
     extractMentions: extractMentions(editContent),
     editContent,
   })
 }
 export function onReplyInputChange(replyContent) {
-  store.markState({
+  store.mark({
     countCurrent: countWords(replyContent),
     extractMentions: extractMentions(replyContent),
     replyContent,
@@ -136,7 +136,7 @@ export function onReplyInputChange(replyContent) {
 }
 
 export function openReplyEditor(data) {
-  store.markState({
+  store.mark({
     showReplyBox: true,
     showReplyEditor: true,
     showReplyPreview: false,
@@ -147,21 +147,21 @@ export function openReplyEditor(data) {
 export function replyCommentPreview() {
   log('replyCommentPreview')
 
-  store.markState({
+  store.mark({
     showReplyEditor: false,
     showReplyPreview: true,
   })
 }
 
 export function replyBackToEditor() {
-  store.markState({
+  store.mark({
     showReplyEditor: true,
     showReplyPreview: false,
   })
 }
 
 export function closeReplyBox() {
-  store.markState({
+  store.mark({
     showReplyBox: false,
     showReplyEditor: false,
     showReplyPreview: false,
@@ -169,7 +169,7 @@ export function closeReplyBox() {
 }
 
 export function onFilterChange(filterType) {
-  store.markState({ filterType })
+  store.mark({ filterType })
   loadComents({ filter: { page: 1, sort: filterType } })
 }
 
@@ -228,13 +228,13 @@ export function deleteComment() {
 
 // show delete confirm
 export function onDelete(comment) {
-  store.markState({
+  store.mark({
     tobeDeleteId: comment.id,
   })
 }
 
 export function cancleDelete() {
-  store.markState({
+  store.mark({
     tobeDeleteId: null,
   })
 }
@@ -245,7 +245,7 @@ export function pageOnChange(page = 1) {
 }
 
 const cancelLoading = () => {
-  store.markState({ loading: false, loadingFresh: false, creating: false })
+  store.mark({ loading: false, loadingFresh: false, creating: false })
 }
 
 // ###############################
@@ -256,13 +256,13 @@ const DataSolver = [
     match: asyncRes('pagedComments'),
     action: ({ pagedComments }) => {
       cancelLoading()
-      store.markState({ pagedComments })
+      store.mark({ pagedComments })
     },
   },
   {
     match: asyncRes('createComment'),
     action: () => {
-      store.markState({
+      store.mark({
         showInputBox: false,
         showInputEditor: false,
         editContent: '',
@@ -279,7 +279,7 @@ const DataSolver = [
     match: asyncRes('replyComment'),
     action: ({ replyComment }) => {
       log('replyComment', replyComment)
-      store.markState({
+      store.mark({
         showReplyBox: false,
         replyToComment: null,
       })
@@ -311,7 +311,7 @@ const DataSolver = [
     match: asyncRes('deleteComment'),
     action: ({ deleteComment }) => {
       log('deleteComment', deleteComment)
-      store.markState({ tobeDeleteId: null })
+      store.mark({ tobeDeleteId: null })
       scrollIntoEle('lists-info')
       loadComents({ filter: { page: 1 }, fresh: true })
     },

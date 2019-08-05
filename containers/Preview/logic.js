@@ -38,7 +38,7 @@ export function closePreview() {
   // force call Typewriter's componentWillUnmount to store the draft
   // wait until store move out of the screean
   setTimeout(() => {
-    store.markState({ type: null })
+    store.mark({ type: null })
     log('closePreview ...')
     send(EVENT.PREVIEW_CLOSED)
   }, 200)
@@ -99,7 +99,7 @@ const DataResolver = [
     action: res => {
       const event = res[EVENT.NAV_UPDATE_COMMUNITY]
 
-      store.markState({ editCommunity: event.data })
+      store.mark({ editCommunity: event.data })
       store.open(event.type)
       holdPage()
     },
@@ -108,7 +108,7 @@ const DataResolver = [
     match: asyncRes(EVENT.NAV_SET_COMMUNITY),
     action: res => {
       const event = res[EVENT.NAV_SET_COMMUNITY]
-      store.markState({
+      store.mark({
         editArticle: {
           thread: event.data.thread,
           data: event.data.source,
@@ -132,7 +132,7 @@ const DataResolver = [
     action: res => {
       const event = res[EVENT.NAV_UPDATE_TAG]
 
-      store.markState({ editTag: event.data })
+      store.mark({ editTag: event.data })
       store.open(event.type)
       holdPage()
     },
@@ -151,7 +151,7 @@ const DataResolver = [
     action: res => {
       const event = res[EVENT.NAV_UPDATE_CATEGORY]
 
-      store.markState({ editCategory: event.data })
+      store.mark({ editCategory: event.data })
       store.open(event.type)
       holdPage()
     },
@@ -161,7 +161,7 @@ const DataResolver = [
     action: res => {
       const event = res[EVENT.NAV_SET_CATEGORY]
 
-      store.markState({ editCommunity: event.data })
+      store.mark({ editCommunity: event.data })
       store.open(event.type)
       holdPage()
     },
@@ -172,7 +172,7 @@ const DataResolver = [
       const event = res[EVENT.NAV_CREATE_THREAD]
       console.log('NAV_CREATE_THREAD data: ', event.data)
 
-      store.markState({ editCommunity: event.data })
+      store.mark({ editCommunity: event.data })
       store.open(event.type)
       holdPage()
     },
@@ -182,7 +182,7 @@ const DataResolver = [
     action: res => {
       const event = res[EVENT.NAV_SET_THREAD]
 
-      store.markState({ editCommunity: event.data })
+      store.mark({ editCommunity: event.data })
       store.open(event.type)
       holdPage()
     },
@@ -191,7 +191,7 @@ const DataResolver = [
     match: asyncRes(EVENT.NAV_SET_TAG),
     action: res => {
       const event = res[EVENT.NAV_SET_TAG]
-      store.markState({
+      store.mark({
         editArticle: {
           thread: event.data.thread,
           data: event.data.source,
@@ -206,7 +206,7 @@ const DataResolver = [
     action: res => {
       const event = res[EVENT.NAV_UPDATE_PERMISSION]
       console.log('hello --> ')
-      store.markState({
+      store.mark({
         editPermission: {
           type: event.data.type,
           data: event.data.source,
